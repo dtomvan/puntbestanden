@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -euxo pipefail
+filename="$HOME/screenshots/screenshot.$(date +%Y%m%d_%H%M%S).png"
+
+if [[ $XDG_SESSION_TYPE == wayland ]]; then
+    ~/.config/hypr/grimblast \
+        --notify --freeze \
+        copysave area "$filename"
+    # slurp | grim -g - - | wl-copy -t image/png && wl-paste > "$filename"
+else
+    selection=$(slop || hacksaw)  # add hacksaw arguments inside as you wish
+    mkdir -p ~/screenshots
+    shotgun -g "$selection" "$filename"
+    xclip -t 'image/png' -selection clipboard < "$filename"
+fi

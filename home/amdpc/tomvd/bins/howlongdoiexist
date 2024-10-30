@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BEGIN="$(head -n1 /var/log/pacman.log | sed -E "s/\[(.*)\] \[PACMAN\].*/\1/" | xargs -I{} date --date="{}" +%s)"
+NOW=`date +%s`
+
+echo "$NOW - $BEGIN" | bc | xargs -I"{}" date -u -d "@{}" +"%j days %H:%M:%S"
