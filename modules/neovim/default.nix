@@ -18,7 +18,7 @@
   ];
 
   config = lib.mkIf config.neovim.enable {
-    xdg.configFile.".config/nvim/inspirational_quotes.txt".source = ./inspirational_quotes.txt;
+    xdg.configFile."nvim/inspirational_quotes.txt".source = ./inspirational_quotes.txt;
     programs.nixvim = {
       enable = true;
       defaultEditor = true;

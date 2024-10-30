@@ -1,4 +1,4 @@
-{ config, lib, ... } : {
+{ config, lib, pkgs, ... } : {
     options = with lib; {
         alacritty.enable = mkEnableOption "install and configure alacritty";
         alacritty.use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
@@ -19,8 +19,8 @@
             settings = {
                 font.size = config.alacritty.font.size;
                 font.normal.family = config.alacritty.font.family;
-                window.dynamic_title = true;
-                general.live_config_reload = true;
+                # window.dynamic_title = true;
+                # general.live_config_reload = true;
                 colors = lib.mkIf config.alacritty.use-nix-colors (with config.colorScheme.palette; {
                     primary.background = "0x${base00}";
                     primary.foreground = "0x${base05}";

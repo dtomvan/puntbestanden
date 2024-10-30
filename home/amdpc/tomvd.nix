@@ -14,12 +14,18 @@ in {
     ../../modules/nerd-fonts.nix
     ../../modules/alacritty.nix
     ../../modules/ags.nix
+    ../../modules/foot.nix
+    ../../modules/hyprland
   ];
 
+  hyprland.enable = true;
+  hyprland.use-nix-colors = true;
   ags.enable = true;
   ags.use-nix-colors = true;
-  alacritty.enable = true;
-  alacritty.use-nix-colors = true;
+  # alacritty.enable = true;
+  # alacritty.use-nix-colors = true;
+  foot.enable = true;
+  foot.use-nix-colors = true;
   nerd-fonts.enable = true;
 
   home.username = username;

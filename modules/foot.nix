@@ -1,27 +1,27 @@
 { pkgs, config, lib, ... }: {
-    options = {
-        foot.enable = lib.mkEnableOption "install and configure foot";
+    options = with lib; {
+        foot.enable = mkEnableOption "install and configure foot";
         foot.use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
-        foot.font.family = lib.mkOption {
+        foot.font.family = mkOption {
             description = "the font to use in the foot terminal";
             default = "${config.nerd-fonts.main-nerd-font} Nerd Font";
-            type = lib.types.str;
+            type = types.str;
         };
-        foot.font.size = lib.mkOption {
+        foot.font.size = mkOption {
             description = "the font size to use in the foot terminal";
             default = 14;
-            type = lib.types.ints.between 9 30;
+            type = types.ints.between 9 30;
         };
     };
     config = lib.mkIf config.foot.enable {
         home.packages = [ pkgs.foot ];
-        xdg.configFile.".config/foot/foot.ini".text = ''
+        xdg.configFile."foot/foot.ini".text = ''
         term=xterm-256color
-        font=${config.foot.font.family}:size=${config.foot.font.size}
-        '' + lib.mkIf config.foot.use-nix-colors with config.colorScheme.palette; ''
+        font=${config.foot.font.family}:size=${builtins.toString config.foot.font.size}
+        '' + lib.optionalString config.foot.use-nix-colors (with config.colorScheme.palette; ''
         [colors]
-        foreground=${base00} # Text
-        background=${base05} # Base
+        foreground=${base05} # Text
+        background=${base00} # Base
         regular0=${base00}   # Surface 1
         regular1=${base08}   # red
         regular2=${base0B}   # green
@@ -38,6 +38,6 @@
         bright5=${base06}    # pink
         bright6=${base0F}    # teal
         bright7=${base07}    # Subtext 0
-        '';
+        '');
     };
 }
