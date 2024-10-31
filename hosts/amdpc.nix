@@ -39,6 +39,7 @@
             ripgrep
             zathura
         ];
+        hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
     };
     xdg.portal.wlr.enable = true;
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
