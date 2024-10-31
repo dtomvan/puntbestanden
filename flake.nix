@@ -40,6 +40,13 @@
           inherit nix-colors;
         };
       };
+      nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = [ ];
+        modules = [
+        ./hosts/amdpc.nix
+        ];
+      };
     };
 }
 # vim:sw=2 ts=2 sts=2

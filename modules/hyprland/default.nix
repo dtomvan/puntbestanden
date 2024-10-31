@@ -75,7 +75,7 @@ args @ { pkgs, lib, config, ... }: {
         utilKeys = with tools; [
         ''$mod, Print, exec,${grimblast} --notify --freeze copysave area "$HOME/screenshots/screenshot.$(date +%Y%m%d_%H%M%S).png"''
         ''$mod, return, exec, foot || alacritty''
-        ''$mod, space, exec, ${tofi.drun}''
+        ''$mod, space, exec, $(${tofi.drun})''
         ''$mod, V, exec, ${clipman} pick -t CUSTOM -T "${bemenu} --list 10 --wrap"''
         ''$mod SHIFT, escape, exec, ${locker}''
         ''$mod,D,exec, ${desktop-alpha} 0.1; sleep 1; ${desktop-alpha} 1''
@@ -130,7 +130,7 @@ args @ { pkgs, lib, config, ... }: {
         bindle = audioKeysle;
         bindm = [
         "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, movewindow"
+        "$mod, mouse:273, resizewindow"
         ];
 
         exec-once = autostart;
