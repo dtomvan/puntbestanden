@@ -56,6 +56,8 @@
     services.greetd.settings.default_session = {
         command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
     };
+    services.keybase.enable = true;
+    services.kbfs.enable = true;
 
     environment.systemPackages = with pkgs; [
         home-manager
