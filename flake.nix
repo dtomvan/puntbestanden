@@ -42,7 +42,6 @@
       };
       nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = [ ];
         modules = [
         ./hosts/amdpc.nix
         ];

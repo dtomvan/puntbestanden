@@ -5,14 +5,14 @@
     ];
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    boot.loader.grub.enable = true;
+    boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostname = "amdpc";
+    networking.hostname = "tom-pc";
     networking.dhcpcd.enable = true;
     networking.wireless.enable = true;
     networking.wireless.userControlled.enable = true;
-    networking.wireless.networks."H369A8D363E".psk = lib.fileContents ./H369A8D363E.pass;
+    networking.wireless.networks."H369A8D363E".psk = "937F96647EE6";
 
     time.timeZone = "Europe/Amsterdam";
     i18n.defaultLocale = "en_US.UTF-8";
@@ -41,11 +41,12 @@
         ];
         hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
     };
+    programs.neovim.defaultEditor = true;
     xdg.portal.wlr.enable = true;
     xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
     services.greetd.enable = true;
 
-    environment.systemPackages = [
+    environment.systemPackages = with pkgs; [
         home-manager
         wget
         curl

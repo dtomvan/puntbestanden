@@ -20,8 +20,8 @@ in {
 
   hyprland.enable = true;
   hyprland.use-nix-colors = true;
-  ags.enable = true;
-  ags.use-nix-colors = true;
+  # ags.enable = true;
+  # ags.use-nix-colors = true;
   # alacritty.enable = true;
   # alacritty.use-nix-colors = true;
   foot.enable = true;

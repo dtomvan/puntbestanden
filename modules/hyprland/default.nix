@@ -79,14 +79,12 @@ args @ { pkgs, lib, config, ... }: {
         ''$mod, V, exec, ${clipman} pick -t CUSTOM -T "${bemenu} --list 10 --wrap"''
         ''$mod SHIFT, escape, exec, ${locker}''
         ''$mod,D,exec, ${desktop-alpha} 0.1; sleep 1; ${desktop-alpha} 1''
-        ''$mod,escape,exec,${ags} -t pmenu''
         ''$mod,f12,exec,${toggle-nightlight}''
-        ];
+        ] ++ lib.optionals config.ags.enable [ ''$mod,escape,exec,${tools.ags} -t pmenu'' ];
         autostart = with tools; [
-        "${ags} -c ~/.config/ags/config.js"
         "${wl-paste} -t text --watch ${clipman} store"
         "${swayidle}"
-        ];
+        ] ++ lib.optionals.config.ags.enable [ "${tools.ags} -c ~/.config/ags/config.js" ];
     in lib.mkIf config.hyprland.enable {
         monitor = [ ", preferred, auto, 1" ];
         input = {
