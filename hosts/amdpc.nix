@@ -33,6 +33,7 @@
         # not sure which are needed but I don't want to debug these again
         extraGroups = [ "wheel" "kvm" "audio" "seat" "libvirt" "lp" "audio" ];
         packages = with pkgs; [
+            firefox
             neovim
             btop
             du-dust
@@ -59,6 +60,7 @@
     };
     services.keybase.enable = true;
     services.kbfs.enable = true;
+    services.flatpak.enable = true;
 
     environment.systemPackages = with pkgs; [
         home-manager
