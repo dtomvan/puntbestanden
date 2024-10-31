@@ -84,7 +84,7 @@ args @ { pkgs, lib, config, ... }: {
         autostart = with tools; [
         "${wl-paste} -t text --watch ${clipman} store"
         "${swayidle}"
-        ] ++ lib.optionals.config.ags.enable [ "${tools.ags} -c ~/.config/ags/config.js" ];
+        ] ++ lib.optionals config.ags.enable [ "${tools.ags} -c ~/.config/ags/config.js" ];
     in lib.mkIf config.hyprland.enable {
         monitor = [ ", preferred, auto, 1" ];
         input = {
