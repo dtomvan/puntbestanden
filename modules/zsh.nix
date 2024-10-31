@@ -10,6 +10,7 @@
         zsh.atuin.enable = mkEnableOption "install atuin and configure with zsh";
     };
 
+    config.home.packages = [ pkgs.zoxide ];
     config.programs.zsh = lib.mkIf config.zsh.enable {
         enable = true;
         autocd = true;

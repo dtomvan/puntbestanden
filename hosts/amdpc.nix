@@ -46,7 +46,7 @@
     };
     programs.hyprland = {
         enable = true;
-        package = pkgs.x86_64-linux.hyprland;
+        package = pkgs.hyprland;
         portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
     programs.neovim.defaultEditor = true;
