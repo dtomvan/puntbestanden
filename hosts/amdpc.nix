@@ -1,14 +1,18 @@
 { pkgs, config, lib, ... }:
 {
+    nix.settings = {
+        experimental-features = [ "nix-command" "flakes" ];
+        substituters = ["https://hyprland.cachix.org"];
+        trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    };
     imports = [
         ../hardware-configuration.nix
     ];
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostname = "tom-pc";
+    networking.hostName = "tom-pc";
     networking.dhcpcd.enable = true;
     networking.wireless.enable = true;
     networking.wireless.userControlled.enable = true;
@@ -29,7 +33,6 @@
         # not sure which are needed but I don't want to debug these again
         extraGroups = [ "wheel" "kvm" "audio" "seat" "libvirt" "lp" "audio" ];
         packages = with pkgs; [
-            hyprland
             neovim
             btop
             du-dust
@@ -41,10 +44,18 @@
         ];
         hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
     };
+    programs.hyprland = {
+        enable = true;
+        package = pkgs.x86_64-linux.hyprland;
+        portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    };
     programs.neovim.defaultEditor = true;
-    xdg.portal.wlr.enable = true;
-    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+    # xdg.portal.wlr.enable = true;
+    # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
     services.greetd.enable = true;
+    services.greetd.settings.default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+    };
 
     environment.systemPackages = with pkgs; [
         home-manager

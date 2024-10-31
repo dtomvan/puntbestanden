@@ -16,6 +16,7 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
     ags.url = "github:Aylur/ags";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs = inputs: let
@@ -25,6 +26,8 @@
             inputs.nixgl.overlay
             (_final: prev: {
               ags = inputs.ags.packages.x86_64-linux.agsNoTypes;
+              hyprland = inputs.hyprland.packages.x86_64-linux.hyprland;
+              xdg-desktop-portal-hyprland = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
             })
           ];
         };
