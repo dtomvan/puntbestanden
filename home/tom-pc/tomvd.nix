@@ -9,24 +9,25 @@ let
   editor = "nvim";
 in {
   imports = [
-    ../../modules/basic-cli.nix
+    ../../modules/basic-cli
+    ../../modules/hyprland
 
     ../../modules/nerd-fonts.nix
-    ../../modules/alacritty.nix
     ../../modules/ags.nix
     ../../modules/foot.nix
-    ../../modules/hyprland
+		../../modules/gtk.nix
   ];
 
-  hyprland.enable = true;
-  hyprland.use-nix-colors = true;
-  # ags.enable = true;
-  # ags.use-nix-colors = true;
-  # alacritty.enable = true;
-  # alacritty.use-nix-colors = true;
-  foot.enable = true;
-  foot.use-nix-colors = true;
-  nerd-fonts.enable = true;
+	modules = {
+		ags.enable = true;
+		ags.use-nix-colors = true;
+		foot.enable = true;
+		foot.use-nix-colors = true;
+		hyprland.enable = true;
+		hyprland.use-nix-colors = true;
+		nerd-fonts.enable = true;
+		gtk.enable = true;
+	};
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -38,6 +39,8 @@ in {
   news.entries = lib.mkForce [];
 
   home.packages = with pkgs; [
+	ripdrag
+	file
   ];
 
   home.file = {

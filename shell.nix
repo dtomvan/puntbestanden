@@ -6,7 +6,7 @@
       home-manager
       git
     ];
-    installPhase = ''
+    shellHook = ''
     echo "To install, run something along the lines of:"
     echo "---"
     echo "# cfdisk"
@@ -15,10 +15,10 @@
     echo "# mount /dev/sda1 /mnt"
     echo "# mount /dev/sda2 /mnt/boot"
     echo "# nixos-generate-config --root /mnt"
-    echo "$ cp /mnt/etc/nixos/hardware-config.nix ."
+    echo "$ cp /mnt/etc/nixos/hardware-config.nix hardware/tom-pc.nix"
     echo "# nixos-rebuild --switch --flake .#tom-pc"
-    echo "$ mkdir -p /mnt/home/tomvd/puntbestanden"
-    echo "$ cp -r * /mnt/home/tomvd/puntbestanden"
+	echo "$ pushd .."
+    echo "$ cp -r puntbestanden /mnt/home/tomvd/puntbestanden"
     echo "$ reboot"
     '';
   };

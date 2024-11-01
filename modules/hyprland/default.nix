@@ -1,5 +1,9 @@
-args @ { pkgs, lib, config, ... }: {
-    options.hyprland = with lib; {
+args @ { pkgs, lib, config, ... }: let
+	cfg = config.modules.hyprland;
+	agsCfg = config.modules.ags;
+	terminal-app = (import ../../lib/terminal-app.nix args).terminal-app;
+in {
+    options.modules.hyprland = with lib; {
         enable = mkEnableOption "download and configure hyprland";
         use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
         extra-keymaps = mkOption {
@@ -21,12 +25,13 @@ args @ { pkgs, lib, config, ... }: {
     num-results = 5
     font = monospace
     background-color = #000A
-    '' + lib.optionalString (config.hyprland.use-nix-colors) ''
+	terminal = ${terminal-app}
+    '' + lib.optionalString (cfg.use-nix-colors) ''
     selection-color = #${config.colorScheme.palette.base0D}
     '';
 
-    config.wayland.windowManager.hyprland.enable = config.hyprland.enable;
-    config.services.playerctld.enable = config.hyprland.enable;
+    config.wayland.windowManager.hyprland.enable = cfg.enable;
+    config.services.playerctld.enable = cfg.enable;
     config.wayland.windowManager.hyprland.settings = let
         tools = import ./tools.nix args;
         wsKeys = builtins.concatLists (builtins.genList (i:
@@ -64,18 +69,18 @@ args @ { pkgs, lib, config, ... }: {
         ];
         utilKeys = with tools; [
         ''$mod, Print, exec,${grimblast} --notify --freeze copysave area "$HOME/screenshots/screenshot.$(date +%Y%m%d_%H%M%S).png"''
-        ''$mod, return, exec, foot || alacritty''
+        ''$mod, return, exec, ${terminal-app}''
         ''$mod, space, exec, $(${tofi.drun})''
         ''$mod, V, exec, ${clipman} pick -t CUSTOM -T "${bemenu} --list 10 --wrap"''
         ''$mod SHIFT, escape, exec, ${locker}''
         ''$mod,D,exec, ${desktop-alpha} 0.1; sleep 1; ${desktop-alpha} 1''
         ''$mod,f12,exec,${toggle-nightlight}''
-        ] ++ lib.optionals config.ags.enable [ ''$mod,escape,exec,${tools.ags} -t pmenu'' ];
+        ] ++ lib.optionals agsCfg.enable [ ''$mod,escape,exec,${tools.ags} -t pmenu'' ];
         autostart = with tools; [
         "${wl-paste} -t text --watch ${clipman} store"
         "${swayidle}"
-        ] ++ lib.optionals config.ags.enable [ "${tools.ags} -c ~/.config/ags/config.js" ];
-    in lib.mkIf config.hyprland.enable {
+        ] ++ lib.optionals agsCfg.enable [ "${tools.ags} -c ~/.config/ags/config.js" ];
+    in lib.mkIf cfg.enable {
         monitor = [ ", preferred, auto, 1" ];
         input = {
             kb_layout = "us,gr";
@@ -95,8 +100,8 @@ args @ { pkgs, lib, config, ... }: {
             gaps_in = 5;
             gaps_out = 20;
             border_size = 2;
-            "col.active_border" = if config.hyprland.use-nix-colors then "rgb(${config.colorScheme.palette.base05})" else "rgba(33ccffee) rgba(00ff99ee) 45deg";
-            "col.inactive_border" = if config.hyprland.use-nix-colors then "rgb(${config.colorScheme.palette.base00})" else "rgba(595959aa)";
+            "col.active_border" = if cfg.use-nix-colors then "rgb(${config.colorScheme.palette.base05})" else "rgba(33ccffee) rgba(00ff99ee) 45deg";
+            "col.inactive_border" = if cfg.use-nix-colors then "rgb(${config.colorScheme.palette.base00})" else "rgba(595959aa)";
             layout = "dwindle";
         };
         dwindle = {
