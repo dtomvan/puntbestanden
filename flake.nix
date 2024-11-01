@@ -21,6 +21,7 @@
 
   outputs = inputs: let
         pkgs = import inputs.nixpkgs {
+					config.allowUnfree = true;
           system = "x86_64-linux";
           overlays = [
             inputs.nixgl.overlay
@@ -37,7 +38,7 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           nix-colors.homeManagerModules.default
-          ./home/amdpc/tomvd.nix
+          ./home/tom-pc/tomvd.nix
         ];
         extraSpecialArgs = with inputs; {
           inherit nix-colors;
@@ -46,7 +47,7 @@
       nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-        ./hosts/amdpc.nix
+        ./hosts/tom-pc.nix
         ];
       };
     };

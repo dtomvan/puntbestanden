@@ -1,12 +1,13 @@
 { pkgs, config, lib, ... }:
 {
+	nixpkgs.config.allowUnfree = true;
     nix.settings = {
         experimental-features = [ "nix-command" "flakes" ];
         substituters = ["https://hyprland.cachix.org"];
         trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
     };
     imports = [
-        ../hardware-configuration.nix
+        ../hardware/tom-pc.nix
     ];
 
     boot.loader.systemd-boot.enable = true;
@@ -21,6 +22,17 @@
     time.timeZone = "Europe/Amsterdam";
     i18n.defaultLocale = "en_US.UTF-8";
 
+	services.xserver.videoDrivers = [ "nvidia" ];
+	hardware.graphics.enable = true;
+	hardware.nvidia = {
+		modesetting.enable = true;
+		powerManagement.enable = false;
+		powerManagement.finegrained = false;
+		open = false;
+		nvidiaSettings = true;
+		package = config.boot.kernelPackages.nvidiaPackages.stable;
+	  };
+
     services.pipewire = {
         enable = true;
         pulse.enable = true;
@@ -30,6 +42,7 @@
     users.users.tomvd = {
         isNormalUser = true;
         createHome = true;
+		shell = pkgs.zsh;
         # not sure which are needed but I don't want to debug these again
         extraGroups = [ "wheel" "kvm" "audio" "seat" "libvirt" "lp" "audio" ];
         packages = with pkgs; [
@@ -42,10 +55,10 @@
             jq
             ripgrep
             zathura
-            discord
         ];
         hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
     };
+	programs.zsh.enable = true;
     programs.hyprland = {
         enable = true;
         package = pkgs.hyprland;
@@ -59,7 +72,15 @@
         command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
     };
     services.keybase.enable = true;
-    services.kbfs.enable = true;
+	security.wrappers.keybase-redirector = {
+		owner = "root";
+		group = "root";
+		permissions = "u+rs,g+rx,o+x";
+	};
+    services.kbfs = {
+		enable = true;
+		enableRedirector = true;
+	};
     services.flatpak.enable = true;
 
     environment.systemPackages = with pkgs; [

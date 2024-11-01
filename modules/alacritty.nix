@@ -1,27 +1,35 @@
-{ config, lib, pkgs, ... } : {
-    options = with lib; {
-        alacritty.enable = mkEnableOption "install and configure alacritty";
-        alacritty.use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
-        alacritty.font.family = mkOption {
+{ config, lib, pkgs, ... } : let
+	cfg = config.modules.alacritty;
+in {
+    options.modules.alacritty = with lib; {
+        enable = mkEnableOption "install and configure alacritty";
+		package = mkOption {
+			description = "the alacritty package to use";
+			default = pkgs.alacritty;
+			type = types.package;
+		};
+        use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
+        font.family = mkOption {
             description = "the font to use in the alacritty terminal";
             default = "${config.nerd-fonts.main-nerd-font} Nerd Font";
             type = types.str;
         };
-        alacritty.font.size = mkOption {
+        font.size = mkOption {
             description = "the font size to use in the alacritty terminal";
             default = 14;
             type = types.ints.between 9 30;
         };
     };
-    config = lib.mkIf config.alacritty.enable {
+    config = lib.mkIf cfg.enable {
         programs.alacritty = {
             enable = true;
+			package = cfg.package;
             settings = {
-                font.size = config.alacritty.font.size;
-                font.normal.family = config.alacritty.font.family;
+                font.size = cfg.font.size;
+                font.normal.family = cfg.font.family;
                 # window.dynamic_title = true;
                 # general.live_config_reload = true;
-                colors = lib.mkIf config.alacritty.use-nix-colors (with config.colorScheme.palette; {
+                colors = lib.mkIf cfg.use-nix-colors (with config.colorScheme.palette; {
                     primary.background = "0x${base00}";
                     primary.foreground = "0x${base05}";
 

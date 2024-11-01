@@ -67,7 +67,7 @@
         } // config.neovim.lsp.extraLspServers;
       };
 
-      extraFiles."after/plugin/extra-config.lua".source = ./extra-config.lua;
+      extraFiles."after/plugin/extra-config.lua".source = config.lib.file.mkOutOfStoreSymlink ./extra-config.lua;
       extraFiles."after/plugin/mini-starter.lua".source = ./mini-starter.lua;
     };
   };

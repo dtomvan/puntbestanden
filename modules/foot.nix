@@ -1,24 +1,31 @@
-{ pkgs, config, lib, ... }: {
-    options = with lib; {
-        foot.enable = mkEnableOption "install and configure foot";
-        foot.use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
-        foot.font.family = mkOption {
+{ pkgs, config, lib, ... }: let
+	cfg = config.modules.foot;
+in {
+    options.modules.foot = with lib; {
+        enable = mkEnableOption "install and configure foot";
+        use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
+		package = mkOption {
+			description = "the foot package to use";
+			default = pkgs.foot;
+			type = types.package;
+		};
+        font.family = mkOption {
             description = "the font to use in the foot terminal";
-            default = "${config.nerd-fonts.main-nerd-font} Nerd Font";
+            default = "${config.modules.nerd-fonts.main-nerd-font} Nerd Font";
             type = types.str;
         };
-        foot.font.size = mkOption {
+        font.size = mkOption {
             description = "the font size to use in the foot terminal";
             default = 14;
             type = types.ints.between 9 30;
         };
     };
-    config = lib.mkIf config.foot.enable {
-        home.packages = [ pkgs.foot ];
+    config = lib.mkIf cfg.enable {
+        home.packages = [ cfg.package ];
         xdg.configFile."foot/foot.ini".text = ''
         term=xterm-256color
-        font=${config.foot.font.family}:size=${builtins.toString config.foot.font.size}
-        '' + lib.optionalString config.foot.use-nix-colors (with config.colorScheme.palette; ''
+        font=${cfg.font.family}:size=${builtins.toString cfg.font.size}
+        '' + lib.optionalString cfg.use-nix-colors (with config.colorScheme.palette; ''
         [colors]
         foreground=${base05} # Text
         background=${base00} # Base
