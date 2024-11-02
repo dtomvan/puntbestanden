@@ -1,8 +1,9 @@
 { pkgs, config, lib, ... }: let
-	cfg = config.modules.foot;
+	cfg = config.modules.terminals.foot;
 in {
-    options.modules.foot = with lib; {
+    options.modules.terminals.foot = with lib; {
         enable = mkEnableOption "install and configure foot";
+		default = mkEnableOption "make foot the default terminal; only 1 can be the default";
         use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
 		package = mkOption {
 			description = "the foot package to use";
@@ -21,6 +22,10 @@ in {
         };
     };
     config = lib.mkIf cfg.enable {
+		modules.terminals = lib.mkIf cfg.default {
+			name = lib.mkForce "foot";
+			bin = lib.mkForce "${cfg.package}/bin/foot";
+		};
         home.packages = [ cfg.package ];
         xdg.configFile."foot/foot.ini".text = ''
         term=xterm-256color

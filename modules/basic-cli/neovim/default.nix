@@ -1,6 +1,7 @@
 { pkgs, lib, config, ...}: {
   options = {
     neovim.enable = lib.mkEnableOption "install and configure neovim";
+		neovim.use-nix-colors = lib.mkEnableOption "refer to nix-color for colorscheme";
     neovim.lsp = {
       enable = lib.mkEnableOption "use lspconfig and download servers";
       extraLspServers = lib.mkOption {

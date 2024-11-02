@@ -1,4 +1,4 @@
-{config, ...}: {
+{config, lib, ...}: {
     programs.nixvim.plugins.mini = {
         enable = true;
         modules = {
@@ -14,7 +14,7 @@
                 };
             };
             # use colorscheme from nix-colors with mini.base16. really seamlessly.
-            base16.palette = builtins.mapAttrs (k: v: "#${v}") config.colorScheme.palette;
+            base16.palette = lib.mkIf config.neovim.use-nix-colors (builtins.mapAttrs (k: v: "#${v}") config.colorScheme.palette);
             bracketed = {};
             comment = {};
             completion = {};

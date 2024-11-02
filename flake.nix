@@ -27,6 +27,15 @@
             inputs.nixgl.overlay
             (_final: prev: {
               ags = inputs.ags.packages.x86_64-linux.agsNoTypes;
+							ags-wrapped = pkgs.symlinkJoin {
+								name = "ags";
+								paths = [ inputs.ags.packages.x86_64-linux.agsNoTypes ];
+								buildInputs = [ pkgs.makeWrapper ];
+								postBuild = ''
+								wrapProgram $out/bin/ags \
+								--set "GTK_THEME" "Adwaita:dark"
+								'';
+							};
               hyprland = inputs.hyprland.packages.x86_64-linux.hyprland;
               xdg-desktop-portal-hyprland = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
             })

@@ -19,7 +19,7 @@
     };
     wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
     clipman = "${pkgs.clipman}/bin/clipman";
-    ags = "${pkgs.ags}/bin/ags";
+    ags = "${pkgs.ags-wrapped}/bin/ags";
 
     desktop-alpha = writeBash "desktop-alpha.sh" ''
     source ${hyprctl-env}

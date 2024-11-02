@@ -72,15 +72,7 @@
         command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
     };
     services.keybase.enable = true;
-	security.wrappers.keybase-redirector = {
-		owner = "root";
-		group = "root";
-		permissions = "u+rs,g+rx,o+x";
-	};
-    services.kbfs = {
-		enable = true;
-		enableRedirector = true;
-	};
+    services.kbfs.enable = true;
     services.flatpak.enable = true;
 
     environment.systemPackages = with pkgs; [

@@ -9,18 +9,8 @@ in {
             default = config.colorScheme ? true;
         };
     };
-    config = lib.mkIf cfg.enable (let 
-		ags-wrapped = pkgs.symlinkJoin {
-			name = "ags";
-			paths = [ pkgs.ags ];
-			buildInputs = [ pkgs.makeWrapper ];
-			postBuild = ''
-			wrapProgram $out/bin/ags \
-			--set "GTK_THEME" "Adwaita:dark"
-			'';
-		};
-	in {
-        home.packages = [ ags-wrapped pkgs.gnome-themes-extra pkgs.hicolor-icon-theme ];
+    config = lib.mkIf cfg.enable {
+        home.packages = with pkgs; [ ags-wrapped gnome-themes-extra hicolor-icon-theme ];
 
         xdg.configFile."ags" = {
             source = ./ags;
@@ -41,5 +31,5 @@ in {
             @define-color surface #665c54;
             @define-color surface2 #3c3836;
         '';
-    });
+    };
 }
