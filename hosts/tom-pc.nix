@@ -10,12 +10,21 @@
         ../hardware/tom-pc.nix
     ];
 
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+
+   boot.loader.systemd-boot.enable = true;
+   boot.loader.efi.canTouchEfiVariables = true;
 
     networking.hostName = "tom-pc";
+    networking.wireless.iwd.enable = true;
     networking.dhcpcd.enable = true;
-    networking.wireless.enable = true;
+    networking.wireless.enable = false;
+	# networking.interfaces.wlp7s0.ipv4.routes = [
+	# 	{
+	# 		address = "192.168.2.65";
+	# 		prefixLength = 24;
+	# 		via = "192.168.2.254";
+	# 	}
+	# ];
     networking.wireless.userControlled.enable = true;
     networking.wireless.networks."H369A8D363E".psk = "937F96647EE6";
 
@@ -33,6 +42,7 @@
 		package = config.boot.kernelPackages.nvidiaPackages.stable;
 	  };
 
+	services.fstrim.enable = true;
     services.pipewire = {
         enable = true;
         pulse.enable = true;
@@ -44,7 +54,7 @@
         createHome = true;
 		shell = pkgs.zsh;
         # not sure which are needed but I don't want to debug these again
-        extraGroups = [ "wheel" "kvm" "audio" "seat" "libvirt" "lp" "audio" ];
+        extraGroups = [ "wheel" "kvm" "audio" "seat" "libvirtd" "lp" "audio" ];
         packages = with pkgs; [
             firefox
             neovim
@@ -75,11 +85,17 @@
     services.kbfs.enable = true;
     services.flatpak.enable = true;
 
+	security.polkit.enable = true;
+	virtualisation.libvirtd.enable = true;
+	virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
+	programs.virt-manager.enable = true;
+
     environment.systemPackages = with pkgs; [
         home-manager
         wget
         curl
         nixos-rebuild
+		iwd
     ];
 
     programs.gnupg.agent = {

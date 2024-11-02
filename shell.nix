@@ -5,18 +5,15 @@
       nix
       home-manager
       git
+	  tmux
     ];
     shellHook = ''
     echo "To install, run something along the lines of:"
     echo "---"
-    echo "# cfdisk"
-    echo "# mkfs.ext4 -L nixos /dev/sda1"
-    echp "# mkfs.fat -F 32 -n boot /dev/sda2"
-    echo "# mount /dev/sda1 /mnt"
-    echo "# mount /dev/sda2 /mnt/boot"
-    echo "# nixos-generate-config --root /mnt"
-    echo "$ cp /mnt/etc/nixos/hardware-config.nix hardware/tom-pc.nix"
-    echo "# nixos-rebuild --switch --flake .#tom-pc"
+	echo "$ tmux"
+    echo "# nixos-generate-config --show-hardware-config --no-filesystems --root /mnt > hardware/tom-pc.nix"
+	echo "WARNING: CHECK WETHER the disko configs under /hardware are any good"
+    echo "# nix run 'github:nix-community/disko/latest#disko-install' -- --write-efi-boot-entries --flake .#tom-pc --disk main /dev/nvme0n1"
 	echo "$ pushd .."
     echo "$ cp -r puntbestanden /mnt/home/tomvd/puntbestanden"
     echo "$ reboot"

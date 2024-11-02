@@ -18,7 +18,7 @@
 			package = gnome-themes-extra;
 		};
 		# is this needed?
-		# gtk3 = { inherit extraConfig; };
+		gtk3 = { extraConfig.gtk-theme-name = "Adwaita-dark"; };
 		gtk4 = { inherit extraConfig; };
 	});
 }

@@ -17,9 +17,12 @@
     nix-colors.url = "github:misterio77/nix-colors";
     ags.url = "github:Aylur/ags";
     hyprland.url = "github:hyprwm/Hyprland";
+
+		disko.url = "github:nix-community/disko/latest";
+		disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs: let
+  outputs = inputs @ { nixpkgs, home-manager, nixvim, disko, ... }: let
         pkgs = import inputs.nixpkgs {
 					config.allowUnfree = true;
           system = "x86_64-linux";
@@ -27,6 +30,7 @@
             inputs.nixgl.overlay
             (_final: prev: {
               ags = inputs.ags.packages.x86_64-linux.agsNoTypes;
+# my ags config needs a dark theme for some reason...
 							ags-wrapped = pkgs.symlinkJoin {
 								name = "ags";
 								paths = [ inputs.ags.packages.x86_64-linux.agsNoTypes ];
@@ -57,6 +61,31 @@
         system = "x86_64-linux";
         modules = [
         ./hosts/tom-pc.nix
+				./hardware/tom-pc-disko.nix
+				disko.nixosModules.disko
+        ];
+      };
+      nixosConfigurations."tom-pc-vm" = inputs.nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+        ./hosts/tom-pc.nix
+				./hardware/disko-vda.nix
+				disko.nixosModules.disko
+        ];
+      };
+			nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/iso.nix
+          home-manager.nixosModules.home-manager
+          {
+						home-manager.extraSpecialArgs = {
+							inherit nixvim;
+						};
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.nixos = import ./home/iso-home.nix;
+          }
         ];
       };
     };
