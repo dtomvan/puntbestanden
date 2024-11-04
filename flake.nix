@@ -23,9 +23,10 @@
   };
 
   outputs = inputs @ { nixpkgs, home-manager, nixvim, disko, ... }: let
+				system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
+					inherit system;
 					config.allowUnfree = true;
-          system = "x86_64-linux";
           overlays = [
             inputs.nixgl.overlay
             (_final: prev: {
@@ -46,7 +47,8 @@
           ];
         };
       in {
-      homeConfigurations."tomvd@tom-pc" = inputs.home-manager.lib.homeManagerConfiguration {
+			devShells.${system} = import ./shells { inherit pkgs; };
+      homeConfigurations."tomvd@tom-pc" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
@@ -57,8 +59,19 @@
           inherit nix-colors;
         };
       };
+      homeConfigurations."tom@tom-laptop" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = with inputs; [
+          nixvim.homeManagerModules.nixvim
+          nix-colors.homeManagerModules.default
+          ./home/tom-laptop/tom.nix
+        ];
+        extraSpecialArgs = with inputs; {
+          inherit nix-colors;
+        };
+      };
       nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules = [
         ./hosts/tom-pc.nix
 				./hardware/tom-pc-disko.nix
@@ -66,7 +79,7 @@
         ];
       };
       nixosConfigurations."tom-pc-vm" = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules = [
         ./hosts/tom-pc.nix
 				./hardware/disko-vda.nix
@@ -74,7 +87,7 @@
         ];
       };
 			nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+        inherit system;
         modules = [
           ./hosts/iso.nix
           home-manager.nixosModules.home-manager
