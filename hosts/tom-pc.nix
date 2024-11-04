@@ -2,6 +2,7 @@
 {
 	nixpkgs.config.allowUnfree = true;
     nix.settings = {
+		trusted-users = [ "tomvd" ];
         experimental-features = [ "nix-command" "flakes" ];
         substituters = ["https://hyprland.cachix.org"];
         trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
@@ -65,6 +66,13 @@
             jq
             ripgrep
             zathura
+			sxiv
+			wl-clipboard
+			pavucontrol
+			alsa-utils
+			nix-tree
+			cosmic-files
+			mpv
         ];
         hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
     };
@@ -81,6 +89,13 @@
     services.greetd.settings.default_session = {
         command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
     };
+	services.printing = {
+		enable = true;
+		drivers = [ pkgs.hplip ];
+	};
+	services.system-config-printer.enable = true;
+	programs.system-config-printer.enable = true;
+
     services.keybase.enable = true;
     services.kbfs.enable = true;
     services.flatpak.enable = true;

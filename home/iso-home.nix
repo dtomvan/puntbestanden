@@ -9,7 +9,7 @@
 		type = with lib.types; attrsOf str;
 	};
 	config = {
-		neovim = {
+		modules.neovim = {
 			enable = true;
 # cruft during install, nice after installation
 			plugins.mini.starter.enable = false;

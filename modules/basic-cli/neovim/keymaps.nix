@@ -20,5 +20,13 @@
         action = "<cmd>Neotree toggle right<cr>";
         key = "<f1>";
       }
+	  {
+		  action = "mlggyG`l";
+		  key = "<space>y";
+	  }
+	  {
+		  action = "<cr>";
+		  key = ",<cr>";
+	  }
     ];
 }

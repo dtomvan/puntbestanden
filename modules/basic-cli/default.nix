@@ -16,9 +16,12 @@
 
     git.enable = mkDefault true;
     git.use-gh-cli = mkDefault true;
-    neovim.enable = mkDefault true;
-    neovim.use-nix-colors = mkDefault true;
-    neovim.lsp.enable = mkDefault true;
+    modules.neovim = {
+		enable = mkDefault true;
+		use-nix-colors = mkDefault true;
+		lsp.enable = mkDefault true;
+		lsp.latex.enable = mkDefault true;
+	};
     tmux.enable = mkDefault true;
     zsh.enable = mkDefault true;
     zsh.omz.enable = mkDefault true;

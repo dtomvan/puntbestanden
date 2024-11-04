@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }: {
+	# imports = lib.optionals config.git.enable [
+	# ./scripts/git-clone.nix
+	# ];
     options = with lib; {
         git.enable = mkEnableOption "install and configure git";
         git.user.email = mkOption {

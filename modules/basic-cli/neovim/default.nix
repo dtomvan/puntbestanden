@@ -1,8 +1,10 @@
-{ pkgs, lib, config, ...}: {
-  options = {
-    neovim.enable = lib.mkEnableOption "install and configure neovim";
-		neovim.use-nix-colors = lib.mkEnableOption "refer to nix-color for colorscheme";
-    neovim.lsp = {
+{ pkgs, lib, config, ...}: let
+  cfg = config.modules.neovim;
+in {
+  options.modules.neovim = {
+    enable = lib.mkEnableOption "install and configure neovim";
+		use-nix-colors = lib.mkEnableOption "refer to nix-color for colorscheme";
+    lsp = {
       enable = lib.mkEnableOption "use lspconfig and download servers";
       extraLspServers = lib.mkOption {
         description = "extra LSP servers you want available in neovim";
@@ -18,8 +20,12 @@
     ./plugins
   ];
 
-  config = lib.mkIf config.neovim.enable {
+  config = lib.mkIf cfg.enable {
     xdg.configFile."nvim/inspirational_quotes.txt".source = ./inspirational_quotes.txt;
+    xdg.configFile."nvim/ftplugin" = {
+			source = ./ftplugin;
+			recursive = true;
+		};
     programs.nixvim = {
       enable = true;
       defaultEditor = true;
@@ -60,12 +66,12 @@
         }
       ];
 
-      plugins.lsp = lib.mkIf config.neovim.lsp.enable {
+      plugins.lsp = lib.mkIf cfg.lsp.enable {
         enable = true;
         inlayHints = true;
         servers = {
           lua_ls.enable = true;
-        } // config.neovim.lsp.extraLspServers;
+        } // cfg.lsp.extraLspServers;
       };
 
       extraFiles."after/plugin/extra-config.lua".source = config.lib.file.mkOutOfStoreSymlink ./extra-config.lua;

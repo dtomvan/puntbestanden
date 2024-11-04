@@ -1,5 +1,5 @@
 {config, lib, ...}: {
-	options.neovim.plugins.mini = {
+	options.modules.neovim.plugins.mini = {
 		starter.enable = lib.mkEnableOption "startup dashboard" // {default = true;};
 	};
     config.programs.nixvim.plugins.mini = {
@@ -17,12 +17,11 @@
                 };
             };
             # use colorscheme from nix-colors with mini.base16. really seamlessly.
-            base16 = lib.mkIf config.neovim.use-nix-colors {
+            base16 = lib.mkIf config.modules.neovim.use-nix-colors {
 				palette = (builtins.mapAttrs (k: v: "#${v}") config.colorScheme.palette);
 			};
             bracketed = {};
             comment = {};
-            completion = {};
             icons = {};
             indentscope = {};
             notify = {};

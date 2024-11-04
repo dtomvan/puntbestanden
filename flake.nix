@@ -48,28 +48,35 @@
         };
       in {
 			devShells.${system} = import ./shells { inherit pkgs; };
-      homeConfigurations."tomvd@tom-pc" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = with inputs; [
-          nixvim.homeManagerModules.nixvim
-          nix-colors.homeManagerModules.default
-          ./home/tom-pc/tomvd.nix
-        ];
-        extraSpecialArgs = with inputs; {
-          inherit nix-colors;
-        };
-      };
-      homeConfigurations."tom@tom-laptop" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = with inputs; [
-          nixvim.homeManagerModules.nixvim
-          nix-colors.homeManagerModules.default
-          ./home/tom-laptop/tom.nix
-        ];
-        extraSpecialArgs = with inputs; {
-          inherit nix-colors;
-        };
-      };
+      homeConfigurations = let 
+				tomvd = { username = "tomvd"; hostname = "tom-pc"; };
+			in {
+				"${tomvd.username}@${tomvd.hostname}" = inputs.home-manager.lib.homeManagerConfiguration {
+					inherit pkgs;
+					modules = with inputs; [
+						nixvim.homeManagerModules.nixvim
+						nix-colors.homeManagerModules.default
+						./home/tom-pc/tomvd.nix
+					];
+					extraSpecialArgs = with inputs; {
+						inherit nixpkgs;
+						inherit nix-colors;
+						hostname = tomvd.hostname;
+						username = tomvd.username;
+					};
+				};
+				"tom@tom-laptop" = home-manager.lib.homeManagerConfiguration {
+					inherit pkgs;
+					modules = with inputs; [
+						nixvim.homeManagerModules.nixvim
+						nix-colors.homeManagerModules.default
+						./home/tom-laptop/tom.nix
+					];
+					extraSpecialArgs = with inputs; {
+						inherit nix-colors;
+					};
+				};
+			};
       nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [

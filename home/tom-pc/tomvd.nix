@@ -2,10 +2,12 @@
 , pkgs
 , lib
 , nix-colors
+, nixpkgs
+, hostname ? "tom-pc"
+, username ? "tomvd"
 , ... }:
 
 let
-  username = "tomvd";
   editor = "nvim";
 in {
   imports = [
@@ -30,6 +32,28 @@ in {
 		hyprland.use-nix-colors = true;
 		nerd-fonts.enable = true;
 		gtk.enable = true;
+
+		neovim.lsp.extraLspServers = {
+			nixd.enable = true;
+# set the nixpkgs to the flake input so nixd will hopefully search through the nixpkgs I am already using
+			nixd.package = pkgs.symlinkJoin {
+				name = "nixd";
+				paths = [ pkgs.nixd ];
+				buildInputs = [ pkgs.makeWrapper ];
+				postBuild = ''
+					wrapProgram $out/bin/nixd \
+					--set "NIX_PATH" "nixpkgs=${nixpkgs}"
+					'';
+			};
+			nixd.settings.options = let 
+			link-to-flake = config.lib.file.mkOutOfStoreSymlink ../../flake.nix;
+			flake = ''(builtins.getFlake "${link-to-flake}")'';
+			in {
+# set the path to the current nixos and home-manager configurations
+				nixos.expr = ''${flake}.nixosConfigurations.${hostname}.options'';
+				home-manager.expr = ''${flake}.homeConfigurations."${username}@${hostname}".options'';
+			};
+		};
 	};
 
   home.username = username;
@@ -44,7 +68,9 @@ in {
   home.packages = with pkgs; [
 	ripdrag
 	file
+	cosmic-files
   ];
+	xdg.mimeApps.defaultApplications."inode/directory" = [ "cosmic-files.desktop" ];
 
   home.file = {
   };
