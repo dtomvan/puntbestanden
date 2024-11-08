@@ -45,13 +45,4 @@
             '';
     };
 
-    config.home.shellAliases = {
-        e = if config.modules.neovim.enable then "nvim" else "nano";
-        ls = "${pkgs.eza}/bin/eza --icons always";
-        la = "ls -a";
-        ll = "ls -lah";
-    };
-
-    config.home.sessionVariables = {
-    };
 }

@@ -4,18 +4,26 @@
     nix.settings = {
 		trusted-users = [ "tomvd" ];
         experimental-features = [ "nix-command" "flakes" ];
-        substituters = ["https://hyprland.cachix.org"];
-        trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+        substituters = [
+		"https://hyprland.cachix.org"
+		"https://cosmic.cachix.org"
+		];
+        trusted-public-keys = [
+		"hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+		"cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+		];
     };
     imports = [
         ../hardware/tom-pc.nix
     ];
 
-
+	environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
+	boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
    boot.loader.systemd-boot.enable = true;
    boot.loader.efi.canTouchEfiVariables = true;
 
     networking.hostName = "tom-pc";
+	networking.networkmanager.wifi.backend = "iwd";
     networking.wireless.iwd.enable = true;
     networking.dhcpcd.enable = true;
     networking.wireless.enable = false;
@@ -77,18 +85,16 @@
         hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
     };
 	programs.zsh.enable = true;
-    programs.hyprland = {
-        enable = true;
-        package = pkgs.hyprland;
-        portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    };
+	services.displayManager.cosmic-greeter.enable = true;
+	services.desktopManager.cosmic.enable = true;
+    # programs.hyprland = {
+    #     enable = true;
+    #     package = pkgs.hyprland;
+    #     portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    # };
     programs.neovim.defaultEditor = true;
     # xdg.portal.wlr.enable = true;
     # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-    services.greetd.enable = true;
-    services.greetd.settings.default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
-    };
 	services.printing = {
 		enable = true;
 		drivers = [ pkgs.hplip ];
@@ -96,6 +102,10 @@
 	services.system-config-printer.enable = true;
 	programs.system-config-printer.enable = true;
 
+    # services.greetd.enable = true;
+    # services.greetd.settings.default_session = {
+    #     command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+    # };
     services.keybase.enable = true;
     services.kbfs.enable = true;
     services.flatpak.enable = true;

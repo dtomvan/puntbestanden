@@ -2,16 +2,27 @@
 , pkgs
 , lib
 , nix-colors
+, htmlDocs
 , ... }:
 
 let
   username = "tom";
   editor = "nvim";
+	docs = pkgs.makeDesktopItem {
+      name = "nixos-manual";
+      desktopName = "NixOS Manual";
+      genericName = "System Manual";
+      comment = "View NixOS documentation in a web browser";
+      icon = "nix-snowflake";
+      exec = "${pkgs.xdg-utils}/bin/xdg-open ${htmlDocs}/share/doc/nixos/index.html";
+      categories = ["System"];
+	};
 in {
   imports = [
     ../../modules/basic-cli
     ../../modules/terminals
     ../../modules/nerd-fonts.nix
+    ../../modules/cosmic
   ];
 
 	modules = {
@@ -20,6 +31,7 @@ in {
 		terminals.foot.font.size = 16;
 
 		nerd-fonts.enable = true;
+		cosmic.enable = true;
 	};
 	xdg.mimeApps.enable = lib.mkForce false;
 
@@ -34,7 +46,9 @@ in {
 
   # This is a debian system so I'll just use this homemanager config to pull in
   # nixvim with my neovim config etc.
-  home.packages = with pkgs; [ ];
+  home.packages = with pkgs; [
+		docs
+	];
 
   home.file = {
   };

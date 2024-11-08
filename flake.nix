@@ -18,11 +18,14 @@
     ags.url = "github:Aylur/ags";
     hyprland.url = "github:hyprwm/Hyprland";
 
+		nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic/main";
+		nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
+
 		disko.url = "github:nix-community/disko/latest";
 		disko.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, nixvim, disko, ... }: let
+  outputs = inputs @ { nixpkgs, home-manager, nixvim, disko, nixos-cosmic, ... }: let
 				system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
 					inherit system;
@@ -74,6 +77,7 @@
 					];
 					extraSpecialArgs = with inputs; {
 						inherit nix-colors;
+						htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
 					};
 				};
 			};
@@ -91,6 +95,7 @@
         ./hosts/tom-pc.nix
 				./hardware/disko-vda.nix
 				disko.nixosModules.disko
+				inputs.nixos-cosmic.nixosModules.default
         ];
       };
 			nixosConfigurations.iso = nixpkgs.lib.nixosSystem {

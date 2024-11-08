@@ -13,6 +13,25 @@
 			"inode/directory" = [ "yazi.desktop" ];
 		};
 	};
+	home.shellAliases = {
+        e = if config.modules.neovim.enable then "nvim" else "nano";
+		ls = "${pkgs.eza}/bin/eza --icons always";
+		la = "ls -a";
+		ll = "ls -lah";
+		cat = "${pkgs.bat}/bin/bat --color always";
+	};
+
+	home.sessionVariables = {
+	};
+
+# I don't know which of these two actually work, the first one doesn't seem to work...
+	home.sessionPath = [
+		"$HOME/.cargo/bin"
+	];
+
+	systemd.user.settings.Manager.DefaultEnvironment = {
+		PATH = "%u/bin:%u/.cargo/bin";
+	};
 
     git.enable = mkDefault true;
     git.use-gh-cli = mkDefault true;
