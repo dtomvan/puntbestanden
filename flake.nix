@@ -23,9 +23,11 @@
 
 		disko.url = "github:nix-community/disko/latest";
 		disko.inputs.nixpkgs.follows = "nixpkgs";
+
+		coachtaal-tooling.url = "github:dtomvan/coachtaal-tooling/flake";
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, nixvim, disko, nixos-cosmic, ... }: let
+  outputs = inputs @ { nixpkgs, home-manager, nixvim, disko, nixos-cosmic, coachtaal-tooling, ... }: let
 				system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
 					inherit system;
@@ -46,6 +48,7 @@
 							};
               hyprland = inputs.hyprland.packages.x86_64-linux.hyprland;
               xdg-desktop-portal-hyprland = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
+							coach = coachtaal-tooling.packages.${system}.default;
             })
           ];
         };

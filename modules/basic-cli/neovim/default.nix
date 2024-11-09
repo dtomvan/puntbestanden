@@ -18,6 +18,7 @@ in {
     ./opts.nix
     ./keymaps.nix
     ./plugins
+		./coach-lsp.nix
   ];
 
   config = lib.mkIf cfg.enable {

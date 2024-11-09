@@ -85,16 +85,16 @@
         hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
     };
 	programs.zsh.enable = true;
-	services.displayManager.cosmic-greeter.enable = true;
-	services.desktopManager.cosmic.enable = true;
+	# services.displayManager.cosmic-greeter.enable = true;
+	# services.desktopManager.cosmic.enable = true;
     # programs.hyprland = {
     #     enable = true;
     #     package = pkgs.hyprland;
     #     portalPackage = pkgs.xdg-desktop-portal-hyprland;
     # };
     programs.neovim.defaultEditor = true;
-    # xdg.portal.wlr.enable = true;
-    # xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+    xdg.portal.wlr.enable = true;
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
 	services.printing = {
 		enable = true;
 		drivers = [ pkgs.hplip ];
@@ -102,10 +102,10 @@
 	services.system-config-printer.enable = true;
 	programs.system-config-printer.enable = true;
 
-    # services.greetd.enable = true;
-    # services.greetd.settings.default_session = {
-    #     command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
-    # };
+    services.greetd.enable = true;
+    services.greetd.settings.default_session = {
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+    };
     services.keybase.enable = true;
     services.kbfs.enable = true;
     services.flatpak.enable = true;

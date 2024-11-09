@@ -68,6 +68,25 @@
         "type": "github"
       }
     },
+    "coachtaal-tooling": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1731108605,
+        "narHash": "sha256-XfOP/eAEXOQyDDFYra5o/9j0dB2pLKhl194mP0+H5cs=",
+        "owner": "dtomvan",
+        "repo": "coachtaal-tooling",
+        "rev": "26b198fb331539e03e96a9b5c5c73b4b07190328",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dtomvan",
+        "ref": "flake",
+        "repo": "coachtaal-tooling",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -362,7 +381,7 @@
         "hyprlang": "hyprlang",
         "hyprutils": "hyprutils",
         "hyprwayland-scanner": "hyprwayland-scanner",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "pre-commit-hooks": "pre-commit-hooks",
         "systems": "systems_2",
         "xdph": "xdph"
@@ -556,7 +575,7 @@
     "nixgl": {
       "inputs": {
         "flake-utils": "flake-utils",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_4"
       },
       "locked": {
         "lastModified": 1713543440,
@@ -661,6 +680,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1717696253,
+        "narHash": "sha256-1+ua0ggXlYYPLTmMl3YeYYsBXDSCqT+Gw3u6l4gvMhA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9b5328b7f761a7bbdc0e332ac4cf076a3eedb89b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9b5328b7f761a7bbdc0e332ac4cf076a3eedb89b",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1729413321,
         "narHash": "sha256-I4tuhRpZFa6Fu6dcH9Dlo5LlH17peT79vx1y1SpeKt0=",
         "owner": "NixOS",
@@ -675,7 +710,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_3": {
+    "nixpkgs_4": {
       "locked": {
         "lastModified": 1660551188,
         "narHash": "sha256-a1LARMMYQ8DPx1BgoI/UN4bXe12hhZkCNqdxNi6uS0g=",
@@ -690,7 +725,7 @@
         "type": "github"
       }
     },
-    "nixpkgs_4": {
+    "nixpkgs_5": {
       "locked": {
         "lastModified": 1729880355,
         "narHash": "sha256-RP+OQ6koQQLX5nw0NmcDrzvGL8HDLnyXt/jHhL1jwjM=",
@@ -784,13 +819,14 @@
     "root": {
       "inputs": {
         "ags": "ags",
+        "coachtaal-tooling": "coachtaal-tooling",
         "disko": "disko",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nix-colors": "nix-colors",
         "nixgl": "nixgl",
         "nixos-cosmic": "nixos-cosmic",
-        "nixpkgs": "nixpkgs_4",
+        "nixpkgs": "nixpkgs_5",
         "nixvim": "nixvim"
       }
     },
