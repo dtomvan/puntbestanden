@@ -34,6 +34,7 @@ in {
 		gtk.enable = true;
 
 		coach-lsp.enable = true;
+		coach-lsp.use-cached = true;
 		neovim.lsp.extraLspServers = {
 			nixd.enable = true;
 # set the nixpkgs to the flake input so nixd will hopefully search through the nixpkgs I am already using

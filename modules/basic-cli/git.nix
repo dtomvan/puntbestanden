@@ -19,6 +19,7 @@
 
     config.programs.git = lib.mkIf config.git.enable {
         enable = true;
+        lfs.enable = true;
         delta.enable = true;
         signing = {
             signByDefault = true;

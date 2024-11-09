@@ -23,11 +23,9 @@
 
 		disko.url = "github:nix-community/disko/latest";
 		disko.inputs.nixpkgs.follows = "nixpkgs";
-
-		coachtaal-tooling.url = "github:dtomvan/coachtaal-tooling/flake";
   };
 
-  outputs = inputs @ { nixpkgs, home-manager, nixvim, disko, nixos-cosmic, coachtaal-tooling, ... }: let
+  outputs = inputs @ { self, nixpkgs, home-manager, nixvim, disko, nixos-cosmic, ... }: let
 				system = "x86_64-linux";
         pkgs = import inputs.nixpkgs {
 					inherit system;
@@ -48,12 +46,15 @@
 							};
               hyprland = inputs.hyprland.packages.x86_64-linux.hyprland;
               xdg-desktop-portal-hyprland = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;
-							coach = coachtaal-tooling.packages.${system}.default;
+							coach-cached = self.packages.${system}.coach-cached;
             })
           ];
         };
       in {
 			devShells.${system} = import ./shells { inherit pkgs; };
+			packages.${system} = {
+				coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
+			};
       homeConfigurations = let 
 				tomvd = { username = "tomvd"; hostname = "tom-pc"; };
 			in {

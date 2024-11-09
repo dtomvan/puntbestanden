@@ -27,15 +27,6 @@
     networking.wireless.iwd.enable = true;
     networking.dhcpcd.enable = true;
     networking.wireless.enable = false;
-	# networking.interfaces.wlp7s0.ipv4.routes = [
-	# 	{
-	# 		address = "192.168.2.65";
-	# 		prefixLength = 24;
-	# 		via = "192.168.2.254";
-	# 	}
-	# ];
-    networking.wireless.userControlled.enable = true;
-    networking.wireless.networks."H369A8D363E".psk = "937F96647EE6";
 
     time.timeZone = "Europe/Amsterdam";
     i18n.defaultLocale = "en_US.UTF-8";
