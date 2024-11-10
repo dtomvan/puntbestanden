@@ -28,6 +28,7 @@ in {
 		};
         home.packages = [ cfg.package ];
         xdg.configFile."foot/foot.ini".text = ''
+		shell=/usr/bin/env zsh
         term=xterm-256color
         font=${cfg.font.family}:size=${builtins.toString cfg.font.size}
         '' + lib.optionalString cfg.use-nix-colors (with config.colorScheme.palette; ''

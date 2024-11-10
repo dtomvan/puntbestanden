@@ -6,7 +6,7 @@
 , ... }:
 
 let
-  username = "tom";
+  username = "tomvd";
   editor = "nvim";
 	docs = pkgs.makeDesktopItem {
       name = "nixos-manual";

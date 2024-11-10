@@ -7,10 +7,9 @@
             type = with types; listOf str;
             default = [ ];
         };
-        zsh.atuin.enable = mkEnableOption "install atuin and configure with zsh";
     };
 
-    config.home.packages = [ pkgs.zoxide ];
+    config.home.packages = with pkgs; [ atuin zoxide ];
     config.programs.zsh = lib.mkIf config.zsh.enable {
         enable = true;
         autocd = true;
@@ -40,8 +39,10 @@
         }
         ];
 
-        initExtra = lib.mkIf config.zsh.atuin.enable ''
+        initExtra = ''
             eval "''$(${pkgs.atuin}/bin/atuin init zsh --disable-up-arrow)"
+			test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+			test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
             '';
     };
 

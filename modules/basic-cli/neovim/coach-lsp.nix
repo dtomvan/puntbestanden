@@ -2,7 +2,7 @@
   cfg = config.modules.coach-lsp;
   cmd = if cfg.use-cached
 	then "${pkgs.coach-cached}/bin/coach-lsp"
-	else "${pkgs.coach}/bin/coach-lsp";
+	else "${pkgs.coach-cached}/bin/coach-lsp";
 in {
 	options.modules.coach-lsp = {
 		enable = lib.mkEnableOption "download coach-lsp and add to nvim";

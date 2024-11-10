@@ -72,7 +72,7 @@
 						username = tomvd.username;
 					};
 				};
-				"tom@tom-laptop" = home-manager.lib.homeManagerConfiguration {
+				"tomvd@tom-laptop" = home-manager.lib.homeManagerConfiguration {
 					inherit pkgs;
 					modules = with inputs; [
 						nixvim.homeManagerModules.nixvim
