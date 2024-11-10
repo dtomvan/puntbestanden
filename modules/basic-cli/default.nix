@@ -6,6 +6,14 @@
         ./git.nix
     ];
 
+	programs.mise = {
+		enable = true;
+		enableZshIntegration = true;
+	};
+	# programs.direnv = {
+	# 	enable = true;
+	# 	enableZshIntegration = true;
+	# };
     home.packages = with pkgs; [file fd ripgrep yazi];
 	xdg.mimeApps = {
 		enable = mkDefault true;

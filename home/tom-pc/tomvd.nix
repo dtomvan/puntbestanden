@@ -71,6 +71,7 @@ in {
 	ripdrag
 	file
 	cosmic-files
+	coach-cached
   ];
 	xdg.mimeApps.defaultApplications."inode/directory" = [ "cosmic-files.desktop" ];
 

@@ -26,6 +26,11 @@
 	networking.networkmanager.wifi.backend = "iwd";
     networking.wireless.iwd.enable = true;
     networking.dhcpcd.enable = true;
+	networking.dhcpcd.extraConfig = ''
+	interface wlan0
+	static ip_address=192.168.2.33/24
+	static routers=192.168.2.254
+	'';
     networking.wireless.enable = false;
 
     time.timeZone = "Europe/Amsterdam";
@@ -112,6 +117,12 @@
         curl
         nixos-rebuild
 		iwd
+
+		gcc
+		pkg-config
+		gnumake
+		cmake
+		meson
     ];
 
     programs.gnupg.agent = {
