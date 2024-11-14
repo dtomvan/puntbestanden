@@ -33,11 +33,11 @@
           overlays = [
             inputs.nixgl.overlay
             (_final: prev: {
-              ags = inputs.ags.packages.x86_64-linux.agsNoTypes;
+              ags = inputs.ags.packages.x86_64-linux.default;
 # my ags config needs a dark theme for some reason...
 							ags-wrapped = pkgs.symlinkJoin {
 								name = "ags";
-								paths = [ inputs.ags.packages.x86_64-linux.agsNoTypes ];
+								paths = [ inputs.ags.packages.x86_64-linux.default ];
 								buildInputs = [ pkgs.makeWrapper ];
 								postBuild = ''
 								wrapProgram $out/bin/ags \

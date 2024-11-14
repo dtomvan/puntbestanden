@@ -32,12 +32,17 @@
 	static routers=192.168.2.254
 	'';
     networking.wireless.enable = false;
+	hardware.bluetooth.enable = true;
+	services.blueman.enable = true;
 
     time.timeZone = "Europe/Amsterdam";
     i18n.defaultLocale = "en_US.UTF-8";
 
 	services.xserver.videoDrivers = [ "nvidia" ];
-	hardware.graphics.enable = true;
+	hardware.graphics = {
+		enable = true;
+		enable32Bit = true;
+	};
 	hardware.nvidia = {
 		modesetting.enable = true;
 		powerManagement.enable = false;
@@ -60,6 +65,7 @@
 		shell = pkgs.zsh;
         # not sure which are needed but I don't want to debug these again
         extraGroups = [ "wheel" "kvm" "audio" "seat" "libvirtd" "lp" "audio" ];
+# Packages that I always want available, no matter if I have home-manager installed
         packages = with pkgs; [
             firefox
             neovim
@@ -70,12 +76,13 @@
             jq
             ripgrep
             zathura
+# Can't decide on an image viewer...
 			sxiv
+			pqiv
 			wl-clipboard
 			pavucontrol
 			alsa-utils
 			nix-tree
-			cosmic-files
 			mpv
         ];
         hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
@@ -83,14 +90,17 @@
 	programs.zsh.enable = true;
 	# services.displayManager.cosmic-greeter.enable = true;
 	# services.desktopManager.cosmic.enable = true;
-    # programs.hyprland = {
-    #     enable = true;
-    #     package = pkgs.hyprland;
-    #     portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    # };
+    programs.hyprland = {
+        enable = true;
+        package = pkgs.hyprland;
+        portalPackage = pkgs.xdg-desktop-portal-hyprland;
+    };
     programs.neovim.defaultEditor = true;
     xdg.portal.wlr.enable = true;
-    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+    xdg.portal.extraPortals = with pkgs; [
+		xdg-desktop-portal-hyprland 
+		xdg-desktop-portal-gtk
+	];
 	services.printing = {
 		enable = true;
 		drivers = [ pkgs.hplip ];
@@ -123,7 +133,40 @@
 		gnumake
 		cmake
 		meson
+
+# General archive support
+		unzip
+		zip
+		libarchive
+		rar
+		unrar
+		bzip2
+		lz4
+# Ooh spooky
+		xz
+
+# Nix helpers
+		nh
+		nix-fast-build
+		nix-output-monitor
+		nvd
     ];
+
+	programs.steam = {
+		enable = true;
+		extraPackages = with pkgs; [
+		protonup
+		gamemode
+		mangohud
+		];
+		extraCompatPackages = [pkgs.proton-ge-bin];
+# for wayland
+		extest.enable = true;
+	};
+	programs.gamescope = {
+		enable = true;
+		capSysNice = true;
+	};
 
     programs.gnupg.agent = {
         enable = true;

@@ -14,7 +14,12 @@
 	# 	enable = true;
 	# 	enableZshIntegration = true;
 	# };
-    home.packages = with pkgs; [file fd ripgrep yazi];
+    home.packages = with pkgs; [
+	file 
+	fd 
+	ripgrep 
+	yazi
+	];
 	xdg.mimeApps = {
 		enable = mkDefault true;
 		defaultApplications = {
@@ -30,6 +35,9 @@
 	};
 
 	home.sessionVariables = {
+# Hardcoded because nix otherwise complains and I just assume myself in this case.
+# It's not even critical, just for convenience
+		FLAKE = "/home/tomvd/puntbestanden/";
 	};
 
 # I don't know which of these two actually work, the first one doesn't seem to work...
