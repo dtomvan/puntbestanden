@@ -3,12 +3,11 @@ pkgs.mkShell {
   packages = with pkgs; [
     tmux
     tmuxinator
-    # to compile it I guess
-    # typescript
+# We don't need any of this because ags already does almost everything through its transitive deps.
     # slim means no npm, we don't need it anyways
-    nodejs-slim_latest
+    # nodejs-slim_latest
     # we have nix!
-    nodePackages.eslint
+    # nodePackages.eslint
     ags
 	watchexec
   ];

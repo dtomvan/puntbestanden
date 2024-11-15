@@ -1,6 +1,15 @@
-$bg: #212223;
-$fg: #f1f1f1;
-$accent: #378DF7;
+// Uncomment this in order to experiment with colors or run ags from puntbestanden
+// $fg: #d5c4a1;
+// $bg: #1d2021;
+// $accent: #83a598;
+
+// Comment this in order to experiment with colors or run ags from puntbestanden
+$fg: #@THEME_FG_COLOR@;
+$bg: #@THEME_BG_COLOR@;
+$theme_selected_bg_color: #@THEME_SELECTED_BG_COLOR@;
+$accent: #@SURFACE@;
+$surface2: #@SURFACE2@;
+
 $radius: 7px;
 
 window.Bar {
