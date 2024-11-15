@@ -64,7 +64,6 @@ function Clock() {
     })
 }
 
-
 // we don't need dunst or any other notification daemon
 // because the Notifications module is a notification daemon itself
 function Notification() {
@@ -131,7 +130,6 @@ function Media() {
         child: Widget.Label({ label }),
     })
 }
-
 
 function Volume() {
     const icons = {

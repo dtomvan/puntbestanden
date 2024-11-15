@@ -4,7 +4,10 @@ import Bar from "./widget/Bar"
 
 App.start({
     css: style,
-    main() {
-        App.get_monitors().map(Bar)
+    instanceName: "js",
+    requestHandler(request, res) {
+        print(request)
+        res("ok")
     },
+    main: () => App.get_monitors().map(Bar),
 })

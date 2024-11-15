@@ -1,37 +1,44 @@
-{ pkgs, config, lib, ... }: let
-	cfg = config.modules.terminals.foot;
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.modules.terminals.foot;
 in {
-    options.modules.terminals.foot = with lib; {
-        enable = mkEnableOption "install and configure foot";
-		default = mkEnableOption "make foot the default terminal; only 1 can be the default";
-        use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
-		package = mkOption {
-			description = "the foot package to use";
-			default = pkgs.foot;
-			type = types.package;
-		};
-        font.family = mkOption {
-            description = "the font to use in the foot terminal";
-            default = "${config.modules.nerd-fonts.main-nerd-font} Nerd Font";
-            type = types.str;
-        };
-        font.size = mkOption {
-            description = "the font size to use in the foot terminal";
-            default = 14;
-            type = types.ints.between 9 30;
-        };
+  options.modules.terminals.foot = with lib; {
+    enable = mkEnableOption "install and configure foot";
+    default = mkEnableOption "make foot the default terminal; only 1 can be the default";
+    use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
+    package = mkOption {
+      description = "the foot package to use";
+      default = pkgs.foot;
+      type = types.package;
     };
-    config = lib.mkIf cfg.enable {
-		modules.terminals = lib.mkIf cfg.default {
-			name = lib.mkForce "foot";
-			bin = lib.mkForce "${cfg.package}/bin/foot";
-		};
-        home.packages = [ cfg.package ];
-        xdg.configFile."foot/foot.ini".text = ''
-		shell=/usr/bin/env zsh
-        term=xterm-256color
-        font=${cfg.font.family}:size=${builtins.toString cfg.font.size}
-        '' + lib.optionalString cfg.use-nix-colors (with config.colorScheme.palette; ''
+    font.family = mkOption {
+      description = "the font to use in the foot terminal";
+      default = "${config.modules.nerd-fonts.main-nerd-font} Nerd Font";
+      type = types.str;
+    };
+    font.size = mkOption {
+      description = "the font size to use in the foot terminal";
+      default = 14;
+      type = types.ints.between 9 30;
+    };
+  };
+  config = lib.mkIf cfg.enable {
+    modules.terminals = lib.mkIf cfg.default {
+      name = lib.mkForce "foot";
+      bin = lib.mkForce "${cfg.package}/bin/foot";
+    };
+    home.packages = [cfg.package];
+    xdg.configFile."foot/foot.ini".text =
+      ''
+        shell=/usr/bin/env zsh
+              term=xterm-256color
+              font=${cfg.font.family}:size=${builtins.toString cfg.font.size}
+      ''
+      + lib.optionalString cfg.use-nix-colors (with config.colorScheme.palette; ''
         [colors]
         foreground=${base05} # Text
         background=${base00} # Base
@@ -51,6 +58,6 @@ in {
         bright5=${base06}    # pink
         bright6=${base0F}    # teal
         bright7=${base07}    # Subtext 0
-        '');
-    };
+      '');
+  };
 }

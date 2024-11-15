@@ -1,6 +1,12 @@
-{ pkgs, lib, config, ... }: let
-  git-clone = lib.writers.writeShellApplication {
-  };
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}: let
+  git-clone =
+    lib.writers.writeShellApplication {
+    };
 in {
-	home.packages = [ git-clone ];
+  home.packages = [git-clone];
 }
