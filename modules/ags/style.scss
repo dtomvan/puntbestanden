@@ -3,6 +3,7 @@
 // $bg: #1d2021;
 // $accent: #83a598;
 
+@use "./notifications/Notification.scss";
 // Comment this in order to experiment with colors or run ags from puntbestanden
 $fg: #@THEME_FG_COLOR@;
 $bg: #@THEME_BG_COLOR@;

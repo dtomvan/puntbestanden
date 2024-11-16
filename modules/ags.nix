@@ -36,23 +36,21 @@ in {
         SURFACE = "665c54";
         SURFACE2 = "3c3836";
       };
-	  # we need to remove /nix/store BECAUSE IS WORKS RELATIVE TO APP.ts 
-	  # and app.ts is in /nix/store also
-      styleSheet = lib.removePrefix "/nix/store" (builtins.toString (pkgs.replaceVars ./ags/style.scss (
+      styleSheet = pkgs.replaceVars ./ags/style.scss (
         if cfg.use-nix-colors
         then nixColorPalette
         else sensibleDefault
-      )));
-      barTsx = lib.removePrefix "/nix/store" "${./ags/widgets/Bar.tsx}";
-      # when using nix, we need to ****ing tweak app.ts...
-      appTs = pkgs.substitute {
-		  src = ./ags/app.ts;
-		  substitutions = [
-		  "--replace-fail" "/widgets/Bar" barTsx
-		  "--replace-fail" "/style.scss" styleSheet
-		  ];
-	  };
-    in
-      appTs;
+      );
+      appBundle =
+        pkgs.runCommandNoCCLocal "hm-ags-bundle" {
+          buildInputs = [pkgs.ags];
+        } ''
+          mkdir $out
+          cp -r ${./ags}/* $out
+		  rm $out/style.scss
+          cp ${styleSheet} $out/style.scss
+          ags bundle $out/app.ts $out/bundle.js
+        '';
+    in "${appBundle}/bundle.js";
   };
 }

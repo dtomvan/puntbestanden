@@ -4,8 +4,8 @@
     zip
     libarchive
     rar
-    unrar
     bzip2
+	zstd
     lz4
     # Ooh spooky
     xz

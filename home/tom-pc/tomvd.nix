@@ -18,12 +18,14 @@
     ../../modules/gtk.nix
     ../../modules/lorri.nix
     ../../modules/sowon.nix
+
+		../../scripts/listapps.nix
   ];
 
-	git.user = {
-		name = "Tom van Dijk";
-		email = "18gatenmaker6@gmail.com";
-	};
+  git.user = {
+    name = "Tom van Dijk";
+    email = "18gatenmaker6@gmail.com";
+  };
 
   modules = {
     ags.enable = true;
@@ -39,10 +41,10 @@
     gtk.enable = true;
 
     lorri.enable = true;
-		sowon = {
-			enable = true;
-			enablePenger = true;
-		};
+    sowon = {
+      enable = true;
+      enablePenger = true;
+    };
     coach-lsp.enable = true;
     coach-lsp.use-cached = true;
     neovim.lsp.extraLspServers = {
@@ -67,6 +69,11 @@
         home-manager.expr = ''${flake}.homeConfigurations."${username}@${hostname}".options'';
       };
     };
+  };
+
+  programs.agsv1 = {
+    enable = true;
+    configPath = ../../modules/ags.bak/config.js;
   };
 
   home.username = username;

@@ -4,5 +4,8 @@
     nix-fast-build
     nix-output-monitor
     nvd
+	nix-init
+	nurl
+	nix-tree
   ];
 }

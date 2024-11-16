@@ -4,41 +4,48 @@
   lib,
   ...
 }: {
-  nixpkgs.config.allowUnfree = true;
   nix.settings = {
     trusted-users = ["tomvd"];
-    experimental-features = ["nix-command" "flakes"];
-    substituters = [
-      "https://hyprland.cachix.org"
-      "https://cosmic.cachix.org"
-    ];
-    trusted-public-keys = [
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-    ];
   };
   imports = [
+    # nix and nixpkgs config
+    ../os-modules/maintenance.nix
+    ../os-modules/nix-config-common.nix
+    ../os-modules/substituters/hyprland.nix
+
+    # hardware / drivers
     ../hardware/tom-pc.nix
     ../os-modules/hardware/nvidia.nix
     ../os-modules/hardware/ssd.nix
 
+    # package sets (groups of packages that I want to
+    # reuse across installs, to hopefully future-proof
+    # my nixos configuration
     ../os-modules/packagesets/archives.nix
     ../os-modules/packagesets/build-tools.nix
     ../os-modules/packagesets/nix-helpers.nix
+    ../os-modules/packagesets/repo-tools.nix
 
+    # networking / bluetooth
     ../os-modules/networking/bluetooth.nix
     ../os-modules/networking/static-ip.nix
     ../os-modules/networking/iwd.nix
 
+    # Users (no home-manager, built separately)
+    # WARNING: users.mutableUsers == false, so removing all regular users renders
+    # the system almost UNUSABLE. Remove users with caution (obviously).
     ../os-modules/users/tomvd.nix
 
+    # Big programs / configuration
     ../os-modules/steam.nix
     ../os-modules/graphical-session.nix
     ../os-modules/printing.nix
+    ../os-modules/gaming-extra.nix
   ];
 
   modules = {
     printing.useHPLip = true;
+    gaming-extra.epicGames = true;
   };
 
   boot.loader.systemd-boot.enable = true;
@@ -54,6 +61,7 @@
     pulse.enable = true;
   };
 
+  # WARNING: this requires a user to be set, or the root password to be known.
   users.mutableUsers = false;
 
   services.keybase.enable = true;
@@ -61,8 +69,10 @@
   services.flatpak.enable = true;
 
   security.polkit.enable = true;
-  virtualisation.libvirtd.enable = true;
-  virtualisation.libvirtd.qemu.package = pkgs.qemu_kvm;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.package = pkgs.qemu_kvm;
+  };
   programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [

@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   programs.steam = {
     enable = true;
     extraPackages = with pkgs; [
@@ -8,7 +8,7 @@
     ];
     extraCompatPackages = [pkgs.proton-ge-bin];
     # for wayland
-    extest.enable = true;
+    extest.enable = lib.mkDefault true;
   };
   programs.gamescope = {
     enable = true;
