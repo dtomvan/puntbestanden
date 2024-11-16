@@ -1,12 +1,6 @@
-import GLib from "gi://GLib"
-
 const ANCHOR_CENTER = ["top", "bottom", "left", "right"]
 
-const clock = Variable(GLib.DateTime.new_now_local(), {
-    poll: [1000, () => GLib.DateTime.new_now_local()],
-})
-
-function Background(file) {
+function Background() {
     return Widget.Box({
         class_name: "wallpaper",
         expand: true,
@@ -14,7 +8,6 @@ function Background(file) {
         hpack: "center",
         css: `
             background-color: rgba(50, 50, 50, 0.95);
-            background-image: url('${file}');
             background-size: contain;
             background-repeat: no-repeat;
             transition: 200ms;
@@ -23,32 +16,6 @@ function Background(file) {
             border-radius: 30px;
             box-shadow: 25px 25px 30px 0 rgba(0,0,0,0.5);`,
     })
-}
-
-function DateTime() {
-    return Widget.Box(
-        {
-            spacing: 4,
-            homogeneous: false,
-            vertical: true,
-            margin: 8,
-            vpack: 'center',
-            hpack: 'center',
-        },
-        // icon
-        Widget.Label({
-            css: `
-                font-size: 72pt;
-            `,
-            label: clock.bind().as(date => date.format("%H:%M"))
-        }),
-        Widget.Label({
-            css: `
-                font-size: 48pt;
-            `,
-            label: clock.bind().as(date => date.format("%x"))
-        }),
-    )
 }
 
 function PowerButtons(buttons = [
@@ -99,17 +66,6 @@ function CloseButton(
 }
 
 export function Powermenu(name = 'pmenu', monitor = 0) {
-    const wallpaperPath = Utils.interval(120 * 1000, () => {
-        // Let's borrow the wp lookup from my previous powermenu using the
-        // venerable EWW
-        return Utils.exec("bash -c \"~/.config/eww/scripts/wallpaper\"");
-    })
-
-    // const closeThis = () => {
-    //     App.closeWindow(name);
-    //     App.openWindow(`bar-${monitor}`);
-    // };
-
     return Widget.Window({
         name,
         monitor,
@@ -119,14 +75,12 @@ export function Powermenu(name = 'pmenu', monitor = 0) {
         class_name: "power-menu",
         anchor: ANCHOR_CENTER,
         setup: w => {
-            // w.keybind("Escape", closeThis);
             w.keybind("Escape", () => App.closeWindow(name));
         },
         child: Widget.Overlay({
-            child: Background(wallpaperPath),
+            child: Background(),
             overlays: [
-                DateTime(),
-                CloseButton(name/*, closeThis */),
+                CloseButton(name),
                 Widget.Box(
                     {
                         css: `padding-top: calc(350px - 32px - 32px);`,
@@ -139,14 +93,5 @@ export function Powermenu(name = 'pmenu', monitor = 0) {
                 )
             ]
         }),
-    }).hook(App, (self, windowName, visible) => {
-        if (self.name !== windowName) {return}
-        if (visible) {
-            Utils.execAsync('bash -c "~/.config/hypr/desktop-alpha.sh 0.2"');
-            App.closeWindow(`bar-${monitor}`);
-        } else {
-            Utils.execAsync('bash -c "~/.config/hypr/desktop-alpha.sh 1"');
-            App.openWindow(`bar-${monitor}`)
-        }
-    }, 'window-toggled')
+    })
 }
