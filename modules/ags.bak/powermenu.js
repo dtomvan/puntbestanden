@@ -1,4 +1,36 @@
+import GLib from "gi://GLib"
+
 const ANCHOR_CENTER = ["top", "bottom", "left", "right"]
+
+const clock = Variable(GLib.DateTime.new_now_local(), {
+    poll: [1000, () => GLib.DateTime.new_now_local()],
+})
+
+function DateTime() {
+    return Widget.Box(
+        {
+            spacing: 4,
+            homogeneous: false,
+            vertical: true,
+            margin: 8,
+            vpack: 'center',
+            hpack: 'center',
+        },
+        // icon
+        Widget.Label({
+            css: `
+                font-size: 72pt;
+            `,
+            label: clock.bind().as(date => date.format("%H:%M"))
+        }),
+        Widget.Label({
+            css: `
+                font-size: 48pt;
+            `,
+            label: clock.bind().as(date => date.format("%x"))
+        }),
+    )
+}
 
 function Background() {
     return Widget.Box({
@@ -80,6 +112,7 @@ export function Powermenu(name = 'pmenu', monitor = 0) {
         child: Widget.Overlay({
             child: Background(),
             overlays: [
+				DateTime(),
                 CloseButton(name),
                 Widget.Box(
                     {

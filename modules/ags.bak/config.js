@@ -236,8 +236,8 @@ function Bar(monitor = 0) {
 App.config({
     style: App.configDir + "/style.css",
     windows: [
-        NotificationPopups(),
-        Bar(),
+        // NotificationPopups(),
+        // Bar(),
         Powermenu(),
     ],
 })

@@ -25,6 +25,7 @@ in {
   wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
   clipman = "${pkgs.clipman}/bin/clipman";
   ags = "${pkgs.ags}/bin/ags";
+  agsv1 = "${pkgs.agsv1}/bin/agsv1";
 
   desktop-alpha = writeBash "desktop-alpha.sh" ''
     source ${hyprctl-env}

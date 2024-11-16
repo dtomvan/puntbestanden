@@ -94,13 +94,19 @@ in {
             ''$mod,D,exec, ${desktop-alpha} 0.1; sleep 1; ${desktop-alpha} 1''
             ''$mod,f12,exec,${toggle-nightlight}''
           ]
-          ++ lib.optionals agsCfg.enable [''$mod,escape,exec,${tools.ags} -t pmenu''];
+          ++ lib.optionals agsCfg.enable [
+			  ''$mod,escape,exec,${tools.agsv1} -t pmenu''
+		  ];
         autostart = with tools;
           [
             "${wl-paste} -t text --watch ${clipman} store"
             "${swayidle}"
           ]
-          ++ lib.optionals agsCfg.enable ["${tools.ags} run"];
+          ++ lib.optionals agsCfg.enable [
+			  "${tools.ags} run"
+			  # agsv1 already configured through HM module.
+			  "${tools.agsv1}"
+		  ];
       in
         lib.mkIf cfg.enable {
           monitor = [", preferred, auto, 1"];
