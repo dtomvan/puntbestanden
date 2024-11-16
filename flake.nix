@@ -18,9 +18,6 @@
     ags.url = "github:Aylur/ags";
     hyprland.url = "github:hyprwm/Hyprland";
 
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic/main";
-    nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
-
     disko.url = "github:nix-community/disko/latest";
     disko.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -31,7 +28,6 @@
     home-manager,
     nixvim,
     disko,
-    nixos-cosmic,
     ...
   }: let
     system = "x86_64-linux";
@@ -41,13 +37,6 @@
       overlays = [
         inputs.nixgl.overlay
         (_final: prev: {
-          agsv1 = pkgs.symlinkJoin {
-            name = "agsv1";
-            paths = [(builtins.getFlake "github:Aylur/ags/67b0e31ded361934d78bddcfc01f8c3fcf781aad").packages.x86_64-linux.agsNoTypes];
-            postBuild = ''
-              mv $out/bin/ags $out/bin/agsv1
-            '';
-          };
           ags = inputs.ags.packages.x86_64-linux.agsFull;
           hyprland = inputs.hyprland.packages.x86_64-linux.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.x86_64-linux.xdg-desktop-portal-hyprland;

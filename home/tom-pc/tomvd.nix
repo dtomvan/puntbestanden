@@ -20,6 +20,11 @@
     ../../modules/sowon.nix
   ];
 
+	git.user = {
+		name = "Tom van Dijk";
+		email = "18gatenmaker6@gmail.com";
+	};
+
   modules = {
     ags.enable = true;
     ags.use-nix-colors = true;
