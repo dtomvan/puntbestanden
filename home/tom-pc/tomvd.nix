@@ -90,6 +90,7 @@
     file
     cosmic-files
     coach-cached
+		rwds-cli
   ];
   xdg.mimeApps.defaultApplications."inode/directory" = ["cosmic-files.desktop"];
 

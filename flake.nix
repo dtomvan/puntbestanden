@@ -23,6 +23,9 @@
 
     disko.url = "github:nix-community/disko/latest";
     disko.inputs.nixpkgs.follows = "nixpkgs";
+
+		rusty-words.url = "github:dtomvan/rusty-words";
+		rusty-words.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -46,6 +49,7 @@
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
+					rwds-cli = inputs.rusty-words.packages.${system}.default;
         })
       ];
     };

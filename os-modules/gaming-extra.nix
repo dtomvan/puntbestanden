@@ -15,10 +15,10 @@ in {
     xonotic = mkEnableOption "xonotic";
   };
   config = {
-    environment.systemPackages = with lib pkgs; (
-      optionals cfg.epicGames.enable ([legendary-gl] ++ optionals cfg.epicGames.gui [rare])
-      ++ optionals cfg.lutris [lutris]
-	  ++ optionals cfg.xonotic [xonotic.override {
+    environment.systemPackages = (
+      lib.optionals cfg.epicGames.enable ([pkgs.legendary-gl] ++ lib.optionals cfg.epicGames.gui [pkgs.rare])
+      ++ lib.optionals cfg.lutris [pkgs.lutris]
+	  ++ lib.optionals cfg.xonotic [pkgs.xonotic.override {
 		  # withSDL = false;
 		  # withDedicated = false;
 		  # withGLX = true;

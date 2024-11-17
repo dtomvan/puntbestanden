@@ -36,6 +36,9 @@
     # the system almost UNUSABLE. Remove users with caution (obviously).
     ../os-modules/users/tomvd.nix
 
+	# Experimenting with "old" environments (nextstep design/ux)
+	../os-modules/xorg.nix
+
     # Big programs / configuration
     ../os-modules/steam.nix
     ../os-modules/graphical-session.nix
@@ -45,7 +48,7 @@
 
   modules = {
     printing.useHPLip = true;
-    gaming-extra.epicGames = true;
+    gaming-extra.epicGames.enable = true;
   };
 
   boot.loader.systemd-boot.enable = true;
