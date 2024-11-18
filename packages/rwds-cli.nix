@@ -3,6 +3,7 @@
   fetchzip,
   autoPatchelfHook,
   lib,
+  libgcc,
 }: let
   version = "0.1.0";
 in
@@ -17,6 +18,7 @@ in
 
     nativeBuildInputs = [
       autoPatchelfHook
+	  libgcc
     ];
 
 	dontConfigure = true;
