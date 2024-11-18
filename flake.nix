@@ -23,9 +23,6 @@
 
     disko.url = "github:nix-community/disko/latest";
     disko.inputs.nixpkgs.follows = "nixpkgs";
-
-		rusty-words.url = "github:dtomvan/rusty-words";
-		rusty-words.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
@@ -45,11 +42,11 @@
         (_final: prev: {
           ags = inputs.ags.packages.${system}.agsFull;
 					agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
+					doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
           hyprland = inputs.hyprland.packages.${system}.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
-					rwds-cli = inputs.rusty-words.packages.${system}.default;
         })
       ];
     };
@@ -58,6 +55,7 @@
     devShells.${system} = import ./shells {inherit pkgs;};
     packages.${system} = {
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
+					rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
     };
     homeConfigurations = let
       tomvd = {

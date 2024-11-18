@@ -30,6 +30,7 @@
     ../os-modules/networking/bluetooth.nix
     ../os-modules/networking/static-ip.nix
     ../os-modules/networking/iwd.nix
+    ../os-modules/networking/tailscale.nix
 
     # Users (no home-manager, built separately)
     # WARNING: users.mutableUsers == false, so removing all regular users renders
