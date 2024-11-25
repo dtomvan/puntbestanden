@@ -45,11 +45,13 @@
     ../os-modules/graphical-session.nix
     ../os-modules/printing.nix
     ../os-modules/gaming-extra.nix
+    ../os-modules/syncthing.nix
   ];
 
   modules = {
     printing.useHPLip = true;
     gaming-extra.epicGames.enable = true;
+	syncthing.enable = true;
   };
 
   boot.loader.systemd-boot.enable = true;
