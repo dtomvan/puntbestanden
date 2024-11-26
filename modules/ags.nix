@@ -45,11 +45,11 @@ in {
         pkgs.runCommandNoCCLocal "hm-ags-bundle" {
           buildInputs = [pkgs.ags];
         } ''
-          mkdir $out
-          cp -r ${./ags}/* $out
-		  rm $out/style.scss
-          cp ${styleSheet} $out/style.scss
-          ags bundle $out/app.ts $out/bundle.js
+                mkdir $out
+                cp -r ${./ags}/* $out
+          rm $out/style.scss
+                cp ${styleSheet} $out/style.scss
+                ags bundle $out/app.ts $out/bundle.js
         '';
     in "${appBundle}/bundle.js";
   };

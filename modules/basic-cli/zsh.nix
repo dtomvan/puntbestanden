@@ -15,29 +15,29 @@
   };
 
   config.home.packages = with pkgs; [atuin zoxide];
-    config.programs.zsh = lib.mkIf config.zsh.enable {
-        enable = true;
-        autocd = true;
-        autosuggestion.enable = true;
-        syntaxHighlighting.enable = true;
-        defaultKeymap = "viins";
+  config.programs.zsh = lib.mkIf config.zsh.enable {
+    enable = true;
+    autocd = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+    defaultKeymap = "viins";
 
-        history = {
-            size = 10000;
-            save = 10000;
-        };
-
-        plugins = [
-        {
-            name = "zsh-vi-mode";
-            src = pkgs.zsh-vi-mode.src;
-        }
-        ];
-
-        initExtra = ''
-			#          eval "''$(${pkgs.atuin}/bin/atuin init zsh --disable-up-arrow)"
-			test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
-			test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-            '';
+    history = {
+      size = 10000;
+      save = 10000;
     };
+
+    plugins = [
+      {
+        name = "zsh-vi-mode";
+        src = pkgs.zsh-vi-mode.src;
+      }
+    ];
+
+    initExtra = ''
+      #          eval "''$(${pkgs.atuin}/bin/atuin init zsh --disable-up-arrow)"
+      test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
+      test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    '';
+  };
 }

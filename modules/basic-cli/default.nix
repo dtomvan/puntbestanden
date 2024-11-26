@@ -16,37 +16,40 @@ with lib; {
     enable = true;
     enableZshIntegration = true;
   };
-	programs.bash.enable = true;
-	programs.oh-my-posh = {
-		enable = true;
-		enableBashIntegration = true;
-		enableZshIntegration = true;
-		useTheme = "catppuccin_mocha";
-	};
+  programs.bash.enable = true;
+  programs.oh-my-posh = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+    useTheme = "catppuccin_mocha";
+  };
 
-    home.packages = with pkgs; [file fd ripgrep yazi];
-	xdg.mimeApps = {
-		enable = mkDefault true;
-		defaultApplications = {
-			"inode/directory" = [ "yazi.desktop" ];
-		};
-	};
-	home.shellAliases = {
-        e = if config.modules.neovim.enable then "nvim" else "nano";
-		ls = "${pkgs.eza}/bin/eza --icons always";
-		la = "ls -a";
-		ll = "ls -lah";
-		cat = "${pkgs.bat}/bin/bat --color always";
-		g = "git";
-		gst = "git status";
-		gaa = "git add -A";
-		gp = "git push";
-		gpf = "git push --force-with-lease";
-		gpF = "git push --force";
-		gc = "git commit";
-		gd = "git diff";
-		gdca = "git diff --cached";
-	};
+  home.packages = with pkgs; [file fd ripgrep yazi];
+  xdg.mimeApps = {
+    enable = mkDefault true;
+    defaultApplications = {
+      "inode/directory" = ["yazi.desktop"];
+    };
+  };
+  home.shellAliases = {
+    e =
+      if config.modules.neovim.enable
+      then "nvim"
+      else "nano";
+    ls = "${pkgs.eza}/bin/eza --icons always";
+    la = "ls -a";
+    ll = "ls -lah";
+    cat = "${pkgs.bat}/bin/bat --color always";
+    g = "git";
+    gst = "git status";
+    gaa = "git add -A";
+    gp = "git push";
+    gpf = "git push --force-with-lease";
+    gpF = "git push --force";
+    gc = "git commit";
+    gd = "git diff";
+    gdca = "git diff --cached";
+  };
 
   home.sessionVariables = {
     # Hardcoded because nix otherwise complains and I just assume myself in this case.

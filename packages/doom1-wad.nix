@@ -14,9 +14,9 @@ in
       hash = "sha256-HX1DvlAeZ9kn5BXguPPinDvzMHXoWXIYFvZSpSbKx3E=";
     };
 
-	dontUnpack = true;
-	dontConfigure = true;
-	dontBuild = true;
+    dontUnpack = true;
+    dontConfigure = true;
+    dontBuild = true;
 
     sourceRoot = ".";
 

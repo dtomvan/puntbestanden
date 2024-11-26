@@ -19,7 +19,7 @@
     ../../modules/lorri.nix
     ../../modules/sowon.nix
 
-		../../scripts/listapps.nix
+    ../../scripts/listapps.nix
   ];
 
   git.user = {
@@ -48,11 +48,11 @@
     coach-lsp.enable = true;
     coach-lsp.use-cached = true;
     neovim.lsp.extraLspServers = {
-			rust_analyzer = {
-				enable = true;
-				installCargo = true;
-				installRustc = true;
-			};
+      rust_analyzer = {
+        enable = true;
+        installCargo = true;
+        installRustc = true;
+      };
       nixd.enable = true;
       # set the nixpkgs to the flake input so nixd will hopefully search through the nixpkgs I am already using
       nixd.package = pkgs.symlinkJoin {
@@ -95,9 +95,9 @@
     file
     cosmic-files
     coach-cached
-		prboom-plus
+    prboom-plus
   ];
-	home.file."doom1.wad".source = "${pkgs.doom1-wad}/share/games/doom1.wad";
+  home.file."doom1.wad".source = "${pkgs.doom1-wad}/share/games/doom1.wad";
   xdg.mimeApps.defaultApplications."inode/directory" = ["cosmic-files.desktop"];
 
   home.file = {

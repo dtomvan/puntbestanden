@@ -18,11 +18,14 @@ in {
     environment.systemPackages = (
       lib.optionals cfg.epicGames.enable ([pkgs.legendary-gl] ++ lib.optionals cfg.epicGames.gui [pkgs.rare])
       ++ lib.optionals cfg.lutris [pkgs.lutris]
-	  ++ lib.optionals cfg.xonotic [pkgs.xonotic.override {
-		  # withSDL = false;
-		  # withDedicated = false;
-		  # withGLX = true;
-	  }]
+      ++ lib.optionals cfg.xonotic [
+        pkgs.xonotic.override
+        {
+          # withSDL = false;
+          # withDedicated = false;
+          # withGLX = true;
+        }
+      ]
     );
   };
 }

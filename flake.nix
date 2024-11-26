@@ -5,31 +5,31 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-			 inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-        url = "github:nix-community/nixvim";
-				 inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:nix-community/nixGL";
 
     nix-colors.url = "github:misterio77/nix-colors";
     ags.url = "github:Aylur/ags";
     agsv1.url = "github:dtomvan/agsv1";
-		#   agsv1.url = "git+file:///home/tomvd/projects/agsv1";
-		# agsv1.inputs.nixpkgs.follows = "nixpkgs";
+    #   agsv1.url = "git+file:///home/tomvd/projects/agsv1";
+    # agsv1.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
 
-		nixos-cosmic = {
-			url = "github:lilyinstarlight/nixos-cosmic/main";
-			 inputs.nixpkgs.follows = "nixpkgs";
-		};
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		disko = {
-			url = "github:nix-community/disko/latest";
-			 inputs.nixpkgs.follows = "nixpkgs";
-		};
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
@@ -48,8 +48,8 @@
         inputs.nixgl.overlay
         (_final: prev: {
           ags = inputs.ags.packages.${system}.agsFull;
-					agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
-					doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
+          agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
+          doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
           hyprland = inputs.hyprland.packages.${system}.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;
@@ -62,7 +62,7 @@
     devShells.${system} = import ./shells {inherit pkgs;};
     packages.${system} = {
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
-					rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
+      rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
     };
     homeConfigurations = let
       tomvd = {

@@ -37,8 +37,8 @@
     # the system almost UNUSABLE. Remove users with caution (obviously).
     ../os-modules/users/tomvd.nix
 
-	# Experimenting with "old" environments (nextstep design/ux)
-	../os-modules/xorg.nix
+    # Experimenting with "old" environments (nextstep design/ux)
+    ../os-modules/xorg.nix
 
     # Big programs / configuration
     ../os-modules/steam.nix
@@ -56,14 +56,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "tom-pc";
-    environment.systemPackages = with pkgs; [
-        home-manager
-        wget
-        curl
-		nh
-        # nixos-rebuild
-		iwd
-    ];
+  environment.systemPackages = with pkgs; [
+    home-manager
+    wget
+    curl
+    nh
+    # nixos-rebuild
+    iwd
+  ];
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";

@@ -95,18 +95,18 @@ in {
             ''$mod,f12,exec,${toggle-nightlight}''
           ]
           ++ lib.optionals agsCfg.enable [
-			  ''$mod,escape,exec,${tools.agsv1} -t pmenu''
-		  ];
+            ''$mod,escape,exec,${tools.agsv1} -t pmenu''
+          ];
         autostart = with tools;
           [
             "${wl-paste} -t text --watch ${clipman} store"
             "${swayidle}"
           ]
           ++ lib.optionals agsCfg.enable [
-			  "${tools.ags} run"
-			  # agsv1 already configured through HM module.
-			  "${tools.agsv1}"
-		  ];
+            "${tools.ags} run"
+            # agsv1 already configured through HM module.
+            "${tools.agsv1}"
+          ];
       in
         lib.mkIf cfg.enable {
           monitor = [", preferred, auto, 1"];

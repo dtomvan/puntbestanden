@@ -5,7 +5,7 @@
     libarchive
     rar
     bzip2
-	zstd
+    zstd
     lz4
     # Ooh spooky
     xz
