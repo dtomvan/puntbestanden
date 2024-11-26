@@ -56,6 +56,14 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "tom-pc";
+    environment.systemPackages = with pkgs; [
+        home-manager
+        wget
+        curl
+		nh
+        # nixos-rebuild
+		iwd
+    ];
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -78,13 +86,6 @@
     qemu.package = pkgs.qemu_kvm;
   };
   programs.virt-manager.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    home-manager
-    wget
-    curl
-    nixos-rebuild
-  ];
 
   services.lorri.enable = true;
 

@@ -5,24 +5,31 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+			 inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+        url = "github:nix-community/nixvim";
+				 inputs.nixpkgs.follows = "nixpkgs";
     };
     nixgl.url = "github:nix-community/nixGL";
 
     nix-colors.url = "github:misterio77/nix-colors";
     ags.url = "github:Aylur/ags";
-    # agsv1.url = "github:dtomvan/agsv1";
-    agsv1.url = "git+file:///home/tomvd/projects/agsv1";
-		agsv1.inputs.nixpkgs.follows = "nixpkgs";
+    agsv1.url = "github:dtomvan/agsv1";
+		#   agsv1.url = "git+file:///home/tomvd/projects/agsv1";
+		# agsv1.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
 
-    disko.url = "github:nix-community/disko/latest";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+		nixos-cosmic = {
+			url = "github:lilyinstarlight/nixos-cosmic/main";
+			 inputs.nixpkgs.follows = "nixpkgs";
+		};
+
+		disko = {
+			url = "github:nix-community/disko/latest";
+			 inputs.nixpkgs.follows = "nixpkgs";
+		};
   };
 
   outputs = inputs @ {
