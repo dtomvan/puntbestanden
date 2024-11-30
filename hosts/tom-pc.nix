@@ -28,7 +28,7 @@
 
     # networking / bluetooth
     ../os-modules/networking/bluetooth.nix
-    ../os-modules/networking/static-ip.nix
+    # ../os-modules/networking/static-ip.nix
     ../os-modules/networking/iwd.nix
     ../os-modules/networking/tailscale.nix
 
@@ -89,6 +89,15 @@
   };
   programs.virt-manager.enable = true;
 
+  services.avahi = {
+	  enable = true;
+	  publish = {
+		  enable = true;
+		  userServices = true;
+	  };
+	  nssmdns4 = true;
+	  openFirewall = true;
+  };
   services.lorri.enable = true;
 
   programs.gnupg.agent = {

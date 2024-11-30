@@ -3,9 +3,7 @@ import { Variable, GLib, bind } from "astal"
 import { Astal, Gtk, Gdk } from "astal/gtk3"
 import Hyprland from "gi://AstalHyprland"
 import Mpris from "gi://AstalMpris"
-import Battery from "gi://AstalBattery"
 import Wp from "gi://AstalWp"
-import Network from "gi://AstalNetwork"
 import Tray from "gi://AstalTray"
 
 function trim_to_length(len) {

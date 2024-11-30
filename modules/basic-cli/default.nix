@@ -66,6 +66,16 @@ with lib; {
     PATH = "%u/bin:%u/.cargo/bin";
   };
 
+  programs.btop = mkDefault {
+	  enable = true;
+	  settings = {
+		  color_theme = "${config.programs.btop.package}/share/btop/themes/gruvbox_dark.theme";
+		  theme_background = false;
+		  vim_keys = true;
+		  update_ms = 500;
+	  };
+  };
+
   git.enable = mkDefault true;
   git.use-gh-cli = mkDefault true;
   modules.neovim = {

@@ -21,11 +21,6 @@
     # agsv1.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.url = "github:hyprwm/Hyprland";
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,9 +42,17 @@
       overlays = [
         inputs.nixgl.overlay
         (_final: prev: {
-          ags = inputs.ags.packages.${system}.agsFull;
-          agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
-          doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
+          ags = inputs.ags.packages.${system}.default.override (with inputs.ags.packages.${system}; {
+						extraPackages = [ 
+						notifd
+						tray
+						wireplumber
+						hyprland
+						mpris
+						];
+					});
+					agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
+					doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
           hyprland = inputs.hyprland.packages.${system}.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;
@@ -112,7 +115,6 @@
         ./hosts/tom-pc.nix
         ./hardware/disko-vda.nix
         disko.nixosModules.disko
-        inputs.nixos-cosmic.nixosModules.default
       ];
     };
     nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
