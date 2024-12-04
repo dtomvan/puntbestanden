@@ -6,6 +6,7 @@
 }:
 with lib; let 
 	enable-bash-zsh = attrs: attrs // {
+		enable = true;
 		enableBashIntegration = true;
 		enableZshIntegration = true;
 	};
