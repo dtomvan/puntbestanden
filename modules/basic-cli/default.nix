@@ -36,10 +36,10 @@ in {
       if config.modules.neovim.enable
       then "nvim"
       else "nano";
-    ls = "${pkgs.eza}/bin/eza --icons always";
+    ls = "${lib.getExe pkgs.eza} --icons always";
     la = "ls -a";
     ll = "ls -lah";
-    cat = "${pkgs.bat}/bin/bat --color always";
+    cat = "${lib.getExe pkgs.bat} --color always";
     g = "git";
     gst = "git status";
     gaa = "git add -A";

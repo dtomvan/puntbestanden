@@ -29,7 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     modules.terminals = lib.mkIf cfg.default {
       name = lib.mkForce "foot";
-      bin = lib.mkForce "${cfg.package}/bin/foot";
+      bin = lib.mkForce "${lib.getExe cfg.package}";
     };
     home.packages = [cfg.package];
     xdg.configFile."foot/foot.ini".text =

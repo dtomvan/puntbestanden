@@ -13,18 +13,18 @@
 in {
   inherit locker hyprctl-env;
 
-  playerctl = "${pkgs.playerctl}/bin/playerctl";
+  playerctl = lib.getExe pkgs.playerctl;
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
-  grimblast = "${pkgs.grimblast}/bin/grimblast";
-  bemenu = "${pkgs.bemenu}/bin/bemenu";
-  tofi = {
-    normal = "${pkgs.tofi}/bin/tofi";
-    run = "${pkgs.tofi}/bin/tofi-run";
-    drun = "${pkgs.tofi}/bin/tofi-drun";
+  grimblast = lib.getExe pkgs.grimblast;
+  bemenu = lib.getExe pkgs.bemenu;
+  tofi = rec {
+    normal = lib.getExe pkgs.tofi;
+    run = normal + "-run";
+    drun = normal + "-drun";
   };
   wl-paste = "${pkgs.wl-clipboard}/bin/wl-paste";
-  clipman = "${pkgs.clipman}/bin/clipman";
-  ags = "${pkgs.ags}/bin/ags";
+  clipman = lib.getExe pkgs.clipman;
+  ags = lib.getExe pkgs.ags;
   agsv1 = "${pkgs.agsv1}/bin/agsv1";
 
   desktop-alpha = writeBash "desktop-alpha.sh" ''
@@ -43,7 +43,7 @@ in {
 
   toggle-nightlight = writeBash "toggle-nightlight.sh" ''
     source ${hyprctl-env}
-    currentshader=$(h getoption decoration:screen_shader -j | ${pkgs.jq}/bin/jq -r '.str')
+    currentshader=$(h getoption decoration:screen_shader -j | ${lib.getExe pkgs.jq} -r '.str')
 
     if [[ "$currentshader" != *"bluelight.frag" ]]; then
         h keyword decoration:screen_shader ~/.config/hypr/bluelight.frag
@@ -54,7 +54,7 @@ in {
   '';
 
   swayidle = writeBash "swayidle.sh" ''
-    ${pkgs.swayidle}/bin/swayidle -w                                                                         \
+    ${lib.getExe pkgs.swayidle} -w                                                                         \
     timeout 290 'pgrep swaylock || hyprctl notify 2 10000 0 "Locking in 10 seconds..."' \
     timeout 300 ${locker}                                                               \
     timeout 600 'hyprctl dispatch dpms off'                                             \

@@ -64,7 +64,7 @@
           --set "NIX_PATH" "nixpkgs=${nixpkgs}"
         '';
       };
-      nixd.settings.formatting.command = ["${pkgs.alejandra}/bin/alejandra"];
+      nixd.settings.formatting.command = [(lib.getExe pkgs.alejandra)];
       nixd.settings.options = let
         link-to-flake = config.lib.file.mkOutOfStoreSymlink ../../flake.nix;
         flake = ''(builtins.getFlake "${link-to-flake}")'';

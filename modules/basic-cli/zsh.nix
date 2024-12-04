@@ -35,7 +35,7 @@
     ];
 
     initExtra = ''
-      #          eval "''$(${pkgs.atuin}/bin/atuin init zsh --disable-up-arrow)"
+      #          eval "''$(${lib.getExe pkgs.atuin} init zsh --disable-up-arrow)"
       test -d ~/.linuxbrew && eval "$(~/.linuxbrew/bin/brew shellenv)"
       test -d /home/linuxbrew/.linuxbrew && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     '';

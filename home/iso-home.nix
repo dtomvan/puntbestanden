@@ -30,7 +30,7 @@
         iwctl
         sleep 3
         ping -c 4 1.1.1.1
-        ${pkgs.git}/bin/git clone https://github.com/dtomvan/puntbestanden
+        ${lib.getExe pkgs.git} clone https://github.com/dtomvan/puntbestanden
         cd puntbestanden
         nix-shell
       '';

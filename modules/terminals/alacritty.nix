@@ -29,7 +29,7 @@ in {
   config = lib.mkIf cfg.enable {
     modules.terminals = lib.mkIf cfg.default {
       name = lib.mkForce "alacritty";
-      bin = lib.mkForce "${cfg.package}/bin/alacritty";
+      bin = lib.mkForce "${lib.getExe cfg.package}";
     };
     programs.alacritty = {
       enable = true;
