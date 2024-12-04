@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  modulesPath,
   ...
 }: let
   cfg = config.modules.nerd-fonts;
@@ -20,7 +21,11 @@ in {
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home.packages = [(pkgs.nerdfonts.override {fonts = with cfg; extra-nerd-fonts ++ [main-nerd-font];})];
-  };
+  config = lib.mkIf cfg.enable (let
+	font-metadata = lib.importJSON ./fonts.json;
+    find-font = font: lib.findFirst (pkg: font == pkg.patchedName) null font-metadata;
+	get-font = font: lib.getAttr (find-font font).caskName pkgs.nerd-fonts;
+  in {
+    home.packages = lib.map get-font ([cfg.main-nerd-font] ++ cfg.extra-nerd-fonts);
+  });
 }
