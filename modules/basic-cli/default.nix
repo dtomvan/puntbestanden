@@ -4,7 +4,12 @@
   lib,
   ...
 }:
-with lib; {
+with lib; let 
+	enable-bash-zsh = attrs: attrs // {
+		enableBashIntegration = true;
+		enableZshIntegration = true;
+	};
+in {
   imports = [
     ./neovim
     ./zsh.nix
@@ -12,15 +17,9 @@ with lib; {
     ./git.nix
   ];
 
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-  };
+  programs.direnv = enable-bash-zsh {};
   programs.bash.enable = true;
-  programs.oh-my-posh = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
+  programs.oh-my-posh = enable-bash-zsh {
     useTheme = "catppuccin_mocha";
   };
 

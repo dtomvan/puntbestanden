@@ -34,11 +34,6 @@ in {
     # cosmic.enable = true;
   };
   services.lorri.enable = true;
-  programs.direnv = {
-    enable = true;
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-  };
   xdg.mimeApps.enable = lib.mkForce false;
 
   home.username = username;
