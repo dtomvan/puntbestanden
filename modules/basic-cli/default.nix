@@ -18,13 +18,14 @@ in {
     ./git.nix
   ];
 
+  programs.atuin = enable-bash-zsh {};
   programs.direnv = enable-bash-zsh {};
   programs.bash.enable = true;
   programs.oh-my-posh = enable-bash-zsh {
     useTheme = "catppuccin_mocha";
   };
 
-  home.packages = with pkgs; [file fd ripgrep yazi];
+  home.packages = with pkgs; [file fd ripgrep yazi bat];
   xdg.mimeApps = {
     enable = mkDefault true;
     defaultApplications = {

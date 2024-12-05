@@ -56,6 +56,7 @@
           hyprland = inputs.hyprland.packages.${system}.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;
+          steam-tui = self.packages.${system}.steam-tui;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
         })
       ];
@@ -66,6 +67,7 @@
     packages.${system} = {
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
       rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
+      steam-tui = pkgs.callPackage ./packages/steam-tui-bin.nix {};
     };
     homeConfigurations = let
       tomvd = {
