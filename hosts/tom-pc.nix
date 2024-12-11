@@ -51,7 +51,7 @@
   modules = {
     printing.useHPLip = true;
     gaming-extra.epicGames.enable = true;
-	syncthing.enable = true;
+    syncthing.enable = true;
   };
 
   boot.loader.systemd-boot.enable = true;
@@ -90,13 +90,13 @@
   programs.virt-manager.enable = true;
 
   services.avahi = {
-	  enable = true;
-	  publish = {
-		  enable = true;
-		  userServices = true;
-	  };
-	  nssmdns4 = true;
-	  openFirewall = true;
+    enable = true;
+    publish = {
+      enable = true;
+      userServices = true;
+    };
+    nssmdns4 = true;
+    openFirewall = true;
   };
   services.lorri.enable = true;
 

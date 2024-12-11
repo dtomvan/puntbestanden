@@ -39,7 +39,7 @@
       diff.tool = "nvimdiff";
       init.defaultBranch = "main";
       advice.detachedHead = false;
-	  pull.rebase = true;
+      pull.rebase = true;
     };
   };
   config.programs.gh = lib.mkIf config.git.use-gh-cli {

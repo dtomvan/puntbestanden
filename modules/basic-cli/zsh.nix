@@ -17,6 +17,7 @@
   config.home.packages = with pkgs; [atuin zoxide];
   config.programs.zsh = lib.mkIf config.zsh.enable {
     enable = true;
+    zprof.enable = true;
     autocd = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;

@@ -43,16 +43,16 @@
         inputs.nixgl.overlay
         (_final: prev: {
           ags = inputs.ags.packages.${system}.default.override (with inputs.ags.packages.${system}; {
-						extraPackages = [ 
-						notifd
-						tray
-						wireplumber
-						hyprland
-						mpris
-						];
-					});
-					agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
-					doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
+            extraPackages = [
+              notifd
+              tray
+              wireplumber
+              hyprland
+              mpris
+            ];
+          });
+          agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
+          doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
           hyprland = inputs.hyprland.packages.${system}.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;

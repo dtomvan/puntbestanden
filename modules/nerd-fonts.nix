@@ -22,9 +22,9 @@ in {
   };
 
   config = lib.mkIf cfg.enable (let
-	font-metadata = lib.importJSON ./fonts.json;
+    font-metadata = lib.importJSON ./fonts.json;
     find-font = font: lib.findFirst (pkg: font == pkg.patchedName) null font-metadata;
-	get-font = font: lib.getAttr (find-font font).caskName pkgs.nerd-fonts;
+    get-font = font: lib.getAttr (find-font font).caskName pkgs.nerd-fonts;
   in {
     home.packages = lib.map get-font ([cfg.main-nerd-font] ++ cfg.extra-nerd-fonts);
   });

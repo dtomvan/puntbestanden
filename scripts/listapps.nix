@@ -1,4 +1,8 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   home.packages = [
     (pkgs.writers.writeBashBin "list-apps" ''
       ${lib.getExe pkgs.nix-tree} --dot ~/.nix-profile/bin/* \
