@@ -27,12 +27,6 @@ in {
   programs.bash.enable = true;
 
   home.packages = with pkgs; [file fd ripgrep yazi bat];
-  xdg.mimeApps = {
-    enable = mkDefault true;
-    defaultApplications = {
-      "inode/directory" = ["yazi.desktop"];
-    };
-  };
   home.shellAliases = {
     e =
       if config.modules.neovim.enable

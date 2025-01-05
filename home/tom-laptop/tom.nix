@@ -31,7 +31,6 @@ in {
     terminals.foot.font.size = 16;
 
     nerd-fonts.enable = true;
-    # cosmic.enable = true;
   };
   services.lorri.enable = true;
   xdg.mimeApps.enable = lib.mkForce false;

@@ -38,7 +38,7 @@
     ../os-modules/users/tomvd.nix
 
     # Experimenting with "old" environments (nextstep design/ux)
-    ../os-modules/xorg.nix
+    # ../os-modules/xorg.nix
 
     # Big programs / configuration
     ../os-modules/steam.nix
@@ -85,7 +85,18 @@
   security.polkit.enable = true;
   virtualisation.libvirtd = {
     enable = true;
-    qemu.package = pkgs.qemu_kvm;
+    qemu = {
+		package = pkgs.qemu_kvm;
+		runAsRoot = true;
+		swtpm.enable = true;
+		ovmf = {
+			enable = true;
+			packages = [(pkgs.OVMF.override {
+				secureBoot = true;
+				tpmSupport = true;
+			}).fd];
+		};
+	};
   };
   programs.virt-manager.enable = true;
 

@@ -32,7 +32,9 @@
     ags.use-nix-colors = true;
 
     terminals.enable = true;
-    terminals.alacritty.enable = true;
+    # terminals.alacritty.enable = true;
+		# terminals.ghostty.enable = true;
+		# terminals.ghostty.default = true;
     terminals.foot.default = true;
 
     hyprland.enable = true;
@@ -98,7 +100,11 @@
     prboom-plus
   ];
   home.file."doom1.wad".source = "${pkgs.doom1-wad}/share/games/doom1.wad";
-  xdg.mimeApps.defaultApplications."inode/directory" = ["cosmic-files.desktop"];
+  xdg.mimeApps = {
+		enable = true;
+		defaultApplications."inode/directory" = ["cosmic-files.desktop"];
+		defaultApplications."application/pdf" = ["zathura.desktop"];
+	};
 
   home.file = {
   };

@@ -8,6 +8,7 @@ in {
   imports = [
     ./alacritty.nix
     ./foot.nix
+    ./ghostty.nix
   ];
   options.modules.terminals = with lib; {
     enable = mkEnableOption "install a default terminal";

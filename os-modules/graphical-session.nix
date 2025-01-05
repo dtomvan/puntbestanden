@@ -9,8 +9,10 @@
     xdg-desktop-portal-hyprland
     xdg-desktop-portal-gtk
   ];
-  services.greetd.enable = true;
-  services.greetd.settings.default_session = {
-    command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
+  programs.regreet = {
+	  enable = true;
+	  settings = {
+		  GTK.application_prefer_dark_theme = true;
+	  };
   };
 }
