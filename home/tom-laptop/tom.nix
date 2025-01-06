@@ -49,6 +49,7 @@ in {
   # nixvim with my neovim config etc.
   home.packages = with pkgs; [
     docs
+		ghostty
   ];
 
   home.file = {

@@ -8,6 +8,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+		ghostty = {
+# lock because I don't wanna recompile until a new major version hits
+      url = "github:ghostty-org/ghostty/574407aacd2420197d7df9e756e1076aee88078f?narHash=sha256-Jj13Unxiu5r/hK8hlJ37VxxNTDAtpKcmFDeDd3vAJ7o%3D";
+      inputs.nixpkgs-unstable.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,6 +39,7 @@
     home-manager,
     nixvim,
     disko,
+		ghostty,
     ...
   }: let
     system = "x86_64-linux";
@@ -58,6 +65,7 @@
           coach-cached = self.packages.${system}.coach-cached;
           steam-tui = self.packages.${system}.steam-tui;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
+					ghostty = ghostty.packages.${system}.default;
         })
       ];
     };
