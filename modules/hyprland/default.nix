@@ -47,6 +47,7 @@ in {
       # terminal is required!
       modules.terminals.enable = lib.mkForce true;
       wayland.windowManager.hyprland.enable = true;
+	  wayland.windowManager.hyprland.systemd.enable = false;
       services.playerctld.enable = true;
       wayland.windowManager.hyprland.settings = let
         tools = import ./tools.nix args;
