@@ -11,7 +11,7 @@ in {
     enable = lib.mkEnableOption "install nerd fonts";
     main-nerd-font = lib.mkOption {
       description = "Nerd font to install and use";
-      default = "Iosevka";
+      default = "JetBrainsMono";
       type = lib.types.str;
     };
     extra-nerd-fonts = lib.mkOption {

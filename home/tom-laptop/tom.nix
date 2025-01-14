@@ -22,12 +22,14 @@ in {
     ../../modules/basic-cli
     ../../modules/terminals
     ../../modules/nerd-fonts.nix
+    ../../modules/stow.nix
     # ../../modules/minecraft.nix
   ];
 
   modules = {
     terminals.enable = true;
     terminals.foot.default = true;
+    terminals.foot.font.family = "Afio";
     terminals.foot.font.size = 16;
 
     nerd-fonts.enable = true;
@@ -48,11 +50,11 @@ in {
   # nixvim with my neovim config etc.
   home.packages = with pkgs; [
     docs
-		ghostty
+		afio
+		(pkgs.writers.writeBashBin "nix-run4" ''
+		nix run "$FLAKE#pkgs.$@"
+		'')
   ];
-
-  home.file = {
-  };
 
   programs.home-manager.enable = true;
 }

@@ -1,0 +1,13 @@
+% qr code
+
+# Create a QR code with some content 2
+curl qrcode.show/<content>
+
+# Create a QR code with some content 3
+curl qrcode.show -d <content>
+
+# Create a QR code from a file
+curl qrcode.show -d @<inputfile>
+
+# Create a QR code with some content 4
+echo <content> | curl qrcode.show -d @-

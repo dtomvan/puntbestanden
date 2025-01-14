@@ -19,13 +19,11 @@
     ../../modules/lorri.nix
     ../../modules/sowon.nix
 
+# File for a bunch of home.file.
+    ../../modules/stow.nix
+
     ../../scripts/listapps.nix
   ];
-
-  git.user = {
-    name = "Tom van Dijk";
-    email = "18gatenmaker6@gmail.com";
-  };
 
   modules = {
     ags.enable = true;
@@ -47,8 +45,8 @@
       enable = true;
       enablePenger = true;
     };
-    coach-lsp.enable = true;
-    coach-lsp.use-cached = true;
+    # coach-lsp.enable = true;
+    # coach-lsp.use-cached = true;
     neovim.lsp.extraLspServers = {
       rust_analyzer = {
         enable = true;
@@ -98,6 +96,9 @@
     cosmic-files
     coach-cached
     prboom-plus
+		(pkgs.writers.writeBashBin "nix-run4" ''
+		nix run "$FLAKE#pkgs.$@"
+		'')
   ];
   home.file."doom1.wad".source = "${pkgs.doom1-wad}/share/games/doom1.wad";
   xdg.mimeApps = {
@@ -105,9 +106,6 @@
 		defaultApplications."inode/directory" = ["cosmic-files.desktop"];
 		defaultApplications."application/pdf" = ["zathura.desktop"];
 	};
-
-  home.file = {
-  };
 
   programs.home-manager.enable = true;
 }
