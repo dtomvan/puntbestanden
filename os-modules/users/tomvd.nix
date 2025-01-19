@@ -4,7 +4,7 @@
     createHome = true;
     shell = pkgs.zsh;
     # not sure which are needed but I don't want to debug these again
-    extraGroups = ["wheel" "kvm" "audio" "seat" "libvirtd" "lp" "audio"];
+    extraGroups = ["wheel" "kvm" "audio" "seat" "libvirtd" "qemu-libvirtd" "lp" "audio"];
     # Packages that I always want available, no matter if I have home-manager installed
     packages = with pkgs; [
       firefox
@@ -18,7 +18,6 @@
       zathura
       # Can't decide on an image viewer...
       sxiv
-      pqiv
       wl-clipboard
       pavucontrol
       alsa-utils

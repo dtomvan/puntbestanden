@@ -46,6 +46,8 @@
     ../os-modules/printing.nix
     ../os-modules/gaming-extra.nix
     ../os-modules/syncthing.nix
+
+	../specialisations/waydroid.nix
   ];
 
   modules = {
@@ -65,6 +67,7 @@
     nh
     # nixos-rebuild
     iwd
+	wl-clipboard
   ];
 
   time.timeZone = "Europe/Amsterdam";
@@ -83,6 +86,10 @@
   services.flatpak.enable = true;
 
   security.polkit.enable = true;
+  environment.etc."libvirt/qemu.conf".text = "group=kvm";
+  virtualisation.waydroid.enable = true;
+  users.groups.libvirtd.members = ["tomvd"];
+  virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
