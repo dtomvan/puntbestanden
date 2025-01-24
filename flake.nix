@@ -8,12 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		ghostty = {
-# lock because I don't wanna recompile until a new major version hits
-      url = "github:ghostty-org/ghostty/574407aacd2420197d7df9e756e1076aee88078f?narHash=sha256-Jj13Unxiu5r/hK8hlJ37VxxNTDAtpKcmFDeDd3vAJ7o%3D";
-      inputs.nixpkgs-unstable.follows = "nixpkgs";
-    };
-
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,9 +16,7 @@
 
     nix-colors.url = "github:misterio77/nix-colors";
     ags.url = "github:Aylur/ags";
-    agsv1.url = "github:dtomvan/agsv1";
-    #   agsv1.url = "git+file:///home/tomvd/projects/agsv1";
-    # agsv1.inputs.nixpkgs.follows = "nixpkgs";
+    # agsv1.url = "github:dtomvan/agsv1";
     hyprland.url = "github:hyprwm/Hyprland";
 
     disko = {
@@ -39,7 +31,6 @@
     home-manager,
     nixvim,
     disko,
-		ghostty,
     ...
   }: let
     system = "x86_64-linux";
@@ -58,15 +49,14 @@
               mpris
             ];
           });
-          agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
+          # agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
           doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
           hyprland = inputs.hyprland.packages.${system}.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;
           steam-tui = self.packages.${system}.steam-tui;
-          afio = self.packages.${system}.afio;
+          afio-font = self.packages.${system}.afio-font;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
-					ghostty = ghostty.packages.${system}.default;
         })
       ];
     };
@@ -77,7 +67,7 @@
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
       rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
       steam-tui = pkgs.callPackage ./packages/steam-tui-bin.nix {};
-      afio = pkgs.callPackage ./packages/afio.nix {};
+      afio-font = pkgs.callPackage ./packages/afio.nix {};
     };
     homeConfigurations = let
       tomvd = {
@@ -90,7 +80,7 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           nix-colors.homeManagerModules.default
-          agsv1.homeManagerModules.agsv1
+          # agsv1.homeManagerModules.agsv1
           ./home/tom-pc/tomvd.nix
         ];
         extraSpecialArgs = with inputs; {

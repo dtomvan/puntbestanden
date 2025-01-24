@@ -28,9 +28,14 @@ in {
 
   modules = {
     terminals.enable = true;
-    terminals.foot.default = true;
-    terminals.foot.font.family = "Afio";
-    terminals.foot.font.size = 16;
+    terminals.foot = {
+      enable = true;
+      default = true;
+      font = {
+        size = 14;
+        family = "Afio";
+      };
+    };
 
     nerd-fonts.enable = true;
   };
@@ -50,10 +55,10 @@ in {
   # nixvim with my neovim config etc.
   home.packages = with pkgs; [
     docs
-		afio
-		(pkgs.writers.writeBashBin "nix-run4" ''
-		nix run "$FLAKE#pkgs.$@"
-		'')
+    afio-font
+    (pkgs.writers.writeBashBin "nix-run4" ''
+      nix run "$FLAKE#pkgs.$@"
+    '')
   ];
 
   programs.home-manager.enable = true;

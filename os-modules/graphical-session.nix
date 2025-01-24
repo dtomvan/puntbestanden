@@ -3,7 +3,7 @@
     enable = true;
     package = pkgs.hyprland;
     portalPackage = pkgs.xdg-desktop-portal-hyprland;
-	withUWSM = true;
+    withUWSM = true;
   };
   xdg.portal.wlr.enable = true;
   xdg.portal.extraPortals = with pkgs; [
@@ -11,9 +11,9 @@
     xdg-desktop-portal-gtk
   ];
   programs.regreet = {
-	  enable = true;
-	  settings = {
-		  GTK.application_prefer_dark_theme = true;
-	  };
+    enable = true;
+    settings = {
+      GTK.application_prefer_dark_theme = true;
+    };
   };
 }

@@ -47,7 +47,7 @@ in {
       # terminal is required!
       modules.terminals.enable = lib.mkForce true;
       wayland.windowManager.hyprland.enable = true;
-	  wayland.windowManager.hyprland.systemd.enable = false;
+      wayland.windowManager.hyprland.systemd.enable = false;
       services.playerctld.enable = true;
       wayland.windowManager.hyprland.settings = let
         tools = import ./tools.nix args;
@@ -96,7 +96,7 @@ in {
             ''$mod,f12,exec,${toggle-nightlight}''
           ]
           ++ lib.optionals agsCfg.enable [
-            ''$mod,escape,exec,${tools.agsv1} -t pmenu''
+            # ''$mod,escape,exec,${tools.agsv1} -t pmenu''
           ];
         autostart = with tools;
           [
@@ -106,11 +106,11 @@ in {
           ++ lib.optionals agsCfg.enable [
             "${tools.ags} run"
             # agsv1 already configured through HM module.
-            "${tools.agsv1}"
+            # "${tools.agsv1}"
           ]
-		  ++ lib.optionals config.modules.terminals.ghostty.enable [
-		  "${lib.getExe pkgs.ghostty} --class=com.mitchellh.ghostty.server"
-		  ];
+          ++ lib.optionals config.modules.terminals.ghostty.enable [
+            "${lib.getExe pkgs.ghostty} --class=com.mitchellh.ghostty.server"
+          ];
       in
         lib.mkIf cfg.enable {
           monitor = [", preferred, auto, 1"];
@@ -163,9 +163,9 @@ in {
             "$mod, mouse:272, movewindow"
             "$mod, mouse:273, resizewindow"
           ];
-		  windowrule = [
-		  "workspace special:ghosttyserver silent, com.mitchellh.ghostty.server"
-		  ];
+          windowrule = [
+            "workspace special:ghosttyserver silent, com.mitchellh.ghostty.server"
+          ];
 
           exec-once = autostart;
         };

@@ -19,7 +19,9 @@
     ../../modules/lorri.nix
     ../../modules/sowon.nix
 
-# File for a bunch of home.file.
+		../../modules/jc141.nix
+
+    # File for a bunch of home.file.
     ../../modules/stow.nix
 
     ../../scripts/listapps.nix
@@ -30,10 +32,14 @@
     ags.use-nix-colors = true;
 
     terminals.enable = true;
-    # terminals.alacritty.enable = true;
-		# terminals.ghostty.enable = true;
-		# terminals.ghostty.default = true;
-    terminals.foot.default = true;
+    terminals.foot = {
+      enable = true;
+      default = true;
+      font = {
+        size = 14;
+        family = "Afio";
+      };
+    };
 
     hyprland.enable = true;
     hyprland.use-nix-colors = true;
@@ -76,10 +82,10 @@
     };
   };
 
-  programs.agsv1 = {
-    enable = true;
-    configPath = ../../modules/ags.bak/config.js;
-  };
+  # programs.agsv1 = {
+  #   enable = true;
+  #   configPath = ../../modules/ags.bak/config.js;
+  # };
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -94,18 +100,17 @@
     ripdrag
     file
     cosmic-files
-    coach-cached
-    prboom-plus
-		(pkgs.writers.writeBashBin "nix-run4" ''
-		nix run "$FLAKE#pkgs.$@"
-		'')
+    afio-font
+    (pkgs.writers.writeBashBin "nix-run4" ''
+      nix run "$FLAKE#pkgs.$@"
+    '')
   ];
-  home.file."doom1.wad".source = "${pkgs.doom1-wad}/share/games/doom1.wad";
+
   xdg.mimeApps = {
-		enable = true;
-		defaultApplications."inode/directory" = ["cosmic-files.desktop"];
-		defaultApplications."application/pdf" = ["zathura.desktop"];
-	};
+    enable = true;
+    defaultApplications."inode/directory" = ["cosmic-files.desktop"];
+    defaultApplications."application/pdf" = ["zathura.desktop"];
+  };
 
   programs.home-manager.enable = true;
 }

@@ -21,5 +21,14 @@ in {
     };
     services.system-config-printer.enable = true;
     programs.system-config-printer.enable = true;
+    services.avahi = {
+      enable = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+      nssmdns4 = true;
+      openFirewall = true;
+    };
   };
 }

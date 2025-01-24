@@ -35,13 +35,17 @@ in {
       enable = true;
       package = cfg.package;
     };
-	xdg.configFile."ghostty/config".text = ''
-	font-family = ${cfg.font.family}
-	font-size = ${builtins.toString cfg.font.size}
-	theme = ${if cfg.use-nix-colors then config.colorScheme.slug else "catppuccin-mocha"}
-	gtk-adwaita = false
-	window-decoration = false
-	gtk-single-instance = true
-	'';
+    xdg.configFile."ghostty/config".text = ''
+      font-family = ${cfg.font.family}
+      font-size = ${builtins.toString cfg.font.size}
+      theme = ${
+        if cfg.use-nix-colors
+        then config.colorScheme.slug
+        else "catppuccin-mocha"
+      }
+      gtk-adwaita = false
+      window-decoration = false
+      gtk-single-instance = true
+    '';
   };
 }

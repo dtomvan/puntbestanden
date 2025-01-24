@@ -24,7 +24,11 @@
     ../os-modules/packagesets/archives.nix
     ../os-modules/packagesets/build-tools.nix
     ../os-modules/packagesets/nix-helpers.nix
+    ../os-modules/packagesets/nix-tools.nix
     ../os-modules/packagesets/repo-tools.nix
+
+# Docker
+    # ../os-modules/packagesets/docker.nix
 
     # networking / bluetooth
     ../os-modules/networking/bluetooth.nix
@@ -47,7 +51,7 @@
     ../os-modules/gaming-extra.nix
     ../os-modules/syncthing.nix
 
-	../specialisations/waydroid.nix
+    ../specialisations/waydroid.nix
   ];
 
   modules = {
@@ -67,7 +71,9 @@
     nh
     # nixos-rebuild
     iwd
-	wl-clipboard
+    wl-clipboard
+
+		distrobox
   ];
 
   time.timeZone = "Europe/Amsterdam";
@@ -93,29 +99,28 @@
   virtualisation.libvirtd = {
     enable = true;
     qemu = {
-		package = pkgs.qemu_kvm;
-		runAsRoot = true;
-		swtpm.enable = true;
-		ovmf = {
-			enable = true;
-			packages = [(pkgs.OVMF.override {
-				secureBoot = true;
-				tpmSupport = true;
-			}).fd];
-		};
-	};
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+      ovmf = {
+        enable = true;
+        packages = [
+          (pkgs.OVMF.override {
+            secureBoot = true;
+            tpmSupport = true;
+          })
+          .fd
+        ];
+      };
+    };
   };
   programs.virt-manager.enable = true;
 
-  services.avahi = {
-    enable = true;
-    publish = {
-      enable = true;
-      userServices = true;
-    };
-    nssmdns4 = true;
-    openFirewall = true;
-  };
+	virtualisation.podman = {
+		enable = true;
+		dockerCompat = true;
+	};
+
   services.lorri.enable = true;
 
   programs.gnupg.agent = {
