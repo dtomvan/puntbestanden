@@ -1,4 +1,6 @@
 local starter = require 'mini.starter'
+starter.setup {}
+if true then return end
 local logo_width = 0
 
 -- Removes the "Sessions" sections if there are none

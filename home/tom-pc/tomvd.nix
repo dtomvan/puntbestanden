@@ -21,9 +21,6 @@
 
 		../../modules/jc141.nix
 
-    # File for a bunch of home.file.
-    ../../modules/stow.nix
-
     ../../scripts/listapps.nix
   ];
 
@@ -82,11 +79,6 @@
     };
   };
 
-  # programs.agsv1 = {
-  #   enable = true;
-  #   configPath = ../../modules/ags.bak/config.js;
-  # };
-
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "24.05";
@@ -99,7 +91,7 @@
   home.packages = with pkgs; [
     ripdrag
     file
-    cosmic-files
+    # cosmic-files
     afio-font
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"
@@ -108,7 +100,7 @@
 
   xdg.mimeApps = {
     enable = true;
-    defaultApplications."inode/directory" = ["cosmic-files.desktop"];
+    # defaultApplications."inode/directory" = ["cosmic-files.desktop"];
     defaultApplications."application/pdf" = ["zathura.desktop"];
   };
 

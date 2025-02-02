@@ -88,6 +88,11 @@ in {
           // cfg.lsp.extraLspServers;
       };
 
+		plugins.treesitter = {
+			enable = true;
+			settings.highlight.enable = true;
+		};
+
       extraFiles."after/plugin/extra-config.lua".source = config.lib.file.mkOutOfStoreSymlink ./extra-config.lua;
       extraFiles."after/plugin/mini-starter.lua".source = ./mini-starter.lua;
     };

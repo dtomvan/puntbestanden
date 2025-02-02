@@ -12,11 +12,9 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixgl.url = "github:nix-community/nixGL";
 
     nix-colors.url = "github:misterio77/nix-colors";
     ags.url = "github:Aylur/ags";
-    # agsv1.url = "github:dtomvan/agsv1";
     hyprland.url = "github:hyprwm/Hyprland";
 
     disko = {
@@ -38,7 +36,6 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        inputs.nixgl.overlay
         (_final: prev: {
           ags = inputs.ags.packages.${system}.default.override (with inputs.ags.packages.${system}; {
             extraPackages = [
@@ -49,7 +46,6 @@
               mpris
             ];
           });
-          # agsv1 = inputs.agsv1.legacyPackages.${system}.agsv1;
           doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
           hyprland = inputs.hyprland.packages.${system}.hyprland;
           xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
@@ -80,7 +76,6 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           nix-colors.homeManagerModules.default
-          # agsv1.homeManagerModules.agsv1
           ./home/tom-pc/tomvd.nix
         ];
         extraSpecialArgs = with inputs; {

@@ -10,7 +10,7 @@
       gamemode
       mangohud
     ];
-    extraCompatPackages = [pkgs.proton-ge-bin];
+    # extraCompatPackages = [pkgs.proton-ge-bin];
     # for wayland
     extest.enable = lib.mkDefault true;
   };

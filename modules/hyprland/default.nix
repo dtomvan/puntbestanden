@@ -94,9 +94,6 @@ in {
             ''$mod SHIFT, escape, exec, ${locker}''
             ''$mod,D,exec, ${desktop-alpha} 0.1; sleep 1; ${desktop-alpha} 1''
             ''$mod,f12,exec,${toggle-nightlight}''
-          ]
-          ++ lib.optionals agsCfg.enable [
-            # ''$mod,escape,exec,${tools.agsv1} -t pmenu''
           ];
         autostart = with tools;
           [
@@ -105,8 +102,6 @@ in {
           ]
           ++ lib.optionals agsCfg.enable [
             "${tools.ags} run"
-            # agsv1 already configured through HM module.
-            # "${tools.agsv1}"
           ]
           ++ lib.optionals config.modules.terminals.ghostty.enable [
             "${lib.getExe pkgs.ghostty} --class=com.mitchellh.ghostty.server"

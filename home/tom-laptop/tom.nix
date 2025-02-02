@@ -22,7 +22,6 @@ in {
     ../../modules/basic-cli
     ../../modules/terminals
     ../../modules/nerd-fonts.nix
-    ../../modules/stow.nix
     # ../../modules/minecraft.nix
   ];
 

@@ -24,7 +24,7 @@
       nix-tree
       mpv
     ];
-    hashedPassword = "$6$H7z49YyQ3UJkW5rC$C.EWZnpCX9c1/OJPB.sbq9iqFbEwrHYsm2Whn5GbJJPsu05VFWo3V71sxUydb9rhLjDUB.pqVwiESolfOORID0";
+    hashedPassword = "$y$j9T$Ze3xItl54/1SRkq0Iry6E.$wsj4ufLq2EsHTFb526MgMT.1UBADpPTX/Snq2evTCf6";
   };
   programs.zsh.enable = true;
   programs.neovim.defaultEditor = true;

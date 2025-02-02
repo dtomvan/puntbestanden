@@ -17,6 +17,7 @@
     ../hardware/tom-pc.nix
     ../os-modules/hardware/nvidia.nix
     ../os-modules/hardware/ssd.nix
+    ../os-modules/misc/udisks.nix
 
     # package sets (groups of packages that I want to
     # reuse across installs, to hopefully future-proof
@@ -26,6 +27,7 @@
     ../os-modules/packagesets/nix-helpers.nix
     ../os-modules/packagesets/nix-tools.nix
     ../os-modules/packagesets/repo-tools.nix
+    ../os-modules/packagesets/linux-utils.nix
 
 # Docker
     # ../os-modules/packagesets/docker.nix
