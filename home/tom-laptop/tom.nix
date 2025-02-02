@@ -37,6 +37,13 @@ in {
     };
 
     nerd-fonts.enable = true;
+    neovim.lsp.extraLspServers = {
+      rust_analyzer = {
+        enable = true;
+				installRustc = false;
+				installCargo = false;
+      };
+    };
   };
   services.lorri.enable = true;
   xdg.mimeApps.enable = lib.mkForce false;

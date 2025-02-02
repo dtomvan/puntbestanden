@@ -91,8 +91,14 @@
   home.packages = with pkgs; [
     ripdrag
     file
+<<<<<<< HEAD
     # cosmic-files
     afio-font
+=======
+    cosmic-files
+    coach-cached
+    prboom-plus
+>>>>>>> 247739b (2025-02-02)
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"
     '')
@@ -100,7 +106,11 @@
 
   xdg.mimeApps = {
     enable = true;
+<<<<<<< HEAD
     # defaultApplications."inode/directory" = ["cosmic-files.desktop"];
+=======
+    defaultApplications."inode/directory" = ["cosmic-files.desktop"];
+>>>>>>> 247739b (2025-02-02)
     defaultApplications."application/pdf" = ["zathura.desktop"];
   };
 
