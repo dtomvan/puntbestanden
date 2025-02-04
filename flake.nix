@@ -8,14 +8,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+		#   nvf.url = "github:notashelf/nvf";
+		# nvf.inputs.nixpkgs.follows = "nixpkgs";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-colors.url = "github:misterio77/nix-colors";
-    ags.url = "github:Aylur/ags";
-    hyprland.url = "github:hyprwm/Hyprland";
+    # ags.url = "github:Aylur/ags";
+    # hyprland.url = "github:hyprwm/Hyprland";
 
     disko = {
       url = "github:nix-community/disko/latest";
@@ -29,6 +31,7 @@
     home-manager,
     nixvim,
     disko,
+		# nvf,
     ...
   }: let
     system = "x86_64-linux";
@@ -37,18 +40,18 @@
       config.allowUnfree = true;
       overlays = [
         (_final: prev: {
-          ags = inputs.ags.packages.${system}.default.override (with inputs.ags.packages.${system}; {
-            extraPackages = [
-              notifd
-              tray
-              wireplumber
-              hyprland
-              mpris
-            ];
-          });
+          # ags = inputs.ags.packages.${system}.default.override (with inputs.ags.packages.${system}; {
+          #   extraPackages = [
+          #     notifd
+          #     tray
+          #     wireplumber
+          #     hyprland
+          #     mpris
+          #   ];
+          # });
           doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
-          hyprland = inputs.hyprland.packages.${system}.hyprland;
-          xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
+          # hyprland = inputs.hyprland.packages.${system}.hyprland;
+          # xdg-desktop-portal-hyprland = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
           coach-cached = self.packages.${system}.coach-cached;
           steam-tui = self.packages.${system}.steam-tui;
           afio-font = self.packages.${system}.afio-font;
@@ -76,6 +79,7 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           nix-colors.homeManagerModules.default
+					# nvf.homeManagerModules.default
           ./home/tom-pc/tomvd.nix
         ];
         extraSpecialArgs = with inputs; {
@@ -90,7 +94,24 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           nix-colors.homeManagerModules.default
+					# nvf.homeManagerModules.default
           ./home/tom-laptop/tom.nix
+        ];
+        extraSpecialArgs = with inputs; {
+          inherit nix-colors;
+          htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
+        };
+      };
+      "tomvd@aurora" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = with inputs; [
+          nixvim.homeManagerModules.nixvim
+          nix-colors.homeManagerModules.default
+					# nvf.homeManagerModules.default
+          ./home/tom-laptop/tom.nix
+	  ({pkgs, config, lib, ...}: {
+		programs.bash.enable = lib.mkForce false;
+	  })
         ];
         extraSpecialArgs = with inputs; {
           inherit nix-colors;
