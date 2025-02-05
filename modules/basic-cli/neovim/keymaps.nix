@@ -9,14 +9,6 @@
       key = ":";
     }
     {
-      action = "<cmd>Telescope find_files<cr>";
-      key = "<c-e>";
-    }
-    {
-      action = "<cmd>Telescope live_grep<cr>";
-      key = "<c-p>";
-    }
-    {
       action = "<cmd>Neotree toggle right<cr>";
       key = "<f1>";
     }
@@ -28,9 +20,24 @@
       action = "<cr>";
       key = ",<cr>";
     }
-    {
+  ];
+	programs.nixvim.keymapsOnEvents.LspAttach = [
+	    {
       action = "<cmd>lua vim.lsp.buf.format { async = false }<cr>";
       key = "<c-f>";
     }
-  ];
+    {
+      action = "<cmd>lua vim.lsp.buf.definition()<cr>";
+      key = "gd";
+    }
+    {
+      action = "<cmd>lua vim.lsp.buf.hover()<cr>";
+      key = "K";
+    }
+		{
+      action = "<cmd>lua vim.lsp.buf.rename()<cr>";
+      key = "<space>rn";
+    }
+
+	];
 }

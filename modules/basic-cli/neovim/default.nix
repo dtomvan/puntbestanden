@@ -40,10 +40,12 @@ in {
       vimdiffAlias = true;
       withRuby = false;
       extraPackages = with pkgs; [
-        wl-clipboard
       ];
+			luaLoader.enable = true;
+			plugins.lz-n.enable = true;
 
       clipboard.register = "unnamedplus";
+			clipboard.providers.wl-copy.enable = true;
 
       performance = {
         byteCompileLua = {
@@ -92,9 +94,6 @@ in {
 			enable = true;
 			settings.highlight.enable = true;
 		};
-
-      extraFiles."after/plugin/extra-config.lua".source = config.lib.file.mkOutOfStoreSymlink ./extra-config.lua;
-      extraFiles."after/plugin/mini-starter.lua".source = ./mini-starter.lua;
     };
   };
 }

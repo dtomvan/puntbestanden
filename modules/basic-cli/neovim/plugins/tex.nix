@@ -20,6 +20,7 @@ in {
         };
         # I'll use tectonic, which downloads only what it needs
         texlivePackage = null;
+				# lazyLoad.settings.ft = ["tex"];
       };
       lsp.servers.texlab.enable = true;
     };
