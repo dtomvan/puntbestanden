@@ -1,3 +1,6 @@
+[PlasmaTransientsConfig]
+PreloadWeight=26
+
 [PlasmaViews][Panel 2]
 floating=0
 panelLengthMode=0

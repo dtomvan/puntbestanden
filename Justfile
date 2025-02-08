@@ -1,16 +1,57 @@
 [private]
-run-stow PACKAGE +ACTION:
-	stow -vv --dotfiles -t ~ -d ./stow {{PACKAGE}} {{ACTION}}
+run-stow ACTION PACKAGE +ARGS='':
+	stow -vv --dotfiles -t ~ -d ./stow {{ACTION}} {{PACKAGE}} {{ARGS}}
 
+[group('stow')]
 alias s := stow
-stow PACKAGE='tom-pc' +args='':
-	@just run-stow {{PACKAGE}} -S . {{args}}
+stow PACKAGE +args='':
+	@just run-stow -S {{PACKAGE}} {{args}}
 
-unstow PACKAGE='tom-pc' +args='':
-	@just run-stow {{PACKAGE}} -D . {{args}}
+[group('stow')]
+unstow PACKAGE +args='':
+	@just run-stow -D {{PACKAGE}} {{args}}
 
-restow PACKAGE='tom-pc' +args='':
-	@just run-stow {{PACKAGE}} -R . {{args}}
+[group('stow')]
+restow PACKAGE +args='':
+	@just run-stow -R {{PACKAGE}} {{args}}
 
-stow-adopt PACKAGE='tom-pc' +args='':
-	@just run-stow {{PACKAGE}} --adopt . {{args}}
+[group('stow')]
+stow-adopt PACKAGE +args='':
+	@just run-stow --adopt {{PACKAGE}} {{args}}
+
+[group('stow')]
+stow-tom-pc:
+	@just stow kde-common kde-tom-pc
+
+[group('stow')]
+stow-tom-laptop:
+	@just stow kde-common kde-tom-laptop
+
+####################################################################################################
+
+[group('nix')]
+nix +args='':
+	nix --experimental-features="nix-command flakes" {{args}}
+
+[group('nix')]
+alias upf := update-flake
+[group('nix')]
+update-flake:
+	@just nix flake update
+
+[group('nix')]
+alias uph := update-home
+[group('nix')]
+update-home +home="{{shell('whoami')}}@{{shell('hostname')}}":
+	nh home switch -c "{{home}}" .
+
+[group('nix')]
+alias upo := update-os
+[group('nix')]
+update-os:
+	nh os switch # only works on nixos, so we don't include an option to change which one to update
+
+[group('nix')]
+up: update-flake update-home
+
+

@@ -28,8 +28,8 @@ remove=true
 RightButton;NoModifier=org.kde.contextmenu
 
 [Containments][1]
-ItemGeometries-1536x864=Applet-42:48,0,352,128,0;Applet-43:48,128,208,192,0;Applet-45:1152,0,368,368,0;
-ItemGeometriesHorizontal=Applet-42:48,0,352,128,0;Applet-43:48,128,208,192,0;Applet-45:1152,0,368,368,0;
+ItemGeometries-1536x864=
+ItemGeometriesHorizontal=
 activityId=86da4254-3f55-4dd9-a41b-baeb614409f1
 formfactor=0
 immutability=1
@@ -37,31 +37,6 @@ lastScreen=0
 location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.potd
-
-[Containments][1][Applets][42]
-immutability=1
-plugin=org.kde.kdeconnect
-
-[Containments][1][Applets][43]
-immutability=1
-plugin=org.kde.plasma.quicklaunch
-
-[Containments][1][Applets][43][Configuration][ConfigDialog]
-DialogHeight=540
-DialogWidth=720
-
-[Containments][1][Applets][43][Configuration][General]
-launcherUrls=file:///usr/share/applications/org.kde.dolphin.desktop,file:///var/lib/flatpak/exports/share/applications/md.obsidian.Obsidian.desktop,file:///var/lib/flatpak/exports/share/applications/org.telegram.desktop.desktop,file:///var/lib/flatpak/exports/share/applications/org.libreoffice.LibreOffice.desktop
-maxSectionCount=2
-
-[Containments][1][Applets][45]
-immutability=1
-plugin=org.kde.plasma.mediacontroller
-
-[Containments][1][Applets][45][Configuration]
-PreloadWeight=55
-popupHeight=360
-popupWidth=360
 
 [Containments][1][ConfigDialog]
 DialogHeight=540
