@@ -1,16 +1,16 @@
 [private]
-run-stow +ACTION:
-	stow -vv --dotfiles -t ~ -d ./stow/ {{ACTION}}
+run-stow PACKAGE +ACTION:
+	stow -vv --dotfiles -t ~ -d ./stow {{PACKAGE}} {{ACTION}}
 
 alias s := stow
-stow +args='':
-	@just run-stow -S . {{args}}
+stow PACKAGE='tom-pc' +args='':
+	@just run-stow {{PACKAGE}} -S . {{args}}
 
-unstow +args='':
-	@just run-stow -D . {{args}}
+unstow PACKAGE='tom-pc' +args='':
+	@just run-stow {{PACKAGE}} -D . {{args}}
 
-restow +args='':
-	@just run-stow -R . {{args}}
+restow PACKAGE='tom-pc' +args='':
+	@just run-stow {{PACKAGE}} -R . {{args}}
 
-stow-adopt +args='':
-	@just run-stow --adopt . {{args}}
+stow-adopt PACKAGE='tom-pc' +args='':
+	@just run-stow {{PACKAGE}} --adopt . {{args}}
