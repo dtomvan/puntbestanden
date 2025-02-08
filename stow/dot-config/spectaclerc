@@ -1,0 +1,9 @@
+[GuiConfig]
+captureMode=0
+
+[ImageSave]
+lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250206_184740.png
+translatedScreenshotsFolder=Screenshots
+
+[VideoSave]
+translatedScreencastsFolder=Screencasts

@@ -34,13 +34,6 @@ in {
         name = theme;
         package = gnome-themes-extra;
       };
-      # is this needed?
-      gtk3 = {
-        extraConfig.gtk-theme-name =
-          if cfg.preferDark
-          then "${theme}-dark"
-          else theme;
-      };
       gtk4 = {inherit extraConfig;};
     });
 }

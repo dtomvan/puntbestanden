@@ -1,8 +1,13 @@
-{ pkgs, config, lib, ... }: {
-	environment.systemPackages = with pkgs; [
-	docker-compose
-	docker-buildx
-	];
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [
+    docker-compose
+    docker-buildx
+  ];
 
-	virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 }

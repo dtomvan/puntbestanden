@@ -41,11 +41,11 @@ in {
       withRuby = false;
       extraPackages = with pkgs; [
       ];
-			luaLoader.enable = true;
-			plugins.lz-n.enable = true;
+      luaLoader.enable = true;
+      plugins.lz-n.enable = true;
 
       clipboard.register = "unnamedplus";
-			clipboard.providers.wl-copy.enable = true;
+      clipboard.providers.wl-copy.enable = true;
 
       performance = {
         byteCompileLua = {
@@ -90,10 +90,10 @@ in {
           // cfg.lsp.extraLspServers;
       };
 
-		plugins.treesitter = {
-			enable = true;
-			settings.highlight.enable = true;
-		};
+      plugins.treesitter = {
+        enable = true;
+        settings.highlight.enable = true;
+      };
     };
   };
 }

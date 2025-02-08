@@ -19,12 +19,5 @@ in {
     user = cfg.user;
     dataDir = "/home/${cfg.user}/Documents"; # Default folder for new synced folders
     configDir = "/home/${cfg.user}/Documents/.config/syncthing";
-    # settings = {
-    # 	urAccepted = 3;
-    # 	devices.broke-void = {
-    # 		name = "broke-void";
-    # 		id = "KZE4SS2-HUMDCJL-D4DGHHA-SC3OJNV-2BBIEXA-OMES6UN-IKH5XSO-VKQTOAT";
-    # 	};
-    # };
   };
 }

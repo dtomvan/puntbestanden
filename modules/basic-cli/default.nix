@@ -10,7 +10,8 @@ with lib; let
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
-    } // attrs;
+    }
+    // attrs;
 in {
   imports = [
     ./neovim

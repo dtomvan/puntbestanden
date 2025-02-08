@@ -10,46 +10,37 @@
 }: {
   imports = [
     ../../modules/basic-cli
-    ../../modules/hyprland
     ../../modules/terminals
 
     ../../modules/nerd-fonts.nix
-    ../../modules/ags.nix
     ../../modules/gtk.nix
     ../../modules/lorri.nix
-    ../../modules/sowon.nix
-
-		../../modules/jc141.nix
 
     ../../scripts/listapps.nix
   ];
 
   modules = {
-    ags.enable = true;
-    ags.use-nix-colors = true;
-
     terminals.enable = true;
-    terminals.foot = {
+    # Replaced largely by Konsole
+    # terminals.foot = {
+    #   enable = true;
+    #   default = true;
+    #   font = {
+    #     size = 14;
+    #     family = "Afio";
+    #   };
+    # };
+    terminals.ghostty = {
       enable = true;
-      default = true;
       font = {
         size = 14;
         family = "Afio";
       };
     };
 
-    hyprland.enable = true;
-    hyprland.use-nix-colors = true;
     nerd-fonts.enable = true;
-    gtk.enable = true;
 
     lorri.enable = true;
-    sowon = {
-      enable = true;
-      enablePenger = true;
-    };
-    # coach-lsp.enable = true;
-    # coach-lsp.use-cached = true;
     neovim.lsp.extraLspServers = {
       rust_analyzer = {
         enable = true;
@@ -91,28 +82,13 @@
   home.packages = with pkgs; [
     ripdrag
     file
-<<<<<<< HEAD
-    # cosmic-files
     afio-font
-=======
-    cosmic-files
-    coach-cached
-    prboom-plus
->>>>>>> 247739b (2025-02-02)
+    stow
+    just
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"
     '')
   ];
-
-  xdg.mimeApps = {
-    enable = true;
-<<<<<<< HEAD
-    # defaultApplications."inode/directory" = ["cosmic-files.desktop"];
-=======
-    defaultApplications."inode/directory" = ["cosmic-files.desktop"];
->>>>>>> 247739b (2025-02-02)
-    defaultApplications."application/pdf" = ["zathura.desktop"];
-  };
 
   programs.home-manager.enable = true;
 }

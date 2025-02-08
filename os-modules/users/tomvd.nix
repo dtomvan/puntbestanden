@@ -1,4 +1,8 @@
 {pkgs, ...}: {
+  nix.settings = {
+    trusted-users = ["tomvd"];
+  };
+
   users.users.tomvd = {
     isNormalUser = true;
     createHome = true;

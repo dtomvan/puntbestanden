@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   nix-colors,
@@ -7,7 +6,6 @@
   ...
 }: let
   username = "tomvd";
-  editor = "nvim";
   docs = pkgs.makeDesktopItem {
     name = "nixos-manual";
     desktopName = "NixOS Manual";
@@ -21,8 +19,6 @@ in {
   imports = [
     ../../modules/basic-cli
     ../../modules/terminals
-    ../../modules/nerd-fonts.nix
-    # ../../modules/minecraft.nix
   ];
 
   modules = {
@@ -36,17 +32,19 @@ in {
       };
     };
 
-    nerd-fonts.enable = true;
     neovim.lsp.extraLspServers = {
       rust_analyzer = {
         enable = true;
-				installRustc = false;
-				installCargo = false;
+        # Let brew or devenv manage that.
+        installRustc = false;
+        installCargo = false;
       };
     };
   };
   services.lorri.enable = true;
   xdg.mimeApps.enable = lib.mkForce false;
+
+  services.syncthing.enable = true;
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -57,16 +55,17 @@ in {
   news.display = "silent";
   news.entries = lib.mkForce [];
 
-  # This is a debian system so I'll just use this homemanager config to pull in
-  # nixvim with my neovim config etc.
   home.packages = with pkgs; [
     docs
     afio-font
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"
     '')
+    stow
+    just
   ];
 
+  programs.bash.enable = lib.mkForce false;
   programs.home-manager.enable = true;
 }
 # vim:sw=2 ts=2 sts=2

@@ -1,19 +1,12 @@
 {pkgs, ...}: {
-  programs.hyprland = {
-    enable = true;
-    package = pkgs.hyprland;
-    portalPackage = pkgs.xdg-desktop-portal-hyprland;
-    withUWSM = true;
-  };
-  xdg.portal.wlr.enable = true;
-  xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-hyprland
-    xdg-desktop-portal-gtk
+  # is this needed on wayland?
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.defaultSession = "plasma";
+  environment.systemPackages = with pkgs; [
+    kdePackages.kdeconnect-kde
+    kdePackages.plasma-browser-integration
   ];
-  programs.regreet = {
-    enable = true;
-    settings = {
-      GTK.application_prefer_dark_theme = true;
-    };
-  };
 }

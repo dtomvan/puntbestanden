@@ -5,7 +5,6 @@ args @ {
   ...
 }: let
   cfg = config.modules.hyprland;
-  agsCfg = config.modules.ags;
 in {
   imports = [
     ../terminals
@@ -85,23 +84,19 @@ in {
           ", XF86AudioRaiseVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+"
           ", XF86AudioLowerVolume, exec, ${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ];
-        utilKeys = with tools;
-          [
-            ''$mod, Print, exec,${grimblast} --notify --freeze copysave area "$HOME/screenshots/screenshot.$(date +%Y%m%d_%H%M%S).png"''
-            ''$mod, return, exec, ${terminal-app}''
-            ''$mod, space, exec, $(${tofi.drun})''
-            ''$mod, V, exec, ${clipman} pick -t CUSTOM -T "${bemenu} --list 10 --wrap"''
-            ''$mod SHIFT, escape, exec, ${locker}''
-            ''$mod,D,exec, ${desktop-alpha} 0.1; sleep 1; ${desktop-alpha} 1''
-            ''$mod,f12,exec,${toggle-nightlight}''
-          ];
+        utilKeys = with tools; [
+          ''$mod, Print, exec,${grimblast} --notify --freeze copysave area "$HOME/screenshots/screenshot.$(date +%Y%m%d_%H%M%S).png"''
+          ''$mod, return, exec, ${terminal-app}''
+          ''$mod, space, exec, $(${tofi.drun})''
+          ''$mod, V, exec, ${clipman} pick -t CUSTOM -T "${bemenu} --list 10 --wrap"''
+          ''$mod SHIFT, escape, exec, ${locker}''
+          ''$mod,D,exec, ${desktop-alpha} 0.1; sleep 1; ${desktop-alpha} 1''
+          ''$mod,f12,exec,${toggle-nightlight}''
+        ];
         autostart = with tools;
           [
             "${wl-paste} -t text --watch ${clipman} store"
             "${swayidle}"
-          ]
-          ++ lib.optionals agsCfg.enable [
-            "${tools.ags} run"
           ]
           ++ lib.optionals config.modules.terminals.ghostty.enable [
             "${lib.getExe pkgs.ghostty} --class=com.mitchellh.ghostty.server"

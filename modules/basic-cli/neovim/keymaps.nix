@@ -20,9 +20,17 @@
       action = "<cr>";
       key = ",<cr>";
     }
+    {
+      action = "<cmd>cn<cr>";
+      key = "<space>j";
+    }
+    {
+      action = "<cmd>cp<cr>";
+      key = "<space>k";
+    }
   ];
-	programs.nixvim.keymapsOnEvents.LspAttach = [
-	    {
+  programs.nixvim.keymapsOnEvents.LspAttach = [
+    {
       action = "<cmd>lua vim.lsp.buf.format { async = false }<cr>";
       key = "<c-f>";
     }
@@ -34,10 +42,9 @@
       action = "<cmd>lua vim.lsp.buf.hover()<cr>";
       key = "K";
     }
-		{
+    {
       action = "<cmd>lua vim.lsp.buf.rename()<cr>";
       key = "<space>rn";
     }
-
-	];
+  ];
 }

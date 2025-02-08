@@ -1,0 +1,21 @@
+[58a9e121-5444-4c68-8402-77fd7ddf88a9]
+Description=Window settings for libreoffice-writer
+desktopfile=libreoffice-writer
+desktopfilerule=3
+title=MONDELINGE-AFSLUITING-literatuur-Ned-Eng-vwo.docx — LibreOffice Writer
+types=1
+wmclass=\slibreoffice-writer
+wmclasscomplete=true
+wmclassmatch=1
+
+[62feb899-b9d4-4026-aa3a-0ec1affa4ce4]
+Description=Application settings for discord
+clientmachine=localhost
+desktops=339141c0-201d-4d3a-8b88-c31a9dc67612
+desktopsrule=3
+wmclass=discord
+wmclassmatch=1
+
+[General]
+count=2
+rules=58a9e121-5444-4c68-8402-77fd7ddf88a9,62feb899-b9d4-4026-aa3a-0ec1affa4ce4

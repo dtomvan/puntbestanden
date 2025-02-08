@@ -19,7 +19,7 @@ in {
   programs.oh-my-posh = {
     enable = true;
     enableBashIntegration = true;
-# lag
+    # lag
     enableZshIntegration = false;
     settings = {
       upgrade = {
