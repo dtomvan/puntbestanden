@@ -16,6 +16,7 @@
     ../../modules/gtk.nix
     ../../modules/lorri.nix
     ../../modules/latex.nix
+		../../modules/syncthing.nix
 
     ../../scripts/listapps.nix
   ];

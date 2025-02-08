@@ -15,18 +15,12 @@
     exec = "${pkgs.xdg-utils}/bin/xdg-open ${htmlDocs}/share/doc/nixos/index.html";
     categories = ["System"];
   };
-  syncthing-shortcut = pkgs.makeDesktopItem {
-    name = "syncthing";
-    desktopName = "Syncthing";
-    comment = "Open syncthing in browser";
-    icon = "Syncthing";
-    exec = "${pkgs.xdg-utils}/bin/xdg-open http://127.0.0.1:8384/";
-    categories = ["Utilities"];
-  };
 in {
   imports = [
     ../../modules/basic-cli
     ../../modules/terminals
+
+    ../../modules/syncthing.nix
   ];
 
   modules = {
@@ -49,7 +43,7 @@ in {
   services.lorri.enable = true;
   xdg.mimeApps.enable = lib.mkForce false;
 
-  services.syncthing.enable = true;
+	nix.gc.automatic = true;
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -62,7 +56,6 @@ in {
 
   home.packages = with pkgs; [
     docs
-		syncthing-shortcut
     afio-font
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"

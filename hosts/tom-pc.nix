@@ -38,7 +38,6 @@
     ../os-modules/graphical-session.nix
 
     ../os-modules/misc/printing.nix
-    ../os-modules/misc/syncthing.nix
 
     ../os-modules/virt/kvm.nix
     ../os-modules/virt/distrobox.nix
@@ -47,7 +46,6 @@
   modules = {
     printing.useHPLip = true;
     # gaming-extra.epicGames.enable = true;
-    syncthing.enable = true;
   };
 
   boot.loader.systemd-boot.enable = true;
