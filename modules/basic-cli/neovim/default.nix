@@ -11,6 +11,8 @@ in {
     use-nix-colors = lib.mkEnableOption "refer to nix-color for colorscheme";
     lsp = {
       enable = lib.mkEnableOption "use lspconfig and download servers";
+      nixd.enable = lib.mkEnableOption "use nixd with this flake";
+      rust_analyzer.enable = lib.mkEnableOption "enable rust_analyzer";
       extraLspServers = lib.mkOption {
         description = "extra LSP servers you want available in neovim";
         default = {};
@@ -23,7 +25,7 @@ in {
     ./opts.nix
     ./keymaps.nix
     ./plugins
-    # ./coach-lsp.nix
+		./autocmd/lastplace.nix
   ];
 
   config = lib.mkIf cfg.enable {
@@ -39,8 +41,7 @@ in {
       vimAlias = true;
       vimdiffAlias = true;
       withRuby = false;
-      extraPackages = with pkgs; [
-      ];
+
       luaLoader.enable = true;
       plugins.lz-n.enable = true;
 
@@ -53,41 +54,6 @@ in {
           initLua = false;
           plugins = true;
         };
-      };
-
-      autoGroups = {
-        LastPlace = {clear = true;};
-      };
-      autoCmd = [
-        {
-          event = "BufReadPost";
-          group = "LastPlace";
-          callback = {
-            __raw =
-              /*
-              lua
-              */
-              ''
-                function()
-                  local mark = vim.api.nvim_buf_get_mark(0, '"')
-                  local lcount = vim.api.nvim_buf_line_count(0)
-                  if mark[1] > 0 and mark[1] <= lcount then
-                    pcall(vim.api.nvim_win_set_cursor, 0, mark)
-                  end
-                end
-              '';
-          };
-        }
-      ];
-
-      plugins.lsp = lib.mkIf cfg.lsp.enable {
-        enable = true;
-        inlayHints = true;
-        servers =
-          {
-            lua_ls.enable = true;
-          }
-          // cfg.lsp.extraLspServers;
       };
 
       plugins.treesitter = {

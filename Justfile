@@ -2,7 +2,6 @@
 run-stow ACTION PACKAGE +ARGS='':
 	stow -vv --dotfiles -t ~ -d ./stow {{ACTION}} {{PACKAGE}} {{ARGS}}
 
-[group('stow')]
 alias s := stow
 stow PACKAGE +args='':
 	@just run-stow -S {{PACKAGE}} {{args}}
@@ -33,19 +32,16 @@ stow-tom-laptop:
 nix +args='':
 	nix --experimental-features="nix-command flakes" {{args}}
 
-[group('nix')]
 alias upf := update-flake
 [group('nix')]
 update-flake:
 	@just nix flake update
 
-[group('nix')]
 alias uph := update-home
 [group('nix')]
 update-home +home="{{shell('whoami')}}@{{shell('hostname')}}":
 	nh home switch -c "{{home}}" .
 
-[group('nix')]
 alias upo := update-os
 [group('nix')]
 update-os:

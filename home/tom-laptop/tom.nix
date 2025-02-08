@@ -15,6 +15,14 @@
     exec = "${pkgs.xdg-utils}/bin/xdg-open ${htmlDocs}/share/doc/nixos/index.html";
     categories = ["System"];
   };
+  syncthing-shortcut = pkgs.makeDesktopItem {
+    name = "syncthing";
+    desktopName = "Syncthing";
+    comment = "Open syncthing in browser";
+    icon = "Syncthing";
+    exec = "${pkgs.xdg-utils}/bin/xdg-open http://127.0.0.1:8384/";
+    categories = ["Utilities"];
+  };
 in {
   imports = [
     ../../modules/basic-cli
@@ -32,13 +40,10 @@ in {
       };
     };
 
-    neovim.lsp.extraLspServers = {
-      rust_analyzer = {
-        enable = true;
-        # Let brew or devenv manage that.
-        installRustc = false;
-        installCargo = false;
-      };
+    neovim.lsp = {
+      enable = true;
+      nixd.enable = true;
+      rust_analyzer.enable = true;
     };
   };
   services.lorri.enable = true;
@@ -57,6 +62,7 @@ in {
 
   home.packages = with pkgs; [
     docs
+		syncthing-shortcut
     afio-font
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"

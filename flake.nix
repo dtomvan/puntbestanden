@@ -45,6 +45,7 @@
     };
   in {
     inherit pkgs;
+
     devShells.${system} = import ./shells {inherit pkgs;};
     packages.${system} = {
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
@@ -52,6 +53,7 @@
       steam-tui = pkgs.callPackage ./packages/steam-tui-bin.nix {};
       afio-font = pkgs.callPackage ./packages/afio.nix {};
     };
+
     homeConfigurations = let
       tomvd = {
         username = "tomvd";
@@ -68,11 +70,10 @@
         extraSpecialArgs = with inputs; {
           inherit nixpkgs;
           inherit nix-colors;
-          hostname = tomvd.hostname;
-          username = tomvd.username;
+          inherit (tomvd) username hostname;
         };
       };
-      "tomvd@aurora" = home-manager.lib.homeManagerConfiguration {
+      "${tomvd.username}@aurora" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
@@ -80,11 +81,15 @@
           ./home/tom-laptop/tom.nix
         ];
         extraSpecialArgs = with inputs; {
+					inherit nixpkgs;
           inherit nix-colors;
+					inherit (tomvd) username;
+					hostname = "aurora";
           htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
         };
       };
     };
+
     nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [

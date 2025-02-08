@@ -15,21 +15,13 @@
     ../../modules/nerd-fonts.nix
     ../../modules/gtk.nix
     ../../modules/lorri.nix
+    ../../modules/latex.nix
 
     ../../scripts/listapps.nix
   ];
 
   modules = {
     terminals.enable = true;
-    # Replaced largely by Konsole
-    # terminals.foot = {
-    #   enable = true;
-    #   default = true;
-    #   font = {
-    #     size = 14;
-    #     family = "Afio";
-    #   };
-    # };
     terminals.ghostty = {
       enable = true;
       font = {
@@ -41,33 +33,18 @@
     nerd-fonts.enable = true;
 
     lorri.enable = true;
-    neovim.lsp.extraLspServers = {
-      rust_analyzer = {
-        enable = true;
-        installCargo = true;
-        installRustc = true;
-      };
+    neovim.lsp = {
+      enable = true;
       nixd.enable = true;
-      # set the nixpkgs to the flake input so nixd will hopefully search through the nixpkgs I am already using
-      nixd.package = pkgs.symlinkJoin {
-        name = "nixd";
-        paths = [pkgs.nixd];
-        buildInputs = [pkgs.makeWrapper];
-        postBuild = ''
-          wrapProgram $out/bin/nixd \
-          --set "NIX_PATH" "nixpkgs=${nixpkgs}"
-        '';
-      };
-      nixd.settings.formatting.command = [(lib.getExe pkgs.alejandra)];
-      nixd.settings.options = let
-        link-to-flake = config.lib.file.mkOutOfStoreSymlink ../../flake.nix;
-        flake = ''(builtins.getFlake "${link-to-flake}")'';
-      in {
-        # set the path to the current nixos and home-manager configurations
-        nixos.expr = ''${flake}.nixosConfigurations.${hostname}.options'';
-        home-manager.expr = ''${flake}.homeConfigurations."${username}@${hostname}".options'';
-      };
+      rust_analyzer.enable = true;
     };
+
+		latex = {
+			enable = true;
+			package = pkgs.texliveFull;
+			kile = true;
+			neovim-lsp.enable = true;
+		};
   };
 
   home.username = username;
