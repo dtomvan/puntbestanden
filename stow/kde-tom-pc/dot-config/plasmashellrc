@@ -1,24 +1,27 @@
 [Applets][46]
-immutability=1
-plugin=org.kde.plasma.weather
+immutability[$d]
+plugin[$d]
 
 [Applets][46][Configuration]
-PreloadWeight=18
+PreloadWeight[$d]
 
 [Applets][46][Configuration][ConfigDialog]
-DialogHeight=540
-DialogWidth=720
+DialogHeight[$d]
+DialogWidth[$d]
 
 [Applets][46][Configuration][Units]
-pressureUnit=5008
-speedUnit=9008
-temperatureUnit=6001
-visibilityUnit=2007
+pressureUnit[$d]
+speedUnit[$d]
+temperatureUnit[$d]
+visibilityUnit[$d]
 
 [Applets][46][Configuration][WeatherStation]
-source=bbcukmet|weather|Assen, Netherlands, NL|2759633
+source[$d]
 
 [Applets][49][Configuration]
+PreloadWeight=42
+
+[PlasmaTransientsConfig]
 PreloadWeight=42
 
 [PlasmaViews][Panel 2]

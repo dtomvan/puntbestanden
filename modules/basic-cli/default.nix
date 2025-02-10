@@ -70,6 +70,7 @@ in {
   # I don't know which of these two actually work, the first one doesn't seem to work...
   home.sessionPath = [
     "$HOME/.cargo/bin"
+    "$HOME/.local/bin"
   ];
 
   systemd.user.settings.Manager.DefaultEnvironment = {
