@@ -1,6 +1,14 @@
 [General]
-count=1
-rules=d5c7f455-a91e-4a13-b15b-e40e131fce8c
+count=2
+rules=c3631390-37a5-4c6c-909c-7b13d42190d8,d5c7f455-a91e-4a13-b15b-e40e131fce8c
+
+[c3631390-37a5-4c6c-909c-7b13d42190d8]
+Description=Application settings for org.kde.KTailctl
+desktopfile=org.fkoehler.KTailctl
+desktopfilerule=3
+wmclass=\sorg.kde.KTailctl
+wmclasscomplete=true
+wmclassmatch=1
 
 [d5c7f455-a91e-4a13-b15b-e40e131fce8c]
 Description=Terminal Fullscreen

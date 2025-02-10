@@ -33,8 +33,28 @@ in {
     };
     programs.ghostty = {
       enable = true;
-      package = cfg.package;
+      package = pkgs.symlinkJoin {
+				name = "ghostty-nixgl";
+				paths = [cfg.package];
+				buildInputs = [pkgs.makeWrapper];
+				postBuild = ''
+				mv $out/bin/ghostty $out/bin/ghostty-unwrapped
+				printf "#!%s\n\nnixGL %s %s" ${lib.getExe pkgs.bash} $out/bin/ghostty-unwrapped '$@' > $out/bin/ghostty
+				chmod a+x $out/bin/ghostty
+				'';
+			};
     };
+		# xdg.desktopEntries."com.mitchellh.ghostty" = {
+		# 	name = "Ghostty";
+		# 	exec = "nixGL ghostty";
+		# 	icon = "com.mitchellh.ghostty";
+		# 	terminal = false;
+		# 	categories = ["System"];
+		# 	actions.new-window = {
+		# 		name = "New Window";
+		# 		exec = "nixGL ghostty";
+		# 	};
+		# };
     xdg.configFile."ghostty/config".text = ''
       font-family = ${cfg.font.family}
       font-size = ${builtins.toString cfg.font.size}
@@ -43,9 +63,8 @@ in {
         then config.colorScheme.slug
         else "catppuccin-mocha"
       }
-      gtk-adwaita = false
-      window-decoration = false
       gtk-single-instance = true
+      command = zsh
     '';
   };
 }

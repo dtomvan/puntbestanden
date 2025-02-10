@@ -25,9 +25,17 @@ in {
 
   modules = {
     terminals.enable = true;
-    terminals.foot = {
+    terminals.ghostty = {
       enable = true;
       default = true;
+      font = {
+        size = 14;
+        family = "Afio";
+      };
+		};
+    terminals.foot = {
+      enable = true;
+      default = false;
       font = {
         size = 14;
         family = "Afio";
@@ -36,7 +44,7 @@ in {
 
     neovim.lsp = {
       enable = true;
-      nixd.enable = true;
+      nixd.enable = false;
       rust_analyzer.enable = true;
     };
   };

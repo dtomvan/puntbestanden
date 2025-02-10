@@ -36,7 +36,7 @@ immutability=1
 lastScreen=0
 location=0
 plugin=org.kde.plasma.folder
-wallpaperplugin=org.kde.potd
+wallpaperplugin=org.kde.image
 
 [Containments][1][ConfigDialog]
 DialogHeight=540
@@ -51,6 +51,7 @@ Image=file:///usr/share/wallpapers/Dynamic/contents/images/dynamic.avif
 
 [Containments][1][Wallpaper][org.kde.image][General]
 Image=/usr/share/wallpapers/aurora-wallpaper-1/contents/images/15392x8616.jpg
+SlidePaths=/usr/share/wallpapers/
 
 [Containments][1][Wallpaper][org.kde.potd][General]
 FillMode=2
@@ -106,21 +107,12 @@ plugin=org.kde.plasma.pager
 DialogHeight=540
 DialogWidth=720
 
-[Containments][2][Applets][46]
-immutability=1
-plugin=org.kde.kdeconnect
-
-[Containments][2][Applets][46][Configuration]
-PreloadWeight=95
-popupHeight=400
-popupWidth=560
-
 [Containments][2][Applets][47]
 immutability=1
 plugin=org.kde.plasma.shutdownorswitch
 
 [Containments][2][Applets][47][Configuration]
-PreloadWeight=65
+PreloadWeight=80
 popupHeight=136
 popupWidth=216
 
@@ -131,6 +123,25 @@ DialogWidth=720
 [Containments][2][Applets][47][Configuration][General]
 showFullName=true
 
+[Containments][2][Applets][48]
+immutability=1
+plugin=org.kde.plasma.kickoff
+
+[Containments][2][Applets][48][Configuration]
+PreloadWeight=100
+popupHeight=528
+popupWidth=699
+
+[Containments][2][Applets][48][Configuration][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
+[Containments][2][Applets][48][Configuration][General]
+favoritesPortedToKAstats=true
+
+[Containments][2][Applets][48][Shortcuts]
+global=Meta
+
 [Containments][2][Applets][5]
 immutability=1
 plugin=org.kde.plasma.icontasks
@@ -140,7 +151,7 @@ DialogHeight=540
 DialogWidth=720
 
 [Containments][2][Applets][5][Configuration][General]
-launchers=applications:org.kde.dolphin.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.dvlv.boxbuddyrs.desktop,applications:org.kde.okular.desktop,file:///var/lib/flatpak/exports/share/applications/org.libreoffice.LibreOffice.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.firefox.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop
+launchers=applications:org.kde.dolphin.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.dvlv.boxbuddyrs.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.firefox.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop,applications:org.kde.okular.desktop,applications:libreoffice-startcenter.desktop,file:///nix/store/4biz6zzk83rchjyajgq2lkw7iy2r08za-home-manager-path/share/applications/com.mitchellh.ghostty.desktop,file:///nix/store/4biz6zzk83rchjyajgq2lkw7iy2r08za-home-manager-path/share/applications/foot.desktop,applications:org.kde.konsole.desktop
 showOnlyCurrentDesktop=false
 
 [Containments][2][Applets][6]
@@ -156,7 +167,7 @@ PreloadWeight=100
 SystrayContainmentId=8
 
 [Containments][2][General]
-AppletOrder=47;46;35;4;5;6;7;21
+AppletOrder=47;48;35;4;5;6;7;21
 
 [Containments][37]
 ItemGeometries-1536x864=
@@ -264,7 +275,7 @@ immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][8][Applets][23][Configuration]
-PreloadWeight=92
+PreloadWeight=84
 
 [Containments][8][Applets][24]
 immutability=1
@@ -278,7 +289,7 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=67
+PreloadWeight=45
 
 [Containments][8][Applets][26]
 immutability=1
@@ -312,5 +323,5 @@ knownItems=org.kde.kdeconnect,org.kde.kscreen,org.kde.plasma.battery,org.kde.pla
 scaleIconsToFit=true
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,6,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9OYXR1dXJrdW5kZQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9QTy9OTCBFc3NheQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvT3V0bG9vay5kZXNrdG9w,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvU29tdG9kYXkuZGVza3RvcA,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTm9vcmRob2ZmLmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTGVhcm5iZWF0LmRlc2t0b3A,0,86da4254-3f55-4dd9-a41b-baeb614409f1,4,desktop:/Learnbeat.desktop,desktop:/Outlook.desktop,desktop:/Noordhoff.desktop,desktop:/Somtoday.desktop
-screenMapping=file:///home/tomvd/Desktop/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168
+itemsOnDisabledScreens=0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,6,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvT3V0bG9vay5kZXNrdG9w,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9QTy9OTCBFc3NheQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9OYXR1dXJrdW5kZQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTm9vcmRob2ZmLmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTGVhcm5iZWF0LmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvU29tdG9kYXkuZGVza3RvcA,0,86da4254-3f55-4dd9-a41b-baeb614409f1,4,desktop:/Learnbeat.desktop,desktop:/Somtoday.desktop,desktop:/Outlook.desktop,desktop:/Noordhoff.desktop
+screenMapping=desktop:/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168

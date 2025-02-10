@@ -3,10 +3,10 @@ annotationToolType=6
 textShadow=false
 
 [GuiConfig]
-captureMode=4
+captureMode=0
 
 [ImageSave]
-lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250206_155611.png
+lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250210_123456.png
 translatedScreenshotsFolder=Screenshots
 
 [VideoSave]
