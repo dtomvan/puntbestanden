@@ -3,6 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+		new-libvirtd.url = "github:r-ryantm/nixpkgs/55402a8db5e222b356c9b9a592f270ddf8d34ba3";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,7 +35,7 @@
     system = "x86_64-linux";
     pkgs = import inputs.nixpkgs {
       inherit system;
-      config.allowUnfree = true;
+			config.allowUnfree = true;
       overlays = [
         (_final: prev: {
           doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
@@ -40,6 +43,8 @@
           steam-tui = self.packages.${system}.steam-tui;
           afio-font = self.packages.${system}.afio-font;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
+
+					libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
         })
       ];
     };
@@ -92,6 +97,7 @@
 
     nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
+			inherit pkgs;
       modules = [
         ./hosts/tom-pc.nix
         ./hardware/tom-pc-disko.nix

@@ -42,7 +42,7 @@
 
 		latex = {
 			enable = true;
-			package = pkgs.texliveFull;
+			package = pkgs.texliveMedium;
 			kile = true;
 			neovim-lsp.enable = true;
 		};

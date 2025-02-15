@@ -126,7 +126,7 @@ DialogHeight=540
 DialogWidth=720
 
 [Containments][2][Applets][5][Configuration][General]
-launchers=preferred://filemanager,file:///nix/store/9g7psm1hlwhhgcz2a7iyw5mcli5dk0pm-system-path/share/applications/org.kde.konsole.desktop,file:///nix/store/sqk6kyrvj2b81d2h03dwbd22hglsgnh8-user-environment/share/applications/firefox.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.dvlv.boxbuddyrs.desktop,file:///var/lib/flatpak/exports/share/applications/md.obsidian.Obsidian.desktop,applications:Emacs-emacs.desktop,file:///nix/store/9g7psm1hlwhhgcz2a7iyw5mcli5dk0pm-system-path/share/applications/org.kde.kate.desktop,[b28af259-3104-4ab2-b8a7-43caeb0539af\\,804178db-f272-42fa-9d0e-28a00228cf3c]\napplications:steam.desktop,[b28af259-3104-4ab2-b8a7-43caeb0539af\\,804178db-f272-42fa-9d0e-28a00228cf3c]\napplications:so.libdb.dissent.desktop,file:///var/lib/flatpak/exports/share/applications/org.kde.neochat.desktop,file:///var/lib/flatpak/exports/share/applications/org.telegram.desktop.desktop,file:///nix/store/8y9c5xw6cg96i370r1dwfh3w8ickqknb-system-path/share/applications/org.fkoehler.KTailctl.desktop
+launchers=preferred://filemanager,file:///nix/store/9g7psm1hlwhhgcz2a7iyw5mcli5dk0pm-system-path/share/applications/org.kde.konsole.desktop,file:///nix/store/sqk6kyrvj2b81d2h03dwbd22hglsgnh8-user-environment/share/applications/firefox.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.dvlv.boxbuddyrs.desktop,file:///var/lib/flatpak/exports/share/applications/md.obsidian.Obsidian.desktop,applications:Emacs-emacs.desktop,file:///nix/store/9g7psm1hlwhhgcz2a7iyw5mcli5dk0pm-system-path/share/applications/org.kde.kate.desktop,file:///var/lib/flatpak/exports/share/applications/org.kde.neochat.desktop,file:///var/lib/flatpak/exports/share/applications/org.telegram.desktop.desktop,file:///nix/store/8y9c5xw6cg96i370r1dwfh3w8ickqknb-system-path/share/applications/org.fkoehler.KTailctl.desktop,file:///nix/store/s37z6vy3pqlz4k9qr1p7dmnmaky316vp-system-path/share/applications/steam.desktop,file:///var/lib/flatpak/exports/share/applications/com.discordapp.Discord.desktop
 showOnlyCurrentDesktop=false
 
 [Containments][2][Applets][6]
@@ -138,7 +138,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=90
+PreloadWeight=100
 SystrayContainmentId=8
 
 [Containments][2][General]
@@ -160,12 +160,12 @@ DialogHeight=540
 DialogWidth=720
 
 [Containments][34][General]
-positions={"1920x1080":["3"\\,"17"\\,"desktop:/Learnbeat.desktop"\\,"1"\\,"15"\\,"desktop:/kcm_keys.desktop"\\,"0"\\,"0"\\,"desktop:/Leesdossier.desktop"\\,"2"\\,"16"\\,"desktop:/Office.desktop"\\,"1"\\,"16"\\,"desktop:/Somtoday.desktop"\\,"0"\\,"15"\\,"desktop:/Zermelo.desktop"\\,"0"\\,"16"\\,"desktop:/steam.desktop"\\,"0"\\,"1"]\\,"0x0":[]}
+positions={"1920x1080":["3"\\,"17"\\,"desktop:/Zermelo.desktop"\\,"0"\\,"16"\\,"desktop:/kcm_keys.desktop"\\,"0"\\,"0"\\,"desktop:/Learnbeat.desktop"\\,"1"\\,"15"\\,"desktop:/Leesdossier.desktop"\\,"2"\\,"16"\\,"desktop:/Somtoday.desktop"\\,"0"\\,"15"\\,"desktop:/Office.desktop"\\,"1"\\,"16"\\,"desktop:/steam.desktop"\\,"0"\\,"1"]\\,"0x0":[]}
 sortMode=-1
 
 [Containments][37]
-ItemGeometries-1920x1080=Applet-41:1584,15.44,304,112,0;Applet-40:128,224,224,112,0;
-ItemGeometriesHorizontal=Applet-41:1584,15.44,304,112,0;Applet-40:128,224,224,112,0;
+ItemGeometries-1920x1080=Applet-41:1584,16,304,112,0;
+ItemGeometriesHorizontal=Applet-41:1584,16,304,112,0;
 activityId=804178db-f272-42fa-9d0e-28a00228cf3c
 formfactor=0
 immutability=1
@@ -214,9 +214,15 @@ DialogWidth=720
 immutability=1
 plugin=org.kde.plasma.notifications
 
+[Containments][8][Applets][11][Configuration]
+PreloadWeight=60
+
 [Containments][8][Applets][12]
 immutability=1
 plugin=org.kde.plasma.devicenotifier
+
+[Containments][8][Applets][12][Configuration]
+PreloadWeight=100
 
 [Containments][8][Applets][13]
 immutability=1
@@ -241,6 +247,9 @@ plugin=org.kde.kscreen
 [Containments][8][Applets][18]
 immutability=1
 plugin=org.kde.plasma.volume
+
+[Containments][8][Applets][18][Configuration]
+PreloadWeight=55
 
 [Containments][8][Applets][18][Configuration][General]
 migrated=true
@@ -267,21 +276,21 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][8][Applets][24][Configuration]
-PreloadWeight=57
+PreloadWeight=41
 
 [Containments][8][Applets][25]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=42
+PreloadWeight=33
 
 [Containments][8][Applets][43]
 immutability=1
 plugin=org.kde.kdeconnect
 
 [Containments][8][Applets][43][Configuration]
-PreloadWeight=60
+PreloadWeight=85
 
 [Containments][8][Applets][47][Configuration]
 PreloadWeight=42
@@ -314,7 +323,7 @@ immutability=1
 plugin=org.kde.plasma.brightness
 
 [Containments][8][Applets][50][Configuration]
-PreloadWeight=18
+PreloadWeight=0
 
 [Containments][8][Applets][9]
 immutability=1
@@ -331,5 +340,5 @@ knownItems=org.kde.plasma.manage-inputmethod,org.kde.plasma.cameraindicator,org.
 shownItems=org.kde.plasma.networkmanagement
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,5,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9aZXJtZWxvLmRlc2t0b3A,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWFybmJlYXQuZGVza3RvcA,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9Tb210b2RheS5kZXNrdG9w,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWVzZG9zc2llci5kZXNrdG9w,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9PZmZpY2UuZGVza3RvcA,0,b28af259-3104-4ab2-b8a7-43caeb0539af,47,file:///home/tomvd/RDPWindowsPREP.qcow2,file:///usr,file:///run,desktop:/Leesdossier.desktop,file:///home/tomvd/screenshots,desktop:/Somtoday.desktop,file:///var,file:///tmp,file:///home/tomvd/Music,file:///bin,desktop:/steam.desktop,file:///home/tomvd/research,file:///home/tomvd/Downloads,file:///home/tomvd/old-config,file:///home/tomvd/video-usb.tar,file:///home/tomvd/projects,file:///home/tomvd/usb,file:///keybase,file:///home/tomvd/repos,file:///boot,file:///sys,desktop:/Office.desktop,file:///srv,file:///home/tomvd/Public,file:///nix,file:///root,file:///home/tomvd/school,file:///etc,file:///home/tomvd/Blend Assen - Blend in DNK Assen 2024.mp4,file:///home/tomvd/Pictures,file:///home/tomvd/keybase,desktop:/Learnbeat.desktop,file:///proc,file:///home/tomvd/Templates,file:///mnt,file:///home/tomvd/Documents,file:///home/tomvd/Desktop,file:///dev,desktop:/Zermelo.desktop,file:///home/tomvd/Sync,file:///home/tomvd/Videos,file:///home,file:///home/tomvd/Chase & Status - Censor VIP [USB Version] [NmCayjTmQWU].m4a,file:///opt,file:///home/tomvd/puntbestanden,file:///lost+found,file:///home/tomvd/pong-with-gdscript-demo
-screenMapping=desktop:/steam.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Office.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///home/tomvd/Desktop/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///nix/store/phy0qfnmaly1s2jnshnm7rjs5gk03izc-steam-unwrapped-1.0.0.82/share/applications/steam.desktop,0,804178db-f272-42fa-9d0e-28a00228cf3c,desktop:/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Learnbeat.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/kcm_keys.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Somtoday.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///home/tomvd/Desktop/Leesdossier.desktop,0,b28af259-3104-4ab2-b8a7-43caeb0539af,desktop:/Zermelo.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2
+itemsOnDisabledScreens=0,b28af259-3104-4ab2-b8a7-43caeb0539af,47,file:///home/tomvd/Downloads,file:///home/tomvd/old-config,desktop:/steam.desktop,file:///home/tomvd/research,desktop:/Somtoday.desktop,file:///home/tomvd/screenshots,file:///tmp,file:///var,file:///bin,file:///home/tomvd/Music,file:///home/tomvd/RDPWindowsPREP.qcow2,file:///usr,file:///run,desktop:/Leesdossier.desktop,file:///srv,file:///boot,desktop:/Office.desktop,file:///sys,file:///keybase,file:///home/tomvd/usb,file:///home/tomvd/repos,file:///home/tomvd/projects,file:///home/tomvd/video-usb.tar,file:///mnt,file:///home/tomvd/Documents,file:///home/tomvd/Desktop,file:///home/tomvd/Pictures,file:///home/tomvd/keybase,desktop:/Learnbeat.desktop,file:///proc,file:///home/tomvd/Templates,file:///home/tomvd/school,file:///home/tomvd/Blend Assen - Blend in DNK Assen 2024.mp4,file:///etc,file:///home/tomvd/Public,file:///nix,file:///root,file:///opt,file:///home/tomvd/puntbestanden,file:///lost+found,file:///home/tomvd/pong-with-gdscript-demo,file:///home,file:///home/tomvd/Chase & Status - Censor VIP [USB Version] [NmCayjTmQWU].m4a,file:///home/tomvd/Sync,file:///home/tomvd/Videos,file:///dev,desktop:/Zermelo.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,5,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9aZXJtZWxvLmRlc2t0b3A,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWFybmJlYXQuZGVza3RvcA,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9Tb210b2RheS5kZXNrdG9w,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9PZmZpY2UuZGVza3RvcA,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWVzZG9zc2llci5kZXNrdG9w
+screenMapping=desktop:/Learnbeat.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Office.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///home/tomvd/Desktop/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Zermelo.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/kcm_keys.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Somtoday.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///home/tomvd/Desktop/Leesdossier.desktop,0,b28af259-3104-4ab2-b8a7-43caeb0539af,file:///nix/store/phy0qfnmaly1s2jnshnm7rjs5gk03izc-steam-unwrapped-1.0.0.82/share/applications/steam.desktop,0,804178db-f272-42fa-9d0e-28a00228cf3c,desktop:/steam.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2

@@ -1,8 +1,9 @@
 [GuiConfig]
+captureDelay=3
 captureMode=0
 
 [ImageSave]
-lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250209_140733.png
+lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250215_155622.png
 translatedScreenshotsFolder=Screenshots
 
 [VideoSave]

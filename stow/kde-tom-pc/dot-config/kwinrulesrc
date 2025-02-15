@@ -10,9 +10,15 @@ wmclassmatch=1
 
 [62feb899-b9d4-4026-aa3a-0ec1affa4ce4]
 Description=Application settings for discord
+activity=804178db-f272-42fa-9d0e-28a00228cf3c
+activityrule=3
 clientmachine=localhost
-desktops=339141c0-201d-4d3a-8b88-c31a9dc67612
+desktops=cf0d035d-9fda-4989-8bb6-7e8c10eb53ef
 desktopsrule=3
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
 wmclass=discord
 wmclassmatch=1
 
