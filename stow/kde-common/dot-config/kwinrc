@@ -30,14 +30,5 @@ shakecursorEnabled=false
 [Tiling]
 padding=4
 
-[Tiling][7764056d-f7c6-535b-90e8-3cc6ffa2570d]
-tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
-
-[Tiling][9a6ab2f2-3481-5185-857f-674e2a55a541]
-tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
-
 [Windows]
 RollOverDesktops=true
-
-[Xwayland]
-Scale=1
