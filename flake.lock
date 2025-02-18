@@ -58,6 +58,21 @@
         "type": "github"
       }
     },
+    "dont-track-me": {
+      "locked": {
+        "lastModified": 1739821938,
+        "narHash": "sha256-32/sfmHB4qvkfj9tIQGiKuBt0GVPUGuhZheW9WVRcFI=",
+        "ref": "refs/heads/main",
+        "rev": "a15ee40ff24d1968ef3ff490131dd69e6ba30eb5",
+        "revCount": 5,
+        "type": "git",
+        "url": "file:///home/tomvd/projects/dont-track-me.nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/tomvd/projects/dont-track-me.nix"
+      }
+    },
     "flake-compat": {
       "locked": {
         "lastModified": 1733328505,
@@ -228,6 +243,22 @@
         "type": "github"
       }
     },
+    "new-libvirtd": {
+      "locked": {
+        "lastModified": 1737566041,
+        "narHash": "sha256-TjPTGZ+JiUlzbMvRDEj71CP/Jg+3znxhpUB77MLLQC8=",
+        "owner": "r-ryantm",
+        "repo": "nixpkgs",
+        "rev": "55402a8db5e222b356c9b9a592f270ddf8d34ba3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "r-ryantm",
+        "repo": "nixpkgs",
+        "rev": "55402a8db5e222b356c9b9a592f270ddf8d34ba3",
+        "type": "github"
+      }
+    },
     "nix-colors": {
       "inputs": {
         "base16-schemes": "base16-schemes",
@@ -353,7 +384,9 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "dont-track-me": "dont-track-me",
         "home-manager": "home-manager",
+        "new-libvirtd": "new-libvirtd",
         "nix-colors": "nix-colors",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim"
