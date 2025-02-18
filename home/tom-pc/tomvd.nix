@@ -63,6 +63,15 @@
     afio-font
     stow
     just
+
+		alejandra
+		yt-dlp
+		visidata
+		rink
+		rwds-cli
+
+		libreoffice-qt6-fresh
+
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"
     '')

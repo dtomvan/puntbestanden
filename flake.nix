@@ -22,6 +22,8 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+		dont-track-me.url = "/home/tomvd/projects/dont-track-me.nix";
   };
 
   outputs = inputs @ {
@@ -42,6 +44,7 @@
           coach-cached = self.packages.${system}.coach-cached;
           steam-tui = self.packages.${system}.steam-tui;
           afio-font = self.packages.${system}.afio-font;
+          rwds-cli = self.packages.${system}.rwds-cli;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
 
 					libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
@@ -70,6 +73,13 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           nix-colors.homeManagerModules.default
+					inputs.dont-track-me.homeManagerModules.default
+					({config, pkgs, lib, ...}: {
+						dont-track-me = {
+							enable = true;
+							enableAll = true;
+						};
+					})
           ./home/tom-pc/tomvd.nix
         ];
         extraSpecialArgs = with inputs; {
