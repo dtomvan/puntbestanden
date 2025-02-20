@@ -43,12 +43,14 @@
     ../os-modules/misc/flatpak.nix
     ../os-modules/misc/gpg.nix
     ../os-modules/misc/keybase.nix
+    ../os-modules/misc/ssh.nix
 
     ../os-modules/virt/kvm.nix
     ../os-modules/virt/distrobox.nix
   ];
 
   modules = {
+		ssh.enable = true;
     # printing.useHPLip = true;
     # gaming-extra.epicGames.enable = true;
   };

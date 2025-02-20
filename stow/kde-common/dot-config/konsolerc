@@ -8,5 +8,8 @@ ConfigVersion=1
 AllowMenuAccelerators=true
 UseSingleInstance=true
 
+[MainWindow]
+ToolBarsMovable=Disabled
+
 [UiSettings]
 ColorScheme=

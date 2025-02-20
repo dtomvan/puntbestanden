@@ -36,6 +36,7 @@
 
     ../os-modules/kde.nix
 
+    ../os-modules/misc/ssh.nix
     ../os-modules/misc/printing.nix
     ../os-modules/misc/flatpak.nix
     ../os-modules/misc/gpg.nix
@@ -45,6 +46,7 @@
   ];
 
   modules = {
+		ssh.enable = true;
     printing.useHPLip = true;
 		boot.plymouth.enable = true;
   };
@@ -56,6 +58,7 @@
     curl
     nh
     wl-clipboard
+		git
   ];
 
   time.timeZone = "Europe/Amsterdam";

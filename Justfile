@@ -19,12 +19,12 @@ stow-adopt PACKAGE +args='':
 	@just run-stow --adopt {{PACKAGE}} {{args}}
 
 [group('stow')]
-stow-tom-pc:
-	@just stow kde-common kde-tom-pc
+stow-tom-pc +args='':
+	@just stow kde-common kde-tom-pc {{args}}
 
 [group('stow')]
-stow-tom-laptop:
-	@just stow kde-common kde-tom-laptop
+stow-tom-laptop +args='':
+	@just stow kde-common kde-tom-laptop {{args}}
 
 ####################################################################################################
 

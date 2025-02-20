@@ -40,91 +40,78 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-        (_final: prev: {
-          coach-cached = self.packages.${system}.coach-cached;
-          afio-font = self.packages.${system}.afio-font;
-          rwds-cli = self.packages.${system}.rwds-cli;
-          sowon = pkgs.callPackage ./packages/sowon.nix {};
-
-          libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
-
-          imp-pkgs = pkgs.callPackage ./packages/tools/imp-pkgs.nix {};
-        })
+        (_final: prev:
+          {
+            libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
+          }
+          // self.packages.${system})
       ];
     };
-    nixosSystem = modules:
-      inputs.nixpkgs.lib.nixosSystem {
-        inherit system;
-        inherit pkgs;
-        inherit modules;
-      };
   in {
     inherit pkgs;
 
     devShells.${system} = import ./shells {inherit pkgs;};
     packages.${system} = {
-      coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
-      rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
       afio-font = pkgs.callPackage ./packages/afio.nix {};
+      coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
+      imp-pkgs = pkgs.callPackage ./packages/tools/imp-pkgs.nix {};
+      rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
+      sowon = pkgs.callPackage ./packages/sowon.nix {};
     };
 
     homeConfigurations = let
-      tomvd = {
-        username = "tomvd";
-        hostname = "tom-pc";
-      };
+      homeManagerConfiguration = {
+        config,
+        hostname ? "tom-pc",
+        username ? "tomvd",
+        extraModules ? [],
+        extraSpecialArgs ? {},
+      }:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = with inputs;
+            [
+              nixvim.homeManagerModules.nixvim
+              nix-colors.homeManagerModules.default
+              inputs.dont-track-me.homeManagerModules.default
+              config
+            ]
+            ++ extraModules;
+          extraSpecialArgs = with inputs;
+            {
+              inherit nixpkgs;
+              inherit nix-colors;
+              inherit username hostname;
+
+              htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
+              neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
+            }
+            // extraSpecialArgs;
+        };
     in {
-      "${tomvd.username}@${tomvd.hostname}" = inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = with inputs; [
-          nixvim.homeManagerModules.nixvim
-          nix-colors.homeManagerModules.default
-          inputs.dont-track-me.homeManagerModules.default
-          ./home/tom-pc/tomvd.nix
-        ];
-        extraSpecialArgs = with inputs; {
-          inherit nixpkgs;
-          inherit nix-colors;
-          inherit (tomvd) username;
-        };
+      "tomvd@tom-pc" = homeManagerConfiguration {
+        config = ./home/tom-pc/tomvd.nix;
       };
 
-      "${tomvd.username}@aurora" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = with inputs; [
-          nixvim.homeManagerModules.nixvim
-          nix-colors.homeManagerModules.default
-          ./home/tom-laptop/tom.nix
-        ];
-        extraSpecialArgs = with inputs; {
-          inherit nixpkgs;
-          inherit nix-colors;
-          inherit (tomvd) username;
-          htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
-
-          neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
-        };
+      "tomvd@aurora" = homeManagerConfiguration {
+        config = ./home/tom-laptop/tom.nix;
+        hostname = "aurora";
       };
 
-      "${tomvd.username}@tom-laptop" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = with inputs; [
-          nixvim.homeManagerModules.nixvim
-          nix-colors.homeManagerModules.default
-          ./home/tom-laptop/tom.nix
-        ];
-        extraSpecialArgs = with inputs; {
-          inherit nixpkgs;
-          inherit nix-colors;
-          inherit (tomvd) username;
-          htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
-
-          neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
-        };
+      "tomvd@tom-laptop" = homeManagerConfiguration {
+        config = ./home/tom-laptop/tom.nix;
+        hostname = "tom-laptop";
       };
     };
 
-    nixosConfigurations = {
+    nixosConfigurations = let
+      nixosSystem = modules:
+        inputs.nixpkgs.lib.nixosSystem {
+          inherit system;
+          inherit pkgs;
+          inherit modules;
+        };
+    in {
       tom-pc = nixosSystem [
         ./hosts/tom-pc.nix
         ./hardware/tom-pc-disko.nix
@@ -134,8 +121,24 @@
         ./hosts/tom-laptop.nix
       ];
       iso = nixosSystem [
-        ./hosts/iso.nix
-        home-manager.nixosModules.home-manager
+        ({modulesPath, lib, ...}: {
+          imports = [
+            "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
+						./os-modules/users/tomvd.nix
+						./os-modules/misc/ssh.nix
+          ];
+					isoImage = {
+						edition = lib.mkForce "plasma6-with-ssh";
+						squashfsCompression = "gzip -Xcompression-level 1";
+						contents = [
+							{
+								source = ./.;
+								target = "nix-config";
+							}
+						];
+					};
+					modules.ssh.enable = true;
+        })
       ];
     };
   };

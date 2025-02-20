@@ -85,19 +85,6 @@ use24hFormat=2
 DialogHeight=540
 DialogWidth=720
 
-[Containments][2][Applets][35]
-immutability=1
-plugin=org.kde.placesWidget
-
-[Containments][2][Applets][35][Configuration]
-PreloadWeight=100
-popupHeight=495
-popupWidth=250
-
-[Containments][2][Applets][35][Configuration][ConfigDialog]
-DialogHeight=540
-DialogWidth=720
-
 [Containments][2][Applets][4]
 immutability=1
 plugin=org.kde.plasma.pager
@@ -166,7 +153,7 @@ PreloadWeight=100
 SystrayContainmentId=8
 
 [Containments][2][General]
-AppletOrder=47;48;35;4;5;6;7;21
+AppletOrder=47;48;4;5;6;7;21
 
 [Containments][37]
 ItemGeometries-1536x864=

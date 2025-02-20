@@ -1,5 +1,5 @@
 [Activities][LastVirtualDesktop]
-804178db-f272-42fa-9d0e-28a00228cf3c=fd342897-1860-494f-8027-5ecde730929c
+804178db-f272-42fa-9d0e-28a00228cf3c=9e98ef08-1764-49f6-96ce-adaf08f927ca
 86da4254-3f55-4dd9-a41b-baeb614409f1=9a10f31d-1480-40dd-aa32-2d2c5553100c
 
 [Desktops]
@@ -31,8 +31,14 @@ shakecursorEnabled=false
 [Tiling]
 padding=4
 
+[Tiling][7764056d-f7c6-535b-90e8-3cc6ffa2570d]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][9a6ab2f2-3481-5185-857f-674e2a55a541]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Windows]
 RollOverDesktops=true
+
+[Xwayland]
+Scale=1
