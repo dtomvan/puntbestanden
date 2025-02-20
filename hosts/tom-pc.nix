@@ -8,24 +8,23 @@
     ../hardware/tom-pc.nix
     ../os-modules/hardware/nvidia.nix
     ../os-modules/hardware/ssd.nix
+    ../os-modules/hardware/sound.nix
     ../os-modules/misc/udisks.nix
 
-    # package sets (groups of packages that I want to
-    # reuse across installs, to hopefully future-proof
-    # my nixos configuration
-    ../os-modules/packagesets/archives.nix
-    ../os-modules/packagesets/build-tools.nix
-    ../os-modules/packagesets/nix-helpers.nix
-    ../os-modules/packagesets/nix-tools.nix
-    ../os-modules/packagesets/repo-tools.nix
-    ../os-modules/packagesets/linux-utils.nix
+    # WARN: include a boot loader or you'll just not boot... bummer!
+    ../os-modules/boot/systemd-boot.nix
 
-		../os-modules/programs/libreoffice.nix
 
+    ../os-modules/packagesets/utilities/archives.nix
+    ../os-modules/packagesets/utilities/build-tools.nix
+    ../os-modules/packagesets/utilities/linux.nix
+    ../os-modules/packagesets/utilities/nix.nix
+    ../os-modules/packagesets/utilities/repos.nix
+    ../os-modules/programs/libreoffice.nix
 
     # networking / bluetooth
     ../os-modules/networking/bluetooth.nix
-    ../os-modules/networking/iwd.nix
+    # ../os-modules/networking/networkmanager.nix
     ../os-modules/networking/tailscale.nix
 
     # Users (no home-manager, built separately)
@@ -38,21 +37,21 @@
     ../os-modules/gaming/steam.nix
     ../os-modules/gaming/gaming-extra.nix
 
-    ../os-modules/graphical-session.nix
+    ../os-modules/kde.nix
 
     ../os-modules/misc/printing.nix
+    ../os-modules/misc/flatpak.nix
+    ../os-modules/misc/gpg.nix
+    ../os-modules/misc/keybase.nix
 
     ../os-modules/virt/kvm.nix
     ../os-modules/virt/distrobox.nix
   ];
 
   modules = {
-    printing.useHPLip = true;
+    # printing.useHPLip = true;
     # gaming-extra.epicGames.enable = true;
   };
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "tom-pc";
   environment.systemPackages = with pkgs; [
@@ -66,29 +65,12 @@
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
   # WARNING: this requires a user to be set, or the root password to be known.
   users.mutableUsers = false;
-
-  services.keybase.enable = true;
-  services.kbfs.enable = true;
-
-  services.flatpak.enable = true;
-
-  security.polkit.enable = true;
 
   virtualisation.waydroid.enable = true;
 
   services.lorri.enable = true;
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   programs.less.enable = true;
   programs.command-not-found.enable = false;

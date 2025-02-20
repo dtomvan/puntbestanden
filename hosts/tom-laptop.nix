@@ -6,23 +6,26 @@
 
     # hardware / drivers
     ../hardware/tom-laptop.nix
+    ../os-modules/hardware/sound.nix
     ../os-modules/hardware/ssd.nix
+		../os-modules/hardware/elan-tp.nix
+		../os-modules/hardware/fprint.nix
+		../os-modules/hardware/comet-lake.nix
 
-    # package sets (groups of packages that I want to
-    # reuse across installs, to hopefully future-proof
-    # my nixos configuration
-    ../os-modules/packagesets/archives.nix
-    ../os-modules/packagesets/build-tools.nix
-    ../os-modules/packagesets/nix-helpers.nix
-    ../os-modules/packagesets/nix-tools.nix
-    ../os-modules/packagesets/repo-tools.nix
-    ../os-modules/packagesets/linux-utils.nix
+		# WARN: include a boot loader or you'll just not boot... bummer!
+		../os-modules/boot/systemd-boot.nix
+		../os-modules/boot/plymouth.nix
 
+		../os-modules/packagesets/utilities/archives.nix
+    ../os-modules/packagesets/utilities/build-tools.nix
+    ../os-modules/packagesets/utilities/linux.nix
+    ../os-modules/packagesets/utilities/nix.nix
+    ../os-modules/packagesets/utilities/repos.nix
     ../os-modules/programs/libreoffice.nix
 
     # networking / bluetooth
     ../os-modules/networking/bluetooth.nix
-    ../os-modules/networking/iwd.nix
+    ../os-modules/networking/networkmanager.nix
     ../os-modules/networking/tailscale.nix
 
     # Users (no home-manager, built separately)
@@ -31,19 +34,20 @@
     ../os-modules/users/tomvd.nix
     ../os-modules/users/root.nix
 
-    ../os-modules/graphical-session.nix
+    ../os-modules/kde.nix
 
     ../os-modules/misc/printing.nix
+    ../os-modules/misc/flatpak.nix
+    ../os-modules/misc/gpg.nix
+    ../os-modules/misc/keybase.nix
 
     ../os-modules/virt/distrobox.nix
   ];
 
   modules = {
     printing.useHPLip = true;
+		boot.plymouth.enable = true;
   };
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "tom-laptop";
   environment.systemPackages = with pkgs; [
@@ -57,27 +61,7 @@
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-  };
-
-  # WARNING: this requires a user to be set, or the root password to be known.
-  users.mutableUsers = false;
-
-  services.keybase.enable = true;
-  services.kbfs.enable = true;
-
-  services.flatpak.enable = true;
-
-  security.polkit.enable = true;
-
   services.lorri.enable = true;
-
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   programs.less.enable = true;
   programs.command-not-found.enable = false;
@@ -85,5 +69,5 @@
   environment.stub-ld.enable = false;
   networking.firewall.enable = false;
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }

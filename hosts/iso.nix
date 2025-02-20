@@ -32,17 +32,18 @@
   documentation.info.enable = false;
 
   services.getty.helpLine = lib.mkForce ''
-    The "nixos" and "root" accounts have empty passwords.
+      The "nixos" and "root" accounts have empty passwords.
 
-    To log in over ssh you must set a password for either "nixos" or "root"
-    with `passwd` (prefix with `sudo` for "root"), or add your public key to
-    /home/nixos/.ssh/authorized_keys or /root/.ssh/authorized_keys.
+      To log in over ssh you must set a password for either "nixos" or "root"
+      with `passwd` (prefix with `sudo` for "root"), or add your public key to
+      /home/nixos/.ssh/authorized_keys or /root/.ssh/authorized_keys.
 
-    If you need a wireless connection, use `nmtui`.
-		See the NixOS manual for details.
+      If you need a wireless connection, use `nmtui`.
+    See the NixOS manual for details.
   '';
 
-	networking.networkmanager.enable = true;
+  networking.wireless.enable = lib.mkForce false;
+  networking.networkmanager.enable = true;
 
   networking.hostName = "nixos";
 
@@ -53,43 +54,46 @@
   users.users.nixos = {
     useDefaultShell = true;
     packages = with pkgs; [
-			mkpasswd
+      mkpasswd
       tmux
       btop
       du-dust
-			ripgrep
+      ripgrep
       eza
       fd
       jq
-			nh
+      nh
     ];
   };
-	programs.git.enable = true;
+  programs.git.enable = true;
   programs.neovim = {
-		enable = true;
-		defaultEditor = true;
-	};
+    enable = true;
+    defaultEditor = true;
+  };
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.nixos = import ./home/iso-home.nix;
 
   environment.systemPackages = with pkgs; [
     home-manager
     wget
     curl
     git
-    nixos-rebuild
+    nixos-install-tools
   ];
-
-	isoImage.contents = [
-	{
-		source = ./..;
-		recursive = true;
-		target = "/home/nixos/upstream-config";
-	}
-	];
 
   environment.stub-ld.enable = false;
 
-	# Use faster squashfs compression
-  isoImage.squashfsCompression = "gzip -Xcompression-level 1";
+  isoImage = {
+    contents = [
+      {
+        source = ./.;
+        target = "/nix-config";
+      }
+    ];
+    squashfsCompression = "gzip -Xcompression-level 1";
+  };
 
   system.stateVersion = "24.05";
 }

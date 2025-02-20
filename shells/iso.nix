@@ -10,7 +10,7 @@
       nixos-generators
     ];
     shellHook = ''
-      echo nixos-generate -f install-iso --flake .#tom-pc -o result-iso
+      echo nixos-generate -f iso --flake .#iso -o result-iso
     '';
   };
 }

@@ -21,9 +21,6 @@ source[$d]
 [Applets][49][Configuration]
 PreloadWeight=42
 
-[PlasmaTransientsConfig]
-PreloadWeight=42
-
 [PlasmaViews][Panel 2]
 alignment=132
 floating=0

@@ -23,8 +23,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		dont-track-me.url = "github:dtomvan/dont-track-me.nix";
-		neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    dont-track-me.url = "github:dtomvan/dont-track-me.nix";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ {
@@ -41,9 +41,7 @@
       config.allowUnfree = true;
       overlays = [
         (_final: prev: {
-          doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
           coach-cached = self.packages.${system}.coach-cached;
-          steam-tui = self.packages.${system}.steam-tui;
           afio-font = self.packages.${system}.afio-font;
           rwds-cli = self.packages.${system}.rwds-cli;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
@@ -54,6 +52,12 @@
         })
       ];
     };
+    nixosSystem = modules:
+      inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        inherit pkgs;
+        inherit modules;
+      };
   in {
     inherit pkgs;
 
@@ -61,7 +65,6 @@
     packages.${system} = {
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
       rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
-      steam-tui = pkgs.callPackage ./packages/steam-tui-bin.nix {};
       afio-font = pkgs.callPackage ./packages/afio.nix {};
     };
 
@@ -76,21 +79,16 @@
         modules = with inputs; [
           nixvim.homeManagerModules.nixvim
           nix-colors.homeManagerModules.default
-					inputs.dont-track-me.homeManagerModules.default
-					({config, pkgs, lib, ...}: {
-						dont-track-me = {
-							enable = true;
-							enableAll = true;
-						};
-					})
+          inputs.dont-track-me.homeManagerModules.default
           ./home/tom-pc/tomvd.nix
         ];
         extraSpecialArgs = with inputs; {
           inherit nixpkgs;
           inherit nix-colors;
-          inherit (tomvd) username hostname;
+          inherit (tomvd) username;
         };
       };
+
       "${tomvd.username}@aurora" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         modules = with inputs; [
@@ -102,55 +100,42 @@
           inherit nixpkgs;
           inherit nix-colors;
           inherit (tomvd) username;
-          hostname = "aurora";
           htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
 
-					neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
+          neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
+        };
+      };
+
+      "${tomvd.username}@tom-laptop" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = with inputs; [
+          nixvim.homeManagerModules.nixvim
+          nix-colors.homeManagerModules.default
+          ./home/tom-laptop/tom.nix
+        ];
+        extraSpecialArgs = with inputs; {
+          inherit nixpkgs;
+          inherit nix-colors;
+          inherit (tomvd) username;
+          htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
+
+          neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
         };
       };
     };
 
-    nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit pkgs;
-      modules = [
+    nixosConfigurations = {
+      tom-pc = nixosSystem [
         ./hosts/tom-pc.nix
         ./hardware/tom-pc-disko.nix
         disko.nixosModules.disko
       ];
-    };
-    nixosConfigurations."tom-pc-vm" = inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        ./hosts/tom-pc.nix
-        ./hardware/disko-vda.nix
-        disko.nixosModules.disko
-      ];
-    };
-    nixosConfigurations."tom-laptop" = inputs.nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit pkgs;
-      modules = [
+      tom-laptop = nixosSystem [
         ./hosts/tom-laptop.nix
-				# FIXME
-        ./hardware/tom-pc-disko.nix
-        disko.nixosModules.disko
       ];
-    };
-
-    nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
+      iso = nixosSystem [
         ./hosts/iso.nix
         home-manager.nixosModules.home-manager
-        {
-          home-manager.extraSpecialArgs = {
-            inherit nixvim;
-          };
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.nixos = import ./home/iso-home.nix;
-        }
       ];
     };
   };

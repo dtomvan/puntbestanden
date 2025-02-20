@@ -1,4 +1,5 @@
 [Activities][LastVirtualDesktop]
+804178db-f272-42fa-9d0e-28a00228cf3c=fd342897-1860-494f-8027-5ecde730929c
 86da4254-3f55-4dd9-a41b-baeb614409f1=9a10f31d-1480-40dd-aa32-2d2c5553100c
 
 [Desktops]
@@ -8,11 +9,8 @@ Id_3=fd342897-1860-494f-8027-5ecde730929c
 Id_4=bd72ecad-3e8d-45cb-972c-b49d82de548d
 Id_5=f8fc3252-ed4c-4274-b2b2-caf1b4492b5a
 Id_6=1da37e6f-0a66-4f70-90ab-0deaa0d11b28
-Id_7=ca336525-5580-4306-97d6-42ef18515574
-Id_8=cf0d035d-9fda-4989-8bb6-7e8c10eb53ef
-Id_9=935892ed-d5fb-4939-b0fd-de9718c3e7c7
-Number=9
-Rows=3
+Number=6
+Rows=2
 
 [Effect-cube]
 CubeFaceDisplacement=0

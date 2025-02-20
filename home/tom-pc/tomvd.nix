@@ -4,7 +4,6 @@
   lib,
   nix-colors,
   nixpkgs,
-  hostname ? "tom-pc",
   username ? "tomvd",
   ...
 }: {
@@ -16,7 +15,7 @@
     ../../modules/gtk.nix
     ../../modules/lorri.nix
     ../../modules/latex.nix
-		../../modules/syncthing.nix
+    ../../modules/syncthing.nix
 
     ../../scripts/listapps.nix
   ];
@@ -40,12 +39,17 @@
       rust_analyzer.enable = true;
     };
 
-		latex = {
-			enable = true;
-			package = pkgs.texliveMedium;
-			kile = true;
-			neovim-lsp.enable = true;
-		};
+    latex = {
+      enable = true;
+      package = pkgs.texliveMedium;
+      kile = true;
+      neovim-lsp.enable = true;
+    };
+  };
+
+  dont-track-me = {
+    enable = true;
+    enableAll = true;
   };
 
   home.username = username;
@@ -64,18 +68,16 @@
     stow
     just
 
-		alejandra
-		yt-dlp
-		visidata
-		rink
-		rwds-cli
-
-		libreoffice-qt6-fresh
+    alejandra
+    yt-dlp
+    visidata
+    rink
+    rwds-cli
 
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"
     '')
-		rink
+    rink
   ];
 
   programs.home-manager.enable = true;
