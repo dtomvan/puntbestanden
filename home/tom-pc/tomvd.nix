@@ -75,6 +75,7 @@
     (pkgs.writers.writeBashBin "nix-run4" ''
       nix run "$FLAKE#pkgs.$@"
     '')
+		rink
   ];
 
   programs.home-manager.enable = true;

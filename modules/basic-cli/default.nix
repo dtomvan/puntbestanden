@@ -41,6 +41,7 @@ in {
 
   home.packages = with pkgs; [file fd ripgrep yazi bat skim tealdeer];
   home.shellAliases = {
+		j = "just";
     e =
       if config.modules.neovim.enable
       then "nvim"
@@ -49,16 +50,7 @@ in {
     la = "ls -a";
     ll = "ls -lah";
     cat = "${lib.getExe pkgs.bat} --color always";
-    g = "git";
-    gst = "git status";
-    gaa = "git add -A";
-    gp = "git push";
-    gpf = "git push --force-with-lease";
-    gpF = "git push --force";
-    gc = "git commit";
-    gd = "git diff";
-    gdca = "git diff --cached";
-  };
+  } // (import ../../lib/a-fuckton-of-git-aliases.nix);
 
   home.sessionVariables = {
     # Hardcoded because nix otherwise complains and I just assume myself in this case.

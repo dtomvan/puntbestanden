@@ -39,8 +39,16 @@
       key = "gd";
     }
     {
+      action = "<cmd>lua vim.lsp.buf.references()<cr>";
+      key = "gr";
+    }
+    {
       action = "<cmd>lua vim.lsp.buf.hover()<cr>";
       key = "K";
+    }
+    {
+      action = "<cmd>lua vim.lsp.buf.code_action()<cr>";
+      key = "<space>a";
     }
     {
       action = "<cmd>lua vim.lsp.buf.rename()<cr>";

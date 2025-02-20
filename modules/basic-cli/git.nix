@@ -44,6 +44,11 @@
   };
   config.programs.gh = lib.mkIf config.git.use-gh-cli {
     enable = true;
+		extensions = with pkgs; [
+			gh-s
+			gh-dash
+			gh-i
+		];
     gitCredentialHelper.enable = true;
   };
   config.home.file.".gitmessage".source = ./git-message.txt;

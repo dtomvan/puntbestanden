@@ -3,8 +3,10 @@
   lib,
   nix-colors,
   htmlDocs,
+	neovim-nightly,
   ...
 }: let
+	useNeovimNightly = true;
   username = "tomvd";
   docs = pkgs.makeDesktopItem {
     name = "nixos-manual";
@@ -48,6 +50,9 @@ in {
       rust_analyzer.enable = true;
     };
   };
+
+	programs.nixvim.package = lib.mkIf useNeovimNightly (lib.mkForce neovim-nightly);
+
   services.lorri.enable = true;
   xdg.mimeApps.enable = lib.mkForce false;
 
@@ -70,6 +75,7 @@ in {
     '')
     stow
     just
+		rink
   ];
 
   programs.bash.enable = lib.mkForce false;

@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-		new-libvirtd.url = "github:r-ryantm/nixpkgs/55402a8db5e222b356c9b9a592f270ddf8d34ba3";
+    new-libvirtd.url = "github:r-ryantm/nixpkgs/55402a8db5e222b356c9b9a592f270ddf8d34ba3";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -23,7 +23,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-		dont-track-me.url = "/home/tomvd/projects/dont-track-me.nix";
+		dont-track-me.url = "github:dtomvan/dont-track-me.nix";
+		neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ {
@@ -37,7 +38,7 @@
     system = "x86_64-linux";
     pkgs = import inputs.nixpkgs {
       inherit system;
-			config.allowUnfree = true;
+      config.allowUnfree = true;
       overlays = [
         (_final: prev: {
           doom1-wad = pkgs.callPackage ./packages/doom1-wad.nix {};
@@ -47,7 +48,9 @@
           rwds-cli = self.packages.${system}.rwds-cli;
           sowon = pkgs.callPackage ./packages/sowon.nix {};
 
-					libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
+          libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
+
+          imp-pkgs = pkgs.callPackage ./packages/tools/imp-pkgs.nix {};
         })
       ];
     };
@@ -96,18 +99,20 @@
           ./home/tom-laptop/tom.nix
         ];
         extraSpecialArgs = with inputs; {
-					inherit nixpkgs;
+          inherit nixpkgs;
           inherit nix-colors;
-					inherit (tomvd) username;
-					hostname = "aurora";
+          inherit (tomvd) username;
+          hostname = "aurora";
           htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
+
+					neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
         };
       };
     };
 
     nixosConfigurations."tom-pc" = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
-			inherit pkgs;
+      inherit pkgs;
       modules = [
         ./hosts/tom-pc.nix
         ./hardware/tom-pc-disko.nix
@@ -122,6 +127,17 @@
         disko.nixosModules.disko
       ];
     };
+    nixosConfigurations."tom-laptop" = inputs.nixpkgs.lib.nixosSystem {
+      inherit system;
+      inherit pkgs;
+      modules = [
+        ./hosts/tom-laptop.nix
+				# FIXME
+        ./hardware/tom-pc-disko.nix
+        disko.nixosModules.disko
+      ];
+    };
+
     nixosConfigurations.iso = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [

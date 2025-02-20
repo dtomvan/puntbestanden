@@ -44,7 +44,6 @@ DialogWidth=720
 
 [Containments][1][General]
 positions={"1536x864":[]}
-url=activities:/current/
 
 [Containments][1][Wallpaper][com.github.zzag.dynamic][General]
 Image=file:///usr/share/wallpapers/Dynamic/contents/images/dynamic.avif
@@ -151,7 +150,7 @@ DialogHeight=540
 DialogWidth=720
 
 [Containments][2][Applets][5][Configuration][General]
-launchers=applications:org.kde.dolphin.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.dvlv.boxbuddyrs.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.firefox.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop,applications:org.kde.okular.desktop,applications:libreoffice-startcenter.desktop,file:///nix/store/4biz6zzk83rchjyajgq2lkw7iy2r08za-home-manager-path/share/applications/com.mitchellh.ghostty.desktop,file:///nix/store/4biz6zzk83rchjyajgq2lkw7iy2r08za-home-manager-path/share/applications/foot.desktop,applications:org.kde.konsole.desktop
+launchers=applications:org.kde.dolphin.desktop,file:///var/lib/flatpak/exports/share/applications/io.github.dvlv.boxbuddyrs.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.firefox.desktop,file:///var/lib/flatpak/exports/share/applications/org.mozilla.Thunderbird.desktop,applications:org.kde.okular.desktop,applications:libreoffice-startcenter.desktop,applications:org.kde.konsole.desktop
 showOnlyCurrentDesktop=false
 
 [Containments][2][Applets][6]
@@ -268,7 +267,7 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][8][Applets][20][Configuration]
-PreloadWeight=60
+PreloadWeight=65
 
 [Containments][8][Applets][20][Configuration][General]
 migrated=true
@@ -292,14 +291,14 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=19
+PreloadWeight=3
 
 [Containments][8][Applets][26]
 immutability=1
 plugin=org.kde.plasma.brightness
 
 [Containments][8][Applets][26][Configuration]
-PreloadWeight=5
+PreloadWeight=0
 
 [Containments][8][Applets][27]
 immutability=1
@@ -326,5 +325,5 @@ knownItems=org.kde.kdeconnect,org.kde.kscreen,org.kde.plasma.battery,org.kde.pla
 scaleIconsToFit=true
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,86da4254-3f55-4dd9-a41b-baeb614409f1,4,desktop:/Learnbeat.desktop,desktop:/Somtoday.desktop,desktop:/Outlook.desktop,desktop:/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,6,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvT3V0bG9vay5kZXNrdG9w,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9OYXR1dXJrdW5kZQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9QTy9OTCBFc3NheQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTm9vcmRob2ZmLmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTGVhcm5iZWF0LmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvU29tdG9kYXkuZGVza3RvcA
-screenMapping=desktop:/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168
+itemsOnDisabledScreens=0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,6,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9QTy9OTCBFc3NheQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9OYXR1dXJrdW5kZQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvT3V0bG9vay5kZXNrdG9w,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvU29tdG9kYXkuZGVza3RvcA,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTGVhcm5iZWF0LmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTm9vcmRob2ZmLmRlc2t0b3A
+screenMapping=desktop:/Learnbeat.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,desktop:/Noordhoff.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,desktop:/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,file:///home/tomvd/Desktop/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Outlook.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,file:///home/tomvd/Desktop/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168

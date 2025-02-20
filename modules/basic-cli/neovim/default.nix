@@ -29,7 +29,6 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    xdg.configFile."nvim/inspirational_quotes.txt".source = ./inspirational_quotes.txt;
     xdg.configFile."nvim/ftplugin" = {
       source = ./ftplugin;
       recursive = true;
