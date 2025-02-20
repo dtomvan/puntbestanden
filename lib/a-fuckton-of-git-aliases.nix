@@ -70,8 +70,8 @@
   "ghh" = ''git help'';
   "glgg" = ''git log --graph'';
   "glgm" = ''git log --graph --max-count=10'';
-  "glod" = ''git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset''';
-  "glol" = ''git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset''';
+  "glod" = ''git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' '';
+  "glol" = ''git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' '';
   "glo" = ''git log --oneline --decorate'';
   "glog" = ''git log --oneline --decorate --graph'';
   "glp" = ''git log --pretty=<format>'';
