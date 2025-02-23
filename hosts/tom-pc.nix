@@ -44,6 +44,7 @@
     ../os-modules/misc/gpg.nix
     ../os-modules/misc/keybase.nix
     ../os-modules/misc/ssh.nix
+    ../os-modules/misc/dutch.nix
 
     ../os-modules/virt/kvm.nix
     ../os-modules/virt/distrobox.nix

@@ -46,7 +46,7 @@ in {
 
     neovim.lsp = {
       enable = true;
-      nixd.enable = false;
+      # nixd.enable = false;
       rust_analyzer.enable = true;
     };
   };

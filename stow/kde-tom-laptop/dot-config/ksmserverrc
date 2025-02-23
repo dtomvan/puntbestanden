@@ -1,2 +1,5 @@
 [General]
-loginMode=restoreSavedSession
+loginMode=emptySession
+
+[SubSession: 0341e3cc-ae3a-4317-bcfa-ec3c6329a168]
+count=0

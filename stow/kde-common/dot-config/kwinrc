@@ -28,6 +28,15 @@ diminactiveEnabled=true
 loginEnabled=false
 shakecursorEnabled=false
 
+[SubSession: 0341e3cc-ae3a-4317-bcfa-ec3c6329a168]
+active=-1
+count=0
+
+[TabBox]
+DesktopMode=0
+LayoutName=compact
+OrderMinimizedMode=1
+
 [Tiling]
 padding=4
 
@@ -39,6 +48,3 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Windows]
 RollOverDesktops=true
-
-[Xwayland]
-Scale=1

@@ -1,6 +1,13 @@
+[9e884520-ad20-495e-b7ff-68a2ab30cca1]
+Description=Settings for obsidian
+desktopfile=md.obsidian.Obsidian
+desktopfilerule=3
+wmclass=obsidian
+wmclassmatch=1
+
 [General]
-count=1
-rules=d5c7f455-a91e-4a13-b15b-e40e131fce8c
+count=2
+rules=d5c7f455-a91e-4a13-b15b-e40e131fce8c,9e884520-ad20-495e-b7ff-68a2ab30cca1
 
 [d5c7f455-a91e-4a13-b15b-e40e131fce8c]
 Description=Terminal Fullscreen

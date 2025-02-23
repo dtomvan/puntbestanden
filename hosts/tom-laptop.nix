@@ -42,6 +42,8 @@
     ../os-modules/misc/gpg.nix
     ../os-modules/misc/keybase.nix
 
+    ../os-modules/misc/dutch.nix
+
     ../os-modules/virt/distrobox.nix
   ];
 
@@ -50,6 +52,13 @@
     printing.useHPLip = true;
 		boot.plymouth.enable = true;
   };
+
+	services.displayManager.sddm.settings = {
+		AutoLogin = {
+			Session = "plasma.desktop";
+			User = "tomvd";
+		};
+	};
 
   networking.hostName = "tom-laptop";
   environment.systemPackages = with pkgs; [

@@ -1,6 +1,5 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
-switch-to-activity-0341e3cc-ae3a-4317-bcfa-ec3c6329a168=none,none,Switch to activity "School"
 switch-to-activity-3c4146ee-0e5f-4040-9c0b-29038a9d2be2=none,none,Switch to activity "School"
 switch-to-activity-804178db-f272-42fa-9d0e-28a00228cf3c=none,none,Switch to activity "Games"
 switch-to-activity-86da4254-3f55-4dd9-a41b-baeb614409f1=none,none,Switch to activity "Default"
@@ -246,8 +245,8 @@ activate task manager entry 8=none,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=none,Meta+9,Activate Task Manager Entry 9
 activate widget 28=none,none,Activate Application Menu Widget
 activate widget 41=none,none,Activate Show Activity Manager Widget
-activate widget 48=none,none,Activate Application Launcher Widget
-activate widget 51=Meta,none,Activate Application Launcher Widget
+activate widget 48=Meta,none,Activate Application Launcher Widget
+activate widget 51=none,none,Activate Application Launcher Widget
 clear-history=none,,Clear Clipboard History
 clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Automatic Action Popup Menu
 cycle-panels=Meta+Alt+P,Meta+Alt+P,Move keyboard focus between panels
