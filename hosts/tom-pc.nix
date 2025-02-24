@@ -24,7 +24,7 @@
 
     # networking / bluetooth
     ../os-modules/networking/bluetooth.nix
-    # ../os-modules/networking/networkmanager.nix
+    ../os-modules/networking/networkmanager.nix
     ../os-modules/networking/tailscale.nix
 
     # Users (no home-manager, built separately)

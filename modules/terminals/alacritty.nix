@@ -6,26 +6,11 @@
 }: let
   cfg = config.modules.terminals.alacritty;
 in {
-  options.modules.terminals.alacritty = with lib; {
-    enable = mkEnableOption "install and configure alacritty";
-    default = mkEnableOption "make alacritty the default terminal; only 1 can be the default";
-    package = mkOption {
-      description = "the alacritty package to use";
-      default = pkgs.alacritty;
-      type = types.package;
-    };
-    use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
-    font.family = mkOption {
-      description = "the font to use in the alacritty terminal";
-      default = "${config.modules.nerd-fonts.main-nerd-font} Nerd Font";
-      type = types.str;
-    };
-    font.size = mkOption {
-      description = "the font size to use in the alacritty terminal";
-      default = 14;
-      type = types.ints.between 9 30;
-    };
-  };
+  options.modules.terminals.alacritty = import ../../lib/mk-terminal-options.nix {
+		inherit lib config;
+		name = "alacritty";
+		package = pkgs.alacritty;
+	};
   config = lib.mkIf cfg.enable {
     modules.terminals = lib.mkIf cfg.default {
       name = lib.mkForce "alacritty";

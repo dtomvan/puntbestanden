@@ -128,7 +128,6 @@
 						./os-modules/misc/ssh.nix
           ];
 					isoImage = {
-						edition = lib.mkForce "plasma6-with-ssh";
 						squashfsCompression = "gzip -Xcompression-level 1";
 						contents = [
 							{

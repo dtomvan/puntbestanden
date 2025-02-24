@@ -6,26 +6,11 @@
 }: let
   cfg = config.modules.terminals.foot;
 in {
-  options.modules.terminals.foot = with lib; {
-    enable = mkEnableOption "install and configure foot";
-    default = mkEnableOption "make foot the default terminal; only 1 can be the default";
-    use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
-    package = mkOption {
-      description = "the foot package to use";
-      default = pkgs.foot;
-      type = types.package;
-    };
-    font.family = mkOption {
-      description = "the font to use in the foot terminal";
-      default = "${config.modules.nerd-fonts.main-nerd-font} Nerd Font";
-      type = types.str;
-    };
-    font.size = mkOption {
-      description = "the font size to use in the foot terminal";
-      default = 14;
-      type = types.ints.between 9 30;
-    };
-  };
+  options.modules.terminals.foot = import ../../lib/mk-terminal-options.nix {
+		inherit lib config;
+		name = "foot";
+		package = pkgs.foot;
+	};
   config = lib.mkIf cfg.enable {
     modules.terminals = lib.mkIf cfg.default {
       name = lib.mkForce "foot";

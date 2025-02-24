@@ -6,26 +6,11 @@
 }: let
   cfg = config.modules.terminals.ghostty;
 in {
-  options.modules.terminals.ghostty = with lib; {
-    enable = mkEnableOption "install and configure ghostty";
-    default = mkEnableOption "make ghostty the default terminal; only 1 can be the default";
-    package = mkOption {
-      description = "the ghostty package to use";
-      default = pkgs.ghostty;
-      type = types.package;
-    };
-    use-nix-colors = mkEnableOption "use nix-colors for colorscheme";
-    font.family = mkOption {
-      description = "the font to use in the ghostty terminal";
-      default = "${config.modules.nerd-fonts.main-nerd-font} Nerd Font";
-      type = types.str;
-    };
-    font.size = mkOption {
-      description = "the font size to use in the ghostty terminal";
-      default = 14;
-      type = types.ints.between 9 30;
-    };
-  };
+  options.modules.terminals.ghostty = import ../../lib/mk-terminal-options.nix {
+		inherit lib config;
+		name = "ghostty";
+		package = pkgs.ghostty;
+	};
   config = lib.mkIf cfg.enable {
     modules.terminals = lib.mkIf cfg.default {
       name = lib.mkForce "ghostty";
