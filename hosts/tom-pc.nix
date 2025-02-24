@@ -52,7 +52,7 @@
 
   modules = {
 		ssh.enable = true;
-    # printing.useHPLip = true;
+    printing.useHPLip = true;
     # gaming-extra.epicGames.enable = true;
   };
 
