@@ -40,6 +40,8 @@
     ../os-modules/kde.nix
 
     ../os-modules/misc/printing.nix
+    ../os-modules/misc/sane.nix
+
     ../os-modules/misc/flatpak.nix
     ../os-modules/misc/gpg.nix
     ../os-modules/misc/keybase.nix

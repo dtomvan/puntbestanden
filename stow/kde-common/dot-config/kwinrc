@@ -1,5 +1,5 @@
 [Activities][LastVirtualDesktop]
-804178db-f272-42fa-9d0e-28a00228cf3c=fd342897-1860-494f-8027-5ecde730929c
+804178db-f272-42fa-9d0e-28a00228cf3c=9a10f31d-1480-40dd-aa32-2d2c5553100c
 86da4254-3f55-4dd9-a41b-baeb614409f1=9a10f31d-1480-40dd-aa32-2d2c5553100c
 
 [Desktops]
@@ -47,3 +47,6 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Windows]
 RollOverDesktops=true
+
+[Xwayland]
+Scale=1

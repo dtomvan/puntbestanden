@@ -7,5 +7,7 @@
   environment.systemPackages = with pkgs; [
     kdePackages.kdeconnect-kde
     kdePackages.plasma-browser-integration
+
+		ripdrag
   ];
 }

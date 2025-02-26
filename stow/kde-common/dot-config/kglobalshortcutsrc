@@ -1,5 +1,6 @@
 [ActivityManager]
 _k_friendly_name=Activity Manager
+switch-to-activity-0341e3cc-ae3a-4317-bcfa-ec3c6329a168=none,none,Switch to activity "School"
 switch-to-activity-3c4146ee-0e5f-4040-9c0b-29038a9d2be2=none,none,Switch to activity "School"
 switch-to-activity-804178db-f272-42fa-9d0e-28a00228cf3c=none,none,Switch to activity "Games"
 switch-to-activity-86da4254-3f55-4dd9-a41b-baeb614409f1=none,none,Switch to activity "Default"
@@ -10,6 +11,30 @@ Switch keyboard layout to English (US)=none,none,Switch keyboard layout to Engli
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Keyboard Layout
 Switch to Next Keyboard Layout=Meta+Alt+K,Meta+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
+
+[amarok]
+_k_friendly_name=Amarok
+decreaseVolume=none,Meta+-,Decrease Volume
+increaseVolume=none,Meta++,Increase Volume
+loveTrack=none,Meta+L,Last.fm: Love Current Track
+mute=Meta+M,Meta+M,Mute Volume
+next=none,none,Next Track
+play_pause=none,none,Play/Pause
+playlist_add=none,Meta+A,Add Media...
+prev=none,none,Previous Track
+rate1=none,Meta+1,Rate Current Track: 1
+rate2=none,Meta+2,Rate Current Track: 2
+rate3=none,Meta+3,Rate Current Track: 3
+rate4=none,Meta+4,Rate Current Track: 4
+rate5=none,Meta+5,Rate Current Track: 5
+replay=none,none,Restart current track
+seek_backward_medium=Meta+Shift+-,Meta+Shift+-,Seek Backward by 10.00 seconds seconds
+seek_forward_medium=Meta+Shift++,Meta+Shift++,Seek Forward by 10.00 seconds seconds
+showNotificationPopup=Meta+O,Meta+O,Show Notification Popup
+skipTrack=none,Meta+S,Last.fm: Skip Current Track
+stop=none,none,Stop
+stop_after_current=Meta+Shift+V,Meta+Shift+V,Stop after current Track
+toggleMainWindow=none,none,Toggle Main Window
 
 [kaccess]
 Toggle Screen Reader On and Off=Meta+Alt+S,Meta+Alt+S,Toggle Screen Reader On and Off
@@ -245,8 +270,8 @@ activate task manager entry 8=none,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=none,Meta+9,Activate Task Manager Entry 9
 activate widget 28=none,none,Activate Application Menu Widget
 activate widget 41=none,none,Activate Show Activity Manager Widget
-activate widget 48=Meta,none,Activate Application Launcher Widget
-activate widget 51=none,none,Activate Application Launcher Widget
+activate widget 48=none,none,Activate Application Launcher Widget
+activate widget 51=Meta,none,Activate Application Launcher Widget
 clear-history=none,,Clear Clipboard History
 clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Automatic Action Popup Menu
 cycle-panels=Meta+Alt+P,Meta+Alt+P,Move keyboard focus between panels
