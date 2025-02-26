@@ -1,3 +1,6 @@
+[Auto Allow]
+kdewallet=ksshaskpass,kwalletmanager
+
 [Wallet]
 Close When Idle=false
 Close on Screensaver=false

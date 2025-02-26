@@ -6,7 +6,7 @@
 	neovim-nightly,
   ...
 }: let
-	useNeovimNightly = true;
+	useNeovimNightly = false;
   username = "tomvd";
   docs = pkgs.makeDesktopItem {
     name = "nixos-manual";

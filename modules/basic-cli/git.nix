@@ -33,13 +33,50 @@
     userEmail = config.git.user.email;
     userName = config.git.user.name;
     extraConfig = {
-      commit.template = "~/.gitmessage";
-      format.pretty = "fuller";
-      rebase.autosquash = true;
-      diff.tool = "nvimdiff";
-      init.defaultBranch = "main";
       advice.detachedHead = false;
+      commit = {
+				template = "~/.gitmessage";
+				verbose = true;
+			};
+			core = {
+				excludesFile = "~/.gitignore";
+				fsmonitor = true;
+				untrackedCache = true;
+			};
+			rerere = {
+				enabled = true;
+				autoupdate = true;
+			};
+      format.pretty = "fuller";
+      init.defaultBranch = "main";
       pull.rebase = true;
+			column.ui = "auto";
+			branch.sort = "-committerdate";
+			tag.sort = "version:refname";
+			diff = {
+				tool = "nvimdiff";
+				algorithm = "histogram";
+				colorMoved = "plain";
+				mnemonicPrefix = true;
+				renames = true;
+			};
+			push = {
+				default = "simple";
+				autoSetupRemote = true;
+				followTags = true;
+			};
+			fetch = {
+				prune = true;
+				pruneTags = true;
+				all = true;
+			};
+			merge.conflictstyle = "zdiff3";
+			help.autocorrect = "prompt";
+      rebase = {
+				autoSquash = true;
+				autoStash = true;
+				updateRefs = true;
+			};
     };
   };
   config.programs.gh = lib.mkIf config.git.use-gh-cli {

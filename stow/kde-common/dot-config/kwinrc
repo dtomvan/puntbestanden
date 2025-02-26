@@ -33,7 +33,6 @@ active=-1
 count=0
 
 [TabBox]
-DesktopMode=0
 LayoutName=compact
 OrderMinimizedMode=1
 
