@@ -4,6 +4,12 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+		# delete when https://nixpk.gs/pr-tracker.html?pr=375888 gets into nixos-unstable
     new-libvirtd.url = "github:r-ryantm/nixpkgs/55402a8db5e222b356c9b9a592f270ddf8d34ba3";
 
     home-manager = {
@@ -40,6 +46,7 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
+				inputs.nur.overlays.default
         (_final: prev:
           {
             libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
@@ -121,22 +128,26 @@
         ./hosts/tom-laptop.nix
       ];
       iso = nixosSystem [
-        ({modulesPath, lib, ...}: {
+        ({
+          modulesPath,
+          lib,
+          ...
+        }: {
           imports = [
             "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
-						./os-modules/users/tomvd.nix
-						./os-modules/misc/ssh.nix
+            ./os-modules/users/tomvd.nix
+            ./os-modules/misc/ssh.nix
           ];
-					isoImage = {
-						squashfsCompression = "gzip -Xcompression-level 1";
-						contents = [
-							{
-								source = ./.;
-								target = "nix-config";
-							}
-						];
-					};
-					modules.ssh.enable = true;
+          isoImage = {
+            squashfsCompression = "gzip -Xcompression-level 1";
+            contents = [
+              {
+                source = ./.;
+                target = "nix-config";
+              }
+            ];
+          };
+          modules.ssh.enable = true;
         })
       ];
     };

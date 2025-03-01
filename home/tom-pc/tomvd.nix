@@ -11,6 +11,8 @@
     ../../modules/basic-cli
     ../../modules/terminals
 
+    ../../modules/firefox.nix
+
     ../../modules/nerd-fonts.nix
     ../../modules/gtk.nix
     ../../modules/lorri.nix
@@ -20,6 +22,10 @@
     ../../scripts/listapps.nix
   ];
 
+	firefox = {
+		enable = true;
+		isPlasma = true;
+	};
   modules = {
     terminals.enable = true;
     terminals.ghostty = {

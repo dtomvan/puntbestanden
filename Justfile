@@ -40,14 +40,14 @@ update-flake:
 alias uph := update-home
 [group('nix')]
 update-home +home="{{shell('whoami')}}@{{shell('hostname')}}":
-	nh home switch -c "{{home}}" .
+	nix-fast-build -f ".#homeConfigurations.{{home}}.activationPackage"
+	./result-/activate
 
 alias upo := update-os
 [group('nix')]
 update-os:
-	nh os switch # only works on nixos, so we don't include an option to change which one to update
+	nh os switch
 
 [group('nix')]
 up: update-flake update-home
-
 

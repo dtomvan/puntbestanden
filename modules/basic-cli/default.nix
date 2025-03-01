@@ -3,16 +3,7 @@
   pkgs,
   lib,
   ...
-}:
-with lib; let
-  enable-bash-zsh = attrs:
-    {
-      enable = true;
-      enableBashIntegration = true;
-      enableZshIntegration = true;
-    }
-    // attrs;
-in {
+}: with lib; {
   imports = [
     ./neovim
     ./zsh.nix
@@ -21,52 +12,55 @@ in {
     ./omp.nix
   ];
 
-  programs.atuin = enable-bash-zsh {
+	home.shell.enableShellIntegration = true;
+
+  programs.atuin = mkDefault {
+		enable = true;
     flags = ["--disable-up-arrow"];
   };
-  programs.direnv = enable-bash-zsh {};
-  programs.zoxide = enable-bash-zsh {};
-  programs.yazi = enable-bash-zsh {};
-  programs.navi = enable-bash-zsh {
-    settings = {
-      finder.command = "skim";
-      client.tealdeer = true;
-      cheats.paths = [
-        "~/cheats/"
-        "~/.local/share/navi/cheats/"
-      ];
-    };
-  };
-  programs.bash.enable = true;
+  programs.direnv.enable = mkDefault true;
+  programs.zoxide.enable = mkDefault true;
+  programs.yazi.enable = mkDefault true;
 
-  home.packages = with pkgs; [file fd ripgrep yazi bat skim tealdeer];
-  home.shellAliases = {
-		j = "just";
-    e =
-      if config.modules.neovim.enable
-      then "nvim"
-      else "nano";
-    ls = "${lib.getExe pkgs.eza} --icons always";
-    la = "ls -a";
-    ll = "ls -lah";
-    cat = "${lib.getExe pkgs.bat} --color always";
-  } // (import ../../lib/a-fuckton-of-git-aliases.nix);
+	zsh.enable = mkDefault true;
+  programs.bash.enable = mkDefault true;
+
+  home.packages = with pkgs; [
+    file
+    fd
+    ripgrep
+    yazi
+    bat
+    skim
+    tealdeer
+		eza
+  ];
+
+  home.shellAliases =
+    {
+      j = "just";
+      e =
+        if config.modules.neovim.enable
+        then "nvim"
+        else "nano";
+      ls = "eza";
+      la = "eza -a";
+      ll = "eza -lah";
+      cat = "bat";
+    }
+    // (import ../../lib/a-fuckton-of-git-aliases.nix);
 
   home.sessionVariables = {
-    # Hardcoded because nix otherwise complains and I just assume myself in this case.
-    # It's not even critical, just for convenience
     FLAKE = "/home/tomvd/puntbestanden/";
     MANPAGER = lib.mkDefault "nvim +Man!";
   };
 
-  # I don't know which of these two actually work, the first one doesn't seem to work...
-  home.sessionPath = [
-    "$HOME/.cargo/bin"
-    "$HOME/.local/bin"
-  ];
-
   systemd.user.settings.Manager.DefaultEnvironment = {
-    PATH = "%u/bin:%u/.cargo/bin";
+    PATH = concatStringsSep ":" (map (p: "%u/${p}") [
+      "bin"
+      ".cargo/bin"
+      ".local/bin"
+    ]);
   };
 
   programs.btop = mkDefault {
@@ -95,7 +89,4 @@ in {
     lsp.latex.enable = mkDefault true;
   };
   tmux.enable = mkDefault true;
-  zsh.enable = mkDefault true;
-
-  # zsh.omz.enable = mkDefault true;
 }
