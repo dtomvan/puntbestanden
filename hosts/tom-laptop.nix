@@ -9,7 +9,6 @@
     ../os-modules/hardware/sound.nix
     ../os-modules/hardware/ssd.nix
 		../os-modules/hardware/elan-tp.nix
-		../os-modules/hardware/fprint.nix
 		../os-modules/hardware/comet-lake.nix
 
 		# WARN: include a boot loader or you'll just not boot... bummer!

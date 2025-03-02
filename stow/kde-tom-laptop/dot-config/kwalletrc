@@ -1,5 +1,5 @@
 [Auto Allow]
-kdewallet=ksshaskpass,kwalletmanager
+kdewallet=ksshaskpass,kwalletmanager,KDE System,kded6
 
 [Wallet]
 Close When Idle=false
