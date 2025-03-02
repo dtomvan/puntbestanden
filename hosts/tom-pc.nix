@@ -13,7 +13,7 @@
 
     # WARN: include a boot loader or you'll just not boot... bummer!
     ../os-modules/boot/systemd-boot.nix
-
+    ../os-modules/boot/plymouth.nix
 
     ../os-modules/packagesets/utilities/archives.nix
     ../os-modules/packagesets/utilities/build-tools.nix
@@ -66,6 +66,13 @@
     nh
     wl-clipboard
   ];
+
+	services.displayManager = {
+		sddm.enable = false;
+		sddm.wayland.enable = false;
+
+		ly.enable = true;
+	};
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";

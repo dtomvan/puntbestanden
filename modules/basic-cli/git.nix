@@ -4,9 +4,6 @@
   lib,
   ...
 }: {
-  # imports = lib.optionals config.git.enable [
-  # ./scripts/git-clone.nix
-  # ];
   options = with lib; {
     git.enable = mkEnableOption "install and configure git";
     git.user.email = mkOption {
@@ -25,7 +22,8 @@
   config.programs.git = lib.mkIf config.git.enable {
     enable = true;
     lfs.enable = true;
-    delta.enable = true;
+    difftastic.enable = true;
+
     signing = {
       signByDefault = true;
       key = "7A984C8207ADBA51";
@@ -88,5 +86,15 @@
 		];
     gitCredentialHelper.enable = true;
   };
+
+	config.programs.gh-dash = lib.mkIf config.git.use-gh-cli {
+		enable = true;
+		settings = {
+			defaults = {
+				preview.width = 80;
+			};
+		};
+	};
+
   config.home.file.".gitmessage".source = ./git-message.txt;
 }

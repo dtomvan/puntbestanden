@@ -11,7 +11,6 @@
     extraGroups = ["wheel" "kvm" "audio" "seat" "libvirtd" "qemu-libvirtd" "lp" "scanner" "audio"];
     # Packages that I always want available, no matter if I have home-manager installed
     packages = with pkgs; [
-      firefox
       neovim
       btop
       du-dust
@@ -20,13 +19,13 @@
       jq
       ripgrep
       zathura
-      # Can't decide on an image viewer...
-      sxiv
+			gron
+			nixfmt-rfc-style
+
       wl-clipboard
       pavucontrol
       alsa-utils
       nix-tree
-      mpv
     ];
     hashedPassword = "$y$j9T$Ze3xItl54/1SRkq0Iry6E.$wsj4ufLq2EsHTFb526MgMT.1UBADpPTX/Snq2evTCf6";
   };

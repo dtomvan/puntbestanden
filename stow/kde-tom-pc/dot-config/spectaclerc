@@ -1,14 +1,15 @@
 [Annotations]
+annotationToolType=8
 rectangleFillColor=2,4,15
 rectangleShadow=false
 rectangleStrokeColor=0,0,0,0
 
 [GuiConfig]
-captureDelay=3
 captureMode=0
+includeShadow=false
 
 [ImageSave]
-lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250301_134327.png
+lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250302_153621.png
 translatedScreenshotsFolder=Screenshots
 
 [VideoSave]

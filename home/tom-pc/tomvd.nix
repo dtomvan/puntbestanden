@@ -22,10 +22,10 @@
     ../../scripts/listapps.nix
   ];
 
-	firefox = {
-		enable = true;
-		isPlasma = true;
-	};
+  firefox = {
+    enable = true;
+    isPlasma = true;
+  };
   modules = {
     terminals.enable = true;
     terminals.ghostty = {
@@ -39,10 +39,13 @@
     nerd-fonts.enable = true;
 
     lorri.enable = true;
-    neovim.lsp = {
-      enable = true;
-      nixd.enable = true;
-      rust_analyzer.enable = true;
+    neovim = {
+      enableQt = true;
+      lsp = {
+        enable = true;
+        nixd.enable = true;
+        rust_analyzer.enable = true;
+      };
     };
 
     latex = {

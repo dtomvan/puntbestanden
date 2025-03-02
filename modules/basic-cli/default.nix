@@ -9,7 +9,6 @@
     ./zsh.nix
     ./tmux.nix
     ./git.nix
-    ./omp.nix
   ];
 
 	home.shell.enableShellIntegration = true;

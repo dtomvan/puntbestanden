@@ -64,6 +64,7 @@ in {
         "widget.use-xdg-desktop-portal.file-picker" = lib.mkIf cfg.isPlasma 1;
         "extensions.autoDisableScopes" = 0;
         "extensions.activeThemeID" = "default-theme@mozilla.org";
+        "general.autoScroll" = true;
 
         "browser.search.region" = "NL";
         "browser.search.isUS" = false;
@@ -78,6 +79,7 @@ in {
         "browser.newtabpage.enabled" = false;
         "browser.discovery.enabled" = false;
         "trailhead.firstrun.didSeeAboutWelcome" = true;
+				"browser.translations.automaticallyPopup" = false;
       };
 
       extraConfig = ''
@@ -112,6 +114,12 @@ in {
           ];
         }
       ];
+
+      userChrome = ''
+			TabsToolbar { visibility: collapse !important; }
+			'';
+      # -- } profiles.default
     };
+    # -- } programs.firefox
   };
 }

@@ -19,6 +19,8 @@ in {
         type = lib.types.attrs;
       };
     };
+
+		enableQt = lib.mkEnableOption "QT GUI";
   };
 
   imports = [
@@ -29,6 +31,8 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
+		home.packages = lib.optional cfg.enableQt pkgs.neovim-qt;
+
     xdg.configFile."nvim/ftplugin" = {
       source = ./ftplugin;
       recursive = true;

@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   imports = [
     ./mini.nix
     ./snacks.nix
@@ -27,4 +27,8 @@
     };
     neo-tree.enable = true;
   };
+
+  programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
+    nvim-window-picker
+  ];
 }
