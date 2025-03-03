@@ -24,15 +24,8 @@ in {
 
     ../../modules/firefox.nix
     ../../modules/syncthing.nix
-    ../../modules/keepassxc.nix
   ];
 
-  # age = {
-  #   identityPaths = ["/home/${username}/.ssh/key"];
-  #   secretsDir = "/home/${username}/.local/share/agenix/agenix";
-  #   secretsMountPoint = "/home/${username}/.local/share/agenix/agenix.d";
-  # };
-  #
   firefox = {
     enable = true;
     isPlasma = true;

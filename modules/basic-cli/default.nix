@@ -33,8 +33,6 @@
     skim
     tealdeer
 		eza
-
-		agenix
   ];
 
   home.shellAliases =

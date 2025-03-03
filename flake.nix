@@ -31,14 +31,6 @@
 
     dont-track-me.url = "github:dtomvan/dont-track-me.nix";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-
-		# agenix = {
-		# 	url = "github:ryantm/agenix";
-		# 	inputs = {
-		# 		nixpkgs.follows = "nixpkgs";
-		# 		home-manager.follows = "home-manager";
-		# 	};
-		# };
   };
 
   outputs = inputs @ {
@@ -89,7 +81,6 @@
               nixvim.homeManagerModules.nixvim
               nix-colors.homeManagerModules.default
               inputs.dont-track-me.homeManagerModules.default
-							# inputs.agenix.homeManagerModules.default
               config
             ]
             ++ extraModules;
