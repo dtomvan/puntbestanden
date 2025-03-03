@@ -4,7 +4,6 @@
   config,
   ...
 }: let
-  hostname = config.networking.hostName;
   username = "tomvd";
   devices = {
     tom-pc = {
@@ -43,9 +42,6 @@ in {
     group = "users";
     user = username;
     dataDir = "/home/${username}";
-
-    key = (builtins.toString ../../st-keys) + "/${hostname}.key.pem";
-    cert = (builtins.toString ../../st-keys) + "/${hostname}.cert.pem";
 
     settings = {
       inherit devices folders;

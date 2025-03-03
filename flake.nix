@@ -131,7 +131,7 @@
           imports = [
             "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
             ./os-modules/users/tomvd.nix
-            ./os-modules/misc/ssh.nix
+            ./os-modules/services/ssh.nix
           ];
           isoImage = {
             squashfsCompression = "gzip -Xcompression-level 1";

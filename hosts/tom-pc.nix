@@ -9,7 +9,6 @@
     ../os-modules/hardware/nvidia.nix
     ../os-modules/hardware/ssd.nix
     ../os-modules/hardware/sound.nix
-    ../os-modules/misc/udisks.nix
 
     # WARN: include a boot loader or you'll just not boot... bummer!
     ../os-modules/boot/systemd-boot.nix
@@ -21,6 +20,7 @@
     ../os-modules/packagesets/utilities/nix.nix
     ../os-modules/packagesets/utilities/repos.nix
     ../os-modules/programs/libreoffice.nix
+    ../os-modules/programs/gpg.nix
 
     # networking / bluetooth
     ../os-modules/networking/bluetooth.nix
@@ -39,15 +39,15 @@
 
     ../os-modules/kde.nix
 
-    ../os-modules/misc/printing.nix
-    ../os-modules/misc/sane.nix
-
-    ../os-modules/misc/flatpak.nix
-    ../os-modules/misc/gpg.nix
-    ../os-modules/misc/keybase.nix
-    ../os-modules/misc/ssh.nix
     ../os-modules/misc/dutch.nix
-    ../os-modules/misc/syncthing.nix
+
+    ../os-modules/services/udisks.nix
+    ../os-modules/services/printing.nix
+    ../os-modules/services/sane.nix
+    ../os-modules/services/flatpak.nix
+    ../os-modules/services/keybase.nix
+    ../os-modules/services/ssh.nix
+    ../os-modules/services/syncthing.nix
 
     ../os-modules/virt/kvm.nix
     ../os-modules/virt/distrobox.nix
