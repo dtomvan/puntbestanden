@@ -19,13 +19,14 @@ in {
     policies = {
       DisableAppUpdate = true;
       DisableFeedbackCommands = true;
-      # I need to find some other way to sync tabs and such...
-      # DisableFirefoxAccounts = true;
+      DisableFirefoxAccounts = true;
       DisableFirefoxStudies = true;
       DisablePasswordReveal = true;
       DisableSetDesktopBackground = true;
       DisableSystemAddonUpdate = true;
       DisableTelemetry = true;
+
+      OfferToSaveLogins = false;
 
       Homepage = {
         StartPage = "none";
@@ -44,6 +45,7 @@ in {
 
     profiles.default = {
       isDefault = true;
+      # only reason I did this is because for some reason this never works after using firefox for a moment
       # search.default = "DuckDuckGo";
 
       extensions = {
@@ -55,6 +57,8 @@ in {
           dearrow
           plasma-integration
           enhancer-for-youtube
+
+          keepassxc-browser
 
           steam-database
         ];
@@ -72,6 +76,9 @@ in {
         "general.useragent.locale" = "nl-NL";
         "browser.bookmarks.showMobileBookmarks" = true;
 
+        "services.sync.engine.passwords" = false;
+        "signon.rememberSignons" = false;
+
         # Don't fuckin' pull this shit again firefox
         "browser.engagement.ctrlTab.has-used" = true;
         "browser.engagement.downloads-button.has-used" = true;
@@ -79,7 +86,7 @@ in {
         "browser.newtabpage.enabled" = false;
         "browser.discovery.enabled" = false;
         "trailhead.firstrun.didSeeAboutWelcome" = true;
-				"browser.translations.automaticallyPopup" = false;
+        "browser.translations.automaticallyPopup" = false;
       };
 
       extraConfig = ''
@@ -116,8 +123,8 @@ in {
       ];
 
       userChrome = ''
-			TabsToolbar { visibility: collapse !important; }
-			'';
+        TabsToolbar { visibility: collapse !important; }
+      '';
       # -- } profiles.default
     };
     # -- } programs.firefox

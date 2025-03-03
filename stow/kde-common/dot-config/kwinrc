@@ -1,16 +1,14 @@
 [Activities][LastVirtualDesktop]
-804178db-f272-42fa-9d0e-28a00228cf3c=9a10f31d-1480-40dd-aa32-2d2c5553100c
 86da4254-3f55-4dd9-a41b-baeb614409f1=9a10f31d-1480-40dd-aa32-2d2c5553100c
+b28af259-3104-4ab2-b8a7-43caeb0539af=9a10f31d-1480-40dd-aa32-2d2c5553100c
 
 [Desktops]
 Id_1=9a10f31d-1480-40dd-aa32-2d2c5553100c
 Id_2=9e98ef08-1764-49f6-96ce-adaf08f927ca
 Id_3=fd342897-1860-494f-8027-5ecde730929c
-Id_4=bd72ecad-3e8d-45cb-972c-b49d82de548d
-Id_5=f8fc3252-ed4c-4274-b2b2-caf1b4492b5a
-Id_6=1da37e6f-0a66-4f70-90ab-0deaa0d11b28
-Number=6
-Rows=2
+Id_4=1da37e6f-0a66-4f70-90ab-0deaa0d11b28
+Number=4
+Rows=1
 
 [Effect-cube]
 CubeFaceDisplacement=0
@@ -29,6 +27,14 @@ loginEnabled=false
 shakecursorEnabled=false
 
 [SubSession: 0341e3cc-ae3a-4317-bcfa-ec3c6329a168]
+active=-1
+count=0
+
+[SubSession: 3c4146ee-0e5f-4040-9c0b-29038a9d2be2]
+active=-1
+count=0
+
+[SubSession: 804178db-f272-42fa-9d0e-28a00228cf3c]
 active=-1
 count=0
 

@@ -10,7 +10,6 @@ args @ {pkgs ? import "<nixpkgs>" {}, ...}: let
     (builtins.listToAttrs shells) // {default = (builtins.head shells).value;};
 in (getShells [
   ./install.nix
-  ./iso.nix
   ./alejandra.nix
-  ./nix-init.nix
+	./paperkey.nix
 ])

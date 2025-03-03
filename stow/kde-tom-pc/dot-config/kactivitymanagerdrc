@@ -1,11 +1,7 @@
 [activities]
-3c4146ee-0e5f-4040-9c0b-29038a9d2be2=School
-804178db-f272-42fa-9d0e-28a00228cf3c=Games
 b28af259-3104-4ab2-b8a7-43caeb0539af=Default
 
-[activities-icons]
-3c4146ee-0e5f-4040-9c0b-29038a9d2be2=applications-education-mathematics-symbolic
-804178db-f272-42fa-9d0e-28a00228cf3c=input-gamepad-symbolic
-
 [main]
-currentActivity=804178db-f272-42fa-9d0e-28a00228cf3c
+currentActivity=b28af259-3104-4ab2-b8a7-43caeb0539af
+runningActivities=b28af259-3104-4ab2-b8a7-43caeb0539af
+stoppedActivities=

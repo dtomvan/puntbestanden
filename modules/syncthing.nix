@@ -9,5 +9,4 @@
   };
 in {
 	home.packages = [syncthing-shortcut];
-	services.syncthing.enable = true;
 }
