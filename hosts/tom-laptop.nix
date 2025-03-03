@@ -77,6 +77,9 @@
   programs.less.enable = true;
   programs.command-not-found.enable = false;
 
+	programs.nix-ld.enable = true;
+	services.envfs.enable = true;
+
   environment.stub-ld.enable = false;
   networking.firewall.enable = false;
 

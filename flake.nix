@@ -31,6 +31,14 @@
 
     dont-track-me.url = "github:dtomvan/dont-track-me.nix";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+		# agenix = {
+		# 	url = "github:ryantm/agenix";
+		# 	inputs = {
+		# 		nixpkgs.follows = "nixpkgs";
+		# 		home-manager.follows = "home-manager";
+		# 	};
+		# };
   };
 
   outputs = inputs @ {
@@ -81,6 +89,7 @@
               nixvim.homeManagerModules.nixvim
               nix-colors.homeManagerModules.default
               inputs.dont-track-me.homeManagerModules.default
+							# inputs.agenix.homeManagerModules.default
               config
             ]
             ++ extraModules;
@@ -98,11 +107,6 @@
     in {
       "tomvd@tom-pc" = homeManagerConfiguration {
         config = ./home/tom-pc/tomvd.nix;
-      };
-
-      "tomvd@aurora" = homeManagerConfiguration {
-        config = ./home/tom-laptop/tom.nix;
-        hostname = "aurora";
       };
 
       "tomvd@tom-laptop" = homeManagerConfiguration {

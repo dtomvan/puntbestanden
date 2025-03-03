@@ -3,10 +3,10 @@
   lib,
   nix-colors,
   htmlDocs,
-	neovim-nightly,
+  neovim-nightly,
   ...
 }: let
-	useNeovimNightly = false;
+  useNeovimNightly = false;
   username = "tomvd";
   docs = pkgs.makeDesktopItem {
     name = "nixos-manual";
@@ -22,8 +22,21 @@ in {
     ../../modules/basic-cli
     ../../modules/terminals
 
+    ../../modules/firefox.nix
     ../../modules/syncthing.nix
+    ../../modules/keepassxc.nix
   ];
+
+  # age = {
+  #   identityPaths = ["/home/${username}/.ssh/key"];
+  #   secretsDir = "/home/${username}/.local/share/agenix/agenix";
+  #   secretsMountPoint = "/home/${username}/.local/share/agenix/agenix.d";
+  # };
+  #
+  firefox = {
+    enable = true;
+    isPlasma = true;
+  };
 
   modules = {
     terminals.enable = true;
@@ -34,7 +47,7 @@ in {
         size = 14;
         family = "Afio";
       };
-		};
+    };
     terminals.foot = {
       enable = true;
       default = false;
@@ -44,20 +57,20 @@ in {
       };
     };
 
+    neovim.use-nix-colors = false;
     neovim.lsp = {
       enable = true;
-			use-nix-colors = false;
       # nixd.enable = false;
       rust_analyzer.enable = true;
     };
   };
 
-	programs.nixvim.package = lib.mkIf useNeovimNightly (lib.mkForce neovim-nightly);
+  programs.nixvim.package = lib.mkIf useNeovimNightly (lib.mkForce neovim-nightly);
 
   services.lorri.enable = true;
   xdg.mimeApps.enable = lib.mkForce false;
 
-	nix.gc.automatic = true;
+  nix.gc.automatic = true;
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
@@ -76,7 +89,7 @@ in {
     '')
     stow
     just
-		rink
+    rink
   ];
 
   programs.bash.enable = lib.mkForce false;

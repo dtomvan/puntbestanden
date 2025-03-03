@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+	hostname,
   ...
 }: let
   cfg = config.firefox;
@@ -48,8 +49,8 @@ in {
       # only reason I did this is because for some reason this never works after using firefox for a moment
       # search.default = "DuckDuckGo";
 
-      extensions = {
-        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; {
+        packages = [
           ublock-origin
           sidebery
           darkreader
@@ -61,7 +62,9 @@ in {
           keepassxc-browser
 
           steam-database
-        ];
+        ] ++ lib.optionals (hostname == "tom-laptop") [
+					onetab
+				];
       };
 
       settings = {

@@ -1,5 +1,4 @@
 [Annotations]
-annotationToolType=3
 textShadow=false
 
 [GuiConfig]
@@ -7,7 +6,7 @@ captureMode=0
 
 [ImageSave]
 lastImageSaveAsLocation=file:///home/tomvd/Documents/v6/LOB/Beroepenvoorlichting staat niet afgerond.png
-lastImageSaveLocation=file:///home/tomvd/Documents/v6/LOB/Beroepenvoorlichting staat niet afgerond.png
+lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250302_221917.png
 translatedScreenshotsFolder=Screenshots
 
 [VideoSave]
