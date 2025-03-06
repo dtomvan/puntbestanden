@@ -3,10 +3,8 @@
   lib,
   nix-colors,
   htmlDocs,
-  neovim-nightly,
   ...
 }: let
-  useNeovimNightly = false;
   username = "tomvd";
   docs = pkgs.makeDesktopItem {
     name = "nixos-manual";
@@ -50,15 +48,13 @@ in {
       };
     };
 
-    neovim.use-nix-colors = false;
+    # neovim.use-nix-colors = false;
     neovim.lsp = {
       enable = true;
       # nixd.enable = false;
       rust_analyzer.enable = true;
     };
   };
-
-  programs.nixvim.package = lib.mkIf useNeovimNightly (lib.mkForce neovim-nightly);
 
   services.lorri.enable = true;
   xdg.mimeApps.enable = lib.mkForce false;
@@ -84,6 +80,39 @@ in {
     just
     rink
   ];
+
+	programs.helix = {
+		enable = true;
+		settings = {
+      theme = "catppuccin_mocha";
+      editor = {
+        cursor-shape = {
+          insert = "bar";
+          normal = "block";
+          select = "underline";
+        };
+
+        line-number = "relative";
+        cursorline = true;
+        rulers = [80 100];
+        bufferline = "multiple";
+        end-of-line-diagnostics = "warning";
+
+        auto-save = {
+          focus-lost = true;
+          after-delay.enable = true;
+        };
+
+        indent-guides.enable = true;
+      };
+		};
+		extraPackages = with pkgs; [
+			marksman
+			nixd
+			rust-analyzer
+			bash-language-server
+		];
+	};
 
   programs.bash.enable = lib.mkForce false;
   programs.home-manager.enable = true;

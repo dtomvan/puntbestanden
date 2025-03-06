@@ -67,6 +67,8 @@
     nh
     wl-clipboard
 		git
+
+		keepassxc
   ];
 
   time.timeZone = "Europe/Amsterdam";

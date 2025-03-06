@@ -1,16 +1,36 @@
 {
   description = "Home Manager configuration of tomvd";
 
+  # nixConfig = {
+  #   extra-substituters = [
+  #     "https://cache.flakehub.com"
+  #   ];
+  #   extra-trusted-public-keys = [
+  #     "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+  #     "cache.flakehub.com-4:Asi8qIv291s0aYLyH6IOnr5Kf6+OF14WVjkE6t3xMio="
+  #     "cache.flakehub.com-5:zB96CRlL7tiPtzA9/WKyPkp3A2vqxqgdgyTVNGShPDU="
+  #     "cache.flakehub.com-6:W4EGFwAGgBj3he7c5fNh9NkOXw0PUVaxygCVKeuvaqU="
+  #     "cache.flakehub.com-7:mvxJ2DZVHn/kRxlIaxYNMuDG1OvMckZu32um1TadOR8="
+  #     "cache.flakehub.com-8:moO+OVS0mnTjBTcOUh2kYLQEd59ExzyoW1QgQ8XAARQ="
+  #     "cache.flakehub.com-9:wChaSeTI6TeCuV/Sg2513ZIM9i0qJaYsF+lZCXg0J6o="
+  #     "cache.flakehub.com-10:2GqeNlIp6AKp4EF2MVbE1kBOp9iBSyo0UPR9KoR0o1Y="
+  #   ];
+  # };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Yes I know it's meant for the enterprise but I really want these eval optimizations especially on my laptop.
+    # My flake is getting pretty big and I'm sick of waiting for a minute to eval a HM or NOS config
+    # determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
+    # Appearantely leads to cache misses but honestly I despise multiple versions of nixpkgs in one flake...
+    # determinate.inputs.nixpkgs.follows = "nixpkgs";
+    # determinate-nix.url = "github:DeterminateSystems/nix";
+    # determinate-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-		# delete when https://nixpk.gs/pr-tracker.html?pr=375888 gets into nixos-unstable
-    new-libvirtd.url = "github:r-ryantm/nixpkgs/55402a8db5e222b356c9b9a592f270ddf8d34ba3";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -30,12 +50,12 @@
     };
 
     dont-track-me.url = "github:dtomvan/dont-track-me.nix";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
   };
 
   outputs = inputs @ {
     self,
     nixpkgs,
+    # determinate,
     home-manager,
     nixvim,
     disko,
@@ -46,12 +66,8 @@
       inherit system;
       config.allowUnfree = true;
       overlays = [
-				inputs.nur.overlays.default
-        (_final: prev:
-          {
-            libvirt = inputs.new-libvirtd.legacyPackages.${system}.libvirt;
-          }
-          // self.packages.${system})
+        inputs.nur.overlays.default
+        (_final: prev: self.packages.${system})
       ];
     };
   in {
@@ -91,7 +107,6 @@
               inherit username hostname;
 
               htmlDocs = nixpkgs.htmlDocs.nixosManual.${system};
-              neovim-nightly = inputs.neovim-nightly-overlay.packages.${system}.default;
             }
             // extraSpecialArgs;
         };
@@ -123,11 +138,7 @@
         ./hosts/tom-laptop.nix
       ];
       iso = nixosSystem [
-        ({
-          modulesPath,
-          lib,
-          ...
-        }: {
+        ({modulesPath, ...}: {
           imports = [
             "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
             ./os-modules/users/tomvd.nix
