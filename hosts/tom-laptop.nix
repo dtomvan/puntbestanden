@@ -40,6 +40,7 @@
     ../os-modules/services/printing.nix
     ../os-modules/services/flatpak.nix
     ../os-modules/services/keybase.nix
+    ../os-modules/services/syncthing.nix
 
     ../os-modules/misc/dutch.nix
 

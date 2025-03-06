@@ -18,6 +18,7 @@
     ../../modules/lorri.nix
     ../../modules/latex.nix
     ../../modules/syncthing.nix
+    ../../modules/helix.nix
 
     ../../scripts/listapps.nix
   ];
@@ -53,6 +54,17 @@
       package = pkgs.texliveMedium;
       kile = true;
       neovim-lsp.enable = true;
+    };
+
+    helix = {
+      enable = true;
+      lsp = {
+        enable = true;
+        extraLspServers = with pkgs; [
+          texlab
+          clang-tools
+        ];
+      };
     };
   };
 
