@@ -68,6 +68,13 @@
     wl-clipboard
 
 		keepassxc
+    # fuck flatpaks they don't even work half the time
+    discord
+    localsend
+    thunderbird
+    gimp
+    obsidian
+    haruna
   ];
 
 	services.displayManager = {

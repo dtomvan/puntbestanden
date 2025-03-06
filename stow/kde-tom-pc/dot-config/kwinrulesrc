@@ -8,20 +8,6 @@ wmclass=\slibreoffice-writer
 wmclasscomplete=true
 wmclassmatch=1
 
-[62feb899-b9d4-4026-aa3a-0ec1affa4ce4]
-Description=Application settings for discord
-activity=804178db-f272-42fa-9d0e-28a00228cf3c
-activityrule=3
-clientmachine=localhost
-desktops=cf0d035d-9fda-4989-8bb6-7e8c10eb53ef
-desktopsrule=3
-maximizehoriz=true
-maximizehorizrule=3
-maximizevert=true
-maximizevertrule=3
-wmclass=discord
-wmclassmatch=1
-
 [General]
-count=2
-rules=58a9e121-5444-4c68-8402-77fd7ddf88a9,62feb899-b9d4-4026-aa3a-0ec1affa4ce4
+count=1
+rules=58a9e121-5444-4c68-8402-77fd7ddf88a9

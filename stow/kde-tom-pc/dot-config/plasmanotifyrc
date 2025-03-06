@@ -1,6 +1,9 @@
 [Applications][firefox]
 Seen=true
 
+[Applications][thunderbird]
+Seen=true
+
 [DoNotDisturb]
 Until=2025,2,24,18,48,0.489
 

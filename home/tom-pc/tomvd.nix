@@ -1,9 +1,7 @@
 {
-  config,
   pkgs,
   lib,
   nix-colors,
-  nixpkgs,
   username ? "tomvd",
   ...
 }: {
@@ -14,7 +12,6 @@
     ../../modules/firefox.nix
 
     ../../modules/nerd-fonts.nix
-    ../../modules/gtk.nix
     ../../modules/lorri.nix
     ../../modules/latex.nix
     ../../modules/syncthing.nix
@@ -72,6 +69,16 @@
     enable = true;
     enableAll = true;
   };
+
+  xdg.configFile."electron-flags.conf".text = ''
+    --ignore-gpu-blocklist
+    --disable-features=UseOzonePlatform
+    --enable-features=VaapiVideoDecoder,WaylandWindowDecorations
+    --use-gl=desktop
+    --enable-gpu-rasterization
+    --enable-zero-copy
+    --ozone-platform-hint=auto
+    '';
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
