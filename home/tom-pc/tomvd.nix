@@ -1,23 +1,20 @@
 {
   pkgs,
-  lib,
   nix-colors,
   username ? "tomvd",
   ...
 }: {
   imports = [
-    ../../modules/basic-cli
-    ../../modules/terminals
+    ../modules/basic-cli.nix
 
-    ../../modules/firefox.nix
+    ../modules/firefox.nix
 
-    ../../modules/nerd-fonts.nix
-    ../../modules/lorri.nix
-    ../../modules/latex.nix
-    ../../modules/syncthing.nix
-    ../../modules/helix.nix
+    ../modules/lorri.nix
+    ../modules/latex.nix
+    ../modules/syncthing.nix
+    ../modules/helix.nix
 
-    ../../scripts/listapps.nix
+    ../modules/tools.nix
   ];
 
   firefox = {
@@ -25,17 +22,6 @@
     isPlasma = true;
   };
   modules = {
-    terminals.enable = true;
-    terminals.ghostty = {
-      enable = true;
-      font = {
-        size = 14;
-        family = "Afio";
-      };
-    };
-
-    nerd-fonts.enable = true;
-
     lorri.enable = true;
     neovim = {
       enableQt = true;
@@ -86,26 +72,17 @@
 
   colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
 
-  news.display = "silent";
-  news.entries = lib.mkForce [];
-
   home.packages = with pkgs; [
-    ripdrag
-    file
     afio-font
-    stow
-    just
-
     alejandra
-    yt-dlp
-    visidata
+    file
+    just
     rink
+    ripdrag
     rwds-cli
-
-    (pkgs.writers.writeBashBin "nix-run4" ''
-      nix run "$FLAKE#pkgs.$@"
-    '')
-    rink
+    stow
+    visidata
+    yt-dlp
   ];
 
   programs.home-manager.enable = true;

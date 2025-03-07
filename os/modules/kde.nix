@@ -1,6 +1,4 @@
 {pkgs, lib, ...}: {
-  # services.xserver.enable = true;
-
   services.displayManager.sddm.enable = lib.mkDefault true;
   services.displayManager.sddm.wayland.enable = lib.mkDefault true;
 

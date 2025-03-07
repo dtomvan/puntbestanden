@@ -1,62 +1,65 @@
 {pkgs, ...}: {
   imports = [
     # nix and nixpkgs config
-    ../os-modules/maintenance.nix
-    ../os-modules/nix-config-common.nix
+    ./modules/maintenance.nix
+    ./modules/nix-config-common.nix
 
     # hardware / drivers
-    ../hardware/tom-pc.nix
-    ../os-modules/hardware/nvidia.nix
-    ../os-modules/hardware/ssd.nix
-    ../os-modules/hardware/sound.nix
+    ./hardware/tom-pc.nix
+    ./hardware/nvidia.nix
+    ./hardware/ssd.nix
+    ./hardware/sound.nix
 
     # WARN: include a boot loader or you'll just not boot... bummer!
-    ../os-modules/boot/systemd-boot.nix
-    ../os-modules/boot/plymouth.nix
+    ./modules/boot/systemd-boot.nix
+    ./modules/boot/plymouth.nix
 
-    ../os-modules/packagesets/utilities/archives.nix
-    ../os-modules/packagesets/utilities/build-tools.nix
-    ../os-modules/packagesets/utilities/linux.nix
-    ../os-modules/packagesets/utilities/nix.nix
-    ../os-modules/packagesets/utilities/repos.nix
-    ../os-modules/programs/libreoffice.nix
-    ../os-modules/programs/gpg.nix
+    ./modules/utilities.nix
+    ./modules/programs/libreoffice.nix
+    ./modules/programs/gpg.nix
 
     # networking / bluetooth
-    ../os-modules/networking/bluetooth.nix
-    ../os-modules/networking/networkmanager.nix
-    ../os-modules/networking/tailscale.nix
+    ./modules/networking/bluetooth.nix
+    ./modules/networking/networkmanager.nix
+    ./modules/networking/tailscale.nix
 
     # Users (no home-manager, built separately)
     # WARNING: users.mutableUsers == false, so removing all regular users renders
     # the system almost UNUSABLE. Remove users with caution (obviously).
-    ../os-modules/users/tomvd.nix
-    ../os-modules/users/root.nix
+    ./modules/users/tomvd.nix
+    ./modules/users/root.nix
 
     # Big programs / configuration
-    ../os-modules/gaming/steam.nix
-    ../os-modules/gaming/gaming-extra.nix
+    ./modules/gaming/steam.nix
+    ./modules/gaming/gaming-extra.nix
 
-    ../os-modules/kde.nix
+    ./modules/kde.nix
 
-    ../os-modules/misc/dutch.nix
+    ./modules/misc/dutch.nix
 
-    ../os-modules/services/udisks.nix
-    ../os-modules/services/printing.nix
-    ../os-modules/services/sane.nix
-    ../os-modules/services/flatpak.nix
-    ../os-modules/services/keybase.nix
-    ../os-modules/services/ssh.nix
-    ../os-modules/services/syncthing.nix
+    ./modules/services/printing.nix
+    ./modules/services/sane.nix
+    ./modules/services/flatpak.nix
+    ./modules/services/keybase.nix
+    ./modules/services/ssh.nix
+    ./modules/services/syncthing.nix
 
-    ../os-modules/virt/kvm.nix
-    ../os-modules/virt/distrobox.nix
+    ./modules/virt/kvm.nix
+    ./modules/virt/distrobox.nix
   ];
 
   modules = {
 		ssh.enable = true;
     printing.useHPLip = true;
     # gaming-extra.epicGames.enable = true;
+
+    utilities = {
+      archives = true;
+      build-tools = true;
+      linux = true;
+      nix = true;
+      repos = true;
+    };
   };
 
   networking.hostName = "tom-pc";

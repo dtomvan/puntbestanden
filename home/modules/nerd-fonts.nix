@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  modulesPath,
   ...
 }: let
   cfg = config.modules.nerd-fonts;

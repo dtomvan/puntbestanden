@@ -1,4 +1,4 @@
-{...}: {
+{
   networking.networkmanager.enable = true;
 
 	# KDE has a builtin applet
