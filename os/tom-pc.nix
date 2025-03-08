@@ -99,6 +99,9 @@
 
   services.lorri.enable = true;
 
+  programs.nix-ld.enable = true;
+  services.envfs.enable = true;
+
   programs.less.enable = true;
   programs.command-not-found.enable = false;
 
