@@ -7,8 +7,8 @@
 in {
   imports = [
     ./alacritty.nix
-    ./foot.nix
-    ./ghostty.nix
+    # ./foot.nix
+    # ./ghostty.nix
   ];
   options.modules.terminals = with lib; {
     enable = mkEnableOption "install a default terminal";
@@ -24,9 +24,9 @@ in {
     };
   };
   config.modules.terminals = lib.mkIf cfg.enable {
-    foot.enable = lib.mkDefault true;
-
-    alacritty.use-nix-colors = lib.mkDefault true;
-    foot.use-nix-colors = lib.mkDefault true;
+    # foot.enable = lib.mkDefault true;
+    #
+    # alacritty.use-nix-colors = lib.mkDefault true;
+    # foot.use-nix-colors = lib.mkDefault true;
   };
 }

@@ -7,7 +7,7 @@
   cfg = config.modules.terminals.alacritty;
 in {
   options.modules.terminals.alacritty = import ../../lib/mk-terminal-options.nix {
-		inherit lib config;
+		inherit lib;
 		name = "alacritty";
 		package = pkgs.alacritty;
 	};
@@ -20,6 +20,7 @@ in {
       enable = true;
       package = cfg.package;
       settings = {
+        terminal.shell.program = lib.getExe pkgs.bashInteractive;
         font.size = cfg.font.size;
         font.normal.family = cfg.font.family;
         # window.dynamic_title = true;

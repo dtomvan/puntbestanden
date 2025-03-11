@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    # nix-colors.url = "github:misterio77/nix-colors";
 
     disko = {
       url = "github:nix-community/disko/latest";
@@ -70,15 +70,14 @@
           modules = with inputs;
             [
               nixvim.homeManagerModules.nixvim
-              nix-colors.homeManagerModules.default
-              inputs.dont-track-me.homeManagerModules.default
+              dont-track-me.homeManagerModules.default
               config
             ]
             ++ extraModules;
-          extraSpecialArgs = with inputs;
+          extraSpecialArgs =
             {
               inherit nixpkgs;
-              inherit nix-colors;
+              # inherit nix-colors;
               inherit username hostname;
             }
             // extraSpecialArgs;
@@ -86,6 +85,7 @@
     in {
       "tomvd@tom-pc" = homeManagerConfiguration {
         config = ./home/tom-pc/tomvd.nix;
+        # extraModules = [inputs.nix-colors.homeManagerModules.default];
       };
 
       "tomvd@tom-laptop" = homeManagerConfiguration {

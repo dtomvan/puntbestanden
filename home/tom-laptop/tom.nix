@@ -1,12 +1,13 @@
 {
-  pkgs,
   lib,
-  nix-colors,
+  pkgs,
   username ? "tomvd",
   ...
 }: {
   imports = [
     ../modules/basic-cli.nix
+
+    ../modules/terminals
 
     ../modules/helix.nix
     ../modules/firefox.nix
@@ -21,6 +22,15 @@
   };
 
   modules = {
+    terminals = {
+      enable = true;
+      alacritty = {
+        enable = true;
+        font.family = "Afio";
+        font.size = 12;
+      };
+    };
+
     neovim.lsp = {
       enable = true;
       rust_analyzer.enable = true;
@@ -36,22 +46,18 @@
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "24.05";
 
-  colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
+  # colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
 
   home.packages = with pkgs; [
     afio-font
     alejandra
     file
-    just
-    rink
     ripdrag
     stow
     visidata
     yt-dlp
   ];
 
-  # That was a uBlue thing, no?
-  # programs.bash.enable = lib.mkForce false;
   programs.home-manager.enable = true;
 }
 # vim:sw=2 ts=2 sts=2

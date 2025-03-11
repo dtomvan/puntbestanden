@@ -3,26 +3,21 @@
   pkgs,
   lib,
   ...
-}: with lib; {
+}:
+with lib; {
   imports = [
     ./neovim
-    ./zsh.nix
-    ./tmux.nix
     ./git.nix
   ];
 
-	home.shell.enableShellIntegration = true;
+  home.shell.enableShellIntegration = true;
 
   programs.atuin = mkDefault {
-		enable = true;
+    enable = true;
     flags = ["--disable-up-arrow"];
   };
   programs.direnv.enable = mkDefault true;
   programs.zoxide.enable = mkDefault true;
-  programs.yazi.enable = mkDefault true;
-
-	zsh.enable = mkDefault true;
-  programs.bash.enable = mkDefault true;
 
   home.packages = with pkgs; [
     file
@@ -32,26 +27,44 @@
     bat
     skim
     tealdeer
-		eza
+    eza
+    btop
+    just
+    rink
   ];
 
-  home.shellAliases =
-    {
-      j = "just";
-      e =
-        if config.modules.neovim.enable
-        then "nvim"
-        else "nano";
-      ls = "eza";
-      la = "eza -a";
-      ll = "eza -lah";
-      cat = "bat";
-    }
-    // (import ../../lib/a-fuckton-of-git-aliases.nix);
+  programs.bash = {
+    enable = true;
+
+    initExtra = ''
+      bind 'set show-all-if-ambiguous on'
+      bind 'TAB:menu-complete'
+    '';
+
+    shellAliases =
+      {
+        j = "just";
+        e = "nvim";
+        ls = "eza";
+        la = "eza -a";
+        ll = "eza -lah";
+        cat = "bat";
+      }
+      // (import ../lib/a-fuckton-of-git-aliases.nix {
+        fish = false;
+      });
+  };
+
+  programs.zellij = {
+    enable = true;
+    settings = {
+      theme = "catppuccin-macchiato";
+      default_shell = "bash";
+    };
+  };
 
   home.sessionVariables = {
     FLAKE = "/home/tomvd/puntbestanden/";
-    MANPAGER = lib.mkDefault "nvim +Man!";
   };
 
   systemd.user.settings.Manager.DefaultEnvironment = {
@@ -60,16 +73,6 @@
       ".cargo/bin"
       ".local/bin"
     ]);
-  };
-
-  programs.btop = mkDefault {
-    enable = true;
-    settings = {
-      color_theme = "${config.programs.btop.package}/share/btop/themes/gruvbox_dark.theme";
-      theme_background = false;
-      vim_keys = true;
-      update_ms = 500;
-    };
   };
 
   git = {
@@ -83,9 +86,7 @@
 
   modules.neovim = {
     enable = mkDefault true;
-    use-nix-colors = mkDefault true;
     lsp.enable = mkDefault true;
     lsp.latex.enable = mkDefault true;
   };
-  tmux.enable = mkDefault true;
 }

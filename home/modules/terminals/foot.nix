@@ -7,7 +7,7 @@
   cfg = config.modules.terminals.foot;
 in {
   options.modules.terminals.foot = import ../../lib/mk-terminal-options.nix {
-		inherit lib config;
+		inherit lib;
 		name = "foot";
 		package = pkgs.foot;
 	};

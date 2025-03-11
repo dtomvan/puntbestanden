@@ -268,8 +268,8 @@ activate task manager entry 8=none,Meta+8,Activate Task Manager Entry 8
 activate task manager entry 9=none,Meta+9,Activate Task Manager Entry 9
 activate widget 28=none,none,Activate Application Menu Widget
 activate widget 41=none,none,Activate Show Activity Manager Widget
-activate widget 48=none,none,Activate Application Launcher Widget
-activate widget 51=Meta,none,Activate Application Launcher Widget
+activate widget 48=Meta,none,Activate Application Launcher Widget
+activate widget 51=none,none,Activate Application Launcher Widget
 clear-history=none,,Clear Clipboard History
 clipboard_action=Meta+Ctrl+X,Meta+Ctrl+X,Automatic Action Popup Menu
 cycle-panels=Meta+Alt+P,Meta+Alt+P,Move keyboard focus between panels
@@ -287,11 +287,11 @@ switch to next activity=none,,Switch to Next Activity
 switch to previous activity=none,,Switch to Previous Activity
 toggle do not disturb=none,,Toggle do not disturb
 
+[services][net.local.alacritty.desktop]
+_launch=Meta+Return
+
 [services][org.gnome.Ptyxis.desktop]
 new-window=none
-
-[services][org.kde.konsole.desktop]
-NewTab=Meta+Return
 
 [services][org.kde.krunner.desktop]
 _launch=Alt+Space\tMeta+Space\tSearch\tAlt+F2

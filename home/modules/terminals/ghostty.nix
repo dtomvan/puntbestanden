@@ -7,7 +7,7 @@
   cfg = config.modules.terminals.ghostty;
 in {
   options.modules.terminals.ghostty = import ../../lib/mk-terminal-options.nix {
-    inherit lib config;
+    inherit lib;
     name = "ghostty";
     package = pkgs.ghostty;
   };

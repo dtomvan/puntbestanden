@@ -1,5 +1,5 @@
 [ExtractDialog]
-DirHistory[$e]=$HOME/Documents/v6/Natuurkunde/,$HOME/Downloads/,$HOME/Documents/v6/SK/
+DirHistory[$e]=$HOME/Documents/,$HOME/Documents/v6/Natuurkunde/,$HOME/Downloads/,$HOME/Documents/v6/SK/
 
 [Extraction]
 openDestinationFolderAfterExtraction=true

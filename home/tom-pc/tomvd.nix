@@ -1,11 +1,12 @@
 {
   pkgs,
-  nix-colors,
+  # nix-colors,
   username ? "tomvd",
   ...
 }: {
   imports = [
     ../modules/basic-cli.nix
+    ../modules/terminals
 
     ../modules/firefox.nix
 
@@ -22,6 +23,15 @@
     isPlasma = true;
   };
   modules = {
+    terminals = {
+      enable = true;
+      alacritty = {
+        enable = true;
+        font.family = "Afio";
+        font.size = 12;
+      };
+    };
+
     lorri.enable = true;
     neovim = {
       enableQt = true;
@@ -64,13 +74,13 @@
     --enable-gpu-rasterization
     --enable-zero-copy
     --ozone-platform-hint=auto
-    '';
+  '';
 
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "24.05";
 
-  colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
+  # colorScheme = nix-colors.colorSchemes.catppuccin-mocha;
 
   home.packages = with pkgs; [
     afio-font

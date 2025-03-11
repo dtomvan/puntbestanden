@@ -1,13 +1,15 @@
 # Excerpt from ohmyzsh
-{
-  "grt" = ''cd "$(git rev-parse --show-toplevel || echo .)"'';
+{fish ? false}: {
   "g" = ''git'';
   "ga" = ''git add'';
   "gaa" = ''git add --all'';
   "gapa" = ''git add --patch'';
   "gau" = ''git add --update'';
   "gav" = ''git add --verbose'';
-  "gwip" = ''git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'';
+  "gwip" =
+    if fish
+    then ''git add -A; git rm (git ls-files --deleted); git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"''
+    else ''git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign --message "--wip-- [skip ci]"'';
   "gam" = ''git am'';
   "gama" = ''git am --abort'';
   "gamc" = ''git am --continue'';
@@ -40,7 +42,6 @@
   "gcpc" = ''git cherry-pick --continue'';
   "gcl" = ''git clone --recurse-submodules'';
   "gclf" = ''git clone --recursive --shallow-submodules --filter=blob:none --also-filter-submodules'';
-  "gccd" = ''git clone --recurse-submodules "$@" && cd "$(basename $\_ .git)"'';
   "gcam" = ''git commit --all --message'';
   "gcas" = ''git commit --all --signoff'';
   "gcsm" = ''git commit --signoff --message'';
@@ -53,13 +54,11 @@
   "gcs" = ''git commit -S'';
   "gcss" = ''git commit -S -s'';
   "gcf" = ''git config --list'';
-  "gdct" = ''git describe --tags $(git rev-list --tags --max-count=1)'';
   "gd" = ''git diff'';
   "gdca" = ''git diff --cached'';
   "gdcw" = ''git diff --cached --word-diff'';
   "gds" = ''git diff --staged'';
   "gdw" = ''git diff --word-diff'';
-  "gdv" = ''git diff -w "$@" | view -'';
   "gdup" = ''git diff @{upstream}'';
   "gdt" = ''git diff-tree --no-commit-id --name-only -r'';
   "gf" = ''git fetch'';
@@ -70,8 +69,6 @@
   "ghh" = ''git help'';
   "glgg" = ''git log --graph'';
   "glgm" = ''git log --graph --max-count=10'';
-  "glod" = ''git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' '';
-  "glol" = ''git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' '';
   "glo" = ''git log --oneline --decorate'';
   "glog" = ''git log --oneline --decorate --graph'';
   "glp" = ''git log --pretty=<format>'';
@@ -90,18 +87,13 @@
   "gpr" = ''git pull --rebase'';
   "gprv" = ''git pull --rebase -v'';
   "gpra" = ''git pull --rebase --autostash'';
-  "ggl" = ''git pull origin $(git branch --show-current)'';
-  "gluc" = ''git pull upstream $(git branch --show-current)'';
   "glum" = ''git pull upstream main'';
   "gp" = ''git push'';
   "gpd" = ''git push --dry-run'';
   "gpf!" = ''git push --force'';
-  "ggf" = ''git push --force origin $(git branch --show-current)'';
   "gpf" = ''git push --force-with-lease --force-if-includes'';
-  "ggfl" = ''git push --force-with-lease origin $(git branch --show-current)'';
   "gpv" = ''git push --verbose'';
   "gpod" = ''git push origin --delete'';
-  "ggp" = ''git push origin $(git branch --show-current)'';
   "gpu" = ''git push upstream'';
   "grb" = ''git rebase'';
   "grba" = ''git rebase --abort'';
@@ -123,7 +115,6 @@
   "grhh" = ''git reset --hard'';
   "grhk" = ''git reset --keep'';
   "grhs" = ''git reset --soft'';
-  "groh" = ''git reset origin/$(git branch --show-current) --hard'';
   "grs" = ''git restore'';
   "grss" = ''git restore --source'';
   "grst" = ''git restore --staged'';
