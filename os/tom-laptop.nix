@@ -4,6 +4,8 @@
     ./modules/maintenance.nix
     ./modules/nix-config-common.nix
 
+    ./modules/fonts.nix
+
     # hardware / drivers
     ./hardware/tom-laptop.nix
     ./hardware/sound.nix
