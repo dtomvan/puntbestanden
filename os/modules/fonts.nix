@@ -2,17 +2,18 @@
   fonts = {
     packages = with pkgs; [
       inter
-      noto-fonts
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       liberation_ttf
       afio-font
     ];
 
     fontconfig = {
       useEmbeddedBitmaps = true;
-      serif = ["Liberation Serif"];
-      sansSerif = ["Inter"];
-      monospace = ["Afio"];
+      defaultFonts = {
+        serif = ["Liberation Serif"];
+        sansSerif = ["Inter"];
+        monospace = ["Afio"];
+      };
     };
   };
 }
