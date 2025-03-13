@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   # nix-colors,
   username ? "tomvd",
@@ -9,6 +10,7 @@
     ../modules/terminals
 
     ../modules/firefox.nix
+    ../modules/terminals
 
     ../modules/lorri.nix
     ../modules/latex.nix
@@ -42,6 +44,17 @@
       };
     };
 
+    terminals = {
+      alacritty = {
+        enable = true;
+        default = true;
+        font = {
+          family = "Afio";
+          size = 12;
+        };
+      };
+    };
+
     latex = {
       enable = true;
       package = pkgs.texliveMedium;
@@ -64,6 +77,14 @@
   dont-track-me = {
     enable = true;
     enableAll = true;
+  };
+
+  programs.zellij = {
+    enable = true;
+    settings = {
+      default_shell = lib.getExe pkgs.bashInteractive;
+      theme = "catppuccin-macchiato";
+    };
   };
 
   xdg.configFile."electron-flags.conf".text = ''

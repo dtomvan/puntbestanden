@@ -43,6 +43,7 @@ with lib; {
 
     shellAliases =
       {
+        strider = "zellij p -- zellij:strider";
         j = "just";
         e = "nvim";
         ls = "eza";
