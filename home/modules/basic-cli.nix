@@ -36,12 +36,12 @@ with lib; {
   programs.bash = {
     enable = true;
 
-    initextra = ''
+    initExtra = ''
       bind 'set show-all-if-ambiguous on'
       bind 'tab:menu-complete'
     '';
 
-    shellaliases =
+    shellAliases =
       {
         strider = "zellij p -- zellij:strider";
         j = "just";
