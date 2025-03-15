@@ -48,6 +48,8 @@
 
     ./modules/virt/kvm.nix
     ./modules/virt/distrobox.nix
+
+    ./modules/misc/bluebuild.nix
   ];
 
   modules = {

@@ -7,7 +7,7 @@
     isNormalUser = true;
     createHome = true;
     # not sure which are needed but I don't want to debug these again
-    extraGroups = ["wheel" "kvm" "audio" "seat" "libvirtd" "qemu-libvirtd" "lp" "scanner" "audio"];
+    extraGroups = ["wheel" "kvm" "audio" "seat" "libvirtd" "qemu-libvirtd" "lp" "scanner" "audio" "docker"];
     # Packages that I always want available, no matter if I have home-manager installed
     packages = with pkgs; [
       neovim
@@ -20,6 +20,8 @@
       zathura
 			gron
 			nixfmt-rfc-style
+      
+      glow
 
       wl-clipboard
       pavucontrol

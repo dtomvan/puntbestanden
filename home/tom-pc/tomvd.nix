@@ -67,6 +67,7 @@
       lsp = {
         enable = true;
         extraLspServers = with pkgs; [
+          yaml-language-server
           texlab
           clang-tools
         ];

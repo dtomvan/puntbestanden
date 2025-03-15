@@ -36,12 +36,12 @@ with lib; {
   programs.bash = {
     enable = true;
 
-    initExtra = ''
+    initextra = ''
       bind 'set show-all-if-ambiguous on'
-      bind 'TAB:menu-complete'
+      bind 'tab:menu-complete'
     '';
 
-    shellAliases =
+    shellaliases =
       {
         strider = "zellij p -- zellij:strider";
         j = "just";
@@ -58,6 +58,7 @@ with lib; {
 
   programs.zellij = {
     enable = true;
+
     settings = {
       theme = "catppuccin-macchiato";
       default_shell = "bash";
