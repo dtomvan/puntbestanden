@@ -62,6 +62,11 @@ with lib; {
     settings = {
       theme = "catppuccin-macchiato";
       default_shell = "bash";
+      keybinds = {
+        normal = {
+          unbind = "Ctrl q";
+        };
+      };
     };
   };
 

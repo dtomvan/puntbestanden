@@ -14,6 +14,8 @@
     ../modules/syncthing.nix
 
     ../modules/tools.nix
+
+    ../modules/lisp.nix
   ];
 
   firefox = {
