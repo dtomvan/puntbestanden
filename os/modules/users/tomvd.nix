@@ -23,6 +23,8 @@
       
       glow
 
+      fastfetch
+
       wl-clipboard
       pavucontrol
       alsa-utils

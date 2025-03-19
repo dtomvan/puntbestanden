@@ -45,6 +45,9 @@ OrderMinimizedMode=1
 [Tiling]
 padding=4
 
+[Tiling][466058bc-fa85-51aa-97c9-ade7d3baae78]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][7764056d-f7c6-535b-90e8-3cc6ffa2570d]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -53,3 +56,6 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Windows]
 RollOverDesktops=true
+
+[Xwayland]
+Scale=1
