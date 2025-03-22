@@ -18,6 +18,7 @@
     ../modules/helix.nix
 
     ../modules/tools.nix
+    ../modules/lisp.nix
   ];
 
   firefox = {

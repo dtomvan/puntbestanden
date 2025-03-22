@@ -60,6 +60,7 @@ with lib; {
     enable = true;
 
     settings = {
+      show_startup_tips = false;
       theme = "catppuccin-macchiato";
       default_shell = "bash";
       keybinds = {
