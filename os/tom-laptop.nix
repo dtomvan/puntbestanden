@@ -76,6 +76,7 @@
 		git
 
 		keepassxc
+    clj-bins
   ];
 
   time.timeZone = "Europe/Amsterdam";

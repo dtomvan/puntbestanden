@@ -55,6 +55,7 @@
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
       rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
       sowon = pkgs.callPackage ./packages/sowon.nix {};
+      clj-bins = pkgs.callPackage ./packages/clj-bins/package.nix {};
     };
 
     homeConfigurations = let

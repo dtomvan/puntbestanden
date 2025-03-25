@@ -74,6 +74,8 @@
     nh
     wl-clipboard
 
+    clj-bins
+
 		keepassxc
     # fuck flatpaks they don't even work half the time
     discord
