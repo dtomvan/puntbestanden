@@ -8,7 +8,6 @@
 in {
   options.modules.neovim = {
     enable = lib.mkEnableOption "install and configure neovim";
-    use-nix-colors = lib.mkEnableOption "refer to nix-color for colorscheme";
     lsp = {
       enable = lib.mkEnableOption "use lspconfig and download servers";
       nixd.enable = lib.mkEnableOption "use nixd with this flake";
@@ -27,18 +26,14 @@ in {
     ./opts.nix
     ./keymaps.nix
     ./plugins
-		./autocmd/lastplace.nix
   ];
 
   config = lib.mkIf cfg.enable {
 		home.packages = lib.optional cfg.enableQt pkgs.neovim-qt;
 
-    xdg.configFile."nvim/ftplugin" = {
-      source = ./ftplugin;
-      recursive = true;
-    };
     programs.nixvim = {
       enable = true;
+      defaultEditor = true;
       viAlias = true;
       vimAlias = true;
       vimdiffAlias = true;

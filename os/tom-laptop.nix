@@ -74,6 +74,7 @@
     nh
     wl-clipboard
 		git
+    nixos-artwork.wallpapers.catppuccin-mocha
 
 		keepassxc
     clj-bins

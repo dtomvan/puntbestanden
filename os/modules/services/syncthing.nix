@@ -51,7 +51,6 @@ in {
         enabled = true;
         user = username;
         password = "$2a$10$bYZG2XbEoOuRxX4A1e46cOIvTgoPfLQRGa4fKnqAI1L8vwMfdB0ri";
-        apiKey = "mWDXydDdFfhEu7XkyAvWRS26Kdt4D6zD";
       };
 
       options = {

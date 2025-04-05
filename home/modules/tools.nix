@@ -12,15 +12,15 @@ in {
     '')
 
     (writers.writeBashBin "nix-install" ''
-      nix run "$FLAKE#pkgs.$@"
+      nix profile install "$FLAKE#pkgs.$@"
     '')
 
     (writers.writeBashBin "list-apps" ''
-      ${jq} --dot ~/.nix-profile/bin/* \
+      ${nix-tree} --dot ~/.nix-profile/bin/* \
       | grep -- '"home-manager-path" -> ".*"' \
       | awk '{print $3}' \
       | sort \
-      | ${nix-tree} -sr ".[]"
+      | ${jq} -sr ".[]"
     '')
     (writeShellScriptBin "imp-pkgs" ''
       nix profile list --json \

@@ -143,10 +143,10 @@
   :init
   (add-hook 'prog-mode-hook
             (lambda ()
-              (unless (string-match-p (rx (and ".el" eol)) (buffer-file-name (current-buffer)))
+              ;; (unless (string-match-p (rx (and ".el" eol)) (buffer-file-name (current-buffer)))
                 (flymake-mode)
                 (evil-local-set-key 'normal (kbd "]d") 'flymake-goto-next-error)
-                (evil-local-set-key 'normal (kbd "[d") 'flymake-goto-prev-error)))))
+                (evil-local-set-key 'normal (kbd "[d") 'flymake-goto-prev-error)))); )
 
 (use-package eglot
   :init

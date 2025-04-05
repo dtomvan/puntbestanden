@@ -22,7 +22,7 @@ in {
 
   config.programs.helix = lib.mkIf cfg.enable {
     enable = true;
-    defaultEditor = true;
+    # defaultEditor = true;
     settings = {
       theme =
         if cfg.use-nix-colors

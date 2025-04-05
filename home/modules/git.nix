@@ -33,7 +33,6 @@
     extraConfig = {
       advice.detachedHead = false;
       commit = {
-				template = "~/.gitmessage";
 				verbose = true;
 			};
 			core = {
@@ -95,6 +94,4 @@
 			};
 		};
 	};
-
-  config.home.file.".gitmessage".source = ./git-message.txt;
 }

@@ -121,7 +121,17 @@ in {
               name = "PaperCut Login for Dr. Nassau College";
               url = "http://as-papercut-as:9191/user";
             }
-          ];
+          ] ++ (builtins.map (v: {name = v; url = "https://www.examenblad.nl/2024/vwo/vakken/exacte-vakken/${v}";}) [
+            "biologie-vwo"
+            "natuurkunde-vwo"
+            "scheikunde-vwo"
+            "wiskunde-b-vwo"
+          ]) ++ (builtins.map (v: {name = v; url = "https://www.examenblad.nl/2024/vwo/vakken/talen/${v}";}) [
+            "engels-vwo"
+            "frans-vwo"
+            "griekse-taal-cultuur-vwo"
+            "nederlands-vwo"
+          ]);
         }
       ];
 
