@@ -17,7 +17,6 @@
     ./modules/boot/plymouth.nix
 
     ./modules/utilities.nix
-    ./modules/programs/libreoffice.nix
     ./modules/programs/gpg.nix
 
     # networking / bluetooth
@@ -33,11 +32,9 @@
 
     # Big programs / configuration
     ./modules/gaming/steam.nix
-    ./modules/gaming/gaming-extra.nix
+    # ./modules/gaming/gaming-extra.nix
 
     ./modules/kde.nix
-
-    ./modules/misc/dutch.nix
 
     ./modules/services/printing.nix
     ./modules/services/sane.nix
@@ -48,8 +45,6 @@
 
     ./modules/virt/kvm.nix
     ./modules/virt/distrobox.nix
-
-    ./modules/misc/bluebuild.nix
   ];
 
   modules = {
@@ -73,6 +68,7 @@
     curl
     nh
     wl-clipboard
+    libreoffice-qt6-fresh
 
     clj-bins
 

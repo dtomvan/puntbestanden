@@ -26,3 +26,6 @@ stow-tom-pc +args='':
 stow-tom-laptop +args='':
 	@just stow kde-common kde-tom-laptop {{args}}
 
+[group('stow')]
+stow-nvim +args='':
+	@just stow nvim {{args}}

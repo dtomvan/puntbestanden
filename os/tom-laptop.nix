@@ -18,7 +18,6 @@
 		./modules/boot/plymouth.nix
 
 		./modules/utilities.nix
-    ./modules/programs/libreoffice.nix
     ./modules/programs/gpg.nix
 
     # networking / bluetooth
@@ -26,9 +25,6 @@
     ./modules/networking/networkmanager.nix
     ./modules/networking/tailscale.nix
 
-    # Users (no home-manager, built separately)
-    # WARNING: users.mutableUsers == false, so removing all regular users renders
-    # the system almost UNUSABLE. Remove users with caution (obviously).
     ./modules/users/tomvd.nix
     ./modules/users/root.nix
 
@@ -39,8 +35,6 @@
     ./modules/services/flatpak.nix
     ./modules/services/keybase.nix
     ./modules/services/syncthing.nix
-
-    ./modules/misc/dutch.nix
 
     ./modules/virt/distrobox.nix
   ];
@@ -74,7 +68,7 @@
     nh
     wl-clipboard
 		git
-    nixos-artwork.wallpapers.catppuccin-mocha
+    libreoffice-qt6-fresh
 
 		keepassxc
     clj-bins

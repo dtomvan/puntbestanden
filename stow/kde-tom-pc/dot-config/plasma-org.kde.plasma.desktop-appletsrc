@@ -163,7 +163,7 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][54][Applets][57][Configuration]
-PreloadWeight=75
+PreloadWeight=95
 
 [Containments][54][Applets][58]
 immutability=1
@@ -172,6 +172,9 @@ plugin=org.kde.plasma.devicenotifier
 [Containments][54][Applets][59]
 immutability=1
 plugin=org.kde.plasma.clipboard
+
+[Containments][54][Applets][59][Configuration]
+PreloadWeight=70
 
 [Containments][54][Applets][60]
 immutability=1
@@ -190,7 +193,7 @@ immutability=1
 plugin=org.kde.kdeconnect
 
 [Containments][54][Applets][63][Configuration]
-PreloadWeight=75
+PreloadWeight=95
 
 [Containments][54][Applets][64]
 immutability=1
@@ -200,7 +203,11 @@ plugin=org.kde.kscreen
 immutability=1
 plugin=org.kde.plasma.volume
 
+[Containments][54][Applets][65][Configuration]
+PreloadWeight=55
+
 [Containments][54][Applets][65][Configuration][General]
+currentTab=streams
 migrated=true
 
 [Containments][54][Applets][66]
@@ -229,14 +236,14 @@ immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][54][Applets][69][Configuration]
-PreloadWeight=87
+PreloadWeight=97
 
 [Containments][54][Applets][70]
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
 [Containments][54][Applets][70][Configuration]
-PreloadWeight=12
+PreloadWeight=0
 
 [Containments][54][ConfigDialog]
 DialogHeight=540
@@ -248,5 +255,5 @@ knownItems=org.kde.plasma.manage-inputmethod,org.kde.plasma.cameraindicator,org.
 shownItems=org.kde.plasma.notifications
 
 [ScreenMapping]
-itemsOnDisabledScreens=0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,5,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWVzZG9zc2llci5kZXNrdG9w,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9PZmZpY2UuZGVza3RvcA,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9Tb210b2RheS5kZXNrdG9w,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWFybmJlYXQuZGVza3RvcA,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9aZXJtZWxvLmRlc2t0b3A,0,804178db-f272-42fa-9d0e-28a00228cf3c,2,desktop:/Xonotic.desktop,desktop:/kcm_keys.desktop,0,b28af259-3104-4ab2-b8a7-43caeb0539af,47,file:///dev,desktop:/Zermelo.desktop,file:///home/tomvd/Sync,file:///home/tomvd/Videos,file:///home,file:///home/tomvd/Chase & Status - Censor VIP [USB Version] [NmCayjTmQWU].m4a,file:///opt,file:///home/tomvd/puntbestanden,file:///lost+found,file:///home/tomvd/pong-with-gdscript-demo,file:///home/tomvd/Public,file:///nix,file:///root,file:///home/tomvd/school,file:///etc,file:///home/tomvd/Blend Assen - Blend in DNK Assen 2024.mp4,file:///home/tomvd/keybase,file:///home/tomvd/Pictures,desktop:/Learnbeat.desktop,file:///proc,file:///home/tomvd/Templates,file:///mnt,file:///home/tomvd/Documents,file:///home/tomvd/Desktop,file:///home/tomvd/video-usb.tar,file:///home/tomvd/projects,file:///home/tomvd/usb,file:///keybase,file:///home/tomvd/repos,file:///boot,file:///sys,desktop:/Office.desktop,file:///srv,file:///home/tomvd/RDPWindowsPREP.qcow2,file:///usr,file:///run,desktop:/Leesdossier.desktop,file:///home/tomvd/screenshots,desktop:/Somtoday.desktop,file:///var,file:///tmp,file:///home/tomvd/Music,file:///bin,desktop:/steam.desktop,file:///home/tomvd/research,file:///home/tomvd/Downloads,file:///home/tomvd/old-config
-screenMapping=file:///nix/store/phy0qfnmaly1s2jnshnm7rjs5gk03izc-steam-unwrapped-1.0.0.82/share/applications/steam.desktop,0,804178db-f272-42fa-9d0e-28a00228cf3c,file:///home/tomvd/Desktop/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Office.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Learnbeat.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Somtoday.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///home/tomvd/Desktop/Leesdossier.desktop,0,b28af259-3104-4ab2-b8a7-43caeb0539af,file:///home/tomvd/Desktop/Xonotic.desktop,0,804178db-f272-42fa-9d0e-28a00228cf3c,desktop:/kcm_keys.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Zermelo.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2
+itemsOnDisabledScreens=0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,5,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9PZmZpY2UuZGVza3RvcA,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWVzZG9zc2llci5kZXNrdG9w,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9Tb210b2RheS5kZXNrdG9w,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9MZWFybmJlYXQuZGVza3RvcA,activities:/current/L2hvbWUvdG9tdmQvRGVza3RvcC9aZXJtZWxvLmRlc2t0b3A,0,b28af259-3104-4ab2-b8a7-43caeb0539af,47,file:///home,file:///home/tomvd/Chase & Status - Censor VIP [USB Version] [NmCayjTmQWU].m4a,file:///home/tomvd/puntbestanden,file:///opt,file:///lost+found,file:///home/tomvd/pong-with-gdscript-demo,file:///dev,desktop:/Zermelo.desktop,file:///home/tomvd/Sync,file:///home/tomvd/Videos,desktop:/Learnbeat.desktop,file:///home/tomvd/keybase,file:///home/tomvd/Pictures,file:///proc,file:///home/tomvd/Templates,file:///mnt,file:///home/tomvd/Desktop,file:///home/tomvd/Documents,file:///nix,file:///home/tomvd/Public,file:///root,file:///home/tomvd/school,file:///etc,file:///home/tomvd/Blend Assen - Blend in DNK Assen 2024.mp4,file:///boot,file:///sys,desktop:/Office.desktop,file:///srv,file:///home/tomvd/video-usb.tar,file:///home/tomvd/projects,file:///home/tomvd/repos,file:///home/tomvd/usb,file:///keybase,file:///home/tomvd/research,desktop:/steam.desktop,file:///home/tomvd/Downloads,file:///home/tomvd/old-config,file:///usr,file:///home/tomvd/RDPWindowsPREP.qcow2,desktop:/Leesdossier.desktop,file:///run,file:///var,file:///tmp,file:///home/tomvd/screenshots,desktop:/Somtoday.desktop,file:///bin,file:///home/tomvd/Music,0,804178db-f272-42fa-9d0e-28a00228cf3c,2,desktop:/Xonotic.desktop,desktop:/kcm_keys.desktop
+screenMapping=desktop:/kcm_keys.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Office.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///home/tomvd/Desktop/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Somtoday.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,file:///home/tomvd/Desktop/Leesdossier.desktop,0,b28af259-3104-4ab2-b8a7-43caeb0539af,file:///nix/store/phy0qfnmaly1s2jnshnm7rjs5gk03izc-steam-unwrapped-1.0.0.82/share/applications/steam.desktop,0,804178db-f272-42fa-9d0e-28a00228cf3c,file:///home/tomvd/Desktop/Xonotic.desktop,0,804178db-f272-42fa-9d0e-28a00228cf3c,desktop:/Leesdossier.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Zermelo.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2,desktop:/Learnbeat.desktop,0,3c4146ee-0e5f-4040-9c0b-29038a9d2be2

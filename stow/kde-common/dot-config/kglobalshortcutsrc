@@ -6,6 +6,7 @@ switch-to-activity-b28af259-3104-4ab2-b8a7-43caeb0539af=none,none,Switch to acti
 
 [KDE Keyboard Layout Switcher]
 Switch keyboard layout to English (US)=none,none,Switch keyboard layout to English (US)
+Switch keyboard layout to Greek=none,none,Switch keyboard layout to Greek
 Switch to Last-Used Keyboard Layout=Meta+Alt+L,Meta+Alt+L,Switch to Last-Used Keyboard Layout
 Switch to Next Keyboard Layout=Meta+Alt+K,Meta+Alt+K,Switch to Next Keyboard Layout
 _k_friendly_name=Keyboard Layout Switcher
@@ -290,11 +291,17 @@ toggle do not disturb=none,,Toggle do not disturb
 [services][net.local.alacritty.desktop]
 _launch=Meta+Return
 
+[services][net.local.tofi-drun.desktop]
+_launch=Meta+R
+
 [services][org.gnome.Ptyxis.desktop]
 new-window=none
 
 [services][org.kde.krunner.desktop]
 _launch=Alt+Space\tMeta+Space\tSearch\tAlt+F2
+
+[services][org.kde.spectacle.desktop]
+RecordRegion=Meta+Shift+R
 
 [services][systemsettings.desktop]
 _launch=Tools\tMeta+I

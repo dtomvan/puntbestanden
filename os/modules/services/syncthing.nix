@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+let
   username = "tomvd";
   devices = {
     tom-pc = {
@@ -11,7 +6,7 @@
       autoAcceptFolders = true;
     };
     tom-laptop = {
-      id = "FZXZUK4-65AZIHQ-OW3ORI7-FTXCU43-6HMDWDR-CBDZCKD-ECM22MD-MWULWQD";
+      id = "2TCHDIM-XCWIBM4-5DL2EK6-7Y7VOSO-TOSZYG6-JNYQYFU-PONSM2D-X2CITQT";
       autoAcceptFolders = true;
     };
     a52 = {
@@ -33,6 +28,11 @@
         type = "trashcan";
         params.cleanoutDays = "90";
       };
+    };
+    logseq-mobile = {
+      id = "xcerk-k5e52";
+      path = "~/logseq-mobile";
+      devices = allDevices;
     };
   };
 in {

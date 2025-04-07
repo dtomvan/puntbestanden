@@ -1,9 +1,5 @@
 {
-  config,
-  lib,
-  ...
-}: {
-  config.programs.nixvim.plugins.mini = {
+  programs.nixvim.plugins.mini = {
     enable = true;
     modules = {
       ai = {};
@@ -28,6 +24,7 @@
       notify = {};
       sessions = {};
       statusline = {};
+      pairs = {};
       surround = {
         mappings = {
           app = "ys";
