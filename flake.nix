@@ -4,6 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,8 +22,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nix-colors.url = "github:misterio77/nix-colors";
-
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,113 +32,113 @@
 
   outputs = inputs @ {
     self,
-    nixpkgs,
-    home-manager,
-    nixvim,
     disko,
+    dont-track-me,
+    flake-parts,
+    home-manager,
+    nixpkgs,
+    nixvim,
     ...
-  }: let
-    system = "x86_64-linux";
-    pkgs = import inputs.nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-      overlays = [
-        inputs.nur.overlays.default
-        (_final: prev: self.packages.${system})
+  }:
+    flake-parts.lib.mkFlake {inherit inputs;} (top @ {
+      config,
+      withSystem,
+      moduleWithSystem,
+      ...
+    }: {
+      imports = [
+        inputs.pkgs-by-name-for-flake-parts.flakeModule
       ];
-    };
-  in {
-    inherit pkgs;
 
-    devShells.${system} = import ./shells {inherit pkgs;};
-    packages.${system} = {
-      buildFirefoxXpiAddon = pkgs.callPackage ./packages/lib/buildFirefoxXpiAddon.nix {};
-
-      afio-font = pkgs.callPackage ./packages/afio.nix {};
-      coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
-      rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
-      sowon = pkgs.callPackage ./packages/sowon.nix {};
-      clj-bins = pkgs.callPackage ./packages/clj-bins/package.nix {};
-
-      obsidian-web-clipper-src = pkgs.callPackage ./packages/obsidian-web-clipper.nix {};
-      obsidian-web-clipper-bin = pkgs.callPackage ./packages/obsidian-web-clipper-bin.nix {};
-      obsidian-web-clipper = pkgs.callPackage ./packages/obsidian-web-clipper-bin.nix {};
-    };
-
-    homeConfigurations = let
-      homeManagerConfiguration = {
-        config,
-        hostname ? "tom-pc",
-        username ? "tomvd",
-        extraModules ? [],
-        extraSpecialArgs ? {},
-      }:
-        home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = with inputs;
-            [
-              nixvim.homeManagerModules.nixvim
-              dont-track-me.homeManagerModules.default
-              config
-            ]
-            ++ extraModules;
-          extraSpecialArgs =
-            {
-              inherit nixpkgs;
-              # inherit nix-colors;
-              inherit username hostname;
-            }
-            // extraSpecialArgs;
-        };
-    in {
-      "tomvd@tom-pc" = homeManagerConfiguration {
-        config = ./home/tom-pc/tomvd.nix;
-        # extraModules = [inputs.nix-colors.homeManagerModules.default];
-      };
-
-      "tomvd@tom-laptop" = homeManagerConfiguration {
-        config = ./home/tom-laptop/tom.nix;
-        hostname = "tom-laptop";
-      };
-    };
-
-    nixosConfigurations = let
-      nixosSystem = modules:
-        inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-          inherit pkgs;
-          inherit modules;
-        };
-    in {
-      tom-pc = nixosSystem [
-        ./os/tom-pc.nix
-        ./os/hardware/tom-pc-disko.nix
-        disko.nixosModules.disko
-      ];
-      tom-laptop = nixosSystem [
-        ./os/tom-laptop.nix
-      ];
-      iso = nixosSystem [
-        ({modulesPath, ...}: {
-          imports = [
-            "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
-            ./os/modules/users/tomvd.nix
-            ./os/modules/services/ssh.nix
-          ];
-          isoImage = {
-            squashfsCompression = "gzip -Xcompression-level 1";
-            contents = [
-              {
-                source = ./.;
-                target = "nix-config";
-              }
+      flake = let
+        mkPkgs = system:
+          import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [
+              inputs.nur.overlays.default
+              (_final: _prev: self.packages.${system})
             ];
           };
-          modules.ssh.enable = true;
-        })
-      ];
-    };
-  };
+      in rec {
+        # Here for compat reasons. Big hack to imperatively install `nix
+        # profile ~/puntbestanden/#pkgs.packagename`
+        pkgs = mkPkgs "x86_64-linux";
+
+        nixosConfigurations = {
+          tom-pc = nixpkgs.lib.nixosSystem {
+            inherit pkgs;
+            modules = [
+              ./os/tom-pc.nix
+              ./os/hardware/tom-pc-disko.nix
+              disko.nixosModules.disko
+            ];
+          };
+
+          tom-laptop = nixpkgs.lib.nixosSystem {
+            inherit pkgs;
+            modules = [
+              ./os/tom-laptop.nix
+            ];
+          };
+        };
+
+        homeConfigurations = let
+          homeManagerConfiguration = {
+            config,
+            system,
+            hostname ? "tom-pc",
+            username ? "tomvd",
+            extraModules ? [],
+            extraSpecialArgs ? {},
+          }:
+            home-manager.lib.homeManagerConfiguration {
+              pkgs = import nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+                overlays = [
+                  inputs.nur.overlays.default
+                  (_final: _prev: self.packages.${system})
+                ];
+              };
+              modules =
+                [
+                  nixvim.homeManagerModules.nixvim
+                  dont-track-me.homeManagerModules.default
+                  config
+                ]
+                ++ extraModules;
+              extraSpecialArgs =
+                {
+                  inherit nixpkgs;
+                  inherit username hostname;
+                }
+                // extraSpecialArgs;
+            };
+        in {
+          "tomvd@tom-pc" = homeManagerConfiguration {
+            system = "x86_64-linux";
+            config = ./home/tom-pc/tomvd.nix;
+          };
+
+          "tomvd@tom-laptop" = homeManagerConfiguration {
+            system = "x86_64-linux";
+            config = ./home/tom-laptop/tom.nix;
+            hostname = "tom-laptop";
+          };
+        };
+      };
+
+      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+
+      perSystem = {
+        pkgs,
+        ...
+      }: {
+        pkgsDirectory = ./packages/by-name;
+        devShells = {};
+      };
+    });
 }
 # vim:sw=2 ts=2 sts=2
 
