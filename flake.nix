@@ -51,11 +51,17 @@
 
     devShells.${system} = import ./shells {inherit pkgs;};
     packages.${system} = {
+      buildFirefoxXpiAddon = pkgs.callPackage ./packages/lib/buildFirefoxXpiAddon.nix {};
+
       afio-font = pkgs.callPackage ./packages/afio.nix {};
       coach-cached = pkgs.callPackage ./packages/coach-cached.nix {};
       rwds-cli = pkgs.callPackage ./packages/rwds-cli.nix {};
       sowon = pkgs.callPackage ./packages/sowon.nix {};
       clj-bins = pkgs.callPackage ./packages/clj-bins/package.nix {};
+
+      obsidian-web-clipper-src = pkgs.callPackage ./packages/obsidian-web-clipper.nix {};
+      obsidian-web-clipper-bin = pkgs.callPackage ./packages/obsidian-web-clipper-bin.nix {};
+      obsidian-web-clipper = pkgs.callPackage ./packages/obsidian-web-clipper-bin.nix {};
     };
 
     homeConfigurations = let

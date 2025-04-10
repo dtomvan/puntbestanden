@@ -6,59 +6,6 @@
   ...
 }: let
   cfg = config.firefox;
-  buildFirefoxXpiAddon = lib.makeOverridable ({
-    stdenv ? pkgs.stdenv,
-    fetchurl ? pkgs.fetchurl,
-    pname,
-    version,
-    addonId,
-    url,
-    hash,
-    meta,
-    ...
-  }:
-    stdenv.mkDerivation {
-      name = "${pname}-${version}";
-
-      inherit meta;
-
-      src = fetchurl {inherit url hash;};
-
-      preferLocalBuild = true;
-      allowSubstitutes = true;
-
-      passthru = {inherit addonId;};
-
-      buildCommand = ''
-        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-        mkdir -p "$dst"
-        install -v -m644 "$src" "$dst/${addonId}.xpi"
-      '';
-    });
-
-  obsidian-web-clipper = buildFirefoxXpiAddon {
-    pname = "obsidian-web-clipper";
-    version = "0.11.4";
-    addonId = "clipper@obsidian.md";
-    url = "https://github.com/obsidianmd/obsidian-clipper/releases/download/0.11.4/obsidian-web-clipper-0.11.4-firefox.zip";
-    hash = "sha256-XiPtVs2kZEq6NL/GXSYVOukX8yQB1oOd0HoVEeYSDWI=";
-    meta = with lib; {
-      homepage = "https://obsidian.md/clipper";
-      description = "Highlight and capture the web in your favorite browser. The official Web Clipper extension for Obsidian.";
-      license = lib.licenses.mit;
-      mozPermissions = [
-		"activeTab"
-		"clipboardWrite"
-		"contextMenus"
-		"storage"
-		"scripting"
-        "<all_urls>"
-		"http://*/*"
-		"https://*/*"
-      ];
-      platforms = platforms.all;
-    };
-  };
 in {
   options.firefox = with lib; {
     enable = mkEnableOption "install and configure firefox";
@@ -116,7 +63,8 @@ in {
             keepassxc-browser
 
             steam-database
-            obsidian-web-clipper
+            # drv in-tree, overlayed
+            pkgs.obsidian-web-clipper
           ]
           ++ lib.optionals (hostname == "tom-laptop") [
             onetab
