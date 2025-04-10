@@ -39,6 +39,14 @@ with lib; {
     initExtra = ''
       bind 'set show-all-if-ambiguous on'
       bind 'tab:menu-complete'
+
+      c() {
+          clifm "--cd-on-quit" "$@"
+          dir="$(grep "^\*" "$HOME/.config/clifm/.last" 2>/dev/null | cut -d':' -f2)";
+          if [ -d "$dir" ]; then
+              cd -- "$dir" || return 1
+          fi
+      }
     '';
 
     shellAliases =

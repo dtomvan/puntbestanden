@@ -7,7 +7,7 @@
       conjure.enable = true;
       lsp.servers = {
         clojure_lsp.enable = true;
-        servers.fennel_ls.enable = true;
+        fennel_ls.enable = true;
       };
     };
 

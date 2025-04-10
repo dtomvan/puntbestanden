@@ -97,6 +97,7 @@
     stow
     visidata
     yt-dlp
+    clifm
   ];
 
   programs.home-manager.enable = true;

@@ -72,7 +72,8 @@
 
     clj-bins
 
-		keepassxc
+    keepassxc
+    zotero
     # fuck flatpaks they don't even work half the time
     discord
     localsend

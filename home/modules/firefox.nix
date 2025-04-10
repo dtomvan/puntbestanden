@@ -2,10 +2,63 @@
   config,
   pkgs,
   lib,
-	hostname,
+  hostname,
   ...
 }: let
   cfg = config.firefox;
+  buildFirefoxXpiAddon = lib.makeOverridable ({
+    stdenv ? pkgs.stdenv,
+    fetchurl ? pkgs.fetchurl,
+    pname,
+    version,
+    addonId,
+    url,
+    hash,
+    meta,
+    ...
+  }:
+    stdenv.mkDerivation {
+      name = "${pname}-${version}";
+
+      inherit meta;
+
+      src = fetchurl {inherit url hash;};
+
+      preferLocalBuild = true;
+      allowSubstitutes = true;
+
+      passthru = {inherit addonId;};
+
+      buildCommand = ''
+        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+        mkdir -p "$dst"
+        install -v -m644 "$src" "$dst/${addonId}.xpi"
+      '';
+    });
+
+  obsidian-web-clipper = buildFirefoxXpiAddon {
+    pname = "obsidian-web-clipper";
+    version = "0.11.4";
+    addonId = "clipper@obsidian.md";
+    url = "https://github.com/obsidianmd/obsidian-clipper/releases/download/0.11.4/obsidian-web-clipper-0.11.4-firefox.zip";
+    hash = "sha256-XiPtVs2kZEq6NL/GXSYVOukX8yQB1oOd0HoVEeYSDWI=";
+    meta = with lib; {
+      homepage = "https://obsidian.md/clipper";
+      description = "Highlight and capture the web in your favorite browser. The official Web Clipper extension for Obsidian.";
+      license = lib.licenses.mit;
+      mozPermissions = [
+		"activeTab"
+		"clipboardWrite"
+		"contextMenus"
+		"storage"
+		"scripting"
+        "<all_urls>"
+		"http://*/*"
+		"https://*/*"
+      ];
+      platforms = platforms.all;
+    };
+  };
 in {
   options.firefox = with lib; {
     enable = mkEnableOption "install and configure firefox";
@@ -50,21 +103,27 @@ in {
       # search.default = "DuckDuckGo";
 
       extensions = with pkgs.nur.repos.rycee.firefox-addons; {
-        packages = [
-          ublock-origin
-          sidebery
-          darkreader
-          sponsorblock
-          dearrow
-          plasma-integration
-          enhancer-for-youtube
+        packages =
+          [
+            ublock-origin
+            sidebery
+            darkreader
+            sponsorblock
+            dearrow
+            plasma-integration
+            enhancer-for-youtube
 
-          keepassxc-browser
+            keepassxc-browser
 
-          steam-database
-        ] ++ lib.optionals (hostname == "tom-laptop") [
-					onetab
-				];
+            steam-database
+            obsidian-web-clipper
+          ]
+          ++ lib.optionals (hostname == "tom-laptop") [
+            onetab
+          ]
+          ++ lib.optionals (hostname == "tom-pc") [
+            zotero-connector
+          ];
       };
 
       settings = {
@@ -97,41 +156,59 @@ in {
         lockPref("browser.aboutwelcome.enabled", false);
       '';
 
-      bookmarks = [
+      bookmarks.force = true;
+      bookmarks.settings = [
         {
           toolbar = true;
-          bookmarks = [
-            {
-              name = "about:config";
-              url = "about:config";
-            }
-            {
-              name = "zermelo";
-              url = "https://nassau.zportal.nl/app/";
-            }
-            {
-              name = "OneDrive";
-              url = "https://nassauvincent-my.sharepoint.com/personal/129102_nassauvincent_nl1/_layouts/15/onedrive.aspx";
-            }
-            {
-              name = "nixpkgs";
-              url = "https://github.com/NixOS/nixpkgs/";
-            }
-            {
-              name = "PaperCut Login for Dr. Nassau College";
-              url = "http://as-papercut-as:9191/user";
-            }
-          ] ++ (builtins.map (v: {name = v; url = "https://www.examenblad.nl/2024/vwo/vakken/exacte-vakken/${v}";}) [
-            "biologie-vwo"
-            "natuurkunde-vwo"
-            "scheikunde-vwo"
-            "wiskunde-b-vwo"
-          ]) ++ (builtins.map (v: {name = v; url = "https://www.examenblad.nl/2024/vwo/vakken/talen/${v}";}) [
-            "engels-vwo"
-            "frans-vwo"
-            "griekse-taal-cultuur-vwo"
-            "nederlands-vwo"
-          ]);
+          bookmarks =
+            [
+              {
+                name = "about:config";
+                url = "about:config";
+              }
+              {
+                name = "zermelo";
+                url = "https://nassau.zportal.nl/app/";
+              }
+              {
+                name = "OneDrive";
+                url = "https://nassauvincent-my.sharepoint.com/personal/129102_nassauvincent_nl1/_layouts/15/onedrive.aspx";
+              }
+              {
+                name = "nixpkgs";
+                url = "https://github.com/NixOS/nixpkgs/";
+              }
+              {
+                name = "PaperCut Login for Dr. Nassau College";
+                url = "http://as-papercut-as:9191/user";
+              }
+              {
+                name = "unreviewed PRs to nixpkgs";
+                url = "https://github.com/NixOS/nixpkgs/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22";
+              }
+              {
+                name = "nixpkgs low-hanging fruit";
+                url = "https://github.com/NixOS/nixpkgs/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22+label%3A%228.has%3A+package+%28update%29%22+comments%3A%3C2+";
+              }
+            ]
+            ++ (builtins.map (v: {
+                name = v;
+                url = "https://www.examenblad.nl/2024/vwo/vakken/exacte-vakken/${v}";
+              }) [
+                "biologie-vwo"
+                "natuurkunde-vwo"
+                "scheikunde-vwo"
+                "wiskunde-b-vwo"
+              ])
+            ++ (builtins.map (v: {
+                name = v;
+                url = "https://www.examenblad.nl/2024/vwo/vakken/talen/${v}";
+              }) [
+                "engels-vwo"
+                "frans-vwo"
+                "griekse-taal-cultuur-vwo"
+                "nederlands-vwo"
+              ]);
         }
       ];
 
