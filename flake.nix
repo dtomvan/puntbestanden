@@ -60,14 +60,10 @@
               (_final: _prev: self.packages.${system})
             ];
           };
-      in rec {
-        # Here for compat reasons. Big hack to imperatively install `nix
-        # profile ~/puntbestanden/#pkgs.packagename`
-        pkgs = mkPkgs "x86_64-linux";
-
+      in {
         nixosConfigurations = {
           tom-pc = nixpkgs.lib.nixosSystem {
-            inherit pkgs;
+            pkgs = mkPkgs "x86_64-linux";
             modules = [
               ./os/tom-pc.nix
               ./os/hardware/tom-pc-disko.nix
@@ -76,7 +72,7 @@
           };
 
           tom-laptop = nixpkgs.lib.nixosSystem {
-            inherit pkgs;
+            pkgs = mkPkgs "x86_64-linux";
             modules = [
               ./os/tom-laptop.nix
             ];
