@@ -245,7 +245,7 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=14
+PreloadWeight=6
 
 [Containments][8][Applets][26]
 immutability=1
@@ -280,4 +280,4 @@ scaleIconsToFit=true
 
 [ScreenMapping]
 itemsOnDisabledScreens=0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,6,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTm9vcmRob2ZmLmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvTGVhcm5iZWF0LmRlc2t0b3A,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvU29tdG9kYXkuZGVza3RvcA,activities:/current/L3Zhci9ob21lL3RvbXZkL0Rlc2t0b3AvT3V0bG9vay5kZXNrdG9w,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9QTy9OTCBFc3NheQ,activities:/current/L3Zhci9ob21lL3RvbXZkL0RvY3VtZW50cy92Ni9OYXR1dXJrdW5kZQ
-screenMapping=desktop:/Learnbeat.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,file:///home/tomvd/Desktop/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Noordhoff.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,file:///home/tomvd/Desktop/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,desktop:/Outlook.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,desktop:/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168
+screenMapping=file:///home/tomvd/Desktop/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Learnbeat.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Outlook.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,desktop:/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Learnbeat,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,desktop:/Learnbeat.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,file:///home/tomvd/Desktop/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Noordhoff.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Noordhoff.desktop,0,86da4254-3f55-4dd9-a41b-baeb614409f1,desktop:/Outlook.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,file:///home/tomvd/Desktop/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168,desktop:/Somtoday.desktop,0,0341e3cc-ae3a-4317-bcfa-ec3c6329a168
