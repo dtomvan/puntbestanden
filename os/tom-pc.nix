@@ -70,8 +70,6 @@
     wl-clipboard
     libreoffice-qt6-fresh
 
-    clj-bins
-
     keepassxc
     zotero
     # fuck flatpaks they don't even work half the time

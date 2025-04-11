@@ -1,0 +1,1 @@
+This directory is used for quick nix-shell hacks. For more fledged-out stuff, you can just use packages/by-name.

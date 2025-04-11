@@ -1,5 +1,4 @@
-#!/usr/bin/env bb
-
+{ writers }: writers.writeBabashkaBin "ask.clj" {} /* clojure */ ''
 (ns ask
   (:require [clojure.string :refer [join lower-case]]))
 
@@ -31,3 +30,4 @@
 
 (when (= *file* (System/getProperty "babashka.file"))
   (apply -main *command-line-args*))
+''

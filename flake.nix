@@ -83,58 +83,28 @@
           };
         };
 
-        homeConfigurations = let
-          homeManagerConfiguration = {
-            config,
-            system,
-            hostname ? "tom-pc",
-            username ? "tomvd",
-            extraModules ? [],
-            extraSpecialArgs ? {},
-          }:
-            home-manager.lib.homeManagerConfiguration {
-              pkgs = import nixpkgs {
-                inherit system;
-                config.allowUnfree = true;
-                overlays = [
-                  inputs.nur.overlays.default
-                  (_final: _prev: self.packages.${system})
-                ];
-              };
-              modules =
-                [
-                  nixvim.homeManagerModules.nixvim
-                  dont-track-me.homeManagerModules.default
-                  config
-                ]
-                ++ extraModules;
-              extraSpecialArgs =
-                {
-                  inherit nixpkgs;
-                  inherit username hostname;
-                }
-                // extraSpecialArgs;
-            };
-        in {
-          "tomvd@tom-pc" = homeManagerConfiguration {
-            system = "x86_64-linux";
-            config = ./home/tom-pc/tomvd.nix;
-          };
+        homeConfigurations = builtins.listToAttrs (builtins.map (hostname: {
+          name = "tomvd@${hostname}";
+          value = home-manager.lib.homeManagerConfiguration {
+            pkgs = mkPkgs "x86_64-linux";
 
-          "tomvd@tom-laptop" = homeManagerConfiguration {
-            system = "x86_64-linux";
-            config = ./home/tom-laptop/tom.nix;
-            hostname = "tom-laptop";
+            modules = [
+              nixvim.homeManagerModules.nixvim
+              dont-track-me.homeManagerModules.default
+              ./home/tomvd.nix
+            ];
+
+            extraSpecialArgs = {
+              inherit nixpkgs hostname;
+              username = "tomvd";
+            };
           };
-        };
+        }) ["tom-pc" "tom-laptop"]);
       };
 
-      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
+      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
 
-      perSystem = {
-        pkgs,
-        ...
-      }: {
+      perSystem = {pkgs, ...}: {
         pkgsDirectory = ./packages/by-name;
         devShells = {};
       };

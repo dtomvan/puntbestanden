@@ -1,3 +1,8 @@
+{ lib, writers, skim, clj-ask }: writers.writeBabashkaBin "switch-profile" {
+  makeWrapperArgs = [
+    "--prefix" "PATH" ":" "${lib.makeBinPath [skim]}"
+  ];
+} /* clojure */ ''
 #!/usr/bin/env bb
 
 (ns profiles
@@ -6,7 +11,7 @@
             [babashka.process :refer [shell]]
             [clojure.string :refer [trim join starts-with?]]))
 
-(cp/add-classpath ".")
+(cp/add-classpath "${clj-ask}/bin")
 (require '[ask :refer [ask?]])
 
 (def profile-dirs
@@ -49,3 +54,4 @@
     (ask? (str "Switch to home " (fs/file-name chosen-profile) " ?") true)
     (shell {} (str chosen-profile "/activate")))
   :else (-> "Unreachable" Exception. throw))
+''

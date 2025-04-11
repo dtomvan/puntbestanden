@@ -71,7 +71,6 @@
     libreoffice-qt6-fresh
 
 		keepassxc
-    clj-bins
   ];
 
   time.timeZone = "Europe/Amsterdam";
