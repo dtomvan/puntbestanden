@@ -66,10 +66,10 @@ in {
             # drv in-tree, overlayed
             pkgs.obsidian-web-clipper
           ]
-          ++ lib.optionals (hostname == "tom-laptop") [
+          ++ lib.optionals (hostname == "feather") [
             onetab
           ]
-          ++ lib.optionals (hostname == "tom-pc") [
+          ++ lib.optionals (hostname == "boomer") [
             zotero-connector
           ];
       };
@@ -136,7 +136,7 @@ in {
               }
               {
                 name = "nixpkgs low-hanging fruit";
-                url = "https://github.com/NixOS/nixpkgs/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22+label%3A%228.has%3A+package+%28update%29%22+comments%3A%3C2+";
+                url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22+-label%3A%222.status%3A+stale%22+";
               }
             ]
             ++ (builtins.map (v: {

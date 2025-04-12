@@ -32,7 +32,6 @@
 
   outputs = inputs @ {
     self,
-    disko,
     dont-track-me,
     flake-parts,
     home-manager,
@@ -61,41 +60,36 @@
             ];
           };
       in {
-        nixosConfigurations = {
-          tom-pc = nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            modules = [
-              ./os/tom-pc.nix
-              ./os/hardware/tom-pc-disko.nix
-              disko.nixosModules.disko
-            ];
-          };
+        nixosConfigurations = nixpkgs.lib.mapAttrs' (
+          _key: host:
+            nixpkgs.lib.nameValuePair host.hostName (nixpkgs.lib.nixosSystem {
+              specialArgs = {
+                inherit host;
+              };
+              modules = import os/modules.nix {inherit host inputs;} ++ host.os.extraModules; # nixpkgs is dumb
+              pkgs = mkPkgs host.system;
+            })
+        ) (import ./hosts.nix);
 
-          tom-laptop = nixpkgs.lib.nixosSystem {
-            pkgs = mkPkgs "x86_64-linux";
-            modules = [
-              ./os/tom-laptop.nix
-            ];
-          };
-        };
+        homeConfigurations = nixpkgs.lib.mapAttrs' (
+          _key: host:
+            nixpkgs.lib.nameValuePair "tomvd@${host.hostName}"
+            (home-manager.lib.homeManagerConfiguration {
+              pkgs = mkPkgs host.system;
 
-        homeConfigurations = builtins.listToAttrs (builtins.map (hostname: {
-          name = "tomvd@${hostname}";
-          value = home-manager.lib.homeManagerConfiguration {
-            pkgs = mkPkgs "x86_64-linux";
+              modules = [
+                nixvim.homeManagerModules.nixvim
+                dont-track-me.homeManagerModules.default
+                ./home/tomvd.nix
+              ];
 
-            modules = [
-              nixvim.homeManagerModules.nixvim
-              dont-track-me.homeManagerModules.default
-              ./home/tomvd.nix
-            ];
-
-            extraSpecialArgs = {
-              inherit nixpkgs hostname;
-              username = "tomvd";
-            };
-          };
-        }) ["tom-pc" "tom-laptop"]);
+              extraSpecialArgs = {
+                inherit nixpkgs;
+                username = "tomvd";
+                hostname = host.hostName;
+              };
+            })
+        ) (import ./hosts.nix);
       };
 
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];

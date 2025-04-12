@@ -1,9 +1,9 @@
 {
   pkgs,
   lib,
-  config,
+  host,
   ...
 }: {
   services.tailscale.enable = true;
-  environment.systemPackages = lib.optionals config.services.desktopManager.plasma6.enable [pkgs.ktailctl];
+  environment.systemPackages = lib.optionals host.os.wantsKde [pkgs.ktailctl];
 }

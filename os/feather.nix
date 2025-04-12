@@ -1,38 +1,11 @@
 {pkgs, ...}: {
   imports = [
-    # nix and nixpkgs config
-    ./modules/maintenance.nix
-    ./modules/nix-config-common.nix
-
-    ./modules/fonts.nix
-
-    # hardware / drivers
-    ./hardware/tom-laptop.nix
-    ./hardware/sound.nix
-    ./hardware/ssd.nix
-		./hardware/elan-tp.nix
-		./hardware/comet-lake.nix
-
-		# WARN: include a boot loader or you'll just not boot... bummer!
-		./modules/boot/systemd-boot.nix
-		./modules/boot/plymouth.nix
-
 		./modules/utilities.nix
     ./modules/programs/gpg.nix
 
-    # networking / bluetooth
-    ./modules/networking/bluetooth.nix
-    ./modules/networking/networkmanager.nix
     ./modules/networking/tailscale.nix
 
-    ./modules/users/tomvd.nix
-    ./modules/users/root.nix
-
-    ./modules/kde.nix
-
     ./modules/services/ssh.nix
-    ./modules/services/printing.nix
-    ./modules/services/flatpak.nix
     ./modules/services/keybase.nix
     ./modules/services/syncthing.nix
 
@@ -42,7 +15,6 @@
   modules = {
 		ssh.enable = true;
     printing.useHPLip = true;
-		boot.plymouth.enable = true;
 
     utilities = {
       archives = true;
@@ -60,7 +32,6 @@
 		};
 	};
 
-  networking.hostName = "tom-laptop";
   environment.systemPackages = with pkgs; [
     home-manager
     wget
@@ -72,6 +43,8 @@
 
 		keepassxc
   ];
+
+  hardware.bluetooth.enable = true;
 
   time.timeZone = "Europe/Amsterdam";
   i18n.defaultLocale = "en_US.UTF-8";

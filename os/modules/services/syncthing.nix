@@ -1,11 +1,12 @@
 let
+  hosts = import ../../../hosts.nix;
   username = "tomvd";
   devices = {
-    tom-pc = {
+    ${hosts.amdpc1.hostName} = {
       id = "3QIVELR-TAOILMZ-446OGI4-76UTNJD-ZA67C4P-X532YOE-ONJS5RY-LWY6HQZ";
       autoAcceptFolders = true;
     };
-    tom-laptop = {
+    ${hosts.tpx1g8.hostName} = {
       id = "2TCHDIM-XCWIBM4-5DL2EK6-7Y7VOSO-TOSZYG6-JNYQYFU-PONSM2D-X2CITQT";
       autoAcceptFolders = true;
     };

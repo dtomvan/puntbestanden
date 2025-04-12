@@ -9,13 +9,11 @@
     ./modules/basic-cli.nix
     ./modules/firefox.nix
     ./modules/terminals
-    # not needed anymore?
-    # ../modules/lorri.nix
     ./modules/helix.nix
     ./modules/syncthing.nix
     ./modules/tools.nix
     ./modules/lisp.nix
-  ] ++ lib.optionals (hostname == "tom-pc") [
+  ] ++ lib.optionals (hostname == "boomer") [
     ./modules/latex.nix
   ];
 
@@ -42,7 +40,7 @@
       rust_analyzer.enable = true;
     };
 
-    ${if hostname == "tom-pc" then "latex" else null} = {
+    ${if hostname == "boomer" then "latex" else null} = {
       enable = true;
       package = pkgs.texliveMedium;
       kile = true;
