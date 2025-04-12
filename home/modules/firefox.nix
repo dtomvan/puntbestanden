@@ -120,7 +120,7 @@ in {
               }
               {
                 name = "OneDrive";
-                url = "https://nassauvincent-my.sharepoint.com/personal/129102_nassauvincent_nl1/_layouts/15/onedrive.aspx";
+                url = "https://cloud.omeduostuurcentenneef.nl";
               }
               {
                 name = "nixpkgs";
