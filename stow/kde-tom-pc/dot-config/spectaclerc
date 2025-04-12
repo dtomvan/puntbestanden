@@ -1,14 +1,15 @@
 [Annotations]
-rectangleFillColor=2,4,15
+annotationToolType=6
+rectangleFillColor=2,4,15,0
 rectangleShadow=false
-rectangleStrokeColor=0,0,0,0
+rectangleStrokeColor=170,0,0
 
 [GuiConfig]
 captureMode=0
 includeShadow=false
 
 [ImageSave]
-lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250411_164322.png
+lastImageSaveLocation=file:///home/tomvd/Pictures/Screenshots/Screenshot_20250413_125355.png
 translatedScreenshotsFolder=Screenshots
 
 [VideoSave]

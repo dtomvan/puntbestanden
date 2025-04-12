@@ -6,6 +6,32 @@
   ...
 }: let
   cfg = config.firefox;
+  profile-name = "default";
+  # used to make a fake firefox wrapper so for example devedition is happy with
+  # my "normal" firefox profile...
+  makeFakeFirefox = lib.makeOverridable ({
+    firefox ? pkgs.firefox,
+    args,
+    ...
+  }:
+    pkgs.stdenvNoCC.mkDerivation {
+      pname = "firefox-devedition-wrapped";
+      version = "0-unstable-2025-04-13";
+      src = firefox;
+
+      nativeBuildInputs = with pkgs; [
+        desktop-file-utils
+      ];
+
+      installPhase = ''
+        mkdir -p $out/share/applications
+        cp $src/share/applications/${firefox.meta.mainProgram}.desktop $out/share/applications
+        ln -s $src/share/icons $out/share/icons
+        desktop-file-edit \
+          --set-key="Exec" --set-value="${lib.getExe firefox} ${args}" \
+          $out/share/applications/${firefox.meta.mainProgram}.desktop
+      '';
+    });
 in {
   options.firefox = with lib; {
     enable = mkEnableOption "install and configure firefox";
@@ -16,7 +42,9 @@ in {
     enable = true;
     # Use official developer edition build so I can use my precious from-source
     # obsidian-web-clipper.
-    package = pkgs.firefox-devedition-bin;
+    package = makeFakeFirefox {
+      args = "-P ${profile-name}";
+    };
     nativeMessagingHosts = lib.mkIf cfg.isPlasma (with pkgs; [
       kdePackages.plasma-browser-integration
     ]);
@@ -47,7 +75,7 @@ in {
       };
     };
 
-    profiles.default = {
+    profiles.${profile-name} = {
       isDefault = true;
       # only reason I did this is because for some reason this never works after using firefox for a moment
       # search.default = "DuckDuckGo";

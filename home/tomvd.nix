@@ -3,27 +3,40 @@
   pkgs,
   username ? "tomvd",
   hostname,
+  host,
   ...
 }: {
-  imports = [
-    ./modules/basic-cli.nix
-    ./modules/firefox.nix
-    ./modules/terminals
-    ./modules/helix.nix
-    ./modules/syncthing.nix
-    ./modules/tools.nix
-    ./modules/lisp.nix
-  ] ++ lib.optionals (hostname == "boomer") [
-    ./modules/latex.nix
-  ];
+  imports =
+    [
+      ./modules/basic-cli.nix
+      ./modules/helix.nix
+      ./modules/tools.nix
+    ]
+    ++ lib.optionals host.isGraphical [
+      ./modules/firefox.nix
+      ./modules/terminals
+      ./modules/syncthing.nix
+      ./modules/lisp.nix
+    ]
+    ++ lib.optionals (hostname == "boomer") [
+      ./modules/latex.nix
+    ];
 
-  firefox = {
+  ${
+    if host.isGraphical
+    then "firefox"
+    else null
+  } = {
     enable = true;
     isPlasma = true;
   };
 
   modules = {
-    terminals = {
+    ${
+      if host.isGraphical
+      then "terminals"
+      else null
+    } = {
       enable = true;
       alacritty = {
         enable = true;
@@ -32,15 +45,19 @@
       };
     };
 
-    # lorri.enable = true;
-
-    neovim.lsp = {
-      enable = true;
-      nixd.enable = true;
-      rust_analyzer.enable = true;
+    neovim = {
+      lsp = lib.mkIf host.isGraphical {
+        enable = true;
+        nixd.enable = true;
+        rust_analyzer.enable = true;
+      };
     };
 
-    ${if hostname == "boomer" then "latex" else null} = {
+    ${
+      if hostname == "boomer"
+      then "latex"
+      else null
+    } = {
       enable = true;
       package = pkgs.texliveMedium;
       kile = true;
@@ -48,7 +65,7 @@
     };
 
     helix.enable = true;
-    helix.lsp.enable = true;
+    helix.lsp.enable = host.isGraphical;
   };
 
   dont-track-me = {
@@ -61,16 +78,6 @@
   home.username = username;
   home.homeDirectory = "/home/${username}";
   home.stateVersion = "24.05";
-
-  # xdg.configFile."electron-flags.conf".text = ''
-  #   --ignore-gpu-blocklist
-  #   --disable-features=UseOzonePlatform
-  #   --enable-features=VaapiVideoDecoder,WaylandWindowDecorations
-  #   --use-gl=desktop
-  #   --enable-gpu-rasterization
-  #   --enable-zero-copy
-  #   --ozone-platform-hint=auto
-  # '';
 
   home.packages = with pkgs; [
     afio-font

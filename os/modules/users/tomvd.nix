@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  host,
   ...
 }: {
   nix.settings = {
@@ -13,27 +14,28 @@
     # not sure which are needed but I don't want to debug these again
     extraGroups = ["wheel" "kvm" "audio" "seat" "libvirtd" "qemu-libvirtd" "lp" "scanner" "audio" "docker"];
     # Packages that I always want available, no matter if I have home-manager installed
-    packages = with pkgs; [
-      neovim
-      btop
-      du-dust
-      eza
-      fd
-      jq
-      ripgrep
-      zathura
-      gron
-      nixfmt-rfc-style
+    packages = with pkgs;
+      [
+        neovim
+        btop
+        du-dust
+        eza
+        fd
+        jq
+        ripgrep
+        gron
+        nixfmt-rfc-style
+        glow
+        fastfetch
+        nix-tree
+      ]
+      ++ lib.optionals host.isGraphical [
+        zathura
+        wl-clipboard
+        pavucontrol
+        alsa-utils
+      ];
 
-      glow
-
-      fastfetch
-
-      wl-clipboard
-      pavucontrol
-      alsa-utils
-      nix-tree
-    ];
     hashedPasswordFile = config.sops.secrets."tomvd.pass".path;
   };
 
