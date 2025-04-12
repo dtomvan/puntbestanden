@@ -7,38 +7,39 @@
 }: {
   imports = [
     ./modules/basic-cli.nix
-    ./modules/firefox.nix
-    ./modules/terminals
+#    ./modules/firefox.nix
+#    ./modules/terminals
     ./modules/helix.nix
-    ./modules/syncthing.nix
+#    ./modules/syncthing.nix
     ./modules/tools.nix
-    ./modules/lisp.nix
+#    ./modules/lisp.nix
   ] ++ lib.optionals (hostname == "boomer") [
     ./modules/latex.nix
   ];
 
-  firefox = {
-    enable = true;
-    isPlasma = true;
-  };
+#  firefox = {
+#    enable = true;
+#    isPlasma = true;
+#  };
 
   modules = {
-    terminals = {
-      enable = true;
-      alacritty = {
-        enable = true;
-        font.family = "Afio";
-        font.size = 12;
-      };
-    };
+#    terminals = {
+#      enable = true;
+#      alacritty = {
+#        enable = true;
+#        font.family = "Afio";
+#        font.size = 12;
+#      };
+#    };
 
     # lorri.enable = true;
 
-    neovim.lsp = {
-      enable = true;
-      nixd.enable = true;
-      rust_analyzer.enable = true;
-    };
+		 neovim.enable = false;
+#    neovim.lsp = {
+#      enable = true;
+#      nixd.enable = true;
+#      rust_analyzer.enable = true;
+#    };
 
     ${if hostname == "boomer" then "latex" else null} = {
       enable = true;
@@ -48,7 +49,7 @@
     };
 
     helix.enable = true;
-    helix.lsp.enable = true;
+#    helix.lsp.enable = true;
   };
 
   dont-track-me = {
@@ -56,7 +57,7 @@
     enableAll = true;
   };
 
-  services.lorri.enable = true;
+#  services.lorri.enable = true;
 
   home.username = username;
   home.homeDirectory = "/home/${username}";

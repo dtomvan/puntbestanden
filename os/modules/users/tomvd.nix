@@ -21,7 +21,7 @@
       fd
       jq
       ripgrep
-      zathura
+#      zathura
       gron
       nixfmt-rfc-style
 
@@ -29,22 +29,23 @@
 
       fastfetch
 
-      wl-clipboard
-      pavucontrol
-      alsa-utils
+#      wl-clipboard
+#      pavucontrol
+#      alsa-utils
       nix-tree
     ];
-    hashedPasswordFile = config.sops.secrets."tomvd.pass".path;
+initialPassword = "123";
+#    hashedPasswordFile = config.sops.secrets."tomvd.pass".path;
   };
 
-  sops.secrets."tomvd.pass" = {
-    sopsFile = ../../../secrets/tomvd.pass.secret;
-    neededForUsers = true;
-
-    format = "binary";
-
-    mode = "0600";
-    owner = "tomvd";
-    group = "users";
-  };
+#  sops.secrets."tomvd.pass" = {
+#    sopsFile = ../../../secrets/tomvd.pass.secret;
+#    neededForUsers = true;
+#
+ #   format = "binary";
+#
+ #   mode = "0600";
+  #  owner = "tomvd";
+ #   group = "users";
+  #};
 }
