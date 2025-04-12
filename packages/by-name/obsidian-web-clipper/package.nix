@@ -1,3 +1,5 @@
+# WARNING: if you want to use an addon that was packaged from source, you need
+# FF dev edition or it won't work as it's unsigned.
 {
   fetchFromGitHub,
   lib,

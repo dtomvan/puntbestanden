@@ -1,6 +1,7 @@
 {
   host,
   lib,
+  nixConfig,
   ...
 }: {
   nixpkgs.flake.setFlakeRegistry = true;
@@ -8,7 +9,7 @@
     settings = {
       experimental-features = lib.mkDefault ["nix-command" "flakes"];
       auto-optimise-store = true;
-    };
+    } // nixConfig;
     channel.enable = false;
 
     gc = {

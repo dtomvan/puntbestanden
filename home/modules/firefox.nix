@@ -14,6 +14,9 @@ in {
 
   config.programs.firefox = lib.mkIf cfg.enable {
     enable = true;
+    # Use official developer edition build so I can use my precious from-source
+    # obsidian-web-clipper.
+    package = pkgs.firefox-devedition-bin;
     nativeMessagingHosts = lib.mkIf cfg.isPlasma (with pkgs; [
       kdePackages.plasma-browser-integration
     ]);

@@ -37,6 +37,16 @@ let
     };
   };
 in {
+  # sops.secrets."tomvd.pass" = {
+  #   sopsFile = ../../../secrets/tomvd.pass.secret;
+  #
+  #   format = "binary";
+  #
+  #   mode = "0600";
+  #   owner = "tomvd";
+  #   group = "users";
+  # };
+
   services.syncthing = {
     enable = true;
     # no own group

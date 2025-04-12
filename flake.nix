@@ -1,5 +1,15 @@
-{
+rec {
   description = "Home Manager configuration of tomvd";
+
+  nixConfig = {
+    substituters = [
+      "https://nix-community.cachix.org"
+    ];
+
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -26,6 +36,9 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    sops.url = "github:Mic92/sops-nix";
+    sops.inputs.nixpkgs.follows = "nixpkgs";
 
     dont-track-me.url = "github:dtomvan/dont-track-me.nix";
   };
@@ -64,7 +77,7 @@
           _key: host:
             nixpkgs.lib.nameValuePair host.hostName (nixpkgs.lib.nixosSystem {
               specialArgs = {
-                inherit host;
+                inherit host nixConfig;
               };
               modules = import os/modules.nix {inherit host inputs;} ++ host.os.extraModules; # nixpkgs is dumb
               pkgs = mkPkgs host.system;

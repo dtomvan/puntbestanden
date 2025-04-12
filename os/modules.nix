@@ -6,6 +6,7 @@
 in
   [
     inputs.disko.nixosModules.disko
+    inputs.sops.nixosModules.sops
     ./common.nix
     ./${host.hostName}.nix
     ./hardware/${host.hostName}.nix

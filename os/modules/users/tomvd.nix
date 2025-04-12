@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   nix.settings = {
     trusted-users = ["tomvd"];
   };
@@ -18,9 +22,9 @@
       jq
       ripgrep
       zathura
-			gron
-			nixfmt-rfc-style
-      
+      gron
+      nixfmt-rfc-style
+
       glow
 
       fastfetch
@@ -30,6 +34,17 @@
       alsa-utils
       nix-tree
     ];
-    hashedPassword = "$y$j9T$Ze3xItl54/1SRkq0Iry6E.$wsj4ufLq2EsHTFb526MgMT.1UBADpPTX/Snq2evTCf6";
+    hashedPasswordFile = config.sops.secrets."tomvd.pass".path;
+  };
+
+  sops.secrets."tomvd.pass" = {
+    sopsFile = ../../../secrets/tomvd.pass.secret;
+    neededForUsers = true;
+
+    format = "binary";
+
+    mode = "0600";
+    owner = "tomvd";
+    group = "users";
   };
 }

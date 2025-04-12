@@ -24,7 +24,7 @@
       notify = {};
       sessions = {};
       statusline = {};
-      pairs = {};
+      # pairs = {};
       surround = {
         mappings = {
           app = "ys";
