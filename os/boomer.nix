@@ -8,7 +8,6 @@
     ./modules/gaming/steam.nix
 
     ./modules/services/keybase.nix
-    ./modules/services/ssh.nix
     ./modules/services/syncthing.nix
 
     ./modules/virt/kvm.nix
@@ -24,7 +23,6 @@
   };
 
   modules = {
-    ssh.enable = true;
     printing.useHPLip = true;
 
     utilities = {

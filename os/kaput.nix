@@ -10,8 +10,8 @@
 
   _module.args.nixinate = {
     host = "kaput";
-    sshUser = "root";
-    buildOn = "remote";
+    sshUser = "tomvd";
+    buildOn = "local";
     substituteOnTarget = true;
     hermetic = true;
   };

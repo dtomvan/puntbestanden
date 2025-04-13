@@ -12,6 +12,8 @@ in
     ./hardware/${host.hostName}.nix
     ./modules/boot/systemd-boot.nix
 
+    ./modules/services/ssh.nix
+
     ./modules/users/tomvd.nix
     ./modules/users/root.nix
   ]

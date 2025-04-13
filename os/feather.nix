@@ -5,7 +5,6 @@
 
     ./modules/networking/tailscale.nix
 
-    ./modules/services/ssh.nix
     ./modules/services/keybase.nix
     ./modules/services/syncthing.nix
 
@@ -21,7 +20,6 @@
   };
 
   modules = {
-    ssh.enable = true;
     printing.useHPLip = true;
 
     utilities = {
