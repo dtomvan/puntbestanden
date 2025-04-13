@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   imports = [
-		./modules/utilities.nix
+    ./modules/utilities.nix
     ./modules/programs/gpg.nix
 
     ./modules/networking/tailscale.nix
@@ -12,8 +12,16 @@
     ./modules/virt/distrobox.nix
   ];
 
+  _module.args.nixinate = {
+    host = "feather";
+    sshUser = "tomvd";
+    buildOn = "local";
+    substituteOnTarget = true;
+    hermetic = false;
+  };
+
   modules = {
-		ssh.enable = true;
+    ssh.enable = true;
     printing.useHPLip = true;
 
     utilities = {
@@ -25,12 +33,12 @@
     };
   };
 
-	services.displayManager.sddm.settings = {
-		AutoLogin = {
-			Session = "plasma.desktop";
-			User = "tomvd";
-		};
-	};
+  services.displayManager.sddm.settings = {
+    AutoLogin = {
+      Session = "plasma.desktop";
+      User = "tomvd";
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     home-manager
@@ -38,10 +46,10 @@
     curl
     nh
     wl-clipboard
-		git
+    git
     libreoffice-qt6-fresh
 
-		keepassxc
+    keepassxc
   ];
 
   hardware.bluetooth.enable = true;
@@ -54,8 +62,8 @@
   programs.less.enable = true;
   programs.command-not-found.enable = false;
 
-	programs.nix-ld.enable = true;
-	services.envfs.enable = true;
+  programs.nix-ld.enable = true;
+  services.envfs.enable = true;
 
   environment.stub-ld.enable = false;
   networking.firewall.enable = false;

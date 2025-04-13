@@ -2,9 +2,6 @@
   pkgs,
   config,
   lib,
-  nixpkgs,
-  hostname,
-  username,
   ...
 }: let
   cfg = config.modules.neovim;
@@ -27,24 +24,24 @@ in {
       // lib.optionalAttrs cfg.lsp.rust_analyzer.enable {
         nixd.enable = true;
         # set the nixpkgs to the flake input so nixd will hopefully search through the nixpkgs I am already using
-        nixd.package = pkgs.symlinkJoin {
-          name = "nixd";
-          paths = [pkgs.nixd];
-          buildInputs = [pkgs.makeWrapper];
-          postBuild = ''
-            wrapProgram $out/bin/nixd \
-            --set "NIX_PATH" "nixpkgs=${nixpkgs}"
-          '';
-        };
+        # nixd.package = pkgs.symlinkJoin {
+        #   name = "nixd";
+        #   paths = [pkgs.nixd];
+        #   buildInputs = [pkgs.makeWrapper];
+          # postBuild = ''
+          #   wrapProgram $out/bin/nixd \
+          #   --set "NIX_PATH" "nixpkgs=${nixpkgs}"
+          # '';
+        # };
         nixd.settings.formatting.command = [(lib.getExe pkgs.alejandra)];
-        nixd.settings.options = let
-          link-to-flake = config.lib.file.mkOutOfStoreSymlink ../../flake.nix;
-          flake = ''(builtins.getFlake "${link-to-flake}")'';
-        in {
+        # nixd.settings.options = let
+        #   link-to-flake = config.lib.file.mkOutOfStoreSymlink ../../flake.nix;
+        #   flake = ''(builtins.getFlake "${link-to-flake}")'';
+        # in {
           # set the path to the current nixos and home-manager configurations
-          nixos.expr = ''${flake}.nixosConfigurations.${hostname}.options'';
-          home-manager.expr = ''${flake}.homeConfigurations."${username}@${hostname}".options'';
-        };
+          # nixos.expr = ''${flake}.nixosConfigurations.${hostname}.options'';
+          # home-manager.expr = ''${flake}.homeConfigurations."${username}@${hostname}".options'';
+        # };
       };
   };
 }

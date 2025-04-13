@@ -8,6 +8,14 @@
     ./modules/networking/tailscale.nix
   ];
 
+  _module.args.nixinate = {
+    host = "kaput";
+    sshUser = "root";
+    buildOn = "remote";
+    substituteOnTarget = true;
+    hermetic = true;
+  };
+
   modules.utilities = {
     archives = true;
     build-tools = true;

@@ -15,8 +15,16 @@
     ./modules/virt/distrobox.nix
   ];
 
+  _module.args.nixinate = {
+    host = "boomer";
+    sshUser = "tomvd";
+    buildOn = "remote";
+    substituteOnTarget = true;
+    hermetic = false;
+  };
+
   modules = {
-		ssh.enable = true;
+    ssh.enable = true;
     printing.useHPLip = true;
 
     utilities = {
@@ -46,12 +54,12 @@
     obsidian
   ];
 
-	services.displayManager = {
-		sddm.enable = false;
-		sddm.wayland.enable = false;
+  services.displayManager = {
+    sddm.enable = false;
+    sddm.wayland.enable = false;
 
-		ly.enable = true;
-	};
+    ly.enable = true;
+  };
 
   hardware.bluetooth.enable = true;
 

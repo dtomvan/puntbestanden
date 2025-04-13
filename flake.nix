@@ -17,6 +17,9 @@ rec {
     flake-parts.url = "github:hercules-ci/flake-parts";
     pkgs-by-name-for-flake-parts.url = "github:drupol/pkgs-by-name-for-flake-parts";
 
+    nixinate.url = "github:matthewcroughan/nixinate";
+    nixinate.inputs.nixpkgs.follows = "nixpkgs";
+
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -45,11 +48,9 @@ rec {
 
   outputs = inputs @ {
     self,
-    dont-track-me,
     flake-parts,
     home-manager,
     nixpkgs,
-    nixvim,
     ...
   }:
     flake-parts.lib.mkFlake {inherit inputs;} (top @ {
@@ -90,16 +91,10 @@ rec {
             (home-manager.lib.homeManagerConfiguration {
               pkgs = mkPkgs host.system;
 
-              modules = [
-                nixvim.homeManagerModules.nixvim
-                dont-track-me.homeManagerModules.default
-                ./home/tomvd.nix
-              ];
+              modules = import home/modules.nix {inherit host inputs;};
 
               extraSpecialArgs = {
-                inherit nixpkgs;
-                username = "tomvd";
-                hostname = host.hostName;
+                inherit host;
               };
             })
         ) (import ./hosts.nix);
@@ -107,7 +102,9 @@ rec {
 
       systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
 
-      perSystem = {pkgs, ...}: {
+      perSystem = {system, pkgs, ...}: {
+        apps = {} // (inputs.nixinate.nixinate.${system} self).nixinate;
+
         pkgsDirectory = ./packages/by-name;
         devShells = {};
       };

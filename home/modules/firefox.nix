@@ -2,9 +2,10 @@
   config,
   pkgs,
   lib,
-  hostname,
+  host,
   ...
 }: let
+  hostname = host.hostName;
   cfg = config.firefox;
   profile-name = "default";
   # used to make a fake firefox wrapper so for example devedition is happy with

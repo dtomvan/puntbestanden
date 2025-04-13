@@ -1,27 +1,9 @@
 {
   lib,
   pkgs,
-  username ? "tomvd",
-  hostname,
   host,
   ...
 }: {
-  imports =
-    [
-      ./modules/basic-cli.nix
-      ./modules/helix.nix
-      ./modules/tools.nix
-    ]
-    ++ lib.optionals host.os.isGraphical [
-      ./modules/firefox.nix
-      ./modules/terminals
-      ./modules/syncthing.nix
-      ./modules/lisp.nix
-    ]
-    ++ lib.optionals (hostname == "boomer") [
-      ./modules/latex.nix
-    ];
-
   ${
     if host.os.isGraphical
     then "firefox"
@@ -46,7 +28,7 @@
     };
 
     neovim = {
-      lsp = lib.mkIf host.os.isGraphical {
+      ${if host.os.isGraphical then "lsp" else null} = lib.mkIf host.os.isGraphical {
         enable = true;
         nixd.enable = true;
         rust_analyzer.enable = true;
@@ -54,7 +36,7 @@
     };
 
     ${
-      if hostname == "boomer"
+      if host.hostName == "boomer"
       then "latex"
       else null
     } = {
@@ -75,8 +57,8 @@
 
   services.lorri.enable = true;
 
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.username = "tomvd";
+  home.homeDirectory = "/home/tomvd";
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
