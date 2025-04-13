@@ -12,7 +12,7 @@
       ./modules/helix.nix
       ./modules/tools.nix
     ]
-    ++ lib.optionals host.isGraphical [
+    ++ lib.optionals host.os.isGraphical [
       ./modules/firefox.nix
       ./modules/terminals
       ./modules/syncthing.nix
@@ -23,7 +23,7 @@
     ];
 
   ${
-    if host.isGraphical
+    if host.os.isGraphical
     then "firefox"
     else null
   } = {
@@ -33,7 +33,7 @@
 
   modules = {
     ${
-      if host.isGraphical
+      if host.os.isGraphical
       then "terminals"
       else null
     } = {
@@ -46,7 +46,7 @@
     };
 
     neovim = {
-      lsp = lib.mkIf host.isGraphical {
+      lsp = lib.mkIf host.os.isGraphical {
         enable = true;
         nixd.enable = true;
         rust_analyzer.enable = true;
@@ -65,7 +65,7 @@
     };
 
     helix.enable = true;
-    helix.lsp.enable = host.isGraphical;
+    helix.lsp.enable = host.os.isGraphical;
   };
 
   dont-track-me = {

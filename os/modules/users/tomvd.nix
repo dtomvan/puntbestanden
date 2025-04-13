@@ -29,7 +29,7 @@
         fastfetch
         nix-tree
       ]
-      ++ lib.optionals host.isGraphical [
+      ++ lib.optionals host.os.isGraphical [
         zathura
         wl-clipboard
         pavucontrol
