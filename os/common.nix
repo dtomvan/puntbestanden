@@ -28,4 +28,6 @@
     inherit (host) hostName;
     networkmanager.enable = true;
   };
+
+  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" "/home/tomvd/.ssh/id_ed25519" ];
 }

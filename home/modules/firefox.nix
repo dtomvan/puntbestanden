@@ -9,8 +9,7 @@
   profile-name = "default";
   # used to make a fake firefox wrapper so for example devedition is happy with
   # my "normal" firefox profile...
-  makeFakeFirefox = lib.makeOverridable ({
-    firefox ? pkgs.firefox,
+  makeFakeFirefox = firefox: lib.makeOverridable ({
     args,
     ...
   }:
@@ -42,7 +41,7 @@ in {
     enable = true;
     # Use official developer edition build so I can use my precious from-source
     # obsidian-web-clipper.
-    package = makeFakeFirefox {
+    package = makeFakeFirefox pkgs.firefox-devedition-bin {
       args = "-P ${profile-name}";
     };
     nativeMessagingHosts = lib.mkIf cfg.isPlasma (with pkgs; [
