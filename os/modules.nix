@@ -12,11 +12,16 @@ in
     ./hardware/${host.hostName}.nix
     ./modules/boot/systemd-boot.nix
 
+    # as long as you have /root/.ssh/remotebuild this will work, I hope it
+    # builds on systems which don't at least
+    ./modules/distributed-builds.nix
+
     ./modules/services/ssh.nix
 
     ./modules/users/tomvd.nix
     ./modules/users/root.nix
   ]
+  ++ lib.optional host.remoteBuild.enable ./modules/users/remote-build.nix
   ++ lib.optionals host.os.isGraphical [
     ./modules/boot/plymouth.nix
 
