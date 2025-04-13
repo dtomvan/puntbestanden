@@ -2,6 +2,10 @@ let
   hosts = import ../../../hosts.nix;
   username = "tomvd";
   devices = {
+    ${hosts.hp3600.hostName} = {
+      id = "SMIZJNY-VQPDQQT-Q3QUAXW-5WBVOFS-QVRBNYM-CTM4FW5-XT656EE-IYXOQAZ";
+      autoAcceptFolders = true;
+    };
     ${hosts.amdpc1.hostName} = {
       id = "3QIVELR-TAOILMZ-446OGI4-76UTNJD-ZA67C4P-X532YOE-ONJS5RY-LWY6HQZ";
       autoAcceptFolders = true;

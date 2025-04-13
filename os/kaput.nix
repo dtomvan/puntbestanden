@@ -6,11 +6,15 @@
   imports = [
     ./modules/utilities.nix
     ./modules/networking/tailscale.nix
+    ./modules/services/syncthing.nix
+
+    ./modules/services/portainer.nix
+    ./modules/services/pihole.nix
   ];
 
   _module.args.nixinate = {
     host = "kaput";
-    sshUser = "tomvd";
+    sshUser = "root";
     buildOn = "local";
     substituteOnTarget = true;
     hermetic = true;
@@ -40,6 +44,8 @@
     wget
     curl
     nh
+
+    tmux
   ];
 
   programs.nix-ld.enable = true;
@@ -47,9 +53,6 @@
 
   programs.less.enable = true;
   programs.command-not-found.enable = false;
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
 
   networking.firewall.enable = false;
 
