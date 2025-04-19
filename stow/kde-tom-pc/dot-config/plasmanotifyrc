@@ -7,6 +7,10 @@ Seen=true
 [Applications][thunderbird]
 Seen=true
 
+[DoNotDisturb]
+NotificationSoundsMuted=true
+Until=2026,4,15,15,15,47.87
+
 [Notifications]
 PopupPosition=BottomRight
 PopupTimeout=10000

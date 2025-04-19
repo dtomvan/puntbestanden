@@ -50,6 +50,8 @@
     thunderbird
     gimp
     obsidian
+
+    prismlauncher
   ];
 
   services.displayManager = {
