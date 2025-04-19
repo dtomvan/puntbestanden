@@ -1,5 +1,5 @@
 [Auto Allow]
-kdewallet=ksshaskpass,kwalletmanager,KDE System,kded6,xdg-desktop-portal,Google Chrome
+kdewallet=ksshaskpass,kwalletmanager,KDE System,kded6,xdg-desktop-portal,Google Chrome,Nextcloud
 
 [Wallet]
 Close When Idle=false

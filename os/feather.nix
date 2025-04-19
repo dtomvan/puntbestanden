@@ -19,6 +19,9 @@
     hermetic = false;
   };
 
+  services.olive-c.enable = true;
+  services.koil.enable = true;
+
   modules = {
     printing.useHPLip = true;
 

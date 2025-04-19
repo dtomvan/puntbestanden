@@ -19,20 +19,6 @@ with lib; {
   programs.direnv.enable = mkDefault true;
   programs.zoxide.enable = mkDefault true;
 
-  home.packages = with pkgs; [
-    file
-    fd
-    ripgrep
-    yazi
-    bat
-    skim
-    tealdeer
-    eza
-    btop
-    just
-    rink
-  ];
-
   programs.bash = {
     enable = true;
 

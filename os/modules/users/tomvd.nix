@@ -16,18 +16,25 @@
     # Packages that I always want available, no matter if I have home-manager installed
     packages = with pkgs;
       [
-        neovim
+        bat
         btop
         du-dust
         eza
-        fd
-        jq
-        ripgrep
-        gron
-        nixfmt-rfc-style
-        glow
         fastfetch
+        fd
+        file
+        glow
+        gron
+        jq
+        just
+        neovim
+        nixfmt-rfc-style
         nix-tree
+        rink
+        ripgrep
+        skim
+        tealdeer
+        yazi
       ]
       ++ lib.optionals host.os.isGraphical [
         zathura
