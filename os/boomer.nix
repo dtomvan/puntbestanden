@@ -52,14 +52,16 @@
     obsidian
 
     prismlauncher
+
+    python3
   ];
 
-  services.displayManager = {
-    sddm.enable = false;
-    sddm.wayland.enable = false;
-
-    ly.enable = true;
-  };
+  # services.displayManager = {
+  #   sddm.enable = false;
+  #   sddm.wayland.enable = false;
+  #
+  #   ly.enable = true;
+  # };
 
   hardware.bluetooth.enable = true;
 

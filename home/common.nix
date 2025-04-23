@@ -73,6 +73,8 @@
     stow
     visidata
     yt-dlp
+
+    speedtest
   ];
 
   programs.home-manager.enable = true;

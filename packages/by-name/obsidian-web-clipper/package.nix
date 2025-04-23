@@ -5,20 +5,21 @@
   lib,
   buildNpmPackage,
   callPackage,
+  nix-update-script,
   buildFirefoxXpiAddon ? callPackage ../../lib/buildFirefoxXpiAddon.nix {},
 }: let
 xpifile = buildNpmPackage (finalAttrs: {
   pname = "obsidian-web-clipper.zip";
-  version = "0.11.4";
+  version = "0.11.7";
 
   src = fetchFromGitHub {
     owner = "obsidianmd";
     repo = "obsidian-clipper";
     rev = finalAttrs.version;
-    hash = "sha256-3MnvOwBvM46YLBTPGDdxJ5yCPLsQtQFLqJwdJa1Czkc=";
+    hash = "sha256-vK9QWFHDdQuTVlolFChXIXBJod2AA2TnpVNJerzEYrE=";
   };
 
-  npmDepsHash = "sha256-09jlRGOzcvhkLB7ebpXwg1nBi+Xjer9HWmftoYyvqHM=";
+  npmDepsHash = "sha256-L3jiO+eRcUPWlnJpDxJ8tR9UjYUm3ujS4JQtzQsRfEE=";
   npmBuildScript = "build:firefox";
 
   installPhase = ''
@@ -28,6 +29,8 @@ xpifile = buildNpmPackage (finalAttrs: {
 
     runHook postInstall
   '';
+
+  passthru.updateScript = nix-update-script {};
 }); in
 buildFirefoxXpiAddon {
   pname = "obsidian-web-clipper";

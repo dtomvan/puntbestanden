@@ -2,11 +2,8 @@
 PreviewSize=32
 
 [General]
-BrowseThroughArchives=true
-LockPanels=false
-OpenExternallyCalledFolderInNewTab=true
 Version=202
-ViewPropsTimestamp=2025,2,3,15,18,44.042
+ViewPropsTimestamp=2025,4,23,13,28,8.451
 
 [KFileDialog Settings]
 Places Icons Auto-resize=false
@@ -14,6 +11,3 @@ Places Icons Static Size=22
 
 [MainWindow]
 MenuBar=Disabled
-
-[PreviewSettings]
-Plugins=audiothumbnail,avif,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,fontthumbnail,imagethumbnail,jpegthumbnail,jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,gsthumbnail,rawthumbnail,svgthumbnail,gdk-pixbuf-thumbnailer,ffmpegthumbs

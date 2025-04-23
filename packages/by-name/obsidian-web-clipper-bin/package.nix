@@ -5,10 +5,10 @@
 }:
 buildFirefoxXpiAddon {
   pname = "obsidian-web-clipper";
-  version = "0.11.4";
+  version = "0.11.7";
   addonId = "clipper@obsidian.md";
-  url = "https://github.com/obsidianmd/obsidian-clipper/releases/download/0.11.4/obsidian-web-clipper-0.11.4-firefox.zip";
-  hash = "sha256-XiPtVs2kZEq6NL/GXSYVOukX8yQB1oOd0HoVEeYSDWI=";
+  url = "https://github.com/obsidianmd/obsidian-clipper/releases/download/0.11.7/obsidian-web-clipper-0.11.7-firefox.zip";
+  hash = "sha256-7VFgltPbsf4WgyZzukRk5elkPLNyLFWVwizNj0tXmII=";
   meta = with lib; {
     homepage = "https://obsidian.md/clipper";
     description = "Highlight and capture the web in your favorite browser. The official Web Clipper extension for Obsidian.";

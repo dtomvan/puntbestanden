@@ -28,7 +28,7 @@
         cp $src/share/applications/${firefox.meta.mainProgram}.desktop $out/share/applications
         ln -s $src/share/icons $out/share/icons
         desktop-file-edit \
-          --set-key="Exec" --set-value="${lib.getExe firefox} ${args}" \
+          --set-key="Exec" --set-value="${lib.getExe firefox} ${args} %U" \
           $out/share/applications/${firefox.meta.mainProgram}.desktop
       '';
     });
@@ -103,6 +103,8 @@ in {
           ++ lib.optionals (hostname == "boomer") [
             zotero-connector
           ];
+
+        force = true;
       };
 
       settings = {
