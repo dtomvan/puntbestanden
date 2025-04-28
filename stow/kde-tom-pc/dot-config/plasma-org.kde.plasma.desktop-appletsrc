@@ -3,3 +3,6 @@ launchers=file:///nix/store/0kr0qjd741qla8p5f3s86an3jdzzhbrq-profile/share/appli
 
 [Containments][52][Applets][71][Configuration]
 PreloadWeight=95
+
+[Containments][54][Applets][69][Configuration]
+PreloadWeight=100

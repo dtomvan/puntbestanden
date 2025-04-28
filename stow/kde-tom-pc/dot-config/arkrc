@@ -1,5 +1,5 @@
 [ExtractDialog]
-DirHistory[$e]=$HOME/Music/,$HOME/Downloads/
+DirHistory[$e]=$HOME/Downloads/,$HOME/Music/
 
 [General]
 LockSidebar=true

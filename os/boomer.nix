@@ -12,6 +12,7 @@
 
     ./modules/virt/kvm.nix
     ./modules/virt/distrobox.nix
+    ./modules/virt/docker.nix
   ];
 
   _module.args.nixinate = {
@@ -54,6 +55,12 @@
     prismlauncher
 
     python3
+
+    # zozin.nix
+    blang
+    musializer
+    fourat
+    sowon
   ];
 
   # services.displayManager = {
@@ -75,8 +82,9 @@
 
   services.lorri.enable = true;
 
-  programs.nix-ld.enable = true;
-  services.envfs.enable = true;
+  # this doesn't really aid nixpkgs contribution at all
+  # programs.nix-ld.enable = true;
+  # services.envfs.enable = true;
 
   programs.less.enable = true;
   programs.command-not-found.enable = false;

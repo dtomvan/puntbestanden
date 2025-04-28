@@ -72,6 +72,7 @@ rec {
             config.allowUnfree = true;
             overlays = [
               inputs.nur.overlays.default
+              (_final: _prev: inputs.zozin.packages.${system})
               (_final: _prev: self.packages.${system})
             ];
           };
@@ -106,6 +107,8 @@ rec {
 
       perSystem = {system, pkgs, ...}: {
         apps = {} // (inputs.nixinate.nixinate.${system} self).nixinate;
+
+        formatter = pkgs.nixfmt-tree;
 
         pkgsDirectory = ./packages/by-name;
         devShells = {};

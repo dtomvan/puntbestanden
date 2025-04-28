@@ -65,8 +65,12 @@ with lib; {
     };
   };
 
-  home.sessionVariables = {
-    FLAKE = "/home/tomvd/puntbestanden/";
+  home.sessionVariables = let
+    nhVersion = lib.getVersion pkgs.nh;
+    flakeVar = if lib.versionAtLeast nhVersion "4.0.0" then "NH_FLAKE" else "FLAKE";
+  in {
+    # breaking change: see nixpkgs#401255
+    ${flakeVar} = "/home/tomvd/puntbestanden/";
   };
 
   systemd.user.settings.Manager.DefaultEnvironment = {
