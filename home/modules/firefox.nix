@@ -92,7 +92,6 @@ in
       extensions = with pkgs.nur.repos.rycee.firefox-addons; {
         packages =
           [
-            ublock-origin
             sidebery
             darkreader
             sponsorblock
@@ -102,8 +101,9 @@ in
 
             keepassxc-browser
 
-            steam-database
             # drv in-tree, overlayed
+            pkgs.steam-database
+            pkgs.ublock-origin
             pkgs.obsidian-web-clipper
           ]
           ++ lib.optionals (hostname == "feather") [
