@@ -2,14 +2,15 @@
   pkgs,
   lib,
   ...
-}: {
-	imports = [ ./quiet.nix ];
+}:
+{
+  imports = [ ./quiet.nix ];
   config = {
-		modules.boot.quiet = lib.mkDefault true;
+    modules.boot.quiet = lib.mkDefault true;
     boot.plymouth = lib.mkDefault {
       enable = true;
       theme = "nixos-bgrt";
-      themePackages = [pkgs.nixos-bgrt-plymouth];
+      themePackages = [ pkgs.nixos-bgrt-plymouth ];
     };
   };
 }

@@ -3,9 +3,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.neovim;
-in {
+in
+{
   programs.nixvim.plugins.lsp = lib.mkIf cfg.lsp.enable {
     enable = true;
     inlayHints = true;
@@ -23,7 +25,7 @@ in {
       }
       // lib.optionalAttrs cfg.lsp.nixd.enable {
         nixd.enable = true;
-        nixd.settings.formatting.command = [(lib.getExe pkgs.nixfmt-rfc-style)];
+        nixd.settings.formatting.command = [ (lib.getExe pkgs.nixfmt-rfc-style) ];
       };
   };
 }

@@ -1,4 +1,10 @@
-args @ {lib, stdenv, fetchurl}: lib.makeOverridable ({
+args@{
+  lib,
+  stdenv,
+  fetchurl,
+}:
+lib.makeOverridable (
+  {
     stdenv ? args.stdenv,
     fetchurl ? args.fetchurl,
     pname,
@@ -7,22 +13,23 @@ args @ {lib, stdenv, fetchurl}: lib.makeOverridable ({
     url ? null,
     hash ? null,
     meta,
-    src ? fetchurl {inherit url hash;},
+    src ? fetchurl { inherit url hash; },
     ...
   }:
-    stdenv.mkDerivation {
-      name = "${pname}-${version}";
+  stdenv.mkDerivation {
+    name = "${pname}-${version}";
 
-      inherit meta src;
+    inherit meta src;
 
-      preferLocalBuild = true;
-      allowSubstitutes = true;
+    preferLocalBuild = true;
+    allowSubstitutes = true;
 
-      passthru = {inherit addonId;};
+    passthru = { inherit addonId; };
 
-      buildCommand = ''
-        dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-        mkdir -p "$dst"
-        install -v -m644 "$src" "$dst/${addonId}.xpi"
-      '';
-    })
+    buildCommand = ''
+      dst="$out/share/mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+      mkdir -p "$dst"
+      install -v -m644 "$src" "$dst/${addonId}.xpi"
+    '';
+  }
+)

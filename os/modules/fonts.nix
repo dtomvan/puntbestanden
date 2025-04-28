@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   fonts = {
     packages = with pkgs; [
       inter
@@ -10,9 +11,9 @@
     fontconfig = {
       useEmbeddedBitmaps = true;
       defaultFonts = {
-        serif = ["Liberation Serif"];
-        sansSerif = ["Inter"];
-        monospace = ["Afio"];
+        serif = [ "Liberation Serif" ];
+        sansSerif = [ "Inter" ];
+        monospace = [ "Afio" ];
       };
     };
   };

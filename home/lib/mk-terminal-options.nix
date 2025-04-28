@@ -2,9 +2,10 @@
   lib,
   name,
   package,
-	defaultFontSize ? 12,
+  defaultFontSize ? 12,
 }:
-with lib; {
+with lib;
+{
   enable = mkEnableOption "install and configure ${name}";
   package = mkOption {
     description = "the ${name} package to use";

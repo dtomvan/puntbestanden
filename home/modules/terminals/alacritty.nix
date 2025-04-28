@@ -3,14 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.terminals.alacritty;
-in {
+in
+{
   options.modules.terminals.alacritty = import ../../lib/mk-terminal-options.nix {
-		inherit lib;
-		name = "alacritty";
-		package = pkgs.alacritty;
-	};
+    inherit lib;
+    name = "alacritty";
+    package = pkgs.alacritty;
+  };
   config = lib.mkIf cfg.enable {
     modules.terminals = lib.mkIf cfg.default {
       name = lib.mkForce "alacritty";
@@ -22,7 +24,10 @@ in {
       settings = {
         terminal.shell = {
           program = lib.getExe pkgs.bashInteractive;
-          args = [ "-c" (lib.getExe pkgs.zellij) ];
+          args = [
+            "-c"
+            (lib.getExe pkgs.zellij)
+          ];
         };
         font.size = cfg.font.size;
         font.normal.family = cfg.font.family;

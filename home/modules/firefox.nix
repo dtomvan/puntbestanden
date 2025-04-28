@@ -4,35 +4,41 @@
   lib,
   host,
   ...
-}: let
+}:
+let
   hostname = host.hostName;
   cfg = config.firefox;
   profile-name = "default";
   # used to make a fake firefox wrapper so for example devedition is happy with
   # my "normal" firefox profile...
-  makeFakeFirefox = firefox: lib.makeOverridable ({
-    args,
-    ...
-  }:
-    pkgs.stdenvNoCC.mkDerivation {
-      pname = "firefox-devedition-wrapped";
-      version = "0-unstable-2025-04-13";
-      src = firefox;
+  makeFakeFirefox =
+    firefox:
+    lib.makeOverridable (
+      {
+        args,
+        ...
+      }:
+      pkgs.stdenvNoCC.mkDerivation {
+        pname = "firefox-devedition-wrapped";
+        version = "0-unstable-2025-04-13";
+        src = firefox;
 
-      nativeBuildInputs = with pkgs; [
-        desktop-file-utils
-      ];
+        nativeBuildInputs = with pkgs; [
+          desktop-file-utils
+        ];
 
-      installPhase = ''
-        mkdir -p $out/share/applications
-        cp $src/share/applications/${firefox.meta.mainProgram}.desktop $out/share/applications
-        ln -s $src/share/icons $out/share/icons
-        desktop-file-edit \
-          --set-key="Exec" --set-value="${lib.getExe firefox} ${args} %U" \
-          $out/share/applications/${firefox.meta.mainProgram}.desktop
-      '';
-    });
-in {
+        installPhase = ''
+          mkdir -p $out/share/applications
+          cp $src/share/applications/${firefox.meta.mainProgram}.desktop $out/share/applications
+          ln -s $src/share/icons $out/share/icons
+          desktop-file-edit \
+            --set-key="Exec" --set-value="${lib.getExe firefox} ${args} %U" \
+            $out/share/applications/${firefox.meta.mainProgram}.desktop
+        '';
+      }
+    );
+in
+{
   options.firefox = with lib; {
     enable = mkEnableOption "install and configure firefox";
     isPlasma = mkEnableOption "Plasma integration";
@@ -45,9 +51,12 @@ in {
     package = makeFakeFirefox pkgs.firefox-devedition-bin {
       args = "-P ${profile-name}";
     };
-    nativeMessagingHosts = lib.mkIf cfg.isPlasma (with pkgs; [
-      kdePackages.plasma-browser-integration
-    ]);
+    nativeMessagingHosts = lib.mkIf cfg.isPlasma (
+      with pkgs;
+      [
+        kdePackages.plasma-browser-integration
+      ]
+    );
     policies = {
       DisableAppUpdate = true;
       DisableFeedbackCommands = true;
@@ -172,24 +181,30 @@ in {
                 url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22+-label%3A%222.status%3A+stale%22+";
               }
             ]
-            ++ (builtins.map (v: {
+            ++ (builtins.map
+              (v: {
                 name = v;
                 url = "https://www.examenblad.nl/2024/vwo/vakken/exacte-vakken/${v}";
-              }) [
+              })
+              [
                 "biologie-vwo"
                 "natuurkunde-vwo"
                 "scheikunde-vwo"
                 "wiskunde-b-vwo"
-              ])
-            ++ (builtins.map (v: {
+              ]
+            )
+            ++ (builtins.map
+              (v: {
                 name = v;
                 url = "https://www.examenblad.nl/2024/vwo/vakken/talen/${v}";
-              }) [
+              })
+              [
                 "engels-vwo"
                 "frans-vwo"
                 "griekse-taal-cultuur-vwo"
                 "nederlands-vwo"
-              ]);
+              ]
+            );
         }
       ];
 

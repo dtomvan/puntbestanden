@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.terminals;
-in {
+in
+{
   imports = [
     ./alacritty.nix
     # ./foot.nix

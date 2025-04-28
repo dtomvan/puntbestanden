@@ -1,7 +1,7 @@
 {
   lib,
   callPackage,
-  buildFirefoxXpiAddon ? callPackage ../../lib/buildFirefoxXpiAddon.nix {},
+  buildFirefoxXpiAddon ? callPackage ../../lib/buildFirefoxXpiAddon.nix { },
 }:
 buildFirefoxXpiAddon {
   pname = "obsidian-web-clipper";
@@ -13,7 +13,7 @@ buildFirefoxXpiAddon {
     homepage = "https://obsidian.md/clipper";
     description = "Highlight and capture the web in your favorite browser. The official Web Clipper extension for Obsidian.";
     license = licenses.mit;
-    sourceProvenance = with sourceTypes; [binaryBytecode];
+    sourceProvenance = with sourceTypes; [ binaryBytecode ];
     mozPermissions = [
       "activeTab"
       "clipboardWrite"

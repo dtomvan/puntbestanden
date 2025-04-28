@@ -3,9 +3,11 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.utilities;
-in {
+in
+{
   options.modules.utilities = {
     nix = lib.mkEnableOption "nix utils";
     archives = lib.mkEnableOption "tar/unzip etc.";
@@ -14,7 +16,8 @@ in {
     repos = lib.mkEnableOption "repo utils (jj)";
   };
 
-  config.environment.systemPackages = with pkgs;
+  config.environment.systemPackages =
+    with pkgs;
     lib.optionals cfg.nix [
       nh
       nix-fast-build

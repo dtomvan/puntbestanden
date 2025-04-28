@@ -9,7 +9,12 @@
       enable = true;
       settings = {
         maxJobs = 12;
-        supportedFeatures = ["benchmark" "nixos-test" "big-parallel" "kvm"];
+        supportedFeatures = [
+          "benchmark"
+          "nixos-test"
+          "big-parallel"
+          "kvm"
+        ];
         speedFactor = 4;
       };
     };
@@ -52,7 +57,7 @@
     os = {
       isGraphical = false;
       wantsKde = false;
-      extraModules = [];
+      extraModules = [ ];
     };
   };
 }

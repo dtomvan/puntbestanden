@@ -2,7 +2,7 @@
   programs.nixvim.plugins.mini = {
     enable = true;
     modules = {
-      ai = {};
+      ai = { };
       basics = {
         options = {
           basic = true;
@@ -17,13 +17,13 @@
       # base16 = lib.mkIf config.modules.neovim.use-nix-colors {
       #   palette = builtins.mapAttrs (k: v: "#${v}") config.colorScheme.palette;
       # };
-      bracketed = {};
-      comment = {};
-      icons = {};
-      indentscope = {};
-      notify = {};
-      sessions = {};
-      statusline = {};
+      bracketed = { };
+      comment = { };
+      icons = { };
+      indentscope = { };
+      notify = { };
+      sessions = { };
+      statusline = { };
       # pairs = {};
       surround = {
         mappings = {

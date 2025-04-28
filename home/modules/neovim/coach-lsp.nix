@@ -3,10 +3,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   cfg = config.modules.coach-lsp;
   cmd = "${pkgs.coach-cached}/bin/coach-lsp";
-in {
+in
+{
   options.modules.coach-lsp = {
     enable = lib.mkEnableOption "download coach-lsp and add to nvim";
     use-cached = lib.mkEnableOption "don't compile coach-lsp, just use a distributed version";

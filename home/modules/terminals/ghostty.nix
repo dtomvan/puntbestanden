@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.terminals.ghostty;
-in {
+in
+{
   options.modules.terminals.ghostty = import ../../lib/mk-terminal-options.nix {
     inherit lib;
     name = "ghostty";
@@ -23,16 +25,13 @@ in {
       settings = {
         font-family = cfg.font.family;
         font-size = cfg.font.size;
-        theme =
-          if cfg.use-nix-colors
-          then config.colorScheme.slug
-          else "catppuccin-mocha";
+        theme = if cfg.use-nix-colors then config.colorScheme.slug else "catppuccin-mocha";
         gtk-single-instance = true;
         command = "zsh";
 
-				window-decoration = "server";
-				window-theme = "system";
-				adw-toolbar-style = "flat";
+        window-decoration = "server";
+        window-theme = "system";
+        adw-toolbar-style = "flat";
       };
     };
   };

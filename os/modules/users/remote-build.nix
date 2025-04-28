@@ -4,10 +4,10 @@
     createHome = false;
     group = "remotebuild";
 
-    openssh.authorizedKeys.keyFiles = [./remotebuild.pub];
+    openssh.authorizedKeys.keyFiles = [ ./remotebuild.pub ];
   };
 
-  users.groups.remotebuild = {};
+  users.groups.remotebuild = { };
 
-  nix.settings.trusted-users = ["remotebuild"];
+  nix.settings.trusted-users = [ "remotebuild" ];
 }

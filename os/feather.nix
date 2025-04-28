@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./modules/utilities.nix
     ./modules/programs/gpg.nix

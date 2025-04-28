@@ -1,1 +1,1 @@
-{ imports = [./modules/latex.nix]; }
+{ imports = [ ./modules/latex.nix ]; }

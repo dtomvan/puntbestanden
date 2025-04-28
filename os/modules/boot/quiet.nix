@@ -2,7 +2,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   options.modules.boot.quiet = lib.mkEnableOption "quiet boot";
   config = lib.mkIf config.modules.boot.quiet {
     boot = {

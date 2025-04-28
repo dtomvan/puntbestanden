@@ -1,4 +1,7 @@
-{pkgs, ...}: {
-  virtualisation.podman = { enable = true; };
-  environment.systemPackages = [pkgs.distrobox];
+{ pkgs, ... }:
+{
+  virtualisation.podman = {
+    enable = true;
+  };
+  environment.systemPackages = [ pkgs.distrobox ];
 }

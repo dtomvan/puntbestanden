@@ -3,7 +3,8 @@
   lib,
   pkgs,
   ...
-}: {
+}:
+{
   options = {
   };
   config.programs.nixvim = {
@@ -17,10 +18,10 @@
     plugins.cmp = {
       enable = true;
       settings.sources = [
-        {name = "nvim_lsp";}
-        {name = "snippets";}
-        {name = "path";}
-        {name = "buffer";}
+        { name = "nvim_lsp"; }
+        { name = "snippets"; }
+        { name = "path"; }
+        { name = "buffer"; }
       ];
       settings.mapping = {
         "<C-Space>" = "cmp.mapping.complete()";

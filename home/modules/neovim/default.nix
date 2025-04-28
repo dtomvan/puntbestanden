@@ -3,9 +3,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.modules.neovim;
-in {
+in
+{
   options.modules.neovim = {
     enable = lib.mkEnableOption "install and configure neovim";
     lsp = {
@@ -14,12 +16,12 @@ in {
       rust_analyzer.enable = lib.mkEnableOption "enable rust_analyzer";
       extraLspServers = lib.mkOption {
         description = "extra LSP servers you want available in neovim";
-        default = {};
+        default = { };
         type = lib.types.attrs;
       };
     };
 
-		enableQt = lib.mkEnableOption "QT GUI";
+    enableQt = lib.mkEnableOption "QT GUI";
   };
 
   imports = [
@@ -29,7 +31,7 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-		home.packages = lib.optional cfg.enableQt pkgs.neovim-qt;
+    home.packages = lib.optional cfg.enableQt pkgs.neovim-qt;
 
     programs.nixvim = {
       enable = true;
@@ -61,4 +63,3 @@ in {
   };
 }
 # vim:sw=2 ts=2 sts=2
-

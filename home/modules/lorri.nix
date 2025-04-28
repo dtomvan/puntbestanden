@@ -3,14 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.modules.lorri;
-in {
+in
+{
   options.modules.lorri = {
     enable = lib.mkEnableOption "Install and enable systemd lorri integration";
   };
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [lorri];
+    home.packages = with pkgs; [ lorri ];
     systemd.user.services.lorri = {
       Unit = {
         Description = "lorri daemon";
@@ -30,7 +32,7 @@ in {
         ListenStream = "%t/lorri/daemon.socket";
         RuntimeDirectory = "lorri";
       };
-      Install.WantedBy = ["sockets.target"];
+      Install.WantedBy = [ "sockets.target" ];
     };
   };
 }

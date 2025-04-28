@@ -1,6 +1,7 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   environment.etc."libvirt/qemu.conf".text = "group=kvm";
-  users.groups.libvirtd.members = ["tomvd"];
+  users.groups.libvirtd.members = [ "tomvd" ];
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd = {
     enable = true;
@@ -14,8 +15,7 @@
           (pkgs.OVMF.override {
             secureBoot = true;
             tpmSupport = true;
-          })
-          .fd
+          }).fd
         ];
       };
     };

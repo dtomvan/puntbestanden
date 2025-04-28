@@ -105,11 +105,12 @@ kdePackages.mkKdeDerivation rec {
     }
   ];
 
-  passthru.updateScript = nix-update-script {};
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "Login screen using the LightDM framework.";
-    longDescription = ''      Login screen using the LightDM framework.
+    longDescription = ''
+      Login screen using the LightDM framework.
           * "LightDM project": https://launchpad.net/lightdm
           * "Bug Tracker": https://bugs.kde.org/describecomponents.cgi?product=lightdm
     '';

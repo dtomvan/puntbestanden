@@ -4,7 +4,8 @@
   lib,
   ...
 }:
-with lib; {
+with lib;
+{
   imports = [
     ./neovim
     ./git.nix
@@ -14,7 +15,7 @@ with lib; {
 
   programs.atuin = mkDefault {
     enable = true;
-    flags = ["--disable-up-arrow"];
+    flags = [ "--disable-up-arrow" ];
   };
   programs.direnv.enable = mkDefault true;
   programs.zoxide.enable = mkDefault true;
@@ -65,20 +66,24 @@ with lib; {
     };
   };
 
-  home.sessionVariables = let
-    nhVersion = lib.getVersion pkgs.nh;
-    flakeVar = if lib.versionAtLeast nhVersion "4.0.0" then "NH_FLAKE" else "FLAKE";
-  in {
-    # breaking change: see nixpkgs#401255
-    ${flakeVar} = "/home/tomvd/puntbestanden/";
-  };
+  home.sessionVariables =
+    let
+      nhVersion = lib.getVersion pkgs.nh;
+      flakeVar = if lib.versionAtLeast nhVersion "4.0.0" then "NH_FLAKE" else "FLAKE";
+    in
+    {
+      # breaking change: see nixpkgs#401255
+      ${flakeVar} = "/home/tomvd/puntbestanden/";
+    };
 
   systemd.user.settings.Manager.DefaultEnvironment = {
-    PATH = concatStringsSep ":" (map (p: "%u/${p}") [
-      "bin"
-      ".cargo/bin"
-      ".local/bin"
-    ]);
+    PATH = concatStringsSep ":" (
+      map (p: "%u/${p}") [
+        "bin"
+        ".cargo/bin"
+        ".local/bin"
+      ]
+    );
   };
 
   git = {

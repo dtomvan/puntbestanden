@@ -9,8 +9,8 @@
         "443:443/tcp"
       ];
       environment = {
-          TZ = "Europe/Amsterdam";
-          FTLCONF_dns_listeningMode = "all";
+        TZ = "Europe/Amsterdam";
+        FTLCONF_dns_listeningMode = "all";
       };
       volumes = [
         "etc_pihole:/etc/pihole"

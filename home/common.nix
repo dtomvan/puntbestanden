@@ -3,22 +3,15 @@
   pkgs,
   host,
   ...
-}: {
-  ${
-    if host.os.isGraphical
-    then "firefox"
-    else null
-  } = {
+}:
+{
+  ${if host.os.isGraphical then "firefox" else null} = {
     enable = true;
     isPlasma = true;
   };
 
   modules = {
-    ${
-      if host.os.isGraphical
-      then "terminals"
-      else null
-    } = {
+    ${if host.os.isGraphical then "terminals" else null} = {
       enable = true;
       alacritty = {
         enable = true;
@@ -35,11 +28,7 @@
       };
     };
 
-    ${
-      if host.hostName == "boomer"
-      then "latex"
-      else null
-    } = {
+    ${if host.hostName == "boomer" then "latex" else null} = {
       enable = true;
       package = pkgs.texliveMedium;
       kile = true;
@@ -80,4 +69,3 @@
   programs.home-manager.enable = true;
 }
 # vim:sw=2 ts=2 sts=2
-

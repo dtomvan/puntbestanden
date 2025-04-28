@@ -40,7 +40,8 @@ let
       devices = allDevices;
     };
   };
-in {
+in
+{
   # sops.secrets."tomvd.pass" = {
   #   sopsFile = ../../../secrets/tomvd.pass.secret;
   #

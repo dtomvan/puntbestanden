@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./modules/utilities.nix
     ./modules/networking/tailscale.nix
@@ -36,7 +37,10 @@
   users.users.een = {
     isNormalUser = true;
     description = "123";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   environment.systemPackages = with pkgs; [

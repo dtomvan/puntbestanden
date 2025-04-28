@@ -3,7 +3,8 @@
   lib,
   config,
   ...
-}: {
+}:
+{
   services.xserver.enable = true;
   services.xserver.displayManager.lightdm = {
     enable = lib.mkDefault true;
@@ -18,7 +19,7 @@
   services.desktopManager.plasma6.enable = true;
   services.displayManager.defaultSession = "plasma";
   environment.systemPackages = with pkgs.kdePackages; [
-  pkgs.lightdm-kde-greeter # for KCM?
+    pkgs.lightdm-kde-greeter # for KCM?
     kdeconnect-kde
     plasma-browser-integration
 

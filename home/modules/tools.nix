@@ -2,10 +2,12 @@
   pkgs,
   lib,
   ...
-}: let
+}:
+let
   nix-tree = lib.getExe pkgs.nix-tree;
   jq = lib.getExe pkgs.jq;
-in {
+in
+{
   home.packages = with pkgs; [
     (writers.writeBashBin "nix-run" ''
       nix run "$FLAKE#pkgs.$@"

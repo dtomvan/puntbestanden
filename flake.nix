@@ -48,72 +48,88 @@ rec {
     dont-track-me.url = "github:dtomvan/dont-track-me.nix";
   };
 
-  outputs = inputs @ {
-    self,
-    flake-parts,
-    home-manager,
-    nixpkgs,
-    ...
-  }:
-    flake-parts.lib.mkFlake {inherit inputs;} (top @ {
-      config,
-      withSystem,
-      moduleWithSystem,
+  outputs =
+    inputs@{
+      self,
+      flake-parts,
+      home-manager,
+      nixpkgs,
       ...
-    }: {
-      imports = [
-        inputs.pkgs-by-name-for-flake-parts.flakeModule
-      ];
+    }:
+    flake-parts.lib.mkFlake { inherit inputs; } (
+      top@{
+        config,
+        withSystem,
+        moduleWithSystem,
+        ...
+      }:
+      {
+        imports = [
+          inputs.pkgs-by-name-for-flake-parts.flakeModule
+        ];
 
-      flake = let
-        mkPkgs = system:
-          import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [
-              inputs.nur.overlays.default
-              (_final: _prev: inputs.zozin.packages.${system})
-              (_final: _prev: self.packages.${system})
-            ];
+        flake =
+          let
+            mkPkgs =
+              system:
+              import nixpkgs {
+                inherit system;
+                config.allowUnfree = true;
+                overlays = [
+                  inputs.nur.overlays.default
+                  (_final: _prev: inputs.zozin.packages.${system})
+                  (_final: _prev: self.packages.${system})
+                ];
+              };
+          in
+          {
+            nixosConfigurations = nixpkgs.lib.mapAttrs' (
+              _key: host:
+              nixpkgs.lib.nameValuePair host.hostName (
+                nixpkgs.lib.nixosSystem {
+                  specialArgs = {
+                    inherit host nixConfig;
+                  };
+                  modules = import os/modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
+                  pkgs = mkPkgs host.system;
+                }
+              )
+            ) (import ./hosts.nix);
+
+            homeConfigurations = nixpkgs.lib.mapAttrs' (
+              _key: host:
+              nixpkgs.lib.nameValuePair "tomvd@${host.hostName}" (
+                home-manager.lib.homeManagerConfiguration {
+                  pkgs = mkPkgs host.system;
+
+                  modules = import home/modules.nix { inherit host inputs; };
+
+                  extraSpecialArgs = {
+                    inherit host;
+                  };
+                }
+              )
+            ) (import ./hosts.nix);
           };
-      in {
-        nixosConfigurations = nixpkgs.lib.mapAttrs' (
-          _key: host:
-            nixpkgs.lib.nameValuePair host.hostName (nixpkgs.lib.nixosSystem {
-              specialArgs = {
-                inherit host nixConfig;
-              };
-              modules = import os/modules.nix {inherit host inputs;} ++ host.os.extraModules; # nixpkgs is dumb
-              pkgs = mkPkgs host.system;
-            })
-        ) (import ./hosts.nix);
 
-        homeConfigurations = nixpkgs.lib.mapAttrs' (
-          _key: host:
-            nixpkgs.lib.nameValuePair "tomvd@${host.hostName}"
-            (home-manager.lib.homeManagerConfiguration {
-              pkgs = mkPkgs host.system;
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+          "aarch64-darwin"
+          "x86_64-darwin"
+        ];
 
-              modules = import home/modules.nix {inherit host inputs;};
+        perSystem =
+          { system, pkgs, ... }:
+          {
+            apps = { } // (inputs.nixinate.nixinate.${system} self).nixinate;
 
-              extraSpecialArgs = {
-                inherit host;
-              };
-            })
-        ) (import ./hosts.nix);
-      };
+            formatter = pkgs.nixfmt-tree;
 
-      systems = ["x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin"];
-
-      perSystem = {system, pkgs, ...}: {
-        apps = {} // (inputs.nixinate.nixinate.${system} self).nixinate;
-
-        formatter = pkgs.nixfmt-tree;
-
-        pkgsDirectory = ./packages/by-name;
-        devShells = {};
-      };
-    });
+            pkgsDirectory = ./packages/by-name;
+            devShells = { };
+          };
+      }
+    );
 }
 # vim:sw=2 ts=2 sts=2
-

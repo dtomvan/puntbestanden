@@ -3,9 +3,11 @@
   lib,
   config,
   ...
-}: let
+}:
+let
   cfg = config.modules.helix;
-in {
+in
+{
   options.modules.helix = {
     enable = lib.mkEnableOption "install and configure hx";
     use-nix-colors = lib.mkEnableOption "refer to nix-colors for theme";
@@ -14,7 +16,7 @@ in {
       enable = lib.mkEnableOption "download servers";
       extraLspServers = lib.mkOption {
         description = "extra LSP servers you want available in hx";
-        default = [];
+        default = [ ];
         type = lib.types.listOf lib.types.package;
       };
     };
@@ -25,9 +27,10 @@ in {
     # defaultEditor = true;
     settings = {
       theme =
-        if cfg.use-nix-colors
-        then builtins.replaceStrings ["-"] ["_"] config.colorScheme.slug
-        else "catppuccin_mocha";
+        if cfg.use-nix-colors then
+          builtins.replaceStrings [ "-" ] [ "_" ] config.colorScheme.slug
+        else
+          "catppuccin_mocha";
 
       editor = {
         cursor-shape = {
@@ -42,7 +45,10 @@ in {
 
         line-number = "relative";
         cursorline = true;
-        rulers = [80 100];
+        rulers = [
+          80
+          100
+        ];
         bufferline = "multiple";
         end-of-line-diagnostics = "warning";
 
@@ -74,13 +80,15 @@ in {
         # C-4 = "@<C-s>ghwc#### <esc><C-o>i";
       };
     };
-    extraPackages = lib.mkIf cfg.lsp.enable (with pkgs;
+    extraPackages = lib.mkIf cfg.lsp.enable (
+      with pkgs;
       [
         marksman
         nixd
         rust-analyzer
         bash-language-server
       ]
-      ++ cfg.lsp.extraLspServers);
+      ++ cfg.lsp.extraLspServers
+    );
   };
 }
