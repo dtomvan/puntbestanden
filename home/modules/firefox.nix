@@ -92,25 +92,25 @@ in
       extensions = with pkgs.nur.repos.rycee.firefox-addons; {
         packages =
           [
-            sidebery
-            darkreader
             sponsorblock
             dearrow
             plasma-integration
-            enhancer-for-youtube
-
-            keepassxc-browser
+            enhancer-for-youtube # unfree, cannot build from source :(
 
             # drv in-tree, overlayed
+            pkgs.keepassxc-browser
+            pkgs.darkreader
+            pkgs.obsidian-web-clipper
+            pkgs.sidebery
             pkgs.steam-database
             pkgs.ublock-origin
-            pkgs.obsidian-web-clipper
           ]
           ++ lib.optionals (hostname == "feather") [
-            onetab
+            onetab # unfree, cannot build from source :(
           ]
           ++ lib.optionals (hostname == "boomer") [
-            zotero-connector
+            pkgs.zotero-connector
+            pkgs.violentmonkey
           ];
 
         force = true;

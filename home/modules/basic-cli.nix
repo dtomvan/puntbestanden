@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   ...
@@ -38,7 +37,8 @@ with lib;
 
     shellAliases =
       {
-        strider = "zellij p -- zellij:strider";
+        ghopen = ''gh browse -R $(git remote get-url origin) -b $(git branch --show-current)'';
+        ghshow = ''gh browse -R $(git remote get-url origin) $(git rev-parse HEAD)'';
         j = "just";
         e = "nvim";
         ls = "eza";
