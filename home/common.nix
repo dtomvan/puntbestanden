@@ -58,7 +58,7 @@
     just
     rink
     ripdrag
-    rwds-cli
+    rwds-cli-bin
     stow
     visidata
     yt-dlp

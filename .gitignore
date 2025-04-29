@@ -2,3 +2,4 @@ result*
 H369A8D363E.pass
 .clj-kondo
 .lsp
+*.log

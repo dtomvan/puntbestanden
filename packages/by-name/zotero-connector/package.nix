@@ -8,6 +8,7 @@
   zip,
   jq,
   moreutils,
+  nix-update-script,
 }:
 let
   xpifile = buildNpmPackage (finalAttrs: {
@@ -46,6 +47,8 @@ let
 
       runHook postInstall
     '';
+
+    passthru.updateScript = nix-update-script { };
   });
 in
 buildFirefoxXpiAddon {

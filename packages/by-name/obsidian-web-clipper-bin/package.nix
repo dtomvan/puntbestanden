@@ -3,12 +3,13 @@
   callPackage,
   buildFirefoxXpiAddon ? callPackage ../../lib/buildFirefoxXpiAddon.nix { },
 }:
-buildFirefoxXpiAddon {
+buildFirefoxXpiAddon rec {
   pname = "obsidian-web-clipper";
   version = "0.11.7";
   addonId = "clipper@obsidian.md";
-  url = "https://github.com/obsidianmd/obsidian-clipper/releases/download/0.11.7/obsidian-web-clipper-0.11.7-firefox.zip";
+  url = "https://github.com/obsidianmd/obsidian-clipper/releases/download/${version}/obsidian-web-clipper-${version}-firefox.zip";
   hash = "sha256-7VFgltPbsf4WgyZzukRk5elkPLNyLFWVwizNj0tXmII=";
+
   meta = with lib; {
     homepage = "https://obsidian.md/clipper";
     description = "Highlight and capture the web in your favorite browser. The official Web Clipper extension for Obsidian.";

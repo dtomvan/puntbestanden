@@ -1,44 +1,29 @@
 {
-  stdenv,
-  fetchzip,
-  autoPatchelfHook,
   lib,
-  libgcc,
+  rustPlatform,
+  fetchFromGitHub,
+  nix-update-script,
 }:
-let
-  version = "0.1.0";
-in
-stdenv.mkDerivation {
-  inherit version;
+rustPlatform.buildRustPackage {
   pname = "rwds-cli";
+  version = "0-unstable-2025-04-29";
 
-  src = fetchzip {
-    url = "https://github.com/dtomvan/rusty-words/releases/download/v${version}/rwds-cli-bin-linux-x86_64.tar.gz";
-    hash = "sha256-OA1YdCWPYhHxA72ZpfwRvslrM9V/zwODVgVmRAGqFEM=";
+  src = fetchFromGitHub {
+    owner = "dtomvan";
+    repo = "rusty-words";
+    rev = "b21a88079a869a8a3b7fe36a45c4665f7b38a097";
+    hash = "sha256-fkjcUz54knC3WY/ub05GRAM3pGqyZHe65eyUbTaYknQ=";
   };
 
-  nativeBuildInputs = [
-    autoPatchelfHook
-    libgcc
-  ];
+  cargoHash = "sha256-/hbRzl8dh6r1mRbW1RZ2idhOJDP7HJQX6R7LpSn1xIw=";
 
-  dontConfigure = true;
-  dontBuild = true;
+  passthru.updateScript = nix-update-script { extraArgs = [ "--version=branch" ]; };
 
-  sourceRoot = ".";
-
-  installPhase = ''
-       runHook preInstall
-       install -m755 -D source/rwds-cli $out/bin/rwds-cli
-    patchelf \
-     --set-interpreter "$(cat $NIX_CC/nix-support/dynamic-linker)" \
-     $out/bin/rwds-cli
-       runHook postInstall
-  '';
-
-  meta = with lib; {
-    homepage = "https://github.com/dtomvan/rusty-words/";
-    description = "Program to study flashcards";
-    platforms = platforms.linux;
+  meta = {
+    description = "Practice your flashcards like in Quizlet, but for the TUI";
+    homepage = "https://github.com/dtomvan/rusty-words";
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ dtomvan ];
+    mainProgram = "rwds-cli";
   };
 }

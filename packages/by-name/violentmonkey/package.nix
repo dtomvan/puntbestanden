@@ -9,11 +9,10 @@
   yarnBuildHook,
   nodejs,
   zip,
-  jq,
-  moreutils,
   pkg-config,
   vips,
   python3,
+  nix-update-script,
 }:
 let
   xpifile = stdenv.mkDerivation rec {
@@ -71,6 +70,8 @@ let
 
       runHook postInstall
     '';
+
+    passthru.updateScript = nix-update-script { };
   };
 in
 buildFirefoxXpiAddon {

@@ -37,6 +37,11 @@ with lib;
 
     shellAliases =
       {
+        n-b = "nix-build";
+        nb = "nix build";
+        n-s = "nix-shell";
+        ns = "nix shell";
+
         ghopen = ''gh browse -R $(git remote get-url origin) -b $(git branch --show-current)'';
         ghshow = ''gh browse -R $(git remote get-url origin) $(git rev-parse HEAD)'';
         j = "just";

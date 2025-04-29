@@ -46,6 +46,13 @@ rec {
     sops.inputs.nixpkgs.follows = "nixpkgs";
 
     dont-track-me.url = "github:dtomvan/dont-track-me.nix";
+
+    # for rwds-cli from source
+    fenix = {
+      url = "github:nix-community/fenix/monthly";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-analyzer-src.follows = "";
+    };
   };
 
   outputs =

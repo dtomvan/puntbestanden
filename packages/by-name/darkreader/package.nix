@@ -4,6 +4,7 @@
   buildFirefoxXpiAddon ? callPackage ../../lib/buildFirefoxXpiAddon.nix { },
   buildNpmPackage,
   fetchFromGitHub,
+  nix-update-script,
 }:
 let
   xpifile = buildNpmPackage (finalAttrs: {
@@ -27,6 +28,8 @@ let
 
       runHook postInstall
     '';
+
+    passthru.updateScript = nix-update-script { };
   });
 in
 buildFirefoxXpiAddon rec {

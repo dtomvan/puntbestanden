@@ -3,9 +3,20 @@
   stdenv,
   fetchzip,
 }:
+let
+  version = "0.0.12";
+  isRc = true;
+  versionTag = "v${version}${if isRc then "-rc" else ""}";
+in
 stdenv.mkDerivation rec {
   pname = "afio-font";
-  version = "0.0.4";
+  inherit version;
+
+  src = fetchzip {
+    url = "${meta.homepage}/releases/download/${versionTag}/afio-v${version}.zip";
+    hash = "sha256-EizgNdPyFF5mBYXkhCEDORpZppv4p3dQtmFPiDnhAZc=";
+    stripRoot = false;
+  };
 
   sourceRoot = ".";
 
@@ -13,17 +24,12 @@ stdenv.mkDerivation rec {
     runHook preInstall
 
     dst_truetype=$out/share/fonts/truetype/afio/
-
-    find -name \*.ttf -exec mkdir -p $dst_truetype \; -exec cp -p {} $dst_truetype \;
+    find -name \*.ttf -exec mkdir -p $dst_truetype \; -exec cp -vp {} $dst_truetype \;
 
     runHook postInstall
   '';
 
-  src = fetchzip {
-    url = "${meta.homepage}/releases/download/v${version}/afio-v${version}.zip";
-    hash = "sha256-7L9pypexyyru6uUCPry4eUkAf7r3d6GooPjVYMCx20I=";
-    stripRoot = false;
-  };
+  passthru.updateScript = ./update.sh;
 
   meta = {
     description = "Custom slimmed down Iosevka font with nerd-font icons";

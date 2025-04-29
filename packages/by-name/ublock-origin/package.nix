@@ -7,6 +7,7 @@
   python3,
   git,
   zip,
+  nix-update-script,
 }:
 let
   uAssets = fetchFromGitHub {
@@ -62,6 +63,8 @@ let
 
       runHook postInstall
     '';
+
+    passthru.updateScript = nix-update-script { };
   });
 in
 buildFirefoxXpiAddon {
