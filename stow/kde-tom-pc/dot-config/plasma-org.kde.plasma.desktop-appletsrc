@@ -1,8 +1,0 @@
-[Containments][2][Applets][5][Configuration][General]
-launchers=file:///nix/store/0kr0qjd741qla8p5f3s86an3jdzzhbrq-profile/share/applications/firefox-developer-edition.desktop,preferred://filemanager,file:///var/lib/flatpak/exports/share/applications/org.kde.neochat.desktop,applications:org.kde.kate.desktop,file:///var/lib/flatpak/exports/share/applications/org.telegram.desktop.desktop
-
-[Containments][52][Applets][71][Configuration]
-PreloadWeight=95
-
-[Containments][54][Applets][69][Configuration]
-PreloadWeight=100

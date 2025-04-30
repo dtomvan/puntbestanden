@@ -1,12 +1,12 @@
 [Activities][LastVirtualDesktop]
 86da4254-3f55-4dd9-a41b-baeb614409f1=9a10f31d-1480-40dd-aa32-2d2c5553100c
-b28af259-3104-4ab2-b8a7-43caeb0539af=9e98ef08-1764-49f6-96ce-adaf08f927ca
+b28af259-3104-4ab2-b8a7-43caeb0539af=9a10f31d-1480-40dd-aa32-2d2c5553100c
 
 [Desktops]
-Id_1=9a10f31d-1480-40dd-aa32-2d2c5553100c
-Id_2=9e98ef08-1764-49f6-96ce-adaf08f927ca
-Id_3=fd342897-1860-494f-8027-5ecde730929c
-Id_4=1da37e6f-0a66-4f70-90ab-0deaa0d11b28
+Id_1=Desktop_1
+Id_2=Desktop_2
+Id_3=Desktop_3
+Id_4=Desktop_4
 Number=4
 Rows=1
 
@@ -23,8 +23,14 @@ BottomRight=ShowDesktop
 blurEnabled=false
 contrastEnabled=false
 diminactiveEnabled=true
+fadeEnabled=false
+glideEnabled=false
 loginEnabled=false
+magiclampEnabled=true
+scaleEnabled=true
 shakecursorEnabled=false
+squashEnabled=false
+translucencyEnabled=false
 
 [SubSession: 0341e3cc-ae3a-4317-bcfa-ec3c6329a168]
 active=-1

@@ -1,5 +1,5 @@
 [Desktop Entry]
-DefaultProfile=HomeManager.profile
+DefaultProfile=Catppuccin.profile
 
 [General]
 ConfigVersion=1
@@ -7,6 +7,9 @@ ConfigVersion=1
 [KonsoleWindow]
 AllowMenuAccelerators=true
 UseSingleInstance=true
+
+[MainWindow]
+MenuBar=Enabled
 
 [UiSettings]
 ColorScheme=

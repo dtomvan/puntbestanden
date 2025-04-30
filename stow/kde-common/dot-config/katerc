@@ -71,7 +71,7 @@ On-The-Fly Spellcheck=false
 Overwrite Mode=false
 PageUp/PageDown Moves Cursor=false
 Remove Spaces=1
-ReplaceTabsDyn=true
+ReplaceTabsDyn=false
 Show Spaces=0
 Show Tabs=true
 Smart Home=true
@@ -89,16 +89,21 @@ Word Wrap Column=80
 Encoding Prober Type=1
 Fallback Encoding=ISO 8859-6
 
+[KTextEditor Renderer]
+Animate Bracket Matching=false
+Show Indentation Lines=true
+Text Font=afio,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
 [KTextEditor View]
 Allow Mark Menu=true
-Auto Brackets=true
+Auto Brackets=false
 Auto Center Lines=0
 Auto Completion=true
 Auto Completion Preselect First Entry=true
 Backspace Remove Composed Characters=false
 Bookmark Menu Sorting=0
 Bracket Match Preview=false
-Chars To Enclose Selection=<>(){}[]'"
+Chars To Enclose Selection=<>(){}[]'"`
 Default Mark Type=1
 Dynamic Word Wrap=true
 Dynamic Word Wrap Align Indent=80
@@ -112,7 +117,7 @@ Fold First Line=false
 Folding Bar=true
 Folding Preview=true
 Icon Bar=false
-Input Mode=1
+Input Mode=0
 Keyword Completion=true
 Line Modification=true
 Line Numbers=true

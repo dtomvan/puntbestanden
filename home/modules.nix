@@ -4,6 +4,7 @@
 }:
 [
   inputs.nixvim.homeManagerModules.nixvim
+  inputs.plasma-manager.homeManagerModules.plasma-manager
   inputs.dont-track-me.homeManagerModules.default
   ./common.nix
   ./${host.hostName}.nix
@@ -17,4 +18,4 @@
   modules/terminals
   modules/syncthing.nix
   modules/lisp.nix
-]
+] ++ inputs.nixpkgs.lib.optional host.os.wantsKde modules/plasma

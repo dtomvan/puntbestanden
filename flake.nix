@@ -47,11 +47,10 @@ rec {
 
     dont-track-me.url = "github:dtomvan/dont-track-me.nix";
 
-    # for rwds-cli from source
-    fenix = {
-      url = "github:nix-community/fenix/monthly";
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-analyzer-src.follows = "";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 

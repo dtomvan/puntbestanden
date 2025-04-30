@@ -1,9 +1,0 @@
-[ExtractDialog]
-DirHistory[$e]=$HOME/Downloads/,$HOME/Music/
-
-[General]
-LockSidebar=true
-ShowSidebar=true
-
-[MainWindow]
-StatusBar=Disabled
