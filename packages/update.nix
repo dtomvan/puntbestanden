@@ -12,10 +12,9 @@
   order ? null,
 }:
 let
-  self = import ../default.nix { };
-  pkgs = (import <nixpkgs> { }) // self;
-
-  inherit (pkgs) lib;
+  pkgs = import ../default.nix { };
+  nixpkgs = (import <nixpkgs> { });
+  inherit (nixpkgs) lib;
 
   # Remove duplicate elements from the list based on some extracted value. O(n^2) complexity.
   nubOn =
@@ -235,7 +234,7 @@ let
     };
 
   # JSON file with data for update.py.
-  packagesJson = pkgs.writeText "packages.json" (builtins.toJSON (map packageData packages));
+  packagesJson = nixpkgs.writeText "packages.json" (builtins.toJSON (map packageData packages));
 
   optionalArgs =
     lib.optional (max-workers != null) "--max-workers=${max-workers}"
@@ -246,7 +245,7 @@ let
 
   args = [ packagesJson ] ++ optionalArgs;
 in
-pkgs.stdenv.mkDerivation {
+nixpkgs.stdenv.mkDerivation {
   name = "nixpkgs-update-script";
   buildCommand = ''
     echo ""
@@ -260,11 +259,11 @@ pkgs.stdenv.mkDerivation {
   '';
   shellHook = ''
     unset shellHook # do not contaminate nested shells
-    exec ${pkgs.python3.interpreter} ${./update.py} ${builtins.concatStringsSep " " args}
+    exec ${nixpkgs.python3.interpreter} ${./update.py} ${builtins.concatStringsSep " " args}
   '';
   nativeBuildInputs = [
-    pkgs.git
-    pkgs.nix
-    pkgs.cacert
+    nixpkgs.git
+    nixpkgs.nix
+    nixpkgs.cacert
   ];
 }

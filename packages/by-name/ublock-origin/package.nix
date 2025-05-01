@@ -77,6 +77,7 @@ buildFirefoxXpiAddon {
     description = "UBlock Origin - An efficient blocker for Chromium and Firefox. Fast and lean";
     homepage = "https://github.com/gorhill/uBlock";
     changelog = "https://github.com/gorhill/uBlock/blob/${xpifile.version}/CHANGELOG.md";
+    maintainers = with lib.maintainers; [ dtomvan ];
     license = lib.licenses.gpl3Only;
     platforms = lib.platforms.all;
     mozPermissions = [

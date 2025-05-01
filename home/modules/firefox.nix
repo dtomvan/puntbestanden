@@ -131,6 +131,11 @@ in
         "services.sync.engine.passwords" = false;
         "signon.rememberSignons" = false;
 
+        # PLEASE let me install addons from source FF (only possible on
+        # devedition even)
+        "xpinstall.signatures.required" = false;
+        "extensions.langpacks.signatures.required" = false;
+
         # Don't fuckin' pull this shit again firefox
         "browser.engagement.ctrlTab.has-used" = true;
         "browser.engagement.downloads-button.has-used" = true;

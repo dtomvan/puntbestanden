@@ -40,6 +40,7 @@ buildFirefoxXpiAddon {
   meta = {
     description = "SteamDB's extension for Steam websites";
     homepage = "https://github.com/SteamDatabase/BrowserExtension";
+    maintainers = with lib.maintainers; [ dtomvan ];
     license = lib.licenses.bsd3;
     platforms = lib.platforms.all;
     mozPermissions = [

@@ -78,5 +78,6 @@ buildFirefoxXpiAddon {
       "clipboardWrite"
     ];
 
+    maintainers = with lib.maintainers; [ dtomvan ];
   };
 }

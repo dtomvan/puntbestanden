@@ -35,5 +35,6 @@ stdenv.mkDerivation rec {
     description = "Custom slimmed down Iosevka font with nerd-font icons";
     homepage = "https://github.com/awnion/custom-iosevka-nerd-font";
     platform = lib.platforms.all;
+    maintainers = with lib.maintainers; [ dtomvan ];
   };
 }

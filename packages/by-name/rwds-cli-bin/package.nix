@@ -26,9 +26,10 @@ stdenv.mkDerivation (finalAttrs: {
   '';
 
   meta = {
-    homepage = "https://github.com/dtomvan/rusty-words/";
-    license = lib.licenses.mit;
     description = "Program to study flashcards";
+    homepage = "https://github.com/dtomvan/rusty-words/";
+    maintainers = with lib.maintainers; [ dtomvan ];
+    license = lib.licenses.mit;
     platforms = [ "x86_64-linux" ];
   };
 })

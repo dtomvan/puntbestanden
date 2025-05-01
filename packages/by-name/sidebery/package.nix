@@ -50,6 +50,7 @@ buildFirefoxXpiAddon rec {
     description = "Firefox extension for managing tabs and bookmarks in sidebar";
     homepage = "https://github.com/mbnuqw/sidebery";
     changelog = "https://github.com/mbnuqw/sidebery/blob/${version}/CHANGELOG.md";
+    maintainers = with lib.maintainers; [ dtomvan ];
     license = lib.licenses.mit;
     platforms = lib.platforms.all;
     mozPermissions = [

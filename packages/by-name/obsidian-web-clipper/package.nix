@@ -43,6 +43,7 @@ buildFirefoxXpiAddon {
   meta = with lib; {
     homepage = "https://obsidian.md/clipper";
     description = "Highlight and capture the web in your favorite browser. The official Web Clipper extension for Obsidian.";
+    maintainers = with lib.maintainers; [ dtomvan ];
     license = licenses.mit;
     mozPermissions = [
       "activeTab"

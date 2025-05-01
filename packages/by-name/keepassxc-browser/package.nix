@@ -43,6 +43,7 @@ buildFirefoxXpiAddon {
     description = "KeePassXC Browser Extension";
     homepage = "https://github.com/keepassxreboot/keepassxc-browser";
     changelog = "https://github.com/keepassxreboot/keepassxc-browser/blob/${xpifile.src.rev}/CHANGELOG";
+    maintainers = with lib.maintainers; [ dtomvan ];
     license = lib.licenses.gpl3Only;
     platforms = lib.platforms.all;
     mozPermissions = [

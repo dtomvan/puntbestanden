@@ -1,8 +1,0 @@
-[MainWindow]
-ToolBarsMovable=Disabled
-
-[MainWindowState]
-Splitter=244,555
-
-[Search]
-ScopeSelection=0

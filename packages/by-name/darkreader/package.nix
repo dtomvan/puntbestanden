@@ -42,6 +42,7 @@ buildFirefoxXpiAddon rec {
     description = "Dark Reader Chrome and Firefox extension";
     homepage = "https://github.com/darkreader/darkreader";
     changelog = "https://github.com/darkreader/darkreader/blob/${version}/CHANGELOG.md";
+    maintainers = with lib.maintainers; [ dtomvan ];
     license = lib.licenses.mit;
     platforms = lib.platforms.all;
     mozPermissions = [
