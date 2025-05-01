@@ -11,7 +11,7 @@
   gtk2,
   libGL,
   nixos-artwork,
-  wallpaper ? nixos-artwork.wallpapers.nineish-dark-gray.passthru.kdeFilePath,
+  wallpaper ? nixos-artwork.wallpapers.nineish-catppuccin-mocha.passthru.kdeFilePath,
 }:
 kdePackages.mkKdeDerivation rec {
   pname = "lightdm-kde-greeter";

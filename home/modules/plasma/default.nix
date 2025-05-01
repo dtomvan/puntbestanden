@@ -1,6 +1,11 @@
-{ lib, pkgs, host, ... }:
+{
+  lib,
+  pkgs,
+  host,
+  ...
+}:
 let
-  wallpaper = pkgs.nixos-artwork.wallpapers.nineish-dark-gray.passthru.kdeFilePath;
+  wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha.passthru.kdeFilePath;
   fixedWidth = {
     family = "afio";
     pointSize = 12;
@@ -99,44 +104,44 @@ in
 
     shortcuts = {
       kwin = {
-        "Switch to Desktop 1" = "Meta+1,,Switch to Desktop 1";
-        "Switch to Desktop 2" = "Meta+2,,Switch to Desktop 2";
-        "Switch to Desktop 3" = "Meta+3,,Switch to Desktop 3";
-        "Switch to Desktop 4" = "Meta+4,,Switch to Desktop 4";
-        "Switch to Desktop 5" = "Meta+5,,Switch to Desktop 5";
-        "Switch to Desktop 6" = "Meta+6,,Switch to Desktop 6";
-        "Switch to Desktop 7" = "Meta+7,,Switch to Desktop 7";
-        "Switch to Desktop 8" = "Meta+8,,Switch to Desktop 8";
-        "Switch to Desktop 9" = "Meta+9,,Switch to Desktop 9";
+        "Switch to Desktop 1" = "Meta+1";
+        "Switch to Desktop 2" = "Meta+2";
+        "Switch to Desktop 3" = "Meta+3";
+        "Switch to Desktop 4" = "Meta+4";
+        "Switch to Desktop 5" = "Meta+5";
+        "Switch to Desktop 6" = "Meta+6";
+        "Switch to Desktop 7" = "Meta+7";
+        "Switch to Desktop 8" = "Meta+8";
+        "Switch to Desktop 9" = "Meta+9";
         "Window Close" = [
           "Meta+Q"
           "Alt+F4,Alt+F4,Close Window"
         ];
-        "Window to Desktop 1" = "Meta+!,,Window to Desktop 1";
-        "Window to Desktop 2" = "Meta+@,,Window to Desktop 2";
-        "Window to Desktop 3" = "Meta+#,,Window to Desktop 3";
-        "Window to Desktop 4" = "Meta+$,,Window to Desktop 4";
-        "Window to Desktop 5" = "Meta+%,,Window to Desktop 5";
-        "Window to Desktop 6" = "Meta+^,,Window to Desktop 6";
-        "Window to Desktop 7" = "Meta+&,,Window to Desktop 7";
-        "Window to Desktop 8" = "Meta+*,,Window to Desktop 8";
-        "Window to Desktop 9" = "Meta+(,,Window to Desktop 9";
+        "Window to Desktop 1" = "Meta+!";
+        "Window to Desktop 2" = "Meta+@";
+        "Window to Desktop 3" = "Meta+#";
+        "Window to Desktop 4" = "Meta+$";
+        "Window to Desktop 5" = "Meta+%";
+        "Window to Desktop 6" = "Meta+^";
+        "Window to Desktop 7" = "Meta+&";
+        "Window to Desktop 8" = "Meta+*";
+        "Window to Desktop 9" = "Meta+(";
       };
       plasmashell = {
         "activate application launcher" = [
-          "Alt+F1,Meta"
-          "Alt+F1,Activate Application Launcher"
+          "Alt+F1"
+          "Meta"
         ];
-        "activate task manager entry 1" = "none,Meta+1,Activate Task Manager Entry 1";
-        "activate task manager entry 10" = "none,,Activate Task Manager Entry 10";
-        "activate task manager entry 2" = "none,Meta+2,Activate Task Manager Entry 2";
-        "activate task manager entry 3" = "none,Meta+3,Activate Task Manager Entry 3";
-        "activate task manager entry 4" = "none,Meta+4,Activate Task Manager Entry 4";
-        "activate task manager entry 5" = "none,Meta+5,Activate Task Manager Entry 5";
-        "activate task manager entry 6" = "none,Meta+6,Activate Task Manager Entry 6";
-        "activate task manager entry 7" = "none,Meta+7,Activate Task Manager Entry 7";
-        "activate task manager entry 8" = "none,Meta+8,Activate Task Manager Entry 8";
-        "activate task manager entry 9" = "none,Meta+9,Activate Task Manager Entry 9";
+        "activate task manager entry 1" = "none";
+        "activate task manager entry 10" = "none";
+        "activate task manager entry 2" = "none";
+        "activate task manager entry 3" = "none";
+        "activate task manager entry 4" = "none";
+        "activate task manager entry 5" = "none";
+        "activate task manager entry 6" = "none";
+        "activate task manager entry 7" = "none";
+        "activate task manager entry 8" = "none";
+        "activate task manager entry 9" = "none";
       };
       "services/systemsettings.desktop"."_launch" = [
         "Tools"
@@ -168,6 +173,23 @@ in
         translucency.enable = false;
         windowOpenClose.animation = "scale";
       };
+    };
+
+    window-rules = with lib; let
+      mkDesktopFileFix' = wmclass: desktopfile: nameValuePair wmclass {
+        description = "Set ${wmclass} to ${desktopfile}.desktop";
+        match.window-class.value = wmclass;
+        apply.desktopfile = {
+          value = desktopfile;
+          apply = "force";
+        };
+      };
+      # Allows correct icons to display in panel when the window class does not
+      # match the desktop file name
+      # Usage: mkDesktopFileFix { wmclass = "actual-desktop-name"; wmclass2 = "correction2"; }
+      mkDesktopFileFix = m: attrValues (mapAttrs' mkDesktopFileFix' m);
+    in mkDesktopFileFix {
+      firefox-dev = "firefox-developer-edition";
     };
 
     configFile = {
@@ -207,11 +229,6 @@ in
         1;
       "kcminputrc"."Libinput/9494/127/Cooler Master Technology Inc. Gaming MECH KB Mouse"."ScrollMethod" =
         4;
-      "kdeglobals"."General"."AccentColor" = "61,174,233";
-      "kdeglobals"."General"."LastUsedCustomAccentColor" = "61,174,233";
-      "kdeglobals"."General"."XftAntialias" = true;
-      "kdeglobals"."General"."XftHintStyle" = "hintfull";
-      "kdeglobals"."General"."XftSubPixel" = "rgb";
       "klaunchrc"."BusyCursorSettings"."Bouncing" = false;
       "klaunchrc"."FeedbackStyle"."BusyCursor" = false;
       "kscreenlockerrc"."Daemon"."LockGrace" = 30;
