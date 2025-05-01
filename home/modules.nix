@@ -18,4 +18,5 @@
   modules/terminals
   modules/syncthing.nix
   modules/lisp.nix
-] ++ inputs.nixpkgs.lib.optional host.os.wantsKde modules/plasma
+]
+++ inputs.nixpkgs.lib.optional host.os.wantsKde modules/plasma

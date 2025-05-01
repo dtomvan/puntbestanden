@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   imports = [
+    # TEMP
+    ./modules/hyprland.nix
+
     ./modules/utilities.nix
     ./modules/programs/gpg.nix
 
