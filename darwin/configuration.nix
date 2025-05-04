@@ -15,13 +15,11 @@
         "nix-command"
         "flakes"
       ];
-      auto-optimise-store = true;
     };
     channel.enable = false;
 
     gc = {
       automatic = true;
-      dates = "weekly";
       options = "--delete-older-than 14d";
     };
     optimise = {
@@ -29,10 +27,17 @@
     };
   };
 
+  homebrew = {
+    enable = true;
+    casks = [
+      "alacritty"
+      "keybase"
+    ];
+  };
+
   environment.systemPackages = with pkgs; [
     gh
     git
-    alacritty
     bat
     btop
     du-dust
@@ -52,6 +57,7 @@
     skim
     tealdeer
     yazi
+    nh
   ];
 
   networking.hostName = "autisme";
