@@ -122,11 +122,11 @@ rec {
                 }
               )
             ) (import ./hosts.nix);
-          };
 
-          darwinConfigurations.autisme = nix-darwin.lib.darwinSystem {
+            darwinConfigurations.autisme = nix-darwin.lib.darwinSystem {
               modules = [ ./darwin/configuration.nix ];
               specialArgs = { inherit inputs; };
+            };
           };
 
         systems = [

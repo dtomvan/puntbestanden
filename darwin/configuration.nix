@@ -5,30 +5,57 @@
 }:
 {
   imports = [
-    ../os/modules/users/tomvd.nix
     ../os/modules/services/ssh.nix
   ];
 
-  users.users.tomvd.hashedPasswordFile = lib.mkForce null;
-  users.users.tomvd.hashedPassword = "$y$j9T$w/zDDoj.X14G47Pg6Tdnk.$RcqndfuZdGUW1eMA2012j9ry0k/R4K/zBoxMRvEdyn6";
+  nixpkgs.flake.setFlakeRegistry = true;
+  nix = {
+    settings = {
+      experimental-features = lib.mkDefault [
+        "nix-command"
+        "flakes"
+      ];
+      auto-optimise-store = true;
+    };
+    channel.enable = false;
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
+    optimise = {
+      automatic = true;
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     gh
     git
     alacritty
+    bat
+    btop
+    du-dust
+    eza
+    fastfetch
+    fd
+    file
+    glow
+    gron
+    jq
+    just
+    neovim
+    nixfmt-rfc-style
+    nix-tree
+    rink
+    ripgrep
+    skim
+    tealdeer
+    yazi
   ];
 
   networking.hostName = "autisme";
   networking.computerName = "Tom's Autisme";
-
-  homebrew = {
-    enable = true;
-    brews = [
-    ];
-    masApps = {
-      Xcode = 497799835;
-    };
-  };
 
   system.defaults = {
     NSGlobalDomain = {
@@ -64,5 +91,6 @@
       defaults write com.apple.loginwindow DisableScreenLock -bool true
     '';
 
-  nix.gc.automatic = true;
+  nixpkgs.hostPlatform = "x86_64-darwin";
+  system.stateVersion = 6;
 }
