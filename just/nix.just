@@ -21,3 +21,14 @@ update-os:
 [group('nix')]
 up: update-flake update-os update-home
 
+[group('nix')]
+feather:
+    nix run .#feather
+
+[group('nix')]
+boomer:
+    nix run .#boomer
+
+[group('nix')]
+kaput:
+    nix run .#kaput

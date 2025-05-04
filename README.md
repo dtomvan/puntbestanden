@@ -1,0 +1,24 @@
+# Puntbestanden
+
+> Literally means "dotfiles" in Dutch: "punt" = "dot", "bestanden" = "files"
+
+What's in here:
+- 3 nixos configs
+- a generic home-manager config which has "specializations" based of properties of specific hosts (see `hosts.nix`)
+    - neovim
+    - helix
+    - [plasma-manager](https://github.com/nix-community/plasma-manager)
+    - hyprland
+    - various terminals (alacritty, foot, ghostty, konsole)
+- 8 firefox extensions from source
+- 1 font
+- 4 clojure utilities
+- `home/lib/a-fuckton-of-git-aliases.nix` :)
+- An unhinged Emacs config
+- A lot less lines of neovim lua config compared to my [previous attempt](https://github.com/dtomvan/.config/tree/main/neovim/.config/nvim)
+
+## The hostnames
+
+- `boomer`, a reasonably sluggish Ryzen 5 2600 desktop PC.
+- `feather`, the ultra-light Thinkpad X1 Carbon G8
+- `kaput`, a thick bastard of a laptop with a broken screen

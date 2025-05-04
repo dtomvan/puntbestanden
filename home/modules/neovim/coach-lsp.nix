@@ -1,18 +1,12 @@
 {
   config,
   pkgs,
-  lib,
   ...
 }:
 let
-  cfg = config.modules.coach-lsp;
   cmd = "${pkgs.coach-cached}/bin/coach-lsp";
 in
 {
-  options.modules.coach-lsp = {
-    enable = lib.mkEnableOption "download coach-lsp and add to nvim";
-    use-cached = lib.mkEnableOption "don't compile coach-lsp, just use a distributed version";
-  };
   config.programs.nixvim.plugins.lsp.preConfig = ''
     local configs = require 'lspconfig.configs'
 
@@ -26,7 +20,7 @@ in
     }
   '';
   config.programs.nixvim.filetype.extension.coach = "coach";
-  config.programs.nixvim.plugins.lsp.enabledServers = lib.optionals config.modules.coach-lsp.enable [
+  config.programs.nixvim.plugins.lsp.enabledServers = [
     {
       name = "coach-lsp";
       extraOptions = {

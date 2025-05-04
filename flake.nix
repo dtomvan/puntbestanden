@@ -52,6 +52,11 @@ rec {
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -60,6 +65,7 @@ rec {
       flake-parts,
       home-manager,
       nixpkgs,
+      nix-darwin,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } (
@@ -116,6 +122,11 @@ rec {
                 }
               )
             ) (import ./hosts.nix);
+          };
+
+          darwinConfigurations.autisme = nix-darwin.lib.darwinSystem {
+              modules = [ ./darwin/configuration.nix ];
+              specialArgs = { inherit inputs; };
           };
 
         systems = [

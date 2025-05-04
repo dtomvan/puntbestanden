@@ -1,4 +1,3 @@
-{ lib, ... }:
 let
   keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFkdbc1mWvIUciwrrIZVRYrZwTBmQ7Cehd/laxzzdlyL tomvd@boomer"
@@ -7,9 +6,7 @@ let
   ];
 in
 {
-  config = {
-    services.openssh.enable = true;
-    users.users.tomvd.openssh.authorizedKeys.keys = keys;
-    users.users.root.openssh.authorizedKeys.keys = keys;
-  };
+  services.openssh.enable = true;
+  users.users.tomvd.openssh.authorizedKeys.keys = keys;
+  users.users.root.openssh.authorizedKeys.keys = keys;
 }

@@ -14,4 +14,7 @@
     # nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidia_x11;
   };
+  boot.extraModprobeConfig = ''
+    options nvidia NVreg_PreserveVideoMemoryAllocations=1
+  '';
 }
