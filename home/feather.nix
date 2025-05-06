@@ -1,1 +1,3 @@
-{ }
+{
+  imports = [ modules/hyprland.nix ];
+}

@@ -4,6 +4,7 @@
     system = "x86_64-linux";
     hardware = {
       cpuVendor = "amd";
+      gpuVendor = "nvidia";
     };
     remoteBuild = {
       enable = true;
@@ -23,7 +24,6 @@
       wantsKde = true;
       extraModules = [
         ./os/hardware/boomer-disko.nix
-        ./os/hardware/nvidia.nix
         ./os/hardware/ssd.nix
       ];
     };
@@ -34,6 +34,7 @@
     system = "x86_64-linux";
     hardware = {
       cpuVendor = "intel";
+      gpuVendor = "intel";
     };
     remoteBuild.enable = false;
     os = {

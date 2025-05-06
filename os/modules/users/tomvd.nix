@@ -49,7 +49,7 @@
         yazi
       ]
       ++ lib.optionals host.os.isGraphical [
-        zathura
+        kdePackages.okular
         wl-clipboard
         pavucontrol
         alsa-utils

@@ -38,10 +38,10 @@
     ];
   };
 
-  fileSystems."/tmp" = {
-    device = "none";
-    fsType = "tmpfs";
-  };
+  # fileSystems."/tmp" = {
+  #   device = "none";
+  #   fsType = "tmpfs";
+  # };
 
   swapDevices = [
     { device = "/dev/disk/by-uuid/5f91d35f-872c-475e-857a-089dd93a8711"; }

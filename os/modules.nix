@@ -37,4 +37,5 @@ in
 
   ./modules/fonts.nix
 ]
+++ lib.optional (host.hardware.gpuVendor == "nvidia") ./os/hardware/nvidia.nix
 ++ lib.optional host.os.wantsKde ./modules/kde.nix

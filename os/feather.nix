@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./modules/hyprland.nix
     ./modules/utilities.nix
     ./modules/programs/gpg.nix
 

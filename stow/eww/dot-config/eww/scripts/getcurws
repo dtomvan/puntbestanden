@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+ws() {
+  hyprctl activeworkspace -j | jq -r .name
+}
+
+ws
+
+socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - | while read -r line; do
+  ws
+done

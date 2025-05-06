@@ -162,17 +162,23 @@ in
                 url = "about:config";
               }
               {
-                name = "zermelo";
-                url = "https://nassau.zportal.nl/app/";
-              }
-              {
-                name = "OneDrive";
-                url = "https://cloud.omeduostuurcentenneef.nl";
-              }
-              {
                 name = "nixpkgs";
                 url = "https://github.com/NixOS/nixpkgs/";
               }
+              # {
+              #   name = "NGI@NIX";
+              #   toolbar = true;
+              #   bookmarks = [
+              {
+                name = "SoN 2025";
+                url = "https://github.com/ngi-nix/summer-of-nix/";
+              }
+              {
+                name = "ngipkgs";
+                url = "https://github.com/ngi-nix/ngipkgs/";
+              }
+              #   ];
+              # }
               {
                 name = "PaperCut Login for Dr. Nassau College";
                 url = "http://as-papercut-as:9191/user";

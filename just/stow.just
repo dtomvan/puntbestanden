@@ -19,13 +19,5 @@ stow-adopt PACKAGE +args='':
 	@just run-stow --adopt {{PACKAGE}} {{args}}
 
 [group('stow')]
-stow-tom-pc +args='':
-	@just stow kde-common kde-tom-pc {{args}}
-
-[group('stow')]
-stow-tom-laptop +args='':
-	@just stow kde-common kde-tom-laptop {{args}}
-
-[group('stow')]
 stow-nvim +args='':
 	@just stow nvim {{args}}

@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   host,
@@ -8,6 +9,19 @@
   ${if host.os.isGraphical then "firefox" else null} = {
     enable = true;
     isPlasma = true;
+  };
+
+  home.${if host.os.isGraphical then "pointerCursor" else null} = {
+    enable = true;
+    package = pkgs.kdePackages.breeze;
+    name = "Breeze";
+    size = 24;
+    gtk.enable = true;
+    x11.enable = true;
+    hyprcursor = lib.mkIf config.wayland.windowManager.hyprland.enable {
+      enable = true;
+      size = 24;
+    };
   };
 
   modules = {
