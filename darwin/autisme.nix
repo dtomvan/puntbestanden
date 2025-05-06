@@ -6,6 +6,7 @@
 {
   imports = [
     ../os/modules/services/ssh.nix
+    ../os/modules/users/remote-build.nix
   ];
 
   nixpkgs.flake.setFlakeRegistry = true;
@@ -27,15 +28,17 @@
     };
   };
 
-  homebrew = {
+  programs.gnupg = {
+    agent.enable = true;
+  };
+
+  services.tailscale = {
     enable = true;
-    casks = [
-      "alacritty"
-      "keybase"
-    ];
+    package = pkgs.tailscale.overrideAttrs { doCheck = false; };
   };
 
   environment.systemPackages = with pkgs; [
+    alacritty
     gh
     git
     bat

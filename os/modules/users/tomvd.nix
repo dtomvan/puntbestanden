@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   host,
   ...
@@ -56,17 +55,6 @@
         alsa-utils
       ];
 
-    hashedPasswordFile = config.sops.secrets."tomvd.pass".path;
-  };
-
-  sops.secrets."tomvd.pass" = {
-    sopsFile = ../../../secrets/tomvd.pass.secret;
-    neededForUsers = true;
-
-    format = "binary";
-
-    mode = "0600";
-    owner = "tomvd";
-    group = "users";
+    hashedPassword = "$y$j9T$UNKC2ue19sYmCgHQGWcVE.$.6FqJwASbIV0O7c1hJM7BsPnGV6j98lMzr635nHmwA4";
   };
 }

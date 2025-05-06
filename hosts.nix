@@ -38,11 +38,11 @@
     remoteBuild.enable = false;
     os = {
       isGraphical = true;
-      wantsKde = true;
+      wantsKde = false;
       extraModules = [
         ./os/hardware/comet-lake.nix
         ./os/hardware/elan-tp.nix
-        ./os/hardware/fprint.nix
+        # ./os/hardware/fprint.nix
       ];
     };
   };
@@ -58,6 +58,21 @@
       isGraphical = false;
       wantsKde = false;
       extraModules = [ ];
+    };
+  };
+
+  x86-darwin-kvm = {
+    hostName = "autisme";
+    system = "x86_64-darwin";
+    hardware = {
+      cpuVendor = "intel";
+    };
+    remoteBuild = {
+      enable = true;
+      settings = {
+        maxJobs = 6;
+        speedFactor = 1;
+      };
     };
   };
 }

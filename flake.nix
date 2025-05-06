@@ -94,11 +94,11 @@ rec {
                 ];
               };
           in
-          {
-            nixosConfigurations = nixpkgs.lib.mapAttrs' (
+          with nixpkgs.lib; {
+            nixosConfigurations = mapAttrs' (
               _key: host:
-              nixpkgs.lib.nameValuePair host.hostName (
-                nixpkgs.lib.nixosSystem {
+              nameValuePair host.hostName (
+                nixosSystem {
                   specialArgs = {
                     inherit host nixConfig;
                   };
@@ -106,7 +106,19 @@ rec {
                   pkgs = mkPkgs host.system;
                 }
               )
-            ) (import ./hosts.nix);
+            ) (filterAttrs (_k: v: hasInfix "linux" v.system) (import ./hosts.nix));
+
+            darwinConfigurations = mapAttrs' (
+              _key: host:
+              nameValuePair host.hostName (
+                nix-darwin.lib.darwinSystem {
+                  specialArgs = {
+                    inherit host nixConfig;
+                  };
+                  modules = [ ./darwin/${host.hostName}.nix ];
+                }
+              )
+            ) (filterAttrs (_k: v: hasInfix "darwin" v.system) (import ./hosts.nix));
 
             homeConfigurations = nixpkgs.lib.mapAttrs' (
               _key: host:
@@ -122,11 +134,6 @@ rec {
                 }
               )
             ) (import ./hosts.nix);
-
-            darwinConfigurations.autisme = nix-darwin.lib.darwinSystem {
-              modules = [ ./darwin/configuration.nix ];
-              specialArgs = { inherit inputs; };
-            };
           };
 
         systems = [

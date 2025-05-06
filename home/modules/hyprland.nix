@@ -3,12 +3,11 @@
   home.packages = with pkgs; [
     alacritty
     kdePackages.dolphin
-    kdePackages.spectacle
+    grimblast
     wireplumber
     brightnessctl
     playerctl
   ];
-  # TEMP
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
@@ -58,7 +57,7 @@
           "$mod, E, exec, dolphin"
           "$mod, Q, killactive,"
           "$mod, V, togglefloating,"
-          ", Print, exec, spectacle"
+          '', Print, exec, grimblast copysave area ~/Pictures/Screenshots/Screenshot_"$(date +'%Y%m%d_%H%M%S')".png''
         ]
         ++ (builtins.concatLists (
           builtins.genList (

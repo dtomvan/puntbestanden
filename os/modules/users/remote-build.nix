@@ -1,13 +1,18 @@
+{ lib, host, ... }:
+let
+  inherit (import ../../../lib/host.nix { inherit lib; }) isLinux;
+  isLinux' = isLinux host;
+in
 {
   users.users.remotebuild = {
-    isNormalUser = true;
+    ${if isLinux' then "isNormalUser" else null} = true;
     createHome = false;
-    group = "remotebuild";
+    ${if isLinux' then "group" else null} = "remotebuild";
 
     openssh.authorizedKeys.keyFiles = [ ./remotebuild.pub ];
   };
 
-  users.groups.remotebuild = { };
+  users.groups.remotebuild = lib.mkIf isLinux' { };
 
   nix.settings.trusted-users = [ "remotebuild" ];
 }

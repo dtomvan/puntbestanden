@@ -20,9 +20,6 @@
     hermetic = false;
   };
 
-  services.olive-c.enable = true;
-  services.koil.enable = true;
-
   modules = {
     printing.useHPLip = true;
 
@@ -32,13 +29,6 @@
       linux = true;
       nix = true;
       repos = true;
-    };
-  };
-
-  services.displayManager.sddm.settings = {
-    AutoLogin = {
-      Session = "plasma.desktop";
-      User = "tomvd";
     };
   };
 

@@ -67,12 +67,11 @@
     sowon
   ];
 
-  # services.displayManager = {
-  #   sddm.enable = false;
-  #   sddm.wayland.enable = false;
-  #
-  #   ly.enable = true;
-  # };
+  # hyprland.nix provides regreet, kde.nix provides sddm, choice made.
+  services.displayManager = {
+    sddm.enable = false;
+    sddm.wayland.enable = false;
+  };
 
   hardware.bluetooth.enable = true;
 
