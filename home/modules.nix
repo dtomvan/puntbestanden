@@ -6,7 +6,6 @@ if inputs.nixpkgs.lib.strings.hasInfix "linux" host.system then
   [
     inputs.nixvim.homeManagerModules.nixvim
     inputs.plasma-manager.homeManagerModules.plasma-manager
-    inputs.dont-track-me.homeManagerModules.default
     ./common.nix
     ./${host.hostName}.nix
 

@@ -15,7 +15,7 @@
 
   _module.args.nixinate = {
     host = "feather";
-    sshUser = "root";
+    sshUser = "tomvd";
     buildOn = "local";
     substituteOnTarget = true;
     hermetic = false;

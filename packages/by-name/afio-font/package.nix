@@ -4,7 +4,7 @@
   fetchzip,
 }:
 let
-  version = "0.0.12";
+  version = "0.0.13";
   isRc = true;
   versionTag = "v${version}${if isRc then "-rc" else ""}";
 in
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   src = fetchzip {
     url = "${meta.homepage}/releases/download/${versionTag}/afio-v${version}.zip";
-    hash = "sha256-EizgNdPyFF5mBYXkhCEDORpZppv4p3dQtmFPiDnhAZc=";
+    hash = "sha256-9CU9zwxure1XvKdqqX/WSx3IHWtntlyAq7Zrlwxla2o=";
     stripRoot = false;
   };
 

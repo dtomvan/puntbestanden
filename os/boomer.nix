@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     # TEMP
-    ./modules/hyprland.nix
+    # ./modules/hyprland.nix
 
     ./modules/utilities.nix
     ./modules/programs/gpg.nix
@@ -68,10 +68,10 @@
   ];
 
   # hyprland.nix provides regreet, kde.nix provides sddm, choice made.
-  services.displayManager = {
-    sddm.enable = false;
-    sddm.wayland.enable = false;
-  };
+  # services.displayManager = {
+  #   sddm.enable = false;
+  #   sddm.wayland.enable = false;
+  # };
 
   hardware.bluetooth.enable = true;
 

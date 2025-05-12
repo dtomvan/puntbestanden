@@ -1,6 +1,6 @@
 {
   imports = [
     modules/latex.nix
-    modules/hyprland.nix
+    # modules/hyprland.nix
   ];
 }

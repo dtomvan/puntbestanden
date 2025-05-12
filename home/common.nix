@@ -53,11 +53,6 @@
     helix.lsp.enable = host.os.isGraphical;
   };
 
-  dont-track-me = {
-    enable = true;
-    enableAll = true;
-  };
-
   services.lorri.enable = true;
 
   home.username = "tomvd";
@@ -76,6 +71,10 @@
     stow
     visidata
     yt-dlp
+
+    npins
+    treefmt # when nixtreefmt is added, you need treefmt anyways so "for free"
+    nixtreefmt # in-tree
 
     speedtest
   ];

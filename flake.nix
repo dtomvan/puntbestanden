@@ -45,8 +45,6 @@ rec {
     sops.url = "github:Mic92/sops-nix";
     sops.inputs.nixpkgs.follows = "nixpkgs";
 
-    dont-track-me.url = "github:dtomvan/dont-track-me.nix";
-
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -94,18 +92,17 @@ rec {
                 ];
               };
           in
-          with nixpkgs.lib; {
+          with nixpkgs.lib;
+          {
             nixosConfigurations = mapAttrs' (
               _key: host:
-              nameValuePair host.hostName (
-                nixosSystem {
-                  specialArgs = {
-                    inherit host nixConfig;
-                  };
-                  modules = import os/modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
-                  pkgs = mkPkgs host.system;
-                }
-              )
+              nameValuePair host.hostName (nixosSystem {
+                specialArgs = {
+                  inherit host nixConfig inputs;
+                };
+                modules = import os/modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
+                pkgs = mkPkgs host.system;
+              })
             ) (filterAttrs (_k: v: hasInfix "linux" v.system) (import ./hosts.nix));
 
             darwinConfigurations = mapAttrs' (
@@ -152,6 +149,21 @@ rec {
 
             pkgsDirectory = ./packages/by-name;
             devShells = { };
+
+            packages = {
+              # treefmt for nixpkgs contributors
+              nixtreefmt =
+                let
+                  inherit (import "${nixpkgs}/ci" { inherit nixpkgs system; }) fmt;
+                in
+                pkgs.symlinkJoin {
+                  name = "nixtreefmt";
+                  paths = [ fmt.pkg ];
+                  postBuild = ''
+                    mv $out/bin/{,nix}treefmt
+                  '';
+                };
+            };
           };
       }
     );
