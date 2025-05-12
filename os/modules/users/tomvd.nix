@@ -49,7 +49,6 @@
         yazi
       ]
       ++ lib.optionals host.os.isGraphical [
-        kdePackages.okular
         wl-clipboard
         pavucontrol
         alsa-utils

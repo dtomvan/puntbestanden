@@ -4,6 +4,45 @@
   host,
   ...
 }:
+with lib;
+let
+  isHex = str: match "[0-9a-fA-F]+" str != null;
+  isRGB = color: isHex color && stringLength color == 6;
+  isRGBA = color: isHex color && stringLength color == 8;
+
+  toRGB = color: substring 0 6 color;
+  toRGBA = color: "${substring 0 6 color}FF";
+
+  minusHex = a: b: toHexString ((fromHexString a) - (fromHexString b));
+  complementRGB = color: minusHex "FFFFFF" color;
+  complementRGBA = color: minusHex "FFFFFFFF" color;
+  complement = color: {
+    RGB = complementRGB color.RGB;
+    RGBA = complementRGBA color.RGBA;
+  };
+
+  makeColor =
+    color:
+    if isRGB color then
+      {
+        RGB = color;
+        RGBA = toRGBA color;
+      }
+    else if isRGBA color then
+      {
+        RGB = toRGB color;
+        RGBA = color;
+      }
+    else
+      throw "Not a color";
+
+  accentColor = makeColor "33ccffee";
+  compAccentColor = complement accentColor;
+
+  backgroundColor = makeColor "000000AA";
+
+  grey = makeColor "595959aa";
+in
 {
   # TODO: less hardcoding, more flexibility
   home.packages = with pkgs; [
@@ -25,8 +64,6 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = null;
-    portalPackage = null;
     systemd.enable = false;
     settings = {
       "$mod" = "SUPER";
@@ -47,8 +84,8 @@
 
         border_size = 2;
 
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        "col.active_border" = "rgba(${accentColor.RGBA})";
+        "col.inactive_border" = "rgba(${grey.RGBA})";
       };
 
       input = {
@@ -127,12 +164,12 @@
           "$mod, l, movefocus, r"
           "$mod, k, movefocus, u"
           "$mod, j, movefocus, d"
-          "$mod, F, exec, firefox-developer-edition"
+          "$mod, F, fullscreen,"
           "$mod, return, exec, alacritty"
           "$mod, space, exec, tofi-drun --drun-launch=true"
           "$mod, E, exec, dolphin"
           "$mod, Q, killactive,"
-          "$mod, V, togglefloating,"
+          "$mod, M, togglefloating,"
           '', Print, exec, grimblast copysave area ~/Pictures/Screenshots/Screenshot_"$(date +'%Y%m%d_%H%M%S')".png''
           "$mod, V, exec, $terminal --class clipse -e 'clipse'"
           "$mod ALT, L, exec, hyprlock"
@@ -219,6 +256,7 @@
         ];
         wallpaper = [
           "DP-1,${wallpaper}"
+          "eDP-1,${wallpaper}"
         ];
       };
     };
@@ -255,6 +293,68 @@
             on-resume = after_sleep_cmd;
           }
         ];
+      };
+  };
+
+  programs.tofi = {
+    enable = true;
+    package = null;
+    settings = {
+      terminal = "alacritty";
+      text-cursor = true;
+      font = "Afio";
+      font-size = 12;
+      background-color = "#${backgroundColor.RGBA}";
+      selection-color = "#${accentColor.RGB}";
+      selection-match-color = "#${compAccentColor.RGB}";
+      outline-width = 0;
+      border-width = 0;
+      prompt-text = ": ";
+      width = "50%";
+      height = "30%";
+      corner-radius = 20;
+    };
+  };
+
+  services.fnott = {
+    enable = true;
+    settings =
+      let
+        background = backgroundColor.RGBA;
+        font-family = "Afio";
+        title-font = "${font-family}:size=14";
+        summary-font = "${font-family}:size=12";
+        body-font = "${font-family}:size=12";
+      in
+      {
+        main = {
+          edge-margin-vertical = 30;
+          edge-margin-horizontal = 30;
+        };
+
+        low = {
+          inherit
+            background
+            title-font
+            summary-font
+            body-font
+            ;
+        };
+
+        normal = {
+          inherit
+            background
+            title-font
+            summary-font
+            body-font
+            ;
+        };
+
+        critical = {
+          background = "6c3333AA";
+
+          inherit title-font summary-font body-font;
+        };
       };
   };
 }
