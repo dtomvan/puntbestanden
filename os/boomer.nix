@@ -3,6 +3,8 @@
   imports = [
     # TEMP
     # ./modules/hyprland.nix
+    
+    ./modules/localsend-rs.nix
 
     ./modules/utilities.nix
     ./modules/programs/gpg.nix

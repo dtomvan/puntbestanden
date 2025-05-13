@@ -55,6 +55,12 @@ rec {
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    localsend-rs = {
+      # private
+      url = "github:dtomvan/localsend-rust-impl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
