@@ -1,12 +1,16 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
   imports = [
     ../os/modules/services/ssh.nix
     ../os/modules/users/remote-build.nix
+    inputs.srvos.darwinModules.server
+    inputs.srvos.darwinModules.mixins-terminfo
+    inputs.srvos.darwinModules.mixins-trusted-nix-caches
   ];
 
   nixpkgs.flake.setFlakeRegistry = true;
@@ -16,6 +20,7 @@
         "nix-command"
         "flakes"
       ];
+      trusted-users = [ "tomvd" ];
     };
     channel.enable = false;
 

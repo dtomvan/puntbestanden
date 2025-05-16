@@ -61,6 +61,11 @@ rec {
       url = "github:dtomvan/localsend-rust-impl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    srvos = {
+      url = "github:nix-community/srvos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -116,7 +121,7 @@ rec {
               nameValuePair host.hostName (
                 nix-darwin.lib.darwinSystem {
                   specialArgs = {
-                    inherit host nixConfig;
+                    inherit host nixConfig inputs;
                   };
                   modules = [ ./darwin/${host.hostName}.nix ];
                 }
