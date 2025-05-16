@@ -25,10 +25,10 @@ writers.writeBabashkaBin "ask.clj" { } # clojure
     (defn -main [& args]
       (let [q (join " " args)
             q (if (empty? q) "Yes or no" q)]
-        (println
+        (System/exit
          (if (ask? q false)
-           1
-           0))))
+           0
+           1))))
 
     (when (= *file* (System/getProperty "babashka.file"))
       (apply -main *command-line-args*))

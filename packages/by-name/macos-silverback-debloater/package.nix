@@ -19,11 +19,11 @@ stdenv.mkDerivation (finalAttrs: {
     runHook preInstall
 
     install -Dm555 macOS_Silverback-Debloater.sh $out/bin/macos-silverback-debloater
-    ${lib.concatStrings [
+    ${lib.concatStringsSep " " [
       ''sed -i $out/bin/macos-silverback-debloater''
-      '' '2a\ if [[ 0 -eq `${clj-ask}/bin/ask.clj''
-      '' "Are you sure you want to debloat your MacOS?"` ]];''
-      ''then exit; fi' ''
+      '' -e '2a\ `${clj-ask}/bin/ask.clj''
+      ''"Are you sure you want to debloat your MacOS?"''
+      ''|| exit 1 ''
     ]}
 
     runHook postInstall
