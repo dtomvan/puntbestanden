@@ -2,6 +2,7 @@ keys:
   - &boomer age1p0qcwy8he6y70xk5qkp52pnaeyr2pdhhhgpjqgaxpwpu0dthhs8s099w9x
   - &feather age1pjgmdxkj6zvn5hpjwd4mlv2jw89mk78luuetdcjqtmaq6r88juwshyjqal
   - &kaput age1hfxwhjh3lwq9cl2fp2fx0edzvptd0m8e87amlxktpt0p37q9ueusqd9h5p
+  - &autisme age1r3zv7nrf53wvjd78lld55wtqhmysp7n40uka07yaq0v4e9yv6s7szjj0nn
 
 creation_rules:
   - path_regex: secrets/[^/]+.secret
@@ -10,3 +11,4 @@ creation_rules:
         - *boomer
         - *feather
         - *kaput
+        - *autisme
