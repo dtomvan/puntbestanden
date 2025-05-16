@@ -22,7 +22,7 @@ stdenv.mkDerivation (finalAttrs: {
     ${lib.concatStringsSep " " [
       ''sed -i $out/bin/macos-silverback-debloater''
       '' -e '2a\ ${clj-ask}/bin/ask.clj''
-      ''"Are you sure you want to debloat your MacOS?"''
+      ''"Are you sure you want to debloat your MacOS?"' ''
       ''|| exit 1''
     ]}
 
