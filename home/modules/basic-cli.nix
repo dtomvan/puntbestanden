@@ -107,6 +107,7 @@ with lib;
       name = mkDefault "Tom van Dijk";
       email = mkDefault "18gatenmaker6@gmail.com";
     };
+    jujutsuBabyMode = true;
   };
 
   modules.neovim = {
