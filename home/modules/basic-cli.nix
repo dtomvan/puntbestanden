@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }:
 with lib;
 {
   imports = [
@@ -22,41 +18,51 @@ with lib;
   programs.bash = {
     enable = true;
 
-    initExtra = ''
-      bind 'set show-all-if-ambiguous on'
-      bind 'tab:menu-complete'
+    initExtra =
+      # bash
+      ''
+        bind 'set show-all-if-ambiguous on'
+        bind 'tab:menu-complete'
 
-      c() {
-          clifm "--cd-on-quit" "$@"
-          dir="$(grep "^\*" "$HOME/.config/clifm/.last" 2>/dev/null | cut -d':' -f2)";
-          if [ -d "$dir" ]; then
-              cd -- "$dir" || return 1
-          fi
-      }
-    '';
         if [ -z "$container" ]; then
           source <(atuin init bash --disable-up-arrow)
         fi
 
-    shellAliases =
-      {
-        n-b = "nix-build";
-        nb = "nix build";
-        n-s = "nix-shell";
-        ns = "nix shell";
+        c() {
+            clifm "--cd-on-quit" "$@"
+            dir="$(grep "^\*" "$HOME/.config/clifm/.last" 2>/dev/null | cut -d':' -f2)";
+            if [ -d "$dir" ]; then
+                cd -- "$dir" || return 1
+            fi
+        }
+        getpath() {
+          nix path-info nixpkgs#$1
+        }
+        yazipath() {
+          yazi "$(nix path-info nixpkgs#$1)"
+        }
+        nix-source() {
+          local expr=`printf 'with import <nixpkgs> {}; lib.concatLines [(%s.src.url or "") (%s.meta.homepage or "")]' "$@" "$@"`
+          nix-instantiate --eval --raw --expr "$expr"
+        }
+      '';
 
-        ghopen = ''gh browse -R $(git remote get-url origin) -b $(git branch --show-current)'';
-        ghshow = ''gh browse -R $(git remote get-url origin) $(git rev-parse HEAD)'';
-        j = "just";
-        e = "nvim";
-        ls = "eza";
-        la = "eza -a";
-        ll = "eza -lah";
-        cat = "bat";
-      }
-      // (import ../lib/a-fuckton-of-git-aliases.nix {
-        fish = false;
-      });
+    shellAliases = {
+      yr = "yazi result";
+      n-b = "nix-build";
+      nb = "nix build";
+      n-s = "nix-shell";
+      ns = "nix shell";
+
+      ghopen = "gh browse -R $(git remote get-url origin) -b $(git branch --show-current)";
+      ghshow = "gh browse -R $(git remote get-url origin) $(git rev-parse HEAD)";
+      j = "just";
+      e = "nvim";
+      ls = "eza";
+      la = "eza -a";
+      ll = "eza -lah";
+      cat = "bat";
+    } // (import ../lib/a-fuckton-of-git-aliases.nix { fish = false; });
   };
 
   programs.zellij = {
