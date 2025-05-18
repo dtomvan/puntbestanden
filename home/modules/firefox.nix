@@ -173,8 +173,8 @@ in
               #   ];
               # }
               {
-                name = "PaperCut Login for Dr. Nassau College";
-                url = "http://as-papercut-as:9191/user";
+                name = "Revsets";
+                url = "https://jj-vcs.github.io/jj/latest/revsets/";
               }
               {
                 name = "unreviewed PRs to nixpkgs";
