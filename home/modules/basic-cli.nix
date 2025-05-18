@@ -2,8 +2,9 @@
 with lib;
 {
   imports = [
-    ./neovim
     ./git.nix
+    ./jujutsu.nix
+    ./neovim
   ];
 
   home.shell.enableShellIntegration = true;
