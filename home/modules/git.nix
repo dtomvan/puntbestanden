@@ -38,100 +38,101 @@ in
       lazyjj
     ];
 
-  config.programs.jujutsu = lib.mkIf cfg.enable {
-    enable = true;
-    package = if cfg.withJujutsu then pkgs.jujutsu else null;
-    # TODO: largely copy-pasta from jj wiki
-    # https://jj-vcs.github.io/jj/latest
-    settings = {
-      inherit (cfg) user;
-      ui = {
-        default-command = "log";
-        pager = ":builtin";
-        diff.tool = [
-          "${lib.getExe pkgs.difftastic}"
-          "--color=always"
-          "$left"
-          "$right"
-        ];
-      };
-      git = {
-        auto-local-bookmark = true;
-        private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
-        # see signing.behavior
-        sign-on-push = true;
-      };
-      workspace = {
-        multi-working-copy = true;
-      };
-      fix.tools = {
-        nixfmt = {
-          command = [
-            "${lib.getExe pkgs.nixfmt}"
-            "$file"
-          ];
-          patterns = [ "glob:'**/*.nix'" ];
-        };
-        rustfmt = {
-          enabled = false;
-          command = [
-            "rustfmt"
-            "--emit"
-            "stdout"
-          ];
-          patterns = [ "glob:'**/*.rs'" ];
-        };
-      };
-      aliases = {
-        set = [
-          "config"
-          "set"
-          "--repo"
-        ];
-        watch = [
-          "config"
-          "set"
-          "--repo"
-          "core.fsmonitor"
-          "watchman"
-        ];
-        unwatch = [
-          "config"
-          "set"
-          "--repo"
-          "core.fsmonitor"
-          "none"
-        ];
-        l = [
-          "log"
-          "-r"
-          "(main..@):: | (main..@)-"
-        ];
-      };
-      signing = {
-        # not set to "own" anymore because I cannot stand the fact that even a `jj log` can ask me for my password
-        behavior = "drop";
-        backend = "gpg";
-        key = gpgPubKey; # not nessecary, should pick up from user.email
-      };
-      revsets = {
-        mine = "author('${cfg.user.email}')";
-      };
-      templates.draft_commit_description = ''
+  config.programs.jujutsu =
+    let
+      makeDraftDesc = d: ''
         concat(
-          coalesce(description, default_commit_description, "\n"),
+          coalesce(description, ${d}, "\n"),
           "\nJJ: ignore-rest\n",
           diff.git(),
         )
       '';
-      "--scope" = [
-        {
-          "--when".repositories = [ "~/puntbestanden" ];
-          templates.default_commit_description = "commit.commiter().timestamp().format('%c')";
-        }
-      ];
+    in
+    lib.mkIf cfg.enable {
+      enable = true;
+      package = if cfg.withJujutsu then pkgs.jujutsu else null;
+      # TODO: largely copy-pasta from jj wiki
+      # https://jj-vcs.github.io/jj/latest
+      settings = {
+        inherit (cfg) user;
+        ui = {
+          default-command = "log";
+          pager = ":builtin";
+          diff.tool = [
+            "${lib.getExe pkgs.difftastic}"
+            "--color=always"
+            "$left"
+            "$right"
+          ];
+        };
+        git = {
+          auto-local-bookmark = true;
+          private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
+          # see signing.behavior
+          sign-on-push = true;
+        };
+        workspace = {
+          multi-working-copy = true;
+        };
+        fix.tools = {
+          nixfmt = {
+            command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
+            patterns = [ "glob:'**/*.nix'" ];
+          };
+          rustfmt = {
+            enabled = false;
+            command = [
+              "rustfmt"
+              "--emit"
+              "stdout"
+            ];
+            patterns = [ "glob:'**/*.rs'" ];
+          };
+        };
+        aliases = {
+          set = [
+            "config"
+            "set"
+            "--repo"
+          ];
+          watch = [
+            "config"
+            "set"
+            "--repo"
+            "core.fsmonitor"
+            "watchman"
+          ];
+          unwatch = [
+            "config"
+            "set"
+            "--repo"
+            "core.fsmonitor"
+            "none"
+          ];
+          l = [
+            "log"
+            "-r"
+            "(main..@):: | (main..@)-"
+          ];
+        };
+        signing = {
+          # not set to "own" anymore because I cannot stand the fact that even a `jj log` can ask me for my password
+          behavior = "drop";
+          backend = "gpg";
+          key = gpgPubKey; # not nessecary, should pick up from user.email
+        };
+        revsets = {
+          mine = "author('${cfg.user.email}')";
+        };
+        templates.draft_commit_description = makeDraftDesc ''""'';
+        # "--scope" = [
+        #   {
+        #     "--when".repositories = [ "~/puntbestanden" ];
+        #     templates.draft_commit_description = makeDraftDesc "commit.committer().timestamp().format('%c')";
+        #   }
+        # ];
+      };
     };
-  };
 
   config.programs.git = lib.mkIf cfg.enable {
     enable = true;
