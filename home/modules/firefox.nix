@@ -191,6 +191,10 @@ in
                 name = "nixpkgs low-hanging fruit";
                 url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22+-label%3A%222.status%3A+stale%22+";
               }
+              {
+                name = "Nix package versions";
+                url = "https://lazamar.co.uk/nix-versions/";
+              }
             ]
             ++ (builtins.map
               (v: {

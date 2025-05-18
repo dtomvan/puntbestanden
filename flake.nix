@@ -66,6 +66,11 @@ rec {
       url = "github:nix-community/srvos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix4vscode = {
+      url = "github:nix-community/nix4vscode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -98,6 +103,9 @@ rec {
                 config.allowUnfree = true;
                 overlays = [
                   inputs.nur.overlays.default
+                  inputs.nix4vscode.overlays.forVscode
+                  # broken
+                  # (_final: _prev: { nix4vscode.forOpenVsx = inputs.nix4vscode.lib.${system}.forOpenVsx; })
                   (_final: _prev: inputs.zozin.packages.${system})
                   (_final: _prev: self.packages.${system})
                 ];

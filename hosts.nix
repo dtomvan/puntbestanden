@@ -39,7 +39,7 @@
     remoteBuild.enable = false;
     os = {
       isGraphical = true;
-      wantsKde = false;
+      wantsKde = true;
       extraModules = [
         ./os/hardware/comet-lake.nix
         ./os/hardware/elan-tp.nix
