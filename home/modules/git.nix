@@ -39,6 +39,9 @@ in
     ];
 
   config.programs.mergiraf.enable = true;
+
+  # damn I thought I had a lot of stuff in my git config, but jj really is
+  # something else
   config.programs.jujutsu =
     let
       makeDraftDesc = d: ''
