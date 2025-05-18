@@ -109,6 +109,18 @@ in
             "core.fsmonitor"
             "none"
           ];
+          up = [
+            "bookmark"
+            "set"
+          ];
+          upm = [
+            "bookmark"
+            "move"
+            "--from"
+            "heads(::@- & bookmarks())"
+            "--to"
+            "@-"
+          ];
           l = [
             "log"
             "-r"
