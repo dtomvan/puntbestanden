@@ -14,7 +14,7 @@ with lib;
 
   programs.atuin = mkDefault {
     enable = true;
-    flags = [ "--disable-up-arrow" ];
+    enableBashIntegration = false;
   };
   programs.direnv.enable = mkDefault true;
   programs.zoxide.enable = mkDefault true;
@@ -34,6 +34,9 @@ with lib;
           fi
       }
     '';
+        if [ -z "$container" ]; then
+          source <(atuin init bash --disable-up-arrow)
+        fi
 
     shellAliases =
       {
