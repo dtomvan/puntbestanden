@@ -14,18 +14,13 @@ let
   makeFakeFirefox =
     firefox:
     lib.makeOverridable (
-      {
-        args,
-        ...
-      }:
+      { args, ... }:
       pkgs.stdenvNoCC.mkDerivation {
         pname = "firefox-devedition-wrapped";
         version = "0-unstable-2025-04-13";
         src = firefox;
 
-        nativeBuildInputs = with pkgs; [
-          desktop-file-utils
-        ];
+        nativeBuildInputs = with pkgs; [ desktop-file-utils ];
 
         installPhase = ''
           mkdir -p $out/share/applications
@@ -52,10 +47,7 @@ in
       args = "-P ${profile-name}";
     };
     nativeMessagingHosts = lib.mkIf cfg.isPlasma (
-      with pkgs;
-      [
-        kdePackages.plasma-browser-integration
-      ]
+      with pkgs; [ kdePackages.plasma-browser-integration ]
     );
     policies = {
       DisableAppUpdate = true;
@@ -92,13 +84,14 @@ in
       extensions = with pkgs.nur.repos.rycee.firefox-addons; {
         packages =
           [
+            keepassxc-browser
             sponsorblock
             dearrow
             plasma-integration
             enhancer-for-youtube # unfree, cannot build from source :(
 
             # drv in-tree, overlayed
-            pkgs.keepassxc-browser
+            # pkgs.keepassxc-browser #broken
             pkgs.darkreader
             pkgs.obsidian-web-clipper
             pkgs.sidebery
