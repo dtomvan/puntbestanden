@@ -38,6 +38,7 @@ in
       lazyjj
     ];
 
+  config.programs.mergiraf.enable = true;
   config.programs.jujutsu =
     let
       makeDraftDesc = d: ''
@@ -73,6 +74,22 @@ in
         };
         workspace = {
           multi-working-copy = true;
+        };
+        merge-tools = {
+          mergiraf = {
+            program = "mergiraf";
+            merge-args = [
+              "merge"
+              "$base"
+              "$left"
+              "$right"
+              "-o"
+              "$output"
+              "--fast"
+            ];
+            merge-conflict-exit-codes = [ 1 ];
+            conflict-marker-style = "git";
+          };
         };
         fix.tools = {
           nixfmt = {
