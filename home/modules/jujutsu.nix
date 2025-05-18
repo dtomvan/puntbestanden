@@ -41,7 +41,7 @@ in
         inherit (cfg) user;
 
         ui = {
-          default-command = "log";
+          default-command = "l";
           pager = ":builtin";
           diff.tool = [
             "${lib.getExe pkgs.difftastic}"
