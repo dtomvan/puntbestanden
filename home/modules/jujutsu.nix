@@ -124,11 +124,11 @@ in
             "set"
           ];
 
-          upm = [
+          tug = [
             "bookmark"
             "move"
             "--from"
-            "heads(::@- & bookmarks())"
+            "closest_bookmark(@-)"
             "--to"
             "@-"
           ];
@@ -221,6 +221,10 @@ in
 
         revsets = {
           mine = "author('${cfg.user.email}')";
+        };
+
+        revset-aliases = {
+          "closest_bookmark(to)" = "heads(::to & bookmarks())";
         };
 
         template-aliases = {
