@@ -178,6 +178,13 @@ in
             "log"
             "-Tlog2"
           ];
+
+          o = [
+            "op"
+            "log"
+            "-T"
+            "builtin_op_log_comfortable"
+          ];
         };
 
         signing = {
