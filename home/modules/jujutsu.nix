@@ -1,4 +1,5 @@
 # I just refactored this out and it's ALREADY 162 lines!
+# should this've been simple TOML?
 {
   pkgs,
   lib,
@@ -134,8 +135,48 @@ in
 
           l = [
             "log"
-            "-r"
-            "(main..@):: | (main..@)-"
+            "-Tlog1"
+            "-n10"
+          ];
+
+          ll = [
+            "log"
+            "-Tlog1"
+            "-n30"
+          ];
+
+          lll = [
+            "log"
+            "-Tlog1"
+            "-n100"
+          ];
+
+          llll = [
+            "log"
+            "-Tlog1"
+          ];
+
+          L = [
+            "log"
+            "-Tlog2"
+            "-n10"
+          ];
+
+          LL = [
+            "log"
+            "-Tlog2"
+            "-n30"
+          ];
+
+          LLL = [
+            "log"
+            "-Tlog2"
+            "-n100"
+          ];
+
+          LLLL = [
+            "log"
+            "-Tlog2"
           ];
         };
 
@@ -148,6 +189,41 @@ in
 
         revsets = {
           mine = "author('${cfg.user.email}')";
+        };
+
+        template-aliases = {
+          # don't even think about thinking about thinking I made this
+          # https://github.com/jj-vcs/jj/discussions/5812#discussioncomment-13095720
+          log1 = "smlog(original_time(committer.timestamp()), description.first_line(), bookmarks, tags)";
+          "local_time(timestamp)" = ''timestamp.local().format("%Y-%m-%d %H:%M:%S")'';
+          "localised_time(timestamp)" = ''timestamp.local().format("%Y-%m-%d %H:%M:%S %z")'';
+          "original_time(timestamp)" = ''timestamp.format("%Y-%m-%d %H:%M:%S %z")'';
+          "smlog(timestr, description, bookmarks, tags)" = ''
+            if(root,
+              format_root_commit(self),
+              label(if(current_working_copy, "working_copy"),
+                concat(
+                  separate(" ",
+                    format_short_change_id_with_hidden_and_divergent_info(self),
+                    format_short_commit_id(commit_id),
+                    timestr,
+                    if(bookmarks,surround("[","]",bookmarks),""),
+                    tags,
+                    working_copies,
+                    if(git_head, label("git_head", "git_head()")),
+                    if(conflict, label("conflict", "conflict")),
+                    if(empty, label("empty", "(empty)")),
+                    if(author.name(), author.name(), email_placeholder),
+                    if(description,
+                      description,
+                      label(if(empty, "empty"), description_placeholder),
+                    ),
+                  ) ++ "\n",
+                ),
+              )
+            )
+          '';
+          log2 = "builtin_log_comfortable";
         };
 
         templates.draft_commit_description = makeDraftDesc ''""'';
