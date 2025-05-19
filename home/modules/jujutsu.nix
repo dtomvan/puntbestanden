@@ -225,6 +225,13 @@ in
             "--remote"
             "origin"
           ];
+
+          wip = [
+            "describe"
+            "-m"
+            "wip: "
+            "--edit"
+          ];
         };
 
         signing = {
