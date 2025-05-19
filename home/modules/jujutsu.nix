@@ -60,6 +60,7 @@ in
           private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
           # see signing.behavior
           sign-on-push = true;
+          push-bookmark-prefix = "dtomvan/push-";
         };
 
         workspace = {
