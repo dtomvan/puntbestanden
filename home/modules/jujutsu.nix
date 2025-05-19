@@ -91,6 +91,15 @@ in
             command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
             patterns = [ "glob:'**/*.nix'" ];
           };
+          ruff = {
+            command = [ "${lib.getExe pkgs.ruff}" ];
+            patterns = [ "glob:'**/*.py'" ];
+          };
+          gofmt = {
+            # appearantely stricter and also don't import all of go!!!
+            command = [ "${lib.getExe pkgs.gofumpt}" ];
+            patterns = [ "glob:'**/*.py'" ];
+          };
           rustfmt = {
             enabled = false;
             command = [
