@@ -40,6 +40,10 @@ in
       settings = {
         inherit (cfg) user;
 
+        core = {
+          watchman.register-snapshot-trigger = true;
+        };
+
         ui = {
           default-command = "l";
           pager = ":builtin";
