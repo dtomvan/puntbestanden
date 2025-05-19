@@ -22,6 +22,7 @@ with lib;
     initExtra =
       # bash
       ''
+        source "${pkgs.bash-preexec}/share/bash/bash-preexec.sh"
         bind 'set show-all-if-ambiguous on'
         bind 'tab:menu-complete'
 
