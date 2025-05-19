@@ -50,6 +50,9 @@ with lib;
       '';
 
     shellAliases = {
+      # like archlinux
+      upppkg = " nix flake update nixpkgs";
+
       yr = "yazi result";
       n-b = "nix-build";
       nb = "nix build";
