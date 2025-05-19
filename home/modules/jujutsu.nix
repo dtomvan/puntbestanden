@@ -16,6 +16,7 @@ in
     ++ lib.optionals cfg.jujutsuBabyMode [
       gg-jj
       lazyjj
+      meld
     ];
 
   programs.mergiraf.enable = true;
@@ -53,6 +54,7 @@ in
             "$left"
             "$right"
           ];
+          merge-editor = if cfg.jujutsuBabyMode then "meld" else ":builtin";
         };
 
         git = {
