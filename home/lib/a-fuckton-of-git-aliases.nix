@@ -162,4 +162,5 @@
   jp = "jj git push";
   jup = "jj bookmark set";
   jb = "jj branch";
+  js = "jj show";
 }
