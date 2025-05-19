@@ -15,8 +15,6 @@ in
     [ watchman ]
     ++ lib.optionals cfg.jujutsuBabyMode [
       gg-jj
-      lazyjj
-      diffedit3
     ];
 
   programs.mergiraf.enable = true;
@@ -54,7 +52,8 @@ in
             "$left"
             "$right"
           ];
-          merge-editor = if cfg.jujutsuBabyMode then "diffedit3" else ":builtin";
+          diff-editor = ":builtin"; # shut up
+          # diff-editor = if cfg.jujutsuBabyMode then "diffedit3" else ":builtin";
         };
 
         git = {
