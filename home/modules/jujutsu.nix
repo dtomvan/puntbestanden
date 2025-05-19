@@ -217,6 +217,14 @@ in
             "-T"
             "builtin_op_log_comfortable"
           ];
+
+          branch = [
+            "bookmark"
+            "list"
+            "-t"
+            "--remote"
+            "origin"
+          ];
         };
 
         signing = {

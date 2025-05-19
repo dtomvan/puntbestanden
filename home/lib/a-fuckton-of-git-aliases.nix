@@ -161,4 +161,5 @@
   jde = "jj describe";
   jp = "jj git push";
   jup = "jj bookmark set";
+  jb = "jj branch";
 }
