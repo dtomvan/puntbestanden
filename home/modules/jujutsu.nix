@@ -267,6 +267,13 @@ in
             "-d"
             "main"
           ];
+
+          push = [
+            "git"
+            "push"
+            "-c"
+            "@-"
+          ];
         };
 
         signing = {
