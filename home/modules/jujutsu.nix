@@ -284,8 +284,9 @@ in
           # key = gpgPubKey; # not nessecary, should pick up from user.email
         };
 
-        # idk how this one works
         revsets = {
+          # less shit, hopefully faster under nixpkgs
+          log = "@ | ancestors(trunk()..(visible_heads() & mine()), 2) | trunk()";
         };
 
         revset-aliases = {
