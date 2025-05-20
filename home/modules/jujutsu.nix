@@ -226,7 +226,7 @@ in
             "builtin_op_log_comfortable"
           ];
 
-          branch = [
+          branches = [
             "bookmark"
             "list"
             "-t"
