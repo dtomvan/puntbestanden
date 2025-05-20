@@ -30,6 +30,10 @@ with lib;
           source <(atuin init bash --disable-up-arrow)
         fi
 
+        demo() {
+          export PS1="$ "
+        }
+
         c() {
             clifm "--cd-on-quit" "$@"
             dir="$(grep "^\*" "$HOME/.config/clifm/.last" 2>/dev/null | cut -d':' -f2)";
