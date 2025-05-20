@@ -68,8 +68,6 @@
   "gf" = "git fetch";
   "gfa" = "git fetch --all --tags --prune";
   "gfo" = "git fetch origin";
-  "gg" = "git gui citool";
-  "gga" = "git gui citool --amend";
   "ghh" = "git help";
   "glgg" = "git log --graph";
   "glgm" = "git log --graph --max-count=10";
