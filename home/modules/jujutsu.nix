@@ -255,18 +255,11 @@ in
             "upstream"
           ];
 
-          mevolve = [
-            "rebase"
-            "--skip-empty"
-            "-d"
-            "master"
-          ];
-
           evolve = [
             "rebase"
             "--skip-empty"
             "-d"
-            "main"
+            "trunk()"
           ];
 
           push = [
