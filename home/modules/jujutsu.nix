@@ -240,6 +240,33 @@ in
             "wip: "
             "--edit"
           ];
+
+          sync = [
+            "git"
+            "fetch"
+            "--all-remotes"
+          ];
+
+          nixpkgs = [
+            "git"
+            "fetch"
+            "--remote"
+            "upstream"
+          ];
+
+          mevolve = [
+            "rebase"
+            "--skip-empty"
+            "-d"
+            "master"
+          ];
+
+          evolve = [
+            "rebase"
+            "--skip-empty"
+            "-d"
+            "main"
+          ];
         };
 
         signing = {
