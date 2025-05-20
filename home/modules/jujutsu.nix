@@ -30,6 +30,7 @@ in
           diff.git(),
         )
       '';
+      push-bookmark-prefix = "dtomvan/push-";
     in
     lib.mkIf cfg.enable {
       enable = true;
@@ -57,11 +58,11 @@ in
         };
 
         git = {
+          inherit push-bookmark-prefix;
           auto-local-bookmark = true;
           private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
           # see signing.behavior
           sign-on-push = true;
-          push-bookmark-prefix = "dtomvan/push-";
         };
 
         workspace = {
@@ -273,6 +274,13 @@ in
             "push"
             "-c"
             "@-"
+          ];
+
+          upload = [
+            "git"
+            "push"
+            "-b"
+            "glob:${push-bookmark-prefix}*"
           ];
         };
 
