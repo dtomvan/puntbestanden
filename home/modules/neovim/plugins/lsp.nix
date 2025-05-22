@@ -8,9 +8,8 @@ let
   cfg = config.modules.neovim;
 in
 {
-  programs.nixvim.plugins.lsp = lib.mkIf cfg.lsp.enable {
-    enable = true;
-    inlayHints = true;
+  programs.nixvim.lsp = lib.mkIf cfg.lsp.enable {
+    inlayHints.enable = true;
     servers =
       {
         lua_ls.enable = true;
@@ -19,8 +18,6 @@ in
       // lib.optionalAttrs cfg.lsp.rust_analyzer.enable {
         rust_analyzer = {
           enable = true;
-          installCargo = true;
-          installRustc = true;
         };
       }
       // lib.optionalAttrs cfg.lsp.nixd.enable {
