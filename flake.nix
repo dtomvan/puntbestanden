@@ -71,6 +71,11 @@ rec {
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lazy-apps = {
+      url = "sourcehut:~rycee/lazy-apps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -104,6 +109,7 @@ rec {
                 overlays = [
                   inputs.nur.overlays.default
                   inputs.nix4vscode.overlays.forVscode
+                  inputs.lazy-apps.overlays.default
                   # broken
                   # (_final: _prev: { nix4vscode.forOpenVsx = inputs.nix4vscode.lib.${system}.forOpenVsx; })
                   (_final: _prev: inputs.zozin.packages.${system})

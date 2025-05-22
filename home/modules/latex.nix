@@ -25,7 +25,7 @@ in
       ++ lib.optionals cfg.kile [ pkgs.kile ]
       ++ lib.optionals cfg.neovim-lsp.enable [ cfg.neovim-lsp.package ];
 
-    modules.neovim.lsp.extraLspServers = lib.mkIf cfg.neovim-lsp.enable {
+    programs.nixvim.lsp.servers = lib.mkIf cfg.neovim-lsp.enable {
       texlab.enable = true;
       texlab.package = cfg.neovim-lsp.package;
     };
