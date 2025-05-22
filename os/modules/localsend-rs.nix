@@ -1,4 +1,5 @@
 {
+  lib,
   inputs,
   config,
   ...
@@ -9,7 +10,7 @@
   ];
 
   services.localsend-rs = {
-    enable = true;
+    enable = lib.mkDefault false;
     user = "tomvd";
   };
 
