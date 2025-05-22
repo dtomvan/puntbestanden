@@ -13,6 +13,8 @@
     ./modules/virt/distrobox.nix
   ];
 
+  # services.localsend-rs.sopsBootstrap = true;
+
   _module.args.nixinate = {
     host = "feather";
     sshUser = "tomvd";
