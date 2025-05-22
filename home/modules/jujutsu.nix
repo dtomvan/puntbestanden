@@ -8,11 +8,27 @@
 }:
 let
   cfg = config.git;
+  lazyFormatters =
+    with pkgs;
+    lib.map pkgs.lazy-app.override [
+      { pkg = nixfmt-rfc-style; }
+      { pkg = rustfmt; }
+      { pkg = ruff; }
+      {
+        pkg = go;
+        exe = "gofmt";
+      }
+      { pkg = shfmt; }
+      { pkg = taplo; }
+    ];
 in
 {
   home.packages =
     with pkgs;
-    [ watchman ]
+    [
+      watchman
+    ]
+    ++ lazyFormatters
     ++ lib.optionals cfg.jujutsuBabyMode [
       gg-jj
     ];
@@ -89,17 +105,23 @@ in
 
         fix.tools = {
           nixfmt = {
-            command = [ "${lib.getExe pkgs.nixfmt-rfc-style}" ];
+            command = [ "nixfmt" ];
             patterns = [ "glob:'**/*.nix'" ];
           };
           ruff = {
-            command = [ "${lib.getExe pkgs.ruff}" ];
+            command = [ "ruff" ];
             patterns = [ "glob:'**/*.py'" ];
           };
           gofmt = {
-            # appearantely stricter and also don't import all of go!!!
-            command = [ "${lib.getExe pkgs.gofumpt}" ];
+            command = [ "gofmt" ];
             patterns = [ "glob:'**/*.go'" ];
+          };
+          shfmt = {
+            command = [ "shfmt" ];
+            patterns = [
+              "glob:'**/*.sh'"
+              "glob:'**/*.bash'"
+            ];
           };
           rustfmt = {
             enabled = false;
@@ -109,6 +131,13 @@ in
               "stdout"
             ];
             patterns = [ "glob:'**/*.rs'" ];
+          };
+          taplo = {
+            command = [
+              "taplo"
+              "format"
+            ];
+            patterns = [ "glob:'**/*.toml'" ];
           };
         };
 
