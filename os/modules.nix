@@ -24,6 +24,8 @@ in
 
   ./modules/users/tomvd.nix
   ./modules/users/root.nix
+
+  ./modules/localsend-rs.nix
 ]
 ++ lib.optional host.remoteBuild.enable ./modules/users/remote-build.nix
 ++ lib.optionals host.os.isGraphical [
