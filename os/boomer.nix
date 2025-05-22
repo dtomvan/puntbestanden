@@ -3,7 +3,7 @@
   imports = [
     # TEMP
     # ./modules/hyprland.nix
-    
+
     ./modules/utilities.nix
     ./modules/programs/gpg.nix
 
@@ -29,45 +29,42 @@
 
   modules = {
     printing.useHPLip = true;
-
-    utilities = {
-      archives = true;
-      build-tools = true;
-      linux = true;
-      nix = true;
-      repos = true;
-    };
   };
 
   services.localsend-rs.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    home-manager
-    wget
-    curl
-    nh
-    wl-clipboard
-    libreoffice-qt6-fresh
+  environment.systemPackages =
+    with pkgs;
+    [
+      home-manager
+      wget
+      curl
+      nh
+      wl-clipboard
+      libreoffice-qt6-fresh
 
-    keepassxc
-    zotero
-    # fuck flatpaks they don't even work half the time
-    discord
-    localsend
-    thunderbird
-    gimp
-    obsidian
+      keepassxc
+      # fuck flatpaks they don't even work half the time
+      discord
+      thunderbird
+      obsidian
 
-    prismlauncher
+      prismlauncher
 
-    python3
+      python3
 
-    # zozin.nix
-    blang
-    musializer
-    fourat
-    sowon
-  ];
+      # zozin.nix
+      blang
+      musializer
+      fourat
+      sowon
+    ]
+    ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
+      # rarely used
+      zotero
+      localsend
+      gimp
+    ];
 
   # hyprland.nix provides regreet, kde.nix provides sddm, choice made.
   # services.displayManager = {
