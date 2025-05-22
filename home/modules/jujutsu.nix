@@ -109,7 +109,7 @@ in
             patterns = [ "glob:'**/*.nix'" ];
           };
           ruff = {
-            command = [ "ruff" ];
+            command = [ "ruff" "format" "-" ];
             patterns = [ "glob:'**/*.py'" ];
           };
           gofmt = {
