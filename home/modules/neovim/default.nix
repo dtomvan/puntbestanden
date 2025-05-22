@@ -50,7 +50,7 @@ in
       performance = {
         byteCompileLua = {
           enable = true;
-          initLua = false;
+          initLua = true;
           plugins = true;
         };
       };
