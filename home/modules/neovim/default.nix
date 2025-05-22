@@ -14,11 +14,7 @@ in
       enable = lib.mkEnableOption "use lspconfig and download servers";
       nixd.enable = lib.mkEnableOption "use nixd with this flake";
       rust_analyzer.enable = lib.mkEnableOption "enable rust_analyzer";
-      extraLspServers = lib.mkOption {
-        description = "extra LSP servers you want available in neovim";
-        default = { };
-        type = lib.types.attrs;
-      };
+      lazyMoar = lib.mkEnableOption "install a lot of LSP servers, but lazily with lazy-apps";
     };
 
     enableQt = lib.mkEnableOption "QT GUI";
