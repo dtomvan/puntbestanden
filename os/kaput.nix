@@ -21,14 +21,6 @@
     hermetic = true;
   };
 
-  modules.utilities = {
-    archives = true;
-    build-tools = true;
-    linux = true;
-    nix = true;
-    repos = true;
-  };
-
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Amsterdam";

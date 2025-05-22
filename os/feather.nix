@@ -25,27 +25,24 @@
 
   modules = {
     printing.useHPLip = true;
-
-    utilities = {
-      archives = true;
-      build-tools = true;
-      linux = true;
-      nix = true;
-      repos = true;
-    };
   };
 
-  environment.systemPackages = with pkgs; [
-    home-manager
-    wget
-    curl
-    nh
-    wl-clipboard
-    git
-    libreoffice-qt6-fresh
+  environment.systemPackages =
+    with pkgs;
+    [
+      home-manager
+      wget
+      curl
+      nh
+      wl-clipboard
+      git
 
-    keepassxc
-  ];
+      keepassxc
+    ]
+    ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
+      # rarely used
+      libreoffice-qt6-fresh
+    ];
 
   hardware.bluetooth.enable = true;
 
