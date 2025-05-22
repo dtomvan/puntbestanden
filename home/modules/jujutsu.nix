@@ -260,7 +260,7 @@ in
 
           evolve = [
             "rebase"
-            "--skip-empty"
+            "--skip-emptied"
             "-d"
             "trunk()"
           ];
