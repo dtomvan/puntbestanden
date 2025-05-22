@@ -99,7 +99,7 @@ in
           gofmt = {
             # appearantely stricter and also don't import all of go!!!
             command = [ "${lib.getExe pkgs.gofumpt}" ];
-            patterns = [ "glob:'**/*.py'" ];
+            patterns = [ "glob:'**/*.go'" ];
           };
           rustfmt = {
             enabled = false;
