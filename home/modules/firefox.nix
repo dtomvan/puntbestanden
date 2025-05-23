@@ -89,21 +89,20 @@ in
             dearrow
             plasma-integration
             enhancer-for-youtube # unfree, cannot build from source :(
-
-            # drv in-tree, overlayed
-            # pkgs.keepassxc-browser #broken
-            pkgs.darkreader
-            pkgs.obsidian-web-clipper
-            pkgs.sidebery
-            pkgs.steam-database
-            pkgs.ublock-origin
           ]
+          ++ (with pkgs.nur.repos.dtomvan; [
+            darkreader
+            obsidian-web-clipper
+            sidebery
+            steam-database
+            ublock-origin
+          ])
           ++ lib.optionals (hostname == "feather") [
             onetab # unfree, cannot build from source :(
           ]
           ++ lib.optionals (hostname == "boomer") [
-            pkgs.zotero-connector
-            pkgs.violentmonkey
+            pkgs.nur.repos.dtomvan.zotero-connector
+            pkgs.nur.repos.dtomvan.violentmonkey
           ];
 
         force = true;

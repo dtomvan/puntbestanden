@@ -5,7 +5,7 @@
       inter
       noto-fonts-color-emoji
       liberation_ttf
-      afio-font
+      nur.repos.dtomvan.afio-font
     ];
 
     fontconfig = {
