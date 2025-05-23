@@ -14,8 +14,6 @@ rec {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    zozin.url = "github:dtomvan/zozin.nix";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     nixinate.url = "github:matthewcroughan/nixinate";
@@ -75,12 +73,6 @@ rec {
       url = "sourcehut:~rycee/lazy-apps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # TODO: not yet actually on the NUR, refactor when it is
-    nur-packages = {
-      url = "github:dtomvan/nur-packages";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -115,9 +107,7 @@ rec {
                   inputs.lazy-apps.overlays.default
                   # broken
                   # (_final: _prev: { nix4vscode.forOpenVsx = inputs.nix4vscode.lib.${system}.forOpenVsx; })
-                  (_final: _prev: inputs.zozin.packages.${system})
                   (_final: _prev: self.packages.${system})
-                  (_final: _prev: inputs.nur-packages.packages.${system})
                   (_final: prev: {
                     # https://github.com/dtomvan/puntbestanden/issues/1
                     # https://github.com/NixOS/nixpkgs/pull/409162/files

@@ -8,8 +8,8 @@ in
 [
   inputs.disko.nixosModules.disko
   inputs.sops.nixosModules.sops
-  inputs.zozin.nixosModules.olive_c
-  inputs.zozin.nixosModules.koil
+  # inputs.zozin.nixosModules.olive_c
+  # inputs.zozin.nixosModules.koil
 
   ./common.nix
   ./${host.hostName}.nix

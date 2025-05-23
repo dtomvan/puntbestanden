@@ -60,14 +60,14 @@
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
-    afio-font
+    nur.repos.dtomvan.afio-font
     alejandra
     clifm
     file
     just
     rink
     ripdrag
-    rwds-cli
+    nur.repos.dtomvan.rwds-cli
     stow
     visidata
     yt-dlp
