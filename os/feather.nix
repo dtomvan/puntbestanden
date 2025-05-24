@@ -11,6 +11,7 @@
     ./modules/services/syncthing.nix
 
     ./modules/virt/distrobox.nix
+    ./modules/virt/docker.nix
   ];
 
   # services.localsend-rs.sopsBootstrap = true;
