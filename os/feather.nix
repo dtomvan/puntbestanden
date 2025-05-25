@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     # ./modules/hyprland.nix
@@ -44,6 +44,9 @@
       # rarely used
       libreoffice-qt6-fresh
     ];
+
+  systemd.services.podman.wantedBy = lib.mkForce [];
+  virtualisation.docker.enableOnBoot = false;
 
   hardware.bluetooth.enable = true;
 
