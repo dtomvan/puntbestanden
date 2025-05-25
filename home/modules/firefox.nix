@@ -172,6 +172,10 @@ in
             #   ];
             # }
             {
+              name = "Me on repology";
+              url = "https://repology.org/maintainer/18gatenmaker6%40gmail.com";
+            }
+            {
               name = "Revsets";
               url = "https://jj-vcs.github.io/jj/latest/revsets/";
             }
