@@ -162,14 +162,14 @@ in
               #   name = "NGI@NIX";
               #   toolbar = true;
               #   bookmarks = [
-              {
-                name = "SoN 2025";
-                url = "https://github.com/ngi-nix/summer-of-nix/";
-              }
-              {
-                name = "ngipkgs";
-                url = "https://github.com/ngi-nix/ngipkgs/";
-              }
+              # {
+              #   name = "SoN 2025";
+              #   url = "https://github.com/ngi-nix/summer-of-nix/";
+              # }
+              # {
+              #   name = "ngipkgs";
+              #   url = "https://github.com/ngi-nix/ngipkgs/";
+              # }
               #   ];
               # }
               {
