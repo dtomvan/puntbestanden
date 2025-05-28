@@ -20,6 +20,7 @@ in
   # builds on systems which don't at least
   ./modules/distributed-builds.nix
 
+  ./modules/networking/wifi-passwords.nix
   ./modules/services/ssh.nix
 
   ./modules/users/tomvd.nix
