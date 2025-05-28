@@ -12,7 +12,6 @@
         "nix-command"
         "flakes"
       ];
-      auto-optimise-store = true;
     } // nixConfig;
     channel.enable = false;
 
