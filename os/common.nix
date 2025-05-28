@@ -25,6 +25,11 @@
     };
   };
 
+  services.journald.extraConfig = ''
+    SystemMaxUse=250M
+    SystemMaxFileSize=50M
+  '';
+
   hardware.cpu.${host.hardware.cpuVendor}.updateMicrocode = true;
 
   networking = {
