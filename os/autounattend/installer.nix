@@ -50,6 +50,7 @@
     after = [
       "network.target"
       "polkit.service"
+      "getty@tty1.service"
     ];
     path = [ "/run/current-system/sw/" ];
     script =
@@ -67,8 +68,14 @@
         [ -b /dev/nvme0n1 ] && dev=/dev/nvme0n1
         [ -b /dev/vda ] && dev=/dev/vda
 
-        echo "Installing NixOS on $dev in 10 seconds..."
-        sleep 10
+        n=15
+        echo "Installing NixOS on $dev in $n seconds..."
+        
+        while [ $n -ne 0 ]; do
+          echo "WIPING YOUR MAIN DISK $dev IN $n!!!"
+          sleep 1
+          n=$((n-1))
+        done
 
         ${disko}/bin/disko \
           --yes-wipe-all-disks \
