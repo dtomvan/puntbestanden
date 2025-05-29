@@ -97,6 +97,7 @@ rec {
         imports = [ ];
 
         flake =
+          with nixpkgs.lib;
           let
             mkPkgs =
               system:
@@ -124,10 +125,10 @@ rec {
                   })
                 ];
               };
-          in
-          with nixpkgs.lib;
-          {
-            nixosConfigurations = mapAttrs' (
+
+            getHosts = type: filterAttrs (_k: v: hasInfix type v.system) (import ./hosts.nix);
+
+            makeNixos =
               _key: host:
               nameValuePair host.hostName (nixosSystem {
                 specialArgs = {
@@ -135,10 +136,9 @@ rec {
                 };
                 modules = import os/modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
                 pkgs = mkPkgs host.system;
-              })
-            ) (filterAttrs (_k: v: hasInfix "linux" v.system) (import ./hosts.nix));
+              });
 
-            darwinConfigurations = mapAttrs' (
+            makeDarwin =
               _key: host:
               nameValuePair host.hostName (
                 nix-darwin.lib.darwinSystem {
@@ -147,10 +147,9 @@ rec {
                   };
                   modules = [ ./darwin/${host.hostName}.nix ];
                 }
-              )
-            ) (filterAttrs (_k: v: hasInfix "darwin" v.system) (import ./hosts.nix));
+              );
 
-            homeConfigurations = nixpkgs.lib.mapAttrs' (
+            makeHome =
               _key: host:
               nixpkgs.lib.nameValuePair "tomvd@${host.hostName}" (
                 home-manager.lib.homeManagerConfiguration {
@@ -162,8 +161,54 @@ rec {
                     inherit host;
                   };
                 }
-              )
-            ) (import ./hosts.nix);
+              );
+
+            system = "x86_64-linux";
+
+            autounattend = nixosSystem {
+              pkgs = mkPkgs system;
+              modules = [
+                inputs.disko.nixosModules.disko
+                inputs.sops.nixosModules.default
+                ./os/autounattend/configuration.nix
+                ./os/autounattend/hardware-configuration.nix
+                ./os/autounattend/disko.nix
+                { nixpkgs.hostPlatform = system; }
+              ];
+              specialArgs = {
+                inherit nixConfig inputs;
+                host = {
+                  hostName = "nixos";
+                  inherit system;
+                  hardware.cpuVendor = "intel";
+                  os = {
+                    isGraphical = false;
+                    wantsKde = false;
+                  };
+                };
+              };
+            };
+
+            installer = nixosSystem {
+              pkgs = mkPkgs system;
+              modules = [
+                inputs.sops.nixosModules.default
+                ./os/autounattend/installer.nix
+              ];
+              specialArgs = {
+                inherit nixConfig inputs;
+                evaluatedSystem = autounattend;
+              };
+            };
+          in
+          {
+            nixosConfigurations = (mapAttrs' makeNixos (getHosts "linux")) // {
+              inherit autounattend installer;
+            };
+
+            darwinConfigurations = mapAttrs' makeDarwin (getHosts "darwin");
+
+            homeConfigurations = mapAttrs' makeHome (import ./hosts.nix);
           };
 
         systems = [
@@ -174,15 +219,46 @@ rec {
         ];
 
         perSystem =
-          { system, pkgs, ... }:
           {
-            apps = { } // (inputs.nixinate.nixinate.${system} self).nixinate;
+            config,
+            system,
+            pkgs,
+            ...
+          }:
+          {
+            apps = {
+              install-demo = {
+                type = "app";
+                program = pkgs.lib.getExe (
+                  pkgs.writeShellApplication {
+                    name = "install-demo";
+                    text = ''
+                      set -euo pipefail
+                      disk=root.img
+                      if [ ! -f "$disk" ]; then
+                        echo "Creating harddisk image root.img"
+                        ${pkgs.qemu}/bin/qemu-img create -f qcow2 "$disk" 20G
+                      fi
+                      ${pkgs.qemu}/bin/qemu-system-x86_64 \
+                        -cpu host \
+                        -enable-kvm \
+                        -m 2G \
+                        -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
+                        -cdrom ${config.packages.iso}/iso/*.iso \
+                        -hda "$disk"
+                    '';
+                  }
+                );
+              };
+            } // (inputs.nixinate.nixinate.${system} self).nixinate;
 
             formatter = pkgs.nixfmt-tree;
 
             devShells = { };
 
             packages = {
+              iso = self.nixosConfigurations.installer.config.system.build.isoImage;
+
               # treefmt for nixpkgs contributors
               nixtreefmt =
                 let

@@ -1,0 +1,98 @@
+# adapted from https://github.com/tfc/nixos-auto-installer
+# mostly to use disko and btrfs
+{
+  evaluatedSystem,
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}:
+{
+  imports = [
+    "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+    ../modules/networking/wifi-passwords.nix
+  ];
+
+  isoImage.edition = lib.mkForce "autounattend";
+
+  hardware.enableAllFirmware = true;
+
+  services.getty.helpLine = ''
+    ┌──────────────────────────────────────────────────┐
+    │                                                  │
+    │ ▄▄▄   ▄▄     ██                 ▄▄▄▄      ▄▄▄▄   │
+    │ ███   ██     ▀▀                ██▀▀██   ▄█▀▀▀▀█  │
+    │ ██▀█  ██   ████     ▀██  ██▀  ██    ██  ██▄      │
+    │ ██ ██ ██     ██       ████    ██    ██   ▀████▄  │
+    │ ██  █▄██     ██       ▄██▄    ██    ██       ▀██ │
+    │ ██   ███  ▄▄▄██▄▄▄   ▄█▀▀█▄    ██▄▄██   █▄▄▄▄▄█▀ │
+    │ ▀▀   ▀▀▀  ▀▀▀▀▀▀▀▀  ▀▀▀  ▀▀▀    ▀▀▀▀     ▀▀▀▀▀   │
+    │                                                  │
+    │                                                  │
+    └──────────────────────────────────────────────────┘
+
+    Commencing automatic installation in a few moments...
+
+    Note: if you do not want this, power off the machine right now
+  '';
+
+  services.journald.console = "/dev/tty1";
+
+  systemd.services.install = {
+    description = "Bootstrap a NixOS installation";
+    wantedBy = [ "multi-user.target" ];
+    after = [
+      "network.target"
+      "polkit.service"
+    ];
+    path = [ "/run/current-system/sw/" ];
+    script =
+      with pkgs;
+      # bash
+      ''
+        set -euxo pipefail
+
+        echo "Choosing between disks (in that order):"
+        echo "  /dev/vda"
+        echo "  /dev/nvme0n1"
+        echo "  /dev/sda"
+
+        dev=/dev/sda
+        [ -b /dev/nvme0n1 ] && dev=/dev/nvme0n1
+        [ -b /dev/vda ] && dev=/dev/vda
+
+        echo "Installing NixOS on $dev in 10 seconds..."
+        sleep 10
+
+        ${disko}/bin/disko \
+          --yes-wipe-all-disks \
+          -m destroy,format,mount \
+          --argstr device "$dev" \
+          ${./disko.nix}
+
+        mkdir -p /mnt/etc/nixos/
+        cp -r ${../..}/* /mnt/etc/nixos/
+        chmod -R 755 /mnt/etc/nixos
+
+        ${config.system.build.nixos-install}/bin/nixos-install \
+          --system ${evaluatedSystem.config.system.build.toplevel} \
+          --no-root-passwd \
+          --cores 0
+
+        echo '--------------------------------------------------------------------------------'
+        echo '                              Done. Shutting off.                               '
+        echo '--------------------------------------------------------------------------------'
+
+        sleep 3
+        ${systemd}/bin/systemctl poweroff
+      '';
+    environment = config.nix.envVars // {
+      inherit (config.environment.sessionVariables) NIX_PATH;
+      HOME = "/root";
+    };
+    serviceConfig = {
+      Type = "oneshot";
+    };
+  };
+}
