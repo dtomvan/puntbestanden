@@ -19,6 +19,12 @@
       gcc
       pkg-config
       gnumake
+      usbutils
+      pciutils
+      e2fsprogs
+      btrfs-progs
+      util-linux
+      dosfstools
     ]
     ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
       nix-fast-build
@@ -31,12 +37,6 @@
       xz
       cmake
       meson
-      usbutils
-      pciutils
-      e2fsprogs
-      btrfs-progs
-      util-linux
-      dosfstools
       tokei
       git-lfs
     ];
