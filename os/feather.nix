@@ -10,6 +10,7 @@
     ./modules/services/keybase.nix
     ./modules/services/syncthing.nix
 
+    ./modules/virt/kvm.nix
     ./modules/virt/distrobox.nix
     ./modules/virt/docker.nix
   ];
