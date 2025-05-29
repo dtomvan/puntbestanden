@@ -14,6 +14,11 @@
     ../modules/networking/wifi-passwords.nix
   ];
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   isoImage.edition = lib.mkForce "autounattend";
 
   hardware.enableAllFirmware = true;
