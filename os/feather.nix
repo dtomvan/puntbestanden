@@ -15,6 +15,8 @@
     ./modules/virt/docker.nix
   ];
 
+  virtualisation.libvirtd.onBoot = "ignore";
+
   # services.localsend-rs.sopsBootstrap = true;
 
   _module.args.nixinate = {
