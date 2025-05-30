@@ -19,7 +19,10 @@
     "flakes"
   ];
 
-  isoImage.edition = lib.mkForce "autounattend";
+  isoImage = {
+    edition = lib.mkForce "autounattend";
+    squashfsCompression = "gzip -Xcompression-level 1";
+  };
 
   hardware.enableAllFirmware = true;
 
