@@ -16,8 +16,7 @@
     ../common.nix
     ../modules/boot/systemd-boot.nix
     ../modules/networking/tailscale.nix
-    ../modules/programs/gpg.nix
-    ../modules/services/keybase.nix
+    ../modules/networking/wifi-passwords.nix
     ../modules/services/ssh.nix
     ../modules/users/tomvd.nix
     ../modules/utilities.nix
