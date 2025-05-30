@@ -7,8 +7,12 @@
 }:
 {
   imports = [
-    # hardware-configuration and disko are included in flake.nix
     inputs.home-manager.nixosModules.default
+    inputs.disko.nixosModules.disko
+    inputs.sops.nixosModules.default
+    ./disko.nix
+    ./hardware-configuration.nix
+
     ../common.nix
     ../modules/boot/systemd-boot.nix
     ../modules/networking/tailscale.nix

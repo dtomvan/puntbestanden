@@ -168,11 +168,7 @@ rec {
             autounattend = nixosSystem {
               pkgs = mkPkgs system;
               modules = [
-                inputs.disko.nixosModules.disko
-                inputs.sops.nixosModules.default
                 ./os/autounattend/configuration.nix
-                ./os/autounattend/hardware-configuration.nix
-                ./os/autounattend/disko.nix
                 { nixpkgs.hostPlatform = system; }
               ];
               specialArgs = {
