@@ -8,6 +8,7 @@ in
 [
   inputs.disko.nixosModules.disko
   inputs.sops.nixosModules.sops
+  inputs.srvos.nixosModules.mixins-terminfo
   # inputs.zozin.nixosModules.olive_c
   # inputs.zozin.nixosModules.koil
 
