@@ -84,6 +84,12 @@
       url = "sourcehut:~rycee/lazy-apps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # uncomment for testing
+    # nur-packages = {
+    #   url = "github:dtomvan/nur-packages/dtomvan/push-ssqqtnvrqmll";
+    # inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
