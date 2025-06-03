@@ -26,11 +26,10 @@
 
   modules = {
     ${if host.os.isGraphical then "terminals" else null} = {
-      enable = true;
-      alacritty = {
-        enable = true;
-        font.family = "Afio";
-        font.size = 12;
+      alacritty.enable = true;
+      font = {
+        family = "Afio";
+        size = 12;
       };
     };
 
