@@ -91,32 +91,12 @@ rec {
       {
         imports = [
           ./darwin/flake-module.nix
+          ./home/flake-module.nix
           ./os/flake-module.nix
           ./os/autounattend/flake-module.nix
         ];
 
-        flake =
-          with nixpkgs.lib;
-          let
-            mkPkgs = system: import ./lib/make-packages.nix { inherit system nixpkgs inputs; };
-
-            makeHome =
-              _key: host:
-              nixpkgs.lib.nameValuePair "tomvd@${host.hostName}" (
-                home-manager.lib.homeManagerConfiguration {
-                  pkgs = mkPkgs host.system;
-
-                  modules = import home/modules.nix { inherit host inputs; };
-
-                  extraSpecialArgs = {
-                    inherit host;
-                  };
-                }
-              );
-          in
-          {
-            homeConfigurations = mapAttrs' makeHome (import ./hosts.nix);
-          };
+        flake = { };
 
         systems = [
           "x86_64-linux"
