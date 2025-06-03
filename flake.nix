@@ -90,6 +90,7 @@ rec {
       }:
       {
         imports = [
+          ./darwin/flake-module.nix
           ./os/flake-module.nix
           ./os/autounattend/flake-module.nix
         ];
@@ -98,19 +99,6 @@ rec {
           with nixpkgs.lib;
           let
             mkPkgs = system: import ./lib/make-packages.nix { inherit system nixpkgs inputs; };
-
-            getHosts = type: filterAttrs (_k: v: hasInfix type v.system) (import ./hosts.nix);
-
-            makeDarwin =
-              _key: host:
-              nameValuePair host.hostName (
-                nix-darwin.lib.darwinSystem {
-                  specialArgs = {
-                    inherit host nixConfig inputs;
-                  };
-                  modules = [ ./darwin/${host.hostName}.nix ];
-                }
-              );
 
             makeHome =
               _key: host:
@@ -127,8 +115,6 @@ rec {
               );
           in
           {
-            darwinConfigurations = mapAttrs' makeDarwin (getHosts "darwin");
-
             homeConfigurations = mapAttrs' makeHome (import ./hosts.nix);
           };
 
