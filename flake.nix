@@ -9,8 +9,10 @@ rec {
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    nixinate.url = "github:matthewcroughan/nixinate";
-    nixinate.inputs.nixpkgs.follows = "nixpkgs";
+    nixinate = {
+      url = "github:matthewcroughan/nixinate";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nur = {
       url = "github:nix-community/NUR";
@@ -32,8 +34,10 @@ rec {
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    sops.url = "github:Mic92/sops-nix";
-    sops.inputs.nixpkgs.follows = "nixpkgs";
+    sops = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
