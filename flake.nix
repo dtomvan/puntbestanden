@@ -1,4 +1,4 @@
-rec {
+{
   description = "Home Manager configuration of tomvd";
 
   # HACK: I would do `nixConfig = import ./nix-config.nix` here, but that IS
@@ -76,9 +76,7 @@ rec {
     inputs@{
       self,
       flake-parts,
-      home-manager,
       nixpkgs,
-      nix-darwin,
       ...
     }:
     flake-parts.lib.mkFlake { inherit inputs; } (
@@ -107,7 +105,6 @@ rec {
 
         perSystem =
           {
-            config,
             system,
             pkgs,
             ...
