@@ -7,7 +7,7 @@ if inputs.nixpkgs.lib.strings.hasInfix "linux" host.system then
     inputs.nixvim.homeManagerModules.nixvim
     inputs.plasma-manager.homeManagerModules.plasma-manager
     ./common.nix
-    ./${host.hostName}.nix
+    ./hosts/${host.hostName}.nix
 
     modules/basic-cli.nix
     modules/helix.nix
