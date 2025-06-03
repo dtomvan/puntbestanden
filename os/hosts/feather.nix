@@ -1,18 +1,18 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    # ./modules/hyprland.nix
-    ./modules/utilities.nix
-    ./modules/programs/gpg.nix
+    # ../modules/hyprland.nix
+    ../modules/utilities.nix
+    ../modules/programs/gpg.nix
 
-    ./modules/networking/tailscale.nix
+    ../modules/networking/tailscale.nix
 
-    ./modules/services/keybase.nix
-    ./modules/services/syncthing.nix
+    ../modules/services/keybase.nix
+    ../modules/services/syncthing.nix
 
-    ./modules/virt/kvm.nix
-    ./modules/virt/distrobox.nix
-    ./modules/virt/docker.nix
+    ../modules/virt/kvm.nix
+    ../modules/virt/distrobox.nix
+    ../modules/virt/docker.nix
   ];
 
   virtualisation.libvirtd.onBoot = "ignore";
@@ -48,7 +48,7 @@
       libreoffice-qt6-fresh
     ];
 
-  systemd.services.podman.wantedBy = lib.mkForce [];
+  systemd.services.podman.wantedBy = lib.mkForce [ ];
   virtualisation.docker.enableOnBoot = false;
 
   hardware.bluetooth.enable = true;

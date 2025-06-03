@@ -2,21 +2,21 @@
 {
   imports = [
     # TEMP
-    # ./modules/hyprland.nix
+    # ../modules/hyprland.nix
 
-    ./modules/utilities.nix
-    ./modules/programs/gpg.nix
+    ../modules/utilities.nix
+    ../modules/programs/gpg.nix
 
-    ./modules/networking/tailscale.nix
+    ../modules/networking/tailscale.nix
 
-    ./modules/gaming/steam.nix
+    ../modules/gaming/steam.nix
 
-    ./modules/services/keybase.nix
-    ./modules/services/syncthing.nix
+    ../modules/services/keybase.nix
+    ../modules/services/syncthing.nix
 
-    ./modules/virt/kvm.nix
-    ./modules/virt/distrobox.nix
-    ./modules/virt/docker.nix
+    ../modules/virt/kvm.nix
+    ../modules/virt/distrobox.nix
+    ../modules/virt/docker.nix
   ];
 
   _module.args.nixinate = {

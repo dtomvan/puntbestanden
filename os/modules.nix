@@ -13,7 +13,7 @@ in
   # inputs.zozin.nixosModules.koil
 
   ./common.nix
-  ./${host.hostName}.nix
+  ./hosts/${host.hostName}.nix
   ./hardware/${host.hostName}.nix
   ./modules/boot/systemd-boot.nix
 
