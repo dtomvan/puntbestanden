@@ -13,7 +13,6 @@ What's in here:
 - 8 firefox extensions from source
 - 1 font
 - 4 clojure utilities
-- `home/lib/a-fuckton-of-git-aliases.nix` :)
 - An unhinged Emacs config
 - A lot less lines of neovim lua config compared to my [previous attempt](https://github.com/dtomvan/.config/tree/main/neovim/.config/nvim)
 
