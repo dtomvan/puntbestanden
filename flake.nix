@@ -87,6 +87,7 @@ rec {
       {
         imports = [
           ./os/flake-module.nix
+          ./os/autounattend/flake-module.nix
         ];
 
         flake =
@@ -142,31 +143,7 @@ rec {
             ...
           }:
           {
-            apps = {
-              install-demo = {
-                type = "app";
-                program = pkgs.lib.getExe (
-                  pkgs.writeShellApplication {
-                    name = "install-demo";
-                    text = ''
-                      set -euo pipefail
-                      disk=root.img
-                      if [ ! -f "$disk" ]; then
-                        echo "Creating harddisk image root.img"
-                        ${pkgs.qemu}/bin/qemu-img create -f qcow2 "$disk" 20G
-                      fi
-                      ${pkgs.qemu}/bin/qemu-system-x86_64 \
-                        -cpu host \
-                        -enable-kvm \
-                        -m 2G \
-                        -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-                        -cdrom ${config.packages.iso}/iso/*.iso \
-                        -hda "$disk"
-                    '';
-                  }
-                );
-              };
-            } // (inputs.nixinate.nixinate.${system} self).nixinate;
+            apps = (inputs.nixinate.nixinate.${system} self).nixinate;
 
             formatter = pkgs.nixfmt-tree;
 
