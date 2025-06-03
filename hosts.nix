@@ -36,7 +36,7 @@
       cpuVendor = "intel";
       gpuVendor = "intel";
     };
-    remoteBuild.enable = false;
+    remoteBuild.enable = true;
     os = {
       isGraphical = true;
       wantsKde = true;
