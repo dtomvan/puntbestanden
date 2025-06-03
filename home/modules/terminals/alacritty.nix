@@ -5,22 +5,19 @@
   ...
 }:
 let
-  cfg = config.modules.terminals.alacritty;
+  cfg = config.modules.terminals;
 in
 {
-  options.modules.terminals.alacritty = import ../../lib/mk-terminal-options.nix {
-    inherit lib;
-    name = "alacritty";
-    package = pkgs.alacritty;
+  options.modules.terminals.alacritty = {
+    enable = lib.mkEnableOption "alacritty";
+    package = lib.mkPackageOption pkgs "alacritty" { };
   };
-  config = lib.mkIf cfg.enable {
-    modules.terminals = lib.mkIf cfg.default {
-      name = lib.mkForce "alacritty";
-      bin = lib.mkForce "${lib.getExe cfg.package}";
-    };
+
+  config = lib.mkIf cfg.alacritty.enable {
     programs.alacritty = {
       enable = true;
-      package = cfg.package;
+      package = cfg.alacritty.package;
+
       settings = {
         terminal.shell = {
           program = lib.getExe pkgs.bashInteractive;

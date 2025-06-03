@@ -1,33 +1,30 @@
 {
+  pkgs,
   config,
   lib,
-  pkgs,
   ...
 }:
 let
-  cfg = config.modules.terminals.ghostty;
+  cfg = config.modules.terminals;
 in
 {
-  options.modules.terminals.ghostty = import ../../lib/mk-terminal-options.nix {
-    inherit lib;
-    name = "ghostty";
-    package = pkgs.ghostty;
+  options.modules.terminals.ghostty = {
+    enable = lib.mkEnableOption "ghostty";
+    package = lib.mkPackageOption pkgs "ghostty" { };
   };
-  config = lib.mkIf cfg.enable {
-    modules.terminals = lib.mkIf cfg.default {
-      name = lib.mkForce "ghostty";
-      bin = lib.mkForce "${lib.getExe cfg.package}";
-    };
+
+  config = lib.mkIf cfg.ghostty.enable {
     programs.ghostty = {
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+
       settings = {
         font-family = cfg.font.family;
         font-size = cfg.font.size;
-        theme = if cfg.use-nix-colors then config.colorScheme.slug else "catppuccin-mocha";
+        theme = "catppuccin-mocha";
         gtk-single-instance = true;
-        command = "zsh";
+        command = "${lib.getExe pkgs.bashInteractive} -c ${lib.getExe pkgs.zellij}";
 
         window-decoration = "server";
         window-theme = "system";
