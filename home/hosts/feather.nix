@@ -1,7 +1,7 @@
 {
   imports = [
-    # modules/hyprland.nix
-    # modules/vscode.nix
+    # ../modules/hyprland.nix
+    # ../modules/vscode.nix
   ];
 
   modules.neovim.lsp.lazyMoar = true;
