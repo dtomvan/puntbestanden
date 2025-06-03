@@ -1,4 +1,6 @@
-{ lib, ...}: with lib; let
+{ lib, ... }:
+with lib;
+let
   keys = {
     boomer = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFkdbc1mWvIUciwrrIZVRYrZwTBmQ7Cehd/laxzzdlyL tomvd@boomer";
     feather = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICYRKHdw4dNFdV36OmEQvxEvko5fpkfV/Ch6pQypmOo8 tomvd@feather";

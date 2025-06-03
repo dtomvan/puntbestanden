@@ -1,8 +1,13 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   # hyprland doesn't set breeze by default, but we do use kde packages. To make
   # them not look like they are the QT apps from your grandma, we specifically
-  # specify qt settings here 
+  # specify qt settings here
 
   qt = {
     enable = true;
@@ -55,10 +60,9 @@
     kdePackages.kate
     haruna
 
-
     kdePackages.breeze-icons
     kdePackages.breeze-gtk
-  
+
     wireplumber
     brightnessctl
     playerctl

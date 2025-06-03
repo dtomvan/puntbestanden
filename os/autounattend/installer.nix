@@ -70,7 +70,7 @@
 
         n=15
         echo "Installing NixOS on $dev in $n seconds..."
-        
+
         while [ $n -ne 0 ]; do
           echo "WIPING YOUR MAIN DISK $dev IN $n!!!"
           sleep 1

@@ -12,11 +12,10 @@
           sshUser = "remotebuild";
           sshKey = "/root/.ssh/remotebuild";
         }
-        // (h.remoteBuild.settings or {})
+        // (h.remoteBuild.settings or { })
       )
       (
-        builtins.filter (h: h.remoteBuild.enable && h.hostName != host.hostName) /* don't build for yourself */ ( 
-          builtins.attrValues (import ../../hosts.nix)
-        )
+        builtins.filter (h: h.remoteBuild.enable && h.hostName != host.hostName) # don't build for yourself
+          (builtins.attrValues (import ../../hosts.nix))
       );
 }
