@@ -5,12 +5,12 @@
 }:
 {
   imports = [
-    ./modules/utilities.nix
-    ./modules/networking/tailscale.nix
-    ./modules/services/syncthing.nix
+    ../modules/utilities.nix
+    ../modules/networking/tailscale.nix
+    ../modules/services/syncthing.nix
 
-    ./modules/services/portainer.nix
-    ./modules/services/pihole.nix
+    ../modules/services/portainer.nix
+    ../modules/services/pihole.nix
   ];
 
   _module.args.nixinate = {
