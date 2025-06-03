@@ -85,7 +85,9 @@ rec {
         ...
       }:
       {
-        imports = [ ];
+        imports = [
+          ./os/flake-module.nix
+        ];
 
         flake =
           with nixpkgs.lib;
@@ -93,16 +95,6 @@ rec {
             mkPkgs = system: import ./lib/make-packages.nix { inherit system nixpkgs inputs; };
 
             getHosts = type: filterAttrs (_k: v: hasInfix type v.system) (import ./hosts.nix);
-
-            makeNixos =
-              _key: host:
-              nameValuePair host.hostName (nixosSystem {
-                specialArgs = {
-                  inherit host nixConfig inputs;
-                };
-                modules = import os/modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
-                pkgs = mkPkgs host.system;
-              });
 
             makeDarwin =
               _key: host:
@@ -128,46 +120,8 @@ rec {
                   };
                 }
               );
-
-            system = "x86_64-linux";
-
-            autounattend = nixosSystem {
-              pkgs = mkPkgs system;
-              modules = [
-                ./os/autounattend/configuration.nix
-                { nixpkgs.hostPlatform = system; }
-              ];
-              specialArgs = {
-                inherit nixConfig inputs;
-                host = {
-                  hostName = "nixos";
-                  inherit system;
-                  hardware.cpuVendor = "intel";
-                  os = {
-                    isGraphical = false;
-                    wantsKde = false;
-                  };
-                };
-              };
-            };
-
-            installer = nixosSystem {
-              pkgs = mkPkgs system;
-              modules = [
-                inputs.sops.nixosModules.default
-                ./os/autounattend/installer.nix
-              ];
-              specialArgs = {
-                inherit nixConfig inputs;
-                evaluatedSystem = autounattend;
-              };
-            };
           in
           {
-            nixosConfigurations = (mapAttrs' makeNixos (getHosts "linux")) // {
-              inherit autounattend installer;
-            };
-
             darwinConfigurations = mapAttrs' makeDarwin (getHosts "darwin");
 
             homeConfigurations = mapAttrs' makeHome (import ./hosts.nix);
@@ -219,8 +173,6 @@ rec {
             devShells = { };
 
             packages = {
-              iso = self.nixosConfigurations.installer.config.system.build.isoImage;
-
               # treefmt for nixpkgs contributors
               nixtreefmt =
                 let
