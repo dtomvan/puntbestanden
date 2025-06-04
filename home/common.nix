@@ -24,6 +24,12 @@
     };
   };
 
+  dconf.${if host.os.isGraphical then "settings" else null} = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
   modules = {
     ${if host.os.isGraphical then "terminals" else null} = {
       alacritty.enable = true;
