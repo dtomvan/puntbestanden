@@ -51,6 +51,10 @@ with lib;
           local expr=`printf 'with import <nixpkgs> {}; lib.concatLines [(%s.src.url or "") (%s.meta.homepage or "")]' "$@" "$@"`
           nix-instantiate --eval --raw --expr "$expr"
         }
+        nix-maintainers() {
+          local expr=`printf 'with import <nixpkgs> {}; lib.concatLines (lib.map (m: "@''${m.github}") (%s.meta.maintainers or []))' "$@"`
+          nix-instantiate --eval --raw --expr "$expr"
+        }
       '';
 
     shellAliases = {
