@@ -30,6 +30,16 @@
     };
   };
 
+  editorconfig = {
+    enable = true;
+    settings = {
+      "*.nix" = {
+        indent_style = "space";
+        indent_size = 2;
+      };
+    };
+  };
+
   modules = {
     ${if host.os.isGraphical then "terminals" else null} = {
       alacritty.enable = true;
