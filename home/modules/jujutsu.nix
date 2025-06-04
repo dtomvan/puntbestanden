@@ -205,25 +205,21 @@ in
           # prepend b to show current branch only, non-elided
           bl = [
             "log"
-            "-Tlog1"
             "-r::@"
             "-n10"
           ];
           bll = [
             "log"
-            "-Tlog1"
             "-r::@"
             "-n30"
           ];
           blll = [
             "log"
-            "-Tlog1"
             "-r::@"
             "-n100"
           ];
           bllll = [
             "log"
-            "-Tlog1"
             "-r::@"
           ];
 
