@@ -7,7 +7,7 @@
   ...
 }:
 let
-  cfg = config.git;
+  cfg = config.modules.git;
   lazyFormatters =
     with pkgs;
     lib.map pkgs.lazy-app.override [

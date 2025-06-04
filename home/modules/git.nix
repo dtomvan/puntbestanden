@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.git;
+  cfg = config.modules.git;
   gpgPubKey = "7A984C8207ADBA51";
 in
 {
-  options.git = with lib; {
+  options.modules.git = with lib; {
     enable = mkEnableOption "install and configure git";
     user.email = mkOption {
       description = "git config user.email";
