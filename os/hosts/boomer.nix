@@ -58,6 +58,8 @@
         ];
       })
 
+      logseq
+
       python3
 
       nur.repos.dtomvan.tsodingPackages.blang
