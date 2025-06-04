@@ -122,19 +122,21 @@ with lib;
     );
   };
 
-  git = {
-    enable = mkDefault true;
-    use-gh-cli = mkDefault true;
-    user = {
-      name = mkDefault "Tom van Dijk";
-      email = mkDefault "18gatenmaker6@gmail.com";
+  modules = {
+    git = {
+      enable = mkDefault true;
+      use-gh-cli = mkDefault true;
+      user = {
+        name = mkDefault "Tom van Dijk";
+        email = mkDefault "18gatenmaker6@gmail.com";
+      };
+      jujutsuBabyMode = true;
     };
-    jujutsuBabyMode = true;
-  };
 
-  modules.neovim = {
-    enable = mkDefault true;
-    lsp.enable = mkDefault true;
-    lsp.latex.enable = mkDefault true;
+    neovim = {
+      enable = mkDefault true;
+      lsp.enable = mkDefault true;
+      lsp.latex.enable = mkDefault true;
+    };
   };
 }
