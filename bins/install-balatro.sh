@@ -1,5 +1,5 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p coreutils depotdownloader mktemp gnufind
+#!nix-shell -i bash -p coreutils depotdownloader mktemp findutils
 
 # shellcheck shell=bash
 
@@ -27,7 +27,7 @@ pushd "$tmp"
         -depot "$depoid" \
         -manifest "$manifestid"
 
-    exe="$(find "$tmp" -executable | head -n1)"
+    exe="$(find "$tmp" -name "Balatro.exe" | head -n1)"
     if ! [ -e "$exe" ]; then
         echo "No balatro.exe found"
         exit 1
@@ -42,7 +42,7 @@ cat <<EOF > "$tmp/default.nix"
 let
   name = "$name";
   hash = "$hash";
-  src = pkgs.requireFile { inherit name hash; message = "unreachable"; }
+  src = pkgs.requireFile { inherit name hash; message = "unreachable"; };
 in
 pkgs.balatro.overrideAttrs { inherit src; }
 EOF
