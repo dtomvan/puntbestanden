@@ -6,7 +6,7 @@ let
   system = "x86_64-linux";
 in
 {
-  flake.nixosConfigurations = {
+  flake.nixosConfigurations = rec {
     autounattend = nixosSystem {
       pkgs = mkPkgs system;
       modules = [
@@ -47,7 +47,6 @@ in
   perSystem =
     {
       pkgs,
-      config,
       ...
     }:
     {
@@ -69,7 +68,7 @@ in
                   -enable-kvm \
                   -m 2G \
                   -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
-                  -cdrom ${config.packages.iso}/iso/*.iso \
+                  -cdrom ${self.packages.${system}.iso}/iso/*.iso \
                   -hda "$disk"
               '';
             }
