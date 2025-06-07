@@ -239,10 +239,9 @@ in
           ];
 
           wip = [
-            "describe"
-            "-m"
-            "wip: "
-            "--edit"
+            "log"
+            "-r"
+            "trunk()..closest_bookmark(@-) & description(glob:\"wip:*\")"
           ];
 
           sync = [
