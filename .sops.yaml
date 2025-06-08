@@ -13,9 +13,11 @@ creation_rules:
         - *feather
         - *kaput
         - *autisme
-  - path_regex: secrets/vitune/rathole-credentials.secret
+  - path_regex: secrets/vitune/rathole-server.secret
+    key_groups:
+      - age:
+        - *vitune
+  - path_regex: secrets/vitune/rathole-client.secret
     key_groups:
       - age:
         - *boomer
-        - *feather
-        - *vitune
