@@ -3,6 +3,7 @@ keys:
   - &feather age1pjgmdxkj6zvn5hpjwd4mlv2jw89mk78luuetdcjqtmaq6r88juwshyjqal
   - &kaput age1hfxwhjh3lwq9cl2fp2fx0edzvptd0m8e87amlxktpt0p37q9ueusqd9h5p
   - &autisme age1r3zv7nrf53wvjd78lld55wtqhmysp7n40uka07yaq0v4e9yv6s7szjj0nn
+  - &vitune age1tfcfat3y9uekdw8u2ln4az4uqfznk25ntarte34292rz0zw3zy6qjcqqth
 
 creation_rules:
   - path_regex: secrets/[^/]+.secret
@@ -12,3 +13,9 @@ creation_rules:
         - *feather
         - *kaput
         - *autisme
+  - path_regex: secrets/vitune/rathole-credentials.secret
+    key_groups:
+      - age:
+        - *boomer
+        - *feather
+        - *vitune
