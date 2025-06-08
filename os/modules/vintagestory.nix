@@ -1,22 +1,36 @@
-{ config, ... }:
+{ inputs, config, ... }:
+let
+  host = "127.0.0.1";
+  port = 42420;
+in
 {
-  # TODO: when services.vintagestory gets merged, set that up. this is just the
-  # reverse proxy for now.
+  services.vintagestory = {
+    enable = true;
+    inherit host port;
+    extraFlags = [
+      "--addModPath"
+      (builtins.toString (inputs.vs2nix.legacyPackages.x86_64-linux.makeModsDir "my-mods" (mods: with mods; [
+        primitivesurvival
+        carryon
+        xskills
+      ])))
+    ];
+  };
+
   services.rathole = {
     enable = true;
     role = "client";
     settings.client = {
       remote_addr = "vitune.app:2333";
-      services.vintagestory.local_addr = "127.0.0.1:42420";
+      services.vintagestory.local_addr = "${host}:${builtins.toString port}";
     };
-    credentialsFile = config.sops.secrets.rathole-credentials.path;
+    credentialsFile = config.sops.secrets.rathole-client.path;
   };
 
-  sops.secrets.rathole-credentials = {
-    mode = "0400";
-    sopsFile = ../../secrets/vitune/rathole-credentials.secret;
+  sops.secrets.rathole-client = {
+    mode = "0444";
     format = "binary";
-    owner = "root";
-    group = "wheel";
+    sopsFile = ../../secrets/vitune/rathole-client.secret;
+    restartUnits = [ "rathole.service" ];
   };
 }

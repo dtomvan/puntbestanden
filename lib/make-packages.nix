@@ -6,7 +6,13 @@
 }:
 import nixpkgs {
   inherit system;
-  config.allowUnfree = true;
+  config = {
+    allowUnfree = true;
+    # for vintagestory
+    permittedInsecurePackages = [
+      "dotnet-runtime-7.0.20"
+    ];
+  };
   overlays = [
     inputs.nur.overlays.default
     inputs.nix4vscode.overlays.forVscode
