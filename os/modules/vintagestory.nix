@@ -23,6 +23,7 @@ in
     settings.client = {
       remote_addr = "vitune.app:2333";
       services.vintagestory.local_addr = "${host}:${builtins.toString port}";
+      transport.type = "noise";
     };
     credentialsFile = config.sops.secrets.rathole-client.path;
   };

@@ -4,7 +4,7 @@
     # TEMP
     # ../modules/hyprland.nix
 
-    # ../modules/vintagestory.nix
+    ../modules/vintagestory.nix
 
     ../modules/utilities.nix
     ../modules/programs/gpg.nix
