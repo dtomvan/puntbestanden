@@ -11,6 +11,8 @@
   services.displayManager.defaultSession = "plasma";
   environment.systemPackages = with pkgs.kdePackages; [
     kdeconnect-kde
+    krfb # VNC share/server
+    krdc # remote desktop client, should get negotiated by kdeconnect
     plasma-browser-integration
 
     filelight
