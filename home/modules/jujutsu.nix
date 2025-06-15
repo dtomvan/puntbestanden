@@ -63,14 +63,13 @@ in
         ui = {
           default-command = "l";
           pager = ":builtin";
-          diff.tool = [
+          diff-formatter = [
             "${lib.getExe pkgs.difftastic}"
             "--color=always"
             "$left"
             "$right"
           ];
           diff-editor = ":builtin"; # shut up
-          # diff-editor = if cfg.jujutsuBabyMode then "diffedit3" else ":builtin";
         };
 
         git = {
