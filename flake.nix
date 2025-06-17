@@ -118,6 +118,7 @@
           parts/home.nix
           parts/os.nix
           parts/formatter.nix
+          parts/nixinate.nix
         ];
 
         flake = { };
@@ -136,8 +137,6 @@
             ...
           }:
           {
-            apps = (inputs.nixinate.nixinate.${system} self).nixinate;
-
             devShells = { };
 
             packages = {
