@@ -117,6 +117,7 @@
           parts/darwin.nix
           parts/home.nix
           parts/os.nix
+          parts/formatter.nix
         ];
 
         flake = { };
@@ -136,8 +137,6 @@
           }:
           {
             apps = (inputs.nixinate.nixinate.${system} self).nixinate;
-
-            formatter = pkgs.nixfmt-tree;
 
             devShells = { };
 
