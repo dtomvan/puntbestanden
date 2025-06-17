@@ -10,7 +10,7 @@ let
         specialArgs = {
           inherit host nixConfig inputs;
         };
-        modules = [ ./hosts/${host.hostName}.nix ];
+        modules = [ ../darwin/hosts/${host.hostName}.nix ];
       }
     );
 in

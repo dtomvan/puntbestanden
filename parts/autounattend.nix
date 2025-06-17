@@ -1,8 +1,8 @@
 { self, inputs, ... }:
 with inputs.nixpkgs.lib;
 let
-  nixConfig = import ../../nix-config.nix;
-  mkPkgs = system: import ../../lib/make-packages.nix { inherit self system inputs; };
+  nixConfig = import ../nix-config.nix;
+  mkPkgs = system: import ../lib/make-packages.nix { inherit self system inputs; };
   system = "x86_64-linux";
 in
 {
@@ -10,7 +10,7 @@ in
     autounattend = nixosSystem {
       pkgs = mkPkgs system;
       modules = [
-        ./configuration.nix
+        ../os/autounattend/configuration.nix
         { nixpkgs.hostPlatform = system; }
       ];
       specialArgs = {
@@ -31,7 +31,7 @@ in
       pkgs = mkPkgs system;
       modules = [
         inputs.sops.nixosModules.default
-        ./installer.nix
+        ../os/autounattend/installer.nix
       ];
       specialArgs = {
         inherit nixConfig inputs;
