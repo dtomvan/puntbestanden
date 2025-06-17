@@ -12,7 +12,7 @@ let
       specialArgs = {
         inherit host nixConfig inputs;
       };
-      modules = import ./modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
+      modules = import ../os/modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
       pkgs = mkPkgs host.system;
     });
 in

@@ -113,10 +113,10 @@
       }:
       {
         imports = [
-          ./darwin/flake-module.nix
-          ./home/flake-module.nix
-          ./os/flake-module.nix
-          ./os/autounattend/flake-module.nix
+          parts/autounattend.nix
+          parts/darwin.nix
+          parts/home.nix
+          parts/os.nix
         ];
 
         flake = { };

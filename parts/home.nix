@@ -9,7 +9,7 @@ let
       inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = mkPkgs host.system;
 
-        modules = import ./modules.nix { inherit host inputs; };
+        modules = import ../home/modules.nix { inherit host inputs; };
 
         extraSpecialArgs = {
           inherit host;
