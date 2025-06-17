@@ -27,6 +27,7 @@
     };
 
     flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
 
     nixinate = {
       url = "github:matthewcroughan/nixinate";
@@ -98,31 +99,11 @@
   };
 
   outputs =
-    inputs@{
-      self,
+    {
+      import-tree,
       flake-parts,
-      nixpkgs,
       ...
-    }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      top@{
-        config,
-        withSystem,
-        moduleWithSystem,
-        ...
-      }:
-      {
-        imports = [
-          parts/autounattend.nix
-          parts/darwin.nix
-          parts/home.nix
-          parts/os.nix
-          parts/formatter.nix
-          parts/nixinate.nix
-          parts/nixtreefmt.nix
-          parts/systems.nix
-        ];
-      }
-    );
+    }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } (import-tree ./parts);
 }
 # vim:sw=2 ts=2 sts=2
