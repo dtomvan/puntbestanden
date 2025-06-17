@@ -233,6 +233,21 @@
     },
     "import-tree": {
       "locked": {
+        "lastModified": 1749958812,
+        "narHash": "sha256-zdo2CwxdUK3FpQjLBjkJnXvl7OPoTpjdW5OvOzQffoQ=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "6fcfa909614de6dd6c712db8229b8c0261791e39",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
+        "type": "github"
+      }
+    },
+    "import-tree_2": {
+      "locked": {
         "lastModified": 1745565707,
         "narHash": "sha256-ccFeWWQ9RLgCd1k+xwV/ASUkJ7AGTTaGDhlRWZgytxY=",
         "owner": "vic",
@@ -579,6 +594,7 @@
         "disko": "disko",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "import-tree": "import-tree",
         "lazy-apps": "lazy-apps",
         "localsend-rs": "localsend-rs",
         "nix-darwin": "nix-darwin",
@@ -774,7 +790,7 @@
     "vs2nix": {
       "inputs": {
         "flake-parts": "flake-parts_4",
-        "import-tree": "import-tree",
+        "import-tree": "import-tree_2",
         "nixpkgs": [
           "nixpkgs"
         ]
