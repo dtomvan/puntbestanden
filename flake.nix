@@ -119,6 +119,7 @@
           parts/os.nix
           parts/formatter.nix
           parts/nixinate.nix
+          parts/nixtreefmt.nix
         ];
 
         flake = { };
@@ -129,31 +130,6 @@
           "aarch64-darwin"
           "x86_64-darwin"
         ];
-
-        perSystem =
-          {
-            system,
-            pkgs,
-            ...
-          }:
-          {
-            devShells = { };
-
-            packages = {
-              # treefmt for nixpkgs contributors
-              nixtreefmt =
-                let
-                  inherit (import "${nixpkgs}/ci" { inherit nixpkgs system; }) fmt;
-                in
-                pkgs.symlinkJoin {
-                  name = "nixtreefmt";
-                  paths = [ fmt.pkg ];
-                  postBuild = ''
-                    mv $out/bin/{,nix}treefmt
-                  '';
-                };
-            };
-          };
       }
     );
 }
