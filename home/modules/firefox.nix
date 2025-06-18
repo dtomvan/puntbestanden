@@ -43,7 +43,7 @@ in
     enable = true;
     # Use official developer edition build so I can use my precious from-source
     # obsidian-web-clipper.
-    package = makeFakeFirefox pkgs.firefox-devedition-bin {
+    package = makeFakeFirefox pkgs.firefox-devedition {
       args = "-P ${profile-name}";
     };
     nativeMessagingHosts = lib.mkIf cfg.isPlasma (
