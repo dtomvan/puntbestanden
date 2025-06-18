@@ -55,10 +55,16 @@ with lib;
           local expr=`printf 'with import <nixpkgs> {}; lib.concatLines (lib.map (m: "@''${m.github}") (%s.meta.maintainers or []))' "$@"`
           nix-instantiate --eval --raw --expr "$expr"
         }
-        new-remote() {
+        jj-remote() {
           reponame="$(basename "$(git rev-parse --show-toplevel)")"
           username="$1"
           jj git remote add "$username" "https://github.com/$username/$reponame"
+        }
+        jj-fetch() {
+          jj git fetch --remote "$1" --branch "$2"
+        }
+        jj-track() {
+          jj bookmark track "$2"@"$1"
         }
       '';
 
