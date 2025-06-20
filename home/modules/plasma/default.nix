@@ -157,7 +157,7 @@ in
         mkDesktopFileFix = m: attrValues (mapAttrs' mkDesktopFileFix' m);
       in
       mkDesktopFileFix {
-        "firefox-bin firefox-dev" = "firefox-developer-edition";
+        "firefox-devedition firefox-dev" = "firefox-devedition";
       };
 
     configFile = {
