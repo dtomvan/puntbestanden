@@ -10,9 +10,32 @@ in
     extraFlags = [
       "--addModPath"
       (builtins.toString (inputs.vs2nix.legacyPackages.x86_64-linux.makeModsDir "my-mods" (mods: with mods; [
+        # more survival mechanics
         primitivesurvival
-        carryon
+        # skill trees
         xskills
+
+        ## QOL
+        betterfirepit
+        carryon
+        earlychiseling
+        gimmeoneseedplz
+        justanarrowheadmold
+        morepiles
+        playercorpse
+        prospecttogether
+
+        ## Visual
+        hit
+        # Like MC's distant horizons
+        farseer
+
+        ## Libs
+        commonlib
+        vsimgui
+        configlib
+        autoconfiglib
+        xlib
       ])))
     ];
   };
