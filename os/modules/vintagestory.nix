@@ -1,15 +1,17 @@
-{ inputs, config, ... }:
+{ inputs, config, pkgs, ... }:
 let
   host = "127.0.0.1";
   port = 42420;
 in
 {
+  environment.systemPackages = with pkgs; [ rustique ];
+
   services.vintagestory = {
     enable = true;
     inherit host port;
     extraFlags = [
       "--addModPath"
-      (builtins.toString (inputs.vs2nix.legacyPackages.x86_64-linux.makeModsDir "my-mods" (mods: with mods; [
+      (builtins.toString (inputs.vs2nix.legacyPackages.x86_64-linux.makeVintageStoryModsDir "my-mods" (mods: with mods; [
         # more survival mechanics
         primitivesurvival
         # skill trees
