@@ -90,8 +90,6 @@
   # WARNING: this requires a user to be set, or the root password to be known.
   users.mutableUsers = false;
 
-  virtualisation.waydroid.enable = true;
-
   services.lorri.enable = true;
 
   # this doesn't really aid nixpkgs contribution at all
