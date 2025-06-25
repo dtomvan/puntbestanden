@@ -29,6 +29,8 @@ in
   ./modules/users/root.nix
 
   ./modules/localsend-rs.nix
+
+  ./modules/programs/nano.nix
 ]
 ++ lib.optional host.remoteBuild.enable ./modules/users/remote-build.nix
 ++ lib.optionals host.os.isGraphical [
