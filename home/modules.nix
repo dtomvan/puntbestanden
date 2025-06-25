@@ -11,6 +11,7 @@ if inputs.nixpkgs.lib.strings.hasInfix "linux" host.system then
 
     modules/basic-cli.nix
     modules/helix.nix
+    modules/nano.nix
   ]
   ++ inputs.nixpkgs.lib.optionals host.os.isGraphical [
     modules/firefox.nix
