@@ -1,4 +1,9 @@
-{ inputs, config, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 let
   host = "127.0.0.1";
   port = 42420;
@@ -11,34 +16,68 @@ in
     inherit host port;
     extraFlags = [
       "--addModPath"
-      (builtins.toString (inputs.vs2nix.legacyPackages.x86_64-linux.makeVintageStoryModsDir "my-mods" (mods: with mods; [
-        # more survival mechanics
-        primitivesurvival
-        # skill trees
-        xskills
+      (builtins.toString (
+        inputs.vs2nix.legacyPackages.x86_64-linux.makeVintageStoryModsDir "my-mods" (
+          mods:
+          with mods;
+          [
+            # worldgen
+            betterforest
+            betterruins
+            # settings:
+            # landform 50%, lf scale 300%
+            # worldheight 320
+            terraprety
+            # needed for terraprety above 1.20
+            (pkgs.fetchurl rec {
+              pname = "MoreBlueClay";
+              version = "1.0.1";
+              url = "https://mods.vintagestory.at/download/35368/${pname}_${version}.zip";
+              hash = "sha256-eQIV5NHTHleAaPWPi9m9RQbJaZDkT89/kqjFU6BicU8=";
+            })
+            (pkgs.fetchurl rec {
+              pname = "BetterForest";
+              version = "0.1.0";
+              url = "https://mods.vintagestory.at/download/33287/${pname}_${version}.zip";
+              hash = "sha256-1q166al70H7WwB2irzngVI4s37NI1MvqqKKyRiBZ80A=";
+            })
+            # more survival mechanics
+            primitivesurvival
+            # skill trees
+            xskills
 
-        ## QOL
-        betterfirepit
-        carryon
-        earlychiseling
-        gimmeoneseedplz
-        justanarrowheadmold
-        morepiles
-        playercorpse
-        prospecttogether
+            ## QOL
+            betterfirepit
+            carryon
+            gimmeoneseedplz
+            justanarrowheadmold
+            morepiles
+            playercorpse
+            prospecttogether
 
-        ## Visual
-        hit
-        # Like MC's distant horizons
-        farseer
+            ## Visual
+            hit
+            # Like MC's distant horizons
+            farseer
 
-        ## Libs
-        commonlib
-        vsimgui
-        configlib
-        autoconfiglib
-        xlib
-      ])))
+            ## Libs
+            commonlib
+            vsimgui
+            configlib
+            autoconfiglib
+            xlib
+          ]
+          ++ lib.optionals (lib.versions.versionOlder pkgs.vintagestory.version "1.21") [
+            # needed for terraprety below 1.21
+            (pkgs.fetchurl {
+              pname = "SeaLevelFix";
+              version = "1.0.11";
+              url = "https://mods.vintagestory.at/download/45783/${pname}_${version}.zip";
+              hash = "sha256-2GthrtRefpHYTDsoL2sNnvlUUQXzwMymfNyh4PRI03s=";
+            })
+          ]
+        )
+      ))
     ];
   };
 
