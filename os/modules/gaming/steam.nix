@@ -7,7 +7,6 @@
   programs.steam = {
     enable = true;
     extraPackages = with pkgs; [
-      protonup
       gamemode
       mangohud
     ];

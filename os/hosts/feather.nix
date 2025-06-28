@@ -5,6 +5,8 @@
     ../modules/utilities.nix
     ../modules/programs/gpg.nix
 
+    ../modules/gaming/steam.nix
+
     ../modules/networking/tailscale.nix
 
     ../modules/services/keybase.nix
