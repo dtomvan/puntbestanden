@@ -21,6 +21,11 @@
   inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
 
+    nixpkgs-unfree = {
+      url = "github:numtide/nixpkgs-unfree";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     vs2nix = {
       url = "github:dtomvan/vs2nix";
       inputs.nixpkgs.follows = "nixpkgs";
