@@ -1,11 +1,14 @@
 {
   inputs,
+  pkgs,
   host,
   lib,
   nixConfig,
   ...
 }:
 {
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   nixpkgs.flake.setFlakeRegistry = true;
   nix = {
     settings = {

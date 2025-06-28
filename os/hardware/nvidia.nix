@@ -11,7 +11,7 @@
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     open = false;
-    package = config.boot.kernelPackages.nvidia_x11;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
   boot.extraModprobeConfig = ''
     options nvidia NVreg_PreserveVideoMemoryAllocations=1
