@@ -1,4 +1,5 @@
 {
+  inputs,
   host,
   lib,
   nixConfig,
@@ -28,9 +29,31 @@
       dates = "weekly";
       options = "--delete-older-than 14d";
     };
+
     optimise = {
       automatic = true;
     };
+
+    registry =
+      lib.mapAttrs
+        # WHY can't this be key as indirect reference name then value as
+        # a path, DONE
+        (name: value: {
+          from = {
+            type = "indirect";
+            id = name;
+          };
+          flake = value;
+        })
+        {
+          inherit (inputs)
+            disko
+            localsend-rs
+            nixpkgs-unfree
+            nur
+            vs2nix
+            ;
+        };
   };
 
   boot.tmp.cleanOnBoot = true;
