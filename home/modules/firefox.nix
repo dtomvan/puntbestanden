@@ -38,6 +38,7 @@ let
           mkdir -p $out/share/applications
           cp $src/share/applications/${firefox.meta.mainProgram}.desktop $out/share/applications
           ln -s $src/share/icons $out/share/icons
+          ln -s $src/bin $out/bin
           desktop-file-edit \
             --set-key="Exec" --set-value="${lib.getExe firefox} ${args} %U" \
             $out/share/applications/${firefox.meta.mainProgram}.desktop
