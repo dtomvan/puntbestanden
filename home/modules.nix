@@ -17,6 +17,7 @@ if inputs.nixpkgs.lib.strings.hasInfix "linux" host.system then
     modules/firefox.nix
     modules/terminals
     modules/syncthing.nix
+    modules/webapps
     # modules/lisp.nix
   ]
   ++ inputs.nixpkgs.lib.optional host.os.wantsKde modules/plasma
