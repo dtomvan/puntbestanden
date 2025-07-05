@@ -28,8 +28,7 @@ let
     lib.makeOverridable (
       { args, ... }:
       pkgs.stdenvNoCC.mkDerivation {
-        pname = "firefox-devedition-wrapped";
-        version = "0-unstable-2025-04-13";
+        inherit (firefox) pname version;
         src = firefox;
 
         nativeBuildInputs = with pkgs; [ desktop-file-utils ];
