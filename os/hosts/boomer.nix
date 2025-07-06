@@ -90,8 +90,6 @@
   # WARNING: this requires a user to be set, or the root password to be known.
   users.mutableUsers = false;
 
-  services.lorri.enable = true;
-
   # this doesn't really aid nixpkgs contribution at all
   # programs.nix-ld.enable = true;
   # services.envfs.enable = true;

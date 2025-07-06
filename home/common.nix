@@ -68,8 +68,6 @@
     helix.lsp.enable = host.os.isGraphical;
   };
 
-  services.lorri.enable = true;
-
   home.username = "tomvd";
   home.homeDirectory = "/home/tomvd";
   home.stateVersion = "24.05";
