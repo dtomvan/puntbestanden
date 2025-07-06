@@ -28,10 +28,7 @@ in
     [
       watchman
     ]
-    ++ lazyFormatters
-    ++ lib.optionals cfg.jujutsuBabyMode [
-      gg-jj
-    ];
+    ++ lazyFormatters;
 
   programs.mergiraf.enable = true;
 

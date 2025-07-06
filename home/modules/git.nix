@@ -26,8 +26,6 @@ in
     withJujutsu = (mkEnableOption "jujutsu") // {
       default = true;
     };
-
-    jujutsuBabyMode = mkEnableOption "jujutsu {t,g}ui";
   };
 
   config.programs.git = lib.mkIf cfg.enable {
