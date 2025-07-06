@@ -74,22 +74,17 @@
 
   home.packages = with pkgs; [
     nur.repos.dtomvan.afio-font
-    alejandra
-    clifm
     file
     just
     rink
     ripdrag
     nur.repos.dtomvan.rwds-cli
     stow
-    visidata
     yt-dlp
 
     npins
     treefmt # when nixtreefmt is added, you need treefmt anyways so "for free"
     nixtreefmt # in-tree
-
-    speedtest
 
     flake-fmt
   ];
