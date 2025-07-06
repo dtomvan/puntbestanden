@@ -88,7 +88,5 @@
 
     flake-fmt
   ];
-
-  programs.home-manager.enable = true;
 }
 # vim:sw=2 ts=2 sts=2
