@@ -1,26 +1,9 @@
 {
   config,
-  pkgs,
   ...
 }:
 {
-  config.home.packages = with pkgs; [ lazygit ];
-  config.programs.nixvim.keymaps = [
-    {
-      key = "<space>lg";
-      action = "<cmd>lua require('snacks').lazygit()<cr>";
-    }
-    {
-      mode = [
-        "t"
-        "n"
-        "i"
-      ];
-      key = "<a-q>";
-      action = "<cmd>lua require('snacks').terminal.toggle()<cr>";
-    }
-  ];
-  config.programs.nixvim.plugins.snacks = {
+  programs.nixvim.plugins.snacks = {
     enable = true;
     settings = {
       lazygit.configure = true;
