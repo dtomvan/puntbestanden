@@ -6,32 +6,7 @@
 }:
 let
   cfg = config.modules.neovim;
-  lazyPkgs = pkgs.symlinkJoin {
-    name = "lazy-language-servers";
-    paths =
-      with pkgs;
-      map lazy-app.override [
-        { pkg = bash-language-server; }
-        {
-          pkg = clang-tools;
-          exe = "clangd";
-        }
-        { pkg = cmake-language-server; }
-        { pkg = dockerfile-language-server-nodejs; }
-        { pkg = emmet-language-server; }
-        { pkg = kotlin-language-server; }
-        {
-          pkg = pyright;
-          exe = "pyright-langserver";
-        }
-        { pkg = rust-analyzer; }
-        { pkg = rustfmt; }
-        { pkg = svelte-language-server; }
-        { pkg = taplo; }
-        { pkg = terraform-ls; }
-        { pkg = yaml-language-server; }
-      ];
-  };
+  lazyPkgs = import ../../lazy-lsps.nix { inherit pkgs; };
 in
 {
   programs.nixvim = lib.mkIf cfg.lsp.enable {
@@ -42,6 +17,7 @@ in
     lsp = {
       luaConfig.post =
         lib.optionalString cfg.lsp.lazyMoar
+          # please keep in sync with ../../lazy-lsps.nix
           # lua
           ''
             for _, server in ipairs {

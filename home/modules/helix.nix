@@ -6,20 +6,14 @@
 }:
 let
   cfg = config.modules.helix;
+  lazyPkgs = import ./lazy-lsps.nix { inherit pkgs; };
 in
 {
   options.modules.helix = {
     enable = lib.mkEnableOption "install and configure hx";
     use-nix-colors = lib.mkEnableOption "refer to nix-colors for theme";
 
-    lsp = {
-      enable = lib.mkEnableOption "download servers";
-      extraLspServers = lib.mkOption {
-        description = "extra LSP servers you want available in hx";
-        default = [ ];
-        type = lib.types.listOf lib.types.package;
-      };
-    };
+    lsp.enable = lib.mkEnableOption "download servers (lazy)";
   };
 
   config.programs.helix = lib.mkIf cfg.enable {
@@ -80,15 +74,9 @@ in
         # C-4 = "@<C-s>ghwc#### <esc><C-o>i";
       };
     };
-    extraPackages = lib.mkIf cfg.lsp.enable (
-      with pkgs;
-      [
-        marksman
-        nixd
-        rust-analyzer
-        bash-language-server
-      ]
-      ++ cfg.lsp.extraLspServers
-    );
+    extraPackages = lib.mkIf cfg.lsp.enable [
+      pkgs.nixd
+      lazyPkgs
+    ];
   };
 }
