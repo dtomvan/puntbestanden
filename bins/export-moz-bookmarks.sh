@@ -17,21 +17,21 @@
 
 set -euo pipefail
 
-temp=`mktemp`
+temp=$(mktemp)
 
-ls --sort=time \
-| head -n1 \
-| xargs dejsonlz4 \
-| gron \
-| sed 's|\.children||g' \
-| rg 'title|uri' \
-| rg -U 'title.*\n.*uri' \
-| gron -u \
-| jq 'flatten | map(select(. != null) | {name: .title, url: .uri})' > $temp
+ls --sort=time |
+  head -n1 |
+  xargs dejsonlz4 |
+  gron |
+  sed 's|\.children||g' |
+  rg 'title|uri' |
+  rg -U 'title.*\n.*uri' |
+  gron -u |
+  jq 'flatten | map(select(. != null) | {name: .title, url: .uri})' >$temp
 
 nix --extra-experimental-features 'nix-command' \
-    eval --impure \
-    --expr "builtins.fromJSON (builtins.readFile $temp)" \
-    | nixfmt
+  eval --impure \
+  --expr "builtins.fromJSON (builtins.readFile $temp)" |
+  nixfmt
 
 rm $temp

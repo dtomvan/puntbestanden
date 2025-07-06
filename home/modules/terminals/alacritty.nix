@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.alacritty.enable {
     programs.alacritty = {
       enable = true;
-      package = cfg.alacritty.package;
+      inherit (cfg.alacritty) package;
 
       settings = {
         terminal.shell = {

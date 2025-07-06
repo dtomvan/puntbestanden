@@ -81,7 +81,7 @@ in
           hasExtraPackages = cfg.extraPackages != null;
           extraPackages = if hasExtraPackages then cfg.extraPackages else [ ];
         in
-        if hasExtraPackages || cfg.gimmeGimmeGimme == true then
+        if hasExtraPackages || cfg.gimmeGimmeGimme then
           pkgs."${product}${suffix}WithPackages" (
             _: extraPackages ++ lib.optionals cfg.gimmeGimmeGimme gimmePackages
           )

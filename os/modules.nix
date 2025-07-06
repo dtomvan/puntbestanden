@@ -3,7 +3,7 @@
   host,
 }:
 let
-  lib = inputs.nixpkgs.lib;
+  inherit (inputs.nixpkgs) lib;
 in
 [
   inputs.disko.nixosModules.disko
