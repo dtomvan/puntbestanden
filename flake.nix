@@ -70,11 +70,6 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     localsend-rs = {
       # private
       url = "github:dtomvan/localsend-rust-impl";
