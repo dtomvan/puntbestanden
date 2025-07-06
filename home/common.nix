@@ -77,8 +77,7 @@
     yt-dlp
 
     npins
-    treefmt # when nixtreefmt is added, you need treefmt anyways so "for free"
-    nixtreefmt # in-tree
+    treefmt
 
     flake-fmt
   ];
