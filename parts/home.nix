@@ -12,7 +12,7 @@ let
         modules = import ../home/modules.nix { inherit host inputs; };
 
         extraSpecialArgs = {
-          inherit host;
+          inherit host inputs;
         };
       }
     );
