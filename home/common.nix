@@ -6,11 +6,6 @@
   ...
 }:
 {
-  ${if host.os.isGraphical then "firefox" else null} = {
-    enable = true;
-    isPlasma = true;
-  };
-
   home.${if host.os.isGraphical then "pointerCursor" else null} = {
     enable = true;
     package = pkgs.kdePackages.breeze;
