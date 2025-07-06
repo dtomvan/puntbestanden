@@ -16,7 +16,7 @@ update-home user=shell("whoami") host=shell("hostname"):
 alias upo := update-os
 [group('nix')]
 update-os:
-	nh os switch
+	nh os boot
 
 [group('nix')]
 up: update-flake update-os update-home
