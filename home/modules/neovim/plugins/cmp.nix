@@ -1,13 +1,5 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  options = {
-  };
-  config.programs.nixvim = {
+  programs.nixvim = {
     plugins.friendly-snippets.enable = true;
     plugins.nvim-snippets = {
       enable = true;

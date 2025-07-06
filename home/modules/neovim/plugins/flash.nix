@@ -1,13 +1,5 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
-  options = {
-  };
-  config.programs.nixvim = {
+  programs.nixvim = {
     plugins.flash.enable = true;
     keymaps = [
       {
