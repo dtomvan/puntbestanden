@@ -96,6 +96,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # uncomment for testing
     # nur-packages = {
     #   url = "github:dtomvan/nur-packages/dtomvan/push-ssqqtnvrqmll";
