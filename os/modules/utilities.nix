@@ -27,7 +27,6 @@
       dosfstools
     ]
     ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
-      nix-fast-build
       nix-tree
       nvd
       rar
