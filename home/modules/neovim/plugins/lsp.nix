@@ -24,6 +24,8 @@ let
           pkg = pyright;
           exe = "pyright-langserver";
         }
+        { pkg = rust-analyzer; }
+        { pkg = rustfmt; }
         { pkg = svelte-language-server; }
         { pkg = taplo; }
         { pkg = terraform-ls; }
@@ -50,6 +52,7 @@ in
               "emmet_ls",
               "kotlin_language_server",
               "pyright",
+              "rust_analyzer",
               "svelte",
               "taplo",
               "terraformls",
@@ -63,11 +66,6 @@ in
       servers =
         {
           lua_ls.enable = true;
-        }
-        // lib.optionalAttrs cfg.lsp.rust_analyzer.enable {
-          rust_analyzer = {
-            enable = true;
-          };
         }
         // lib.optionalAttrs cfg.lsp.nixd.enable {
           nixd.enable = true;

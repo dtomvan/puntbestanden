@@ -48,7 +48,6 @@
       ${if host.os.isGraphical then "lsp" else null} = lib.mkIf host.os.isGraphical {
         enable = true;
         nixd.enable = true;
-        rust_analyzer.enable = true;
       };
     };
 

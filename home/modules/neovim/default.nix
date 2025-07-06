@@ -13,7 +13,6 @@ in
     lsp = {
       enable = lib.mkEnableOption "use lspconfig and download servers";
       nixd.enable = lib.mkEnableOption "use nixd with this flake";
-      rust_analyzer.enable = lib.mkEnableOption "enable rust_analyzer";
       lazyMoar = lib.mkEnableOption "install a lot of LSP servers, but lazily with lazy-apps";
     };
 
