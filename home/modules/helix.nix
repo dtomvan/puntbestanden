@@ -11,20 +11,13 @@ in
 {
   options.modules.helix = {
     enable = lib.mkEnableOption "install and configure hx";
-    use-nix-colors = lib.mkEnableOption "refer to nix-colors for theme";
-
     lsp.enable = lib.mkEnableOption "download servers (lazy)";
   };
 
   config.programs.helix = lib.mkIf cfg.enable {
     enable = true;
-    # defaultEditor = true;
     settings = {
-      theme =
-        if cfg.use-nix-colors then
-          builtins.replaceStrings [ "-" ] [ "_" ] config.colorScheme.slug
-        else
-          "catppuccin_mocha";
+      theme = "catppuccin_mocha";
 
       editor = {
         cursor-shape = {
@@ -56,22 +49,6 @@ in
 
       keys.normal = {
         G = "goto_file_end";
-      };
-
-      keys.normal."+" = {
-        m = ":run-shell-command make";
-        j.b = ":run-shell-command just build";
-        j.r = ":run-shell-command just run";
-        c.b = ":run-shell-command cargo build";
-        c.t = ":run-shell-command cargo test";
-      };
-
-      keys.insert = {
-        # Doesn't work for some reason
-        # C-1 = "@<C-s>ghwc# <esc><C-o>i";
-        # C-2 = "@<C-s>ghwc## <esc><C-o>i";
-        # C-3 = "@<C-s>ghwc### <esc><C-o>i";
-        # C-4 = "@<C-s>ghwc#### <esc><C-o>i";
       };
     };
     extraPackages = lib.mkIf cfg.lsp.enable [
