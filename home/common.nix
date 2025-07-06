@@ -90,6 +90,8 @@
     nixtreefmt # in-tree
 
     speedtest
+
+    flake-fmt
   ];
 
   programs.home-manager.enable = true;
