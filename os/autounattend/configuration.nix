@@ -32,6 +32,9 @@
   environment.systemPackages = with pkgs; [
     gh
     git
+    # does not include optional deps like ffmpeg, imagemagick, saves ~500MiB
+    # closure size
+    yazi-unwrapped
   ];
 
   services.getty = {
