@@ -83,6 +83,9 @@ in
     ];
   };
 
+  # takes up a bunch of memory, I'll start it on-demand
+  systemd.services.vintagestory.wantedBy = lib.mkForce [ ];
+
   services.rathole = {
     enable = true;
     role = "client";
