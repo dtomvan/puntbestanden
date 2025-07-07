@@ -96,6 +96,10 @@
   time.timeZone = "UTC";
   i18n.defaultLocale = "en_US.UTF-8";
 
+  # We're using flakes here, don't grab the database from a non-existing
+  # channel, but from the input
+  programs.command-not-found.dbPath = "${inputs.nixpkgs.outPath}/programs.sqlite";
+
   programs.less.enable = true;
   networking.firewall.enable = true;
 
