@@ -35,11 +35,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    home-manager
-    wget
-    curl
-    nh
-
     tmux
   ];
 

@@ -1,9 +1,6 @@
 { pkgs, ... }:
 {
   imports = [
-    # TEMP
-    # ../modules/hyprland.nix
-
     ../modules/vintagestory.nix
 
     ../modules/utilities.nix
@@ -39,11 +36,6 @@
   environment.systemPackages =
     with pkgs;
     [
-      home-manager
-      wget
-      curl
-      nh
-      wl-clipboard
       libreoffice-qt6-fresh
 
       keepassxc
@@ -61,8 +53,6 @@
         ];
       })
 
-      logseq
-
       python3
 
       nur.repos.dtomvan.tsodingPackages.blang
@@ -77,12 +67,6 @@
       gimp
     ];
 
-  # hyprland.nix provides regreet, kde.nix provides sddm, choice made.
-  # services.displayManager = {
-  #   sddm.enable = false;
-  #   sddm.wayland.enable = false;
-  # };
-
   hardware.bluetooth.enable = true;
 
   time.timeZone = "Europe/Amsterdam";
@@ -90,10 +74,6 @@
 
   # WARNING: this requires a user to be set, or the root password to be known.
   users.mutableUsers = false;
-
-  # this doesn't really aid nixpkgs contribution at all
-  # programs.nix-ld.enable = true;
-  # services.envfs.enable = true;
 
   programs.less.enable = true;
 

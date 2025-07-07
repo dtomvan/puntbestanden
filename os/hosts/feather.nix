@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    # ../modules/hyprland.nix
     ../modules/utilities.nix
     ../modules/programs/gpg.nix
 
@@ -16,10 +15,6 @@
     ../modules/virt/distrobox.nix
     ../modules/virt/docker.nix
   ];
-
-  virtualisation.libvirtd.onBoot = "ignore";
-
-  # services.localsend-rs.sopsBootstrap = true;
 
   _module.args.nixinate = {
     host = "feather";
@@ -37,13 +32,6 @@
   environment.systemPackages =
     with pkgs;
     [
-      home-manager
-      wget
-      curl
-      nh
-      wl-clipboard
-      git
-
       keepassxc
     ]
     ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
@@ -51,6 +39,7 @@
       libreoffice-qt6-fresh
     ];
 
+  virtualisation.libvirtd.onBoot = "ignore";
   systemd.services.podman.wantedBy = lib.mkForce [ ];
   virtualisation.docker.enableOnBoot = false;
 

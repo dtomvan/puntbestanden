@@ -15,6 +15,8 @@ in
   config.environment.systemPackages =
     with pkgs;
     [
+      wget
+      curl
       nh
       nix-output-monitor
       nix-init
