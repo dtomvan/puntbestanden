@@ -70,7 +70,6 @@ in
         };
 
         git = {
-          inherit push-bookmark-prefix;
           auto-local-bookmark = true;
           private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
           # see signing.behavior
@@ -302,7 +301,10 @@ in
         template-aliases = {
         };
 
-        templates.draft_commit_description = makeDraftDesc ''""'';
+        templates = {
+          draft_commit_description = makeDraftDesc ''""'';
+          git_push_bookmark = ''"${push-bookmark-prefix}" ++ change_id.short()'';
+        };
 
         # "--scope" = [
         #   {
