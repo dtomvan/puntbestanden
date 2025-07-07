@@ -101,6 +101,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # uncomment for testing
     # nur-packages = {
     #   url = "github:dtomvan/nur-packages/dtomvan/push-ssqqtnvrqmll";

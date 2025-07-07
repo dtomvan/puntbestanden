@@ -47,7 +47,6 @@
   services.envfs.enable = true;
 
   programs.less.enable = true;
-  programs.command-not-found.enable = false;
 
   networking.firewall.enable = false;
 

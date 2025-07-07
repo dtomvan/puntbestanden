@@ -10,6 +10,7 @@ in
   inputs.sops.nixosModules.sops
   inputs.srvos.nixosModules.mixins-terminfo
   inputs.vs2nix.nixosModules.default
+  inputs.nix-index-database.nixosModules.nix-index
   # inputs.zozin.nixosModules.olive_c
   # inputs.zozin.nixosModules.koil
 
@@ -17,6 +18,8 @@ in
   ./hosts/${host.hostName}.nix
   ./hardware/${host.hostName}.nix
   ./modules/boot/systemd-boot.nix
+
+  ./modules/comma.nix
 
   # as long as you have /root/.ssh/remotebuild this will work, I hope it
   # builds on systems which don't at least

@@ -95,7 +95,6 @@
   # services.envfs.enable = true;
 
   programs.less.enable = true;
-  programs.command-not-found.enable = false;
 
   environment.stub-ld.enable = false;
   networking.firewall.enable = false;

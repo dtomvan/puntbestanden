@@ -59,7 +59,6 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   programs.less.enable = true;
-  programs.command-not-found.enable = false;
 
   environment.stub-ld.enable = false;
   networking.firewall.enable = false;
