@@ -31,6 +31,7 @@
 
   modules = {
     printing.useHPLip = true;
+    utilities.enableLazyApps = true;
   };
 
   services.localsend-rs.enable = true;
