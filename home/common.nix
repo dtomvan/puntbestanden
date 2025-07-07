@@ -75,6 +75,7 @@
     nur.repos.dtomvan.rwds-cli
     stow
     yt-dlp
+    yazi
 
     npins
     treefmt

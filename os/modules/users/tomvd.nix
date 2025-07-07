@@ -46,7 +46,6 @@
         ripgrep
         skim
         tealdeer
-        yazi
       ]
       ++ lib.optionals host.os.isGraphical [
         wl-clipboard
