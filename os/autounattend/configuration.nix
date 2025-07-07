@@ -26,6 +26,9 @@
   # also remove in installer.nix after fix
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12_hardened;
 
+  # not needed at all OOTB
+  networking.networkmanager.plugins = lib.mkForce [ ];
+
   environment.systemPackages = with pkgs; [
     gh
     git
