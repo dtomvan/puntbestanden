@@ -7,7 +7,7 @@ let
       lib.getExe
     ];
 
-  formatters = lib.mapAttrs (_n: v: mkApp v) {
+  formatters = lib.mapAttrs (_n: mkApp) {
     inherit (pkgs)
       gofumpt
       jq

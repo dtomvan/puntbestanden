@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -13,11 +12,8 @@ in
     lsp = {
       enable = lib.mkEnableOption "use lspconfig and download servers";
       nixd.enable = lib.mkEnableOption "use nixd with this flake";
-      rust_analyzer.enable = lib.mkEnableOption "enable rust_analyzer";
       lazyMoar = lib.mkEnableOption "install a lot of LSP servers, but lazily with lazy-apps";
     };
-
-    enableQt = lib.mkEnableOption "QT GUI";
   };
 
   imports = [
@@ -27,8 +23,6 @@ in
   ];
 
   config = lib.mkIf cfg.enable {
-    home.packages = lib.optional cfg.enableQt pkgs.neovim-qt;
-
     programs.nixvim = {
       enable = true;
       defaultEditor = true;

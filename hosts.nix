@@ -61,19 +61,4 @@
       extraModules = [ ];
     };
   };
-
-  x86-darwin-kvm = {
-    hostName = "autisme";
-    system = "x86_64-darwin";
-    hardware = {
-      cpuVendor = "intel";
-    };
-    remoteBuild = {
-      enable = true;
-      settings = {
-        maxJobs = 6;
-        speedFactor = 1;
-      };
-    };
-  };
 }

@@ -6,11 +6,6 @@
   ...
 }:
 {
-  ${if host.os.isGraphical then "firefox" else null} = {
-    enable = true;
-    isPlasma = true;
-  };
-
   home.${if host.os.isGraphical then "pointerCursor" else null} = {
     enable = true;
     package = pkgs.kdePackages.breeze;
@@ -53,7 +48,6 @@
       ${if host.os.isGraphical then "lsp" else null} = lib.mkIf host.os.isGraphical {
         enable = true;
         nixd.enable = true;
-        rust_analyzer.enable = true;
       };
     };
 
@@ -68,32 +62,25 @@
     helix.lsp.enable = host.os.isGraphical;
   };
 
-  services.lorri.enable = true;
-
   home.username = "tomvd";
   home.homeDirectory = "/home/tomvd";
   home.stateVersion = "24.05";
 
   home.packages = with pkgs; [
     nur.repos.dtomvan.afio-font
-    alejandra
-    clifm
     file
     just
     rink
     ripdrag
     nur.repos.dtomvan.rwds-cli
     stow
-    visidata
     yt-dlp
+    yazi
 
     npins
-    treefmt # when nixtreefmt is added, you need treefmt anyways so "for free"
-    nixtreefmt # in-tree
+    treefmt
 
-    speedtest
+    flake-fmt
   ];
-
-  programs.home-manager.enable = true;
 }
 # vim:sw=2 ts=2 sts=2

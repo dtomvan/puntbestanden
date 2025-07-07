@@ -13,7 +13,10 @@ with lib;
     enable = true;
     enableBashIntegration = false;
   };
-  programs.direnv.enable = mkDefault true;
+  programs.direnv = {
+    enable = mkDefault true;
+    nix-direnv.enable = true; # caching
+  };
   programs.zoxide.enable = mkDefault true;
 
   programs.bash = {
@@ -145,7 +148,6 @@ with lib;
         name = mkDefault "Tom van Dijk";
         email = mkDefault "18gatenmaker6@gmail.com";
       };
-      jujutsuBabyMode = true;
     };
 
     neovim = {

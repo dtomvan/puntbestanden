@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   ...
 }:
@@ -36,11 +35,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    home-manager
-    wget
-    curl
-    nh
-
     tmux
   ];
 
@@ -48,7 +42,6 @@
   services.envfs.enable = true;
 
   programs.less.enable = true;
-  programs.command-not-found.enable = false;
 
   networking.firewall.enable = false;
 

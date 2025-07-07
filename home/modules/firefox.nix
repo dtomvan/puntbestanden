@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   lib,
   host,
@@ -18,8 +17,8 @@ let
     "privacy.globalprivacycontrol.enabled" = true;
   };
 
+  isPlasma = host.os.wantsKde;
   hostname = host.hostName;
-  cfg = config.firefox;
   profile-name = "default";
   # used to make a fake firefox wrapper so for example devedition is happy with
   # my "normal" firefox profile...
@@ -46,21 +45,14 @@ let
     );
 in
 {
-  options.firefox = with lib; {
-    enable = mkEnableOption "install and configure firefox";
-    isPlasma = mkEnableOption "Plasma integration";
-  };
-
-  config.programs.firefox = lib.mkIf cfg.enable {
+  config.programs.firefox = {
     enable = true;
     # Use official developer edition build so I can use my precious from-source
     # obsidian-web-clipper.
     package = makeFakeFirefox pkgs.firefox-devedition {
       args = "-P ${profile-name}";
     };
-    nativeMessagingHosts = lib.mkIf cfg.isPlasma (
-      with pkgs; [ kdePackages.plasma-browser-integration ]
-    );
+    nativeMessagingHosts = lib.mkIf isPlasma (with pkgs; [ kdePackages.plasma-browser-integration ]);
     policies = {
       DisableAppUpdate = true;
       DisableFeedbackCommands = true;
@@ -121,7 +113,7 @@ in
       };
 
       settings = {
-        "widget.use-xdg-desktop-portal.file-picker" = lib.mkIf cfg.isPlasma 1;
+        "widget.use-xdg-desktop-portal.file-picker" = lib.mkIf isPlasma 1;
         "extensions.autoDisableScopes" = 0;
         "extensions.activeThemeID" = "default-theme@mozilla.org";
         "general.autoScroll" = true;

@@ -68,10 +68,7 @@ in
     settings = {
       "$mod" = "SUPER";
 
-      monitor = lib.optional (host == (import ../../hosts.nix).tpx1g8) ",preferred,auto,1.25" ++ [
-        # struts
-        # ", addreserved, 30, 0, 0, 0"
-      ];
+      monitor = lib.optional (host == (import ../../hosts.nix).tpx1g8) ",preferred,auto,1.25";
 
       env = lib.optionals (host.hardware.cpuVendor == "nvidia") [
         "LIBVA_DRIVER_NAME,nvidia"

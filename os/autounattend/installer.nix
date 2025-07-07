@@ -14,6 +14,9 @@
     ../modules/networking/wifi-passwords.nix
   ];
 
+  # parity with eventual configuration for closure size optimization
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12_hardened;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

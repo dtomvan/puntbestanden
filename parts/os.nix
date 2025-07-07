@@ -17,5 +17,5 @@ let
     });
 in
 {
-  flake.nixosConfigurations = (mapAttrs' makeNixos (getHosts "linux"));
+  flake.nixosConfigurations = mapAttrs' makeNixos (getHosts "linux");
 }

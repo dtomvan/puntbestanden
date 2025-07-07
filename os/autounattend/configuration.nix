@@ -22,9 +22,19 @@
     ../modules/utilities.nix
   ];
 
+  # broadcom-sta fails to build: https://github.com/NixOS/nixpkgs/pull/421163
+  # also remove in installer.nix after fix
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12_hardened;
+
+  # not needed at all OOTB
+  networking.networkmanager.plugins = lib.mkForce [ ];
+
   environment.systemPackages = with pkgs; [
     gh
     git
+    # does not include optional deps like ffmpeg, imagemagick, saves ~500MiB
+    # closure size
+    yazi-unwrapped
   ];
 
   services.getty = {
@@ -40,39 +50,38 @@
 
   home-manager.users.tomvd = {
     home.homeDirectory = "/home/tomvd";
+    home.file.README.text = ''
+      You made it!
+      Further steps:
+
+      Either clone your own dotfiles:
+        $ git clone https://github.com/me/my-dotfiles
+        $ cd my-dotfiles
+        $ nixos-generate-config --show-hardware-config > hardware-configuration.nix
+        $ nh os boot -H myhostname .
+        $ reboot
+
+      Or setup a new config from scratch:
+        $ sudo nixos-generate-config --force
+
+      Or with flakes:
+        $ sudo nixos-generate-config --flake --force
+
+      Or SSH into this device:
+        $ sudo hostname non-generic-name
+        $ sudo tailscale up
+
+      Or, if you are dtomvan, grab one of your configs:
+        # NH_FLAKE is already set
+        $ nh os boot -H {boomer,feather,kaput}
+
+    '';
     programs.bash = {
       enable = true;
       initExtra = # bash
         ''
           fastfetch
           systemd-analyze
-
-          echo > README <<EOF
-          You made it!
-          Further steps:
-
-          Either clone your own dotfiles:
-            $ git clone https://github.com/me/my-dotfiles
-            $ cd my-dotfiles
-            $ nixos-generate-config --show-hardware-config > hardware-configuration.nix
-            $ nh os boot -H myhostname .
-            $ reboot
-
-          Or setup a new config from scratch:
-            $ sudo nixos-generate-config --force
-
-          Or with flakes:
-            $ sudo nixos-generate-config --flake --force
-
-          Or SSH into this device:
-            $ sudo hostname non-generic-name
-            $ sudo tailscale up
-
-          Or, if you are dtomvan, grab one of your configs:
-            # NH_FLAKE is already set
-            $ nh os boot -H {boomer,feather,kaput}
-
-          EOF
 
           echo 'cat README for help'
         '';
@@ -86,6 +95,10 @@
 
   time.timeZone = "UTC";
   i18n.defaultLocale = "en_US.UTF-8";
+
+  # We're using flakes here, don't grab the database from a non-existing
+  # channel, but from the input
+  programs.command-not-found.dbPath = "${inputs.nixpkgs.outPath}/programs.sqlite";
 
   programs.less.enable = true;
   networking.firewall.enable = true;

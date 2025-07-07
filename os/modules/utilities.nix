@@ -1,12 +1,22 @@
 {
+  config,
   pkgs,
   lib,
   ...
 }:
+let
+  cfg = config.modules.utilities;
+in
 {
-  environment.systemPackages =
+  # added for ISO. Makes no sense to do this on a fresh system or an offline
+  # installer
+  options.modules.utilities.enableLazyApps = lib.mkEnableOption "extras through lazy-app";
+
+  config.environment.systemPackages =
     with pkgs;
     [
+      wget
+      curl
       nh
       nix-output-monitor
       nix-init
@@ -26,18 +36,19 @@
       util-linux
       dosfstools
     ]
-    ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
-      nix-fast-build
-      nix-tree
-      nvd
-      rar
-      bzip2
-      zstd
-      lz4
-      xz
-      cmake
-      meson
-      tokei
-      git-lfs
-    ];
+    ++ lib.optionals cfg.enableLazyApps (
+      lib.map (pkg: lazy-app.override { inherit pkg; }) [
+        nix-tree
+        nvd
+        rar
+        bzip2
+        zstd
+        lz4
+        xz
+        cmake
+        meson
+        tokei
+        git-lfs
+      ]
+    );
 }

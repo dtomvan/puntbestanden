@@ -1,4 +1,5 @@
 {
+  lib,
   inputs,
   config,
   pkgs,
@@ -21,9 +22,13 @@ in
           mods:
           with mods;
           [
-            # worldgen
-            betterforest
-            betterruins
+            # betterruins
+            (pkgs.fetchurl rec {
+              pname = "BetterRuins";
+              version = "0.4.14";
+              url = "https://mods.vintagestory.at/download/46364/${pname}v${version}.zip";
+              hash = "sha256-aDFrBa1pN0gc0SpuiMynO19L4BCbogtBpKtFnao+G8w=";
+            })
             # settings:
             # landform 50%, lf scale 300%
             # worldheight 320
@@ -43,8 +48,6 @@ in
             })
             # more survival mechanics
             primitivesurvival
-            # skill trees
-            xskills
 
             ## QOL
             betterfirepit
@@ -65,11 +68,10 @@ in
             vsimgui
             configlib
             autoconfiglib
-            xlib
           ]
-          ++ lib.optionals (lib.versions.versionOlder pkgs.vintagestory.version "1.21") [
+          ++ lib.optionals (lib.versionOlder pkgs.vintagestory.version "1.21") [
             # needed for terraprety below 1.21
-            (pkgs.fetchurl {
+            (pkgs.fetchurl rec {
               pname = "SeaLevelFix";
               version = "1.0.11";
               url = "https://mods.vintagestory.at/download/45783/${pname}_${version}.zip";
@@ -80,6 +82,9 @@ in
       ))
     ];
   };
+
+  # takes up a bunch of memory, I'll start it on-demand
+  systemd.services.vintagestory.wantedBy = lib.mkForce [ ];
 
   services.rathole = {
     enable = true;

@@ -13,10 +13,6 @@
           basic = true;
         };
       };
-      # use colorscheme from nix-colors with mini.base16. really seamlessly.
-      # base16 = lib.mkIf config.modules.neovim.use-nix-colors {
-      #   palette = builtins.mapAttrs (k: v: "#${v}") config.colorScheme.palette;
-      # };
       bracketed = { };
       comment = { };
       icons = { };

@@ -13,22 +13,31 @@ in
     enable = mkEnableOption "install and configure git";
     user.email = mkOption {
       description = "git config user.email";
-      type = lib.types.str;
-      default = "unknown@gmail.com";
+      type = with lib.types; nullOr str;
+      default = null;
     };
     user.name = mkOption {
       description = "git config user.name";
-      type = lib.types.str;
-      default = "Unknown";
+      type = with lib.types; nullOr str;
+      default = null;
     };
     use-gh-cli = mkEnableOption "install and use gh cli for authentication with github";
 
     withJujutsu = (mkEnableOption "jujutsu") // {
       default = true;
     };
-
-    jujutsuBabyMode = mkEnableOption "jujutsu {t,g}ui";
   };
+
+  config.assertions = lib.optionals cfg.enable [
+    {
+      assertion = cfg.user.name != null;
+      message = "Cannot identify git user name. You've enabled git, so set modules.git.user.name";
+    }
+    {
+      assertion = cfg.user.email != null;
+      message = "Cannot identify git email. You've enabled git, so set modules.git.user.email";
+    }
+  ];
 
   config.programs.git = lib.mkIf cfg.enable {
     enable = true;
