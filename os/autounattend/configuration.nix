@@ -50,39 +50,38 @@
 
   home-manager.users.tomvd = {
     home.homeDirectory = "/home/tomvd";
+    home.file.README.text = ''
+      You made it!
+      Further steps:
+
+      Either clone your own dotfiles:
+        $ git clone https://github.com/me/my-dotfiles
+        $ cd my-dotfiles
+        $ nixos-generate-config --show-hardware-config > hardware-configuration.nix
+        $ nh os boot -H myhostname .
+        $ reboot
+
+      Or setup a new config from scratch:
+        $ sudo nixos-generate-config --force
+
+      Or with flakes:
+        $ sudo nixos-generate-config --flake --force
+
+      Or SSH into this device:
+        $ sudo hostname non-generic-name
+        $ sudo tailscale up
+
+      Or, if you are dtomvan, grab one of your configs:
+        # NH_FLAKE is already set
+        $ nh os boot -H {boomer,feather,kaput}
+
+    '';
     programs.bash = {
       enable = true;
       initExtra = # bash
         ''
           fastfetch
           systemd-analyze
-
-          echo > README <<EOF
-          You made it!
-          Further steps:
-
-          Either clone your own dotfiles:
-            $ git clone https://github.com/me/my-dotfiles
-            $ cd my-dotfiles
-            $ nixos-generate-config --show-hardware-config > hardware-configuration.nix
-            $ nh os boot -H myhostname .
-            $ reboot
-
-          Or setup a new config from scratch:
-            $ sudo nixos-generate-config --force
-
-          Or with flakes:
-            $ sudo nixos-generate-config --flake --force
-
-          Or SSH into this device:
-            $ sudo hostname non-generic-name
-            $ sudo tailscale up
-
-          Or, if you are dtomvan, grab one of your configs:
-            # NH_FLAKE is already set
-            $ nh os boot -H {boomer,feather,kaput}
-
-          EOF
 
           echo 'cat README for help'
         '';
