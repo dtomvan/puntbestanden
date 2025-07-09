@@ -22,6 +22,8 @@
     ../modules/utilities.nix
   ];
 
+  nix.channel.enable = lib.mkForce true;
+
   # broadcom-sta fails to build: https://github.com/NixOS/nixpkgs/pull/421163
   # also remove in installer.nix after fix
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12_hardened;
