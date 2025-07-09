@@ -69,7 +69,8 @@ in
                   -m 2G \
                   -bios ${pkgs.OVMF.fd}/FV/OVMF.fd \
                   -cdrom ${self.packages.${system}.iso}/iso/*.iso \
-                  -hda "$disk"
+                  -hda "$disk" \
+                  -nic none
               '';
             }
           );
