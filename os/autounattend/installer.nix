@@ -1,5 +1,5 @@
 # adapted from https://github.com/tfc/nixos-auto-installer
-# mostly to use disko and btrfs
+# mostly to use disko and xfs
 {
   evaluatedSystem,
   config,
@@ -14,6 +14,8 @@
     "${modulesPath}/installer/cd-dvd/channel.nix"
     ../modules/networking/wifi-passwords.nix
   ];
+
+  environment.sessionVariables.NIX_PATH = lib.mkForce "nixpkgs=${pkgs.path}";
 
   # parity with eventual configuration for closure size optimization
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12_hardened;
@@ -86,6 +88,7 @@
 
         ${disko}/bin/disko \
           --yes-wipe-all-disks \
+          --no-deps \
           -m destroy,format,mount \
           --argstr device "$dev" \
           ${./disko.nix}
