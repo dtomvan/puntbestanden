@@ -69,6 +69,13 @@ with lib;
         jj-track() {
           jj bookmark track "$2"@"$1"
         }
+
+        direnvify() {
+          local top="$(git rev-parse --show-toplevel)"
+          echo '/.envrc' >> "$top/.git/info/exclude"
+          echo 'use flake' >> "$top/.envrc"
+          direnv allow
+        }
       '';
 
     shellAliases = {
