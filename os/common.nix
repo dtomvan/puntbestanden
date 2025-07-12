@@ -38,7 +38,7 @@
     };
 
     registry =
-      lib.mapAttrs
+      (lib.mapAttrs
         # WHY can't this be key as indirect reference name then value as
         # a path, DONE
         (name: value: {
@@ -56,7 +56,23 @@
             nur
             vs2nix
             ;
+        }
+      )
+      // {
+        # loosey goosey dependency, it's fine though. always pull the latest
+        # one please!
+        templates = {
+          from = {
+            type = "indirect";
+            id = "templates";
+          };
+          to = {
+            owner = "dtomvan";
+            repo = "templates";
+            type = "github";
+          };
         };
+      };
   };
 
   boot.tmp.cleanOnBoot = true;
