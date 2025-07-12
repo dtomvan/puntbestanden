@@ -39,9 +39,10 @@ in
 ++ lib.optionals host.os.isGraphical [
   ./modules/boot/plymouth.nix
 
+  ./modules/services/bazaar.nix
+  ./modules/services/flatpak.nix
   ./modules/services/printing.nix
   ./modules/services/sane.nix
-  ./modules/services/flatpak.nix
 
   ./hardware/sound.nix
 
