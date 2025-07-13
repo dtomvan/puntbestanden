@@ -28,6 +28,7 @@ in
               "emmet_ls",
               "kotlin_language_server",
               "pyright",
+              "ruff",
               "rust_analyzer",
               "svelte",
               "taplo",

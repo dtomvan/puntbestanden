@@ -20,6 +20,7 @@ pkgs.symlinkJoin {
         pkg = pyright;
         exe = "pyright-langserver";
       }
+      { pkg = ruff; }
       { pkg = rust-analyzer; }
       { pkg = rustfmt; }
       { pkg = svelte-language-server; }
