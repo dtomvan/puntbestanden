@@ -319,6 +319,7 @@
             };
 
             templates = {
+              duplicate_description = "concat(description, '\n(cherry picked from commit ', commit_id, ')')";
               draft_commit_description = makeDraftDesc ''""'';
               git_push_bookmark = ''"${push-bookmark-prefix}" ++ change_id.short()'';
             };
