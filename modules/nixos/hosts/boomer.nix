@@ -4,26 +4,18 @@
     { pkgs, ... }:
     {
       imports = with config.flake.modules.nixos; [
-        profiles-base
-        profiles-kde
+        profiles-workstation
 
         hardware-boomer-disko
         hardware-nvidia
         hardware-ssd
 
-        utilities
-
-        networking-tailscale
-
         gaming-steam
 
-        services-keybase
         services-localsend-rs
         services-syncthing
         services-vintagestory
 
-        virt-distrobox
-        virt-docker
         virt-kvm
       ];
 
@@ -37,15 +29,11 @@
 
       modules = {
         printing.useHPLip = true;
-        utilities.enableLazyApps = true;
       };
 
       environment.systemPackages =
         with pkgs;
         [
-          libreoffice-qt6-fresh
-
-          keepassxc
           # fuck flatpaks they don't even work half the time
           discord
           thunderbird
