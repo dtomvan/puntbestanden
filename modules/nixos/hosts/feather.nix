@@ -1,28 +1,18 @@
 { config, ... }:
 {
   flake.modules.nixos.hosts-feather =
-    { pkgs, lib, ... }:
+    { lib, ... }:
     {
       imports = with config.flake.modules.nixos; [
-        profiles-base
-        profiles-kde
+        profiles-workstation
 
         hardware-comet-lake
         hardware-elan-tp
         # hardware-fprint
 
-        utilities
-
         gaming-steam
-
-        networking-tailscale
-
-        services-keybase
         services-syncthing
-
         virt-kvm
-        virt-distrobox
-        virt-docker
       ];
 
       _module.args.nixinate = {
@@ -35,18 +25,7 @@
 
       modules = {
         printing.useHPLip = true;
-        utilities.enableLazyApps = true;
       };
-
-      environment.systemPackages =
-        with pkgs;
-        [
-          keepassxc
-        ]
-        ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
-          # rarely used
-          libreoffice-qt6-fresh
-        ];
 
       virtualisation.libvirtd.onBoot = "ignore";
       systemd.services.podman.wantedBy = lib.mkForce [ ];
