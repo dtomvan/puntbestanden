@@ -34,7 +34,7 @@ let
 in
 {
   flake.nixosConfigurations = pipe hosts [
-    (filterAttrs (_k: v: hasInfix "linux" v.system))
+    (filterAttrs (_k: v: hasInfix "linux" v.system && !(v ? noConfig)))
     (mapAttrs' makeNixos)
   ];
 }

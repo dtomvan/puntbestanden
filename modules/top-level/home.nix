@@ -6,8 +6,10 @@
 }:
 let
   inherit (inputs.nixpkgs.lib)
-    nameValuePair
+    filterAttrs
     mapAttrs'
+    nameValuePair
+    pipe
     ;
 
   makeHome =
@@ -28,5 +30,8 @@ let
     );
 in
 {
-  flake.homeConfigurations = mapAttrs' makeHome config.flake.hosts;
+  flake.homeConfigurations = pipe config.flake.hosts [
+    (filterAttrs (_k: v: !(v ? noConfig)))
+    (mapAttrs' makeHome)
+  ];
 }
