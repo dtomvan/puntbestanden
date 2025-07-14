@@ -119,6 +119,6 @@
       flake-parts,
       ...
     }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } (import-tree ./parts);
+    flake-parts.lib.mkFlake { inherit inputs; } (import-tree ./modules);
 }
 # vim:sw=2 ts=2 sts=2
