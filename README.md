@@ -4,7 +4,7 @@
 
 What's in here:
 - 3 nixos configs
-- a generic home-manager config which has "specializations" based of properties of specific hosts (see `hosts.nix`)
+- a generic home-manager config which has "specializations" based of properties of specific hosts (see `parts/hosts.nix`)
     - neovim
     - helix
     - [plasma-manager](https://github.com/nix-community/plasma-manager)
