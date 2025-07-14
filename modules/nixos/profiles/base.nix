@@ -23,6 +23,8 @@
         programs-nano
 
         networking-wifi-passwords
+
+        undollar
       ];
 
       environment.systemPackages = with pkgs; [
