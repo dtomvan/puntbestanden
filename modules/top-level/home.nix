@@ -19,17 +19,14 @@ let
         { pkgs, ... }:
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-
-          modules = import ../../home/modules.nix { inherit host inputs; };
-
-          extraSpecialArgs = {
-            inherit host inputs;
-          };
+          modules = [ config.flake.modules.homeManager."hosts-${host.hostName}" ];
         }
       )
     );
 in
 {
+  imports = [ inputs.home-manager.flakeModules.default ];
+
   flake.homeConfigurations = pipe config.flake.hosts [
     (filterAttrs (_k: v: !(v ? noConfig)))
     (mapAttrs' makeHome)

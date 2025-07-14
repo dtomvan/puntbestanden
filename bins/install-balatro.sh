@@ -8,9 +8,9 @@ set -euxo pipefail
 tmp="$(mktemp -d)"
 
 cleanup() {
-	if [ -d "$tmp" ]; then
-		rm -rf "$tmp"
-	fi
+  if [ -d "$tmp" ]; then
+    rm -rf "$tmp"
+  fi
 }
 
 trap cleanup EXIT
@@ -23,14 +23,14 @@ declare name hash
 
 pushd "$tmp"
 DepotDownloader -qr \
-	-app "$appid" \
-	-depot "$depoid" \
-	-manifest "$manifestid"
+  -app "$appid" \
+  -depot "$depoid" \
+  -manifest "$manifestid"
 
 exe="$(find "$tmp" -name "Balatro.exe" | head -n1)"
 if ! [ -e "$exe" ]; then
-	echo "No balatro.exe found"
-	exit 1
+  echo "No balatro.exe found"
+  exit 1
 fi
 name="$(basename "$exe")"
 hash="$(nix --extra-experimental-features nix-command hash file "$exe")"
