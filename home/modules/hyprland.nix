@@ -70,11 +70,6 @@ in
 
       monitor = lib.optional (host == (import ../../hosts.nix).tpx1g8) ",preferred,auto,1.25";
 
-      env = lib.optionals (host.hardware.cpuVendor == "nvidia") [
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-      ];
-
       general = {
         gaps_in = 4;
         gaps_out = 10;

@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  host,
   ...
 }:
 let
@@ -36,6 +35,5 @@ in
   xdg.desktopEntries = lib.pipe appNames [
     (lib.map (n: lib.nameValuePair (sanitizeAppName n) (importWebApp n)))
     lib.listToAttrs
-    (lib.mkIf host.os.isGraphical)
   ];
 }

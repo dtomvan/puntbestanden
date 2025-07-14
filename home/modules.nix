@@ -13,13 +13,14 @@ if inputs.nixpkgs.lib.strings.hasInfix "linux" host.system then
     modules/helix.nix
     modules/nano.nix
   ]
-  ++ inputs.nixpkgs.lib.optionals host.os.isGraphical [
+  ++ inputs.nixpkgs.lib.optionals config.home.os.isGraphical [
     modules/firefox.nix
     modules/terminals
     modules/syncthing.nix
     modules/webapps
     # modules/lisp.nix
   ]
-  ++ inputs.nixpkgs.lib.optional host.os.wantsKde modules/plasma
+  # TODO: bring this back
+  # ++ inputs.nixpkgs.lib.optional host.os.wantsKde modules/plasma
 else
   [ ]

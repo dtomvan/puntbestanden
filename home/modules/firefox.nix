@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  host,
   ...
 }:
 let
@@ -17,8 +16,6 @@ let
     "privacy.globalprivacycontrol.enabled" = true;
   };
 
-  isPlasma = host.os.wantsKde;
-  hostname = host.hostName;
   profile-name = "default";
   # used to make a fake firefox wrapper so for example devedition is happy with
   # my "normal" firefox profile...
@@ -52,7 +49,7 @@ in
     package = makeFakeFirefox pkgs.firefox-devedition {
       args = "-P ${profile-name}";
     };
-    nativeMessagingHosts = lib.mkIf isPlasma (with pkgs; [ kdePackages.plasma-browser-integration ]);
+    nativeMessagingHosts = with pkgs; [ kdePackages.plasma-browser-integration ];
     policies = {
       DisableAppUpdate = true;
       DisableFeedbackCommands = true;
@@ -100,20 +97,13 @@ in
             sidebery
             steam-database
             ublock-origin
-          ])
-          ++ lib.optionals (hostname == "feather") [
-            onetab # unfree, cannot build from source :(
-          ]
-          ++ lib.optionals (hostname == "boomer") [
-            pkgs.nur.repos.dtomvan.zotero-connector
-            pkgs.nur.repos.dtomvan.violentmonkey
-          ];
+          ]);
 
         force = true;
       };
 
       settings = {
-        "widget.use-xdg-desktop-portal.file-picker" = lib.mkIf isPlasma 1;
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
         "extensions.autoDisableScopes" = 0;
         "extensions.activeThemeID" = "default-theme@mozilla.org";
         "general.autoScroll" = true;

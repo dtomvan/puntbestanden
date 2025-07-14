@@ -1,7 +1,7 @@
 {
+  config,
   pkgs,
   lib,
-  host,
   ...
 }:
 {
@@ -10,13 +10,13 @@
 
     extraConfig =
       # pipewire only on graphical sessions
-      (lib.optionalString host.os.isGraphical ''
+      (lib.optionalString config.home.os.isGraphical ''
         audio_output {
           type "pipewire"
           name "My PipeWire Output"
         }
       '')
-      + (lib.optionalString (!host.os.isGraphical) ''
+      + (lib.optionalString (!config.home.os.isGraphical) ''
         audio_output {
           type "alsa"
           name "My ALSA"
