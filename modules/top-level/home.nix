@@ -1,4 +1,9 @@
-{ config, inputs, ... }:
+{
+  config,
+  inputs,
+  withSystem,
+  ...
+}:
 let
   inherit (inputs.nixpkgs.lib)
     nameValuePair
@@ -8,13 +13,18 @@ let
   makeHome =
     _key: host:
     nameValuePair "tomvd@${host.hostName}" (
-      inputs.home-manager.lib.homeManagerConfiguration {
-        modules = import ../../home/modules.nix { inherit host inputs; };
+      withSystem host.system (
+        { pkgs, ... }:
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
 
-        extraSpecialArgs = {
-          inherit host inputs;
-        };
-      }
+          modules = import ../../home/modules.nix { inherit host inputs; };
+
+          extraSpecialArgs = {
+            inherit host inputs;
+          };
+        }
+      )
     );
 in
 {
