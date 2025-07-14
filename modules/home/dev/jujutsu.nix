@@ -274,6 +274,21 @@
                 "-b"
                 "glob:${push-bookmark-prefix}*"
               ];
+
+              # lists all bookmarks that are tracked but not authored by you and
+              # aren't a bookmark for the upstream remote.
+              #
+              # for use with xargs to clean up spurious tracked bookmarks
+              # tad nuclear probably
+              not-my-bookmarks = [
+                "bookmark"
+                "list"
+                "-t"
+                "-r"
+                "~mine() & ~tracked_remote_bookmarks(remote=upstream)"
+                "-T"
+                "if(remote, concat(name, \"@\", remote, \"\n'\"))"
+              ];
             };
 
             signing = {
