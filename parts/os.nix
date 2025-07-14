@@ -1,10 +1,15 @@
-{ self, inputs, ... }:
-with inputs.nixpkgs.lib;
+{ inputs, ... }:
 let
-  nixConfig = import ../nix-config.nix;
+  inherit (inputs.nixpkgs.lib)
+    filterAttrs
+    hasInfix
+    mapAttrs'
+    nameValuePair
+    nixosSystem
+    pipe
+    ;
 
-  getHosts = type: filterAttrs (_k: v: hasInfix type v.system) (import ../hosts.nix);
-  mkPkgs = system: import ../lib/make-packages.nix { inherit self system inputs; };
+  nixConfig = import ../nix-config.nix;
 
   makeNixos =
     _key: host:
@@ -13,9 +18,11 @@ let
         inherit host nixConfig inputs;
       };
       modules = import ../os/modules.nix { inherit host inputs; } ++ host.os.extraModules; # nixpkgs is dumb
-      pkgs = mkPkgs host.system;
     });
 in
 {
-  flake.nixosConfigurations = mapAttrs' makeNixos (getHosts "linux");
+  flake.nixosConfigurations = pipe (import ../hosts.nix) [
+    (filterAttrs (_k: v: hasInfix "linux" v.system))
+    (mapAttrs' makeNixos)
+  ];
 }

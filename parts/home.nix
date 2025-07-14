@@ -1,14 +1,14 @@
-{ self, inputs, ... }:
-with inputs.nixpkgs.lib;
+{ inputs, ... }:
 let
-  mkPkgs = system: import ../lib/make-packages.nix { inherit self system inputs; };
+  inherit (inputs.nixpkgs.lib)
+    nameValuePair
+    mapAttrs'
+    ;
 
   makeHome =
     _key: host:
     nameValuePair "tomvd@${host.hostName}" (
       inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = mkPkgs host.system;
-
         modules = import ../home/modules.nix { inherit host inputs; };
 
         extraSpecialArgs = {

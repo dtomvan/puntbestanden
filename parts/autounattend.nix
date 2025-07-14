@@ -1,14 +1,15 @@
 { self, inputs, ... }:
-with inputs.nixpkgs.lib;
 let
+  inherit (inputs.nixpkgs.lib)
+    nixosSystem
+    ;
+
   nixConfig = import ../nix-config.nix;
-  mkPkgs = system: import ../lib/make-packages.nix { inherit self system inputs; };
   system = "x86_64-linux";
 in
 {
   flake.nixosConfigurations = rec {
     autounattend = nixosSystem {
-      pkgs = mkPkgs system;
       modules = [
         ../os/autounattend/configuration.nix
         { nixpkgs.hostPlatform = system; }
@@ -28,10 +29,10 @@ in
     };
 
     installer = nixosSystem {
-      pkgs = mkPkgs system;
       modules = [
         inputs.sops.nixosModules.default
         ../os/autounattend/installer.nix
+        { nixpkgs.hostPlatform = system; }
       ];
       specialArgs = {
         inherit nixConfig inputs;
