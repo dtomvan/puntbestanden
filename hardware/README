@@ -1,0 +1,2 @@
+Used for generated `nixos-generate-config --show-hardware` files. These are NOT
+flake-parts modules because they aren't generated as such by nixos.
