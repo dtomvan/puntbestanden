@@ -21,6 +21,8 @@ in
         networking-wifi-passwords
       ];
 
+      nixpkgs.config.allowUnfree = true;
+
       environment.sessionVariables.NIX_PATH = lib.mkForce "nixpkgs=${pkgs.path}";
 
       # parity with eventual configuration for closure size optimization

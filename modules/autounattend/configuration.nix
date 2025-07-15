@@ -25,6 +25,8 @@
         utilities
       ];
 
+      nixpkgs.config.allowUnfree = true;
+
       nix.channel.enable = lib.mkForce true;
 
       # broadcom-sta fails to build: https://github.com/NixOS/nixpkgs/pull/421163
