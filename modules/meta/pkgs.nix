@@ -39,7 +39,7 @@
             self.overlays.plasmashell-workaround # https://github.com/NixOS/nixpkgs/issues/126590
             (_final: _prev: self.packages.${system})
             # See: https://github.com/NixOS/nixpkgs/issues/425323
-            (final: prev: {
+            (final: _prev: {
               jdk8 = final.temurin-bin-8;
             })
           ] ++ config.pkgs-overlays;
