@@ -8,46 +8,20 @@
     }:
     let
       cfg = config.modules.git;
-      gpgPubKey = "7A984C8207ADBA51";
     in
     {
       options.modules.git = with lib; {
         enable = mkEnableOption "install and configure git";
-        user.email = mkOption {
-          description = "git config user.email";
-          type = with lib.types; nullOr str;
-          default = null;
-        };
-        user.name = mkOption {
-          description = "git config user.name";
-          type = with lib.types; nullOr str;
-          default = null;
-        };
         use-gh-cli = mkEnableOption "install and use gh cli for authentication with github";
       };
-
-      config.assertions = lib.optionals cfg.enable [
-        {
-          assertion = cfg.user.name != null;
-          message = "Cannot identify git user name. You've enabled git, so set modules.git.user.name";
-        }
-        {
-          assertion = cfg.user.email != null;
-          message = "Cannot identify git email. You've enabled git, so set modules.git.user.email";
-        }
-      ];
 
       config.programs.git = lib.mkIf cfg.enable {
         enable = true;
         lfs.enable = true;
         difftastic.enable = true;
 
-        signing = {
-          signByDefault = true;
-          key = gpgPubKey;
-        };
-        userEmail = cfg.user.email;
-        userName = cfg.user.name;
+        signing.signByDefault = true;
+
         extraConfig = {
           advice.detachedHead = false;
           commit = {

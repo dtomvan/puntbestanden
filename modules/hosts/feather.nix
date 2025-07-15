@@ -34,9 +34,6 @@
 
         hardware.bluetooth.enable = true;
 
-        time.timeZone = "Europe/Amsterdam";
-        i18n.defaultLocale = "en_US.UTF-8";
-
         environment.stub-ld.enable = false;
         networking.firewall.enable = false;
 
@@ -47,6 +44,8 @@
       { pkgs, ... }:
       {
         imports = with config.flake.modules.homeManager; [
+          users-tomvd
+
           profiles-base
           profiles-graphical
           plasma

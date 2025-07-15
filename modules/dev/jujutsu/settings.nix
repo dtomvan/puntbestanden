@@ -3,7 +3,6 @@
     {
       pkgs,
       lib,
-      config,
       ...
     }:
     {
@@ -11,8 +10,6 @@
 
       programs.jujutsu = {
         settings = {
-          inherit (config.modules.git) user;
-
           core = {
             watchman.register-snapshot-trigger = true;
           };

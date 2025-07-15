@@ -24,4 +24,18 @@
       hashedPassword = "$y$j9T$UNKC2ue19sYmCgHQGWcVE.$.6FqJwASbIV0O7c1hJM7BsPnGV6j98lMzr635nHmwA4";
     };
   };
+
+  users.tomvd = {
+    fullName = "Tom van Dijk";
+    email = "18gatenmaker6@gmail.com";
+    gpgPubKey = "7A984C8207ADBA51";
+    locale = "en_US.UTF-8";
+    timeZone = "Europe/Amsterdam";
+  };
+
+  flake.modules.homeManager.users-tomvd = {
+    home.username = "tomvd";
+    home.homeDirectory = "/home/tomvd";
+    home.stateVersion = "24.05";
+  };
 }

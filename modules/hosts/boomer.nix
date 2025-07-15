@@ -65,9 +65,6 @@
 
         hardware.bluetooth.enable = true;
 
-        time.timeZone = "Europe/Amsterdam";
-        i18n.defaultLocale = "en_US.UTF-8";
-
         # WARNING: this requires a user to be set, or the root password to be known.
         users.mutableUsers = false;
 
@@ -81,8 +78,10 @@
       { pkgs, ... }:
       {
         imports = with config.flake.modules.homeManager; [
+          users-tomvd
           profiles-base
           profiles-graphical
+
           latex
           mpd
           plasma

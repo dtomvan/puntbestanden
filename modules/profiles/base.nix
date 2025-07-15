@@ -92,10 +92,6 @@ in
             helix.lsp.enable = config.home.os.isGraphical;
           };
 
-          home.username = "tomvd";
-          home.homeDirectory = "/home/tomvd";
-          home.stateVersion = "24.05";
-
           home.packages = with pkgs; [
             nur.repos.dtomvan.rwds-cli
 

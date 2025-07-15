@@ -154,10 +154,6 @@
         git = {
           enable = mkDefault true;
           use-gh-cli = mkDefault true;
-          user = {
-            name = mkDefault "Tom van Dijk";
-            email = mkDefault "18gatenmaker6@gmail.com";
-          };
         };
 
         neovim = {
