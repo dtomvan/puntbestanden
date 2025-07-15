@@ -24,10 +24,6 @@
           default = null;
         };
         use-gh-cli = mkEnableOption "install and use gh cli for authentication with github";
-
-        withJujutsu = (mkEnableOption "jujutsu") // {
-          default = true;
-        };
       };
 
       config.assertions = lib.optionals cfg.enable [

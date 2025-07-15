@@ -65,10 +65,6 @@ in
 
         modules.terminals = {
           alacritty.enable = true;
-          font = {
-            family = "Afio";
-            size = 12;
-          };
         };
 
         modules.neovim.lsp = {

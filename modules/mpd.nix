@@ -10,6 +10,8 @@
       services.mpd = {
         enable = true;
 
+        # TODO: this is the only part where I have a remnant of the old way
+        # `hosts` was used, maybe remove this?
         extraConfig =
           # pipewire only on graphical sessions
           (lib.optionalString config.home.os.isGraphical ''
