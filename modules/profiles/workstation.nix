@@ -5,7 +5,7 @@
     {
       imports = with config.flake.modules.nixos; [
         profiles-base
-        profiles-kde
+        profiles-plasma
 
         networking-tailscale
         services-keybase

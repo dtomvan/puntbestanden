@@ -4,7 +4,7 @@ let
 in
 {
   flake.modules = {
-    nixos.profiles-kde =
+    nixos.profiles-plasma =
       {
         pkgs,
         lib,
