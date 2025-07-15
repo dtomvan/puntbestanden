@@ -27,6 +27,13 @@ in
 {
   imports = [ inputs.home-manager.flakeModules.default ];
 
+  flake-file.inputs = {
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   flake.homeConfigurations = pipe config.flake.hosts [
     (filterAttrs (_k: v: !(v ? noConfig)))
     (mapAttrs' makeHome)

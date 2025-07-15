@@ -1,5 +1,12 @@
 { self, inputs, ... }:
 {
+  flake-file.inputs = {
+    nixinate = {
+      url = "github:matthewcroughan/nixinate";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   perSystem =
     { system, ... }:
     {

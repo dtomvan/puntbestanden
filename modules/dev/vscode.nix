@@ -1,4 +1,16 @@
+# { inputs, ... }:
 {
+  # flake-file.inputs = {
+  #   nix4vscode = {
+  #     url = "github:nix-community/nix4vscode";
+  #     inputs.nixpkgs.follows = "nixpkgs";
+  #   };
+  # };
+  #
+  # pkgs-overlays = [
+  #   inputs.nix4vscode.overlays.forVscode
+  # ];
+
   flake.modules.homeManager.vscode =
     {
       pkgs,

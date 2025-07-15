@@ -74,14 +74,6 @@
       };
       url = "github:nix-community/nix-index-database";
     };
-    nix4vscode = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-      url = "github:nix-community/nix4vscode";
-    };
     nixinate = {
       inputs = {
         nixpkgs = {

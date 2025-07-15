@@ -1,5 +1,13 @@
 { inputs, ... }:
 {
+  flake-file.inputs = {
+    localsend-rs = {
+      # private
+      url = "github:dtomvan/localsend-rust-impl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   flake.modules.nixos.services-localsend-rs =
     {
       config,

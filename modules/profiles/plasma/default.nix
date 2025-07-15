@@ -3,6 +3,14 @@ let
   inherit (config.flake.modules) nixos;
 in
 {
+  flake-file.inputs = {
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+  };
+
   flake.modules = {
     nixos.profiles-plasma =
       {

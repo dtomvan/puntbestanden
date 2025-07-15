@@ -1,5 +1,16 @@
 { inputs, ... }:
 {
+  flake-file.inputs = {
+    vs2nix = {
+      url = "github:dtomvan/vs2nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  pkgs-overlays = [
+    inputs.vs2nix.overlay
+  ];
+
   flake.modules.nixos.services-vintagestory =
     {
       lib,

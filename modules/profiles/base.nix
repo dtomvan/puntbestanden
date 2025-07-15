@@ -3,6 +3,18 @@ let
   inherit (config.flake.modules) homeManager;
 in
 {
+  flake-file.inputs = {
+    flake-fmt = {
+      url = "github:Mic92/flake-fmt";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    srvos = {
+      url = "github:nix-community/srvos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   flake.modules = {
     nixos.profiles-base =
       { pkgs, ... }:
@@ -58,6 +70,9 @@ in
         pkgs,
         ...
       }:
+      let
+        flake-fmt = inputs.flake-fmt.packages.${pkgs.stdenv.hostPlatform.system}.default;
+      in
       {
         imports = with homeManager; [
           basic-cli
