@@ -1,17 +1,15 @@
+# DO-NOT-EDIT. This file was auto-generated using github:vic/flake-file.
+# Use `nix run .#write-flake` to regenerate it.
 {
   description = "Home Manager configuration of tomvd";
 
-  # HACK: I would do `nixConfig = import ./nix-config.nix` here, but that IS
-  # NOT POSSIBLE >:'(
+  outputs = inputs: import ./outputs.nix inputs;
 
-  # NB: if you change something here, for it to work globally on NixOS, also
-  # change it in `nix-config.nix`
   nixConfig = {
     extra-substituters = [
       "https://nix-community.cachix.org"
       "https://cache.garnix.io"
     ];
-
     extra-trusted-public-keys = [
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
@@ -19,106 +17,149 @@
   };
 
   inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-
-    nixpkgs-unfree = {
-      url = "github:numtide/nixpkgs-unfree";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    vs2nix = {
-      url = "github:dtomvan/vs2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:vic/import-tree";
-
-    nixinate = {
-      url = "github:matthewcroughan/nixinate";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     disko = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
       url = "github:nix-community/disko/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    sops = {
-      url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    flake-file = {
+      url = "github:vic/flake-file";
     };
-
     flake-fmt = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
       url = "github:Mic92/flake-fmt";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
     };
-
-    localsend-rs = {
-      # private
-      url = "github:dtomvan/localsend-rust-impl";
-      inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:nix-community/home-manager";
     };
-
-    srvos = {
-      url = "github:nix-community/srvos";
-      inputs.nixpkgs.follows = "nixpkgs";
+    import-tree = {
+      url = "github:vic/import-tree";
     };
-
-    nix4vscode = {
-      url = "github:nix-community/nix4vscode";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     lazy-apps = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
       url = "sourcehut:~rycee/lazy-apps";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+    localsend-rs = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:dtomvan/localsend-rust-impl";
     };
-
     nix-index-database = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
       url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # uncomment for testing
-    # nur-packages = {
-    #   url = "github:dtomvan/nur-packages/dtomvan/push-ssqqtnvrqmll";
-    # inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    nix4vscode = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:nix-community/nix4vscode";
+    };
+    nixinate = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:matthewcroughan/nixinate";
+    };
+    nixpkgs = {
+      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    };
+    nixpkgs-unfree = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:numtide/nixpkgs-unfree";
+    };
+    nixvim = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:nix-community/nixvim";
+    };
+    nur = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:nix-community/NUR";
+    };
+    plasma-manager = {
+      inputs = {
+        home-manager = {
+          follows = "home-manager";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:nix-community/plasma-manager";
+    };
+    sops = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:Mic92/sops-nix";
+    };
+    srvos = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:nix-community/srvos";
+    };
+    treefmt-nix = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:numtide/treefmt-nix";
+    };
+    vs2nix = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:dtomvan/vs2nix";
+    };
   };
 
-  outputs =
-    {
-      import-tree,
-      flake-parts,
-      ...
-    }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } (import-tree ./modules);
 }
-# vim:sw=2 ts=2 sts=2

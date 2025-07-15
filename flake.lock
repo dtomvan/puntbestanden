@@ -75,6 +75,21 @@
         "type": "github"
       }
     },
+    "flake-file": {
+      "locked": {
+        "lastModified": 1752574566,
+        "narHash": "sha256-Z/EHdXl1Kej6V8ZMlnh+k48zyJDfMzcjPgLozBsJNV8=",
+        "owner": "vic",
+        "repo": "flake-file",
+        "rev": "4c83bd7604a39640274c8b7e3a85b11742d7aec6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "flake-file",
+        "type": "github"
+      }
+    },
     "flake-fmt": {
       "inputs": {
         "nixpkgs": [
@@ -611,6 +626,7 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "flake-file": "flake-file",
         "flake-fmt": "flake-fmt",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
