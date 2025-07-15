@@ -31,3 +31,14 @@ boomer:
 [group('nix')]
 kaput:
     nix run .#kaput
+
+[group('nix')]
+update-files:
+    nix run .#write-flake
+    nix run .#write-files
+
+[group('nix')]
+check:
+    nix fmt
+    @just update-files
+    nix flake check
