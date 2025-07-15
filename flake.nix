@@ -25,6 +25,9 @@
       };
       url = "github:nix-community/disko/latest";
     };
+    files = {
+      url = "github:mightyiam/files";
+    };
     flake-file = {
       url = "github:vic/flake-file";
     };

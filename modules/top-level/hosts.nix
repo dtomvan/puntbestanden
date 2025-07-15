@@ -1,6 +1,8 @@
+{ config, lib, ... }:
 {
   flake.hosts = {
     amdpc1 = {
+      description = "a reasonably sluggish Ryzen 5 2600 desktop PC";
       hostName = "boomer";
       system = "x86_64-linux";
       remoteBuild = {
@@ -19,16 +21,19 @@
     };
 
     tpx1g8 = {
+      description = "the ultra-light Thinkpad X1 Carbon G8";
       hostName = "feather";
       system = "x86_64-linux";
       remoteBuild.enable = true;
     };
 
     hp3600 = {
+      description = "a thick bastard of a laptop with a broken screen";
       hostName = "kaput";
       system = "x86_64-linux";
       remoteBuild.enable = false;
     };
+
     bart-pc = {
       hostName = "vitune.app";
       system = "x86_64-linux";
@@ -46,4 +51,16 @@
       };
     };
   };
+
+  text.readme.parts.hostnames =
+    ''
+      ## The hostnames
+
+    ''
+    + lib.pipe config.flake.hosts [
+      lib.attrValues
+      (lib.filter (h: !(h ? noConfig)))
+      (lib.map (h: "- `${h.hostName}`, ${h.description}"))
+      lib.concatLines
+    ];
 }

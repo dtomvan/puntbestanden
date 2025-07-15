@@ -38,4 +38,6 @@ in
     (filterAttrs (_k: v: !(v ? noConfig)))
     (mapAttrs' makeHome)
   ];
+
+  text.readme.parts.home_configs = "- a dendritic home-manager config (TODO: list aspects here)";
 }

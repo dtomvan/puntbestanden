@@ -6,8 +6,10 @@
 }:
 let
   inherit (inputs.nixpkgs.lib)
+    attrsToList
     filterAttrs
     hasInfix
+    length
     mapAttrs'
     nameValuePair
     nixosSystem
@@ -37,4 +39,14 @@ in
     (filterAttrs (_k: v: hasInfix "linux" v.system && !(v ? noConfig)))
     (mapAttrs' makeNixos)
   ];
+
+  text.readme.parts.nixos_configs =
+    let
+      n = pipe config.flake.nixosConfigurations [
+        attrsToList
+        length
+        builtins.toString
+      ];
+    in
+    "- ${n} NixOS configs";
 }

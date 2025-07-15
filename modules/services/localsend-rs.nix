@@ -8,6 +8,22 @@
     };
   };
 
+  text.readme.parts.localsend_rs =
+    # markdown
+    ''
+      ## For myself: How to bootstrap `localsend-rs` inside of the flake
+
+      - Have one of the private keys corresponding to a pubkey listed in `.sops.yaml`
+        in `~/.config/sops/age/keys.txt`.
+      - `nix run nixpkgs#sops -- decrypt secrets/localsend-rs.secret`
+      - Copy the access token
+      - `nix flake lock --extra-access-tokens "$accesstoken"`
+      - `nh os switch`
+
+      Afterwards, through the nixos module, the secret will get loaded into
+      `nix.conf` and you can `nix flake update` for example without any manual setup
+    '';
+
   flake.modules.nixos.services-localsend-rs =
     {
       config,
