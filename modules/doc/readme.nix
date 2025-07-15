@@ -7,6 +7,7 @@
       "home_configs"
       "contents_rest"
       "hostnames"
+      "autounattend"
       "localsend_rs"
     ];
 

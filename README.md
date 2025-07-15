@@ -15,6 +15,19 @@ What's in here:
 - `kaput`, a thick bastard of a laptop with a broken screen
 - `feather`, the ultra-light Thinkpad X1 Carbon G8
 
+# Autounattend
+This repository includes an "autounattend" installer ISO, which:
+- Installs a nested, pre-defined NixOS configuration
+- Without any user interaction required apart from booting it
+- Does not require internet
+
+To create the iso, run `nix build .#iso`.
+
+To run an install demo in QEMU, run `nix run .#install-demo`.
+
+If you do not have access to the secrets in this repo you'll need to
+comment out the `networking-wifi-passwords` import in order to build it.
+
 ## For myself: How to bootstrap `localsend-rs` inside of the flake
 
 - Have one of the private keys corresponding to a pubkey listed in `.sops.yaml`

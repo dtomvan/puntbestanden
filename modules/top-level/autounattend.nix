@@ -9,6 +9,8 @@ let
     nixosSystem
     ;
 
+  isoTarget = "iso";
+  demoTarget = "install-demo";
   system = "x86_64-linux";
 in
 {
@@ -28,7 +30,7 @@ in
   };
 
   flake.packages.${system} = {
-    iso = self.nixosConfigurations.installer.config.system.build.isoImage;
+    ${isoTarget} = self.nixosConfigurations.installer.config.system.build.isoImage;
   };
 
   perSystem =
@@ -38,7 +40,7 @@ in
     }:
     {
       apps = {
-        install-demo = {
+        ${demoTarget} = {
           type = "app";
           program = pkgs.lib.getExe (
             pkgs.writeShellApplication {
@@ -64,4 +66,21 @@ in
         };
       };
     };
+
+  text.readme.parts.autounattend =
+    # markdown
+    ''
+      # Autounattend
+      This repository includes an "autounattend" installer ISO, which:
+      - Installs a nested, pre-defined NixOS configuration
+      - Without any user interaction required apart from booting it
+      - Does not require internet
+
+      To create the iso, run `nix build .#${isoTarget}`.
+
+      To run an install demo in QEMU, run `nix run .#${demoTarget}`.
+
+      If you do not have access to the secrets in this repo you'll need to
+      comment out the `networking-wifi-passwords` import in order to build it.
+    '';
 }
