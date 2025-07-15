@@ -104,7 +104,7 @@
       sops.secrets.rathole-client = {
         mode = "0444";
         format = "binary";
-        sopsFile = ../../../secrets/vitune/rathole-client.secret;
+        sopsFile = ../../secrets/vitune/rathole-client.secret;
         restartUnits = [ "rathole.service" ];
       };
     };

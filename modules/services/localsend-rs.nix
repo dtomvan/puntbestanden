@@ -31,7 +31,7 @@
 
         sops.secrets.localsend-rs = {
           mode = "0440";
-          sopsFile = ../../../secrets/localsend-rs.secret;
+          sopsFile = ../../secrets/localsend-rs.secret;
           format = "binary";
           owner = "tomvd";
           group = "users";
