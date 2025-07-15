@@ -97,7 +97,7 @@ in
               --no-deps \
               -m destroy,format,mount \
               --argstr device "$dev" \
-              ${../../autounattend/disko.nix}
+              ${./_disko.nix}
 
             mkdir -p /mnt/etc/nixos/
             cp -r ${../..}/* /mnt/etc/nixos/

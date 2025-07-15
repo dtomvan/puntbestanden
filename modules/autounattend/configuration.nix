@@ -14,7 +14,7 @@
         inputs.sops.nixosModules.default
 
         ../../hardware/autounattend.nix
-        ../../autounattend/disko.nix # TODO: make this the universal disko file
+        ./_disko.nix # TODO: make this the universal disko file
 
         boot-systemd-boot
         networking-tailscale
