@@ -124,4 +124,17 @@
         restartUnits = [ "rathole.service" ];
       };
     };
+
+  flake.sopsConfig = {
+    keys.vitune = "age1tfcfat3y9uekdw8u2ln4az4uqfznk25ntarte34292rz0zw3zy6qjcqqth";
+    creation_rules = {
+      "secrets/vitune/rathole-server.secret" = [
+        "vitune"
+      ];
+
+      "secrets/vitune/rathole-client.secret" = [
+        "boomer"
+      ];
+    };
+  };
 }

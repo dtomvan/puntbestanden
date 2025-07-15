@@ -1,21 +1,20 @@
-keys:
-  - &boomer age1p0qcwy8he6y70xk5qkp52pnaeyr2pdhhhgpjqgaxpwpu0dthhs8s099w9x
-  - &feather age1pjgmdxkj6zvn5hpjwd4mlv2jw89mk78luuetdcjqtmaq6r88juwshyjqal
-  - &kaput age1hfxwhjh3lwq9cl2fp2fx0edzvptd0m8e87amlxktpt0p37q9ueusqd9h5p
-  - &vitune age1tfcfat3y9uekdw8u2ln4az4uqfznk25ntarte34292rz0zw3zy6qjcqqth
-
 creation_rules:
-  - path_regex: secrets/[^/]+.secret
-    key_groups:
-      - age:
-        - *boomer
-        - *feather
-        - *kaput
-  - path_regex: secrets/vitune/rathole-server.secret
-    key_groups:
-      - age:
-        - *vitune
-  - path_regex: secrets/vitune/rathole-client.secret
-    key_groups:
-      - age:
-        - *boomer
+- key_groups:
+  - age:
+    - '*boomer'
+    - '*feather'
+    - '*kaput'
+  path_regex: secrets/[^/]+.secret
+- key_groups:
+  - age:
+    - '*boomer'
+  path_regex: secrets/vitune/rathole-client.secret
+- key_groups:
+  - age:
+    - '*vitune'
+  path_regex: secrets/vitune/rathole-server.secret
+keys:
+- '&boomer age1p0qcwy8he6y70xk5qkp52pnaeyr2pdhhhgpjqgaxpwpu0dthhs8s099w9x'
+- '&feather age1pjgmdxkj6zvn5hpjwd4mlv2jw89mk78luuetdcjqtmaq6r88juwshyjqal'
+- '&kaput age1hfxwhjh3lwq9cl2fp2fx0edzvptd0m8e87amlxktpt0p37q9ueusqd9h5p'
+- '&vitune age1tfcfat3y9uekdw8u2ln4az4uqfznk25ntarte34292rz0zw3zy6qjcqqth'

@@ -99,4 +99,6 @@
         ];
       };
   };
+
+  flake.sopsConfig.keys.boomer = "age1p0qcwy8he6y70xk5qkp52pnaeyr2pdhhhgpjqgaxpwpu0dthhs8s099w9x";
 }

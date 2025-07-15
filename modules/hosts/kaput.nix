@@ -56,4 +56,5 @@
     ];
   };
 
+  flake.sopsConfig.keys.kaput = "age1hfxwhjh3lwq9cl2fp2fx0edzvptd0m8e87amlxktpt0p37q9ueusqd9h5p";
 }
