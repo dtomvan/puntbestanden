@@ -19,7 +19,6 @@
         [
           wget
           curl
-          nh
           nix-output-monitor
           nix-init
           nurl
