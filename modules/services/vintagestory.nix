@@ -11,6 +11,11 @@
     inputs.vs2nix.overlay
   ];
 
+  # TODO: remove after vintagestory 1.21
+  pkgs-config.permittedInsecurePackages = [
+    "dotnet-runtime-7.0.20"
+  ];
+
   flake.modules.nixos.services-vintagestory =
     {
       lib,

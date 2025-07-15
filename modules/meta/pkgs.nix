@@ -11,6 +11,10 @@
       type = with lib.types; listOf raw;
       default = [ ];
     };
+    pkgs-config = lib.mkOption {
+      type = with lib.types; attrsOf raw;
+      default = { };
+    };
   };
 
   config = {
@@ -28,7 +32,7 @@
           inherit system;
           config = {
             allowUnfree = true;
-          };
+          } // config.pkgs-config;
           overlays = [
             inputs.nur.overlays.default
             inputs.lazy-apps.overlays.default
