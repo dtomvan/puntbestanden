@@ -2,38 +2,28 @@
   flake.modules.nixos.services-printing =
     {
       pkgs,
-      lib,
-      config,
       ...
     }:
-    let
-      cfg = config.modules.printing;
-    in
     {
-      options.modules.printing = {
-        useHPLip = lib.mkEnableOption "download hplip driver";
+      services.printing = {
+        enable = true;
+        listenAddresses = [ "*:631" ];
+        allowFrom = [ "all" ];
+        browsing = true;
+        defaultShared = true;
+        openFirewall = true;
+        drivers = [ pkgs.hplip ];
       };
-      config = {
-        services.printing = {
+      services.system-config-printer.enable = true;
+      programs.system-config-printer.enable = true;
+      services.avahi = {
+        enable = true;
+        publish = {
           enable = true;
-          listenAddresses = [ "*:631" ];
-          allowFrom = [ "all" ];
-          browsing = true;
-          defaultShared = true;
-          openFirewall = true;
-          drivers = lib.optionals cfg.useHPLip [ pkgs.hplip ];
+          userServices = true;
         };
-        services.system-config-printer.enable = true;
-        programs.system-config-printer.enable = true;
-        services.avahi = {
-          enable = true;
-          publish = {
-            enable = true;
-            userServices = true;
-          };
-          nssmdns4 = true;
-          openFirewall = true;
-        };
+        nssmdns4 = true;
+        openFirewall = true;
       };
     };
 }

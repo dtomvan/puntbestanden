@@ -28,10 +28,6 @@
           hermetic = false;
         };
 
-        modules = {
-          printing.useHPLip = true;
-        };
-
         environment.systemPackages =
           with pkgs;
           [

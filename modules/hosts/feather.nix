@@ -24,10 +24,6 @@
           hermetic = false;
         };
 
-        modules = {
-          printing.useHPLip = true;
-        };
-
         virtualisation.libvirtd.onBoot = "ignore";
         systemd.services.podman.wantedBy = lib.mkForce [ ];
         virtualisation.docker.enableOnBoot = false;
