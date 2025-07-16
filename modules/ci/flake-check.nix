@@ -18,7 +18,10 @@
               steps = [
                 { uses = "actions/checkout@v4"; }
                 { uses = "cachix/install-nix-action@v31"; }
-                { run = "nix flake check -L"; }
+                {
+                  run = "nix flake check -L --extra-access-tokens \"github.com=$LOCALSEND_TOKEN\"";
+                  env.LOCALSEND_TOKEN = "\${{ secrets.LOCALSEND_TOKEN }}";
+                }
               ];
             };
           };
