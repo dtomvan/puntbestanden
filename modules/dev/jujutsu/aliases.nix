@@ -1,61 +1,11 @@
+# See also modules/community/jujutsu.nix
 {
   flake.modules.homeManager.jujutsu = {
     programs.jujutsu.settings = {
       aliases = {
-        set = [
-          "config"
-          "set"
-          "--repo"
-        ];
-
-        watch = [
-          "config"
-          "set"
-          "--repo"
-          "core.fsmonitor"
-          "watchman"
-        ];
-
-        unwatch = [
-          "config"
-          "set"
-          "--repo"
-          "core.fsmonitor"
-          "none"
-        ];
-
         up = [
           "bookmark"
           "set"
-        ];
-
-        tug = [
-          "bookmark"
-          "move"
-          "--from"
-          "closest_bookmark(@-)"
-          "--to"
-          "@-"
-        ];
-
-        l = [
-          "log"
-          "-n10"
-        ];
-
-        ll = [
-          "log"
-          "-n30"
-        ];
-
-        lll = [
-          "log"
-          "-n100"
-        ];
-
-        llll = [
-          "log"
-          "-Tlog1"
         ];
 
         # prepend b to show current branch only, non-elided
@@ -111,13 +61,6 @@
           "fetch"
           "--remote"
           "upstream"
-        ];
-
-        evolve = [
-          "rebase"
-          "--skip-emptied"
-          "-d"
-          "trunk()"
         ];
 
         push = [

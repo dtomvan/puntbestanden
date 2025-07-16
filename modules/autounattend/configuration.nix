@@ -1,6 +1,12 @@
 # configuration for the TARGET system.
 { inputs, config, ... }:
 {
+  flake.nixosConfigurations = {
+    autounattend = inputs.nixpkgs.lib.nixosSystem {
+      modules = [ config.flake.modules.nixos.autounattend ];
+    };
+  };
+
   flake.modules.nixos.autounattend =
     {
       pkgs,
@@ -14,7 +20,7 @@
         inputs.sops.nixosModules.default
 
         ../hardware/_generated/autounattend.nix
-        ./_disko.nix # TODO: make this the universal disko file
+        "${config.autounattend.diskoFile}" # TODO: make this the universal disko file
 
         boot-systemd-boot
         networking-tailscale

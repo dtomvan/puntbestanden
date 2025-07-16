@@ -35,12 +35,14 @@ in
           programs-comma
           programs-gpg
           programs-less
-          programs-nano
+          nano
 
           networking-wifi-passwords
 
           undollar
         ];
+
+        programs.nano.formatters.enable = true;
 
         environment.systemPackages = with pkgs; [
           bat
@@ -77,7 +79,6 @@ in
         imports = with homeManager; [
           basic-cli
           helix
-          nano
         ];
 
         options = {

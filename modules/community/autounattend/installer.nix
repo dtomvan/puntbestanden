@@ -2,7 +2,6 @@
 # mostly to use disko and xfs
 { config, ... }:
 let
-  inherit (config.flake.modules.nixos) networking-wifi-passwords;
   evaluatedSystem = config.flake.nixosConfigurations.autounattend;
 in
 {
@@ -18,7 +17,6 @@ in
       imports = [
         "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
         "${modulesPath}/installer/cd-dvd/channel.nix"
-        networking-wifi-passwords
       ];
 
       nixpkgs.config.allowUnfree = true;
@@ -99,7 +97,7 @@ in
               --no-deps \
               -m destroy,format,mount \
               --argstr device "$dev" \
-              ${./_disko.nix}
+              "${config.autounattend.diskoFile}"
 
             mkdir -p /mnt/etc/nixos/
             cp -r ${../..}/* /mnt/etc/nixos/

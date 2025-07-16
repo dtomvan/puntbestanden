@@ -1,3 +1,4 @@
+# See also modules/community/jujutsu.nix
 {
   flake.modules.homeManager.jujutsu =
     {
@@ -6,16 +7,9 @@
       ...
     }:
     {
-      home.packages = [ pkgs.watchman ];
-
       programs.jujutsu = {
         settings = {
-          core = {
-            watchman.register-snapshot-trigger = true;
-          };
-
           ui = {
-            default-command = "l";
             pager = ":builtin";
             diff-formatter = [
               "${lib.getExe pkgs.difftastic}"
@@ -28,7 +22,6 @@
 
           git = {
             auto-local-bookmark = true;
-            private-commits = "description(glob:'wip:*') | description(glob:'private:*')";
             # see signing.behavior
             sign-on-push = true;
           };

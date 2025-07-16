@@ -141,11 +141,6 @@
       };
 
       modules = {
-        git = {
-          enable = mkDefault true;
-          use-gh-cli = mkDefault true;
-        };
-
         neovim = {
           enable = mkDefault true;
           lsp.enable = mkDefault true;

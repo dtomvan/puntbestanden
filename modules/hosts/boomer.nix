@@ -11,7 +11,7 @@
           hardware-nvidia
           hardware-ssd
 
-          gaming-steam
+          steam
 
           services-localsend-rs
           services-syncthing

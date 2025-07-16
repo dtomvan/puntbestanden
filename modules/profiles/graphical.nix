@@ -8,7 +8,7 @@ in
       { pkgs, ... }:
       {
         imports = with config.flake.modules.nixos; [
-          boot-plymouth
+          plymouth
 
           services-bazaar
           services-flatpak

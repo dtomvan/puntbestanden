@@ -1,5 +1,7 @@
+# This module enables steam with some sensible defaults. If you are not using
+# wayland+steam input, please disable `programs.steam.extest.enable` again.
 {
-  flake.modules.nixos.gaming-steam =
+  flake.modules.nixos.steam =
     {
       pkgs,
       lib,
@@ -12,7 +14,7 @@
           gamemode
           mangohud
         ];
-        # extraCompatPackages = [pkgs.proton-ge-bin];
+        extraCompatPackages = [ pkgs.proton-ge-bin ];
         # for wayland
         extest.enable = lib.mkDefault true;
       };

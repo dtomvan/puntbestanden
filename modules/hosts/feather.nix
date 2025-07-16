@@ -11,7 +11,7 @@
           hardware-elan-tp
           # hardware-fprint
 
-          gaming-steam
+          steam
           services-syncthing
           virt-kvm
         ];

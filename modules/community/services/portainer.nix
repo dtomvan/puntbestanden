@@ -1,5 +1,6 @@
+# What you'd normally do in docker-compose if you wanted to use portainer
 {
-  flake.modules.nixos.services-portainer = {
+  flake.modules.nixos.portainer = {
     virtualisation.oci-containers.containers = {
       portainer = {
         image = "portainer/portainer-ce:lts";

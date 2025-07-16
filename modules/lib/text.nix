@@ -23,9 +23,9 @@
       if lib.isAttrs text then
         lib.pipe text.order [
           (map (lib.flip lib.getAttr text.parts))
-          (map (lib.splitString "\n"))
-          (map (map lib.trim))
-          (map lib.concatLines)
+          # (map (lib.splitString "\n"))
+          # (map (map lib.trim))
+          # (map lib.concatLines)
           lib.concatStrings
         ]
       else

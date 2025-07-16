@@ -13,8 +13,8 @@
           utilities
           networking-tailscale
 
-          services-pihole
-          services-portainer
+          pihole
+          portainer
           services-syncthing
         ];
 

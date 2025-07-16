@@ -9,6 +9,7 @@
       "dendritic"
       "hostnames"
       "autounattend"
+      "community_autounattend"
       "localsend_rs"
     ];
 

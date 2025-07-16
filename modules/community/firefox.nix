@@ -1,6 +1,10 @@
+# This module just sets a bunch of firefox policies. The rest of my config is
+# user-specific. This one is a blanket "I don't care about your bullshit"
+# statement to Mozilla.
+{ lib, ... }:
 {
   flake.modules.homeManager.firefox = {
-    programs.firefox = {
+    programs.firefox = lib.mapAttrs (_n: lib.mkDefault) {
       policies = {
         DisableAppUpdate = true;
         DisableFeedbackCommands = true;

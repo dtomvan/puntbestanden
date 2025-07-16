@@ -1,5 +1,6 @@
+# What you'd normally do in docker-compose if you wanted a pihole
 {
-  flake.modules.nixos.services-pihole = {
+  flake.modules.nixos.pihole = {
     virtualisation.oci-containers.containers = {
       pihole = {
         image = "pihole/pihole:latest";
@@ -10,7 +11,7 @@
           "443:443/tcp"
         ];
         environment = {
-          TZ = "Europe/Amsterdam";
+          TZ = "UTC";
           FTLCONF_dns_listeningMode = "all";
         };
         volumes = [

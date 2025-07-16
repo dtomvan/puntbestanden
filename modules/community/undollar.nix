@@ -1,3 +1,8 @@
+# It's the [undollar nodejs package](https://github.com/xtyrrell/undollar)
+# except it's two lines of C, wrapped in a NixOS module.
+#
+# I use it a lot if I want to copy commands from GitHub markdown in
+# a `ShellSession` code block.
 {
   flake.modules.nixos.undollar =
     { pkgs, ... }:
