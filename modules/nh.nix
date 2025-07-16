@@ -5,7 +5,7 @@
       flake = "/home/tomvd/puntbestanden/";
       clean = {
         enable = true;
-        dates = "weekly";
+        dates = "Sun *-*-* 18:00:00";
         extraArgs = "--keep 5 --keep-since 14d --nogcroots";
       };
     };
