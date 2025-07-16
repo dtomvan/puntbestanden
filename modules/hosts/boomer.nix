@@ -80,7 +80,6 @@
 
         modules.latex = {
           enable = true;
-          package = pkgs.texliveMedium;
           kile = true;
           neovim-lsp.enable = true;
         };
