@@ -11,7 +11,9 @@
     };
   };
 
-  perSystem = { pkgs, ... }: {
-    devshells.default.packages = with pkgs; [ nh ];
-  };
+  perSystem =
+    { pkgs, ... }:
+    {
+      devshells.default.packages = with pkgs; [ nh ];
+    };
 }

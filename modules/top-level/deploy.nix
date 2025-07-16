@@ -39,9 +39,11 @@
   ];
 
   perSystem =
-    { system, pkgs, ... }:
+    { pkgs, ... }:
     {
-      checks = inputs.deploy-rs.lib.${system}.deployChecks self.deploy;
+      # TODO: this really bloats up a simple `nix flake check`. disabling it
+      # for now, despite how eager the docs are to not have me do that
+      # checks = inputs.deploy-rs.lib.${system}.deployChecks self.deploy;
 
       devshells.default.packages = with pkgs; [ deploy-rs ];
     };
