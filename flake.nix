@@ -3,7 +3,7 @@
 {
   description = "Home Manager configuration of tomvd";
 
-  outputs = inputs: import ./outputs.nix inputs;
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
     extra-substituters = [
@@ -17,6 +17,14 @@
   };
 
   inputs = {
+    allfollow = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:dtomvan/allfollow/dtomvan/push-rzlonpxovrwz";
+    };
     deploy-rs = {
       inputs = {
         flake-compat = {
@@ -134,6 +142,14 @@
       };
       url = "github:nix-community/plasma-manager";
     };
+    rust-overlay = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:oxalica/rust-overlay";
+    };
     sops = {
       inputs = {
         nixpkgs = {
@@ -149,6 +165,9 @@
         };
       };
       url = "github:nix-community/srvos";
+    };
+    systems = {
+      url = "github:nix-systems/default";
     };
     treefmt-nix = {
       inputs = {

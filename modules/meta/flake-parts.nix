@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   imports = [
     inputs.flake-file.flakeModules.default
@@ -9,7 +9,16 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
     flake-file.url = "github:vic/flake-file";
+    allfollow = lib.mkForce {
+      url = "github:dtomvan/allfollow/dtomvan/push-rzlonpxovrwz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
+
+  flake-file.outputs = ''
+    inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; }
+    (inputs.import-tree ./modules)
+  '';
 
   perSystem = {
     devshells.default.commands = [
