@@ -16,14 +16,6 @@
           virt-kvm
         ];
 
-        _module.args.nixinate = {
-          host = "feather";
-          sshUser = "tomvd";
-          buildOn = "local";
-          substituteOnTarget = true;
-          hermetic = false;
-        };
-
         virtualisation.libvirtd.onBoot = "ignore";
         systemd.services.podman.wantedBy = lib.mkForce [ ];
         virtualisation.docker.enableOnBoot = false;

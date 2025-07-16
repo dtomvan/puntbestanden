@@ -17,6 +17,17 @@
   };
 
   inputs = {
+    deploy-rs = {
+      inputs = {
+        flake-compat = {
+          follows = "";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:serokell/deploy-rs";
+    };
     disko = {
       inputs = {
         nixpkgs = {
@@ -76,14 +87,6 @@
         };
       };
       url = "github:nix-community/nix-index-database";
-    };
-    nixinate = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-      url = "github:matthewcroughan/nixinate";
     };
     nixpkgs = {
       url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";

@@ -18,14 +18,6 @@
           services-syncthing
         ];
 
-        _module.args.nixinate = {
-          host = "kaput";
-          sshUser = "root";
-          buildOn = "local";
-          substituteOnTarget = true;
-          hermetic = true;
-        };
-
         time.timeZone = "Europe/Amsterdam";
         i18n.defaultLocale = "en_US.UTF-8";
 

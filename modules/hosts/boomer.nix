@@ -20,14 +20,6 @@
           virt-kvm
         ];
 
-        _module.args.nixinate = {
-          host = "boomer";
-          sshUser = "tomvd";
-          buildOn = "remote";
-          substituteOnTarget = true;
-          hermetic = false;
-        };
-
         environment.systemPackages =
           with pkgs;
           [
