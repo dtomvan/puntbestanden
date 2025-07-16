@@ -13,7 +13,7 @@
         inputs.home-manager.nixosModules.default
         inputs.sops.nixosModules.default
 
-        ../../hardware/autounattend.nix
+        ../hardware/_generated/autounattend.nix
         ./_disko.nix # TODO: make this the universal disko file
 
         boot-systemd-boot

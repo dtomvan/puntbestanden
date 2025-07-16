@@ -30,7 +30,7 @@ let
           }
         ))
         config.flake.modules.nixos."hosts-${host.hostName}"
-        ../../hardware/${host.hostName}.nix
+        ../hardware/_generated/${host.hostName}.nix
       ];
     });
 in
