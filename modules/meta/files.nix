@@ -16,5 +16,12 @@
         program = config.files.writer.drv;
         meta.description = "write all files.files to the correct places";
       };
+
+      devshells.default.commands = [
+        {
+          name = "write-files";
+          command = "nix run .#write-files";
+        }
+      ];
     };
 }

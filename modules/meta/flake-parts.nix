@@ -11,6 +11,15 @@
     flake-file.url = "github:vic/flake-file";
   };
 
+  perSystem = {
+    devshells.default.commands = [
+      {
+        name = "write-flake";
+        command = "nix run .#write-flake";
+      }
+    ];
+  };
+
   text.readme.parts.dendritic = ''
     # Dendritic
     This repository uses the [dendritic](https://github.com/mightyiam/dendritic)
