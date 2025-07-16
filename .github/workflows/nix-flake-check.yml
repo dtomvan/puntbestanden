@@ -4,7 +4,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: cachix/install-nix-action@v31
-    - run: nix flake check -L
+    - env:
+        LOCALSEND_TOKEN: ${{ secrets.LOCALSEND_TOKEN }}
+      run: nix flake check -L --extra-access-tokens "github.com=$LOCALSEND_TOKEN"
 'on':
   pull_request: {}
   push:
