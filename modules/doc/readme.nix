@@ -6,6 +6,7 @@
       "nixos_configs"
       "home_configs"
       "contents_rest"
+      "dendritic"
       "hostnames"
       "autounattend"
       "localsend_rs"
