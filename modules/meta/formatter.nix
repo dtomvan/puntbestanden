@@ -8,12 +8,23 @@
   };
 
   imports = [ inputs.treefmt-nix.flakeModule ];
-  perSystem.treefmt = {
-    programs = {
-      nixfmt.enable = true;
-      statix.enable = true;
-      deadnix.enable = true;
-      shfmt.enable = true;
+  perSystem =
+    { pkgs, ... }:
+    {
+      treefmt = {
+        programs = {
+          deadnix.enable = true;
+          nixfmt.enable = true;
+          shfmt.enable = true;
+          statix.enable = true;
+        };
+      };
+
+      devshells.default.packages = with pkgs; [
+        deadnix
+        nixfmt-tree
+        shfmt
+        statix
+      ];
     };
-  };
 }

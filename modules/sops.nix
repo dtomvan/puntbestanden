@@ -86,6 +86,12 @@ in
             drv = pkgs.writers.writeYAML ".sops.yaml" sopsConfig;
           }
         ];
+
+        devshells.default.packages = with pkgs; [
+          age
+          sops
+          ssh-to-age
+        ];
       };
   };
 }

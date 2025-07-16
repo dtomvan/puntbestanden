@@ -28,6 +28,14 @@
       };
       url = "github:serokell/deploy-rs";
     };
+    devshell = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:numtide/devshell";
+    };
     disko = {
       inputs = {
         nixpkgs = {
