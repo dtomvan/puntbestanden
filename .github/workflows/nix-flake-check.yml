@@ -6,7 +6,8 @@ jobs:
     - uses: cachix/install-nix-action@v31
     - env:
         LOCALSEND_TOKEN: ${{ secrets.LOCALSEND_TOKEN }}
-      run: nix flake check -L --extra-access-tokens "github.com=$LOCALSEND_TOKEN"
+      run: nix flake lock --extra-access-tokens "github.com=$LOCALSEND_TOKEN"
+    - run: nix flake check -L
 'on':
   pull_request: {}
   push:
