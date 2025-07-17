@@ -73,7 +73,7 @@
           latex
           mpd
           plasma
-          plasma-feather
+          plasma-boomer
         ];
 
         modules.neovim.lsp.lazyMoar = true;
