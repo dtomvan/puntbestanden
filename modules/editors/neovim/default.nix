@@ -45,6 +45,8 @@
             ];
             runtimeEnv = {
               NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+              # saves a whole lotta time
+              nixvimTarget = self'.packages.nixvim.overrideAttrs { dontFixup = true; };
             };
             text = ''
               if nix profile list --json | jq -e '.elements.nixvim' >/dev/null; then
@@ -53,7 +55,7 @@
               fi
 
               echo installing new nixvim install...
-              nix profile install ${self'.packages.nixvim}
+              nix profile install "''${nixvimTarget:?}"
 
               echo "done"
             '';

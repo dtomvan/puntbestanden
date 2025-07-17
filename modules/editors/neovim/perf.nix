@@ -9,6 +9,12 @@
         initLua = true;
         plugins = true;
       };
+      combinePlugins = {
+        enable = true;
+        standalonePlugins = [
+          "snacks.nvim"
+        ];
+      };
     };
   };
 }

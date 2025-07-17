@@ -12,6 +12,8 @@
     ];
     plugins.telescope = {
       enable = true;
+      lazyLoad.settings.cmd = "Telescope";
+
       extensions.fzy-native.enable = true;
       extensions.fzy-native.settings = {
         override_file_sorter = true;

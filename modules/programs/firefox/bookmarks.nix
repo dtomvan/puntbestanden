@@ -14,6 +14,10 @@
               name = "nixpkgs";
               url = "https://github.com/NixOS/nixpkgs/";
             }
+            {
+              name = "NüschtOS search";
+              url = "https://search.nüschtos.de/";
+            }
             # {
             #   name = "NGI@NIX";
             #   toolbar = true;

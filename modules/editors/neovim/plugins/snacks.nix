@@ -8,7 +8,6 @@
       plugins.snacks = {
         enable = true;
         settings = {
-          lazygit.configure = true;
           bigfile = {
             enabled = true;
             setup = lib.nixvim.mkRaw ''

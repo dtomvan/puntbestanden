@@ -23,7 +23,8 @@
               "kotlin_language_server",
               "pyright",
               "ruff",
-              "rust_analyzer",
+              -- commented because rustaceanvim loads the server automatically
+              -- "rust_analyzer",
               "svelte",
               "taplo",
               "terraformls",
@@ -40,5 +41,21 @@
           nixd.settings.formatting.command = [ (lib.getExe pkgs.nixfmt-rfc-style) ];
         };
       };
+
+      keymapsOnEvents.LspAttach =
+        lib.mapAttrsToList
+          (key: action: {
+            inherit key;
+            action = "<cmd>lua vim.lsp.buf.${action}()<cr>";
+            options.buffer = true;
+          })
+          {
+            "<c-f>" = "format";
+            gd = "definition";
+            gr = "references";
+            K = "hover";
+            "<space>a" = "code_action";
+            "<space>rn" = "rename";
+          };
     };
 }

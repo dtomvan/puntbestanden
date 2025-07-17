@@ -27,6 +27,7 @@
         initExtra =
           # bash
           ''
+            export EDITOR=nvim
             source "${pkgs.bash-preexec}/share/bash/bash-preexec.sh"
             bind 'set show-all-if-ambiguous on'
             bind 'tab:menu-complete'
