@@ -139,13 +139,5 @@
           ]
         );
       };
-
-      modules = {
-        neovim = {
-          enable = mkDefault true;
-          lsp.enable = mkDefault true;
-          lsp.latex.enable = mkDefault true;
-        };
-      };
     };
 }

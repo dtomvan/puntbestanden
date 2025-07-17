@@ -84,7 +84,6 @@
         modules.latex = {
           enable = true;
           kile = true;
-          neovim-lsp.enable = true;
         };
 
         programs.firefox.profiles.default.extensions.packages = with pkgs.nur.repos.dtomvan; [
