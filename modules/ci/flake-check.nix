@@ -16,12 +16,17 @@
             jobs.nix-flake-check = {
               runs-on = "ubuntu-latest";
               steps = [
-                { uses = "actions/checkout@v4"; }
-                { uses = "cachix/install-nix-action@v31"; }
                 {
-                  run = "nix flake lock --extra-access-tokens \"github.com=$LOCALSEND_TOKEN\"";
-                  env.LOCALSEND_TOKEN = "\${{ secrets.LOCALSEND_TOKEN }}";
+                  name = "Check that access token works";
+                  env.GH_TOKEN = "\${{ secrets.LOCALSEND_TOKEN }}";
+                  run = "gh api repos/dtomvan/localsend-rust-impl >/dev/null";
                 }
+                { uses = "actions/checkout@v4"; }
+                {
+                  uses = "cachix/install-nix-action@v31";
+                  "with".github_access_token = "\${{ secrets.LOCALSEND_TOKEN }}";
+                }
+                { run = "nix flake lock"; }
                 { run = "nix flake check -L"; }
               ];
             };
