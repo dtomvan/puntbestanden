@@ -23,11 +23,6 @@
   perSystem = {
     devshells.default.commands = [
       {
-        name = "write-flake";
-        help = "Write flake.nix according to its parts";
-        command = "nix run .#write-flake";
-      }
-      {
         name = "update-flake";
         help = "Update flake.lock";
         command = "nix flake update";
