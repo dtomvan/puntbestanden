@@ -34,7 +34,10 @@
         imports = with config.flake.modules.homeManager; [
           users-tomvd
 
+          firefox-ubo-only
+
           profiles-base
+          basic-cli
           profiles-graphical
           plasma
           plasma-feather

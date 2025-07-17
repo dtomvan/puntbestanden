@@ -7,6 +7,8 @@
         imports = with config.flake.modules.nixos; [
           profiles-workstation
 
+          guest
+
           hardware-boomer-disko
           hardware-nvidia
           hardware-ssd
@@ -68,7 +70,10 @@
         imports = with config.flake.modules.homeManager; [
           users-tomvd
           profiles-base
+          basic-cli
           profiles-graphical
+
+          firefox-ubo-only
 
           latex
           mpd

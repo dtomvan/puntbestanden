@@ -76,10 +76,7 @@ in
         flake-fmt = inputs.flake-fmt.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
       {
-        imports = with homeManager; [
-          basic-cli
-          helix
-        ];
+        imports = with homeManager; [ helix ];
 
         options = {
           home.os = {
@@ -94,8 +91,6 @@ in
           };
 
           home.packages = with pkgs; [
-            nur.repos.dtomvan.rwds-cli
-
             flake-fmt
             npins
             ripdrag

@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.firefox =
+  flake.modules.homeManager.firefox-ubo-only =
     {
       pkgs,
       ...
