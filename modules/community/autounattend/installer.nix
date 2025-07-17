@@ -2,6 +2,7 @@
 # mostly to use disko and xfs
 { config, ... }:
 let
+  inherit (config.autounattend) diskoFile;
   evaluatedSystem = config.flake.nixosConfigurations.autounattend;
 in
 {
@@ -97,7 +98,7 @@ in
               --no-deps \
               -m destroy,format,mount \
               --argstr device "$dev" \
-              "${config.autounattend.diskoFile}"
+              "${diskoFile}"
 
             mkdir -p /mnt/etc/nixos/
             cp -r ${../..}/* /mnt/etc/nixos/
