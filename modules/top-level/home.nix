@@ -39,7 +39,7 @@ in
     (mapAttrs' makeHome)
   ];
 
-  text.readme.parts.home_configs = "- a dendritic home-manager config (TODO: list aspects here)";
+  text.readme.parts.home_configs = "\n- a dendritic home-manager config (TODO: list aspects here)";
 
   perSystem =
     { pkgs, lib, ... }:

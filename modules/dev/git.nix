@@ -39,7 +39,7 @@
         };
       };
 
-      config.programs.gh = {
+      programs.gh = {
         enable = true;
         extensions = with pkgs; [
           gh-s
@@ -49,7 +49,7 @@
         gitCredentialHelper.enable = true;
       };
 
-      config.programs.gh-dash = {
+      programs.gh-dash = {
         enable = true;
         settings = {
           defaults = {

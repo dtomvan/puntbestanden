@@ -26,6 +26,7 @@
     parts.contents_rest =
       # markdown
       ''
+
         - An unhinged Emacs config
         - A lot less lines of neovim lua config compared to my [previous attempt](https://github.com/dtomvan/.config/tree/main/neovim/.config/nvim)
       '';
