@@ -66,11 +66,6 @@ in
         modules.terminals = {
           alacritty.enable = true;
         };
-
-        modules.neovim.lsp = {
-          enable = true;
-          nixd.enable = true;
-        };
       };
   };
 }

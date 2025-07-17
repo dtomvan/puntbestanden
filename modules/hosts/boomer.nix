@@ -81,8 +81,6 @@
           plasma-boomer
         ];
 
-        modules.neovim.lsp.lazyMoar = true;
-
         modules.latex = {
           enable = true;
           kile = true;

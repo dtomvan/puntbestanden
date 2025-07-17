@@ -43,8 +43,6 @@
           plasma-feather
         ];
 
-        modules.neovim.lsp.lazyMoar = true;
-
         programs.firefox.profiles.default.extensions.packages = [
           pkgs.nur.repos.rycee.firefox-addons.onetab
         ];
