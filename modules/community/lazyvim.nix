@@ -1,6 +1,6 @@
 # Stolen from https://github.com/LazyVim/LazyVim/discussions/1972
 # Used for my guest profile
-# 
+#
 # You need to make an init.lua and a `lua/config/plugins.lua` yourselves,
 # because that's just how lazyvim works. You can use the following NixOS
 # snippet:

@@ -1,10 +1,5 @@
-result*
-H369A8D363E.pass
-.clj-kondo
-.lsp
-*.log
-*.iso
-*.img
-*.qcow2
-balatro
-.direnv
+/.direnv
+/result*
+/repl-result*
+/.clj-kondo
+/.lsp

@@ -35,4 +35,9 @@
         fennel-ls
       ];
     };
+
+  text.gitignore = ''
+    /.clj-kondo
+    /.lsp
+  '';
 }

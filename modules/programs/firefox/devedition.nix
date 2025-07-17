@@ -3,7 +3,7 @@
 { self, ... }:
 {
   flake.modules.homeManager.firefox =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     let
       inherit (pkgs.stdenv.hostPlatform) system;
     in

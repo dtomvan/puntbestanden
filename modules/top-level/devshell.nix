@@ -34,4 +34,8 @@
         }
       ];
     };
+
+  text.gitignore = ''
+    /.direnv
+  '';
 }
