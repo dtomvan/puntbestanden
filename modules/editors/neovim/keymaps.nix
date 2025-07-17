@@ -1,6 +1,6 @@
 {
-  flake.modules.homeManager.neovim = {
-    programs.nixvim.keymaps = [
+  flake.modules.nixvim.default = {
+    keymaps = [
       {
         action = ":";
         key = ";";
@@ -8,10 +8,6 @@
       {
         action = ";";
         key = ":";
-      }
-      {
-        action = "<cmd>Neotree toggle right<cr>";
-        key = "<f1>";
       }
       {
         action = "mlggyG`l";
@@ -30,7 +26,7 @@
         key = "<space>k";
       }
     ];
-    programs.nixvim.keymapsOnEvents.LspAttach = [
+    keymapsOnEvents.LspAttach = [
       {
         action = "<cmd>lua vim.lsp.buf.format { async = false }<cr>";
         key = "<c-f>";

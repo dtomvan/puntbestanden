@@ -1,17 +1,17 @@
 {
-  flake.modules.homeManager.neovim =
+  flake.modules.nixvim.default =
     {
-      config,
+      lib,
       ...
     }:
     {
-      programs.nixvim.plugins.snacks = {
+      plugins.snacks = {
         enable = true;
         settings = {
           lazygit.configure = true;
           bigfile = {
             enabled = true;
-            setup = config.lib.nixvim.mkRaw ''
+            setup = lib.nixvim.mkRaw ''
               function(ctx)
                 Snacks.util.wo(0, { foldmethod = "manual", statuscolumn = "", conceallevel = 0 })
                 vim.b.minianimate_disable = true

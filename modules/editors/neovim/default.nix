@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   flake-file.inputs = {
     nixvim = {
@@ -7,38 +7,70 @@
     };
   };
 
-  flake.modules.homeManager.neovim = {
-    imports = [
-      inputs.nixvim.homeManagerModules.nixvim
-    ];
+  imports = [ inputs.nixvim.flakeModules.default ];
 
-    programs.nixvim = {
-      enable = true;
-      defaultEditor = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      withRuby = false;
+  nixvim = {
+    packages.enable = true;
+    checks.enable = true;
+  };
 
-      luaLoader.enable = true;
-      plugins.lz-n.enable = true;
-
-      clipboard.register = "unnamedplus";
-      clipboard.providers.wl-copy.enable = true;
-
-      performance = {
-        byteCompileLua = {
-          enable = true;
-          initLua = true;
-          plugins = true;
+  perSystem =
+    {
+      self',
+      pkgs,
+      lib,
+      system,
+      ...
+    }:
+    {
+      nixvimConfigurations = {
+        nixvim = inputs.nixvim.lib.evalNixvim {
+          inherit system;
+          modules = [
+            config.flake.modules.nixvim.default
+            { nixpkgs = { inherit pkgs; }; }
+          ];
         };
       };
 
-      plugins.treesitter = {
-        enable = true;
-        settings.highlight.enable = true;
+      apps.nixvim-activate = {
+        type = "app";
+        meta.description = "Activate your Nixvim configuration";
+        program = lib.getExe (
+          pkgs.writeShellApplication {
+            name = "nixvim-activate";
+            runtimeInputs = with pkgs; [
+              nix
+              jq
+            ];
+            runtimeEnv = {
+              NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+            };
+            text = ''
+              if nix profile list --json | jq -e '.elements.nixvim' >/dev/null; then
+                echo removing existing nixvim install...
+                nix profile remove nixvim
+              fi
+
+              echo installing new nixvim install...
+              nix profile install ${self'.packages.nixvim}
+
+              echo "done"
+            '';
+          }
+        );
       };
     };
-  };
-  # vim:sw=2 ts=2 sts=2
+
+  # unused; if you enable this you get 12 seconds of eval time for free.
+  # I don't think so cowboy.
+  flake.modules.homeManager.nixvim =
+    { self', ... }:
+    {
+      home.packages = [ self'.packages.nixvim ];
+      systemd.user.settings.Manager.DefaultEnvironment = {
+        EDITOR = "nvim";
+      };
+      programs.bash.shellAliases.vim = "nvim";
+    };
 }

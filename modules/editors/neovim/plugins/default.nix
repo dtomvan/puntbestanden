@@ -1,28 +1,17 @@
 {
-  flake.modules.homeManager.neovim =
+  flake.modules.nixvim.default =
     { pkgs, ... }:
     {
-      programs.nixvim.keymaps = [
+      keymaps = [
         {
-          action = "<cmd>Telescope find_files<cr>";
-          key = "<c-e>";
-        }
-        {
-          action = "<cmd>Telescope live_grep<cr>";
-          key = "<c-p>";
+          action = "<cmd>Neotree toggle right<cr>";
+          key = "<f1>";
         }
       ];
-      programs.nixvim.plugins = {
-        telescope.enable = true;
-        telescope.extensions.fzy-native.enable = true;
-        telescope.extensions.fzy-native.settings = {
-          override_file_sorter = true;
-          override_generic_sorter = false;
-        };
-        neo-tree.enable = true;
-      };
 
-      programs.nixvim.extraPlugins = with pkgs.vimPlugins; [
+      plugins.neo-tree.enable = true;
+
+      extraPlugins = with pkgs.vimPlugins; [
         nvim-window-picker
       ];
     };

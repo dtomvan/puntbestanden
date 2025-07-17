@@ -1,6 +1,6 @@
 {
-  flake.modules.homeManager.neovim = {
-    programs.nixvim.opts = {
+  flake.modules.nixvim.default = {
+    opts = {
       sw = 4;
       ts = 4;
       sts = 4;

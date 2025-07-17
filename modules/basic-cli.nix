@@ -7,7 +7,6 @@
       imports = with config.flake.modules.homeManager; [
         git
         jujutsu
-        neovim
       ];
 
       home.shell.enableShellIntegration = true;

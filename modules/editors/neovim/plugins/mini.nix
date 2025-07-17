@@ -1,6 +1,6 @@
 {
-  flake.modules.homeManager.neovim = {
-    programs.nixvim.plugins.mini = {
+  flake.modules.nixvim.default = {
+    plugins.mini = {
       enable = true;
       modules = {
         ai = { };
