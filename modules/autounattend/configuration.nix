@@ -35,11 +35,7 @@
 
       nix.channel.enable = lib.mkForce true;
 
-      # not needed at all OOTB
-      networking = {
-        hostName = "nixos";
-        networkmanager.plugins = lib.mkForce [ ];
-      };
+      networking.hostName = "nixos";
 
       environment.systemPackages = with pkgs; [
         gh
