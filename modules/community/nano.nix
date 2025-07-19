@@ -64,7 +64,7 @@
             ${backupdir} = {
               d = {
                 group = "root";
-                mode = "0666";
+                mode = "0777";
                 user = "root";
               };
             };
