@@ -1,6 +1,5 @@
 # "generated" PLEASE DO NOT OVERRIDE UNLESS YOU REALLY WANT TO KEEP THE OFFLINE INSTALL IMAGE
 {
-  config,
   modulesPath,
   lib,
   ...
@@ -19,9 +18,10 @@
     "virtio_rng"
   ];
 
-  boot.extraModulePackages = [
-    config.boot.kernelPackages.broadcom_sta
-  ];
+  # insecure package
+  # boot.extraModulePackages = [
+  #   config.boot.kernelPackages.broadcom_sta
+  # ];
 
   boot.initrd.availableKernelModules = [
     "9p"
