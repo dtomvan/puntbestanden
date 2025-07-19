@@ -142,14 +142,6 @@
       };
       url = "github:nix-community/plasma-manager";
     };
-    rust-overlay = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-      url = "github:oxalica/rust-overlay";
-    };
     sops = {
       inputs = {
         nixpkgs = {
@@ -165,9 +157,6 @@
         };
       };
       url = "github:nix-community/srvos";
-    };
-    systems = {
-      url = "github:nix-systems/default";
     };
     treefmt-nix = {
       inputs = {
