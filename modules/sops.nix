@@ -58,7 +58,7 @@ in
       };
     };
 
-    flake.modules.nixos.profiles-base = {
+    flake.modules.nixos.sops = {
       imports = [
         inputs.sops.nixosModules.sops
       ];

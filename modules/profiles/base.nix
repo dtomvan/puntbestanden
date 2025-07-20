@@ -32,6 +32,8 @@ in
 
           services-ssh
 
+          sops
+
           programs-comma
           programs-gpg
           programs-less
