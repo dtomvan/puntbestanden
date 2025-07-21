@@ -42,7 +42,7 @@
                       nix fmt
 
                       if [[ "$(git status --porcelain | wc -l)" -gt 0 ]]; then
-                        git commit -m 'chore: sync files after flake update"
+                        git commit -m 'chore: sync files after flake update'
                         git push origin ${branch}
                       fi
                     '';

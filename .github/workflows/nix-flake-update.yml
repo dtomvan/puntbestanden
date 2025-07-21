@@ -21,7 +21,7 @@ jobs:
         pr-title: 'chore: nix flake update'
     - run: "nix run .#write-flake\nnix run .#write-files\nnix fmt\n\nif [[ \"$(git\
         \ status --porcelain | wc -l)\" -gt 0 ]]; then\n  git commit -m 'chore: sync\
-        \ files after flake update\"\n  git push origin update_flake_lock_action\n\
+        \ files after flake update'\n  git push origin update_flake_lock_action\n\
         fi\n"
 'on':
   schedule:
