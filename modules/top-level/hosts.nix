@@ -41,6 +41,7 @@
       remoteBuild = {
         enable = true;
         settings = {
+          sshUser = "nix-remote-builder";
           maxJobs = 2;
           supportedFeatures = [
             "benchmark"
