@@ -32,13 +32,15 @@
           inherit system;
           config = {
             allowUnfree = true;
-          } // config.pkgs-config;
+          }
+          // config.pkgs-config;
           overlays = [
             inputs.nur.overlays.default
             inputs.lazy-apps.overlays.default
             self.overlays.plasmashell-workaround # https://github.com/NixOS/nixpkgs/issues/126590
             (_final: _prev: self.packages.${system})
-          ] ++ config.pkgs-overlays;
+          ]
+          ++ config.pkgs-overlays;
         };
       };
   };

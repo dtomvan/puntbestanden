@@ -52,15 +52,14 @@
     };
   };
 
-  text.readme.parts.hostnames =
-    ''
-      ## The hostnames
+  text.readme.parts.hostnames = ''
+    ## The hostnames
 
-    ''
-    + lib.pipe config.flake.hosts [
-      lib.attrValues
-      (lib.filter (h: !(h ? noConfig)))
-      (lib.map (h: "- `${h.hostName}`, ${h.description}"))
-      lib.concatLines
-    ];
+  ''
+  + lib.pipe config.flake.hosts [
+    lib.attrValues
+    (lib.filter (h: !(h ? noConfig)))
+    (lib.map (h: "- `${h.hostName}`, ${h.description}"))
+    lib.concatLines
+  ];
 }

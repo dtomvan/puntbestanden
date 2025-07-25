@@ -25,12 +25,10 @@
             name = "undollar-ng";
 
             # "tests"
-            buildCommand =
-              prev.buildCommand
-              + ''
-                [ "$($out/bin/\$)" == "" ]
-                [ "$($out/bin/\$ pwd)" == "/build" ]
-              '';
+            buildCommand = prev.buildCommand + ''
+              [ "$($out/bin/\$)" == "" ]
+              [ "$($out/bin/\$ pwd)" == "/build" ]
+            '';
           })
         )
       ];
