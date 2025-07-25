@@ -29,6 +29,7 @@ in
           boot-systemd-boot
           users-tomvd
           users-root
+          users-remote-build
 
           services-ssh
 
