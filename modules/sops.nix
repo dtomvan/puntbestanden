@@ -80,12 +80,13 @@ in
     perSystem =
       { pkgs, ... }:
       {
-        files.files = [
-          {
-            path_ = ".sops.yaml";
-            drv = pkgs.writers.writeYAML ".sops.yaml" sopsConfig;
-          }
-        ];
+        # TODO: doesn't serialize correctly
+        # files.files = [
+        #   {
+        #     path_ = ".sops.yaml";
+        #     drv = pkgs.writers.writeYAML ".sops.yaml" sopsConfig;
+        #   }
+        # ];
 
         devshells.default.packages = with pkgs; [
           age
