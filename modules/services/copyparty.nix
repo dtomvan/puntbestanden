@@ -39,8 +39,6 @@
         settings = {
           p = "80";
           e2dsa = true;
-          # TODO: CPU intensive
-          # e2ts = true;
           dedup = true;
           shr = "/shares";
           hist = "/var/lib/copyparty/";
@@ -51,29 +49,48 @@
 
         accounts.tomvd.passwordFile = config.sops.secrets.copyparty.path;
 
-        volumes = {
-          "/" = {
-            path = "/home/tomvd";
+        volumes =
+          let
             access.A = [ "tomvd" ];
-            flags = {
-              hardlinkonly = true;
-              fk = 4;
-              # please support gitignore
-              noidx = lib.concatStringsSep "|" [
-                ''\.iso$''
-                ''^/home/tomvd/\.''
-                ''^/home/tomvd/repos''
-                ''^/home/tomvd/projects''
-                ''.*/\.git/.*''
-                ''.*/\.jj/.*''
-                ''.*/\.direnv/.*''
-                ''.*/nix/store/.*''
-                ''.*/result.*''
-                ''.*/repl-result.*''
-              ];
+          in
+          {
+            "/" = {
+              inherit access;
+              path = "/home/tomvd";
+              flags = {
+                hardlinkonly = true;
+                fk = 4;
+                # please support gitignore
+                noidx = lib.concatStringsSep "|" [
+                  ''\.iso$''
+                  ''^/home/tomvd/\.''
+                  ''^/home/tomvd/repos''
+                  ''^/home/tomvd/projects''
+                  ''.*/\.git/.*''
+                  ''.*/\.jj/.*''
+                  ''.*/\.direnv/.*''
+                  ''.*/\.flox/.*''
+                  ''.*/nix/store/.*''
+                  ''.*/result.*''
+                  ''.*/repl-result.*''
+                ];
+              };
+            };
+
+            "/Music" = {
+              path = "/home/tomvd/Music";
+              access = access // {
+                r = "*";
+              };
+              flags.e2ts = true;
+            };
+
+            "/Documents" = {
+              inherit access;
+              path = "/home/tomvd/Documents";
+              flags.e2ts = true;
             };
           };
-        };
       };
 
       systemd.services.copyparty.serviceConfig = {
