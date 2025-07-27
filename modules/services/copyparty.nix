@@ -38,6 +38,9 @@
 
         settings = {
           p = "80";
+          # e.g. boomerparty, featherparty
+          name = "${config.networking.hostName}party";
+          z = true;
           e2dsa = true;
           dedup = true;
           shr = "/shares";
