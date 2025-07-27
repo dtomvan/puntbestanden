@@ -57,13 +57,18 @@
             flags = {
               hardlinkonly = true;
               fk = 4;
+              # please support gitignore
               noidx = lib.concatStringsSep "|" [
-                "\\.iso$"
-                "^/home/tomvd/\\."
-                ".*/\\.git/.*"
-                ".*/\\.jj/.*"
-                ".*/\\.direnv/.*"
-                ".*/nix/store/.*"
+                ''\.iso$''
+                ''^/home/tomvd/\.''
+                ''^/home/tomvd/repos''
+                ''^/home/tomvd/projects''
+                ''.*/\.git/.*''
+                ''.*/\.jj/.*''
+                ''.*/\.direnv/.*''
+                ''.*/nix/store/.*''
+                ''.*/result.*''
+                ''.*/repl-result.*''
               ];
             };
           };
