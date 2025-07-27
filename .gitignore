@@ -3,3 +3,4 @@
 /repl-result*
 /.clj-kondo
 /.lsp
+/.tmp
