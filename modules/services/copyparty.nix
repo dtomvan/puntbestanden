@@ -39,7 +39,8 @@
         settings = {
           p = "80";
           e2dsa = true;
-          e2ts = true;
+          # TODO: CPU intensive
+          # e2ts = true;
           dedup = true;
           shr = "/shares";
           hist = "/var/lib/copyparty/";
