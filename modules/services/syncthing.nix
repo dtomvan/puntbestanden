@@ -38,11 +38,6 @@
             params.cleanoutDays = "90";
           };
         };
-        logseq-mobile = {
-          id = "xcerk-k5e52";
-          path = "~/logseq-mobile";
-          devices = allDevices;
-        };
       };
     in
     {
