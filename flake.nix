@@ -25,6 +25,14 @@
       };
       url = "github:dtomvan/allfollow/dtomvan/push-rzlonpxovrwz";
     };
+    copyparty = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:9001/copyparty/v1.18.4";
+    };
     deploy-rs = {
       inputs = {
         flake-compat = {

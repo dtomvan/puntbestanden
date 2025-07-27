@@ -4,10 +4,16 @@ let
     family = "afio";
     pointSize = 12;
   };
+  copypartyFontsPath = "/var/lib/copyparty/customfonts.css";
 in
 {
   flake.modules.nixos.fonts =
-    { pkgs, ... }:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     {
       fonts = {
         packages = with pkgs; [
@@ -25,6 +31,21 @@ in
             monospace = [ fixedWidth.family ];
           };
         };
+      };
+
+      services.copyparty = lib.mkIf config.services.copyparty.enable {
+        settings.html-head =
+          lib.replaceStrings [ "\n" ] [ " " ]
+            # html
+            ''
+              <style>
+              :root {
+                --font-main: ${family};
+                --font-serif: ${family};
+                --font-mono: ${fixedWidth.family};
+              }
+              </style>
+            '';
       };
     };
 

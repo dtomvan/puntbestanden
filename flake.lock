@@ -23,6 +23,28 @@
         "type": "github"
       }
     },
+    "copyparty": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1753468865,
+        "narHash": "sha256-+zBpFvtCti1+qZXJtDU18d5HEUfuVaqslofb5BpAePU=",
+        "owner": "9001",
+        "repo": "copyparty",
+        "rev": "4dca1cf8f4f040867bbca07331109632a23d9e20",
+        "type": "github"
+      },
+      "original": {
+        "owner": "9001",
+        "ref": "v1.18.4",
+        "repo": "copyparty",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1746291859,
@@ -269,6 +291,21 @@
       }
     },
     "flake-utils": {
+      "locked": {
+        "lastModified": 1678901627,
+        "narHash": "sha256-U02riOqrKKzwjsxc/400XnElV+UtPUQWpANPlyazjH0=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "93a2b84fc4b70d9e089d029deacc3583435c2ed6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
       "inputs": {
         "systems": "systems_3"
       },
@@ -286,7 +323,7 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
+    "flake-utils_3": {
       "inputs": {
         "systems": "systems_4"
       },
@@ -429,7 +466,7 @@
       "inputs": {
         "crane": "crane",
         "fenix": "fenix",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -594,7 +631,7 @@
     },
     "nuschtosSearch": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "ixx": "ixx",
         "nixpkgs": [
           "nixvim",
@@ -665,6 +702,7 @@
     "root": {
       "inputs": {
         "allfollow": "allfollow",
+        "copyparty": "copyparty",
         "deploy-rs": "deploy-rs",
         "devshell": "devshell",
         "disko": "disko",
