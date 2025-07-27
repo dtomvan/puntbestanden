@@ -38,6 +38,15 @@
             params.cleanoutDays = "90";
           };
         };
+        Pictures = {
+          id = "xzsp4-pibte";
+          path = "~/Pictures";
+          devices = allDevices;
+          versioning = {
+            type = "trashcan";
+            params.cleanoutDays = "30";
+          };
+        };
       };
     in
     {
