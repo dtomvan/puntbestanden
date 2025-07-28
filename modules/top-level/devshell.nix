@@ -55,5 +55,6 @@
 
   text.gitignore = ''
     /.direnv
+    /.tmp
   '';
 }
