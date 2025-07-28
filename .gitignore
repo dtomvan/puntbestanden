@@ -1,6 +1,6 @@
 /.direnv
+/.tmp
 /result*
 /repl-result*
 /.clj-kondo
 /.lsp
-/.tmp
