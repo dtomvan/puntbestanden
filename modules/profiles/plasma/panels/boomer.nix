@@ -22,6 +22,7 @@
                 "file:///var/lib/flatpak/exports/share/applications/org.kde.neochat.desktop"
                 "applications:org.kde.kate.desktop"
                 "file:///var/lib/flatpak/exports/share/applications/org.telegram.desktop.desktop"
+                "applications:duo.desktop"
               ];
             };
           }
