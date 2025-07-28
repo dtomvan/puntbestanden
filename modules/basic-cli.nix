@@ -100,18 +100,6 @@
           ll = "eza -lah";
           cat = "bat";
 
-          jl = "jj l";
-          jca = "jj amend";
-          jst = "jj status";
-          jrev = "jj revert";
-          jc = "jj new";
-          jd = "jj diff";
-          jde = "jj describe";
-          jf = "jj git fetch";
-          jp = "jj git push";
-          jup = "jj bookmark set";
-          jb = "jj branch";
-          js = "jj show";
         };
       };
 
