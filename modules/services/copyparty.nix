@@ -99,7 +99,8 @@
             xm = "aa,f,j,t3600,${wget}";
 
             # according to docs: checks for dangerous symlinks on startup
-            ls = "**,*,ln,p,r";
+            # I have symlinks to the nix store so this one isn't really possible
+            # ls = "**,*,ln,p,r";
           };
 
           accounts.tomvd.passwordFile = config.sops.secrets.copyparty.path;
