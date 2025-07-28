@@ -4,7 +4,6 @@ let
     family = "afio";
     pointSize = 12;
   };
-  copypartyFontsPath = "/var/lib/copyparty/customfonts.css";
 in
 {
   flake.modules.nixos.fonts =
