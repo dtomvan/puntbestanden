@@ -49,6 +49,14 @@
         group = "users";
       };
 
+      sops.secrets.copyparty-weak = {
+        mode = "0400";
+        sopsFile = ../../secrets/copyparty-weak.secret;
+        format = "binary";
+        owner = "tomvd";
+        group = "users";
+      };
+
       environment.systemPackages = [
         package
         u2c
@@ -104,6 +112,7 @@
           };
 
           accounts.tomvd.passwordFile = config.sops.secrets.copyparty.path;
+          accounts.docs.passwordFile = config.sops.secrets.copyparty-weak.path;
 
           volumes =
             let
@@ -145,8 +154,10 @@
               };
 
               "/Documents" = {
-                inherit access;
                 path = "/home/tomvd/Documents";
+                access = access // {
+                  rw = [ "docs" ];
+                };
                 flags.e2ts = true;
               };
 
