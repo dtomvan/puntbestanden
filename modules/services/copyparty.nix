@@ -181,7 +181,6 @@
                   df = "20g";
                   # No XSS please
                   nohtml = true;
-                  chmod_f = 444; # by default nobody can overwrite uploaded files
                 };
               };
             };
