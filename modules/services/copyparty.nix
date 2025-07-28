@@ -93,6 +93,38 @@
               path = "/home/tomvd/Documents";
               flags.e2ts = true;
             };
+
+            "/drop" = {
+              access = access // {
+                # you can only see the files if you know exactly the path and
+                # the file key.
+                wG = "*";
+              };
+              path = "/var/lib/copyparty/copyparty/drop/";
+              flags = {
+                hardlinkonly = true;
+                # adds some extra random stuff so the file is a little more
+                # "secret"
+                fka = 8;
+                # cannot download partial uploads
+                nopipe = true;
+                # sort uploads by date
+                # this one seems buggy
+                # rotf = "%Y-%m-%d";
+                # no thumbnails
+                dthumb = true;
+                # little less than a quarter
+                lifetime = 60 * 60 * 24 * 30 * 4;
+                # no more than 500 mb over 15 minutes
+                maxb = "500m,600";
+                # you do not get to choose the filename
+                rand = true;
+                # max 200 mb uploads
+                sz = "0-200m";
+                # always leave a little more than my system closure size
+                df = "20g";
+              };
+            };
           };
       };
 
