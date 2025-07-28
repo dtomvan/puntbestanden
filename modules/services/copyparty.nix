@@ -15,6 +15,24 @@
       package = pkgs.copyparty.override {
         withFastThumbnails = true;
       };
+      u2c = pkgs.stdenvNoCC.mkDerivation {
+        pname = "u2c";
+        inherit (package) version meta;
+        src = inputs.copyparty;
+
+        nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
+
+        installPhase = ''
+          runHook preInstall
+
+          install -Dm444 bin/u2c.py -t $out/share/copyparty
+          mkdir $out/bin
+          makeWrapper ${lib.getExe pkgs.python312} $out/bin/u2c \
+            --add-flag $out/share/copyparty/u2c.py
+
+          runHook postInstall
+        '';
+      };
     in
     {
       imports = [ inputs.copyparty.nixosModules.default ];
@@ -27,7 +45,10 @@
         group = "users";
       };
 
-      environment.systemPackages = [ package ];
+      environment.systemPackages = [
+        package
+        u2c
+      ];
 
       services.copyparty = {
         enable = true;
