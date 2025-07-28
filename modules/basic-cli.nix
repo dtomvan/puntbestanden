@@ -79,6 +79,19 @@
               echo 'use flake' >> "$top/.envrc"
               direnv allow
             }
+
+            # upload file to somewhere on the tailnet
+            blast() {
+              target="$1"
+              shift
+
+              u2c \
+                -a '$/run/secrets/copyparty' \
+                -u \
+                --ok \
+                "https://$target.flyingfox-chameleon.ts.net/" \
+                $@
+            }
           '';
 
         shellAliases = {
@@ -100,6 +113,8 @@
           ll = "eza -lah";
           cat = "bat";
 
+          boom = "blast boomer";
+          feat = "blast feather";
         };
       };
 
