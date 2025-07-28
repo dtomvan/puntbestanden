@@ -14,6 +14,9 @@
     let
       package = pkgs.copyparty.override {
         withFastThumbnails = true;
+        withMediaProcessing = false; # uses ffmpeg, which can eat your CPU big time
+        # uses mutagen, should be quicker as well, also saves closure size!
+        withBasicAudioMetadata = true;
       };
       u2c = pkgs.stdenvNoCC.mkDerivation {
         pname = "u2c";
@@ -33,6 +36,7 @@
           runHook postInstall
         '';
       };
+      wget = "${inputs.copyparty.outPath}/bin/hooks/wget.py";
     in
     {
       imports = [ inputs.copyparty.nixosModules.default ];
@@ -50,104 +54,137 @@
         u2c
       ];
 
-      services.copyparty = {
-        enable = true;
-        inherit package;
+      services.copyparty =
+        let
+          # TODO: this is kinda an implementation detail and might break
+          stateDir = "/var/lib/copyparty";
+        in
+        {
+          enable = true;
+          inherit package;
 
-        user = "tomvd";
-        group = "users";
+          user = "tomvd";
+          group = "users";
 
-        settings = {
-          p = "80";
-          # e.g. boomerparty, featherparty
-          name = "${config.networking.hostName}party";
-          z = true;
-          e2dsa = true;
-          dedup = true;
-          shr = "/shares";
-          hist = "/var/lib/copyparty/";
-          theme = 2; # monokai
-          # just a normal spinner
-          spinner = ",padding:0;border-radius:9em;border:.2em solid #444;border-top:.2em solid #fc0";
-        };
+          settings = {
+            ### connection
+            # e.g. boomerparty, featherparty
+            name = "${config.networking.hostName}party";
+            p = "80";
+            z = true;
+            no-robots = true;
 
-        accounts.tomvd.passwordFile = config.sops.secrets.copyparty.path;
+            ### paths
+            shr = "/shares";
+            hist = stateDir;
 
-        volumes =
-          let
-            access.A = [ "tomvd" ];
-          in
-          {
-            "/" = {
-              inherit access;
-              path = "/home/tomvd";
-              flags = {
-                hardlinkonly = true;
-                fk = 4;
-                # please support gitignore
-                noidx = lib.concatStringsSep "|" [
-                  ''\.iso$''
-                  ''^/home/tomvd/\.''
-                  ''^/home/tomvd/repos''
-                  ''^/home/tomvd/projects''
-                  ''.*/\.git/.*''
-                  ''.*/\.jj/.*''
-                  ''.*/\.direnv/.*''
-                  ''.*/\.flox/.*''
-                  ''.*/nix/store/.*''
-                  ''.*/result.*''
-                  ''.*/repl-result.*''
-                ];
-              };
-            };
+            e2dsa = true; # enable indexing
+            dedup = true;
+            theme = 2; # monokai
+            # just a normal spinner
+            spinner = ",padding:0;border-radius:9em;border:.2em solid #444;border-top:.2em solid #fc0";
 
-            "/Music" = {
-              path = "/home/tomvd/Music";
-              access = access // {
-                r = "*";
-              };
-              flags.e2ts = true;
-            };
+            forget-ip = 10080; # week, apparently to comply with GDPR
 
-            "/Documents" = {
-              inherit access;
-              path = "/home/tomvd/Documents";
-              flags.e2ts = true;
-            };
+            ### tarball control
+            zipmaxn = 200;
+            zipmaxs = "8G";
+            # don't download any compressed tarballs, zips are still allowed
+            no-tarcmp = true;
 
-            "/drop" = {
-              access = access // {
-                # you can only see the files if you know exactly the path and
-                # the file key.
-                wG = "*";
-              };
-              path = "/var/lib/copyparty/copyparty/drop/";
-              flags = {
-                hardlinkonly = true;
-                # adds some extra random stuff so the file is a little more
-                # "secret"
-                fka = 8;
-                # cannot download partial uploads
-                nopipe = true;
-                # sort uploads by date
-                # this one seems buggy
-                # rotf = "%Y-%m-%d";
-                # no thumbnails
-                dthumb = true;
-                # little less than a quarter
-                lifetime = 60 * 60 * 24 * 30 * 4;
-                # no more than 500 mb over 15 minutes
-                maxb = "500m,600";
-                # you do not get to choose the filename
-                rand = true;
-                # max 200 mb uploads
-                sz = "0-200m";
-                # always leave a little more than my system closure size
-                df = "20g";
-              };
-            };
+            # useful if you have podcasts or whatever
+            rss = true;
+
+            # wget any url givem to the messaging system, admins only
+            xm = "aa,f,j,t3600,${wget}";
+
+            # according to docs: checks for dangerous symlinks on startup
+            ls = "**,*,ln,p,r";
           };
-      };
+
+          accounts.tomvd.passwordFile = config.sops.secrets.copyparty.path;
+
+          volumes =
+            let
+              access.A = [ "tomvd" ];
+            in
+            {
+              "/" = {
+                inherit access;
+                path = "/home/tomvd";
+                flags = {
+                  hardlinkonly = true;
+                  fk = 4;
+                  # they call this "slightly faster" but forgot my home folder
+                  # is HUGE
+                  nodirsz = true;
+                  # please support gitignore
+                  noidx = lib.concatStringsSep "|" [
+                    ''\.iso$''
+                    ''^/home/tomvd/\.''
+                    ''^/home/tomvd/repos''
+                    ''^/home/tomvd/projects''
+                    ''.*/\.git/.*''
+                    ''.*/\.jj/.*''
+                    ''.*/\.direnv/.*''
+                    ''.*/\.flox/.*''
+                    ''.*/nix/store/.*''
+                    ''.*/result.*''
+                    ''.*/repl-result.*''
+                  ];
+                };
+              };
+
+              "/Music" = {
+                path = "/home/tomvd/Music";
+                access = access // {
+                  r = "*";
+                };
+                flags.e2ts = true;
+              };
+
+              "/Documents" = {
+                inherit access;
+                path = "/home/tomvd/Documents";
+                flags.e2ts = true;
+              };
+
+              "/drop" = {
+                access = access // {
+                  # you can only see the files if you know exactly the path and
+                  # the file key.
+                  wG = "*";
+                };
+                path = "${stateDir}/copyparty/drop/";
+                flags = {
+                  hardlinkonly = true;
+                  # adds some extra random stuff so the file is a little more
+                  # "secret"
+                  fka = 8;
+                  # cannot download partial uploads
+                  nopipe = true;
+                  # sort uploads by date
+                  # this one seems buggy
+                  # rotf = "%Y-%m-%d";
+                  # no thumbnails
+                  dthumb = true;
+                  # little less than a quarter
+                  lifetime = 60 * 60 * 24 * 30 * 4;
+                  # no more than 500 mb over 15 minutes
+                  maxb = "500m,600";
+                  # you do not get to choose the filename
+                  rand = true;
+                  # max 200 mb uploads
+                  sz = "0-200m";
+                  # always leave a little more than my system closure size
+                  df = "20g";
+                  # No XSS please
+                  nohtml = true;
+                  chmod_f = 444; # by default nobody can overwrite uploaded files
+                };
+              };
+            };
+        };
 
       systemd.services.copyparty.serviceConfig = {
         # allow port < 2^10
