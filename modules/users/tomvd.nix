@@ -5,6 +5,7 @@
     };
 
     users.users.tomvd = {
+      uid = 1000;
       isNormalUser = true;
       createHome = true;
       # not sure which are needed but I don't want to debug these again
