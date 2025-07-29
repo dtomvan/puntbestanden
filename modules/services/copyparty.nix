@@ -64,6 +64,8 @@ in
             z = true;
             no-robots = true;
 
+            ah-alg = "argon2"; # hash passwords
+
             ### paths
             shr = "/shares";
             hist = stateDir;
