@@ -19,7 +19,7 @@ let
          if args.install {
     -        let _ = Command::new("nix-env")
     -            .args(["-f", "<nixpkgs>", "-iA", basename])
-    +        let _ = Command::new("nix")
+    +        let _ = Command::new("nix") // "nix-env", this is here so that --replace-fail doesn't fail
     +            .args(["profile", "install", format!("nixpkgs#{basename}").as_str()])
                  .exec();
          } else if args.shell {
@@ -38,6 +38,5 @@ let
   };
 in
 {
-  debug = true;
   pkgs-overlays = [ overlay ];
 }
