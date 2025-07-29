@@ -3,7 +3,7 @@
   flake-file.inputs.copyparty = {
     # TODO: bump manually on new release, you could make a flake app that does
     # this but yeah it doesn't really matter
-    url = "github:9001/copyparty/cbdbaf193896dc83392f65f67a18744d898efd7e";
+    url = "github:9001/copyparty/4915b14be191bca9a91f942073650fee27b3231b";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -18,25 +18,6 @@
         # uses mutagen, should be quicker as well, also saves closure size!
         withBasicAudioMetadata = true;
       };
-      u2c = pkgs.stdenvNoCC.mkDerivation {
-        pname = "u2c";
-        inherit (package) version meta;
-        src = inputs.copyparty;
-
-        nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
-
-        installPhase = ''
-          runHook preInstall
-
-          install -Dm444 bin/u2c.py -t $out/share/copyparty
-          mkdir $out/bin
-          makeWrapper ${lib.getExe pkgs.python312} $out/bin/u2c \
-            --add-flag $out/share/copyparty/u2c.py
-
-          runHook postInstall
-        '';
-      };
-      wget = "${inputs.copyparty.outPath}/bin/hooks/wget.py";
     in
     {
       imports = [ inputs.copyparty.nixosModules.default ];
@@ -59,7 +40,7 @@
 
       environment.systemPackages = [
         package
-        u2c
+        pkgs.u2c
       ];
 
       services.copyparty =
