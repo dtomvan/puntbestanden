@@ -1,4 +1,8 @@
 { inputs, lib, ... }:
+let
+  user = "tomvd";
+  group = "users";
+in
 {
   flake-file.inputs.copyparty = {
     # TODO: bump manually on new release, you could make a flake app that does
@@ -26,16 +30,16 @@
         mode = "0400";
         sopsFile = ../../secrets/copyparty.secret;
         format = "binary";
-        owner = "tomvd";
-        group = "users";
+        owner = user;
+        inherit group;
       };
 
       sops.secrets.copyparty-weak = {
         mode = "0400";
         sopsFile = ../../secrets/copyparty-weak.secret;
         format = "binary";
-        owner = "tomvd";
-        group = "users";
+        owner = user;
+        inherit group;
       };
 
       environment.systemPackages = [
@@ -50,10 +54,7 @@
         in
         {
           enable = true;
-          inherit package;
-
-          user = "tomvd";
-          group = "users";
+          inherit package user group;
 
           settings = {
             ### connection
@@ -92,17 +93,17 @@
             # ls = "**,*,ln,p,r";
           };
 
-          accounts.tomvd.passwordFile = config.sops.secrets.copyparty.path;
+          accounts.${user}.passwordFile = config.sops.secrets.copyparty.path;
           accounts.docs.passwordFile = config.sops.secrets.copyparty-weak.path;
 
           volumes =
             let
-              access.A = [ "tomvd" ];
+              access.A = [ user ];
             in
             {
               "/" = {
                 inherit access;
-                path = "/home/tomvd";
+                path = "/home/${user}";
                 flags = {
                   hardlinkonly = true;
                   fk = 4;
@@ -112,9 +113,9 @@
                   # please support gitignore
                   noidx = lib.concatStringsSep "|" [
                     ''\.iso$''
-                    ''^/home/tomvd/\.''
-                    ''^/home/tomvd/repos''
-                    ''^/home/tomvd/projects''
+                    ''^/home/${user}/\.''
+                    ''^/home/${user}/repos''
+                    ''^/home/${user}/projects''
                     ''.*/\.git/.*''
                     ''.*/\.jj/.*''
                     ''.*/\.direnv/.*''
@@ -127,7 +128,7 @@
               };
 
               "/Music" = {
-                path = "/home/tomvd/Music";
+                path = "/home/${user}/Music";
                 access = access // {
                   r = "*";
                 };
@@ -135,7 +136,7 @@
               };
 
               "/Documents" = {
-                path = "/home/tomvd/Documents";
+                path = "/home/${user}/Documents";
                 access = access // {
                   rw = [ "docs" ];
                 };
