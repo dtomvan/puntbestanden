@@ -20,6 +20,7 @@ in
           runtimeInputs = with pkgs; [
             coreutils
             curl
+            file
             gawk
             gnugrep
             libnotify
