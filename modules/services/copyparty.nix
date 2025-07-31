@@ -77,10 +77,15 @@ in
             forget-ip = 10080; # week, apparently to comply with GDPR
 
             ### tarball control
-            zipmaxn = 200;
+            # zipmaxn = 200;
             zipmaxs = "8G";
             # don't download any compressed tarballs, zips are still allowed
             no-tarcmp = true;
+
+            # for VLC and others which do not support webdav
+            # default ports because why not YOLO
+            ftp = "21";
+            ftp-pr = "12000-13000";
 
             # useful if you have podcasts or whatever
             rss = true;
