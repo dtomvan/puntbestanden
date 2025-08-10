@@ -2,7 +2,7 @@
 {
   flake-file.inputs = {
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim?ref=29edaafdb088cee3d8c616a4a5bb48b5eecc647c";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
