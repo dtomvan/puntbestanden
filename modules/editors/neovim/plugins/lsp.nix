@@ -6,7 +6,11 @@
       lazyPkgs = self.lazy-lsps { inherit pkgs; };
     in
     {
-      plugins.lspconfig.enable = true;
+      plugins = {
+        lspconfig.enable = true;
+        lsp-format.enable = true;
+        none-ls.enable = true;
+      };
 
       extraPackages = [ lazyPkgs ];
 

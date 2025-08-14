@@ -75,6 +75,7 @@
 
           firefox-ubo-only
 
+          typst
           latex
           mpd
           plasma
