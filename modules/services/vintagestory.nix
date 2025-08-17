@@ -72,7 +72,6 @@
                 ## QOL
                 betterfirepit
                 carryon
-                gimmeoneseedplz
                 justanarrowheadmold
                 morepiles
                 playercorpse
