@@ -1,7 +1,7 @@
 let
   family = "Inter";
   fixedWidth = {
-    family = "afio";
+    family = "Aporetic Sans Mono";
     pointSize = 12;
   };
 in
@@ -15,59 +15,60 @@ in
     }:
     {
       fonts = {
-        packages = with pkgs; [
-          inter
-          noto-fonts-color-emoji
-          liberation_ttf
-          nur.repos.dtomvan.afio-font-bin
-        ];
+	packages = with pkgs; [
+	  inter
+	  noto-fonts-color-emoji
+	  liberation_ttf
+	  # nur.repos.dtomvan.afio-font-bin
+	  aporetic
+	];
 
-        fontconfig = {
-          useEmbeddedBitmaps = true;
-          defaultFonts = {
-            serif = [ "Liberation Serif" ];
-            sansSerif = [ family ];
-            monospace = [ fixedWidth.family ];
-          };
-        };
+	fontconfig = {
+	  useEmbeddedBitmaps = true;
+	  defaultFonts = {
+	    serif = [ "Liberation Serif" ];
+	    sansSerif = [ family ];
+	    monospace = [ fixedWidth.family ];
+	  };
+	};
       };
 
       services.copyparty = lib.mkIf config.services.copyparty.enable {
-        settings.html-head =
-          lib.replaceStrings [ "\n" ] [ " " ]
-            # html
-            ''
-              <style>
-              :root {
-                --font-main: ${family};
-                --font-serif: ${family};
-                --font-mono: ${fixedWidth.family};
-              }
-              </style>
-            '';
+	settings.html-head =
+	  lib.replaceStrings [ "\n" ] [ " " ]
+	    # html
+	    ''
+	      <style>
+	      :root {
+		--font-main: ${family};
+		--font-serif: ${family};
+		--font-mono: ${fixedWidth.family};
+	      }
+	      </style>
+	    '';
       };
     };
 
   flake.modules.homeManager.plasma = {
     programs.plasma = {
       fonts = {
-        inherit fixedWidth;
-        general = {
-          inherit family;
-          pointSize = 11;
-        };
-        menu = {
-          inherit family;
-          pointSize = 10;
-        };
-        small = {
-          inherit family;
-          pointSize = 8;
-        };
-        toolbar = {
-          inherit family;
-          pointSize = 10;
-        };
+	inherit fixedWidth;
+	general = {
+	  inherit family;
+	  pointSize = 11;
+	};
+	menu = {
+	  inherit family;
+	  pointSize = 10;
+	};
+	small = {
+	  inherit family;
+	  pointSize = 8;
+	};
+	toolbar = {
+	  inherit family;
+	  pointSize = 10;
+	};
       };
     };
 
