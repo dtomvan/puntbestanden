@@ -1,3 +1,7 @@
+;;; init.el -- emacs config
+;;; Commentary:
+;;; Code:
+
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name
@@ -24,9 +28,9 @@
                  (setq display-line-numbers 'relative)
                  (indent-tabs-mode -1)))
   :init
-  (set-face-attribute 'default nil :font "Afio" :height 120)
+  (set-face-attribute 'default nil :font "Afio" :height 140)
   (add-to-list 'default-frame-alist '(font . "Afio"))
-  (add-to-list 'default-frame-alist '(height . "140"))
+  (add-to-list 'default-frame-alist '(height . "160"))
   :custom
   (inhibit-startup-message t)
   (initial-scratch-message "")
@@ -50,6 +54,9 @@
   (use-file-dialog nil)
   (use-short-answers t)
   (visible-bell nil)
+
+  (warning-suppress-types '((native-compiler)))
+
   :init
   (global-auto-revert-mode 1)
   (when scroll-bar-mode
@@ -57,6 +64,41 @@
   (ido-mode t)
   (menu-bar-mode -1)
   (tool-bar-mode -1))
+
+(defvar user/org-root "~/org/refile.org" "The file to open orgmode in initially.")
+(defun user/org-open ()
+  "Open orgmode file at which my vault starts."
+  (interactive)
+  (find-file (expand-file-name user/org-root)))
+
+; Thanks to https://doc.norang.ca/org-mode.html this org setup was a blast!
+(use-package org
+  :ensure nil
+  :straight nil
+  :init
+  (global-set-key "\C-cl" 'org-store-link)
+  (global-set-key "\C-ca" 'org-agenda)
+  (global-set-key "\C-cb" 'user/org-open)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  :custom
+  (org-directory "~/org")
+  (org-default-notes-file "~/org/refile.org")
+  (org-agenda-files '("~/org"))
+  (org-capture-templates
+   '(("t" "todo" entry (file "") "\n* TODO %?\n%U\n%a\n")
+     ("n" "note" entry (file "") "\n* %? :NOTE:\n%U\n%a\n")))
+  (org-use-fast-todo-selection t)
+  (org-treat-S-cursor-todo-selection-as-state-change nil))
+
+(defun bh/remove-empty-drawer-on-clock-out ()
+  "Remove empty LOGBOOK drawers on clock out."
+  (interactive)
+  (save-excursion
+    (beginning-of-line 0)
+    (org-remove-empty-drawer-at "LOGBOOK" (point))))
+
+(add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
+
 
 (use-package compile
   :ensure nil
@@ -112,12 +154,15 @@
   (show-paren-style 'mixed)
   (show-paren-context-when-offscreen t))
 
-                    ; add vim keybindings
+; add vim keybindings
+(use-package undo-tree)
+(setq evil-undo-system 'undo-tree)
 (setq evil-want-keybinding nil)
 (setq evil-want-C-u-scroll 1)
 (use-package goto-chg)
 (use-package evil
   :init
+  (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
   (evil-mode 1))
 
 (use-package evil-commentary
@@ -131,22 +176,21 @@
   :init
   (evil-collection-init))
 
-                    ; which key
+; which key
 (use-package which-key
   :ensure nil
   :commands (which-key-mode)
   :init
   (which-key-mode))
 
-                    ; add LSP
+; add LSP
 (use-package flymake
   :init
   (add-hook 'prog-mode-hook
             (lambda ()
-              ;; (unless (string-match-p (rx (and ".el" eol)) (buffer-file-name (current-buffer)))
-                (flymake-mode)
-                (evil-local-set-key 'normal (kbd "]d") 'flymake-goto-next-error)
-                (evil-local-set-key 'normal (kbd "[d") 'flymake-goto-prev-error)))); )
+              (flymake-mode)
+              (evil-local-set-key 'normal (kbd "]d") 'flymake-goto-next-error)
+              (evil-local-set-key 'normal (kbd "[d") 'flymake-goto-prev-error))))
 
 (use-package eglot
   :init
@@ -165,17 +209,22 @@
   :custom
   (company-tooltip-align-annotations 't)
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.1))
+  (company-idle-delay 0.1)
+  :bind (:map company-active-map
+              ("RET" . 'newline)
+              ("C-y" . 'company-complete-selection)))
 
 (use-package eldoc
   :init
   (global-eldoc-mode))
 
-                    ; git support
-(use-package vc)
+; git support
+(use-package vc
+  :custom
+  (vc-follow-symlinks t))
 (use-package magit)
 
-                    ; set the theme
+; set the theme
 (use-package catppuccin-theme
   :init
   (load-theme 'catppuccin :no-confirm))
@@ -222,25 +271,25 @@
                 mode-line-buffer-identification '(" %b")
                 mode-line-position-column-line-format '(" %l:%c"))
 
-  ;; Provides the Diminish functionality
-  (defvar emacs-solo-hidden-minor-modes
-    '(abbrev-mode
-      eldoc-mode
-      flyspell-mode
-      flymake-mode
-      evil-collection-unimpaired-mode
-      smooth-scroll-mode
-      outline-minor-mode
-      which-key-mode))
+;; Provides the Diminish functionality
+(defvar emacs-solo-hidden-minor-modes
+  '(abbrev-mode
+    eldoc-mode
+    flyspell-mode
+    flymake-mode
+    evil-collection-unimpaired-mode
+    smooth-scroll-mode
+    outline-minor-mode
+    which-key-mode))
 
-  (defun emacs-solo/purge-minor-modes ()
-    (interactive)
-    (dolist (x emacs-solo-hidden-minor-modes nil)
-      (let ((trg (cdr (assoc x minor-mode-alist))))
-        (when trg
-          (setcar trg "")))))
+(defun emacs-solo/purge-minor-modes ()
+  (interactive)
+  (dolist (x emacs-solo-hidden-minor-modes nil)
+    (let ((trg (cdr (assoc x minor-mode-alist))))
+      (when trg
+        (setcar trg "")))))
 
-  (add-hook 'after-change-major-mode-hook 'emacs-solo/purge-minor-modes))
+(add-hook 'after-change-major-mode-hook 'emacs-solo/purge-minor-modes))
 
 (use-package vertico
   :init
@@ -282,3 +331,7 @@
 (treesit-langs-major-mode-setup)
 
 (use-package clojure-mode)
+(use-package nix-mode)
+
+(provide 'init)
+;;; init.el ends here
