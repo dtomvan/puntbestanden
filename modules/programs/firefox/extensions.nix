@@ -9,7 +9,8 @@
             sponsorblock
             dearrow
             plasma-integration
-            enhancer-for-youtube # unfree, cannot build from source :(
+            # TODO: replace with NUR package
+            # enhancer-for-youtube # unfree, cannot build from source :(
           ]
           ++ (with pkgs.nur.repos.dtomvan; [
             darkreader
