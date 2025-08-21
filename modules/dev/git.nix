@@ -9,7 +9,7 @@
         enable = true;
 
         difftastic.enable = true;
-        signing.signByDefault = true;
+        signing.signByDefault = false;
 
         extraConfig = {
           advice.detachedHead = false;
