@@ -7,7 +7,7 @@
       home.packages = with pkgs; [ watchman ];
 
       programs.jujutsu.settings = {
-        core.watchman.register-snapshot-trigger = lib.mkDefault true;
+        fsmonitor.watchman.register-snapshot-trigger = lib.mkDefault true;
         ui.default-command = lib.mkDefault "l";
 
         git.private-commits = lib.mkDefault "description(glob:'wip:*') | description(glob:'private:*')";
@@ -23,7 +23,7 @@
             "config"
             "set"
             "--repo"
-            "core.fsmonitor"
+            "fsmonitor.backend"
             "watchman"
           ];
 
@@ -31,7 +31,7 @@
             "config"
             "set"
             "--repo"
-            "core.fsmonitor"
+            "fsmonitor.backend"
             "none"
           ];
 
