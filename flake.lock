@@ -949,11 +949,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1755959761,
-        "narHash": "sha256-5vJCOPdFnJ7P/vZLMgI+k16sZpYgq/cQXUUQ4SfXmdM=",
+        "lastModified": 1756042812,
+        "narHash": "sha256-kjAYnvGLn+nabuDhBq37DylzWDfzBzQmfUCsCZHXEgE=",
         "owner": "dtomvan",
         "repo": "vs2nix",
-        "rev": "87731c361ac6701bbeeaadb1458ce74aaf58d29a",
+        "rev": "1819fb198181632a5cc43e4a5f922785be57288e",
         "type": "github"
       },
       "original": {
