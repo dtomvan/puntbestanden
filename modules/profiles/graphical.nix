@@ -21,6 +21,7 @@ in
         ];
 
         environment.systemPackages = with pkgs; [
+          emacs-pgtk
           wl-clipboard
           pavucontrol
           alsa-utils
