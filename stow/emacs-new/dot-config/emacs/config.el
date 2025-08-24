@@ -60,6 +60,20 @@
 
 (set-face-attribute 'default nil :font "Aporetic Sans Mono" :height 130)
 
+(defconst user/variable-width-font "Aporetic Sans")
+(set-face-attribute 'modus-themes-heading-1 nil
+		      :family user/variable-width-font
+		      :height 1.3)
+(set-face-attribute 'modus-themes-heading-2 nil
+		      :family user/variable-width-font
+		      :height 1.2)
+(set-face-attribute 'modus-themes-heading-3 nil
+		      :family user/variable-width-font
+		      :height 1.1)
+(set-face-attribute 'modus-themes-heading-4 nil
+		      :family user/variable-width-font
+		      :height 1.05)
+
 (use-package vertico
   :ensure t
   :hook (after-init . vertico-mode))
@@ -137,22 +151,25 @@ With optional argument FRAME, return the list of buffers of FRAME."
 (use-package goto-chg
   :ensure t)
 
+(defun user/evil-insert-paste ()
+  (interactive)
+  (evil-paste-from-register ?\"))
+
 (use-package evil
   :ensure t
   :init
   (evil-mode 1)
   :bind
   (:map evil-insert-state-map
-	  ("C-y" . evil-paste-before)	; paste with emacs keybind even in insert mode
-	  ))
+	  ("C-y" . user/evil-insert-paste))	; paste with emacs keybind even in insert mode
+  )
 
 (evil-global-set-key
  'normal
  (kbd "SPC t h")
  'user/toggle-theme)
 
-(setq display-line-numbers 'relative)
-(setq display-line-numbers-current-absolute t)
+(setq display-line-numbers-type 'relative)
 
 (use-package evil-commentary
   :ensure t
@@ -249,18 +266,27 @@ With optional argument FRAME, return the list of buffers of FRAME."
 
 (with-eval-after-load 'org
   (setq org-capture-templates
-	'(("t" "todo" entry (file "") "\n* TODO %?\n%U\n%a\n")
-	    ("n" "note" entry (file "") "\n* %? :NOTE:\n%U\n%a\n")
-	    ;; OBTF for daily, no YYYY-MM-dd.md anymore
-	    ("j" "Journal Entry"
-	     entry (file+datetree "~/org/daily.org")
-	     "* %?"
-	     :empty-lines 1))))
+	    '(("t" "todo" entry (file "") "\n* TODO %?\n%U\n%a\n")
+	      ;; ("n" "note" entry (file "") "\n* %? :NOTE:\n%U\n%a\n")
+	      ("r" "reading list" item (file+olp "" "Reading list" "Uncategorized"))
+	      ("c" "config entry"
+	       entry (file "~/.config/emacs/config.org")
+	       "* %?\n\n#+begin_src emacs-lisp\n\n#+end_src\n")
+	      ;; OBTF for daily, no YYYY-MM-dd.md anymore
+	      ("j" "Journal Entry"
+	       entry (file+datetree "~/org/daily.org")
+	       "* %?"
+	       :empty-lines 1))))
+
+(defconst user/org-clipper-value "copy(`[[${location.href}][${document.title}]]`)")
+(defun user/org-get-clipper ()
+  (interactive)
+  (kill-new user/org-clipper-value))
 
 (with-eval-after-load 'org
   (setq org-refile-targets
 	  '(
-	    ("~/org/refile.org" . (:level . 1))
+	    ("~/org/refile.org" . (:level . 2))
 	    ("~/org/projects.org" . (:level . 1))
 	    (nil . (:level . 1))
 	    )))
@@ -274,17 +300,6 @@ With optional argument FRAME, return the list of buffers of FRAME."
 (use-package denote
   :ensure t
   :after dired
-  :init
-  ;; capture template for orgmode that creates a denote file inside ~/org
-  (with-eval-after-load 'org-capture
-    (add-to-list 'org-capture-templates
-		       '("n" "New note (with Denote)" plain
-			 (file denote-last-path)
-			 #'denote-org-capture
-			 :no-save t
-			 :immediate-finish nil
-			 :kill-buffer t
-			 :jump-to-captured t)))
   :custom
   (denote-directory org-directory)
   (denote-file-type "markdown-yaml") ;like obsidian
@@ -293,6 +308,7 @@ With optional argument FRAME, return the list of buffers of FRAME."
 		    ("SPC d d" . user/denote-dired)
 		    ("SPC d n" . denote)
 		    ("SPC d N" . denote-type)
+		    ("SPC d l" . denote-link)
 		    ("SPC d r" . denote-rename-file))
   :hook
   ((dired-mode . denote-dired-mode))
@@ -364,3 +380,17 @@ The DWIM behaviour of this command is as follows:
 
 (use-package nix-mode
   :ensure t)
+
+(use-package elfeed
+  :ensure t
+  :bind
+  (:map evil-normal-state-map
+	  ("SPC r s s" . elfeed)))
+
+(use-package elfeed-org
+  :ensure t
+  :after elfeed
+  :init
+  (elfeed-org)
+  :custom
+  (rmh-elfeed-org-files (list "~/.config/emacs/elfeed.org")))

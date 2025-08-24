@@ -1,0 +1,51 @@
+* Feeds :elfeed:
+** [[https://lambdacreate.com/static/feed.xml][(lambda (x) (create x))]]
+** [[https://zapier.com/engine/rss/5488829/gh][A Feed Called gh]]
+** [[https://drewdevault.com/blog/index.xml][Drew DeVault's blog]]
+** [[https://gpanders.com/index.xml][g.p. anders]]
+** [[https://jamesg.blog/feeds/posts.xml][James' Coffee Blog]]
+** [[https://linuxmatters.sh/episode/index.xml][Linux Matters]]
+** [[https://log.pfad.fr/atom.xml][Olivier's log]]
+** [[https://powrss.com/feed.xml][powRSS Feed]]
+** [[https://www.scattered-thoughts.net/atom.xml][Scattered Thoughts]]
+** [[https://steveklabnik.com/feed.xml][Steve Klabnik]]
+** [[https://welltypedwitch.bearblog.dev/feed/][welltypedwitch]]
+** KDE
+*** [[https://blogs.kde.org/categories/this-week-in-kde-apps/index.xml][This Week in KDE Apps on KDE Blogs]]
+*** [[https://blogs.kde.org/categories/this-week-in-plasma/index.xml][This Week in Plasma on KDE Blogs]]
+** lobsters
+*** [[https://lobste.rs/rss][Lobsters]]
+*** [[https://lobste.rs/t/linux.rss][Lobsters: linux - Linux]]
+*** [[https://lobste.rs/t/nix.rss][Lobsters: nix - package manager, distribution, and related systems like guix]]
+*** [[https://lobste.rs/categories/tools.rss][Lobsters: tools]]
+** Notetaking
+*** [[https://writingslowly.com/feed.xml][Writing Slowly]]
+** Podcasts
+*** [[https://feeds.jupiterbroadcasting.com/lup][LINUX Unplugged]]
+*** [[https://sdr-podcast.com/podcast-feed-m4a.xml][Self-Directed Research]]
+** Prot
+*** [[https://protesilaos.com/books.xml][Protesilaos Stavrou: Books and Essays]]
+*** [[https://protesilaos.com/codelog.xml][Protesilaos Stavrou: Coding blog]]
+** Reddit
+*** [[https://old.reddit.com/r/commandline/top.rss?sort=top&t=week][top scoring links : commandline]]
+*** [[https://old.reddit.com/r/NixOS/top.rss][top scoring links : NixOS]]
+** Software
+*** [[https://neovim.io/news.xml][Neovim]]
+*** [[https://nixos.org/blog/announcements-rss.xml][NixOS Announcements]]
+*** [[https://blogs.kde.org/categories/this-week-in-kde-apps/index.xml][This Week in KDE Apps on KDE Blogs]]
+*** [[https://blogs.kde.org/categories/this-week-in-plasma/index.xml][This Week in Plasma on KDE Blogs]]
+*** [[https://universal-blue.discourse.group/tag/announcements.rss][Universal Blue - Topics tagged announcements]]
+** tech
+*** [[https://fasterthanli.me/index.xml][fasterthanli.me]]
+*** [[https://www.gamingonlinux.com/article_rss.php?hotarticles][GamingOnLinux Hottest Articles Over 30 Days]]
+*** [[https://blog.gitbutler.com/rss/][GitButler]]
+*** [[https://feeds.jupiterbroadcasting.com/lup][LINUX Unplugged]]
+*** [[https://sdr-podcast.com/podcast-feed-m4a.xml][Self-Directed Research]]
+*** [[https://v5.chriskrycho.com/feed.xml][Sympolymathesy, by Chris Krycho]]
+*** [[https://github.blog/feed/][The GitHub Blog]]
+*** [[https://blog.jetbrains.com/feed/][The JetBrains Blog]]
+** Youtube
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCWFNUk2LHUQdRzQcJLYZmcg][Bringus Studios]]
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA][Brodie Robertson]]
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCXnNibvR_YIdyPs8PZIBoEw][Cathode Ray Dude - CRD]]
+*** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC7Jwj9fkrf1adN4fMmTkpug][DankPods]]
