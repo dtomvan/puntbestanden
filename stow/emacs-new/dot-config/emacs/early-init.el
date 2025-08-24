@@ -11,6 +11,14 @@
       inhibit-startup-echo-area-message user-login-name ; read the docstring
       inhibit-startup-buffer-menu t)
 
+;; Disable the various graphical modes that I do not want, should save
+;; some time when used in early-init
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(blink-cursor-mode -1)
+(fringe-mode 0)
+
 ;; Temporarily increase the garbage collection threshold.  These
 ;; changes help shave off about half a second of startup time.  The
 ;; `most-positive-fixnum' is DANGEROUS AS A PERMANENT VALUE.  See the

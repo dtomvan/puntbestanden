@@ -5,12 +5,7 @@
 (use-package emacs
   :ensure nil
   :init
-  (menu-bar-mode -1)
-  (tool-bar-mode -1)
-  (scroll-bar-mode -1)
   (global-display-line-numbers-mode 1)
-  (blink-cursor-mode -1)
-  (fringe-mode 0)
   :custom
   (initial-scratch-message "")
   (initial-buffer-choice t)
@@ -45,18 +40,47 @@
   (interactive)
   ;; TODO: is it required to disable all other themes?
   (seq-each (lambda (theme)
-		  (disable-theme theme))
-		custom-enabled-themes)
+		(disable-theme theme))
+	      custom-enabled-themes)
   (if user/is-dark-theme
-	  (load-theme user/dark-theme t)
+	(load-theme user/dark-theme t)
     (load-theme user/light-theme t)))
 (defun user/toggle-theme ()
   "Toggle the theme between light and dark."
   (interactive)
-  (toggle-option 'user/is-dark-theme)
+  (setq user/is-dark-theme (not user/is-dark-theme))
   (user/set-theme))
 
 (user/set-theme)
+
+(defconst user/dark-theme-max 7) ; Dark theme until 7 am
+(defconst user/dark-theme-min 19) ; Dark theme from 7 pm
+(defun user/set-theme-tod ()
+  "Sets the theme based on the current time of day"
+  (interactive)
+  (let ((current-hour (cl-parse-integer (format-time-string "%H")))
+	  (old-is-dark user/is-dark-theme))
+    (setq user/is-dark-theme
+	    (or (> current-hour user/dark-theme-min)
+		(< current-hour user/dark-theme-max)))
+    (when
+	  (not (eq old-is-dark user/is-dark-theme))
+	(user/set-theme))))
+
+(defvar user/theme-tod-timer nil)
+(defconst user/theme-tod-interval (* 30 60)) ; half an hour
+(define-minor-mode theme-tod-mode
+  "When enabled, periodically checks for time of day and sets the theme accordingly."
+  :global t
+  :lighter 'theme-tod
+  (when theme-tod-mode (user/set-theme-tod))
+  (setq user/theme-tod-timer
+	  (if
+	      (timerp user/theme-tod-timer)
+	      (cancel-timer user/theme-tod-timer)
+	    (run-at-time t user/theme-tod-interval 'user/set-theme-tod))))
+
+(theme-tod-mode 1)
 
 (set-face-attribute 'default nil :font "Aporetic Sans Mono" :height 130)
 
@@ -261,8 +285,19 @@ With optional argument FRAME, return the list of buffers of FRAME."
   (org-directory "~/org")
   (org-default-notes-file "~/org/refile.org")
   (org-agenda-files '("~/org"))
+  (org-log-done 'time) ; log the datetime when you marked a todo as done
+  (org-log-refile 'time) ; log the datetime when you refiled something
+  (org-log-into-drawer t)
   (org-use-fast-todo-selection t)
   (org-treat-S-cursor-todo-selection-as-state-change nil))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 (with-eval-after-load 'org
   (setq org-capture-templates
@@ -305,14 +340,29 @@ With optional argument FRAME, return the list of buffers of FRAME."
   (denote-file-type "markdown-yaml") ;like obsidian
   :bind
   (:map evil-normal-state-map
-		    ("SPC d d" . user/denote-dired)
-		    ("SPC d n" . denote)
-		    ("SPC d N" . denote-type)
-		    ("SPC d l" . denote-link)
-		    ("SPC d r" . denote-rename-file))
+				("SPC d d" . user/denote-dired)
+				("SPC d n" . denote)
+				("SPC d N" . denote-type)
+				("SPC d l" . denote-link)
+				("SPC d r" . denote-rename-file))
   :hook
   ((dired-mode . denote-dired-mode))
   )
+
+;; Allows you to convert Obsidian to Denote links and back, etc.
+;; TODO: maybe customize `denote-md-link-format'?
+(use-package denote-markdown
+  :ensure t
+  :after denote)
+
+(use-package consult-denote
+  :ensure t
+  :bind
+  (:map evil-normal-state-map
+	  ("SPC d f" . consult-denote-find)
+	  ("SPC d p" . consult-denote-grep))
+  :config
+  (consult-denote-mode 1))
 
 (use-package vc
   :ensure nil

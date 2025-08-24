@@ -1,51 +1,107 @@
 * Feeds :elfeed:
-** [[https://lambdacreate.com/static/feed.xml][(lambda (x) (create x))]]
-** [[https://zapier.com/engine/rss/5488829/gh][A Feed Called gh]]
-** [[https://drewdevault.com/blog/index.xml][Drew DeVault's blog]]
-** [[https://gpanders.com/index.xml][g.p. anders]]
-** [[https://jamesg.blog/feeds/posts.xml][James' Coffee Blog]]
-** [[https://linuxmatters.sh/episode/index.xml][Linux Matters]]
-** [[https://log.pfad.fr/atom.xml][Olivier's log]]
-** [[https://powrss.com/feed.xml][powRSS Feed]]
-** [[https://www.scattered-thoughts.net/atom.xml][Scattered Thoughts]]
-** [[https://steveklabnik.com/feed.xml][Steve Klabnik]]
-** [[https://welltypedwitch.bearblog.dev/feed/][welltypedwitch]]
 ** KDE
+It's the two feeds that keep you posted on recent high-level
+developments to the KDE desktop and platform.
 *** [[https://blogs.kde.org/categories/this-week-in-kde-apps/index.xml][This Week in KDE Apps on KDE Blogs]]
 *** [[https://blogs.kde.org/categories/this-week-in-plasma/index.xml][This Week in Plasma on KDE Blogs]]
 ** lobsters
+It's lobste.rs, basically Reddit for programmers. Haven't got invited
+for an account yet, but still enjoying the reads!
+
 *** [[https://lobste.rs/rss][Lobsters]]
 *** [[https://lobste.rs/t/linux.rss][Lobsters: linux - Linux]]
 *** [[https://lobste.rs/t/nix.rss][Lobsters: nix - package manager, distribution, and related systems like guix]]
 *** [[https://lobste.rs/categories/tools.rss][Lobsters: tools]]
 ** Notetaking
 *** [[https://writingslowly.com/feed.xml][Writing Slowly]]
+This guy has a lot to say about:
+- Note-making
+- Creative writing
+- PKM's
+- Tiddlywiki
+*** [[https://takeonrules.com][Take on Rules]]
+*** [[https://bjhess.com/posts_feed][Barry Hess]]
+Has a lot of the same sentiments on RSS and note-taking as I do. About FOMO, internet detox, archival fever....
 ** Podcasts
 *** [[https://feeds.jupiterbroadcasting.com/lup][LINUX Unplugged]]
+It's my favourite weekly Linux talkshow. Varying topics, all things
+linux, but a lot in the reproducible/immutable/cloud-native corner.
 *** [[https://sdr-podcast.com/podcast-feed-m4a.xml][Self-Directed Research]]
+Podcast by Amos from [[https://fasterthanli.me][Fasterthanlime]] about whatever he got obsessed
+about for the last week.
 ** Prot
+Prot is a big Emacs contributor and does a lot of
+philosophy. Inspiring guy. Also underrated.
 *** [[https://protesilaos.com/books.xml][Protesilaos Stavrou: Books and Essays]]
 *** [[https://protesilaos.com/codelog.xml][Protesilaos Stavrou: Coding blog]]
 ** Reddit
 *** [[https://old.reddit.com/r/commandline/top.rss?sort=top&t=week][top scoring links : commandline]]
+I kept this one around. Rarely anything of value.
 *** [[https://old.reddit.com/r/NixOS/top.rss][top scoring links : NixOS]]
+Idem.
 ** Software
 *** [[https://neovim.io/news.xml][Neovim]]
+Also neovim release notes.
 *** [[https://nixos.org/blog/announcements-rss.xml][NixOS Announcements]]
-*** [[https://blogs.kde.org/categories/this-week-in-kde-apps/index.xml][This Week in KDE Apps on KDE Blogs]]
-*** [[https://blogs.kde.org/categories/this-week-in-plasma/index.xml][This Week in Plasma on KDE Blogs]]
 *** [[https://universal-blue.discourse.group/tag/announcements.rss][Universal Blue - Topics tagged announcements]]
+I used to run Bluefin. Nowadays just interested into what goes on in
+cncf-land.
+*** Emacs
+It's the operating system that runs on anything, even Android
+nowadays. It's a computing lifestyle of it's own.
+
+**** [[https://lmno.lol][LMNO - Wholesome blogs minus the yucky bits of the modern web]]
+**** [[https://xenodium.com][Xenodium]]
+
 ** tech
 *** [[https://fasterthanli.me/index.xml][fasterthanli.me]]
+It's Amos wenger, who writes long articles about in-depth technical
+topics, mostly about software.
 *** [[https://www.gamingonlinux.com/article_rss.php?hotarticles][GamingOnLinux Hottest Articles Over 30 Days]]
 *** [[https://blog.gitbutler.com/rss/][GitButler]]
-*** [[https://feeds.jupiterbroadcasting.com/lup][LINUX Unplugged]]
-*** [[https://sdr-podcast.com/podcast-feed-m4a.xml][Self-Directed Research]]
+Gitbutler is mostly a devlog for their Electron git wrapper, but
+sometimes also interesting git tips/announcements.
 *** [[https://v5.chriskrycho.com/feed.xml][Sympolymathesy, by Chris Krycho]]
+I know him from how work on jujutsu, but highly varying topics
 *** [[https://github.blog/feed/][The GitHub Blog]]
+It's basically Microsoft talking about AI. The occasional interesting article.
 *** [[https://blog.jetbrains.com/feed/][The JetBrains Blog]]
+It's Jetbrains. Meh, I don't use their IDE's or their student packs
+anymore...
 ** Youtube
 *** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCWFNUk2LHUQdRzQcJLYZmcg][Bringus Studios]]
+Installs SteamOS on the most exotic hardware, like magnifying glasses.
 *** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCld68syR8Wi-GY_n4CaoJGA][Brodie Robertson]]
+Linux news anchor.
 *** [[https://www.youtube.com/feeds/videos.xml?channel_id=UCXnNibvR_YIdyPs8PZIBoEw][Cathode Ray Dude - CRD]]
+Talks about old technology like no other does. Really nice relaxing
+videos to learn about a past I've not lived in, being born in 2006.
 *** [[https://www.youtube.com/feeds/videos.xml?channel_id=UC7Jwj9fkrf1adN4fMmTkpug][DankPods]]
+Talks about nuggets.
+
+** Others
+** [[https://lambdacreate.com/static/feed.xml][(lambda (x) (create x))]]
+FOSS, lisp, interpreted languages.
+** [[https://drewdevault.com/blog/index.xml][Drew DeVault's blog]]
+Opinion haver, FOSS advocate
+** [[https://gpanders.com/index.xml][g.p. anders]]
+Neovim core maintainer and Mac user I guess. The occasional Neovim release notes.
+** [[https://jamesg.blog/feeds/posts.xml][James' Coffee Blog]]
+About smallweb, writing, etc.
+** [[https://linuxmatters.sh/episode/index.xml][Linux Matters]]
+Linux podcast I've been meaning to listen to.
+** [[https://log.pfad.fr/atom.xml][Olivier's log]]
+NixOS, foss, blogging meta
+** [[https://powrss.com/feed.xml][powRSS Feed]]
+Curated RSS aggregator, read if you want to discover new feeds.
+** [[https://www.scattered-thoughts.net/atom.xml][Scattered Thoughts]]
+Blog by one Jamie Brandon, programmer. Know him from [[https://www.scattered-thoughts.net/writing/the-shape-of-data/][their article
+about EDN]] (extensible data notation, from Clojure)
+** [[https://steveklabnik.com/feed.xml][Steve Klabnik]]
+The big rust guy.
+** [[https://welltypedwitch.bearblog.dev/feed/][welltypedwitch]]
+Read [[https://welltypedwitch.bearblog.dev/the-way-were-thinking-about-breaking-changes-is-really-silly/][The way we're thinking about breaking changes is really silly]],
+got hooked.
+
+** [[https://pluralistic.net/][Pluralistic]]
+About enshittification, only read if you want to be disappointed in humanity ;)
