@@ -72,13 +72,6 @@
             jj-track() {
               jj bookmark track "$2"@"$1"
             }
-            jj-sync() {
-              jj git fetch \
-              && jj evolve \
-              && jj commit -m "$(date -Is)" \
-              && jj tug \
-              && jj git push
-            }
 
             direnvify() {
               local top="$(git rev-parse --show-toplevel)"
@@ -149,5 +142,19 @@
           ]
         );
       };
+
+      home.packages = [
+        (pkgs.writeShellApplication {
+          name = "jj-sync";
+          text = ''
+            jj git fetch
+            jj evolve
+            jj commit -m "$(date -Is)"
+            jj tug
+            jj git push
+          '';
+          runtimeInputs = [ pkgs.jujutsu ];
+        })
+      ];
     };
 }
