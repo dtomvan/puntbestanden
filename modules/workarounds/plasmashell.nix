@@ -1,7 +1,7 @@
 # ugly copypasted code from
 # https://github.com/NixOS/nixpkgs/issues/126590#issuecomment-3194531220
 let
-  plasmashell-workaround = final: prev: {
+  plasmashell-workaround = _final: prev: {
     kdePackages = prev.kdePackages // {
       plasma-workspace =
         let
