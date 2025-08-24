@@ -469,7 +469,22 @@ estate though, it's builtin autopairs!
 Emacs has builtin Git and project support, let's use it. I'll remap =SPC p= to =C-x p=, to make my setup more vimmy.
 
 #+begin_src emacs-lisp
+  (use-package project
+    :ensure nil
+    :init
+    (add-to-list 'project-vc-extra-root-markers ".jj"))
+
   (evil-global-set-key 'normal (kbd "SPC p") project-prefix-map)
+#+end_src
+
+** Jujutsu support
+Magit and =vc-mode= already have good support for Git, but not for
+jujutsu. Let's use the experimental =vc-jj= for that...
+
+#+begin_src emacs-lisp
+  (use-package vc-jj
+    :ensure t
+    (add-to-list 'project-vc-backend-markers-alist '(jj . ".jj")))
 #+end_src
 
 * Filetypes
