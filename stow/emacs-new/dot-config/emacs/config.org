@@ -499,7 +499,7 @@ Emacs has builtin Git and project support, let's use it. I'll remap =SPC p= to =
 #+begin_src emacs-lisp
   (use-package project
     :ensure nil
-    :init
+    :config
     (add-to-list 'project-vc-extra-root-markers ".jj"))
 
   (evil-global-set-key 'normal (kbd "SPC p") project-prefix-map)
@@ -511,7 +511,9 @@ jujutsu. Let's use the experimental =vc-jj= for that...
 
 #+begin_src emacs-lisp
   (use-package vc-jj
+    :after project
     :ensure t
+    :config
     (add-to-list 'project-vc-backend-markers-alist '(jj . ".jj")))
 #+end_src
 

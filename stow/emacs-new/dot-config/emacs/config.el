@@ -73,7 +73,7 @@
   "When enabled, periodically checks for time of day and sets the theme accordingly."
   :global t
   :lighter 'theme-tod
-  (when theme-tod-mode (user/set-theme-tod))
+  (when theme-tod-mode (user/set-theme-tod)) ; when toggled on do the thing initially
   (setq user/theme-tod-timer
 	  (if
 	      (timerp user/theme-tod-timer)
@@ -266,7 +266,18 @@ With optional argument FRAME, return the list of buffers of FRAME."
   (show-paren-style 'mixed)
   (show-paren-context-when-offscreen t))
 
+(use-package project
+  :ensure nil
+  :config
+  (add-to-list 'project-vc-extra-root-markers ".jj"))
+
 (evil-global-set-key 'normal (kbd "SPC p") project-prefix-map)
+
+(use-package vc-jj
+  :after project
+  :ensure t
+  :config
+  (add-to-list 'project-vc-backend-markers-alist '(jj . ".jj")))
 
 (defvar user/org-root "~/org/refile.org" "The file to open orgmode in initially.")
 (defun user/org-open ()
