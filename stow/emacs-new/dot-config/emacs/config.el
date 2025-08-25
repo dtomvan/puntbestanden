@@ -320,7 +320,7 @@ With optional argument FRAME, return the list of buffers of FRAME."
 	       "* %?\n\n#+begin_src emacs-lisp\n\n#+end_src\n")
 	      ;; OBTF for daily, no YYYY-MM-dd.md anymore
 	      ("j" "Journal Entry"
-	       entry (file+datetree "~/org/daily.org")
+	       entry (file+olp+datetree "~/org/daily.org")
 	       "* %?"
 	       :empty-lines 1))))
 
