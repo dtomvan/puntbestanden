@@ -101,6 +101,7 @@ in
             treefmt
             yazi
             yt-dlp
+            typst
           ];
         };
       };
