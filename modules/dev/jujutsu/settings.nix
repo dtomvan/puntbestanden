@@ -36,6 +36,13 @@
             backend = "gpg";
             # key = gpgPubKey; # not nessecary, should pick up from user.email
           };
+
+          "--scope" = [
+            {
+              "--when".repositories = [ "~/org" ];
+              git.sign-on-push = false;
+            }
+          ];
         };
       };
     };
