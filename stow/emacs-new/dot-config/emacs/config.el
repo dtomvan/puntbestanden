@@ -375,6 +375,14 @@ With optional argument FRAME, return the list of buffers of FRAME."
   :config
   (consult-denote-mode 1))
 
+(with-eval-after-load 'treesit
+  (unless (treesit-language-available-p 'typst)
+    (add-to-list 'treesit-language-source-alist
+		   '(typst "https://github.com/uben0/tree-sitter-typst"))
+    (treesit-install-language-grammar 'typst)))
+(use-package typst-ts-mode
+  :ensure t)
+
 (use-package vc
   :ensure nil
   :custom

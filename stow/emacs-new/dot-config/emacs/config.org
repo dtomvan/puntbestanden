@@ -653,6 +653,20 @@ Uses Prot's amazing =Denote= to "do zettelkasten".
     (consult-denote-mode 1))
 #+end_src
 
+** Typst support
+
+I use =typst-ts-mode=.
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'treesit
+    (unless (treesit-language-available-p 'typst)
+      (add-to-list 'treesit-language-source-alist
+		   '(typst "https://github.com/uben0/tree-sitter-typst"))
+      (treesit-install-language-grammar 'typst)))
+  (use-package typst-ts-mode
+    :ensure t)
+#+end_src
+
 * Git support
 #+begin_src emacs-lisp
   (use-package vc
