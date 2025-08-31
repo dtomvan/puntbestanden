@@ -177,13 +177,13 @@ I download/build the font using [[https:https://github.com/nix-community/home-ma
 elsewhere in my dotfiles.
 
 #+begin_src emacs-lisp
-  (set-face-attribute 'default nil :font "Aporetic Sans Mono" :height 130)
+  (set-face-attribute 'default nil :font "AporeticSansM Nerd Font" :height 130)
 #+end_src
 
 And the non-mono variant for headings, and at some pitches:
 
 #+begin_src emacs-lisp
-  (defconst user/variable-width-font "Aporetic Sans")
+  (defconst user/variable-width-font "AporeticSans Nerd Font")
   (set-face-attribute 'modus-themes-heading-1 nil
 		      :family user/variable-width-font
 		      :height 1.3)

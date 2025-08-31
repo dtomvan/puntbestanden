@@ -8,7 +8,7 @@
       options.modules.terminals = {
         font.family = lib.mkOption {
           description = "the font to use in the terminal";
-          default = "Aporetic Sans Mono";
+          default = "AporeticSansM Nerd Font";
           type = lib.types.str;
         };
         font.size = lib.mkOption {

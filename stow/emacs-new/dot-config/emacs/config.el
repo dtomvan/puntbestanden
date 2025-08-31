@@ -82,9 +82,9 @@
 
 (theme-tod-mode 1)
 
-(set-face-attribute 'default nil :font "Aporetic Sans Mono" :height 130)
+(set-face-attribute 'default nil :font "AporeticSansM Nerd Font" :height 130)
 
-(defconst user/variable-width-font "Aporetic Sans")
+(defconst user/variable-width-font "AporeticSans Nerd Font")
 (set-face-attribute 'modus-themes-heading-1 nil
 		      :family user/variable-width-font
 		      :height 1.3)

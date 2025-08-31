@@ -1,7 +1,7 @@
 let
   family = "Inter";
   fixedWidth = {
-    family = "Aporetic Sans Mono";
+    family = "AporeticSansM Nerd Font";
     pointSize = 12;
   };
 in
@@ -19,8 +19,7 @@ in
           inter
           noto-fonts-color-emoji
           liberation_ttf
-          # nur.repos.dtomvan.afio-font-bin
-          aporetic
+          nur.repos.dtomvan.aporetic-patched
         ];
 
         fontconfig = {
