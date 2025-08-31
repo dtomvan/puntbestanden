@@ -334,8 +334,7 @@ project support to create a new frame in each context.
     :ensure t)
 
   (setq evil-undo-system 'undo-fu
-	evil-want-keybinding nil
-	evil-want-C-u-scroll 1)
+	evil-want-keybinding nil)
 
   ; required for certain functionality I can't remember
   (use-package goto-chg
