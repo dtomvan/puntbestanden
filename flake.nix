@@ -139,6 +139,14 @@
       };
       url = "github:nix-community/NUR";
     };
+    nuschtos-search = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:NuschtOS/search";
+    };
     plasma-manager = {
       inputs = {
         home-manager = {

@@ -20,6 +20,8 @@
           services-vintagestory
 
           virt-kvm
+
+          nuschtos-search
         ];
 
         environment.systemPackages =
