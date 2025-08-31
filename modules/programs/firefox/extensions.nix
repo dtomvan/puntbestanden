@@ -9,8 +9,6 @@
             sponsorblock
             dearrow
             plasma-integration
-            # TODO: replace with NUR package
-            # enhancer-for-youtube # unfree, cannot build from source :(
           ]
           ++ (with pkgs.nur.repos.dtomvan; [
             darkreader
@@ -18,6 +16,7 @@
             sidebery
             steam-database
             ublock-origin
+            enhancer-for-youtube-bin
           ]);
 
           force = true;
