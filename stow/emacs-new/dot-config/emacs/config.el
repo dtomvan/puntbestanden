@@ -168,8 +168,7 @@ With optional argument FRAME, return the list of buffers of FRAME."
   :ensure t)
 
 (setq evil-undo-system 'undo-fu
-	evil-want-keybinding nil
-	evil-want-C-u-scroll 1)
+	evil-want-keybinding nil)
 
 ; required for certain functionality I can't remember
 (use-package goto-chg
@@ -298,6 +297,14 @@ With optional argument FRAME, return the list of buffers of FRAME."
   (org-agenda-files '("~/org"))
   (org-log-done 'time) ; log the datetime when you marked a todo as done
   (org-log-refile 'time) ; log the datetime when you refiled something
+
+  ;; When exporting to .ical, do the right thing and use due dates
+  ;; as event dates
+  ;; Otherwise, one has to specify a property to do icalendar stuff,
+  ;; which isn't a sensible default IMO
+  (org-icalendar-use-deadline '(even-if-todo-not-done))
+  (org-icalendar-use-scheduled '(even-if-todo-not-done))
+
   (org-log-into-drawer t)
   (org-use-fast-todo-selection t)
   (org-treat-S-cursor-todo-selection-as-state-change nil))
