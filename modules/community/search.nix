@@ -27,15 +27,19 @@
         "homeManagerModules"
       ];
       blockedInputs = [
-        # fucks about with the 3 billion config classes they are handling
-        "nixvim"
         # does flake-parts modules, which I don't support yet
         "nur"
+        # fucks about with the 3 billion config classes they are handling
+        "nixvim"
         "nuschtos-search"
       ];
       blockedModules = [
+        # deprecated, throws
+        "nur.nixosModules.nur"
         # broken
+        "nix-flatpak.homeManagerModules.nix-flatpak"
         "srvos.nixosModules.roles-github-actions-runner"
+        "srvos.modules.nixos.roles-github-actions-runner"
       ];
 
       port = 6969;
@@ -57,14 +61,43 @@
 
       search = inputs.nuschtos-search.packages.${pkgs.stdenv.hostPlatform.system}.mkMultiSearch {
         title = "Search for puntbestanden on ${config.networking.hostName}";
-        scopes = lib.map (t: {
-          inherit (t) name;
-          modules = [ t.value ];
-          # TODO: find a way to extract the source URL automatically, if it is
-          # even possible
-          urlPrefix = "https://google.com/?q=";
-          inherit specialArgs;
-        }) allFlatTypes;
+        scopes = lib.map (
+          t:
+          (
+            if lib.hasInfix ".homeManagerModules." t.name then
+              {
+                optionsJSON =
+                  let
+                    eval = inputs.home-manager.lib.homeManagerConfiguration {
+                      inherit pkgs;
+                      modules = [
+                        t.value
+                        {
+                          home.stateVersion = "25.05";
+                          home.username = "someuser";
+                          home.homeDirectory = "/home/someuser";
+                        }
+                      ];
+                    };
+                    doc = pkgs.nixosOptionsDoc {
+                      inherit (eval) options;
+                      warningsAreErrors = false;
+                    };
+                  in
+                  "${doc.optionsJSON}/share/doc/nixos/options.json";
+              }
+            else
+              # hopefully nixos module
+              {
+                modules = [ t.value ];
+                inherit specialArgs;
+              }
+          )
+          // {
+            inherit (t) name;
+            urlPrefix = "https://google.com/?q=";
+          }
+        ) allFlatTypes;
       };
     in
     {
