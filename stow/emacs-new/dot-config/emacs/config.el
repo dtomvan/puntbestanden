@@ -298,6 +298,10 @@ With optional argument FRAME, return the list of buffers of FRAME."
   (org-log-done 'time) ; log the datetime when you marked a todo as done
   (org-log-refile 'time) ; log the datetime when you refiled something
 
+  (org-agenda-custom-commands
+    '(("u" "Unscheduled TODOs"
+	 tags "+TODO=\"TODO\"-SCHEDULED={}")))
+
   ;; When exporting to .ical, do the right thing and use due dates
   ;; as event dates
   ;; Otherwise, one has to specify a property to do icalendar stuff,
