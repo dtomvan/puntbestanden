@@ -55,6 +55,11 @@
             gimp
           ];
 
+        services.flatpak.packages = [
+          "org.inkscape.Inkscape"
+          "io.github.dvlv.boxbuddyrs"
+        ];
+
         hardware.bluetooth.enable = true;
 
         # WARNING: this requires a user to be set, or the root password to be known.

@@ -24,6 +24,10 @@ in
           wl-clipboard
           pavucontrol
           alsa-utils
+          pdfarranger
+          forge-sparks
+          pika-backup
+          telegram-desktop
         ];
       };
 
