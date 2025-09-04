@@ -11,7 +11,6 @@ in
           plymouth
 
           services-bazaar
-          services-flatpak
           services-printing
           services-sane
 

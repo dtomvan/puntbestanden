@@ -104,6 +104,9 @@
       };
       url = "github:dtomvan/localsend-rust-impl";
     };
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak/latest";
+    };
     nix-index-database = {
       inputs = {
         nixpkgs = {
