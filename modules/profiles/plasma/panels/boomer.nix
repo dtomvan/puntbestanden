@@ -4,8 +4,8 @@
       {
         location = "bottom";
         hiding = "dodgewindows";
-        lengthMode = "fit";
-        opacity = "adaptive";
+        lengthMode = "fill";
+        opacity = "opaque";
         widgets = [
           {
             kickoff = {
@@ -19,9 +19,8 @@
               launchers = [
                 "applications:firefox-devedition.desktop"
                 "applications:org.kde.dolphin.desktop"
-                "file:///var/lib/flatpak/exports/share/applications/org.kde.neochat.desktop"
                 "applications:org.kde.kate.desktop"
-                "file:///var/lib/flatpak/exports/share/applications/org.telegram.desktop.desktop"
+                "applications:org.telegram.desktop.desktop"
                 "applications:duo.desktop"
               ];
             };
@@ -29,12 +28,13 @@
         ];
       }
       {
-        location = "left";
-        hiding = "autohide";
-        lengthMode = "fit";
+        location = "top";
+        hiding = "dodgewindows";
+        lengthMode = "fill";
         opacity = "opaque";
         widgets = [
           "org.kde.plasma.systemtray"
+          "org.kde.plasma.marginsseparator"
           "org.kde.plasma.digitalclock"
         ];
       }
