@@ -20,7 +20,7 @@
       update.auto.enable = lib.mkDefault false;
       uninstallUnmanaged = lib.mkDefault true;
 
-       packages = lib.mkDefault [
+      packages = lib.mkDefault [
         "com.github.tchx84.Flatseal"
         "com.obsproject.Studio"
         "org.gnome.World.PikaBackup"

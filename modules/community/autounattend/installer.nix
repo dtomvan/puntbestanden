@@ -104,7 +104,7 @@ in
             ${config.system.build.nixos-install}/bin/nixos-install \
               --system ${evaluatedSystem.config.system.build.toplevel} \
               --no-root-passwd \
-              --no-copy-channel \
+              --no-channel-copy \
               --cores 0
 
             echo '--------------------------------------------------------------------------------'
