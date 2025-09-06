@@ -62,7 +62,7 @@ in
           workspace = {
             lookAndFeel = "org.kde.breezedark.desktop";
             cursor = {
-              theme = "Breeze";
+              theme = "default";
               size = 24;
             };
             inherit wallpaper;
