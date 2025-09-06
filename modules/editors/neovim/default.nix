@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ self, inputs, ... }:
 {
   flake-file.inputs = {
     nixvim = {
@@ -27,7 +27,7 @@
         nixvim = inputs.nixvim.lib.evalNixvim {
           inherit system;
           modules = [
-            config.flake.modules.nixvim.default
+            self.modules.nixvim.default
             { nixpkgs = { inherit pkgs; }; }
           ];
         };
@@ -67,9 +67,9 @@
   # unused; if you enable this you get 12 seconds of eval time for free.
   # I don't think so cowboy.
   flake.modules.homeManager.nixvim =
-    { self', ... }:
+    { pkgs, ... }:
     {
-      home.packages = [ self'.packages.nixvim ];
+      home.packages = [ self.packages.${pkgs.hostPlatform.system}.nixvim ];
       systemd.user.settings.Manager.DefaultEnvironment = {
         EDITOR = "nvim";
       };
