@@ -34,6 +34,12 @@ in
       default = ./_disko.nix;
       type = lib.types.pathInStore;
     };
+
+    configRoot = lib.mkOption {
+      description = "path to the root of the config so the installer can copy it to /etc/nixos";
+      default = ../..;
+      type = lib.types.pathInStore;
+    };
   };
 
   config = {

@@ -2,7 +2,7 @@
 # mostly to use disko and xfs
 { config, ... }:
 let
-  inherit (config.autounattend) diskoFile;
+  inherit (config.autounattend) diskoFile configRoot;
   evaluatedSystem = config.flake.nixosConfigurations.autounattend;
 in
 {
@@ -98,7 +98,7 @@ in
               "${diskoFile}"
 
             mkdir -p /mnt/etc/nixos/
-            cp -r ${../..}/* /mnt/etc/nixos/
+            cp -r ${configRoot}/* /mnt/etc/nixos/
             chmod -R 755 /mnt/etc/nixos
 
             ${config.system.build.nixos-install}/bin/nixos-install \
