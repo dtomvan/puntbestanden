@@ -24,6 +24,7 @@
       types = [
         "nixosModules"
         "homeModules"
+        "homeManagerModules"
       ];
       blockedInputs = [
         # fucks about with the 3 billion config classes they are handling
