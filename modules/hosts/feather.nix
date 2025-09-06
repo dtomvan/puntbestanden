@@ -14,6 +14,9 @@
           steam
           services-syncthing
           virt-kvm
+
+          nix-distributed-builds
+          users-remote-build
         ];
 
         virtualisation.libvirtd.onBoot = "ignore";

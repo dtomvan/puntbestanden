@@ -22,6 +22,9 @@
           virt-kvm
 
           nuschtos-search
+
+          nix-distributed-builds
+          users-remote-build
         ];
 
         environment.systemPackages =

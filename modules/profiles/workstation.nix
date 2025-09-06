@@ -8,6 +8,7 @@
         profiles-plasma
 
         networking-tailscale
+        services-copyparty
         services-keybase
         utilities
         virt-distrobox

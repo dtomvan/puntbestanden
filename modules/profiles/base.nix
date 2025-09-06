@@ -24,12 +24,10 @@ in
           inputs.srvos.nixosModules.mixins-terminfo
 
           nix-common
-          nix-distributed-builds
 
           boot-systemd-boot
           users-tomvd
           users-root
-          users-remote-build
 
           services-ssh
 

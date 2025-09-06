@@ -13,7 +13,7 @@ in
 
   pkgs-overlays = [ inputs.copyparty.overlays.default ];
 
-  flake.modules.nixos.profiles-base =
+  flake.modules.nixos.services-copyparty =
     { config, pkgs, ... }:
     let
       package = pkgs.copyparty.override {

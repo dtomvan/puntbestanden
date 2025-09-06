@@ -15,21 +15,15 @@
     }:
     {
       imports = with config.flake.modules.nixos; [
-        inputs.disko.nixosModules.disko
+        profiles-base
+
         inputs.home-manager.nixosModules.default
-        inputs.sops.nixosModules.default
 
         ../hardware/_generated/autounattend.nix
         "${config.autounattend.diskoFile}" # TODO: make this the universal disko file
-
-        boot-systemd-boot
-        networking-tailscale
-        networking-wifi-passwords
-        nix-common
-        services-ssh
-        users-tomvd
-        utilities
       ];
+
+      programs.nh.flake = lib.mkForce "/etc/nixos/";
 
       nixpkgs.config.allowUnfree = true;
 
@@ -54,9 +48,11 @@
         '';
       };
 
-      environment.sessionVariables.NH_FLAKE = "/etc/nixos";
-
       home-manager.users.tomvd = {
+        imports = with config.flake.modules.homeManager; [
+          profiles-base
+        ];
+
         home.homeDirectory = "/home/tomvd";
         home.file.README.text = ''
           You made it!
@@ -84,6 +80,7 @@
             $ nh os boot -H {boomer,feather,kaput}
 
         '';
+
         programs.bash = {
           enable = true;
           initExtra = # bash
@@ -100,6 +97,8 @@
       users.users.tomvd.hashedPassword = lib.mkForce null;
       users.users.tomvd.initialPassword = "tomvd";
       users.users.root.initialPassword = "nixos";
+      # overridden by profiles-base so yeah
+      users.users.root.initialHashedPassword = lib.mkForce null;
 
       time.timeZone = "UTC";
       i18n.defaultLocale = "en_US.UTF-8";
