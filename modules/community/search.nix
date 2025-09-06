@@ -81,7 +81,7 @@
         wantedBy = [ "graphical.target" ];
         after = [ "network.target" ];
         script = ''
-          ${lib.getExe pkgs.live-server} -p ${builtins.toString port} ${search}
+          ${lib.getExe pkgs.python3} -m http.server -d ${search} ${builtins.toString port}
         '';
       };
     };
