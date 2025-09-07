@@ -21,7 +21,7 @@
 
           virt-kvm
 
-          nuschtos-search
+          # nuschtos-search
 
           nix-distributed-builds
           users-remote-build
