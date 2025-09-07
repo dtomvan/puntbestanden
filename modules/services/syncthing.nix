@@ -57,6 +57,8 @@
         user = username;
         dataDir = "/home/${username}";
 
+        extraFlags = [ "--allow-newer-config" ];
+
         settings = {
           inherit devices folders;
 
