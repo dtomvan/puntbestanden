@@ -38,6 +38,7 @@
         "nur.nixosModules.nur"
         # broken
         "nix-flatpak.homeManagerModules.nix-flatpak"
+        "plasma-manager.homeManagerModules.plasma-manager"
         "srvos.nixosModules.roles-github-actions-runner"
         "srvos.modules.nixos.roles-github-actions-runner"
       ];
@@ -64,7 +65,7 @@
         scopes = lib.map (
           t:
           (
-            if lib.hasInfix ".homeManagerModules." t.name then
+            if lib.hasInfix ".homeManagerModules." t.name || lib.hasInfix ".homeModules." t.name then
               {
                 optionsJSON =
                   let
