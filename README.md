@@ -3,7 +3,7 @@
 > Literally means "dotfiles" in Dutch: "punt" = "dot", "bestanden" = "files"
 
 What's in here:
-- 6 NixOS configs
+- 5 NixOS configs
 - a dendritic home-manager config (TODO: list aspects here)
 - An unhinged Emacs config
 - A lot less lines of neovim lua config compared to my [previous attempt](https://github.com/dtomvan/.config/tree/main/neovim/.config/nvim)
@@ -27,7 +27,6 @@ Learn more about it (in order of, well, "deepness" or complexity):
 ## The hostnames
 
 - `boomer`, a reasonably sluggish Ryzen 5 2600 desktop PC
-- `kaput`, a thick bastard of a laptop with a broken screen
 - `feather`, the ultra-light Thinkpad X1 Carbon G8
 # Autounattend
 This repository includes an "autounattend" installer ISO, which:

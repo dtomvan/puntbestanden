@@ -32,6 +32,7 @@
       hostName = "kaput";
       system = "x86_64-linux";
       remoteBuild.enable = false;
+      noConfig = true;
     };
 
     bart-pc = {
