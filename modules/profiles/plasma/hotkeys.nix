@@ -5,20 +5,8 @@
         "Alt+Space"
         "Meta+Space"
       ];
-
-      hotkeys.commands."alacritty" = {
-        name = "Launch Alacritty";
-        key = "Meta+Return";
-        command = "alacritty";
-      };
-
-      hotkeys.commands."tofi-drun" = {
-        name = "Launch Tofi";
-        key = "Meta+Return";
-        command = "tofi-drun --drun-launch=true";
-      };
-
       shortcuts = {
+        "services/alacritty.desktop".New = "Meta+Return";
         kwin = {
           "Switch to Desktop 1" = "Meta+1";
           "Switch to Desktop 2" = "Meta+2";
