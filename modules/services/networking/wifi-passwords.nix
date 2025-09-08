@@ -4,7 +4,7 @@
     {
       sops.secrets.wifi-passwords = {
         mode = "0440";
-        sopsFile = ../../secrets/wifi-passwords.secret;
+        sopsFile = ../../../secrets/wifi-passwords.secret;
         format = "binary";
         # wpa_supplicant gets run as root so no-one else has to read the cleartext passwords
         owner = "root";
