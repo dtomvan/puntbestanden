@@ -37,14 +37,14 @@ in
           lib.replaceStrings [ "\n" ] [ " " ]
             # html
             ''
-              	      <style>
-              	      :root {
-              		--font-main: ${family};
-              		--font-serif: ${family};
-              		--font-mono: ${fixedWidth.family};
-              	      }
-              	      </style>
-              	    '';
+              <style>
+              :root {
+                --font-main: ${family};
+                --font-serif: ${family};
+                --font-mono: ${fixedWidth.family};
+              }
+              </style>
+            '';
       };
     };
 
