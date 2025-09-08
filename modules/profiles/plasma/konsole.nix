@@ -1,13 +1,16 @@
+let
+  schemeName = "catppuccin-mocha";
+in
 {
   flake.modules.homeManager.plasma =
     { pkgs, lib, ... }:
     {
       programs.konsole = {
         enable = true;
-        customColorSchemes.catppuccin-mocha = ./catppuccin-mocha.colorscheme;
-        defaultProfile = "Catppuccin";
-        profiles.Catppuccin = {
-          colorScheme = "catppuccin-mocha";
+        customColorSchemes.${schemeName} = ./${schemeName}.colorscheme;
+        defaultProfile = schemeName;
+        profiles.${schemeName} = {
+          colorScheme = schemeName;
           command = "${lib.getExe pkgs.bashInteractive}";
         };
       };
