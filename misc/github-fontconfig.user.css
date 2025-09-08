@@ -1,0 +1,9 @@
+@-moz-document domain("github.com") {
+/* I use fontconfig. Please respect it github. */
+:root {
+    --fontStack-monospace: monospace !important;
+    --fontStack-sansSerif: sans-serif !important;
+    --fontStack-sansSerifDisplay: sans-serif !important;
+    --fontStack-system: monospace !important;
+}
+}
