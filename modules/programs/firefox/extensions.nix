@@ -14,6 +14,7 @@
             plasma-integration
 
             ubo
+            stylus
           ]
           ++ (with pkgs.nur.repos.dtomvan; [
             darkreader
