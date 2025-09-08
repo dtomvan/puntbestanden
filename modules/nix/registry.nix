@@ -1,5 +1,12 @@
 { inputs, ... }:
 {
+  flake-file.inputs = {
+    nixpkgs-unfree = {
+      url = "github:numtide/nixpkgs-unfree";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   flake.modules.nixos.nix-common =
     { lib, ... }:
     {

@@ -19,8 +19,15 @@
 
   config = {
     flake-file.inputs = {
+      nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+
       nur = {
         url = "github:nix-community/NUR";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+
+      lazy-apps = {
+        url = "sourcehut:~rycee/lazy-apps";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };

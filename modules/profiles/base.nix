@@ -20,7 +20,6 @@ in
       { pkgs, ... }:
       {
         imports = with config.flake.modules.nixos; [
-          inputs.disko.nixosModules.disko
           inputs.srvos.nixosModules.mixins-terminfo
 
           nix-common
