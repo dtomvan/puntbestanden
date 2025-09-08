@@ -177,6 +177,9 @@
       };
       url = "github:nix-community/srvos";
     };
+    systems = {
+      url = "github:nix-systems/default";
+    };
     treefmt-nix = {
       inputs = {
         nixpkgs = {
