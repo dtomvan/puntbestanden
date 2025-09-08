@@ -39,6 +39,7 @@
       hostName = "vitune.app";
       system = "x86_64-linux";
       noConfig = true;
+      noDoc = true;
       remoteBuild = {
         enable = true;
         settings = {
@@ -60,7 +61,7 @@
   ''
   + lib.pipe config.flake.hosts [
     lib.attrValues
-    (lib.filter (h: !(h ? noConfig)))
+    (lib.filter (h: !(h ? noDoc)))
     (lib.map (h: "- `${h.hostName}`, ${h.description}"))
     lib.concatLines
   ];
