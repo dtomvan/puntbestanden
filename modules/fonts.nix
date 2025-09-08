@@ -5,11 +5,11 @@ let
     pointSize = 12;
   };
 in
+{ lib, ... }:
 {
   flake.modules.nixos.fonts =
     {
       pkgs,
-      lib,
       config,
       ...
     }:
@@ -76,10 +76,20 @@ in
       name = fixedWidth.family;
       size = fixedWidth.pointSize + 2;
     };
+  };
 
-    modules.terminals.font = {
-      inherit (fixedWidth) family;
-      size = fixedWidth.pointSize;
+  flake.modules.homeManager.terminals = {
+    options.modules.terminals = {
+      font.family = lib.mkOption {
+        description = "the font to use in the terminal";
+        default = fixedWidth.family;
+        type = lib.types.str;
+      };
+      font.size = lib.mkOption {
+        description = "the font size to use in the terminal";
+        default = fixedWidth.pointSize;
+        type = lib.types.ints.between 9 30;
+      };
     };
   };
 }
