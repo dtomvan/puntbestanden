@@ -55,7 +55,7 @@ NEW: you can do this in YOUR repo too, with your own target config!
   inputs.import-tree.url = "github:vic/import-tree";
   inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   inputs.dtomvan = {
-    url = "github:dtomvan/puntbestanden?subdir=modules/community";
+    url = "github:dtomvan/puntbestanden";
     flake = false;
   };
   inputs.disko = {
@@ -73,12 +73,16 @@ NEW: you can do this in YOUR repo too, with your own target config!
   flake-parts.lib.mkFlake { inherit inputs; } {
     imports = [
       flake-parts.flakeModules.modules
-      (import-tree "${dtomvan}/autounattend")
+      (import-tree "${dtomvan}/modules/community/autounattend")
     ];
 
-    # needed so the installer partitions the same way you mount your
-    # filesystems later
-    autounattend.diskoFile = ./disko.nix;
+    autounattend = {
+      # needed so the installer partitions the same way you mount your
+      # filesystems later
+      diskoFile = ./disko.nix;
+      # this path will be copied to /etc/nixos after installation.
+      configRoot = ./.;
+    };
 
     flake.nixosConfigurations.autounattend = nixpkgs.lib.nixosSystem {
       modules = [
