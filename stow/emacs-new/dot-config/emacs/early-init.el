@@ -19,6 +19,18 @@
 (blink-cursor-mode -1)
 (fringe-mode 0)
 
+;; Start as fullscreen
+(modify-all-frames-parameters
+ `((fullscreen . fullboth)))
+
+;; Stolen from prot, but cut down. This just sets it to the dark
+;; modus-vivendi colors, so it can either load a light theme or the
+;; rest of the dark theme. I don't mind the "dark flash", just the
+;; light flash.
+(setq mode-line-format nil)
+(set-face-attribute 'default nil :background "#0d0e1c" :foreground "#ffffff")
+(set-face-attribute 'mode-line nil :background "#292d48" :foreground "#969696" :box "#979797")
+
 ;; Temporarily increase the garbage collection threshold.  These
 ;; changes help shave off about half a second of startup time.  The
 ;; `most-positive-fixnum' is DANGEROUS AS A PERMANENT VALUE.  See the
