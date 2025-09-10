@@ -1,4 +1,8 @@
 { self, lib, ... }:
+# How to add a host
+# 1. Add an entry to this file
+# 2. Create a file (usually in modules/hosts/) that sets modules.nixos.`hosts-foobar`
+# 3. nixos-generate-config --show-hardware-config > modules/hardware/_generated/foobar.nix
 {
   flake.hosts = {
     amdpc1 = {
