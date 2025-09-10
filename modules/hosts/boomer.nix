@@ -7,6 +7,8 @@
         imports = with config.flake.modules.nixos; [
           profiles-workstation
 
+          pinchflat
+
           guest
 
           hardware-boomer-disko
