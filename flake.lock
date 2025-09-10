@@ -47,11 +47,11 @@
     },
     "crane": {
       "locked": {
-        "lastModified": 1756705356,
-        "narHash": "sha256-dpBFe8SqYKr7W6KN5QOVCr8N76SBKwTslzjw+4BVBVs=",
+        "lastModified": 1757183466,
+        "narHash": "sha256-kTdCCMuRE+/HNHES5JYsbRHmgtr+l9mOtf5dpcMppVc=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "305707bbc27d83aa1039378e91d7dd816f4cac10",
+        "rev": "d599ae4847e7f87603e7082d73ca673aa93c916d",
         "type": "github"
       },
       "original": {
@@ -517,11 +517,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1757010428,
-        "narHash": "sha256-2XNJsXwUmC+DGt7QZFz/ohS5SGM6IF6XlAJYquT/ls4=",
+        "lastModified": 1757513334,
+        "narHash": "sha256-ShMwHPsaaeWLmo2ZhZh8u00g7cRvrlFn8Cgkxez6mN4=",
         "owner": "dtomvan",
         "repo": "localsend-rust-impl",
-        "rev": "a1b76591a98cddd78fd75bba8f4263435d2d7090",
+        "rev": "8d615f2b7ee4581a79a699501f748a83d6575dc7",
         "type": "github"
       },
       "original": {
