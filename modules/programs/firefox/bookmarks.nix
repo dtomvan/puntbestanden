@@ -45,8 +45,8 @@
               url = "https://github.com/NixOS/nixpkgs/pulls?utf8=%E2%9C%93&q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22";
             }
             {
-              name = "nixpkgs low-hanging fruit";
-              url = "https://github.com/NixOS/nixpkgs/pulls?q=is%3Aopen+is%3Apr+-is%3Adraft+review%3Anone+sort%3Acreated-asc+-label%3A%222.status%3A+work-in-progress%22+-label%3A%222.status%3A+merge+conflict%22+-label%3A%222.status%3A+stale%22+";
+              name = "Electron apps to be built from source";
+              url = "https://github.com/NixOS/nixpkgs/issues/296939";
             }
             {
               name = "Nix package versions";
