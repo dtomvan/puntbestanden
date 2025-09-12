@@ -18,8 +18,13 @@
       modules.utilities.enableLazyApps = true;
 
       environment.systemPackages = with pkgs; [
+        emacs-pgtk
+        forge-sparks
         keepassxc
         libreoffice-qt6-fresh
+        pdfarranger
+        pika-backup
+        telegram-desktop
       ];
     };
 }

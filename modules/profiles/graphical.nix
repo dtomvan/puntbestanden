@@ -20,14 +20,9 @@ in
         ];
 
         environment.systemPackages = with pkgs; [
-          emacs-pgtk
           wl-clipboard
           pavucontrol
           alsa-utils
-          pdfarranger
-          forge-sparks
-          pika-backup
-          telegram-desktop
         ];
       };
 
