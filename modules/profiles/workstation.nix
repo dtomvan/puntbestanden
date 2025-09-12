@@ -25,6 +25,7 @@
         pdfarranger
         pika-backup
         telegram-desktop
+        thunderbird
       ];
     };
 }
