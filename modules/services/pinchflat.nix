@@ -1,7 +1,7 @@
 { self, ... }:
 {
   flake.modules.nixos.pinchflat =
-    { config, ... }:
+    { config, lib, ... }:
     {
       imports = [ self.modules.nixos.sops ];
 
@@ -29,6 +29,15 @@
           flags = {
             e2ts = true;
             dthumb = true;
+          };
+        };
+      };
+
+      systemd.tmpfiles.settings."10-pinchflat" = lib.mkIf config.services.syncthing.enable {
+        "/var/lib/pinchflat/media/.stfolder" = {
+          d = {
+            inherit (config.services.pinchflat) group user;
+            mode = "0755";
           };
         };
       };
