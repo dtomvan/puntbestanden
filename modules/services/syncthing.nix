@@ -1,8 +1,9 @@
-{ config, ... }:
+{ self, lib, ... }:
 {
   flake.modules.nixos.services-syncthing =
+    { config, ... }:
     let
-      inherit (config.flake) hosts;
+      inherit (self) hosts;
 
       username = "tomvd";
       devices = {
@@ -46,6 +47,12 @@
             type = "trashcan";
             params.cleanoutDays = "30";
           };
+        };
+        pinchflat = lib.mkIf config.services.pinchflat.enable {
+          id = "g7kr4-ewyfn";
+          path = "/var/lib/pinchflat/media";
+          devices = allDevices;
+          type = "sendonly";
         };
       };
     in
