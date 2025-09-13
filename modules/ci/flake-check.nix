@@ -1,6 +1,6 @@
 # This being a nix file instead of a yml file is basically a running joke at
 # this point
-{ config, ... }:
+{ self, ... }:
 {
   perSystem =
     { pkgs, ... }:
@@ -16,7 +16,7 @@
 
             jobs.nix-flake-check = {
               runs-on = "ubuntu-latest";
-              steps = config.flake.actions-setup ++ [
+              steps = self.actions-setup ++ [
                 { run = "nix flake lock"; }
                 { run = "nix flake check -L"; }
               ];

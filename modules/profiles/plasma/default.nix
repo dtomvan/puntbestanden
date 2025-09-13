@@ -1,6 +1,6 @@
-{ config, inputs, ... }:
+{ self, inputs, ... }:
 let
-  inherit (config.flake.modules) nixos;
+  inherit (self.modules) nixos;
 in
 {
   flake-file.inputs = {

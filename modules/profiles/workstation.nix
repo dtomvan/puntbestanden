@@ -1,9 +1,9 @@
-{ config, ... }:
+{ self, ... }:
 {
   flake.modules.nixos.profiles-workstation =
     { pkgs, ... }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with self.modules.nixos; [
         profiles-base
         profiles-plasma
 

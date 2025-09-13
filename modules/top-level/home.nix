@@ -1,5 +1,5 @@
 {
-  config,
+  self,
   inputs,
   withSystem,
   ...
@@ -19,7 +19,7 @@ let
         { pkgs, ... }:
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [ config.flake.modules.homeManager."hosts-${host.hostName}" ];
+          modules = [ self.modules.homeManager."hosts-${host.hostName}" ];
         }
       )
     );
@@ -34,7 +34,7 @@ in
     };
   };
 
-  flake.homeConfigurations = pipe config.flake.hosts [
+  flake.homeConfigurations = pipe self.hosts [
     (filterAttrs (_k: v: !(v ? noConfig)))
     (mapAttrs' makeHome)
   ];

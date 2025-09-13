@@ -1,6 +1,6 @@
 {
+  self,
   inputs,
-  config,
   ...
 }:
 let
@@ -8,7 +8,7 @@ let
 in
 {
   flake.nixosConfigurations.minimal-container = inputs.nixpkgs.lib.nixosSystem {
-    modules = with config.flake.modules.nixos; [
+    modules = with self.modules.nixos; [
       sops
       services-localsend-rs
       users-tomvd

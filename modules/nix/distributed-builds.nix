@@ -1,6 +1,6 @@
-{ config, ... }:
+{ self, ... }:
 let
-  inherit (config.flake) hosts;
+  inherit (self) hosts;
 in
 {
   flake.modules.nixos.nix-distributed-builds =

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ self, ... }:
 {
   flake.modules = {
     nixos.hosts-kaput =
@@ -7,7 +7,7 @@
         ...
       }:
       {
-        imports = with config.flake.modules.nixos; [
+        imports = with self.modules.nixos; [
           profiles-base
 
           utilities
@@ -42,7 +42,7 @@
         system.stateVersion = "25.05";
       };
 
-    homeManager.hosts-kaput.imports = with config.flake.modules.homeManager; [
+    homeManager.hosts-kaput.imports = with self.modules.homeManager; [
       profiles-base
       users-tomvd
     ];

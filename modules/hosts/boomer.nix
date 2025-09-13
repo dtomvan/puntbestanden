@@ -1,10 +1,10 @@
-{ config, ... }:
+{ self, ... }:
 {
   flake.modules = {
     nixos.hosts-boomer =
       { pkgs, ... }:
       {
-        imports = with config.flake.modules.nixos; [
+        imports = with self.modules.nixos; [
           profiles-workstation
           profiles-catppuccin
 
@@ -79,7 +79,7 @@
     homeManager.hosts-boomer =
       { pkgs, ... }:
       {
-        imports = with config.flake.modules.homeManager; [
+        imports = with self.modules.homeManager; [
           users-tomvd
           profiles-base
           basic-cli

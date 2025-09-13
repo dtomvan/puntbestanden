@@ -1,7 +1,7 @@
-# { config, ... }:
+# { self, ... }:
 {
   flake.modules.homeManager.jujutsu = {
-    # imports = with config.flake.modules.homeManager; [
+    # imports = with self.modules.homeManager; [
     #   git
     # ];
     #

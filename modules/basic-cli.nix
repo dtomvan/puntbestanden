@@ -1,10 +1,10 @@
-{ config, ... }:
+{ self, ... }:
 {
   flake.modules.homeManager.basic-cli =
     { pkgs, lib, ... }:
     with lib;
     {
-      imports = with config.flake.modules.homeManager; [
+      imports = with self.modules.homeManager; [
         git
         jujutsu
       ];

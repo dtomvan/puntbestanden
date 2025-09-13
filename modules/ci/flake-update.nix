@@ -1,4 +1,4 @@
-{ config, ... }:
+{ self, ... }:
 {
   perSystem =
     { pkgs, lib, ... }:
@@ -27,7 +27,7 @@
 
                 runs-on = "ubuntu-latest";
 
-                steps = config.flake.actions-setup ++ [
+                steps = self.actions-setup ++ [
                   {
                     uses = "DeterminateSystems/update-flake-lock@v27";
                     "with" = {

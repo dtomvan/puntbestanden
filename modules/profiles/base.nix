@@ -1,7 +1,4 @@
-{ config, inputs, ... }:
-let
-  inherit (config.flake.modules) homeManager;
-in
+{ self, inputs, ... }:
 {
   flake-file.inputs = {
     flake-fmt = {
@@ -19,7 +16,7 @@ in
     nixos.profiles-base =
       { pkgs, ... }:
       {
-        imports = with config.flake.modules.nixos; [
+        imports = with self.modules.nixos; [
           inputs.srvos.nixosModules.mixins-terminfo
 
           nix-common
@@ -76,7 +73,7 @@ in
         flake-fmt = inputs.flake-fmt.packages.${pkgs.stdenv.hostPlatform.system}.default;
       in
       {
-        imports = with homeManager; [ helix ];
+        imports = with self.modules.homeManager; [ helix ];
 
         options = {
           home.os = {

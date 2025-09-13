@@ -1,9 +1,14 @@
 # configuration for the TARGET system.
-{ inputs, config, ... }:
+{
+  inputs,
+  self,
+  config,
+  ...
+}:
 {
   flake.nixosConfigurations = {
     autounattend = inputs.nixpkgs.lib.nixosSystem {
-      modules = [ config.flake.modules.nixos.autounattend ];
+      modules = [ self.modules.nixos.autounattend ];
     };
   };
 
@@ -14,7 +19,7 @@
       ...
     }:
     {
-      imports = with config.flake.modules.nixos; [
+      imports = with self.modules.nixos; [
         profiles-base
 
         inputs.home-manager.nixosModules.default
@@ -49,7 +54,7 @@
       };
 
       home-manager.users.tomvd = {
-        imports = with config.flake.modules.homeManager; [
+        imports = with self.modules.homeManager; [
           profiles-base
         ];
 

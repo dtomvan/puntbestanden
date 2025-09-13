@@ -1,9 +1,9 @@
 # adapted from https://github.com/tfc/nixos-auto-installer
 # mostly to use disko and xfs
-{ config, ... }:
+{ self, config, ... }:
 let
   inherit (config.autounattend) diskoFile configRoot;
-  evaluatedSystem = config.flake.nixosConfigurations.autounattend;
+  evaluatedSystem = self.nixosConfigurations.autounattend;
 in
 {
   flake.modules.nixos.autounattend-installer =

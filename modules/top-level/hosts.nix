@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ self, lib, ... }:
 {
   flake.hosts = {
     amdpc1 = {
@@ -59,7 +59,7 @@
     ## The hostnames
 
   ''
-  + lib.pipe config.flake.hosts [
+  + lib.pipe self.hosts [
     lib.attrValues
     (lib.filter (h: !(h ? noDoc)))
     (lib.map (h: "- `${h.hostName}`, ${h.description}"))

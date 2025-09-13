@@ -1,5 +1,5 @@
 {
-  config,
+  self,
   flake-parts-lib,
   lib,
   ...
@@ -37,6 +37,6 @@
         withExec;
     in
     {
-      xdg.desktopEntries = lib.mapAttrs makeWebApp config.flake.webApps;
+      xdg.desktopEntries = lib.mapAttrs makeWebApp self.webApps;
     };
 }

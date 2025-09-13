@@ -1,6 +1,6 @@
 {
+  self,
   inputs,
-  config,
   withSystem,
   ...
 }:
@@ -16,7 +16,7 @@ let
     pipe
     ;
 
-  inherit (config.flake) hosts;
+  inherit (self) hosts;
 
   makeNixos =
     _key: host:
@@ -29,7 +29,7 @@ let
             networking = { inherit (host) hostName; };
           }
         ))
-        config.flake.modules.nixos."hosts-${host.hostName}"
+        self.modules.nixos."hosts-${host.hostName}"
         ../hardware/_generated/${host.hostName}.nix
       ];
     });
@@ -42,7 +42,7 @@ in
 
   text.readme.parts.nixos_configs =
     let
-      n = pipe config.flake.nixosConfigurations [
+      n = pipe self.nixosConfigurations [
         attrsToList
         length
         builtins.toString

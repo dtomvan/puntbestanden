@@ -2,7 +2,6 @@
 # stuffs set. Use with `profiles-graphical`.
 {
   self,
-  config,
   lib,
   inputs,
   flake-parts-lib,
@@ -48,7 +47,7 @@ in
 
       home-manager.users.guest = {
         imports =
-          (with config.flake.modules.homeManager; [
+          (with self.modules.homeManager; [
             firefox-ubo-only
             webapps
             terminals

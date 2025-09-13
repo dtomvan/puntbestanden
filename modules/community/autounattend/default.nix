@@ -47,7 +47,7 @@ in
 
     flake.nixosConfigurations = {
       autounattend-installer = nixosSystem {
-        modules = [ config.flake.modules.nixos.autounattend-installer ];
+        modules = [ self.modules.nixos.autounattend-installer ];
       };
     };
 

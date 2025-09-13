@@ -1,13 +1,13 @@
-{ config, ... }:
+{ self, ... }:
 let
-  inherit (config.flake.modules) homeManager;
+  inherit (self.modules) homeManager;
 in
 {
   flake.modules = {
     nixos.profiles-graphical =
       { pkgs, ... }:
       {
-        imports = with config.flake.modules.nixos; [
+        imports = with self.modules.nixos; [
           plymouth
 
           services-bazaar

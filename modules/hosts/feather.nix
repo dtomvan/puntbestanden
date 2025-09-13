@@ -1,10 +1,10 @@
-{ config, ... }:
+{ self, ... }:
 {
   flake.modules = {
     nixos.hosts-feather =
       { lib, ... }:
       {
-        imports = with config.flake.modules.nixos; [
+        imports = with self.modules.nixos; [
           profiles-workstation
 
           hardware-comet-lake
@@ -34,7 +34,7 @@
     homeManager.hosts-feather =
       { pkgs, ... }:
       {
-        imports = with config.flake.modules.homeManager; [
+        imports = with self.modules.homeManager; [
           users-tomvd
 
           firefox-ubo-only

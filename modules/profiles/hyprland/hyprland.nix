@@ -1,4 +1,4 @@
-{ config, ... }:
+{ self, ... }:
 {
   flake.modules = {
     nixos.hyprland =
@@ -63,7 +63,7 @@
           settings = {
             "$mod" = "SUPER";
 
-            monitor = lib.optional (host == config.flake.hosts.tpx1g8) ",preferred,auto,1.25";
+            monitor = lib.optional (host == self.hosts.tpx1g8) ",preferred,auto,1.25";
 
             general = {
               gaps_in = 4;
