@@ -4,6 +4,7 @@ let
     accent = "peach";
     flavor = "mocha";
   };
+  colorScheme = "CatppuccinMochaPeach";
 in
 {
   nixConfig = {
@@ -28,19 +29,62 @@ in
     };
   };
 
-  flake.modules.homeManager.profiles-catppuccin = {
-    imports = [
-      inputs.catppuccin.homeModules.catppuccin
-    ];
+  flake.modules.homeManager.profiles-catppuccin =
+    { pkgs, config, ... }:
+    let
+      catppuccin-kde = pkgs.callPackage (
+        { stdenvNoCC, fetchFromGitHub }:
+        stdenvNoCC.mkDerivation (finalAttrs: {
+          pname = "catppuccin-kde";
+          version = "0.2.6";
 
-    catppuccin = catppuccin // {
-      alacritty.enable = true;
-      bat.enable = true;
-      btop.enable = true;
-      glamour.enable = true;
-      skim.enable = true;
-      yazi.enable = true;
-      zellij.enable = true;
+          src = fetchFromGitHub {
+            owner = "catppuccin";
+            repo = "kde";
+            tag = "v${finalAttrs.version}";
+            hash = "sha256-pfG0L4eSXLYLZM8Mhla4yalpEro74S9kc0sOmQtnG3w=";
+          };
+
+          postPatch = ''
+            chmod +x **.sh
+            patchShebangs .
+            # we will not be using wget, unzip, or lookandfeeltool, so I won't
+            # put it in the closure.
+            sed -Ei -e '/^check_command_exists ".*"$/d' install.sh
+          '';
+
+          installPhase = ''
+            runHook preInstall
+              # mocha, peach, default decorations, only build colorscheme
+              ./install.sh 1 7 1 color
+              install -m644 ./dist/${colorScheme}.colors $out
+            runHook postInstall
+          '';
+        })
+      ) { };
+    in
+    {
+      imports = [
+        inputs.catppuccin.homeModules.catppuccin
+      ];
+
+      xdg.dataFile."color-schemes/${colorScheme}.colors" = {
+        force = true;
+        source = catppuccin-kde;
+      };
+
+      programs.${if config.programs ? plasma then "plasma" else null} = {
+        workspace = { inherit colorScheme; };
+      };
+
+      catppuccin = catppuccin // {
+        alacritty.enable = true;
+        bat.enable = true;
+        btop.enable = true;
+        glamour.enable = true;
+        skim.enable = true;
+        yazi.enable = true;
+        zellij.enable = true;
+      };
     };
-  };
 }
