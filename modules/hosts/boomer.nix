@@ -88,16 +88,10 @@
           firefox-ubo-only
 
           typst
-          latex
           mpd
           plasma
           plasma-boomer
         ];
-
-        modules.latex = {
-          enable = true;
-          kile = true;
-        };
 
         programs.firefox.profiles.default.extensions.packages = with pkgs.nur.repos.dtomvan; [
           zotero-connector
