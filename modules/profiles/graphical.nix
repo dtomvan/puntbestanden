@@ -41,7 +41,6 @@ in
       {
         imports = with homeManager; [
           firefox
-          syncthing
           terminals
           webapps
         ];
