@@ -6,6 +6,7 @@
       {
         imports = with config.flake.modules.nixos; [
           profiles-workstation
+          profiles-catppuccin
 
           pinchflat
 
@@ -84,6 +85,7 @@
           profiles-base
           basic-cli
           profiles-graphical
+          profiles-catppuccin
 
           firefox-ubo-only
 

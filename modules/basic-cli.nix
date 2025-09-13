@@ -123,7 +123,6 @@
 
         settings = {
           show_startup_tips = false;
-          theme = "catppuccin-macchiato";
           default_shell = "bash";
           keybinds = {
             normal = {
@@ -132,6 +131,9 @@
           };
         };
       };
+
+      programs.btop.enable = true;
+      programs.skim.enable = true;
 
       systemd.user.settings.Manager.DefaultEnvironment = {
         PATH = concatStringsSep ":" (
