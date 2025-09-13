@@ -7,10 +7,6 @@
 
       username = "tomvd";
       devices = {
-        ${hosts.hp3600.hostName} = {
-          id = "SMIZJNY-VQPDQQT-Q3QUAXW-5WBVOFS-QVRBNYM-CTM4FW5-XT656EE-IYXOQAZ";
-          autoAcceptFolders = true;
-        };
         ${hosts.amdpc1.hostName} = {
           id = "3QIVELR-TAOILMZ-446OGI4-76UTNJD-ZA67C4P-X532YOE-ONJS5RY-LWY6HQZ";
           autoAcceptFolders = true;
@@ -57,6 +53,18 @@
       };
     in
     {
+      imports = with self.modules.nixos; [
+        sops
+      ];
+
+      sops.secrets.syncthing = {
+        mode = "0400";
+        sopsFile = ../../../secrets/syncthing.${config.networking.hostName}.secret;
+        format = "binary";
+        owner = config.services.syncthing.user;
+        inherit (config.services.syncthing) group;
+      };
+
       services.syncthing = {
         enable = true;
         # no own group
@@ -68,6 +76,12 @@
 
         settings = {
           inherit devices folders;
+
+          # if unset, after reinstallation of syncthing (or deleting configDir)
+          # you'd get new device IDs. This way I hope to keep them for a little
+          # longer.
+          cert = _pubkeys/${config.networking.hostName}.pem;
+          key = config.sops.secrets.syncthing.path;
 
           gui = {
             # Yes, this is the option name
