@@ -8,8 +8,6 @@
           profiles-workstation
           profiles-catppuccin
 
-          pinchflat
-
           guest
 
           hardware-boomer-disko
@@ -19,6 +17,7 @@
           steam
 
           services-localsend-rs
+          services-pinchflat
           services-syncthing
           services-vintagestory
 

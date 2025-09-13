@@ -1,6 +1,6 @@
 { self, ... }:
 {
-  flake.modules.nixos.pinchflat =
+  flake.modules.nixos.services-pinchflat =
     { config, lib, ... }:
     {
       imports = [ self.modules.nixos.sops ];
