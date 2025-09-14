@@ -103,4 +103,9 @@ in
         zellij.enable = true;
       };
     };
+
+  flake.modules.nixvim.default.colorschemes.catppuccin = {
+    enable = true;
+    settings.flavour = catppuccin.flavor; # nice
+  };
 }
