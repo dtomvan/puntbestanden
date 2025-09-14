@@ -2,7 +2,7 @@ let
   schemeName = "catppuccin-mocha";
 in
 {
-  flake.modules.homeManager.plasma =
+  flake.modules.homeManager.profiles-plasma =
     { pkgs, lib, ... }:
     {
       programs.konsole = {

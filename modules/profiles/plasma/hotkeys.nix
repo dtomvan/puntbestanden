@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.plasma = {
+  flake.modules.homeManager.profiles-plasma = {
     programs.plasma = {
       krunner.shortcuts.launch = [
         "Alt+Space"

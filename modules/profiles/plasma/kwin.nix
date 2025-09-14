@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.plasma = {
+  flake.modules.homeManager.profiles-plasma = {
     programs.plasma = {
       kwin = {
         virtualDesktops.number = 4;

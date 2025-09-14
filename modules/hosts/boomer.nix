@@ -80,6 +80,7 @@
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [
+          profiles-plasma
           users-tomvd
           profiles-base
           basic-cli
@@ -90,7 +91,6 @@
 
           typst
           mpd
-          plasma
           plasma-boomer
         ];
 

@@ -35,6 +35,7 @@
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [
+          profiles-plasma
           users-tomvd
 
           firefox-ubo-only
@@ -42,7 +43,6 @@
           profiles-base
           basic-cli
           profiles-graphical
-          plasma
           plasma-feather
         ];
 

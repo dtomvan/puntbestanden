@@ -1,3 +1,3 @@
 {
-  flake.modules.homeManager.plasma.programs.kate.enable = true;
+  flake.modules.homeManager.profiles-plasma.programs.kate.enable = true;
 }

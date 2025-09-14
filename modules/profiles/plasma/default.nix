@@ -42,7 +42,7 @@ in
           ++ lib.optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];
       };
 
-    homeManager.plasma =
+    homeManager.profiles-plasma =
       {
         lib,
         pkgs,

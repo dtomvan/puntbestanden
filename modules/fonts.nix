@@ -48,7 +48,7 @@ in
       };
     };
 
-  flake.modules.homeManager.plasma = {
+  flake.modules.homeManager.profiles-plasma = {
     programs.plasma = {
       fonts = {
         inherit fixedWidth;
