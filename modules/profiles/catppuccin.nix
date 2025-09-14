@@ -78,14 +78,22 @@ in
         source = catppuccin-kde;
       };
 
+      xdg.dataFile."konsole/${colorScheme}.colorscheme" = {
+        force = true;
+        source = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/catppuccin/konsole/3b64040e3f4ae5afb2347e7be8a38bc3cd8c73a8/themes/catppuccin-mocha.colorscheme";
+          hash = "sha256-apsWpYLpmBQdbZCNo7h6wXK3eB9HtBkoJ3P3DReAB28=";
+        };
+      };
+
       programs.${if config.programs ? plasma then "plasma" else null} = {
         workspace = { inherit colorScheme; };
       };
 
       programs.${if config.programs ? konsole then "konsole" else null} = {
         enable = true;
-        defaultProfile = colorScheme;
-        profiles.${colorScheme} = {
+        defaultProfile = "Catppuccin";
+        profiles.Catppuccin = {
           inherit colorScheme;
           command = "${lib.getExe pkgs.bashInteractive}";
         };
