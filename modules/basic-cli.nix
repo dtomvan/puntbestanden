@@ -133,7 +133,10 @@
       };
 
       programs.btop.enable = true;
-      programs.skim.enable = true;
+      programs.skim = {
+        enable = true;
+        enableBashIntegration = false;
+      };
 
       systemd.user.settings.Manager.DefaultEnvironment = {
         PATH = concatStringsSep ":" (
