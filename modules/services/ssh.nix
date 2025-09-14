@@ -13,6 +13,7 @@
     {
       services.openssh.enable = true;
       users.users.tomvd.openssh.authorizedKeys.keys = builtins.attrValues keys;
+      users.users.root.openssh.authorizedKeys.keys = builtins.attrValues keys;
 
       programs.ssh = { inherit knownHosts; };
     };
