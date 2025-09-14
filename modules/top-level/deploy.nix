@@ -24,7 +24,6 @@
         profiles.system = {
           user = "root";
           sshUser = "tomvd"; # TODO: maybe make more generic?
-          interactiveSudo = true;
           path = inputs.deploy-rs.lib.${v.system}.activate.nixos self.nixosConfigurations.${v.hostName};
         };
 
