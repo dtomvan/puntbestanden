@@ -33,34 +33,16 @@
         };
       };
 
+      packages.activatable-nixvim = self'.legacyPackages.activationPackage {
+        # saves a whole lotta time
+        profile = self'.packages.nixvim.overrideAttrs { dontFixup = true; };
+        profileName = "nixvim";
+      };
+
       apps.nixvim-activate = {
         type = "app";
         meta.description = "Activate your Nixvim configuration";
-        program = lib.getExe (
-          pkgs.writeShellApplication {
-            name = "nixvim-activate";
-            runtimeInputs = with pkgs; [
-              nix
-              jq
-            ];
-            runtimeEnv = {
-              NIX_CONFIG = "extra-experimental-features = nix-command flakes";
-              # saves a whole lotta time
-              nixvimTarget = self'.packages.nixvim.overrideAttrs { dontFixup = true; };
-            };
-            text = ''
-              if nix profile list --json | jq -e '.elements.nixvim' >/dev/null; then
-                echo removing existing nixvim install...
-                nix profile remove nixvim
-              fi
-
-              echo installing new nixvim install...
-              nix profile install "''${nixvimTarget:?}"
-
-              echo "done"
-            '';
-          }
-        );
+        program = lib.getExe' self'.packages.activatable-nixvim "activate";
       };
     };
 
