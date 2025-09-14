@@ -35,14 +35,14 @@
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [
+          profiles-base
+          profiles-graphical
           profiles-plasma
-          users-tomvd
 
+          users-tomvd
+          basic-cli
           firefox-ubo-only
 
-          profiles-base
-          basic-cli
-          profiles-graphical
           plasma-feather
         ];
 

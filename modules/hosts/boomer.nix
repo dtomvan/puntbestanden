@@ -80,17 +80,17 @@
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [
-          profiles-plasma
-          users-tomvd
           profiles-base
-          basic-cli
           profiles-graphical
           profiles-catppuccin
+          profiles-plasma
 
+          users-tomvd
+          basic-cli
           firefox-ubo-only
-
-          typst
           mpd
+          typst
+
           plasma-boomer
         ];
 
