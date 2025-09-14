@@ -24,7 +24,6 @@
           settings = {
             font-family = cfg.font.family;
             font-size = cfg.font.size;
-            theme = "catppuccin-mocha";
             gtk-single-instance = true;
             command = "${lib.getExe pkgs.bashInteractive} -c ${lib.getExe pkgs.zellij}";
 

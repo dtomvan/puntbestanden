@@ -20,8 +20,6 @@
       config.programs.helix = lib.mkIf cfg.enable {
         enable = true;
         settings = {
-          theme = "catppuccin_mocha";
-
           editor = {
             cursor-shape = {
               insert = "bar";

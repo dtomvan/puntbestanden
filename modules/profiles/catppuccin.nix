@@ -30,7 +30,12 @@ in
   };
 
   flake.modules.homeManager.profiles-catppuccin =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     let
       catppuccin-kde = pkgs.callPackage (
         { stdenvNoCC, fetchFromGitHub }:
@@ -77,11 +82,22 @@ in
         workspace = { inherit colorScheme; };
       };
 
+      programs.${if config.programs ? konsole then "konsole" else null} = {
+        enable = true;
+        defaultProfile = colorScheme;
+        profiles.${colorScheme} = {
+          inherit colorScheme;
+          command = "${lib.getExe pkgs.bashInteractive}";
+        };
+      };
+
       catppuccin = catppuccin // {
         alacritty.enable = true;
         bat.enable = true;
         btop.enable = true;
+        ghostty.enable = true;
         glamour.enable = true;
+        helix.enable = true;
         skim.enable = true;
         yazi.enable = true;
         zellij.enable = true;
