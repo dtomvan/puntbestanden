@@ -23,7 +23,7 @@
 
         profiles.system = {
           user = "root";
-          sshUser = "tomvd"; # TODO: maybe make more generic?
+          sshUser = "root";
           path = inputs.deploy-rs.lib.${v.system}.activate.nixos self.nixosConfigurations.${v.hostName};
         };
 
