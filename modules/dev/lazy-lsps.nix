@@ -15,7 +15,7 @@
             exe = "clangd";
           }
           { pkg = cmake-language-server; }
-          { pkg = dockerfile-language-server-nodejs; }
+          { pkg = dockerfile-language-server; }
           { pkg = emmet-language-server; }
           { pkg = kotlin-language-server; }
           {
