@@ -99,10 +99,18 @@ in
         };
       };
 
+      programs.firefox.profiles.default.extensions.packages = [
+        pkgs.nur.repos.rycee.firefox-addons.firefox-color
+      ];
+
       catppuccin = catppuccin // {
         alacritty.enable = true;
         bat.enable = true;
         btop.enable = true;
+        firefox = {
+          enable = true;
+          profiles.default.enable = true;
+        };
         ghostty.enable = true;
         glamour.enable = true;
         helix.enable = true;
