@@ -783,11 +783,8 @@ editors. It's generally much more correct and thorough than the legacy
 regexp-based =*-mode= packages, so I'll be using that.
 
 #+begin_src emacs-lisp
-  (use-package treesit-langs
-    :ensure t
-    :vc (:url "https://github.com/emacs-tree-sitter/treesit-langs.git")
-    :init
-    (treesit-langs-major-mode-setup))
+  (use-package tree-sitter-langs
+    :ensure t)
 #+end_src
 
 ** Nix
