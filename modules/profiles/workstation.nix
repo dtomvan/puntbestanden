@@ -18,7 +18,6 @@
       modules.utilities.enableLazyApps = true;
 
       environment.systemPackages = with pkgs; [
-        emacs-pgtk
         forge-sparks
         keepassxc
         libreoffice-qt6-fresh
