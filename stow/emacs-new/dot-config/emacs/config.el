@@ -24,6 +24,12 @@
   (setq native-comp-async-report-warnings-errors 'silent)
   (setq native-compile-prune-cache t))
 
+(use-package time
+  :ensure nil ;builtin
+  :init
+  (with-eval-after-load 'time
+    (add-to-list 'zoneinfo-style-world-list '("Europe/Amsterdam" "local"))))
+
 (require 'package)
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -61,8 +67,8 @@
   (let ((current-hour (cl-parse-integer (format-time-string "%H")))
 	  (old-is-dark user/is-dark-theme))
     (setq user/is-dark-theme
-	    (or (> current-hour user/dark-theme-min)
-		(< current-hour user/dark-theme-max)))
+	    (or (>= current-hour user/dark-theme-min)
+		(<= current-hour user/dark-theme-max)))
     (when
 	  (not (eq old-is-dark user/is-dark-theme))
 	(user/set-theme))))

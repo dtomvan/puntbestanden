@@ -91,6 +91,19 @@ compilation of =.el= files.
     (setq native-compile-prune-cache t))
 #+end_src
 
+** World clock
+This is a wacky builtin package that displays the current time in a
+number of timezones. By default it's Seattle, New York, London, Paris
+and Tokyo. I'll add my local time.
+
+#+begin_src emacs-lisp
+  (use-package time
+    :ensure nil ;builtin
+    :init
+    (with-eval-after-load 'time
+      (add-to-list 'zoneinfo-style-world-list '("Europe/Amsterdam" "local"))))
+#+end_src
+
 * Packages
 Eventually I want some packages installed, like evil. This requires
 =package.el= and MELPA setup.
@@ -147,8 +160,8 @@ accordingly. It's a whole minor mode and all!
     (let ((current-hour (cl-parse-integer (format-time-string "%H")))
 	  (old-is-dark user/is-dark-theme))
       (setq user/is-dark-theme
-	    (or (> current-hour user/dark-theme-min)
-		(< current-hour user/dark-theme-max)))
+	    (or (>= current-hour user/dark-theme-min)
+		(<= current-hour user/dark-theme-max)))
       (when
 	  (not (eq old-is-dark user/is-dark-theme))
 	(user/set-theme))))
