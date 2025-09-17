@@ -27,8 +27,10 @@
               corfu
               denote
               denote-markdown
+              eat
               elfeed
               elfeed-org
+              envrc
               evil
               evil-collection
               evil-commentary
@@ -45,7 +47,7 @@
               tree-sitter-langs
               typst-ts-mode
               ultra-scroll
-              undo-fu
+              undo-tree
               vc-jj
               vertico
             ]
@@ -90,4 +92,13 @@
     {
       environment.systemPackages = [ pkgs.myEmacs ];
     };
+
+  flake.modules.homeManager.profiles-workstation = {
+    programs.bash.initExtra = # bash
+      ''
+        if [ -n "$EAT_SHELL_INTEGRATION_DIR" ]; then
+          source "$EAT_SHELL_INTEGRATION_DIR/bash"
+        fi
+      '';
+  };
 }

@@ -81,6 +81,31 @@ also messes with VCS systems such as Jujutsu. Let's disable it.
 	create-lockfiles nil)
 #+end_src
 
+** Save place
+=save-place-local-mode= is used to place the point where you last left
+o ff when you closed a certain file. Useful when programming or when
+taking notes. Hence adding to =org-mode= and =prog-mode=.
+
+#+begin_src emacs-lisp
+  (use-package saveplace
+    :ensure nil
+    :hook
+    (prog-mode . save-place-local-mode)
+    (org-mode . save-place-local-mode))
+#+end_src
+
+
+** Recent files
+This mode is sadly turned off by default, but it keeps track of all
+recent files. Also useful to pick up where you left off last.
+
+#+begin_src emacs-lisp
+  (use-package recentf
+    :ensure nil
+    :init
+    (recentf-mode 1))
+#+end_src
+
 ** Native compilation
 This snippet disables the clutter that comes with the new native
 compilation of =.el= files.
@@ -128,7 +153,13 @@ accordingly. It's a whole minor mode and all!
 
 #+begin_src emacs-lisp
   (use-package catppuccin-theme
-    :ensure t)
+    :ensure t
+    :init
+    (defun user/catppuccin-reload (_a)
+      "reload catppuccin, except one extra argument or something"
+      (interactive "i")
+      (catppuccin-reload))
+    (add-to-list 'after-make-frame-functions 'user/catppuccin-reload))
   (defun user/light-theme-hook ()
     "Load the light theme."
     (setq catppuccin-flavor 'latte)
@@ -145,10 +176,10 @@ accordingly. It's a whole minor mode and all!
     (interactive)
     ;; TODO: is it required to disable all other themes?
     (seq-each (lambda (theme)
-		(disable-theme theme))
-	      custom-enabled-themes)
+		      (disable-theme theme))
+		    custom-enabled-themes)
     (if user/is-dark-theme
-	(user/dark-theme-hook)
+	      (user/dark-theme-hook)
       (user/light-theme-hook)))
   (defun user/toggle-theme ()
     "Toggle the theme between light and dark."
@@ -164,13 +195,13 @@ accordingly. It's a whole minor mode and all!
     "Sets the theme based on the current time of day"
     (interactive)
     (let ((current-hour (cl-parse-integer (format-time-string "%H")))
-	  (old-is-dark user/is-dark-theme))
+		(old-is-dark user/is-dark-theme))
       (setq user/is-dark-theme
-	    (or (>= current-hour user/dark-theme-min)
-		(<= current-hour user/dark-theme-max)))
+		  (or (>= current-hour user/dark-theme-min)
+		      (<= current-hour user/dark-theme-max)))
       (when
-	  (not (eq old-is-dark user/is-dark-theme))
-	(user/set-theme))))
+		(not (eq old-is-dark user/is-dark-theme))
+	      (user/set-theme))))
 
   (defvar user/theme-tod-timer nil)
   (defconst user/theme-tod-interval (* 30 60)) ; half an hour
@@ -180,10 +211,10 @@ accordingly. It's a whole minor mode and all!
     :lighter 'theme-tod
     (when theme-tod-mode (user/set-theme-tod)) ; when toggled on do the thing initially
     (setq user/theme-tod-timer
-	  (if
-	      (timerp user/theme-tod-timer)
-	      (cancel-timer user/theme-tod-timer)
-	    (run-at-time t user/theme-tod-interval 'user/set-theme-tod))))
+		(if
+		    (timerp user/theme-tod-timer)
+		    (cancel-timer user/theme-tod-timer)
+		  (run-at-time t user/theme-tod-interval 'user/set-theme-tod))))
 
   (theme-tod-mode 1)
 #+end_src
@@ -204,15 +235,15 @@ And the non-mono variant for headings, and at some pitches:
 #+begin_src emacs-lisp
   (defconst user/variable-width-font "AporeticSans Nerd Font")
   (set-face-attribute 'variable-pitch nil
-        :family user/variable-width-font)
+	:family user/variable-width-font)
   (set-face-attribute 'org-level-1 nil
-        :height 1.3)
+	:height 1.3)
   (set-face-attribute 'org-level-2 nil
-        :height 1.2)
+	:height 1.2)
   (set-face-attribute 'org-level-3 nil
-        :height 1.1)
+	:height 1.1)
   (set-face-attribute 'org-level-4 nil
-        :height 1.05)
+	:height 1.05)
 #+end_src
 
 From level 5 onwards I don't care enough anymore... it's enough
@@ -346,29 +377,34 @@ project support to create a new frame in each context.
 
 * Evil mode
 #+begin_src emacs-lisp
-  ; required for U and C-r
-  (use-package undo-fu
-    :ensure t)
+    ; required for U and C-r
+    (use-package undo-tree
+      :ensure t
+      :init
+      (setq undo-tree-history-directory-alist
+	    '(("." . "~/.config/emacs/undo-tree")))
+      (global-undo-tree-mode 1))
 
-  (setq evil-undo-system 'undo-fu
-	evil-want-keybinding nil)
+    (setq evil-undo-system 'undo-tree
+	    evil-want-keybinding nil
+	    evil-want-C-u-scroll t)
 
-  ; required for certain functionality I can't remember
-  (use-package goto-chg
-    :ensure t)
+    ; required for certain functionality I can't remember
+    (use-package goto-chg
+      :ensure t)
 
-  (defun user/evil-insert-paste ()
-    (interactive)
-    (evil-paste-from-register ?\"))
+    (defun user/evil-insert-paste ()
+      (interactive)
+      (evil-paste-from-register ?\"))
 
-  (use-package evil
-    :ensure t
-    :init
-    (evil-mode 1)
-    :bind
-    (:map evil-insert-state-map
-	  ("C-y" . user/evil-insert-paste))	; paste with emacs keybind even in insert mode
-    )
+    (use-package evil
+      :ensure t
+      :init
+      (evil-mode 1)
+      :bind
+      (:map evil-insert-state-map
+		    ("C-y" . user/evil-insert-paste))	; paste with emacs keybind even in insert mode
+      )
 #+end_src
 
 ** Keymaps
@@ -427,6 +463,23 @@ Various supplemental packages that:
    'user/open-config)
 #+end_src
 
+
+*** =:*new= command fix
+I also want =*new*= buffers to be launched into =lisp-interaction-mode=.
+
+#+begin_src emacs-lisp
+  (defun user/evil-buffer-new (_a)
+    "open `lisp-interaction-mode' in a new empty buffer"
+    (interactive "i")
+    (let ((buffer (generate-new-buffer "*new*")))
+      (with-current-buffer buffer (lisp-interaction-mode))
+      (set-window-buffer nil buffer)))
+
+  (advice-add 'evil-buffer-new :override #'user/evil-buffer-new)
+#+end_src
+
+**** TODO can I do this with an =:after= advice???
+
 * History
 The builtin =savehist.el= allows you to save =M-x= (and others')
 history to a file in =.emacs.d=.
@@ -445,9 +498,25 @@ Emacs has builtin editorconfig support. Let's enable it:
 #+begin_src emacs-lisp
   (use-package editorconfig
     :ensure nil
+    :custom
+    ;; otherwise the dir-locals system will yell at you that you are
+    ;; trying to use unsafe variables even tho it's just editorconfig.
+    ;; the editorconfig system is kind-of messed up in emacs.
+    ;; See https://cgit.git.savannah.gnu.org/cgit/emacs.git/tree/lisp/editorconfig.el?h=emacs-30.2
+    (enable-local-variables :safe)
     :init
     (editorconfig-mode t))
 #+end_src
+** Direnv support
+Not much to say. It's used to make my devshell work in eshell. Among
+other things like =compilation-mode=.
+
+#+begin_src emacs-lisp
+  (use-package envrc
+    :ensure t
+    :hook (after-init . envrc-global-mode))
+#+end_src
+
 ** Simple autocomplete
 I am planning to keep using NVim for writing code, with an extensive
 =nixvim= framework for declarative nvim configs. This way I can have a
@@ -690,7 +759,7 @@ I use =typst-ts-mode=.
   ;; (with-eval-after-load 'treesit
   ;;   (unless (treesit-language-available-p 'typst)
   ;;     (add-to-list 'treesit-language-source-alist
-  ;;   	   '(typst "https://github.com/uben0/tree-sitter-typst"))
+  ;;	   '(typst "https://github.com/uben0/tree-sitter-typst"))
   ;;     (treesit-install-language-grammar 'typst)))
   (use-package typst-ts-mode
     :ensure t)
@@ -868,4 +937,15 @@ option. Let's install it into our OS.
     (elfeed-org)
     :custom
     (rmh-elfeed-org-files (list "~/.config/emacs/elfeed.org")))
+#+end_src
+
+* EAT - Emulate A Terminal
+It's to integrate everything nicely and to actually be able to run
+TUI's and other weird terminal stuff inside of eshell.
+
+#+begin_src emacs-lisp
+  (use-package eat
+    :ensure t
+    :hook
+    (eshell-load . eat-eshell-mode))
 #+end_src
