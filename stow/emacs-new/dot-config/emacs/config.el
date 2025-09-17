@@ -34,10 +34,16 @@
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-(defcustom user/light-theme 'modus-operandi-tinted
-  "The theme used when the light theme is enabled.")
-(defcustom user/dark-theme 'modus-vivendi-tinted
-  "The theme used when the dark theme is enabled.")
+(use-package catppuccin-theme
+  :ensure t)
+(defun user/light-theme-hook ()
+  "Load the light theme."
+  (setq catppuccin-flavor 'latte)
+  (load-theme 'catppuccin :no-confirm))
+(defun user/dark-theme-hook ()
+  "Load the dark theme."
+  (setq catppuccin-flavor 'mocha)
+  (load-theme 'catppuccin :no-confirm))
 (defcustom user/is-dark-theme t
   "If true, use the user/dark-theme, if false, use the user/light-theme"
   :type '(boolean))
@@ -49,8 +55,8 @@
 		(disable-theme theme))
 	      custom-enabled-themes)
   (if user/is-dark-theme
-	(load-theme user/dark-theme t)
-    (load-theme user/light-theme t)))
+	(user/dark-theme-hook)
+    (user/light-theme-hook)))
 (defun user/toggle-theme ()
   "Toggle the theme between light and dark."
   (interactive)
@@ -91,18 +97,16 @@
 (set-face-attribute 'default nil :font "AporeticSansM Nerd Font" :height 130)
 
 (defconst user/variable-width-font "AporeticSans Nerd Font")
-(set-face-attribute 'modus-themes-heading-1 nil
-		      :family user/variable-width-font
-		      :height 1.3)
-(set-face-attribute 'modus-themes-heading-2 nil
-		      :family user/variable-width-font
-		      :height 1.2)
-(set-face-attribute 'modus-themes-heading-3 nil
-		      :family user/variable-width-font
-		      :height 1.1)
-(set-face-attribute 'modus-themes-heading-4 nil
-		      :family user/variable-width-font
-		      :height 1.05)
+(set-face-attribute 'variable-pitch nil
+      :family user/variable-width-font)
+(set-face-attribute 'org-level-1 nil
+      :height 1.3)
+(set-face-attribute 'org-level-2 nil
+      :height 1.2)
+(set-face-attribute 'org-level-3 nil
+      :height 1.1)
+(set-face-attribute 'org-level-4 nil
+      :height 1.05)
 
 (use-package vertico
   :ensure t
@@ -458,11 +462,8 @@ The DWIM behaviour of this command is as follows:
 
 (define-key global-map (kbd "C-g") #'prot/keyboard-quit-dwim)
 
-(use-package treesit-langs
-  :ensure t
-  :vc (:url "https://github.com/emacs-tree-sitter/treesit-langs.git")
-  :init
-  (treesit-langs-major-mode-setup))
+(use-package tree-sitter-langs
+  :ensure t)
 
 (use-package nix-mode
   :ensure t)

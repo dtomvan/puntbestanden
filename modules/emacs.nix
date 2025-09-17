@@ -9,6 +9,7 @@
           # it is missing something
           basePackages = with p; [
             beframe
+            catppuccin-theme
             consult
             consult-denote
             corfu

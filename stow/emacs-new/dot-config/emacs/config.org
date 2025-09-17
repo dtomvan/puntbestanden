@@ -127,10 +127,16 @@ periodically check whether it's past seven and adjust the theme
 accordingly. It's a whole minor mode and all!
 
 #+begin_src emacs-lisp
-  (defcustom user/light-theme 'modus-operandi-tinted
-    "The theme used when the light theme is enabled.")
-  (defcustom user/dark-theme 'modus-vivendi-tinted
-    "The theme used when the dark theme is enabled.")
+  (use-package catppuccin-theme
+    :ensure t)
+  (defun user/light-theme-hook ()
+    "Load the light theme."
+    (setq catppuccin-flavor 'latte)
+    (load-theme 'catppuccin :no-confirm))
+  (defun user/dark-theme-hook ()
+    "Load the dark theme."
+    (setq catppuccin-flavor 'mocha)
+    (load-theme 'catppuccin :no-confirm))
   (defcustom user/is-dark-theme t
     "If true, use the user/dark-theme, if false, use the user/light-theme"
     :type '(boolean))
@@ -142,8 +148,8 @@ accordingly. It's a whole minor mode and all!
 		(disable-theme theme))
 	      custom-enabled-themes)
     (if user/is-dark-theme
-	(load-theme user/dark-theme t)
-      (load-theme user/light-theme t)))
+	(user/dark-theme-hook)
+      (user/light-theme-hook)))
   (defun user/toggle-theme ()
     "Toggle the theme between light and dark."
     (interactive)
@@ -197,18 +203,16 @@ And the non-mono variant for headings, and at some pitches:
 
 #+begin_src emacs-lisp
   (defconst user/variable-width-font "AporeticSans Nerd Font")
-  (set-face-attribute 'modus-themes-heading-1 nil
-		      :family user/variable-width-font
-		      :height 1.3)
-  (set-face-attribute 'modus-themes-heading-2 nil
-		      :family user/variable-width-font
-		      :height 1.2)
-  (set-face-attribute 'modus-themes-heading-3 nil
-		      :family user/variable-width-font
-		      :height 1.1)
-  (set-face-attribute 'modus-themes-heading-4 nil
-		      :family user/variable-width-font
-		      :height 1.05)
+  (set-face-attribute 'variable-pitch nil
+        :family user/variable-width-font)
+  (set-face-attribute 'org-level-1 nil
+        :height 1.3)
+  (set-face-attribute 'org-level-2 nil
+        :height 1.2)
+  (set-face-attribute 'org-level-3 nil
+        :height 1.1)
+  (set-face-attribute 'org-level-4 nil
+        :height 1.05)
 #+end_src
 
 From level 5 onwards I don't care enough anymore... it's enough
