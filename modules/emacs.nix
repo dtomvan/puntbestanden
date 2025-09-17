@@ -7,36 +7,43 @@
         let
           # loosely keep this in sync with whatever is in the config. {,M}ELPA exists if
           # it is missing something
-          basePackages = with p; [
-            beframe
-            catppuccin-theme
-            consult
-            consult-denote
-            corfu
-            denote
-            denote-markdown
-            elfeed
-            elfeed-org
-            evil
-            evil-collection
-            evil-commentary
-            evil-org
-            evil-surround
-            goto-chg
-            magit
-            marginalia
-            markdown-mode
-            nix-mode
-            orderless
-            org
-            ox-typst
-            tree-sitter-langs
-            typst-ts-mode
-            pkgs.tree-sitter-grammars.tree-sitter-typst
-            ultra-scroll
-            undo-fu
-            vertico
-          ];
+          basePackages =
+            with p;
+            [
+              beframe
+              catppuccin-theme
+              consult
+              consult-denote
+              corfu
+              denote
+              denote-markdown
+              elfeed
+              elfeed-org
+              evil
+              evil-collection
+              evil-commentary
+              evil-org
+              evil-surround
+              goto-chg
+              magit
+              marginalia
+              markdown-mode
+              nix-mode
+              orderless
+              org
+              ox-typst
+              tree-sitter-langs
+              typst-ts-mode
+              ultra-scroll
+              undo-fu
+              vertico
+            ]
+            # TODO: add more langs
+            ++ lib.map (l: pkgs.tree-sitter-grammars."tree-sitter-${l}") [
+              "elisp"
+              "markdown"
+              "typst"
+            ];
         in
         basePackages
         ++ [
