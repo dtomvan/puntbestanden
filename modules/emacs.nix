@@ -80,7 +80,7 @@
             HOME="$(mktemp -d)"
             cd "$HOME"
             install -Dm444 ${../stow/emacs-new/dot-config/emacs}/config.org -t ~/.config/emacs/
-            emacs -x ${default_el}
+            emacs -x ${default_el} 2>&1 | awk -v IGNORECASE=1 '/^error/{print "Error while loading emacs config:", $0; exit 1} {print $0}'
             touch $out
           '';
     };
