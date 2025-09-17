@@ -11,11 +11,6 @@
     inputs.vs2nix.overlay
   ];
 
-  # TODO: remove after vintagestory 1.21
-  pkgs-config.permittedInsecurePackages = [
-    "dotnet-runtime-7.0.20"
-  ];
-
   flake.modules.nixos.services-vintagestory =
     {
       lib,
@@ -39,35 +34,22 @@
           "--addModPath"
           (builtins.toString (
             inputs.vs2nix.legacyPackages.x86_64-linux.makeVintageStoryModsDir "my-mods" (
-              mods:
-              with mods;
-              [
-                # betterruins
-                (pkgs.fetchurl rec {
-                  pname = "BetterRuins";
-                  version = "0.4.14";
-                  url = "https://mods.vintagestory.at/download/46364/${pname}v${version}.zip";
-                  hash = "sha256-aDFrBa1pN0gc0SpuiMynO19L4BCbogtBpKtFnao+G8w=";
-                })
-                # settings:
-                # landform 50%, lf scale 300%
-                # worldheight 320
-                terraprety
-                # needed for terraprety above 1.20
-                (pkgs.fetchurl rec {
-                  pname = "MoreBlueClay";
-                  version = "1.0.1";
-                  url = "https://mods.vintagestory.at/download/35368/${pname}_${version}.zip";
-                  hash = "sha256-eQIV5NHTHleAaPWPi9m9RQbJaZDkT89/kqjFU6BicU8=";
-                })
+              mods: with mods; [
                 (pkgs.fetchurl rec {
                   pname = "BetterForest";
-                  version = "0.1.0";
-                  url = "https://mods.vintagestory.at/download/33287/${pname}_${version}.zip";
-                  hash = "sha256-1q166al70H7WwB2irzngVI4s37NI1MvqqKKyRiBZ80A=";
+                  version = "0.1.1.zip";
+                  url = "https://mods.vintagestory.at/download/52350/${pname}_${version}";
+                  hash = "sha256-WAeWmP0s44NdD04w3z/E0WE+4eOXXJYfIcwX6AX7QbE=";
                 })
                 # more survival mechanics
-                primitivesurvival
+                # primitivesurvival
+                # TODO: remove after vs2nix bump
+                (pkgs.fetchurl rec {
+                  pname = "primitivesurvival";
+                  version = "3.9.6.zip";
+                  url = "https://mods.vintagestory.at/download/55364/${pname}_${version}";
+                  hash = "sha256-THhLZjlRDY0lOXhB+xPb0kRBsnELsl1QxwGJHLgsQfY=";
+                })
 
                 ## QOL
                 betterfirepit
@@ -87,15 +69,6 @@
                 vsimgui
                 configlib
                 autoconfiglib
-              ]
-              ++ lib.optionals (lib.versionOlder pkgs.vintagestory.version "1.21") [
-                # needed for terraprety below 1.21
-                (pkgs.fetchurl rec {
-                  pname = "SeaLevelFix";
-                  version = "1.0.11";
-                  url = "https://mods.vintagestory.at/download/45783/${pname}_${version}.zip";
-                  hash = "sha256-2GthrtRefpHYTDsoL2sNnvlUUQXzwMymfNyh4PRI03s=";
-                })
               ]
             )
           ))
