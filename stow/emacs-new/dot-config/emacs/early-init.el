@@ -53,10 +53,3 @@
 	    (setq gc-cons-threshold (* 100 100 8)
 		  gc-cons-percentage 0.1
 		  file-name-handler-alist prot-emacs--file-name-handler-alist)))
-
-;; Initialise installed packages at this early stage, by using the
-;; available cache.  I had tried a setup with this set to nil in the
-;; early-init.el, but (i) it ended up being slower and (ii) various
-;; package commands, like `describe-package', did not have an index of
-;; packages to work with, requiring a `package-refresh-contents'.
-(setq package-enable-at-startup t)

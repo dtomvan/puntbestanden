@@ -6,6 +6,11 @@
       lib,
       ...
     }:
+    let
+      default_el = builtins.toFile "default.el" ''
+        (org-babel-load-file (locate-user-emacs-file "config.org"))
+      '';
+    in
     {
       packages.myEmacs = pkgs.emacs-pgtk.pkgs.withPackages (
         p:
@@ -41,25 +46,29 @@
               typst-ts-mode
               ultra-scroll
               undo-fu
+              vc-jj
               vertico
             ]
+            ++ (with pkgs; [
+              # used for cloning various packages if needed
+              git
+            ])
             # TODO: add more langs
             ++ lib.map (l: pkgs.tree-sitter-grammars."tree-sitter-${l}") [
               "elisp"
               "markdown"
               "typst"
             ];
-        in
-        basePackages
-        ++ [
+
           # the "sensible default" of loading ~/.config/emacs/config.org
-          (p.trivialBuild {
+          default = p.trivialBuild {
             pname = "default";
-            src = pkgs.writeText "default.el" "(org-babel-load-file (locate-user-emacs-file \"config.org\"))";
+            src = default_el;
             version = "0.1.0";
             packageRequires = basePackages;
-          })
-        ]
+          };
+        in
+        basePackages ++ [ default ]
       );
 
       checks.emacsLoadCheck =
@@ -70,8 +79,8 @@
           ''
             HOME="$(mktemp -d)"
             cd "$HOME"
-            install -Dm444 ${../stow/emacs-new/dot-config/emacs}/{init.el,config.org} -t ~/.config/emacs/
-            emacs -x ~/.config/emacs/init.el
+            install -Dm444 ${../stow/emacs-new/dot-config/emacs}/config.org -t ~/.config/emacs/
+            emacs -x ${default_el}
             touch $out
           '';
     };
