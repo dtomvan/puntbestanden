@@ -1,6 +1,11 @@
 {
   perSystem =
-    { self', pkgs, ... }:
+    {
+      self',
+      pkgs,
+      lib,
+      ...
+    }:
     {
       packages.myEmacs = pkgs.emacs-pgtk.pkgs.withPackages (
         p:
