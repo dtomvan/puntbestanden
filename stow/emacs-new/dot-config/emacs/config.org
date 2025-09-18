@@ -949,3 +949,33 @@ TUI's and other weird terminal stuff inside of eshell.
     :hook
     (eshell-load . eat-eshell-mode))
 #+end_src
+
+* Terminal integration
+I don't know if it's builtin, but I figured it's much better as =M-x
+alacritty=. Let's make that simple command:
+
+#+begin_src emacs-lisp
+  (defun alacritty ()
+    "Launch alacritty in the current directory."
+    (interactive)
+    (with-editor-async-shell-command
+     "alacritty"))
+#+end_src
+
+** Quick quit
+Quit commands like `jj desc' with C-c C-c
+#+begin_src emacs-lisp
+  ;; Ask for focus when we switch to a file
+  (add-hook 'server-switch-hook #'raise-frame)
+
+  (advice-add 'server-edit :before 'save-buffer)
+
+  (defvar-keymap user/server-quick-quit-mode-map)
+  (bind-key (kbd "C-c C-c") 'server-edit 'user/server-quick-quit-mode-map)
+
+  (define-minor-mode user/server-quick-quit-mode
+    "Quit the current file with C-c C-c."
+    :keymap user/server-quick-quit-mode-map)
+
+  (add-hook 'server-switch-hook #'user/server-quick-quit-mode)
+#+end_src

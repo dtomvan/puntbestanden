@@ -27,7 +27,9 @@
         initExtra =
           # bash
           ''
-            export EDITOR=nvim
+            if [ "$EDITOR" = "nano" ]; then
+              export EDITOR=nvim
+            fi
             source "${pkgs.bash-preexec}/share/bash/bash-preexec.sh"
             bind 'set show-all-if-ambiguous on'
             bind 'tab:menu-complete'
