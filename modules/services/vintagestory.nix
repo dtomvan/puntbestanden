@@ -41,6 +41,7 @@
                   url = "https://mods.vintagestory.at/download/52350/${pname}_${version}";
                   hash = "sha256-WAeWmP0s44NdD04w3z/E0WE+4eOXXJYfIcwX6AX7QbE=";
                 })
+                betterruins
                 # more survival mechanics
                 # primitivesurvival
                 # TODO: remove after vs2nix bump
@@ -49,6 +50,20 @@
                   version = "3.9.6.zip";
                   url = "https://mods.vintagestory.at/download/55364/${pname}_${version}";
                   hash = "sha256-THhLZjlRDY0lOXhB+xPb0kRBsnELsl1QxwGJHLgsQfY=";
+                })
+                th3dungeon
+                (pkgs.fetchurl rec {
+                  pname = "Th3DungonTopEntrance";
+                  version = "0.4.1.zip";
+                  url = "https://mods.vintagestory.at/download/33892/${pname}_${version}";
+                  hash = "sha256-9KlI/puV3QSCoK42WoKSoAnX+/fqyW+sbRTztg1hJ2E=";
+                })
+
+                (pkgs.fetchurl {
+                  pname = "AutoMapMarkers";
+                  version = "4.0.2.zip";
+                  url = "https://mods.vintagestory.at/download/49192/Auto+Map+Markers+4.0.3+-+Vintagestory+1.21-rc.zip";
+                  hash = "sha256-2b81XW0I39kMbRXzdA5fFwXyumRLqDkXEVUErzmcpHU=";
                 })
 
                 ## QOL
