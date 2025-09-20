@@ -7,7 +7,7 @@ in
   flake-file.inputs.copyparty = {
     # TODO: bump manually on new release, you could make a flake app that does
     # this but yeah it doesn't really matter
-    url = "github:9001/copyparty/75b0b312a4ecf1c468b529a2cfe33adcd93ec26b";
+    url = "github:9001/copyparty/a9e02ce753a1342b6d691462f92f5216e62b4b44";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
