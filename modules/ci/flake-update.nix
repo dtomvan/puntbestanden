@@ -15,6 +15,7 @@
             jobs.nix-flake-update =
               let
                 branch = "update_flake_lock_action";
+                msg = "chore: nix flake update";
               in
               {
                 permissions =
@@ -32,7 +33,15 @@
                     uses = "DeterminateSystems/update-flake-lock@v27";
                     "with" = {
                       inherit branch;
-                      pr-title = "chore: nix flake update";
+                      commit-msg = msg;
+                      pr-title = msg;
+                      pr-body = ''
+                        ```
+                        {{ env.GIT_COMMIT_MESSAGE }}
+                        ```
+
+                        @dtomvan (ping for GH mobile)
+                      '';
                     };
                   }
                   {

@@ -18,6 +18,17 @@ jobs:
     - uses: DeterminateSystems/update-flake-lock@v27
       with:
         branch: update_flake_lock_action
+        commit-msg: 'chore: nix flake update'
+        pr-body: '```
+
+          {{ env.GIT_COMMIT_MESSAGE }}
+
+          ```
+
+
+          @dtomvan (ping for GH mobile)
+
+          '
         pr-title: 'chore: nix flake update'
     - run: "nix run .#write-flake\nnix run .#write-files\nnix fmt\n\nif [[ \"$(git\
         \ status --porcelain | wc -l)\" -gt 0 ]]; then\n  git commit -am 'chore: sync\
