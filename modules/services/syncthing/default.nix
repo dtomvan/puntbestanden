@@ -44,6 +44,15 @@
             params.cleanoutDays = "30";
           };
         };
+        Music = {
+          id = "pmac7-de6gr";
+          path = "~/Music";
+          devices = allDevices;
+          versioning = {
+            type = "trashcan";
+            params.cleanoutDays = "30";
+          };
+        };
         pinchflat = lib.mkIf config.services.pinchflat.enable {
           id = "g7kr4-ewyfn";
           path = "/var/lib/pinchflat/media";
