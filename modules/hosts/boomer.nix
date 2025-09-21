@@ -16,7 +16,8 @@
 
           steam
 
-          services-localsend-rs
+          # broken?
+          # services-localsend-rs
           services-pinchflat
           services-syncthing
           services-vintagestory
