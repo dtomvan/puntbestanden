@@ -1084,11 +1084,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1758102651,
-        "narHash": "sha256-gYstfYRcoa/VRNSx6eXoxlWhVeJ85qsKSfXSD+JqFEk=",
+        "lastModified": 1758466213,
+        "narHash": "sha256-on6oXh/qFslWVut37RHFLAMwQ/wh9VlNGcF81LfIMNI=",
         "owner": "dtomvan",
         "repo": "vs2nix",
-        "rev": "be186e1bbb72ac185cb9efe61750568a6bdf1658",
+        "rev": "6b0274e92b41168b5e2c47fc4d30a9307d60bf54",
         "type": "github"
       },
       "original": {
