@@ -9,7 +9,7 @@
           drv = pkgs.writers.writeYAML "nix-flake-update.yml" {
             on = {
               workflow_dispatch = { };
-              schedule = [ { cron = "0 0 * * 0"; } ];
+              schedule = [ { cron = "0 5 * * 0"; } ];
             };
 
             jobs.nix-flake-update =
@@ -30,6 +30,13 @@
 
                 steps = self.actions-setup ++ [
                   {
+                    name = "Get vs2nix pulls";
+                    run = ''
+                      vs2nix_pulls=$(gh api repos/dtomvan/vs2nix/pulls | jq -r 'map(select(.user.login == "github-actions[bot]") | "- \(.html_url)") | .[]')
+                      printf "MERGE_FIRST='%s'" "$vs2nix_pulls" >> $GITHUB_ENV
+                    '';
+                  }
+                  {
                     uses = "DeterminateSystems/update-flake-lock@v27";
                     "with" = {
                       inherit branch;
@@ -41,6 +48,9 @@
                         ```
 
                         @dtomvan (ping for GH mobile)
+
+                        Merge first:
+                        {{ env.MERGE_FIRST }}
                       '';
                     };
                   }

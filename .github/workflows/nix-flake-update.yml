@@ -15,6 +15,13 @@ jobs:
     - uses: cachix/install-nix-action@v31
       with:
         github_access_token: ${{ secrets.LOCALSEND_TOKEN }}
+    - name: Get vs2nix pulls
+      run: 'vs2nix_pulls=$(gh api repos/dtomvan/vs2nix/pulls | jq -r ''map(select(.user.login
+        == "github-actions[bot]") | "- \(.html_url)") | .[]'')
+
+        printf "MERGE_FIRST=''%s''" "$vs2nix_pulls" >> $GITHUB_ENV
+
+        '
     - uses: DeterminateSystems/update-flake-lock@v27
       with:
         branch: update_flake_lock_action
@@ -28,6 +35,11 @@ jobs:
 
           @dtomvan (ping for GH mobile)
 
+
+          Merge first:
+
+          {{ env.MERGE_FIRST }}
+
           '
         pr-title: 'chore: nix flake update'
     - run: "nix run .#write-flake\nnix run .#write-files\nnix fmt\n\nif [[ \"$(git\
@@ -36,5 +48,5 @@ jobs:
         fi\n"
 'on':
   schedule:
-  - cron: 0 0 * * 0
+  - cron: 0 5 * * 0
   workflow_dispatch: {}
