@@ -13,7 +13,7 @@ jobs:
     - run: nix flake lock
     - run: nix flake check -L
 'on':
-  pull_request: {}
   push:
     branches:
     - main
+  workflow_dispatch: {}
