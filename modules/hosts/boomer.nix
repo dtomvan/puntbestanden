@@ -33,11 +33,6 @@
         environment.systemPackages =
           with pkgs;
           [
-            # fuck flatpaks they don't even work half the time
-            discord
-            thunderbird
-            obsidian
-
             (prismlauncher.override {
               jdks = [
                 jdk8
@@ -46,8 +41,6 @@
                 jdk24
               ];
             })
-
-            python3
 
             nur.repos.dtomvan.tsodingPackages.blang
             nur.repos.dtomvan.tsodingPackages.musializer

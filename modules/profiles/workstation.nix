@@ -18,13 +18,16 @@
       modules.utilities.enableLazyApps = true;
 
       environment.systemPackages = with pkgs; [
+        discord
         forge-sparks
         keepassxc
         libreoffice-qt6-fresh
+        obsidian
         pdfarranger
         pika-backup
-        telegram-desktop
+        python3
         signal-desktop
+        telegram-desktop
         thunderbird
       ];
     };
