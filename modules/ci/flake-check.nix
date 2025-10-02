@@ -10,7 +10,7 @@
           path_ = ".github/workflows/nix-flake-check.yml";
           drv = pkgs.writers.writeYAML "nix-flake-check.yml" {
             on = {
-              push.branches = [ "main" ];
+              pull_request = { };
               workflow_dispatch = { };
             };
 
