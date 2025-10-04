@@ -95,6 +95,9 @@ in
             # according to docs: checks for dangerous symlinks on startup
             # I have symlinks to the nix store so this one isn't really possible
             # ls = "**,*,ln,p,r";
+
+            # human-readable file size: SI format, 2 decimals (1.18 MB)
+            ui-filesz = "4c";
           };
 
           accounts.${user}.passwordFile = config.sops.secrets.copyparty.path;
