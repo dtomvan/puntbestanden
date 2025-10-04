@@ -178,7 +178,7 @@ in
                   # max 200 mb uploads
                   sz = "0-200m";
                   # always leave a little more than my system closure size
-                  df = "20g";
+                  df = "25g";
                   # No XSS please
                   nohtml = true;
                 };
