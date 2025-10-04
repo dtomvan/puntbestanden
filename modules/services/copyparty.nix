@@ -1,7 +1,13 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  self,
+  ...
+}:
 let
   user = "tomvd";
   group = "users";
+  port = 80;
 in
 {
   flake-file.inputs.copyparty = {
@@ -57,7 +63,7 @@ in
             ### connection
             # e.g. boomerparty, featherparty
             name = "${config.networking.hostName}party";
-            p = "80";
+            p = builtins.toString port;
             z = true;
             no-robots = true;
 
@@ -202,5 +208,55 @@ in
             Environment = [ "DBUS_SESSION_BUS_ADDRESS=unix:path=${sessionBus}" ];
           };
         };
+    };
+
+  # ensure that copyparty starts correctly given the config and that basic auth
+  # perms are correct. we can't test with the real passwords since sops in
+  # a nixos test would mean leaking my private keys to the nix store
+  perSystem =
+    { pkgs, ... }:
+    {
+      checks.copyparty = pkgs.testers.runNixOSTest (
+        { lib, ... }:
+        {
+          name = "copyparty";
+          nodes.machine = {
+            imports = [
+              self.modules.nixos.services-copyparty
+              self.modules.nixos.users-tomvd
+              inputs.sops.nixosModules.sops
+            ];
+            services.openssh.enable = true;
+            services.copyparty.accounts = {
+              ${user}.passwordFile = lib.mkForce (builtins.toFile "copyparty-test-tomvd-password" "AAAA");
+              docs.passwordFile = lib.mkForce (builtins.toFile "copyparty-test-docs-password" "BBBB");
+            };
+            environment.systemPackages = [ pkgs.curl ];
+          };
+          testScript = ''
+            machine.succeed("copyparty --help")
+            machine.wait_for_unit("copyparty.service")
+            machine.wait_for_open_port(80)
+
+            # homepage
+            machine.succeed("curl -f http://localhost:80/")
+
+            # list
+            machine.succeed("curl -f http://localhost:80/Music")
+            machine.succeed("curl -fH pw:AAAA http://localhost:80")
+            machine.succeed("curl -fH pw:BBBB http://localhost:80/Documents")
+
+            # upload
+            machine.succeed("curl -fH pw:AAAA -H rand:8 -T /etc/os-release http://localhost:80")
+            machine.succeed("curl -fH pw:BBBB -H rand:8 -T /etc/os-release http://localhost:80/Documents")
+
+            # fails due to insufficient space (requires a lot of headroom which vm tests don't get)
+            machine.fail("curl -fT /etc/os-release http://localhost:80/drop")
+
+            # 403
+            machine.fail("curl -f http://localhost:80/Documents")
+          '';
+        }
+      );
     };
 }
