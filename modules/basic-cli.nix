@@ -21,6 +21,19 @@
       };
       programs.zoxide.enable = mkDefault true;
 
+      programs.nix-init = {
+        enable = true;
+        settings = {
+          maintainers = [ "dtomvan" ];
+          commit = true;
+          access-tokens."github.com".command = [
+            (lib.getExe pkgs.gh)
+            "auth"
+            "token"
+          ];
+        };
+      };
+
       programs.bash = {
         enable = true;
 

@@ -20,7 +20,6 @@
           wget
           curl
           nix-output-monitor
-          nix-init
           nurl
           git
           jujutsu
