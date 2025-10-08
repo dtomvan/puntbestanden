@@ -37,7 +37,7 @@ in
 
     configRoot = lib.mkOption {
       description = "path to the root of the config so the installer can copy it to /etc/nixos";
-      default = ../..;
+      default = ../../..;
       type = lib.types.pathInStore;
     };
   };
