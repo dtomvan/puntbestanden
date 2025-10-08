@@ -5,6 +5,12 @@
 What's in here:
 - 5 NixOS configs
 - a dendritic home-manager config (TODO: list aspects here)
+## How to install
+A single command: 
+```ShellSession
+$ nix develop -c sudo disko-install -m format --flake .#<HOSTNAME> --disk main /dev/nvme0n1
+```
+
 - An unhinged Emacs config
 - A lot less lines of neovim lua config compared to my [previous attempt](https://github.com/dtomvan/.config/tree/main/neovim/.config/nvim)
 # Dendritic

@@ -5,6 +5,7 @@
       "intro"
       "nixos_configs"
       "home_configs"
+      "disko_install"
       "contents_rest"
       "dendritic"
       "hostnames"
