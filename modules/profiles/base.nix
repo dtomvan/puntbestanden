@@ -30,8 +30,6 @@
           sops
 
           programs-comma
-          programs-gpg
-          programs-less
           nano
 
           networking-wifi-passwords
@@ -39,6 +37,12 @@
           undollar
         ];
 
+        programs.gnupg.agent = {
+          enable = true;
+          enableSSHSupport = true;
+        };
+
+        programs.less.enable = true;
         programs.nano.formatters.enable = true;
 
         environment.systemPackages = with pkgs; [
