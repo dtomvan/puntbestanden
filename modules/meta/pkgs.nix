@@ -27,7 +27,8 @@
       };
 
       lazy-apps = {
-        url = "sourcehut:~rycee/lazy-apps";
+        # my fork which adds "support" for devshells
+        url = "github:dtomvan/lazy-apps";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
