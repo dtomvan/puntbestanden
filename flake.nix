@@ -62,6 +62,14 @@
       };
       url = "github:numtide/devshell";
     };
+    direnv-instant = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:Mic92/direnv-instant";
+    };
     disko = {
       inputs = {
         nixpkgs = {
@@ -104,7 +112,7 @@
           follows = "nixpkgs";
         };
       };
-      url = "sourcehut:~rycee/lazy-apps";
+      url = "github:dtomvan/lazy-apps";
     };
     localsend-rs = {
       inputs = {
