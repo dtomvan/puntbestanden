@@ -38,7 +38,7 @@
                 jdk8
                 jdk17
                 jdk21
-                jdk24
+                jdk25
               ];
             })
 
