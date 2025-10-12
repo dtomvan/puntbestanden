@@ -23,10 +23,10 @@
 
   text.readme.parts.disko_install = ''
 
-## How to install
-A single command: 
-```ShellSession
-$ nix develop -c sudo disko-install -m format --flake .#<HOSTNAME> --disk main /dev/nvme0n1
-```
+    ## How to install
+    A single command:
+    ```ShellSession
+    $ nix develop -c sudo disko-install -m format --flake .#<HOSTNAME> --disk main /dev/nvme0n1
+    ```
   '';
 }

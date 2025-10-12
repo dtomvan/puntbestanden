@@ -6,7 +6,7 @@ What's in here:
 - 5 NixOS configs
 - a dendritic home-manager config (TODO: list aspects here)
 ## How to install
-A single command: 
+A single command:
 ```ShellSession
 $ nix develop -c sudo disko-install -m format --flake .#<HOSTNAME> --disk main /dev/nvme0n1
 ```

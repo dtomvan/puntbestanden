@@ -5,7 +5,12 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
   flake.modules.homeManager.basic-cli =
-    { pkgs, lib, config, ... }:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     {
       home.packages = [ inputs.direnv-instant.packages.${pkgs.stdenv.hostPlatform.system}.default ];
       programs.bash.initExtra = lib.mkAfter ''
