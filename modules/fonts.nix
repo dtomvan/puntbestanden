@@ -32,19 +32,23 @@ in
         };
       };
 
-      services.copyparty = lib.mkIf config.services.copyparty.enable {
-        settings.html-head =
-          lib.replaceStrings [ "\n" ] [ " " ]
-            # html
-            ''
-              <style>
-              :root {
-                --font-main: ${family};
-                --font-serif: ${family};
-                --font-mono: ${fixedWidth.family};
-              }
-              </style>
-            '';
+      services = {
+        ${if config.services ? copyparty then "copyparty" else null} =
+          lib.mkIf config.services.copyparty.enable
+            {
+              settings.html-head =
+                lib.replaceStrings [ "\n" ] [ " " ]
+                  # html
+                  ''
+                    <style>
+                    :root {
+                      --font-main: ${family};
+                      --font-serif: ${family};
+                      --font-mono: ${fixedWidth.family};
+                    }
+                    </style>
+                  '';
+            };
       };
     };
 
