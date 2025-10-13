@@ -19,6 +19,19 @@ in
         config,
         ...
       }:
+      let
+        ktailctl = pkgs.callPackage (
+          {
+            runCommand,
+            ktailctl,
+          }:
+          runCommand ktailctl.name { } ''
+            cp -r ${ktailctl} $out
+            substituteInPlace "$out/share/applications/org.fkoehler.KTailctl.desktop" \
+              --replace-fail KTailctl Tailscale
+          ''
+        ) { };
+      in
       {
         imports = [ nixos.profiles-graphical ];
 
@@ -38,7 +51,7 @@ in
             filelight
             pkgs.haruna
           ]
-          ++ lib.optionals config.services.tailscale.enable [ pkgs.ktailctl ]
+          ++ lib.optionals config.services.tailscale.enable [ ktailctl ]
           ++ lib.optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];
 
         environment.plasma6.excludePackages = with pkgs; [ kdePackages.discover ];
