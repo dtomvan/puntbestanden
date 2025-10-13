@@ -40,6 +40,8 @@ in
           ]
           ++ lib.optionals config.services.tailscale.enable [ pkgs.ktailctl ]
           ++ lib.optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];
+
+        environment.plasma6.excludePackages = with pkgs; [ kdePackages.discover ];
       };
 
     homeManager.profiles-plasma =

@@ -24,6 +24,7 @@
         "com.github.tchx84.Flatseal"
         "com.obsproject.Studio"
         "org.gnome.World.PikaBackup"
+        "io.github.kolunmi.Bazaar"
       ];
     };
 
