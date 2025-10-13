@@ -28,7 +28,7 @@ in
 
   flake.modules.homeManager.profiles-base = {
     programs.bash.shellAliases = {
-      noremotebuild = "export NIX_CONFIG='builders = \"\"'";
+      noremotebuild = "export NIX_CONFIG='builders = '";
       nore = "noremotebuild";
       remotebuild = "unset NIX_CONFIG";
       re = "remotebuild";
