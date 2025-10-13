@@ -5,11 +5,19 @@
   config,
   ...
 }:
+let
+  hostName = "nixos";
+in
 {
-  flake.nixosConfigurations = {
+  flake.nixosConfigurations = rec {
     autounattend = inputs.nixpkgs.lib.nixosSystem {
-      modules = [ self.modules.nixos.autounattend ];
+      modules = [
+        self.modules.nixos.autounattend
+        { nixpkgs.overlays = config.pkgs-overlays; }
+      ];
     };
+    # allows rebuilding the config easier for a newcomer
+    ${hostName} = autounattend;
   };
 
   flake.modules.nixos.autounattend =
@@ -21,6 +29,10 @@
     {
       imports = with self.modules.nixos; [
         profiles-base
+        profiles-plasma
+
+        # allows me to remote in people's PC for quick tech support
+        networking-tailscale
 
         inputs.home-manager.nixosModules.default
 
@@ -34,7 +46,7 @@
 
       nix.channel.enable = lib.mkForce true;
 
-      networking.hostName = "nixos";
+      networking = { inherit hostName; };
 
       environment.systemPackages = with pkgs; [
         gh
@@ -45,20 +57,19 @@
       ];
 
       services.getty = {
-        autologinUser = "tomvd";
         helpLine = lib.strings.trim ''
           root password is "nixos"
-          tomvd password is "tomvd"
+          me password is "me"
           use nmtui to connect to Wi-Fi
         '';
       };
 
-      home-manager.users.tomvd = {
+      home-manager.users.me = {
         imports = with self.modules.homeManager; [
           profiles-base
         ];
 
-        home.homeDirectory = "/home/tomvd";
+        home.homeDirectory = "/home/me";
         home.file.README.text = ''
           You made it!
           Further steps:
@@ -99,10 +110,12 @@
         home.stateVersion = "25.05";
       };
 
-      users.users.tomvd.hashedPassword = lib.mkForce null;
-      users.users.tomvd.initialPassword = "tomvd";
+      users.users.me = {
+        isNormalUser = true;
+        initialPassword = "me";
+      };
+
       users.users.root.initialPassword = "nixos";
-      # overridden by profiles-base so yeah
       users.users.root.initialHashedPassword = lib.mkForce null;
 
       time.timeZone = "UTC";

@@ -15,17 +15,13 @@
         atomix
         cheese
         epiphany
-        evince
         geary
-        gnome-text-editor
         gnome-console
         gnome-characters
         gnome-music
-        gnome-photos
         hitori
         iagno
         tali
-        totem
       ];
     };
 }

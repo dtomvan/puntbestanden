@@ -19,6 +19,8 @@
 
       # assumes nix-flatpak is available
       services.flatpak.packages = [
+        "com.obsproject.Studio"
+        "org.gnome.World.PikaBackup"
         "dev.overlayed.Overlayed"
       ];
 
