@@ -9,7 +9,6 @@
       home.packages =
         with pkgs;
         lib.map pkgs.lazy-app.override [
-          { pkg = nixfmt-rfc-style; }
           { pkg = rustfmt; }
           { pkg = ruff; }
           {
