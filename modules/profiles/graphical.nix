@@ -10,7 +10,6 @@ in
         imports = with self.modules.nixos; [
           plymouth
 
-          services-bazaar
           services-printing
           services-sane
 
