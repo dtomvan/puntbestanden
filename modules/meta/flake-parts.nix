@@ -8,7 +8,7 @@
   flake-file.inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    flake-file.url = "github:vic/flake-file";
+    flake-file.url = "github:vic/flake-file/c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1";
     allfollow = lib.mkForce {
       url = "github:dtomvan/allfollow/dtomvan/push-rzlonpxovrwz";
       inputs.nixpkgs.follows = "nixpkgs";

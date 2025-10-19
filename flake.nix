@@ -82,7 +82,7 @@
       url = "github:mightyiam/files";
     };
     flake-file = {
-      url = "github:vic/flake-file";
+      url = "github:vic/flake-file/c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1";
     };
     flake-fmt = {
       inputs = {

@@ -221,16 +221,17 @@
     },
     "flake-file": {
       "locked": {
-        "lastModified": 1760837137,
-        "narHash": "sha256-AbHgR3QV2TG+SpZxRfIoWSCh0NdABKNYA9Za8S/iDnQ=",
+        "lastModified": 1756540347,
+        "narHash": "sha256-O306WrpZF8o7bNwx3fYZu5Qu6vHsS9k6rx01+e6ALwQ=",
         "owner": "vic",
         "repo": "flake-file",
-        "rev": "2a3e439aab534cc595dfc2f190e65cb540114698",
+        "rev": "c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1",
         "type": "github"
       },
       "original": {
         "owner": "vic",
         "repo": "flake-file",
+        "rev": "c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1",
         "type": "github"
       }
     },
