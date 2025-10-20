@@ -41,7 +41,7 @@
           follows = "nixpkgs";
         };
       };
-      url = "github:9001/copyparty/24e01221c5aeb8eb055e530b2216336eebd7dbfb";
+      url = "github:9001/copyparty/81881a449b5b5c0e5ae5926b294acb07510ef898";
     };
     deploy-rs = {
       inputs = {
