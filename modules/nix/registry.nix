@@ -2,8 +2,7 @@
 {
   flake-file.inputs = {
     nixpkgs-unfree = {
-      url = "github:numtide/nixpkgs-unfree";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:numtide/nixpkgs-unfree/nixpkgs-unstable";
     };
   };
 
