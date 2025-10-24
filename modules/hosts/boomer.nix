@@ -18,7 +18,10 @@
 
           # broken?
           # services-localsend-rs
-          services-pinchflat
+
+          # yt-dlp doesn't really work right now (2025-10-24)
+          # https://github.com/yt-dlp/yt-dlp/issues/14680 and https://github.com/yt-dlp/yt-dlp/issues/14404
+          # services-pinchflat
           services-syncthing
           services-vintagestory
 
