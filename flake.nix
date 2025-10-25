@@ -41,7 +41,7 @@
           follows = "nixpkgs";
         };
       };
-      url = "github:9001/copyparty/81881a449b5b5c0e5ae5926b294acb07510ef898";
+      url = "github:9001/copyparty/1963ed179516968bece526b1e28f7fc0a8f80cde";
     };
     deploy-rs = {
       inputs = {
@@ -137,12 +137,7 @@
       url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     };
     nixpkgs-unfree = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-      url = "github:numtide/nixpkgs-unfree";
+      url = "github:numtide/nixpkgs-unfree/nixpkgs-unstable";
     };
     nixvim = {
       inputs = {
