@@ -5,13 +5,14 @@
       ...
     }:
     {
+      programs.difftastic.git.enable = true;
+
       programs.git = {
         enable = true;
 
-        difftastic.enable = true;
         signing.signByDefault = false;
 
-        extraConfig = {
+        settings = {
           advice.detachedHead = false;
 
           core = {

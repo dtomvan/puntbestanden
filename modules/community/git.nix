@@ -6,7 +6,7 @@
 
     lfs.enable = lib.mkDefault true;
 
-    extraConfig = {
+    settings = {
       core = {
         excludesFile = "~/.gitignore";
         fsmonitor = true;

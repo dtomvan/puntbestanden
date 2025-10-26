@@ -42,10 +42,12 @@ in
           user = config.users.${hm.config.home.username};
         in
         {
-          programs.git = {
-            extraConfig.signing.key = user.gpgPubKey;
-            userEmail = user.email;
-            userName = user.fullName;
+          programs.git.settings = {
+            signing.key = user.gpgPubKey;
+            user = {
+              name = user.fullName;
+              inherit (user) email;
+            };
           };
         };
 
