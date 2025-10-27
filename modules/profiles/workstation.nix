@@ -17,6 +17,11 @@
 
       modules.utilities.enableLazyApps = true;
 
+      # assumes nix-flatpak is available
+      services.flatpak.packages = [
+        "dev.overlayed.Overlayed"
+      ];
+
       environment.systemPackages = with pkgs; [
         discord
         forge-sparks

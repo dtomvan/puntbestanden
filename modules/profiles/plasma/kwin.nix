@@ -5,7 +5,7 @@
         virtualDesktops.number = 4;
         effects = {
           blur.enable = false;
-          dimInactive.enable = true;
+          # dimInactive.enable = true; # looks bad with overlayed
           minimization.animation = "magiclamp";
           shakeCursor.enable = false;
           translucency.enable = false;
