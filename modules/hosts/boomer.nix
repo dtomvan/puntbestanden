@@ -6,7 +6,7 @@
       {
         imports = with self.modules.nixos; [
           profiles-workstation
-          profiles-catppuccin
+          themes-catppuccin
 
           guest
 
@@ -79,7 +79,7 @@
         imports = with self.modules.homeManager; [
           profiles-base
           profiles-graphical
-          profiles-catppuccin
+          themes-catppuccin
           profiles-plasma
 
           users-tomvd

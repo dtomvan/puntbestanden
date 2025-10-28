@@ -19,7 +19,7 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.modules.nixos.profiles-catppuccin = {
+  flake.modules.nixos.themes-catppuccin = {
     imports = [
       inputs.catppuccin.nixosModules.catppuccin
     ];
@@ -29,7 +29,7 @@ in
     };
   };
 
-  flake.modules.homeManager.profiles-catppuccin =
+  flake.modules.homeManager.themes-catppuccin =
     {
       pkgs,
       lib,
