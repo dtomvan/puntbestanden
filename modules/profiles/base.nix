@@ -21,7 +21,7 @@
 
           nix-common
 
-          boot-systemd-boot
+          boot-grub
           users-tomvd
           users-root
 
