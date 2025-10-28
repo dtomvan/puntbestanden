@@ -13,13 +13,16 @@ in
       config,
       ...
     }:
+    let
+      monoFontPackage = pkgs.nur.repos.dtomvan.aporetic-patched;
+    in
     {
       fonts = {
         packages = with pkgs; [
           inter
           noto-fonts-color-emoji
           liberation_ttf
-          nur.repos.dtomvan.aporetic-patched
+          monoFontPackage
         ];
 
         fontconfig = {
@@ -30,6 +33,14 @@ in
             monospace = [ fixedWidth.family ];
           };
         };
+      };
+
+      # ah yes, very unhardcoded
+      boot.loader.grub = {
+        font = "${monoFontPackage}/share/fonts/truetype/${
+          lib.replaceStrings [ " " ] [ "" ] fixedWidth.family
+        }-Regular.ttf";
+        fontSize = fixedWidth.pointSize;
       };
 
       services = {
