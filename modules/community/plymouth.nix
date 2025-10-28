@@ -11,10 +11,10 @@
     }:
     {
       imports = [ self.modules.nixos.boot-quiet ];
-      boot.plymouth = lib.mkDefault {
+      boot.plymouth = {
         enable = true;
-        theme = "nixos-bgrt";
-        themePackages = [ pkgs.nixos-bgrt-plymouth ];
+        theme = lib.mkDefault "nixos-bgrt";
+        themePackages = lib.mkDefault [ pkgs.nixos-bgrt-plymouth ];
       };
     };
 }

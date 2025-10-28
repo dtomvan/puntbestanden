@@ -41,9 +41,16 @@ in
         sddm.enable = true;
       };
 
-      boot.loader.grub = {
-        theme = lib.mkDefault "${config.catppuccin.sources.grub}/src/catppuccin-${config.catppuccin.flavor}-grub-theme";
-        splashImage = lib.mkOverride 999 pkgs.my-wallpaper.passthru.kdeFilePath;
+      boot = {
+        # manually re-implement catppuccin module because I want control of mkOverride calls
+        plymouth = {
+          theme = lib.mkOverride 999 "catppuccin-${config.catppuccin.flavor}";
+          themePackages = lib.mkOverride 999 [ "${config.catppuccin.sources.plymouth}" ];
+        };
+        loader.grub = {
+          theme = lib.mkDefault "${config.catppuccin.sources.grub}/share/grub/themes/catppuccin-${config.catppuccin.flavor}-grub-theme";
+          splashImage = lib.mkOverride 999 pkgs.my-wallpaper.passthru.kdeFilePath;
+        };
       };
     };
 
