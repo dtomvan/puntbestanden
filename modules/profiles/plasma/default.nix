@@ -60,12 +60,8 @@ in
     homeManager.profiles-plasma =
       {
         lib,
-        pkgs,
         ...
       }:
-      let
-        wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha.passthru.kdeFilePath;
-      in
       {
         imports = [
           inputs.plasma-manager.homeModules.plasma-manager
@@ -80,10 +76,7 @@ in
               theme = "default";
               size = 24;
             };
-            inherit wallpaper;
           };
-
-          kscreenlocker.appearance = { inherit wallpaper; };
 
           configFile = {
             krunnerrc = {

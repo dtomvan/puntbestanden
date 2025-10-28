@@ -67,6 +67,8 @@ in
           '';
         })
       ) { };
+
+      wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha.passthru.kdeFilePath;
     in
     {
       imports = [
@@ -87,7 +89,9 @@ in
       };
 
       programs.${if config.programs ? plasma then "plasma" else null} = {
-        workspace = { inherit colorScheme; };
+        workspace = { inherit colorScheme wallpaper; };
+
+        kscreenlocker.appearance = { inherit wallpaper; };
       };
 
       programs.${if config.programs ? konsole then "konsole" else null} = {
