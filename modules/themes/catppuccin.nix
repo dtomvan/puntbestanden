@@ -14,20 +14,38 @@ in
     ];
   };
 
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.my-wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha;
+    };
+
   flake-file.inputs.catppuccin = {
     url = "github:catppuccin/nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.modules.nixos.themes-catppuccin = {
-    imports = [
-      inputs.catppuccin.nixosModules.catppuccin
-    ];
+  flake.modules.nixos.themes-catppuccin =
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
+    {
+      imports = [
+        inputs.catppuccin.nixosModules.catppuccin
+      ];
 
-    catppuccin = catppuccin // {
-      sddm.enable = true;
+      catppuccin = catppuccin // {
+        sddm.enable = true;
+      };
+
+      boot.loader.grub = {
+        theme = lib.mkDefault "${config.catppuccin.sources.grub}/src/catppuccin-${config.catppuccin.flavor}-grub-theme";
+        splashImage = lib.mkOverride 999 pkgs.my-wallpaper.passthru.kdeFilePath;
+      };
     };
-  };
 
   flake.modules.homeManager.themes-catppuccin =
     {
@@ -68,19 +86,19 @@ in
         })
       ) { };
 
-      wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha.passthru.kdeFilePath;
+      wallpaper = pkgs.my-wallpaper.passthru.kdeFilePath;
     in
     {
       imports = [
         inputs.catppuccin.homeModules.catppuccin
       ];
 
-      xdg.dataFile."color-schemes/${colorScheme}.colors" = {
+      xdg.dataFile."color-schemes/${colorScheme}.colors" = lib.mkDefault {
         force = true;
         source = catppuccin-kde;
       };
 
-      xdg.dataFile."konsole/${colorScheme}.colorscheme" = {
+      xdg.dataFile."konsole/${colorScheme}.colorscheme" = lib.mkDefault {
         force = true;
         source = pkgs.fetchurl {
           url = "https://raw.githubusercontent.com/catppuccin/konsole/3b64040e3f4ae5afb2347e7be8a38bc3cd8c73a8/themes/catppuccin-mocha.colorscheme";
@@ -94,7 +112,7 @@ in
         kscreenlocker.appearance = { inherit wallpaper; };
       };
 
-      programs.${if config.programs ? konsole then "konsole" else null} = {
+      programs.${if config.programs ? konsole then "konsole" else null} = lib.mkDefault {
         enable = true;
         defaultProfile = "Catppuccin";
         profiles.Catppuccin = {
