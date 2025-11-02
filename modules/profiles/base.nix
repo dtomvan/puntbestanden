@@ -48,7 +48,7 @@
         environment.systemPackages = with pkgs; [
           bat
           btop
-          du-dust
+          dust
           eza
           fastfetch
           fd
