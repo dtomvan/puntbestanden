@@ -4,7 +4,7 @@
     { pkgs, ... }:
     {
       checks.actionlint =
-        pkgs.runCommandNoCCLocal "actionlint-check"
+        pkgs.runCommandLocal "actionlint-check"
           {
             nativeBuildInputs = with pkgs; [
               actionlint
