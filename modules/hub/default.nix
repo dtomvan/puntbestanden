@@ -22,7 +22,7 @@ in
         "${modulesPath}/profiles/image-based-appliance.nix"
       ];
 
-      system.nixos.label = "hub";
+      system.nixos.variant_id = "hub";
 
       # always copy to RAM
       boot.initrd.systemd.services.copytoram.unitConfig.ConditionKernelCommandLine = lib.mkForce null;
@@ -70,6 +70,7 @@ in
           (system "x86_64-linux")
           {
             isoImage = {
+              edition = "hub";
               makeEfiBootable = true;
               makeUsbBootable = true;
             };
