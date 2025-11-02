@@ -68,6 +68,12 @@ in
           self.modules.nixos.hub
           "${modulesPath}/installer/cd-dvd/iso-image.nix"
           (system "x86_64-linux")
+          {
+            isoImage = {
+              makeEfiBootable = true;
+              makeUsbBootable = true;
+            };
+          }
         ];
       };
 
