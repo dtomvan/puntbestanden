@@ -50,7 +50,7 @@ in
           mkdir -p /media
           install -Dm600 -o me -g users ${copypartyConf} ${copypartyConfPath}
 
-          printf '\n\n[accounts]\n\tu: %s\n' "$rand" >> ${copypartyConfPath}
+          printf '  qrl: /media?pw=%s\n\n[accounts]\n\tu: %s\n' "$rand" "$rand" >> ${copypartyConfPath}
         '';
         serviceConfig = {
           Type = "oneshot";
