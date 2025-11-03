@@ -98,7 +98,7 @@ in
       hub-rpi = inputs.nixpkgs.lib.nixosSystem {
         modules = [
           self.modules.nixos.hub
-          "${modulesPath}/installer/sd-card/sd-image-raspberrypi.nix"
+          "${modulesPath}/installer/sd-card/sd-image-aarch64.nix"
           (system "aarch64-linux")
         ];
       };
