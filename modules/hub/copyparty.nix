@@ -80,6 +80,10 @@ in
           # allow port < 2^10
           AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
           RuntimeDirectoryPreserve = true; # allow getty to read the config, and only generate it once.
+          # allow the user to configure copyparty to use arbitrary
+          # directories. If set, copyparty would only have access to a static
+          # list of paths set at nixos build time.
+          TemporaryFileSystem = lib.mkForce null;
         };
       };
 
