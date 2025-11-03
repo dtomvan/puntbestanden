@@ -1,6 +1,12 @@
 let
   copypartyConfPath = "/run/copyparty/copyparty.conf";
   qr = "/run/copyparty/qr.txt";
+  ports = [
+    80
+    443
+  ];
+  ftp = 21;
+  tftp = 69;
 in
 {
   flake.modules.nixos.hub =
@@ -13,6 +19,9 @@ in
     let
       copypartyConf = pkgs.replaceVars ./copyparty.conf {
         inherit qr;
+        ports = lib.concatMapStringsSep "," builtins.toString ports;
+        ftp = builtins.toString ftp;
+        tftp = builtins.toString tftp;
       };
     in
     {
@@ -75,5 +84,10 @@ in
       };
 
       services.getty.helpLine = "Copyparty config in ${copypartyConfPath}";
+
+      networking.firewall = {
+        allowedTCPPorts = ports ++ [ ftp ];
+        allowedUDPPorts = [ tftp ];
+      };
     };
 }
