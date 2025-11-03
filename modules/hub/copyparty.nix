@@ -32,6 +32,7 @@ in
         script = ''
           rand=`phraze -w4 -lq` # four short words, with a dash. entropy: 60-70 bits, its fineee
 
+          mkdir -p /media
           install -Dm600 -o me -g users ${./copyparty.conf} ${copypartyConf}
 
           printf '\n\n[accounts]\n\tu: %s\n' "$rand" >> ${copypartyConf}
