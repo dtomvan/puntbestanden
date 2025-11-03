@@ -7,6 +7,7 @@
       "home_configs"
       "disko_install"
       "contents_rest"
+      "hub"
       "dendritic"
       "hostnames"
       "autounattend"

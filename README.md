@@ -3,7 +3,7 @@
 > Literally means "dotfiles" in Dutch: "punt" = "dot", "bestanden" = "files"
 
 What's in here:
-- 5 NixOS configs
+- 8 NixOS configs (well, this is a generated number to it's technically correct but don't over-estimate me)
 - a dendritic home-manager config (TODO: list aspects here)
 ## How to install
 A single command:
@@ -13,6 +13,7 @@ $ nix develop -c sudo disko-install -m format --flake .#<HOSTNAME> --disk main /
 
 - An unhinged Emacs config
 - A lot less lines of neovim lua config compared to my [previous attempt](https://github.com/dtomvan/.config/tree/main/neovim/.config/nvim)
+- A clone of 9001's [hub](https://github.com/9001/asm/blob/hovudstraum/p/hub/) ISO, except not alpine-based :sweat_smile:
 # Dendritic
 This repository uses the [dendritic](https://github.com/mightyiam/dendritic)
 pattern for monolithic, interconnected NixOS/HomeManager/Nixvim configs.

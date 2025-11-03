@@ -111,4 +111,9 @@ in
 
   # allow building of rpi images on x86_64-linux
   flake.modules.nixos.profiles-workstation.boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  text.readme.parts.hub = # markdown
+    ''
+      - A clone of 9001's [hub](https://github.com/9001/asm/blob/hovudstraum/p/hub/) ISO, except not alpine-based :sweat_smile:
+    '';
 }
