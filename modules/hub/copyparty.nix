@@ -24,7 +24,10 @@ in
       systemd.services.setup-copyparty = {
         description = "setup a password for the copyparty config";
         wantedBy = [ "multi-user.target" ];
-        before = [ "copyparty.service" ];
+        before = [
+          "copyparty.service"
+          "getty@tty1.service" # needed to display the credentials on login
+        ];
         path = with pkgs; [ phraze ];
         script = ''
           rand=`phraze -w4 -lq` # four short words, with a dash. entropy: 60-70 bits, its fineee
@@ -52,6 +55,7 @@ in
           ExecStart = lib.mkForce "${lib.getExe config.services.copyparty.package} -c ${copypartyConf}"; # hardcode the path ourselves, not upstream
           # allow port < 2^10
           AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
+          RuntimeDirectoryPreserve = true; # allow getty to read the config, and only generate it once.
         };
       };
 
