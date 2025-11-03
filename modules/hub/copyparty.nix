@@ -15,6 +15,7 @@ in
         package = pkgs.copyparty.override {
           withMediaProcessing = false;
           withFastThumbnails = true;
+          withTFTP = true; # required for the config
         };
         user = "me";
         group = "users";
