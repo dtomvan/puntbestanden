@@ -10,49 +10,42 @@ let
   modulesPath = "${inputs.nixpkgs}/nixos/modules";
 in
 {
-  flake.modules.nixos.hub =
-    {
-      lib,
-      ...
-    }:
-    {
-      imports = [
-        self.modules.nixos.services-ssh
-        inputs.copyparty.nixosModules.default
-        # make it more vacuum
-        "${modulesPath}/profiles/image-based-appliance.nix"
-      ];
+  flake.modules.nixos.hub = {
+    imports = [
+      self.modules.nixos.services-ssh
+      inputs.copyparty.nixosModules.default
+      # make it more vacuum
+      "${modulesPath}/profiles/image-based-appliance.nix"
+    ];
 
-      system.nixos.variant_id = "hub";
+    system.nixos.variant_id = "hub";
 
-      # always copy to RAM
-      boot.initrd.systemd.services.copytoram.unitConfig.ConditionKernelCommandLine = lib.mkForce null;
-      users.allowNoPasswordLogin = true;
+    users.allowNoPasswordLogin = true;
 
-      networking = {
-        hostName = "hub";
-        networkmanager.enable = true;
-      };
-
-      users.groups.networkmanager.members = [ "me" ];
-
-      # for openssh
-      users.users.tomvd = {
-        isNormalUser = true;
-        initialHashedPassword = "";
-        extraGroups = [ "wheel" ];
-      };
-
-      users.users.me = {
-        isNormalUser = true;
-        initialHashedPassword = "";
-        extraGroups = [ "wheel" ];
-      };
-
-      services.getty.autologinUser = "me";
-      # the ISO user wouldn't even know a hypothetical password
-      security.sudo.wheelNeedsPassword = false;
+    networking = {
+      hostName = "hub";
+      networkmanager.enable = true;
     };
+
+    users.groups.networkmanager.members = [ "me" ];
+
+    # for openssh
+    users.users.tomvd = {
+      isNormalUser = true;
+      initialHashedPassword = "";
+      extraGroups = [ "wheel" ];
+    };
+
+    users.users.me = {
+      isNormalUser = true;
+      initialHashedPassword = "";
+      extraGroups = [ "wheel" ];
+    };
+
+    services.getty.autologinUser = "me";
+    # the ISO user wouldn't even know a hypothetical password
+    security.sudo.wheelNeedsPassword = false;
+  };
 
   flake.nixosConfigurations =
     let
@@ -96,6 +89,8 @@ in
               # without much copying
               storeContents = lib.mapAttrsToList (_n: i: i.outPath) inputs;
             };
+            # always copy to RAM
+            boot.initrd.systemd.services.copytoram.unitConfig.ConditionKernelCommandLine = lib.mkForce null;
           }
         ];
       };
