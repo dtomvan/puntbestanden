@@ -46,6 +46,10 @@ in
           echo Copyparty credentials:
           echo
           tail -n2 ${copypartyConf}
+
+          echo use '`systemctl restart setup-copyparty`' to regenerate the password.
+          echo
+          echo WARNING: your changes to the config will be overwritten
         fi
       '';
 
