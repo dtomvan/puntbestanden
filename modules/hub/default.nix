@@ -1,6 +1,7 @@
 # hub - idea stolen from https://github.com/9001/asm -- bootable copyparty etc
 {
   self,
+  lib,
   inputs,
   withSystem,
   ...
@@ -63,8 +64,24 @@ in
             nixpkgs = { inherit pkgs; };
           }
         ));
+
+      systemd-boot = {
+        boot.loader = {
+          systemd-boot.enable = true;
+          efi.canTouchEfiVariables = true;
+        };
+      };
     in
     {
+      hub = inputs.nixpkgs.lib.nixosSystem {
+        modules = [
+          self.modules.nixos.hub
+          systemd-boot
+          (system "x86_64-linux")
+          ./_hardware-configuration.nix
+        ];
+      };
+
       hub-iso = inputs.nixpkgs.lib.nixosSystem {
         modules = [
           self.modules.nixos.hub
@@ -75,6 +92,9 @@ in
               edition = "hub";
               makeEfiBootable = true;
               makeUsbBootable = true;
+              # add inputs to image so that the self-installer can do it
+              # without much copying
+              storeContents = lib.mapAttrsToList (_n: i: i.outPath) inputs;
             };
           }
         ];
