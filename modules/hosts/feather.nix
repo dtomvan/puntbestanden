@@ -6,7 +6,7 @@
       {
         imports = with self.modules.nixos; [
           profiles-workstation
-          themes-catppuccin
+          themes-minecraft
 
           hardware-comet-lake
           hardware-elan-tp
@@ -37,7 +37,7 @@
       {
         imports = with self.modules.homeManager; [
           profiles-base
-          themes-catppuccin
+          themes-minecraft
           profiles-graphical
           profiles-plasma
 
