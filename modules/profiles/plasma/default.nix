@@ -71,7 +71,8 @@ in
           enable = true;
 
           workspace = {
-            lookAndFeel = "org.kde.breezedark.desktop";
+            theme = "breeze-dark";
+            colorScheme = "BreezeDark";
             cursor = {
               theme = "default";
               size = 24;
