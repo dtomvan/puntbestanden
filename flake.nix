@@ -122,6 +122,38 @@
       };
       url = "github:dtomvan/localsend-rust-impl";
     };
+    minecraft-plymouth = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:dtomvan/minecraft-plymouth-theme";
+    };
+    minegrub-theme = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:Lxtharia/minegrub-theme/v3.1.0";
+    };
+    minegrub-world-sel-theme = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:Lxtharia/minegrub-world-sel-theme/v1.0.0";
+    };
+    minesddm = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:dtomvan/sddm-theme-minesddm";
+    };
     nix-flatpak = {
       url = "github:gmodena/nix-flatpak/latest";
     };
