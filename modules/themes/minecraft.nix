@@ -91,11 +91,7 @@
             name = "nixos";
             lineTop = "NixOS ${lib.trivial.codeName} (${day}/${month}/${year}, ${hour}:${minute})";
             lineBottom = "Survival Mode, No Cheats, Version: ${lib.trivial.release}";
-            imgName = "nixos";
-            customImg = builtins.path {
-              path = "${pkgs.nixos-icons}/share/icons/hicolor/64x64/apps/nix-snowflake-white.png";
-              name = "nixos-img";
-            };
+            customImg = "${pkgs.nixos-icons}/share/icons/hicolor/64x64/apps/nix-snowflake-white.png";
           }
         ];
       };
