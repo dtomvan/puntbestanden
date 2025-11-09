@@ -659,16 +659,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1731953143,
-        "narHash": "sha256-+7b0jXVVAyIAtYKeZZONZv2qzfESjwITSng1TVjyAfQ=",
-        "owner": "Lxtharia",
+        "lastModified": 1762680187,
+        "narHash": "sha256-LutLI/xqzOe7akSWyrTMp0Kls2FtvKNn48+xkBdmfgk=",
+        "owner": "dtomvan",
         "repo": "minegrub-theme",
-        "rev": "8b55550688b0e27f67f6b7f4bd8cc16da5c67e35",
+        "rev": "163ed494a87b0ae71067e5969e272c054961934f",
         "type": "github"
       },
       "original": {
-        "owner": "Lxtharia",
-        "ref": "v3.1.0",
+        "owner": "dtomvan",
+        "ref": "release-3.1.0",
         "repo": "minegrub-theme",
         "type": "github"
       }

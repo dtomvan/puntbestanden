@@ -136,7 +136,7 @@
           follows = "nixpkgs";
         };
       };
-      url = "github:Lxtharia/minegrub-theme/v3.1.0";
+      url = "github:dtomvan/minegrub-theme/release-3.1.0";
     };
     minegrub-world-sel-theme = {
       inputs = {

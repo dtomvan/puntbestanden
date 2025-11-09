@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake-file.inputs.minegrub-theme = {
-    url = "github:Lxtharia/minegrub-theme/v3.1.0";
+    url = "github:dtomvan/minegrub-theme/release-3.1.0";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -21,7 +21,7 @@
   };
 
   perSystem =
-    { pkgs, ... }:
+    { pkgs, inputs', ... }:
     {
       packages = {
         minecraftworldloading-kde-splash = pkgs.fetchFromGitHub {
@@ -30,27 +30,72 @@
           rev = "db3dcf5751afe795d92eec80ff83a16222ca2a18";
           hash = "sha256-XqzjrHjBDV1xTWQjZ0A4MAu6BlHqlEPNkk/48PjBZEI=";
         };
+        minegrub-theme = inputs'.minegrub-theme.legacyPackages.default {
+          inherit pkgs;
+          boot-options-count = 3; # amount of menu entries in mainmenu.cfg
+          splash = "Now with Nix!";
+          background = "background_options/1.14 - [Village and Pillage].png";
+        };
       };
     };
 
   flake.modules.nixos.themes-minecraft =
     {
       lib,
+      pkgs,
       config,
       ...
     }:
+    let
+      inherit (inputs.nixpkgs.sourceInfo) lastModifiedDate;
+      inherit (builtins) substring;
+      year = substring 0 4 lastModifiedDate;
+      month = substring 4 2 lastModifiedDate;
+      day = substring 6 2 lastModifiedDate;
+      hour = substring 8 2 lastModifiedDate;
+      minute = substring 10 2 lastModifiedDate;
+    in
     {
       imports = [
-        inputs.minegrub-theme.nixosModules.default
+        inputs.minegrub-world-sel-theme.nixosModules.default
         inputs.minesddm.nixosModules.default
         inputs.minecraft-plymouth.nixosModules.default
       ];
 
-      boot.loader.grub.minegrub-theme = {
+      boot.loader.timeout = lib.mkOverride 999 15;
+
+      boot.loader.grub.extraFiles = {
+        "grub/mainmenu.cfg" = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/Lxtharia/double-minegrub-menu/11000aad6f0e6fb1bebfa71419f8652ec2f299c0/mainmenu.cfg";
+          hash = "sha256-xBUdyFUTLTHDKtPJ5Lx0brbleGZjz3bG1TUiJVnxeQ8=";
+        };
+      };
+
+      boot.loader.grub.extraConfig = ''
+        if [ -z "$chosen" ]; then
+          configfile $prefix/mainmenu.cfg
+        fi
+      '';
+
+      boot.loader.grub.extraInstallCommands = ''
+        rm -rf /boot/grub/themes
+        ${lib.getExe pkgs.rsync} -a ${pkgs.minegrub-theme}/ /boot/
+      '';
+
+      boot.loader.grub.minegrub-world-sel = {
         enable = true;
-        boot-options-count = 5;
-        splash = "Now with Nix!";
-        background = "background_options/1.14 - [Village and Pillage].png";
+        customIcons = [
+          {
+            name = "nixos";
+            lineTop = "NixOS ${lib.trivial.codeName} (${day}/${month}/${year}, ${hour}:${minute})";
+            lineBottom = "Survival Mode, No Cheats, Version: ${lib.trivial.release}";
+            imgName = "nixos";
+            customImg = builtins.path {
+              path = "${pkgs.nixos-icons}/share/icons/hicolor/64x64/apps/nix-snowflake-white.png";
+              name = "nixos-img";
+            };
+          }
+        ];
       };
 
       services.displayManager.sddm.theme = lib.mkIf config.services.displayManager.sddm.enable "minesddm";
