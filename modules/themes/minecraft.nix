@@ -80,8 +80,6 @@
       boot.loader.grub.extraInstallCommands = ''
         rm -rf /boot/grub/themes
         ${lib.getExe pkgs.rsync} -a ${pkgs.minegrub-theme}/ /boot/
-
-        [ -d /boot/theme/icons ] && mv /boot/theme/icons /boot/grub/themes
       '';
 
       boot.loader.grub.splashImage = "${pkgs.minegrub-theme}/grub/themes/minegrub/background.png";
