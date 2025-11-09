@@ -71,11 +71,11 @@ in
           enable = true;
 
           workspace = {
-            theme = "breeze-dark";
-            colorScheme = "BreezeDark";
+            theme = lib.mkDefault "breeze-dark";
+            colorScheme = lib.mkDefault "BreezeDark";
             cursor = {
-              theme = "default";
-              size = 24;
+              theme = lib.mkDefault "default";
+              size = lib.mkDefault 24;
             };
           };
 
