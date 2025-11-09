@@ -7,6 +7,7 @@
       # anymore we don't have to specify a boot device as long as the EFI mount
       # point is known (which it is)
       device = "nodev";
+      configurationLimit = 5;
     };
     efi.canTouchEfiVariables = true;
   };
