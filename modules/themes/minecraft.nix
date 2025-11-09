@@ -32,9 +32,9 @@
         };
         minegrub-theme = inputs'.minegrub-theme.legacyPackages.default {
           inherit pkgs;
+          background = "background_options/1.14 - [Village and Pillage].png";
           boot-options-count = 3; # amount of menu entries in mainmenu.cfg
           splash = "Now with Nix!";
-          background = "background_options/1.14 - [Village and Pillage].png";
         };
       };
     };
@@ -83,6 +83,8 @@
 
         [ -d /boot/theme/icons ] && mv /boot/theme/icons /boot/grub/themes
       '';
+
+      boot.loader.grub.splashImage = "${pkgs.minegrub-theme}/grub/themes/minegrub/background.png";
 
       boot.loader.grub.minegrub-world-sel = {
         enable = true;
