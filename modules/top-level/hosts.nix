@@ -38,25 +38,6 @@
       remoteBuild.enable = false;
       noConfig = true;
     };
-
-    bart-pc = {
-      hostName = "vitune.app";
-      system = "x86_64-linux";
-      noConfig = true;
-      noDoc = true;
-      remoteBuild = {
-        enable = true;
-        settings = {
-          sshUser = "nix-remote-builder";
-          maxJobs = 2;
-          supportedFeatures = [
-            "benchmark"
-            "big-parallel"
-          ];
-          speedFactor = 2;
-        };
-      };
-    };
   };
 
   text.readme.parts.hostnames = ''
