@@ -1,6 +1,9 @@
 {
   flake.modules.nixvim.default = {
     plugins.friendly-snippets.enable = true;
+    performance.combinePlugins.standalonePlugins = [
+      "friendly-snippets"
+    ];
     plugins.nvim-snippets = {
       enable = true;
       settings = {
