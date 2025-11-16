@@ -639,16 +639,17 @@
         "systems": "systems_4"
       },
       "locked": {
-        "lastModified": 1762730834,
-        "narHash": "sha256-RKQJyxwxe0jHRoqML4HVNyBgukGCtp99elHAYIE0n6k=",
+        "lastModified": 1763300508,
+        "narHash": "sha256-+HasGg2Snrgs2P2oOUzQ+TBbzKGUBmtXS0fuerwqMys=",
         "owner": "dtomvan",
         "repo": "minecraft-plymouth-theme",
-        "rev": "81fb6655c359bdd70d58fbf75980995618e18bb5",
+        "rev": "bb7f46cf3ea83c80604fb1003abbfd4c2cd4312e",
         "type": "github"
       },
       "original": {
         "owner": "dtomvan",
         "repo": "minecraft-plymouth-theme",
+        "rev": "bb7f46cf3ea83c80604fb1003abbfd4c2cd4312e",
         "type": "github"
       }
     },

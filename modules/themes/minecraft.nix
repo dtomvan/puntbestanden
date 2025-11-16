@@ -16,7 +16,7 @@
   };
 
   flake-file.inputs.minecraft-plymouth = {
-    url = "github:dtomvan/minecraft-plymouth-theme";
+    url = "github:dtomvan/minecraft-plymouth-theme/bb7f46cf3ea83c80604fb1003abbfd4c2cd4312e";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
