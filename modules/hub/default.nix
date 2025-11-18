@@ -3,7 +3,6 @@
   self,
   lib,
   inputs,
-  withSystem,
   ...
 }:
 let
@@ -49,14 +48,7 @@ in
 
   flake.nixosConfigurations =
     let
-      system =
-        s:
-        (withSystem s (
-          { pkgs, ... }:
-          {
-            nixpkgs = { inherit pkgs; };
-          }
-        ));
+      inherit (self.lib) system;
 
       systemd-boot = {
         boot.loader = {

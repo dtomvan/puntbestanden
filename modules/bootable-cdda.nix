@@ -1,6 +1,5 @@
 # It's the traditional roguelike Cataclysm: Dark Days ahead and it's an ISO file. What more could you ever want?
 {
-  withSystem,
   self,
   inputs,
   ...
@@ -72,12 +71,7 @@
   flake.nixosConfigurations.bootable-cdda = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.modules.nixos.bootable-cdda
-      (withSystem "x86_64-linux" (
-        { pkgs, ... }:
-        {
-          nixpkgs = { inherit pkgs; };
-        }
-      ))
+      (self.lib.system "x86_64-linux")
     ];
   };
 

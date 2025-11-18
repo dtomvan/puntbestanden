@@ -1,7 +1,6 @@
 {
   self,
   inputs,
-  withSystem,
   ...
 }:
 let
@@ -22,13 +21,8 @@ let
     _key: host:
     nameValuePair host.hostName (nixosSystem {
       modules = [
-        (withSystem host.system (
-          { pkgs, ... }:
-          {
-            nixpkgs = { inherit pkgs; };
-            networking = { inherit (host) hostName; };
-          }
-        ))
+        (self.lib.system host.system)
+        { networking = { inherit (host) hostName; }; }
         self.modules.nixos."hosts-${host.hostName}"
         ../hardware/_generated/${host.hostName}.nix
       ];
