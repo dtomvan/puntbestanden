@@ -67,6 +67,8 @@
         services.flatpak.packages = [
           "org.inkscape.Inkscape"
           "io.github.dvlv.boxbuddyrs"
+          "com.github.wwmm.easyeffects"
+          "org.vinegarhq.Sober"
         ];
 
         hardware.bluetooth.enable = true;
