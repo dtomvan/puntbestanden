@@ -14,6 +14,7 @@
           hardware-nvidia
           hardware-ssd
 
+          gaming-free
           steam
 
           # broken?
@@ -32,6 +33,12 @@
           nix-distributed-builds
           users-remote-build
         ];
+
+        programs.gaming-free = {
+          enable = true;
+          enableGraphical = true;
+          enableBig = true;
+        };
 
         environment.systemPackages =
           with pkgs;

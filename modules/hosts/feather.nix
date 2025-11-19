@@ -12,12 +12,18 @@
           # hardware-fprint
 
           steam
+          gaming-free
           services-syncthing
           virt-kvm
 
           nix-distributed-builds
           users-remote-build
         ];
+
+        programs.gaming-free = {
+          enable = true;
+          enableGraphical = true;
+        };
 
         virtualisation.libvirtd.onBoot = "ignore";
         systemd.services.podman.wantedBy = lib.mkForce [ ];
