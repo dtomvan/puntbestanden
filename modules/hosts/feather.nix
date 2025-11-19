@@ -6,7 +6,6 @@
       {
         imports = with self.modules.nixos; [
           profiles-workstation
-          themes-minecraft
 
           hardware-comet-lake
           hardware-elan-tp
