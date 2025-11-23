@@ -3,7 +3,7 @@
 > Literally means "dotfiles" in Dutch: "punt" = "dot", "bestanden" = "files"
 
 What's in here:
-- 8 NixOS configs (well, this is a generated number to it's technically correct but don't over-estimate me)
+- 9 NixOS configs (well, this is a generated number to it's technically correct but don't over-estimate me)
 - a dendritic home-manager config (TODO: list aspects here)
 ## How to install
 A single command:
