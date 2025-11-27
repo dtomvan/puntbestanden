@@ -107,4 +107,13 @@ in
       };
     };
   };
+
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.myXmobarrc = pkgs.replaceVars ./profiles/xmonad/xmobarrc {
+        inherit (fixedWidth) family;
+        size = fixedWidth.pointSize;
+      };
+    };
 }
