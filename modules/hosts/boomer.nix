@@ -6,6 +6,8 @@
       {
         imports = with self.modules.nixos; [
           profiles-workstation
+          profiles-xmonad
+          profiles-ly
           themes-catppuccin
 
           guest
