@@ -19,7 +19,7 @@
 
   config = {
     flake-file.inputs = {
-      nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      nixpkgs.url = "https://channels.nixos.org/nixos-25.11/nixexprs.tar.xz";
 
       nur = {
         url = "github:nix-community/NUR";
