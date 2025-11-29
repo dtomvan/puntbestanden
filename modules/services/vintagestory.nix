@@ -25,8 +25,6 @@
     {
       imports = [ inputs.vs2nix.nixosModules.default ];
 
-      environment.systemPackages = with pkgs; [ rustique ];
-
       services.vintagestory = {
         enable = true;
         inherit host port;
