@@ -25,8 +25,6 @@
     {
       imports = [ inputs.vs2nix.nixosModules.default ];
 
-      environment.systemPackages = with pkgs; [ rustique ];
-
       services.vintagestory = {
         enable = true;
         inherit host port;
@@ -42,15 +40,7 @@
                   hash = "sha256-WAeWmP0s44NdD04w3z/E0WE+4eOXXJYfIcwX6AX7QbE=";
                 })
                 betterruins
-                # more survival mechanics
-                # primitivesurvival
-                # TODO: remove after vs2nix bump
-                (pkgs.fetchurl rec {
-                  pname = "primitivesurvival";
-                  version = "3.9.6.zip";
-                  url = "https://mods.vintagestory.at/download/55364/${pname}_${version}";
-                  hash = "sha256-THhLZjlRDY0lOXhB+xPb0kRBsnELsl1QxwGJHLgsQfY=";
-                })
+                primitivesurvival
                 th3dungeon
                 (pkgs.fetchurl rec {
                   pname = "Th3DungonTopEntrance";

@@ -1,11 +1,5 @@
 { inputs, ... }:
 {
-  flake-file.inputs = {
-    nixpkgs-unfree = {
-      url = "github:numtide/nixpkgs-unfree/nixpkgs-unstable";
-    };
-  };
-
   flake.modules.nixos.nix-common =
     { lib, ... }:
     {
@@ -25,7 +19,6 @@
             inherit (inputs)
               disko
               localsend-rs
-              nixpkgs-unfree
               nur
               vs2nix
               ;
