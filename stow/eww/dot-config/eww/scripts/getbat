@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep -F percentage: | grep -oE '[0-9]+'

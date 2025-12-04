@@ -15,7 +15,6 @@
         '', Print, exec, grimblast copysave area ~/Pictures/Screenshots/Screenshot_"$(date +'%Y%m%d_%H%M%S')".png''
         "$mod, V, exec, $terminal --class clipse -e 'clipse'"
         "$mod ALT, L, exec, hyprlock"
-        "$mod, B, exec, eww open bar --toggle"
       ]
       ++ (builtins.concatLists (
         builtins.genList (

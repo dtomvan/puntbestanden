@@ -22,7 +22,7 @@
           fnott
           kdePackages.xwaylandvideobridge
           clipse
-          eww
+          quickshell
           socat
           grimblast
         ];

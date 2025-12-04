@@ -49,6 +49,7 @@
 
     homeManager.hyprland =
       {
+        pkgs,
         lib,
         host,
         ...
@@ -85,6 +86,7 @@
             exec-once = [
               "clipse -listen"
               "upower-notify"
+              "qs -p ${pkgs.quickshellConfig}"
             ];
           };
         };

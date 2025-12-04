@@ -107,4 +107,13 @@ in
       };
     };
   };
+
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.quickshellConfig = pkgs.replaceVars ./profiles/hyprland/shell.qml {
+        inherit (fixedWidth) family pointSize;
+        DEFAULT_AUDIO_SINK = null;
+      };
+    };
 }
