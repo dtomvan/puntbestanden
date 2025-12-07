@@ -17,28 +17,42 @@
     (lib.filterAttrs (_n: v: !(v ? noConfig)))
     (lib.mapAttrs' (
       _n: v:
+      let
+        inherit (v) hostName system;
+        hostConfig = self.nixosConfigurations.${v.hostName};
+      in
       lib.nameValuePair v.hostName {
         # yes.
-        hostname = v.hostName;
+        hostname = hostName;
 
         profiles.system = {
           user = "root";
           sshUser = "root";
-          path = inputs.deploy-rs.lib.${v.system}.activate.nixos self.nixosConfigurations.${v.hostName};
+          path = inputs.deploy-rs.lib.${system}.activate.nixos hostConfig;
         };
 
         profiles.tomvd = {
           user = "tomvd";
           path =
-            inputs.deploy-rs.lib.${v.system}.activate.home-manager
-              self.homeConfigurations."tomvd@${v.hostName}";
+            inputs.deploy-rs.lib.${system}.activate.home-manager
+              self.homeConfigurations."tomvd@${hostName}";
         };
 
         profiles.nixvim = {
           user = "tomvd";
           path =
-            inputs.deploy-rs.lib.${v.system}.activate.custom self.packages.${v.system}.activatable-nixvim
+            inputs.deploy-rs.lib.${system}.activate.custom self.packages.${system}.activatable-nixvim
               "./bin/activate";
+        };
+
+        profiles.flatpak = {
+          user = "root";
+          path = inputs.deploy-rs.lib.${system}.activate.custom (
+            self.legacyPackages.${system}.activatable-flatpak
+            {
+              inherit (hostConfig.config.services.flatpak) packages;
+            }
+          ) "./bin/flatpak-managed-install";
         };
       }
     ))
@@ -94,12 +108,4 @@
           '';
         };
     };
-
-  flake.modules.nixos.profiles-base =
-    { pkgs, ... }:
-    {
-      environment.systemPackages = with pkgs; [ deploy-rs ];
-    };
-
-  # TODO: deploy home-manager
 }

@@ -154,9 +154,6 @@
       };
       url = "github:dtomvan/sddm-theme-minesddm";
     };
-    nix-flatpak = {
-      url = "github:gmodena/nix-flatpak/latest";
-    };
     nix-index-database = {
       inputs = {
         nixpkgs = {
