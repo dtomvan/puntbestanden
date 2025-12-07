@@ -20,6 +20,9 @@
           wget
           curl
           nix-output-monitor
+          nix-tree
+          dix
+          nix-diff
           nurl
           git
           jujutsu
@@ -38,7 +41,6 @@
         ]
         ++ lib.optionals cfg.enableLazyApps (
           lib.map (pkg: lazy-app.override { inherit pkg; }) [
-            nix-tree
             nvd
             rar
             bzip2
