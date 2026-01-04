@@ -47,6 +47,7 @@
 
         profiles.flatpak = {
           user = "root";
+          sshUser = "root";
           path = inputs.deploy-rs.lib.${system}.activate.custom (
             self.legacyPackages.${system}.activatable-flatpak
             {
