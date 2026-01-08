@@ -19,18 +19,20 @@
           fi
 
           pkgs=(
-            telegram-desktop
-            _64gram
-            ayugram-desktop
-            kotatogram-desktop
-            materialgram
+            ada # dependency of all the telegrams, only really used for td
+            tdlib
+            telegram-desktop.unwrapped
+            _64gram.unwrapped
+            ayugram-desktop.unwrapped
+            kotatogram-desktop.unwrapped
+            materialgram.unwrapped
           )
           if [ "$(hostname)" == boomer ]; then
             export NIX_CONFIG="builders = "
           fi
 
           for pkg in "''${pkgs[@]}"; do
-            nix-update --format --commit -u "$pkg.unwrapped" "''${EXTRA_ARGS[@]}" || true
+            nix-update --format --commit -u "$pkg" "''${EXTRA_ARGS[@]}" || true
           done
         '';
       };
