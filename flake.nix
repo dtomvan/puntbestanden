@@ -163,7 +163,7 @@
       url = "github:nix-community/nix-index-database";
     };
     nixpkgs = {
-      url = "https://channels.nixos.org/nixos-25.11/nixexprs.tar.xz";
+      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     };
     nixvim = {
       inputs = {
