@@ -6,9 +6,8 @@
         mode = "0440";
         sopsFile = ../../../secrets/wifi-passwords.secret;
         format = "binary";
-        # wpa_supplicant gets run as root so no-one else has to read the cleartext passwords
-        owner = "root";
-        group = "wheel";
+        owner = "wpa_supplicant";
+        group = "wpa_supplicant";
       };
 
       networking.wireless = {
