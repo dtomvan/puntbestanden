@@ -13,6 +13,7 @@
 
       networking.wireless = {
         allowAuxiliaryImperativeNetworks = true;
+        userControlled = true;
         secretsFile = config.sops.secrets.wifi-passwords.path;
         networks = {
           H369A8D363E.pskRaw = "ext:psk_H369A8D363E";
