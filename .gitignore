@@ -1,6 +1,6 @@
-/.deploy-gc
 /.direnv
 /.tmp
+/.deploy-gc
 /result*
 /repl-result*
 /.clj-kondo
