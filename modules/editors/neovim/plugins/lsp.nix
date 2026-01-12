@@ -42,7 +42,7 @@
         servers = {
           lua_ls.enable = true;
           nixd.enable = true;
-          nixd.config.formatting.command = [ (lib.getExe pkgs.nixfmt-rfc-style) ];
+          nixd.config.formatting.command = [ (lib.getExe pkgs.nixfmt) ];
         };
       };
 

@@ -109,4 +109,8 @@
           '';
         };
     };
+
+  text.gitignore = ''
+    /.deploy-gc
+  '';
 }

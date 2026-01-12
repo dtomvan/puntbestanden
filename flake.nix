@@ -101,7 +101,7 @@
           follows = "nixpkgs";
         };
       };
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
     };
     import-tree = {
       url = "github:vic/import-tree";
@@ -163,7 +163,7 @@
       url = "github:nix-community/nix-index-database";
     };
     nixpkgs = {
-      url = "https://channels.nixos.org/nixos-25.11/nixexprs.tar.xz";
+      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     };
     nixvim = {
       inputs = {
@@ -171,7 +171,7 @@
           follows = "nixpkgs";
         };
       };
-      url = "github:nix-community/nixvim/nixos-25.11";
+      url = "github:nix-community/nixvim";
     };
     nur = {
       inputs = {
