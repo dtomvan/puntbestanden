@@ -1,6 +1,11 @@
 # adapted from https://github.com/tfc/nixos-auto-installer
 # mostly to use disko and xfs
-{ self, config, ... }:
+{
+  self,
+  config,
+  inputs,
+  ...
+}:
 let
   inherit (config.autounattend) diskoFile configRoot;
   evaluatedSystem = self.nixosConfigurations.autounattend;
@@ -14,6 +19,20 @@ in
       modulesPath,
       ...
     }:
+    let
+      diskoScripts = pkgs.linkFarm "disko-scripts" (
+        lib.map
+          (d: {
+            name = d;
+            path = inputs.disko.lib._cliDestroyFormatMount (import diskoFile { device = "/dev/${d}"; }) pkgs;
+          })
+          [
+            "vda"
+            "nvme0n1"
+            "sda"
+          ]
+      );
+    in
     {
       imports = [
         "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
@@ -88,12 +107,7 @@ in
               n=$((n-1))
             done
 
-            ${disko}/bin/disko \
-              --yes-wipe-all-disks \
-              --no-deps \
-              -m destroy,format,mount \
-              --argstr device "$dev" \
-              "${diskoFile}"
+            ${diskoScripts}/"$(basename "$dev")"/bin/disko-destroy-format-mount --yes-wipe-all-disks
 
             mkdir -p /mnt/etc/nixos/
             cp -r ${configRoot}/* /mnt/etc/nixos/
