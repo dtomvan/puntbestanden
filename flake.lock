@@ -547,11 +547,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1760381981,
-        "narHash": "sha256-e5VoEg0GIA5vZFZBHr6Aq7lI9+UPL2Nx4sXFYnF9CUE=",
+        "lastModified": 1768247242,
+        "narHash": "sha256-sT3lgZnPfeFov8neHHN4iXkeSy+V4PBFgUbW3WJFCQ4=",
         "owner": "dtomvan",
         "repo": "lazy-apps",
-        "rev": "8d75ff24d9bc58a5872a10f204fbd4866fb03e5c",
+        "rev": "61fb2f10eca1cbf5857fcf12df466631b502f5e7",
         "type": "github"
       },
       "original": {
