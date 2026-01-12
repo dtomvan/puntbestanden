@@ -57,51 +57,7 @@ store a couple of times. it is a cool party trick though.
 
 NEW: you can do this in YOUR repo too, with your own target config!
 
-```nix
-{
-  inputs.flake-parts.url = "github:hercules-ci/flake-parts";
-  inputs.import-tree.url = "github:vic/import-tree";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-  inputs.dtomvan = {
-    url = "github:dtomvan/puntbestanden";
-    flake = false;
-  };
-  inputs.disko = {
-    url = "github:nix-community/disko/latest";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
-  outputs = inputs @ {
-    flake-parts,
-    import-tree,
-    nixpkgs,
-    dtomvan,
-    ...
-  }:
-  flake-parts.lib.mkFlake { inherit inputs; } {
-    imports = [
-      flake-parts.flakeModules.modules
-      (import-tree "${dtomvan}/modules/community/autounattend")
-    ];
-
-    autounattend = {
-      # needed so the installer partitions the same way you mount your
-      # filesystems later
-      diskoFile = ./disko.nix;
-      # this path will be copied to /etc/nixos after installation.
-      configRoot = ./.;
-    };
-
-    flake.nixosConfigurations.autounattend = nixpkgs.lib.nixosSystem {
-      modules = [
-        ./configuration.nix
-        ./disko.nix
-        disko.nixosModules.disko
-      ];
-    };
-  };
-}
-```
+Just run `nix flake init -t github:dtomvan/templates#autounattend` `:)`
 ## For myself: How to bootstrap `localsend-rs` inside of the flake
 
 - Have one of the private keys corresponding to a pubkey listed in `.sops.yaml`
