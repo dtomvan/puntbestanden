@@ -44,7 +44,7 @@
           default = lib.mapAttrs (_n: mkApp) {
             go = pkgs.gofumpt;
             json = pkgs.jq;
-            nix = pkgs.nixfmt-rfc-style;
+            nix = pkgs.nixfmt;
             python = pkgs.ruff;
             rust = pkgs.rustfmt;
             sh = pkgs.shfmt;
@@ -52,7 +52,7 @@
           example = lib.literalExpression ''
             {
               java = pkgs.astyle;
-              nix = pkgs.nixfmt-rfc-style;
+              nix = pkgs.nixfmt;
             }
           '';
         };

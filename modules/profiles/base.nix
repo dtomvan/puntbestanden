@@ -58,7 +58,7 @@
           jq
           just
           neovim
-          nixfmt-rfc-style
+          nixfmt
           rink
           ripgrep
           skim
