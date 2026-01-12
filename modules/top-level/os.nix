@@ -42,7 +42,7 @@ in
         builtins.toString
       ];
     in
-    "- ${n} NixOS configs (well, this is a generated number to it's technically correct but don't over-estimate me)";
+    "- ${n} NixOS configs (well, this is a generated number so it's technically correct but don't over-estimate me)";
 
   perSystem =
     { pkgs, lib, ... }:
