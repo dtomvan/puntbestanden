@@ -3,7 +3,7 @@
 > Literally means "dotfiles" in Dutch: "punt" = "dot", "bestanden" = "files"
 
 What's in here:
-- 9 NixOS configs (well, this is a generated number to it's technically correct but don't over-estimate me)
+- 10 NixOS configs (well, this is a generated number to it's technically correct but don't over-estimate me)
 - a dendritic home-manager config (TODO: list aspects here)
 ## How to install
 A single command:
@@ -106,9 +106,8 @@ NEW: you can do this in YOUR repo too, with your own target config!
 
 - Have one of the private keys corresponding to a pubkey listed in `.sops.yaml`
   in `~/.config/sops/age/keys.txt`.
-- `nix run nixpkgs#sops -- decrypt secrets/localsend-rs.secret`
-- Copy the access token
-- `nix flake lock --extra-access-tokens "$accesstoken"`
+- Enter the devshell (or nix-shell -p sops nh)
+- `nix flake lock --extra-access-tokens "$(sops decrypt secrets/localsend-rs.secret | awk '{print $3}')"`
 - `nh os switch`
 
 Afterwards, through the nixos module, the secret will get loaded into
