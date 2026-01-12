@@ -21,7 +21,6 @@
           };
 
           git = {
-            auto-local-bookmark = true;
             # see signing.behavior
             sign-on-push = true;
           };
@@ -43,6 +42,8 @@
               git.sign-on-push = false;
             }
           ];
+
+          remotes.origin.auto-track-bookmarks = "glob:*";
         };
       };
     };
