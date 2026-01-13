@@ -33,12 +33,13 @@
           proxy = { };
           wifi = {
             mode = "infrastructure";
-            ssid = "\${psk_${ssid}}";
+            inherit ssid;
           };
           wifi-security = {
             auth-alg = "open";
             key-mgmt = "wpa-psk";
             leap-password-flags = "1";
+            psk = "\${psk_${ssid}}";
             psk-flags = "1";
             wep-key-flags = "1";
           };
