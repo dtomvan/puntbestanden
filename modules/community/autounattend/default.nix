@@ -13,7 +13,7 @@ let
     nixosSystem
     ;
 
-  inherit (self.nixosConfigurations.autounattend.config.nixpkgs.hostPlatform) system;
+  system = "x86_64-linux";
 in
 {
   options.autounattend = flake-parts-lib.mkSubmoduleOptions {
@@ -47,7 +47,10 @@ in
 
     flake.nixosConfigurations = {
       autounattend-installer = nixosSystem {
-        modules = [ self.modules.nixos.autounattend-installer ];
+        modules = [
+          self.modules.nixos.autounattend-installer
+          (self.lib.system system)
+        ];
       };
     };
 

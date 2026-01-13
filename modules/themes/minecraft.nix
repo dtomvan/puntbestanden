@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
   flake-file.inputs.minegrub-theme = {
     url = "github:dtomvan/minegrub-theme/release-3.1.0";
@@ -54,6 +54,9 @@
       day = substring 6 2 lastModifiedDate;
       hour = substring 8 2 lastModifiedDate;
       minute = substring 10 2 lastModifiedDate;
+
+      inherit (pkgs.stdenv.hostPlatform) system;
+      myPkgs = self.packages.${system};
     in
     {
       imports = [
@@ -79,10 +82,10 @@
 
       boot.loader.grub.extraInstallCommands = ''
         rm -rf /boot/grub/themes
-        ${lib.getExe pkgs.rsync} -a ${pkgs.minegrub-theme}/ /boot/
+        ${lib.getExe pkgs.rsync} -a ${myPkgs.minegrub-theme}/ /boot/
       '';
 
-      boot.loader.grub.splashImage = "${pkgs.minegrub-theme}/grub/themes/minegrub/background.png";
+      boot.loader.grub.splashImage = "${myPkgs.minegrub-theme}/grub/themes/minegrub/background.png";
 
       boot.loader.grub.minegrub-world-sel = {
         enable = true;
@@ -107,9 +110,13 @@
       config,
       ...
     }:
+    let
+      inherit (pkgs.stdenv.hostPlatform) system;
+      myPkgs = self.packages.${system};
+    in
     {
       xdg.dataFile."plasma/look-and-feel/minecraftworldloading-kde-splash" = {
-        source = pkgs.minecraftworldloading-kde-splash;
+        source = myPkgs.minecraftworldloading-kde-splash;
         recursive = true;
         force = true;
       };

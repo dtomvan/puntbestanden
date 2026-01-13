@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 let
   catppuccin = {
     accent = "peach";
@@ -32,6 +32,10 @@ in
       config,
       ...
     }:
+    let
+      inherit (pkgs.stdenv.hostPlatform) system;
+      myPkgs = self.packages.${system};
+    in
     {
       imports = [
         inputs.catppuccin.nixosModules.catppuccin
@@ -49,7 +53,7 @@ in
         };
         loader.grub = {
           theme = lib.mkDefault "${config.catppuccin.sources.grub}/share/grub/themes/catppuccin-${config.catppuccin.flavor}-grub-theme";
-          splashImage = lib.mkOverride 999 pkgs.my-wallpaper.passthru.kdeFilePath;
+          splashImage = lib.mkOverride 999 myPkgs.my-wallpaper.passthru.kdeFilePath;
         };
       };
     };
@@ -62,6 +66,9 @@ in
       ...
     }:
     let
+      inherit (pkgs.stdenv.hostPlatform) system;
+      myPkgs = self.packages.${system};
+
       catppuccin-kde = pkgs.callPackage (
         { stdenvNoCC, fetchFromGitHub }:
         stdenvNoCC.mkDerivation (finalAttrs: {
@@ -93,7 +100,7 @@ in
         })
       ) { };
 
-      wallpaper = pkgs.my-wallpaper.passthru.kdeFilePath;
+      wallpaper = myPkgs.my-wallpaper.passthru.kdeFilePath;
     in
     {
       imports = [

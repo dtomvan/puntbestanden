@@ -74,6 +74,8 @@
 
       system.switch.enable = lib.mkForce true; # needed to install to bootloader anyways
 
-      environment.systemPackages = [ pkgs.nixos-self-install ];
+      environment.systemPackages = [
+        self.packages.${pkgs.stdenv.hostPlatform.system}.nixos-self-install
+      ];
     };
 }

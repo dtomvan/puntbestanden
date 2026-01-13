@@ -54,6 +54,10 @@
         host,
         ...
       }:
+      let
+        inherit (pkgs.stdenv.hostPlatform) system;
+        myPkgs = self.packages.${system};
+      in
       {
         services.swayosd.enable = true;
         services.hyprpolkitagent.enable = true;
@@ -86,7 +90,7 @@
             exec-once = [
               "clipse -listen"
               "upower-notify"
-              "qs -p ${pkgs.quickshellConfig}"
+              "qs -p ${myPkgs.quickshellConfig}"
             ];
           };
         };

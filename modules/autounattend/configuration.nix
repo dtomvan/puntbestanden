@@ -13,7 +13,7 @@ in
     autounattend = inputs.nixpkgs.lib.nixosSystem {
       modules = [
         self.modules.nixos.autounattend
-        { nixpkgs.overlays = config.pkgs-overlays; }
+        (self.lib.system "x86_64-linux")
       ];
     };
     # allows rebuilding the config easier for a newcomer
@@ -41,8 +41,6 @@ in
       ];
 
       programs.nh.flake = lib.mkForce "/etc/nixos/";
-
-      nixpkgs.config.allowUnfree = true;
 
       nix.channel.enable = lib.mkForce true;
 

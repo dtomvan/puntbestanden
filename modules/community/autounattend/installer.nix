@@ -20,8 +20,6 @@ in
         "${modulesPath}/installer/cd-dvd/channel.nix"
       ];
 
-      nixpkgs.config.allowUnfree = true;
-
       environment.sessionVariables.NIX_PATH = lib.mkForce "nixpkgs=${pkgs.path}";
 
       nix.settings.experimental-features = [
@@ -122,7 +120,5 @@ in
           Type = "oneshot";
         };
       };
-
-      nixpkgs.hostPlatform = "x86_64-linux";
     };
 }
