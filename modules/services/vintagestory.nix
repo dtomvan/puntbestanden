@@ -14,7 +14,6 @@
   flake.modules.nixos.services-vintagestory =
     {
       lib,
-      config,
       pkgs,
       ...
     }:
@@ -82,36 +81,5 @@
 
       # takes up a bunch of memory, I'll start it on-demand
       systemd.services.vintagestory.wantedBy = lib.mkForce [ ];
-
-      services.rathole = {
-        enable = true;
-        role = "client";
-        settings.client = {
-          remote_addr = "vitune.app:2333";
-          services.vintagestory.local_addr = "${host}:${builtins.toString port}";
-          transport.type = "noise";
-        };
-        credentialsFile = config.sops.secrets.rathole-client.path;
-      };
-
-      sops.secrets.rathole-client = {
-        mode = "0444";
-        format = "binary";
-        sopsFile = ../../secrets/vitune/rathole-client.secret;
-        restartUnits = [ "rathole.service" ];
-      };
     };
-
-  flake.sopsConfig = {
-    keys.vitune = "age1tfcfat3y9uekdw8u2ln4az4uqfznk25ntarte34292rz0zw3zy6qjcqqth";
-    creation_rules = {
-      "secrets/vitune/rathole-server.secret" = [
-        "vitune"
-      ];
-
-      "secrets/vitune/rathole-client.secret" = [
-        "boomer"
-      ];
-    };
-  };
 }
