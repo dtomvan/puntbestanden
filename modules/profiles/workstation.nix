@@ -12,7 +12,6 @@
         services-keybase
         utilities
         virt-distrobox
-        virt-docker
       ];
 
       modules.utilities.enableLazyApps = true;

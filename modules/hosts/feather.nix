@@ -27,7 +27,6 @@
 
         virtualisation.libvirtd.onBoot = "ignore";
         systemd.services.podman.wantedBy = lib.mkForce [ ];
-        virtualisation.docker.enableOnBoot = false;
 
         hardware.bluetooth.enable = true;
 
