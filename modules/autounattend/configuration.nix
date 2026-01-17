@@ -29,7 +29,7 @@ in
     {
       imports = with self.modules.nixos; [
         profiles-base
-        profiles-plasma
+        profiles-plasma-minimal
 
         # allows me to remote in people's PC for quick tech support
         networking-tailscale
@@ -63,10 +63,6 @@ in
       };
 
       home-manager.users.me = {
-        imports = with self.modules.homeManager; [
-          profiles-base
-        ];
-
         home.homeDirectory = "/home/me";
         home.file.README.text = ''
           You made it!

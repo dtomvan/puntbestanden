@@ -33,13 +33,11 @@ in
         ) { };
       in
       {
-        imports = [ nixos.profiles-graphical ];
+        imports = [
+          nixos.profiles-graphical
+          nixos.profiles-plasma-minimal
+        ];
 
-        services.displayManager.sddm.enable = lib.mkDefault true;
-        services.displayManager.sddm.wayland.enable = lib.mkDefault true;
-
-        services.desktopManager.plasma6.enable = true;
-        services.displayManager.defaultSession = "plasma";
         environment.systemPackages =
           with pkgs.kdePackages;
           [
@@ -53,8 +51,6 @@ in
           ]
           ++ lib.optionals config.services.tailscale.enable [ ktailctl ]
           ++ lib.optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];
-
-        environment.plasma6.excludePackages = with pkgs; [ kdePackages.discover ];
       };
 
     homeManager.profiles-plasma =

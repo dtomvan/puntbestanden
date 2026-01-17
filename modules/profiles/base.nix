@@ -21,7 +21,7 @@
 
           nix-common
 
-          boot-grub
+          boot-systemd-boot
           users-tomvd
           users-root
 
@@ -30,7 +30,6 @@
           sops
 
           programs-comma
-          nano
 
           networking-wifi-passwords
 
@@ -43,7 +42,6 @@
         };
 
         programs.less.enable = true;
-        programs.nano.formatters.enable = true;
 
         environment.systemPackages = with pkgs; [
           bat
