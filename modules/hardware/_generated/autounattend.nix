@@ -9,8 +9,6 @@
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
   hardware.enableAllFirmware = true;
 
-  boot.loader.grub.enable = true;
-
   boot.initrd.kernelModules = [
     "kvm-intel"
     "virtio_balloon"
