@@ -127,15 +127,15 @@ in
                   noidx = lib.concatStringsSep "|" [
                     ''\.iso$''
                     ''^/home/${user}/\.''
-                    ''^/home/${user}/repos''
-                    ''^/home/${user}/projects''
+                    "^/home/${user}/repos"
+                    "^/home/${user}/projects"
                     ''.*/\.git/.*''
                     ''.*/\.jj/.*''
                     ''.*/\.direnv/.*''
                     ''.*/\.flox/.*''
-                    ''.*/nix/store/.*''
-                    ''.*/result.*''
-                    ''.*/repl-result.*''
+                    ".*/nix/store/.*"
+                    ".*/result.*"
+                    ".*/repl-result.*"
                   ];
                 };
               };
