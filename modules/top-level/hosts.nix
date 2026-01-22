@@ -9,6 +9,7 @@
       description = "a reasonably sluggish Ryzen 5 2600 desktop PC";
       hostName = "boomer";
       system = "x86_64-linux";
+      mainDisk = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
       remoteBuild = {
         enable = true;
         settings = {
@@ -28,6 +29,7 @@
       description = "the ultra-light Thinkpad X1 Carbon G8";
       hostName = "feather";
       system = "x86_64-linux";
+      mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
       remoteBuild.enable = true;
     };
 
