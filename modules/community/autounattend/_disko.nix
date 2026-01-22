@@ -36,6 +36,7 @@
             mountpoint = "/";
             mountOptions = [
               "defaults"
+              "noatime" # saves overhead
             ];
           };
         };
