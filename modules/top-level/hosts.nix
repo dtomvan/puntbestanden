@@ -17,6 +17,7 @@
         hostName = "boomer";
         system = "x86_64-linux";
         users = [ "tomvd" ];
+        mainDisk = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
         wirelessInterface = "wlp7s0";
         remoteBuild = {
           enable = true;
@@ -38,6 +39,7 @@
         hostName = "feather";
         system = "x86_64-linux";
         users = [ "tomvd" ];
+        mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
         wirelessInterface = "wlp0s20f3";
         remoteBuild.enable = true;
       };

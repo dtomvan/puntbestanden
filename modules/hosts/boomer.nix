@@ -2,7 +2,7 @@
 {
   flake.modules = {
     nixos.hosts-boomer =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         imports = with self.modules.nixos; [
           profiles-workstation
@@ -10,7 +10,6 @@
 
           guest
 
-          hardware-boomer-disko
           hardware-nvidia
           hardware-ssd
 
@@ -35,6 +34,24 @@
           enableGraphical = true;
           enableBig = true;
         };
+
+        # <boomer patches from the shared disko config>
+        disko.devices.disk.main.content.partitions = {
+          BOOT.size = "2G";
+          swap.size = "20G";
+        };
+
+        # remove this when reinstalling
+        fileSystems."/boot".device =
+          lib.mkForce "/dev/disk/by-partuuid/0e39e9d4-5be8-4676-901e-dd9723abea28";
+        fileSystems."/" = {
+          device = lib.mkForce "/dev/disk/by-partuuid/ad7785bf-cbe1-41e0-9ec5-359e0c79794e";
+          fsType = lib.mkForce "ext4";
+        };
+        swapDevices = lib.mkForce [
+          { device = "/dev/disk/by-uuid/34bbdbae-aea7-4b7f-bf9c-046bd44c7349"; }
+        ];
+        # <boomer patches from the shared disko config />
 
         environment.systemPackages =
           with pkgs;
