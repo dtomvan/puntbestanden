@@ -10,7 +10,6 @@
 
           guest
 
-          hardware-boomer-disko
           hardware-nvidia
           hardware-ssd
 
