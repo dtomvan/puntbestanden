@@ -11,13 +11,9 @@ let
 in
 {
   flake-file.inputs.copyparty = {
-    # TODO: bump manually on new release, you could make a flake app that does
-    # this but yeah it doesn't really matter
-    url = "github:9001/copyparty/519bfe1f0b66bf3131105941d0dc704de7c2ec23";
+    url = "github:9001/copyparty";
     inputs.nixpkgs.follows = "nixpkgs";
   };
-
-  pkgs-overlays = [ inputs.copyparty.overlays.default ];
 
   flake.modules.nixos.services-copyparty =
     { config, pkgs, ... }:
