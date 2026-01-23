@@ -93,6 +93,8 @@ in
     };
   };
 
+  flake.modules.homeManager.profiles-graphical.gtk.font.name = family;
+
   flake.modules.homeManager.terminals = {
     options.modules.terminals = {
       font.family = lib.mkOption {
