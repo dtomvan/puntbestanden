@@ -6,6 +6,8 @@
       {
         imports = with self.modules.nixos; [
           profiles-workstation
+          themes-catppuccin
+          profiles-oxwm
 
           hardware-comet-lake
           hardware-elan-tp
@@ -41,9 +43,10 @@
       {
         imports = with self.modules.homeManager; [
           profiles-base
-          themes-minecraft
+          themes-catppuccin
           profiles-graphical
           profiles-plasma
+          profiles-oxwm
 
           users-tomvd
           basic-cli

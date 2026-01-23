@@ -844,6 +844,26 @@
         "type": "github"
       }
     },
+    "oxwm": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769130356,
+        "narHash": "sha256-3WP7KXg5eiv8T6PIFrQI7S8iovGsig/wdU1KiLiQGWY=",
+        "owner": "tonybanters",
+        "repo": "oxwm",
+        "rev": "7b7d32092b20434e751e74d87e37471b06e6e7c8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tonybanters",
+        "repo": "oxwm",
+        "type": "github"
+      }
+    },
     "plasma-manager": {
       "inputs": {
         "home-manager": [
@@ -918,6 +938,7 @@
         "nixvim": "nixvim",
         "nur": "nur",
         "nuschtos-search": "nuschtos-search",
+        "oxwm": "oxwm",
         "plasma-manager": "plasma-manager",
         "sops": "sops",
         "srvos": "srvos",

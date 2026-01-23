@@ -193,6 +193,14 @@
       };
       url = "github:NuschtOS/search";
     };
+    oxwm = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:tonybanters/oxwm";
+    };
     plasma-manager = {
       inputs = {
         home-manager = {
