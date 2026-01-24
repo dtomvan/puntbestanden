@@ -40,9 +40,7 @@ in
         inputs.catppuccin.nixosModules.catppuccin
       ];
 
-      catppuccin = catppuccin // {
-        sddm.enable = true;
-      };
+      inherit catppuccin;
 
       boot = {
         # manually re-implement catppuccin module because I want control of mkOverride calls
