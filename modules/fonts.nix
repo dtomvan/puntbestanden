@@ -115,5 +115,9 @@ in
         inherit (fixedWidth) family pointSize;
         DEFAULT_AUDIO_SINK = null;
       };
+      packages.myXmobarrc = pkgs.replaceVars ./profiles/xmonad/xmobarrc {
+        inherit (fixedWidth) family;
+        size = fixedWidth.pointSize;
+      };
     };
 }
