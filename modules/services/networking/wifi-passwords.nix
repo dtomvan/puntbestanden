@@ -1,18 +1,20 @@
+{ self, ... }:
 {
   flake.modules.nixos.networking-wifi-passwords =
     { config, lib, ... }:
     let
-      inherit (config.networking) hostName;
-      hostInterfaces = {
-        feather = "wlp0s20f3";
-        boomer = "wlp7s0";
+      host = self.lib.getHost {
+        inherit config;
+        module = "wifi-passwords";
+        doThrow = false;
       };
+
       makeSimpleNetwork =
         {
           ssid,
           user ? "tomvd",
           uuid,
-          interface ? hostInterfaces."${hostName}" or null,
+          interface ? host.wirelessInterface or null,
           ...
         }:
         lib.nameValuePair ssid {

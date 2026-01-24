@@ -9,6 +9,7 @@
       description = "a reasonably sluggish Ryzen 5 2600 desktop PC";
       hostName = "boomer";
       system = "x86_64-linux";
+      wirelessInterface = "wlp7s0";
       remoteBuild = {
         enable = true;
         settings = {
@@ -28,6 +29,7 @@
       description = "the ultra-light Thinkpad X1 Carbon G8";
       hostName = "feather";
       system = "x86_64-linux";
+      wirelessInterface = "wlp0s20f3";
       remoteBuild.enable = true;
     };
 
