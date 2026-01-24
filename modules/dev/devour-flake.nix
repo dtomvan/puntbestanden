@@ -28,7 +28,7 @@
             do
               pname="''${pkg[0]}"
               outPath="''${pkg[1]}"
-              ln -s "$outPath" "$pname"
+              ln -s "$outPath" "result-$pname"
             done < <(devour-flake . "$@" | jq -r 'to_entries | .[0].value.byName | to_entries | map([.key,.value]).[] | @tsv')
           '';
         };
