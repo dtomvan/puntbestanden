@@ -1,31 +1,8 @@
 {
   inputs,
-  flake-parts-lib,
-  lib,
   ...
 }:
-let
-  sopsSubmodule.options = {
-    keys = lib.mkOption {
-      type = with lib.types; attrsOf str;
-      default = { };
-    };
-
-    creation_rules = lib.mkOption {
-      type = with lib.types; attrsOf (listOf str);
-      default = { };
-    };
-  };
-in
 {
-  options = {
-    flake = flake-parts-lib.mkSubmoduleOptions {
-      sopsConfig = lib.mkOption {
-        type = lib.types.submodule sopsSubmodule;
-      };
-    };
-  };
-
   config = {
     flake-file.inputs = {
       sops = {
@@ -42,14 +19,6 @@ in
       sops.age.sshKeyPaths = [
         "/etc/ssh/ssh_host_ed25519_key"
         "/home/tomvd/.ssh/id_ed25519"
-      ];
-    };
-
-    flake.sopsConfig.creation_rules = {
-      "secrets/[^/]+.secret" = [
-        "boomer"
-        "feather"
-        "kaput"
       ];
     };
 
