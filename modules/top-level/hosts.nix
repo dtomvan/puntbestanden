@@ -32,14 +32,6 @@
       wirelessInterface = "wlp0s20f3";
       remoteBuild.enable = true;
     };
-
-    hp3600 = {
-      description = "a thick bastard of a laptop with a broken screen";
-      hostName = "kaput";
-      system = "x86_64-linux";
-      remoteBuild.enable = false;
-      noConfig = true;
-    };
   };
 
   text.readme.parts.hostnames = ''
