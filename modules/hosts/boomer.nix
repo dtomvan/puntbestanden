@@ -27,6 +27,7 @@
           services-vintagestory
 
           virt-kvm
+          virt-incus
 
           # nuschtos-search
 
