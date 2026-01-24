@@ -36,7 +36,6 @@ in
         imports = with homeManager; [
           firefox
           terminals
-          webapps
         ];
 
         home.os.isGraphical = lib.mkDefault true;

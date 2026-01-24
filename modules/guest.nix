@@ -49,7 +49,6 @@ in
         imports =
           (with self.modules.homeManager; [
             firefox-ubo-only
-            webapps
             terminals
             profiles-base
           ])
