@@ -47,11 +47,6 @@
                 jdk25
               ];
             })
-
-            nur.repos.dtomvan.tsodingPackages.blang
-            nur.repos.dtomvan.tsodingPackages.musializer
-            nur.repos.dtomvan.tsodingPackages.fourat
-            nur.repos.dtomvan.tsodingPackages.sowon
           ]
           ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
             # rarely used

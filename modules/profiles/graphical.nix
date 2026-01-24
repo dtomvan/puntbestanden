@@ -9,12 +9,7 @@ in
       {
         imports = with self.modules.nixos; [
           plymouth
-
-          services-printing
-          services-sane
-
           hardware-sound
-
           fonts
         ];
 

@@ -1,16 +1,4 @@
-# { inputs, ... }:
 {
-  # flake-file.inputs = {
-  #   nix4vscode = {
-  #     url = "github:nix-community/nix4vscode";
-  #     inputs.nixpkgs.follows = "nixpkgs";
-  #   };
-  # };
-  #
-  # pkgs-overlays = [
-  #   inputs.nix4vscode.overlays.forVscode
-  # ];
-
   flake.modules.homeManager.vscode =
     {
       pkgs,
@@ -118,90 +106,13 @@
                 editorconfig.editorconfig
                 ms-vscode-remote.remote-ssh
                 ms-vscode-remote.remote-containers
-                kahole.magit
               ]
-              ++ lib.optionals cfg.gimmeGimmeGimme gimmeExtensions
-            /*
-              ++ (pkgs.nix4vscode.forOpenVsx or pkgs.nix4vscode.forVscode or (p: null)) [
-                "Catppuccin.catppuccin-vsc"
-                # "ms-python.python"
-                # "charliermarsh.ruff"
-                "EditorConfig.EditorConfig"
-              ]
-            */
-            ;
+              ++ lib.optionals cfg.gimmeGimmeGimme gimmeExtensions;
+
             userSettings = {
               "[nix]"."editor.tabSize" = 2;
               "workbench.colorTheme" = "Catppuccin Mocha";
             };
-
-            keybindings =
-              # magit binds, remove when removing magit
-              lib.optionals cfg.gimmeGimmeGimme [
-                {
-                  command = "cursorTop";
-                  key = "g g";
-                  when = "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
-                }
-                {
-                  command = "magit.refresh";
-                  key = "g r";
-                  when = "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
-                }
-                {
-                  command = "extension.vim_tab";
-                  key = "tab";
-                  when = "editorTextFocus && vim.active && !inDebugRepl && vim.mode != 'Insert' && editorLangId != 'magit'";
-                }
-                {
-                  command = "-extension.vim_tab";
-                  key = "tab";
-                }
-                {
-                  command = "magit.discard-at-point";
-                  key = "x";
-                  when = "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
-                }
-                {
-                  command = "-magit.discard-at-point";
-                  key = "k";
-                }
-                {
-                  command = "magit.reverse-at-point";
-                  key = "-";
-                  when = "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
-                }
-                {
-                  command = "-magit.reverse-at-point";
-                  key = "v";
-                }
-                {
-                  command = "magit.reverting";
-                  key = "shift+-";
-                  when = "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
-                }
-                {
-                  command = "-magit.reverting";
-                  key = "shift+v";
-                }
-                {
-                  command = "magit.resetting";
-                  key = "shift+o";
-                  when = "editorTextFocus && editorLangId == 'magit' && vim.mode =~ /^(?!SearchInProgressMode|CommandlineInProgress).*$/";
-                }
-                {
-                  command = "-magit.resetting";
-                  key = "shift+x";
-                }
-                {
-                  command = "-magit.reset-mixed";
-                  key = "x";
-                }
-                {
-                  command = "-magit.reset-hard";
-                  key = "ctrl+u x";
-                }
-              ];
           };
         };
       };

@@ -9,9 +9,6 @@ in
 {
   flake.nixosConfigurations.minimal-container = inputs.nixpkgs.lib.nixosSystem {
     modules = with self.modules.nixos; [
-      sops
-      services-localsend-rs
-      users-tomvd
       (
         { pkgs, ... }:
         {
@@ -24,11 +21,7 @@ in
             };
           };
 
-          services.localsend-rs.sopsBootstrap = true;
-
-          environment.systemPackages = with pkgs; [
-            git
-          ];
+          environment.systemPackages = with pkgs; [ git ];
 
           boot.isContainer = true;
           nixpkgs.hostPlatform = system;

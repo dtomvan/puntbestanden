@@ -6,21 +6,22 @@
       lib,
       ...
     }:
+    let
+      inherit (config.home.os) isGraphical;
+    in
     {
       services.mpd = {
         enable = true;
 
-        # TODO: this is the only part where I have a remnant of the old way
-        # `hosts` was used, maybe remove this?
         extraConfig =
           # pipewire only on graphical sessions
-          (lib.optionalString config.home.os.isGraphical ''
+          (lib.optionalString isGraphical ''
             audio_output {
               type "pipewire"
               name "My PipeWire Output"
             }
           '')
-          + (lib.optionalString (!config.home.os.isGraphical) ''
+          + (lib.optionalString (!isGraphical) ''
             audio_output {
               type "alsa"
               name "My ALSA"
@@ -36,8 +37,8 @@
         mpc
       ];
 
-      services.mpd-mpris.enable = true;
-      programs.ncmpcpp.enable = true;
+      services.mpd-mpris.enable = lib.mkIf isGraphical true;
+      programs.ncmpcpp.enable = lib.mkIf isGraphical true;
       xdg.userDirs.enable = true;
     };
 }

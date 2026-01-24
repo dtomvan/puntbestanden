@@ -7,6 +7,9 @@
         profiles-base
         profiles-plasma
 
+        services-printing
+        services-sane
+
         networking-tailscale
         services-copyparty
         services-keybase
