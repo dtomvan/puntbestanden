@@ -87,7 +87,7 @@ in
 
           Or, if you are dtomvan, grab one of your configs:
             # NH_FLAKE is already set
-            $ nh os boot -H {boomer,feather,kaput}
+            $ nh os boot -H {boomer,feather}
 
         '';
 

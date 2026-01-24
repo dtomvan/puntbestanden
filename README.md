@@ -34,7 +34,6 @@ Learn more about it (in order of, well, "deepness" or complexity):
 ## The hostnames
 
 - `boomer`, a reasonably sluggish Ryzen 5 2600 desktop PC
-- `kaput`, a thick bastard of a laptop with a broken screen
 - `feather`, the ultra-light Thinkpad X1 Carbon G8
 # Autounattend
 This repository includes an "autounattend" installer ISO, which:

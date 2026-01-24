@@ -34,14 +34,6 @@
       mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
       remoteBuild.enable = true;
     };
-
-    hp3600 = {
-      description = "a thick bastard of a laptop with a broken screen";
-      hostName = "kaput";
-      system = "x86_64-linux";
-      remoteBuild.enable = false;
-      noConfig = true;
-    };
   };
 
   text.readme.parts.hostnames = ''

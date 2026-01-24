@@ -1,12 +1,10 @@
 keys:
 - &boomer age1p08uvpumsx02aj73dlww4sjz4qtkzpdc03cq4sglu205jq4kzfesklulr9
 - &feather age1r9anx6v5enykaz0f0pwstgjh7afw7t2ew8mzcfnsmy79h0vx95jqhvw7ux
-- &kaput age1hfxwhjh3lwq9cl2fp2fx0edzvptd0m8e87amlxktpt0p37q9ueusqd9h5p
 
 creation_rules:
 - key_groups:
   - age:
     - *boomer
     - *feather
-    - *kaput
   path_regex: secrets/[^/]+.secret
