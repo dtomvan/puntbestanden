@@ -1,5 +1,3 @@
 {
-  flake.modules.nixvim.default = {
-    withRuby = false;
-  };
+  flake.modules.nixvim.default.withRuby = false;
 }

@@ -1,9 +1,6 @@
 {
   flake.modules.nixos.services-sane =
-    {
-      pkgs,
-      ...
-    }:
+    { pkgs, ... }:
     {
       hardware.sane = {
         enable = true;

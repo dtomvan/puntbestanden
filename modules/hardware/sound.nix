@@ -1,8 +1,6 @@
 {
-  flake.modules.nixos.hardware-sound = {
-    services.pipewire = {
-      enable = true;
-      pulse.enable = true;
-    };
+  flake.modules.nixos.hardware-sound.services.pipewire = {
+    enable = true;
+    pulse.enable = true;
   };
 }

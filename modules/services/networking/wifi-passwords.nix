@@ -68,7 +68,7 @@
                 uuid = "787845e2-1f4a-4f3e-b85b-4a8ba80dceb9";
               }
             ]
-            [ (builtins.map makeSimpleNetwork) lib.listToAttrs ];
+            [ (map makeSimpleNetwork) lib.listToAttrs ];
       };
     };
 }
