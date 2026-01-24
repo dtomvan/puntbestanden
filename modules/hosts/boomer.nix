@@ -26,8 +26,6 @@
           virt-kvm
           virt-incus
 
-          # nuschtos-search
-
           nix-distributed-builds
           users-remote-build
         ];
