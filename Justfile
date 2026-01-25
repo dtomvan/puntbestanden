@@ -7,6 +7,14 @@ check:
     nix run .#write-files
     nix flake check
 
+build:
+    nix run .#nix-build-all
+
+deploy:
+    nix develop -c deploy -sk
+
+all: check build deploy
+
 [private]
 run-stow ACTION PACKAGE +ARGS='':
 	stow -vv --dotfiles -t ~ -d ./stow {{ACTION}} {{PACKAGE}} {{ARGS}}
