@@ -175,6 +175,7 @@
           '';
           runtimeInputs = [ pkgs.jujutsu ];
         })
+        pkgs.eza
       ];
     };
 }
