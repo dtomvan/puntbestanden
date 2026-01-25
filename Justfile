@@ -2,9 +2,9 @@ default:
     @just --list
 
 check:
-    nix run write-flake
+    nix run .#write-flake
     nix fmt
-    nix run update-files
+    nix run .#write-files
     nix flake check
 
 [private]
