@@ -7,13 +7,17 @@ check:
     nix run .#write-files
     nix flake check
 
+clean:
+    rm result* repl-result*
+
 build:
     nix run .#nix-build-all
 
 deploy:
     nix develop -c deploy -sk
 
-all: check build deploy
+cleanbuild: clean build
+all: check cleanbuild deploy
 
 [private]
 run-stow ACTION PACKAGE +ARGS='':
