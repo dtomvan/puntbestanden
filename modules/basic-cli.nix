@@ -178,4 +178,14 @@
         pkgs.eza
       ];
     };
+
+  # dim the $SHLVL to the left of the default nixos prompt when SHLVL>1
+  flake.modules.nixos.profiles-base =
+    { options, ... }:
+    {
+      # frick me why no lib.mkAfter
+      programs.bash.promptInit = options.programs.bash.promptInit.default + ''
+        PS1='\n\[\e[2m\]$(((SHLVL>1))&&echo "$SHLVL ")\[\e[0m\]'"''${PS1#'\n'}"
+      '';
+    };
 }
