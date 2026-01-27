@@ -519,6 +519,23 @@
         "type": "github"
       }
     },
+    "mango": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768912412,
+        "narHash": "sha256-zjMDW2Izd2GOKDfekf5/O1LaiI+rGzxmdhzOpzbAvvE=",
+        "owner": "DreamMaoMao",
+        "repo": "mango",
+        "rev": "d78526d1e92acc3c926c1da26d27708f500875aa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "DreamMaoMao",
+        "ref": "0.11.0",
+        "repo": "mango",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -706,6 +723,7 @@
         "import-tree": "import-tree",
         "lazy-apps": "lazy-apps",
         "localsend-rs": "localsend-rs",
+        "mango": "mango",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",

@@ -10,8 +10,6 @@
       ...
     }:
     {
-      imports = [ self.modules.nixos.profiles-ly ];
-
       services.xserver = {
         enable = true;
         windowManager.oxwm = {

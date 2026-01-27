@@ -6,8 +6,10 @@
       {
         imports = with self.modules.nixos; [
           profiles-workstation
-          themes-tony
+          profiles-ly
+          profiles-mangowc
           profiles-oxwm
+          themes-tony
 
           hardware-comet-lake
           hardware-elan-tp
@@ -47,6 +49,7 @@
           profiles-graphical
           profiles-plasma
           profiles-oxwm
+          profiles-mangowc
 
           users-tomvd
           basic-cli

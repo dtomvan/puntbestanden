@@ -1,15 +1,13 @@
 {
-  perSystem =
-    { self', ... }:
-    {
-      packages.tonyWallpaper = self'.legacyPackages.fetchWallpaper {
-        url = "https://raw.githubusercontent.com/tonybanters/tonarchy/8769d9acc2757b1b89c6a535d8592e75283f2eef/assets/wallpapers/wall1.jpg";
-        hash = "sha256-H4P244eEladsbPHxyG4qGBGHyjMyiaIHm62G7RMADJo=";
-      };
-    };
+  # STUB. so that the import scheme is consistent and doesn't error out when added
+  flake.modules.nixos.themes-tony = { };
 
   flake.modules.homeManager.themes-tony =
-    { pkgs, lib, ... }:
+    {
+      pkgs,
+      lib,
+      ...
+    }:
     {
       home.packages = with pkgs; [
         alacritty

@@ -126,6 +126,10 @@
       };
       url = "github:dtomvan/localsend-rust-impl";
     };
+    mango = {
+      flake = false;
+      url = "github:DreamMaoMao/mango/0.11.0";
+    };
     nix-index-database = {
       inputs = {
         nixpkgs = {
