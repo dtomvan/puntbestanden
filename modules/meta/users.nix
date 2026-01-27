@@ -39,10 +39,11 @@ in
       homeManager.git =
         hm:
         let
-          user = config.users.${hm.config.home.username};
+          inherit (hm.config.home) username;
+          user = config.users.${username} or null;
         in
         {
-          programs.git.settings = {
+          programs.git.settings = lib.mkIf (config.users ? username) {
             signing.key = user.gpgPubKey;
             user = {
               name = user.fullName;
@@ -54,10 +55,11 @@ in
       homeManager.jujutsu =
         hm:
         let
-          user = config.users.${hm.config.home.username};
+          inherit (hm.config.home) username;
+          user = config.users.${username} or null;
         in
         {
-          programs.jujutsu.settings.user = {
+          programs.jujutsu.settings.user = lib.mkIf (config.users ? username) {
             inherit (user) email;
             name = user.fullName;
           };
