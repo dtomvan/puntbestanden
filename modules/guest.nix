@@ -23,10 +23,12 @@ let
 in
 {
   flake.modules.nixos.guest =
-    { pkgs, ... }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-    in
+    {
+      self',
+      inputs',
+      pkgs,
+      ...
+    }:
     {
       imports = [
         inputs.home-manager.nixosModules.default
@@ -45,6 +47,9 @@ in
         "f /home/guest/.config/nvim/lua/config/plugins.lua 0644 guest users - return {}"
       ];
 
+      # some modules depend on these. notable profiles-base
+      home-manager.extraSpecialArgs = { inherit self' inputs'; };
+
       home-manager.users.guest = {
         imports =
           (with self.modules.homeManager; [
@@ -61,7 +66,7 @@ in
 
         programs.firefox = {
           enable = true;
-          package = self.legacyPackages.${system}.makeFakeFirefox pkgs.firefox-devedition {
+          package = self'.legacyPackages.makeFakeFirefox pkgs.firefox-devedition {
             args = "-P ubo-only";
           };
           profiles.ubo-only = {

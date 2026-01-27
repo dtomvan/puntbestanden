@@ -4,7 +4,12 @@
   flake.lib.system =
     system:
     (withSystem system (
-      { self', inputs', pkgs, ... }:
+      {
+        self',
+        inputs',
+        pkgs,
+        ...
+      }:
       {
         _module.args = { inherit self' inputs'; };
         nixpkgs = { inherit pkgs; };

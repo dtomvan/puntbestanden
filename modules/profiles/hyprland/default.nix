@@ -49,14 +49,13 @@
 
     homeManager.hyprland =
       {
-        pkgs,
+        self',
         lib,
         host,
         ...
       }:
       let
-        inherit (pkgs.stdenv.hostPlatform) system;
-        myPkgs = self.packages.${system};
+        myPkgs = self'.packages;
       in
       {
         services.swayosd.enable = true;

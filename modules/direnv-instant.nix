@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   flake-file.inputs.direnv-instant = {
     url = "github:Mic92/direnv-instant";
@@ -6,13 +5,13 @@
   };
   flake.modules.homeManager.basic-cli =
     {
-      pkgs,
+      inputs',
       lib,
       config,
       ...
     }:
     {
-      home.packages = [ inputs.direnv-instant.packages.${pkgs.stdenv.hostPlatform.system}.default ];
+      home.packages = [ inputs'.direnv-instant.packages.default ];
       programs.bash.initExtra = lib.mkAfter ''
         eval "$(direnv-instant hook bash)"
       '';

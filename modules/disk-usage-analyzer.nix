@@ -109,7 +109,7 @@
   # make it configurable with a nixos module
   flake.modules.nixos.disk-usage-analyzer =
     {
-      pkgs,
+      self',
       lib,
       config,
       ...
@@ -145,7 +145,7 @@
         package = lib.mkOption {
           description = "the `disk-usage-analyzer' package to use";
           type = lib.types.package;
-          default = self.packages.${pkgs.stdenv.hostPlatform.system}.disk-usage-analyzer;
+          default = self'.packages.disk-usage-analyzer;
         };
         finalPackage = lib.mkOption {
           type = lib.types.package;

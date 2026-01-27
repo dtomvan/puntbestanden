@@ -1,7 +1,7 @@
 {
+  withSystem,
   self,
   lib,
-  inputs,
   ...
 }:
 {
@@ -17,45 +17,43 @@
     (lib.filterAttrs (_n: v: !(v ? noConfig)))
     (lib.mapAttrs' (
       _n: v:
-      let
-        inherit (v) hostName system;
-        hostConfig = self.nixosConfigurations.${v.hostName};
-      in
-      lib.nameValuePair v.hostName {
-        # yes.
-        hostname = hostName;
+      lib.nameValuePair v.hostName (
+        withSystem v.system (
+          { inputs', self', ... }:
+          let
+            deployLib = inputs'.deploy-rs.lib;
+            hostConfig = self.nixosConfigurations.${v.hostName};
+          in
+          {
+            # yes.
+            hostname = v.hostName;
 
-        profiles.system = {
-          user = "root";
-          sshUser = "root";
-          path = inputs.deploy-rs.lib.${system}.activate.nixos hostConfig;
-        };
+            profiles.system = {
+              user = "root";
+              sshUser = "root";
+              path = deployLib.activate.nixos hostConfig;
+            };
 
-        profiles.tomvd = {
-          user = "tomvd";
-          path =
-            inputs.deploy-rs.lib.${system}.activate.home-manager
-              self.homeConfigurations."tomvd@${hostName}";
-        };
+            profiles.tomvd = {
+              user = "tomvd";
+              path = deployLib.activate.home-manager self.homeConfigurations."tomvd@${v.hostName}";
+            };
 
-        profiles.nixvim = {
-          user = "tomvd";
-          path =
-            inputs.deploy-rs.lib.${system}.activate.custom self.packages.${system}.activatable-nixvim
-              "./bin/activate";
-        };
+            profiles.nixvim = {
+              user = "tomvd";
+              path = deployLib.activate.custom self'.packages.activatable-nixvim "./bin/activate";
+            };
 
-        profiles.flatpak = {
-          user = "root";
-          sshUser = "root";
-          path = inputs.deploy-rs.lib.${system}.activate.custom (
-            self.legacyPackages.${system}.activatable-flatpak
-            {
-              inherit (hostConfig.config.services.flatpak) packages;
-            }
-          ) "./bin/flatpak-managed-install";
-        };
-      }
+            profiles.flatpak = {
+              user = "root";
+              sshUser = "root";
+              path = deployLib.activate.custom (self'.legacyPackages.activatable-flatpak {
+                inherit (hostConfig.config.services.flatpak) packages;
+              }) "./bin/flatpak-managed-install";
+            };
+          }
+        )
+      )
     ))
   ];
 

@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   perSystem =
     { self', pkgs, ... }:
@@ -32,6 +31,7 @@
 
   flake.modules.homeManager.themes-tony =
     {
+      self',
       pkgs,
       lib,
       config,
@@ -40,7 +40,7 @@
     }:
     let
       hasMango = options.wayland.windowManager ? mango;
-      myPkgs = self.packages.${pkgs.stdenv.hostPlatform.system};
+      myPkgs = self'.packages;
       tonyMangowcConf = pkgs.runCommand "config.conf" { nativeBuildInputs = [ pkgs.gnused ]; } ''
         sed 's|/home/tony/|${config.home.homeDirectory}/|g' < ${myPkgs.tonyMangowc}/config.conf > $out
         cat << EOF >> $out

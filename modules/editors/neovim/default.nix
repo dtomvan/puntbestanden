@@ -51,7 +51,7 @@
   flake.modules.homeManager.nixvim =
     { pkgs, ... }:
     {
-      home.packages = [ self.packages.${pkgs.hostPlatform.system}.nixvim ];
+      home.packages = [ self.packages.${pkgs.stdenv.hostPlatform.system}.nixvim ];
       systemd.user.settings.Manager.DefaultEnvironment = {
         EDITOR = "nvim";
       };
