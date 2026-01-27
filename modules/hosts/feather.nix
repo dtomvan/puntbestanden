@@ -40,7 +40,7 @@
         system.stateVersion = "24.11";
       };
 
-    homeManager.hosts-feather =
+    homeManager.tomvd-feather =
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [

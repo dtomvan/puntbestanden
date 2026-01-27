@@ -42,7 +42,7 @@
         system.stateVersion = "25.05";
       };
 
-    homeManager.hosts-kaput.imports = with self.modules.homeManager; [
+    homeManager.tomvd-kaput.imports = with self.modules.homeManager; [
       profiles-base
       users-tomvd
     ];

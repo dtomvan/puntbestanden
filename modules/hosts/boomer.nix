@@ -73,7 +73,7 @@
         system.stateVersion = "24.05";
       };
 
-    homeManager.hosts-boomer =
+    homeManager.tomvd-boomer =
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [

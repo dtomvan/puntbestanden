@@ -1,34 +1,41 @@
 {
   self,
+  config,
   inputs,
   withSystem,
   ...
 }:
 let
   inherit (inputs.nixpkgs.lib)
+    attrNames
+    attrValues
+    concatMap
     filterAttrs
-    mapAttrs'
+    listToAttrs
     nameValuePair
     pipe
     ;
 
   makeHome =
-    _key: host:
-    nameValuePair "tomvd@${host.hostName}" (
-      withSystem host.system (
-        {
-          self',
-          inputs',
-          pkgs,
-          ...
-        }:
-        inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ self.modules.homeManager."hosts-${host.hostName}" ];
-          extraSpecialArgs = { inherit self' inputs'; };
-        }
+    host:
+    (map (
+      user:
+      nameValuePair "${user}@${host.hostName}" (
+        withSystem host.system (
+          {
+            self',
+            inputs',
+            pkgs,
+            ...
+          }:
+          inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ self.modules.homeManager."${user}-${host.hostName}" ];
+            extraSpecialArgs = { inherit self' inputs'; };
+          }
+        )
       )
-    );
+    ) (attrNames config.users));
 in
 {
   imports = [ inputs.home-manager.flakeModules.default ];
@@ -42,7 +49,9 @@ in
 
   flake.homeConfigurations = pipe self.hosts [
     (filterAttrs (_k: v: !(v ? noConfig)))
-    (mapAttrs' makeHome)
+    attrValues
+    (concatMap makeHome)
+    listToAttrs
   ];
 
   text.readme.parts.home_configs = "\n- a dendritic home-manager config (TODO: list aspects here)";
