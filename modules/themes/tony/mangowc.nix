@@ -44,6 +44,16 @@
       tonyMangowcConf = pkgs.runCommand "config.conf" { nativeBuildInputs = [ pkgs.gnused ]; } ''
         sed 's|/home/tony/|${config.home.homeDirectory}/|g' < ${myPkgs.tonyMangowc}/config.conf > $out
         cat << EOF >> $out
+        bind=SUPER+SHIFT,1,tag,1,0
+        bind=SUPER+SHIFT,2,tag,2,0
+        bind=SUPER+SHIFT,3,tag,3,0
+        bind=SUPER+SHIFT,4,tag,4,0
+        bind=SUPER+SHIFT,5,tag,5,0
+        bind=SUPER+SHIFT,6,tag,6,0
+        bind=SUPER+SHIFT,7,tag,7,0
+        bind=SUPER+SHIFT,8,tag,8,0
+        bind=SUPER+SHIFT,9,tag,9,0
+
         bind=none,XF86AudioRaiseVolume,spawn,wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
         bind=none,XF86AudioLowerVolume,spawn,wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
         bind=none,XF86AudioMute,spawn,wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
