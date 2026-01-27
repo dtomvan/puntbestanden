@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   perSystem =
     {
@@ -75,17 +74,21 @@
     };
 
   flake.modules.nixos.profiles-xmonad =
-    { pkgs, lib, ... }:
+    {
+      self',
+      pkgs,
+      lib,
+      ...
+    }:
     let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      myPkgs = self.packages.${system};
+      myPkgs = self'.packages;
     in
     {
       services.xserver.enable = true;
       services.xserver.windowManager.session = lib.singleton {
         name = "xmonad";
         start = ''
-          systemd-cat -t xmonad -- ${lib.getExe' myPkgs.myXmonad "xmonad-${system}"}
+          systemd-cat -t xmonad -- ${lib.getExe' myPkgs.myXmonad "xmonad-${pkgs.system}"}
           waitPID=$!
         '';
       };

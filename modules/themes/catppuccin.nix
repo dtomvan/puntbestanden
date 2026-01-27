@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 let
   catppuccin = {
     accent = "peach";
@@ -27,14 +27,13 @@ in
 
   flake.modules.nixos.themes-catppuccin =
     {
-      pkgs,
+      self',
       lib,
       config,
       ...
     }:
     let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      myPkgs = self.packages.${system};
+      myPkgs = self'.packages;
     in
     {
       imports = [
@@ -60,14 +59,14 @@ in
 
   flake.modules.homeManager.themes-catppuccin =
     {
+      self',
       pkgs,
       lib,
       config,
       ...
     }:
     let
-      inherit (pkgs.stdenv.hostPlatform) system;
-      myPkgs = self.packages.${system};
+      myPkgs = self'.packages;
 
       catppuccin-kde = pkgs.callPackage (
         { stdenvNoCC, fetchFromGitHub }:

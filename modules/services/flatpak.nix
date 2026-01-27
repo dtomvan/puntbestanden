@@ -1,15 +1,11 @@
-{ self, ... }:
 {
   flake.modules.nixos.profiles-graphical =
     {
-      pkgs,
+      self',
       lib,
       config,
       ...
     }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-    in
     {
       options.services.flatpak.packages = lib.mkOption {
         description = "list of pre-installed flatpak apps";
@@ -28,7 +24,7 @@
         enable = true;
         # so the user can run `flatpak-managed-install` when they want to
         # update/install apps that are out of date or gone
-        package = self.legacyPackages.${system}.activatable-flatpak {
+        package = self'.legacyPackages.activatable-flatpak {
           inherit (config.services.flatpak) packages;
         };
       };

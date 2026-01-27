@@ -60,7 +60,12 @@
     };
 
   flake.modules.nixos.hub =
-    { pkgs, lib, ... }:
+    {
+      self',
+      pkgs,
+      lib,
+      ...
+    }:
     {
       environment.sessionVariables.NIX_PATH = lib.mkForce "nixpkgs=${pkgs.path}";
 
@@ -75,7 +80,7 @@
       system.switch.enable = lib.mkForce true; # needed to install to bootloader anyways
 
       environment.systemPackages = [
-        self.packages.${pkgs.stdenv.hostPlatform.system}.nixos-self-install
+        self'.packages.nixos-self-install
       ];
     };
 }

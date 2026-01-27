@@ -1,6 +1,5 @@
 # this module basically does tonarchy in nixos. It uses upstream configs which
 # sadly can't get mutated because thats not how home-manager works.
-{ self, ... }:
 {
   flake.modules.nixos.profiles-oxwm =
     {
@@ -36,14 +35,19 @@
     };
 
   flake.modules.homeManager.profiles-oxwm =
-    { pkgs, lib, ... }:
+    {
+      self',
+      pkgs,
+      lib,
+      ...
+    }:
     let
       # tonarchyPicomConf = pkgs.fetchurl {
       #   name = "tonarchy-picom.conf";
       #   url = "https://raw.githubusercontent.com/tonybanters/tonarchy/ad5c4629263d5c5e84495dd14e1372411af8a5ed/assets/picom/picom.conf";
       #   hash = "sha256-og2UMhgUOjrzv7Drv93bsr9MnBTODyxfSEhY6xFfG4U=";
       # };
-      inherit (self.packages.${pkgs.stdenv.hostPlatform.system}) tonyWallpaper;
+      inherit (self'.packages) tonyWallpaper;
 
       autostartCommands = [
         # "${lib.getExe pkgs.picom} --config ${tonarchyPicomConf}" # broken

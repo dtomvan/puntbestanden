@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   perSystem =
     { pkgs, ... }:
@@ -40,11 +39,8 @@
     };
 
   flake.modules.nixos.hosts-boomer =
-    { pkgs, ... }:
-    let
-      inherit (pkgs.stdenv.hostPlatform) system;
-    in
+    { self', ... }:
     {
-      environment.systemPackages = [ self.packages.${system}.nixpkgs-update-telegram ];
+      environment.systemPackages = [ self'.packages.nixpkgs-update-telegram ];
     };
 }

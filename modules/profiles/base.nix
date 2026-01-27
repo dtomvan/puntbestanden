@@ -66,13 +66,14 @@
 
     homeManager.profiles-base =
       {
+        inputs',
         config,
         lib,
         pkgs,
         ...
       }:
       let
-        flake-fmt = inputs.flake-fmt.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        flake-fmt = inputs'.flake-fmt.packages.default;
       in
       {
         imports = with self.modules.homeManager; [ helix ];

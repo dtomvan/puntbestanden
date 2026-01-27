@@ -1,4 +1,3 @@
-{ self, ... }:
 {
   perSystem =
     {
@@ -89,9 +88,9 @@
     };
 
   flake.modules.nixos.profiles-workstation =
-    { pkgs, ... }:
+    { self', ... }:
     {
-      environment.systemPackages = [ self.packages.${pkgs.stdenv.hostPlatform.system}.myEmacs ];
+      environment.systemPackages = [ self'.packages.myEmacs ];
     };
 
   flake.modules.homeManager.profiles-workstation = {
