@@ -16,10 +16,16 @@ let
     _key: host:
     nameValuePair "tomvd@${host.hostName}" (
       withSystem host.system (
-        { pkgs, ... }:
+        {
+          self',
+          inputs',
+          pkgs,
+          ...
+        }:
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ self.modules.homeManager."hosts-${host.hostName}" ];
+          extraSpecialArgs = { inherit self' inputs'; };
         }
       )
     );
