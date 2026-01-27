@@ -46,16 +46,4 @@ in
   ];
 
   text.readme.parts.home_configs = "\n- a dendritic home-manager config (TODO: list aspects here)";
-
-  perSystem =
-    { pkgs, lib, ... }:
-    {
-      devshells.default.commands = [
-        {
-          name = "update-home";
-          help = "Switch to new home-manager configuration";
-          command = "${lib.getExe pkgs.nh} home switch";
-        }
-      ];
-    };
 }

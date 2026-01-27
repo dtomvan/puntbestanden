@@ -43,16 +43,4 @@ in
       ];
     in
     "- ${n} NixOS configs (well, this is a generated number so it's technically correct but don't over-estimate me)";
-
-  perSystem =
-    { pkgs, lib, ... }:
-    {
-      devshells.default.commands = [
-        {
-          name = "update-os";
-          help = "Switch to new NixOS configuration";
-          command = "${lib.getExe pkgs.nh} os switch";
-        }
-      ];
-    };
 }

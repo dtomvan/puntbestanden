@@ -20,16 +20,6 @@
     (inputs.import-tree ./modules)
   '';
 
-  perSystem = {
-    devshells.default.commands = [
-      {
-        name = "update-flake";
-        help = "Update flake.lock";
-        command = "nix flake update";
-      }
-    ];
-  };
-
   text.readme.parts.dendritic = ''
     # Dendritic
     This repository uses the [dendritic](https://github.com/mightyiam/dendritic)

@@ -27,12 +27,4 @@ in
       seems like nix wants to copy around some `source` directory through the
       store a couple of times. it is a cool party trick though.
     '';
-
-  perSystem.devshells.default.commands = [
-    {
-      name = "iso";
-      help = "build the autounattend iso";
-      command = "nix build .#${cfg.isoTarget}";
-    }
-  ];
 }
