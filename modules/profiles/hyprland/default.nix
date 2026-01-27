@@ -58,6 +58,8 @@
         myPkgs = self'.packages;
       in
       {
+        imports = [ self.modules.homeManager.services-fnott ];
+
         services.swayosd.enable = true;
         services.hyprpolkitagent.enable = true;
 
