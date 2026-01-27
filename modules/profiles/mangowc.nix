@@ -24,6 +24,7 @@
   flake.modules.homeManager.profiles-mangowc = {
     imports = [
       (import "${inputs.mango}/nix/hm-modules.nix" self)
+      self.modules.homeManager.services-fnott
     ];
 
     modules.terminals.foot.enable = true;
@@ -31,6 +32,9 @@
     wayland.windowManager.mango = {
       enable = true;
       systemd.xdgAutostart = true;
+      autostart_sh = ''
+        fnott &
+      '';
     };
   };
 }
