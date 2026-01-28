@@ -79,7 +79,7 @@
         accel_profile=2
         accel_speed=0.0
 
-        exec-once ${config.home.homeDirectory}/mango/autostart.sh
+        exec-once=${config.home.homeDirectory}/.config/mango/autostart.sh
         EOF
       '';
       rofiRunner = pkgs.writeShellScript "menu.sh" ''
