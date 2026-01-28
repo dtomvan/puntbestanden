@@ -27,12 +27,12 @@
         sumneko.lua
       ];
       gimmePackages = with pkgs; [
+        gopls
+        lua-language-server
+        mypy
         ruff
         rustup
         shellcheck
-        gopls
-        mypy
-        lua-language-server
       ];
     in
     {
@@ -45,9 +45,9 @@
           default = null;
           example = lib.literalExpression ''
             with pkgs; [
+              gopls
               ruff
               rustup
-              gopls
             ]
           '';
         };

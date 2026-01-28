@@ -17,40 +17,40 @@
       config.environment.systemPackages =
         with pkgs;
         [
-          wget
+          btrfs-progs
           curl
+          dix
+          dosfstools
+          e2fsprogs
+          gcc
+          git
+          gnumake
+          jujutsu
+          libarchive
+          nix-diff
           nix-output-monitor
           nix-tree
-          dix
-          nix-diff
           nurl
-          git
-          jujutsu
-          unzip
-          zip
-          libarchive
-          gcc
-          pkg-config
-          gnumake
-          usbutils
           pciutils
-          e2fsprogs
-          btrfs-progs
+          pkg-config
+          unzip
+          usbutils
           util-linux
-          dosfstools
+          wget
+          zip
         ]
         ++ lib.optionals cfg.enableLazyApps (
           lib.map (pkg: lazy-app.override { inherit pkg; }) [
+            bzip2
+            cmake
+            git-lfs
+            lz4
+            meson
             nvd
             rar
-            bzip2
-            zstd
-            lz4
-            xz
-            cmake
-            meson
             tokei
-            git-lfs
+            xz
+            zstd
           ]
         );
     };

@@ -11,8 +11,8 @@
     {
       home.packages = with pkgs; [
         alacritty
-        nerd-fonts.jetbrains-mono
         fastfetchMinimal
+        nerd-fonts.jetbrains-mono
       ];
 
       xdg.configFile."rofi/config.rasi".source = pkgs.fetchurl {

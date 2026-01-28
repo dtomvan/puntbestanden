@@ -5,8 +5,8 @@
       packages.nixpkgs-update-telegram = pkgs.writeShellApplication {
         name = "nixpkgs-update-telegram";
         runtimeInputs = with pkgs; [
-          nix-update
           git
+          nix-update
         ];
         text = ''
           declare -a pkgs

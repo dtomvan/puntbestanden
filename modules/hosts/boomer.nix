@@ -52,9 +52,9 @@
           ]
           ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
             # rarely used
-            zotero
-            localsend
             gimp
+            localsend
+            zotero
           ];
 
         services.flatpak.packages = [

@@ -33,8 +33,8 @@
       };
 
       home.packages = with pkgs; [
-        mpd
         mpc
+        mpd
       ];
 
       services.mpd-mpris.enable = lib.mkIf isGraphical true;

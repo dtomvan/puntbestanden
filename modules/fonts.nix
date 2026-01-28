@@ -20,9 +20,9 @@ in
       fonts = {
         packages = with pkgs; [
           inter
-          noto-fonts-color-emoji
           liberation_ttf
           monoFontPackage
+          noto-fonts-color-emoji
         ];
 
         fontconfig = {

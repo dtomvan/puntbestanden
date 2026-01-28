@@ -9,12 +9,12 @@
       home.packages =
         with pkgs;
         lib.map pkgs.lazy-app.override [
-          { pkg = rustfmt; }
-          { pkg = ruff; }
           {
             pkg = go;
             exe = "gofmt";
           }
+          { pkg = ruff; }
+          { pkg = rustfmt; }
           { pkg = shfmt; }
           { pkg = taplo; }
         ];

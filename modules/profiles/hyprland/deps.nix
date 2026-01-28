@@ -7,24 +7,24 @@
         # do this also but whatever
         environment.systemPackages = with pkgs; [
           # Some KDE apps which get added to plasma automatically, but which I also want on Hyprland
+          haruna
           kdePackages.ark
           kdePackages.dolphin
           kdePackages.kate
           kdePackages.okular
-          haruna
 
-          kdePackages.breeze-icons
           kdePackages.breeze-gtk
+          kdePackages.breeze-icons
 
-          wireplumber
           brightnessctl
-          playerctl
-          fnott
-          kdePackages.xwaylandvideobridge
           clipse
+          fnott
+          grimblast
+          kdePackages.xwaylandvideobridge
+          playerctl
           quickshell
           socat
-          grimblast
+          wireplumber
         ];
       };
 

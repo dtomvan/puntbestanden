@@ -41,13 +41,12 @@ in
         environment.systemPackages =
           with pkgs.kdePackages;
           [
-            kdeconnect-kde
-            krfb # VNC share/server
-            krdc # remote desktop client, should get negotiated by kdeconnect
-            plasma-browser-integration
-
             filelight
+            kdeconnect-kde
+            krdc # remote desktop client, should get negotiated by kdeconnect
+            krfb # VNC share/server
             pkgs.haruna
+            plasma-browser-integration
           ]
           ++ lib.optionals config.services.tailscale.enable [ ktailctl ]
           ++ lib.optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];

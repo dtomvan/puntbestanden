@@ -99,9 +99,9 @@
     in
     {
       home.packages = with pkgs; [
+        brightnessctl
         rofi
         wireplumber
-        brightnessctl
       ];
 
       services.swww.enable = lib.mkIf hasMango true;

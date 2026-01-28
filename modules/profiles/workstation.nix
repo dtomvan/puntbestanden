@@ -31,6 +31,7 @@
         forge-sparks
         keepassxc
         libreoffice-qt6-fresh
+        nixpkgs-reviewFull
         obsidian
         pdfarranger
         pika-backup
@@ -38,7 +39,6 @@
         signal-desktop
         telegram-desktop
         thunderbird
-        nixpkgs-reviewFull
       ];
     };
 }

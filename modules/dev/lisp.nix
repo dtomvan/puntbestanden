@@ -29,9 +29,8 @@
       home.packages = with pkgs; [
         clojure
         clojure-lsp
-
-        luaPackages.fennel
         fennel-ls
+        luaPackages.fennel
       ];
     };
 

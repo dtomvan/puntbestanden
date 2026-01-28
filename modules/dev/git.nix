@@ -43,9 +43,9 @@
       programs.gh = {
         enable = true;
         extensions = with pkgs; [
-          gh-s
           gh-dash
           gh-i
+          gh-s
         ];
         gitCredentialHelper.enable = true;
       };

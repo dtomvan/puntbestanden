@@ -96,9 +96,9 @@
             ripdrag
             stow
             treefmt
+            typst
             yazi
             yt-dlp
-            typst
           ];
         };
       };

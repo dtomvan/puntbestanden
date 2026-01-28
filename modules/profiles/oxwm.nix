@@ -57,12 +57,12 @@
     {
       # required by config
       home.packages = with pkgs; [
+        maim
         rofi
         xclip
-        maim
 
-        wireplumber
         brightnessctl
+        wireplumber
       ];
 
       xdg.configFile."oxwm/config.lua".source = pkgs.stdenvNoCC.mkDerivation (finalAttrs: {

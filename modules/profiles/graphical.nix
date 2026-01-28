@@ -14,9 +14,9 @@ in
         ];
 
         environment.systemPackages = with pkgs; [
-          wl-clipboard
-          pavucontrol
           alsa-utils
+          pavucontrol
+          wl-clipboard
         ];
       };
 

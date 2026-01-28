@@ -16,8 +16,8 @@
         cheese
         epiphany
         geary
-        gnome-console
         gnome-characters
+        gnome-console
         gnome-music
         hitori
         iagno

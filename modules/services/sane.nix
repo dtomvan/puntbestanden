@@ -6,8 +6,8 @@
         enable = true;
         extraBackends = with pkgs; [
           hplip
-          sane-airscan
           ipp-usb
+          sane-airscan
         ];
       };
     };
