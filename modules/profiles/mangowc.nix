@@ -11,20 +11,37 @@
     {
       packages = {
         mango = pkgs.mangowc;
-        swayidle = pkgs.writeShellApplication {
-          name = "swayidle";
+        hypridle = pkgs.writeShellApplication {
+          name = "hypridle";
           runtimeInputs = with pkgs; [
             nur.repos.dtomvan.wlr-dpms
-            swayidle
+            hypridle
             swaylock
           ];
+          # HACK: the promised `-c` flag for hypridle doesn't actually work.
+          # Making a fake XDG_CONFIG_HOME.
           text = ''
-            exec swayidle -w \
-              timeout 300  swaylock \
-              timeout 600  'wlr-dpms off' \
-              resume       'wlr-dpms on' \
-              before-sleep swaylock \
-              lock         swaylock
+            XDG_CONFIG_HOME=${pkgs.writeTextDir "hypr/hypridle.conf" ''
+              general {
+                  lock_cmd = pidof swaylock || swaylock
+                  unlock_cmd = pkill -USR1 swaylock
+              }
+
+              listener {
+                  timeout = 300
+                  on-timeout = swaylock
+              }
+
+              listener {
+                  timeout = 360
+                  on-timeout = wlr-dpms off
+                  on-resume = wlr-dpms on
+              }
+
+              listener {
+                  on-before-sleep = swaylock
+              }
+            ''} exec hypridle
           '';
         };
       };
@@ -57,7 +74,7 @@
         systemd.xdgAutostart = true;
         autostart_sh = ''
           fnott &
-          ${lib.getExe self'.packages.swayidle} &
+          ${lib.getExe self'.packages.hypridle} &
         '';
       };
     };
