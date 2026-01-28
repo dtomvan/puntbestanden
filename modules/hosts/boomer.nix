@@ -27,6 +27,8 @@
           virt-incus
 
           nix-distributed-builds
+
+          users-tomvd
           users-remote-build
         ];
 

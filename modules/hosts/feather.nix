@@ -21,6 +21,8 @@
           virt-kvm
 
           nix-distributed-builds
+
+          users-tomvd
           users-remote-build
         ];
 
