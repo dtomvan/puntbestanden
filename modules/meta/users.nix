@@ -1,4 +1,11 @@
 { lib, config, ... }:
+# How to add a user:
+# Make create modules/users/<username>.nix and define the following outputs:
+# - users.<username>
+# - flake.modules.homeManager.<username>
+# - (optional) flake.modules.homeManager."<username>@<hostname>" for every host
+#   you'd want to use the user on with host-specific settings.
+# Then, when used with NixOS, you should
 let
   userEntry.options = {
     fullName = lib.mkOption {
