@@ -16,26 +16,56 @@ let
     pipe
     ;
 
+  hosts = pipe self.hosts [
+    (filterAttrs (_k: v: !(v ? noConfig)))
+    attrValues
+  ];
+
   makeHome =
-    host:
-    (map (
-      user:
-      nameValuePair "${user}@${host.hostName}" (
-        withSystem host.system (
-          {
-            self',
-            inputs',
-            pkgs,
-            ...
-          }:
-          inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ self.modules.homeManager."${user}-${host.hostName}" ];
-            extraSpecialArgs = { inherit self' inputs'; };
-          }
-        )
+    {
+      name ? "${user}@${hostName}",
+      user,
+      hostName ? "",
+      system,
+    }:
+    nameValuePair name (
+      withSystem system (
+        {
+          self',
+          inputs',
+          pkgs,
+          ...
+        }:
+        inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            (self.lib.mkHomeDefaults user)
+            (self.modules.homeManager."${user}@${hostName}" or { })
+            (self.modules.homeManager."users-${user}" or { })
+          ];
+          extraSpecialArgs = { inherit self' inputs'; };
+        }
       )
-    ) (attrNames config.users));
+    );
+
+  makeHomes =
+    user:
+    # for host-specific configs
+    (map (
+      host:
+      makeHome {
+        inherit user;
+        inherit (host) hostName system;
+      }
+    ) hosts)
+    ++ [
+      # for home-manager users not tied to a NixOS host.
+      (makeHome {
+        inherit user;
+        name = user;
+        system = "x86_64-linux";
+      })
+    ];
 in
 {
   imports = [ inputs.home-manager.flakeModules.default ];
@@ -47,10 +77,9 @@ in
     };
   };
 
-  flake.homeConfigurations = pipe self.hosts [
-    (filterAttrs (_k: v: !(v ? noConfig)))
-    attrValues
-    (concatMap makeHome)
+  flake.homeConfigurations = pipe config.users [
+    attrNames
+    (concatMap makeHomes)
     listToAttrs
   ];
 

@@ -40,19 +40,16 @@
         system.stateVersion = "24.11";
       };
 
-    homeManager.tomvd-feather =
+    homeManager."tomvd@feather" =
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [
-          profiles-base
           themes-tony
           profiles-graphical
           profiles-plasma
           profiles-oxwm
           profiles-mangowc
 
-          users-tomvd
-          basic-cli
           firefox-ubo-only
 
           plasma-feather
@@ -63,6 +60,8 @@
         ];
 
         programs.plasma.configFile.kwinrc.Xwayland.Scale = 1.5;
+
+        home.stateVersion = "24.05";
       };
   };
 }

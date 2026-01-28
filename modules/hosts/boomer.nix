@@ -73,17 +73,14 @@
         system.stateVersion = "24.05";
       };
 
-    homeManager.tomvd-boomer =
+    homeManager."tomvd@boomer" =
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [
-          profiles-base
           profiles-graphical
           themes-catppuccin
           profiles-plasma
 
-          users-tomvd
-          basic-cli
           firefox-ubo-only
           mpd
           typst
@@ -95,6 +92,8 @@
           zotero-connector
           violentmonkey
         ];
+
+        home.stateVersion = "24.05";
       };
   };
 

@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   flake.modules.nixos.users-tomvd = {
     nix.settings = {
@@ -35,9 +36,8 @@
     timeZone = "Europe/Amsterdam";
   };
 
-  flake.modules.homeManager.users-tomvd = {
-    home.username = "tomvd";
-    home.homeDirectory = "/home/tomvd";
-    home.stateVersion = "24.05";
-  };
+  flake.modules.homeManager.users-tomvd.imports = with self.modules.homeManager; [
+    profiles-base
+    basic-cli
+  ];
 }
