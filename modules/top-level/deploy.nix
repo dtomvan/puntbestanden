@@ -2,6 +2,7 @@
   withSystem,
   self,
   lib,
+  config,
   ...
 }:
 {
@@ -13,7 +14,7 @@
     };
   };
 
-  flake.deploy.nodes = lib.pipe self.hosts [
+  flake.deploy.nodes = lib.pipe config.hosts [
     (lib.filterAttrs (_n: v: !(v ? noConfig)))
     (lib.mapAttrs' (
       _n: v:

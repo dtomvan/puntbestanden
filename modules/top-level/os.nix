@@ -1,5 +1,6 @@
 {
   self,
+  config,
   inputs,
   ...
 }:
@@ -15,7 +16,7 @@ let
     pipe
     ;
 
-  inherit (self) hosts;
+  inherit (config) hosts;
 
   makeNixos =
     _key: host:

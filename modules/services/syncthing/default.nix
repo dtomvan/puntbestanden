@@ -1,9 +1,9 @@
-{ self, lib, ... }:
+toplevel@{ self, lib, ... }:
 {
   flake.modules.nixos.services-syncthing =
     { config, ... }:
     let
-      inherit (self) hosts;
+      inherit (toplevel.config) hosts;
 
       username = "tomvd";
       devices = {

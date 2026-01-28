@@ -16,7 +16,7 @@ let
     pipe
     ;
 
-  hosts = pipe self.hosts [
+  hosts = pipe config.hosts [
     (filterAttrs (_k: v: !(v ? noConfig)))
     attrValues
   ];
