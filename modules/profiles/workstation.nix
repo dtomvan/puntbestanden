@@ -38,6 +38,7 @@
         signal-desktop
         telegram-desktop
         thunderbird
+        nixpkgs-reviewFull
       ];
     };
 }
