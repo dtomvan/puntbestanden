@@ -41,6 +41,8 @@
       };
     };
 
+    perSystem.packages.hosts = builtins.toFile "hosts.json" (builtins.toJSON config.hosts);
+
     text.readme.parts.hostnames = ''
       ## The hostnames
 
