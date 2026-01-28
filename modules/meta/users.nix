@@ -13,17 +13,20 @@ let
 
     gpgPubKey = lib.mkOption {
       description = "GPG public key fingerprint";
-      type = lib.types.str;
+      default = null;
+      type = with lib.types; nullOr str;
     };
 
     locale = lib.mkOption {
       description = "Default display language";
-      type = lib.types.str;
+      default = null;
+      type = with lib.types; nullOr str;
     };
 
     timeZone = lib.mkOption {
       description = "NixOS timezone";
-      type = lib.types.str;
+      default = null;
+      type = with lib.types; nullOr str;
     };
   };
 in
@@ -43,8 +46,8 @@ in
           user = config.users.${username} or null;
         in
         {
-          programs.git.settings = lib.mkIf (config.users ? username) {
-            signing.key = user.gpgPubKey;
+          programs.git.settings = lib.mkIf (user != null) {
+            signing.key = user.gpgPubKey or null;
             user = {
               name = user.fullName;
               inherit (user) email;
@@ -59,7 +62,7 @@ in
           user = config.users.${username} or null;
         in
         {
-          programs.jujutsu.settings.user = lib.mkIf (config.users ? username) {
+          programs.jujutsu.settings.user = lib.mkIf (user != null) {
             inherit (user) email;
             name = user.fullName;
           };
@@ -68,8 +71,8 @@ in
       nixos = lib.mapAttrs' (
         n: v:
         lib.nameValuePair "users-${n}" {
-          time.timeZone = lib.mkDefault v.timeZone;
-          i18n.defaultLocale = lib.mkDefault v.locale;
+          time.timeZone = lib.mkIf (v.timeZone != null) (lib.mkDefault v.timeZone);
+          i18n.defaultLocale = lib.mkIf (v.locale != null) (lib.mkDefault v.locale);
         }
       ) config.users;
     };
