@@ -78,6 +78,7 @@ in
       nixos = lib.mapAttrs' (
         n: v:
         lib.nameValuePair "users-${n}" {
+          users.users.${n}.isNormalUser = true;
           time.timeZone = lib.mkIf (v.timeZone != null) (lib.mkDefault v.timeZone);
           i18n.defaultLocale = lib.mkIf (v.locale != null) (lib.mkDefault v.locale);
         }
