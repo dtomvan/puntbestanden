@@ -20,9 +20,9 @@
       _n: v:
       lib.nameValuePair v.hostName (
         withSystem v.system (
-          { inputs', self', ... }:
+          { system, self', ... }:
           let
-            deployLib = inputs'.deploy-rs.lib;
+            deployLib = inputs.deploy-rs.lib.${system};
             hostConfig = self.nixosConfigurations.${v.hostName};
           in
           {
