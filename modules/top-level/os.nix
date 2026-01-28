@@ -26,7 +26,8 @@ let
         { networking = { inherit (host) hostName; }; }
         self.modules.nixos."hosts-${host.hostName}"
         ../hardware/_generated/${host.hostName}.nix
-      ];
+      ]
+      ++ (map (u: self.modules.nixos."users-${u}") host.users);
     });
 in
 {

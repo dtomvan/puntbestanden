@@ -22,7 +22,6 @@
           nix-common
 
           boot-systemd-boot
-          users-tomvd
           users-root
 
           services-ssh

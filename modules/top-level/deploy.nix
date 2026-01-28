@@ -1,6 +1,7 @@
 {
   withSystem,
   self,
+  inputs,
   lib,
   config,
   ...
@@ -24,34 +25,41 @@
           let
             deployLib = inputs.deploy-rs.lib.${system};
             hostConfig = self.nixosConfigurations.${v.hostName};
+            homeProfiles = lib.listToAttrs (
+              map (
+                user:
+                lib.nameValuePair "home-${user}" {
+                  inherit user;
+                  path = deployLib.activate.home-manager self.homeConfigurations."${user}@${v.hostName}";
+                }
+              ) v.users
+            );
           in
           {
             # yes.
             hostname = v.hostName;
 
-            profiles.system = {
-              user = "root";
-              sshUser = "root";
-              path = deployLib.activate.nixos hostConfig;
-            };
+            profiles = {
+              system = {
+                user = "root";
+                sshUser = "root";
+                path = deployLib.activate.nixos hostConfig;
+              };
 
-            profiles.tomvd = {
-              user = "tomvd";
-              path = deployLib.activate.home-manager self.homeConfigurations."tomvd@${v.hostName}";
-            };
+              nixvim = {
+                user = "tomvd";
+                path = deployLib.activate.custom self'.packages.activatable-nixvim "./bin/activate";
+              };
 
-            profiles.nixvim = {
-              user = "tomvd";
-              path = deployLib.activate.custom self'.packages.activatable-nixvim "./bin/activate";
-            };
-
-            profiles.flatpak = {
-              user = "root";
-              sshUser = "root";
-              path = deployLib.activate.custom (self'.legacyPackages.activatable-flatpak {
-                inherit (hostConfig.config.services.flatpak) packages;
-              }) "./bin/flatpak-managed-install";
-            };
+              flatpak = {
+                user = "root";
+                sshUser = "root";
+                path = deployLib.activate.custom (self'.legacyPackages.activatable-flatpak {
+                  inherit (hostConfig.config.services.flatpak) packages;
+                }) "./bin/flatpak-managed-install";
+              };
+            }
+            // homeProfiles;
           }
         )
       )
