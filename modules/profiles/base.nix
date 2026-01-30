@@ -48,7 +48,7 @@
           btop
           dust
           eza
-          fastfetch
+          fastfetchMinimal
           fd
           file
           glow

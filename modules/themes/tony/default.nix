@@ -66,10 +66,5 @@
           white = "#a9b1d6";
         };
       };
-
-      # obligatory
-      programs.bash.initExtra = lib.mkAfter ''
-        fastfetch
-      '';
     };
 }
