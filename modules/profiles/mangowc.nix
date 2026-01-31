@@ -23,6 +23,7 @@
           text = ''
             XDG_CONFIG_HOME=${pkgs.writeTextDir "hypr/hypridle.conf" ''
               general {
+                  before_sleep_cmd = pidof swaylock || swaylock
                   lock_cmd = pidof swaylock || swaylock
                   unlock_cmd = pkill -USR1 swaylock
               }
@@ -36,10 +37,6 @@
                   timeout = 360
                   on-timeout = wlr-dpms off
                   on-resume = wlr-dpms on
-              }
-
-              listener {
-                  on-before-sleep = swaylock
               }
             ''} exec hypridle
           '';
