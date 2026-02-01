@@ -23,6 +23,7 @@
 
           boot-systemd-boot
           users-root
+          users-tomvd # TODO: this is required by services-ssh, remove explicit tomvd keys in there
 
           services-ssh
 
