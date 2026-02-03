@@ -3,6 +3,9 @@
     { pkgs, ... }:
     {
       virtualisation.podman.enable = true;
-      environment.systemPackages = [ pkgs.distrobox ];
+      environment.systemPackages = with pkgs; [
+        distrobox
+        podman-compose
+      ];
     };
 }
