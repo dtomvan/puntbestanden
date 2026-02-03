@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.virt-distrobox =
+  flake.modules.nixos.virt-podman =
     { pkgs, ... }:
     {
       virtualisation.podman.enable = true;

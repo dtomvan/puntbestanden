@@ -14,7 +14,7 @@
         services-copyparty
         services-keybase
         utilities
-        virt-distrobox
+        virt-podman
       ];
 
       modules.utilities.enableLazyApps = true;
