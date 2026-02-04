@@ -10,7 +10,7 @@
   flake.modules.nixos.profiles-base = {
     imports = [
       inputs.disko.nixosModules.disko
-      # TODO: uncomment after moving all of my machines to disko
+      # TASK(20260204-232838): uncomment after moving all of my machines to disko
       # ./community/autounattend/_disko.nix
     ];
   };

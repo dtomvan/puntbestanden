@@ -13,8 +13,7 @@
         powerManagement.enable = false;
         powerManagement.finegrained = false;
         open = false;
-        # TODO: could differentiate with host.isNvidiaPascal or something and
-        # use production drivers on 20xx cards.
+        # TASK(20260204-235918): could differentiate with host.isNvidiaPascal or something and use production drivers on 20xx cards.
         package = config.boot.kernelPackages.nvidiaPackages.mkDriver {
           version = "580.119.02";
           sha256_64bit = "sha256-gCD139PuiK7no4mQ0MPSr+VHUemhcLqerdfqZwE47Nc=";

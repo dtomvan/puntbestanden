@@ -69,14 +69,15 @@
   perSystem =
     { self', pkgs, ... }:
     {
-      # TODO: this really bloats up a simple `nix flake check`. disabling it
-      # for now, despite how eager the docs are to not have me do that
+      # TASK(20260204-233523): this really bloats up a simple `nix flake
+      # check`. disabling it for now, despite how eager the docs are to not
+      # have me do that
       # checks = inputs.deploy-rs.lib.${system}.deployChecks self.deploy;
 
       devshells.default.packages = with pkgs; [ deploy-rs ];
 
-      # TODO: this is ugly, but yeah the API of deploy-rs doesn't seem really
-      # flexible to me. How to fix?
+      # TASK(20260204-234938): this is ugly, but yeah the API of deploy-rs
+      # doesn't seem really flexible to me. How to fix?
       legacyPackages.activationPackage =
         args:
         pkgs.buildEnv {

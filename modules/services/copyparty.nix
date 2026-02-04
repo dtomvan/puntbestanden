@@ -48,7 +48,7 @@ in
 
       services.copyparty =
         let
-          # TODO: this is kinda an implementation detail and might break
+          # TASK(20260204-233237): this is kinda an implementation detail and might break
           stateDir = "/var/lib/copyparty";
         in
         {

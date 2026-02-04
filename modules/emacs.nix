@@ -55,7 +55,7 @@
               # used for cloning various packages if needed
               git
             ])
-            # TODO: add more langs
+            # TASK(20260204-235041): add more langs
             ++ lib.map (l: pkgs.tree-sitter-grammars."tree-sitter-${l}") [
               "elisp"
               "markdown"

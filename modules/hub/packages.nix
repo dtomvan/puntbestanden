@@ -86,7 +86,7 @@
           iputils
           mtr
           nmap
-          # pingu # TODO: broken
+          pingu
           proxychains-ng
           socat
           tcpdump
