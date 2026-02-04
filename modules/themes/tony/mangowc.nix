@@ -78,6 +78,7 @@
         swipe_min_threshold=1
         accel_profile=2
         accel_speed=0.0
+        focus_on_activate=0
 
         exec-once=${config.home.homeDirectory}/.config/mango/autostart.sh
         EOF
