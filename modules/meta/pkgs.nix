@@ -44,7 +44,6 @@
           overlays = [
             inputs.nur.overlays.default
             inputs.lazy-apps.overlays.default
-            self.overlays.plasmashell-workaround # https://github.com/NixOS/nixpkgs/issues/126590
           ]
           ++ config.pkgs-overlays;
         };
