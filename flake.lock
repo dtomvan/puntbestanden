@@ -612,15 +612,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771008912,
-        "narHash": "sha256-MUxwjvnO2hZitXm52phpSCcCv5Zx4DeVTAPZa8jcxtw=",
-        "rev": "a82ccc39b39b621151d6732718e3e250109076fa",
-        "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.05pre945868.a82ccc39b39b/nixexprs.tar.xz"
+        "lastModified": 1771152965,
+        "narHash": "sha256-MTTZlUEccHwAgtpYXeu0khEO9q1fy83EYlOiIGW9eNM=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "c13c6f742560d379e737d0387e7dbb6cf6d0b278",
+        "type": "github"
       },
       "original": {
-        "type": "tarball",
-        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
+        "owner": "nixos",
+        "ref": "pull/479797/merge",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs-lib": {
