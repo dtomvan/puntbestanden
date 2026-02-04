@@ -139,7 +139,7 @@
       url = "github:nix-community/nix-index-database";
     };
     nixpkgs = {
-      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      url = "github:nixos/nixpkgs/pull/479797/merge";
     };
     nixvim = {
       inputs = {

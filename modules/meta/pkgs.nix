@@ -18,7 +18,7 @@
 
   config = {
     flake-file.inputs = {
-      nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      nixpkgs.url = "github:nixos/nixpkgs/pull/479797/merge";
 
       nur = {
         url = "github:nix-community/NUR";
