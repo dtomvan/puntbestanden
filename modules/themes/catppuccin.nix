@@ -148,7 +148,6 @@ in
         };
         ghostty.enable = true;
         glamour.enable = true;
-        helix.enable = true;
         skim.enable = true;
         yazi.enable = true;
         zellij.enable = true;
