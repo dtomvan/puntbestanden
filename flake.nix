@@ -187,6 +187,14 @@
     systems = {
       url = "github:nix-systems/default";
     };
+    tasks = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:dtomvan/tasks.nvim";
+    };
     treefmt-nix = {
       inputs = {
         nixpkgs = {
