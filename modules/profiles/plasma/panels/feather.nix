@@ -21,7 +21,6 @@
                 "applications:org.kde.dolphin.desktop"
                 "applications:org.kde.kate.desktop"
                 "applications:org.telegram.desktop.desktop"
-                "applications:duo.desktop"
               ];
             };
           }
