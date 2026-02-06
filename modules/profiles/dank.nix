@@ -41,5 +41,10 @@
           fi
         '';
       };
+
+      # used for when the tony mangowc config is used
+      xdg.configFile."mango/snip.sh".source = lib.mkForce (
+        pkgs.writeShellScript "dank-snip.sh" "${pkgs.dms-shell}/bin/dms screenshot"
+      );
     };
 }
