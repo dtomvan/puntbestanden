@@ -1,3 +1,4 @@
+# WARNING: plasma theming might break, so don't use with profiles-plasma, I guess
 { self, ... }:
 {
   flake.modules.nixos.profiles-dank =
@@ -18,6 +19,13 @@
       };
 
       programs.dms-shell.enable = true;
+
+      # so dms can write its configs for qt apps
+      qt = {
+        enable = true;
+        platformTheme = "qt5ct"; # also does qt6ct
+        style = lib.mkForce null; # so qt5ct can be overridden by dms
+      };
     };
 
   flake.modules.homeManager.profiles-dank =
@@ -46,5 +54,8 @@
       xdg.configFile."mango/snip.sh".source = lib.mkForce (
         pkgs.writeShellScript "dank-snip.sh" "${pkgs.dms-shell}/bin/dms screenshot"
       );
+
+      # let DMS manage GTK themes
+      gtk.enable = lib.mkForce false;
     };
 }
