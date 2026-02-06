@@ -6,10 +6,7 @@
       {
         imports = with self.modules.nixos; [
           profiles-workstation
-          profiles-ly
-          profiles-mangowc
-          profiles-oxwm
-          themes-tony
+          profiles-dank
 
           hardware-comet-lake
           hardware-elan-tp
@@ -45,10 +42,9 @@
       {
         imports = with self.modules.homeManager; [
           themes-tony
+          profiles-dank
           profiles-graphical
           profiles-plasma
-          profiles-oxwm
-          profiles-mangowc
 
           firefox-ubo-only
 
