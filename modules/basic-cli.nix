@@ -145,6 +145,23 @@
             };
           };
         };
+
+        layouts.default = {
+          layout._children = [
+            {
+              default_tab_template._children = [
+                { pane.borderless = true; }
+                {
+                  pane = {
+                    size = 1;
+                    borderless = true;
+                    plugin.location = "compact-bar";
+                  };
+                }
+              ];
+            }
+          ];
+        };
       };
 
       programs.btop.enable = true;
