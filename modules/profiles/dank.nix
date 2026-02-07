@@ -47,6 +47,8 @@
           if [ $(hostname) == feather ]; then
             ${pkgs.wlr-randr}/bin/wlr-randr --output eDP-1 --scale 1.25
           fi
+          # TODO: remove this when dank/QS supports checking for idle
+          ${lib.getExe (self'.legacyPackages.hypridleOf "dms ipc call lock lock")} &
         '';
       };
 

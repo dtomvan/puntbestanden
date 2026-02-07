@@ -7,7 +7,7 @@
 
   # use mangowc from nixpkgs
   perSystem =
-    { pkgs, self', ... }:
+    { pkgs, ... }:
     {
       packages = {
         swaylock = pkgs.writeShellScriptBin "swaylock" ''
@@ -51,26 +51,28 @@
               --fade-in=1
         '';
         mango = pkgs.mangowc;
-        hypridle = pkgs.writeShellApplication {
+      };
+
+      legacyPackages.hypridleOf =
+        cmd:
+        pkgs.writeShellApplication {
           name = "hypridle";
           runtimeInputs = with pkgs; [
             nur.repos.dtomvan.wlr-dpms
             hypridle
-            self'.packages.swaylock
           ];
           # HACK: the promised `-c` flag for hypridle doesn't actually work.
           # Making a fake XDG_CONFIG_HOME.
           text = ''
             XDG_CONFIG_HOME=${pkgs.writeTextDir "hypr/hypridle.conf" ''
               general {
-                  before_sleep_cmd = pidof swaylock || swaylock
-                  lock_cmd = pidof swaylock || swaylock
-                  unlock_cmd = pkill -USR1 swaylock
+                  before_sleep_cmd = ${cmd}
+                  lock_cmd = ${cmd}
               }
 
               listener {
                   timeout = 300
-                  on-timeout = swaylock
+                  on-timeout = ${cmd}
               }
 
               listener {
@@ -81,7 +83,6 @@
             ''} exec hypridle
           '';
         };
-      };
     };
 
   flake.modules.nixos.profiles-mangowc = {
@@ -98,6 +99,9 @@
 
   flake.modules.homeManager.profiles-mangowc =
     { self', lib, ... }:
+    let
+      swaylockCmd = "pidof swaylock || ${lib.getExe self'.packages.swaylock}";
+    in
     {
       imports = [
         (import "${inputs.mango}/nix/hm-modules.nix" self)
@@ -111,7 +115,7 @@
         systemd.xdgAutostart = true;
         autostart_sh = ''
           fnott &
-          ${lib.getExe self'.packages.hypridle} &
+          ${lib.getExe (self'.legacyPackages.hypridleOf swaylockCmd)} &
         '';
       };
     };
