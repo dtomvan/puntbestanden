@@ -1,0 +1,10 @@
+// https://yalter.github.io/niri/Configuration
+
+include "autostart.kdl"
+include "binds.kdl"
+include "feather.kdl"
+include "input.kdl"
+include "layout.kdl"
+include "misc.kdl"
+
+include "dms/colors.kdl"

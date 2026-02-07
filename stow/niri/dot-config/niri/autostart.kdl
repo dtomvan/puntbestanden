@@ -1,0 +1,1 @@
+spawn-sh-at-startup "bash ~/.config/niri/hypridle/bin/hypridle"
