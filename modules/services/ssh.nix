@@ -5,7 +5,7 @@
     let
       keys = {
         boomer = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8M2MZ3h6AGyUGmzIY5AG0nRYvh6DOAE4TbEmfSefdt tomvd@boomer";
-        feather = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILZCTsfqR/RkuQxq4Z2Pq6PeLW/QqRQwM6JTluy34XyV tomvd@feather";
+        feather = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILfGy4zOT23WZZX+8smSqFd1BFFrS2afwsYNfdgSDXh8 tomvd@feather";
       };
       knownHosts = mapAttrs' (n: v: nameValuePair n { publicKey = v; }) keys;
     in
