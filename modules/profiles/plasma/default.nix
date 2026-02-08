@@ -63,7 +63,7 @@ in
         ];
 
         programs.plasma = {
-          enable = true;
+          enable = false;
 
           workspace = {
             theme = lib.mkDefault "breeze-dark";
