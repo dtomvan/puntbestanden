@@ -1,1 +1,2 @@
 spawn-sh-at-startup "bash ~/.config/niri/hypridle/bin/hypridle"
+spawn-sh-at-startup "dms run"

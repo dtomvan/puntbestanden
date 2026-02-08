@@ -8,6 +8,8 @@
           profiles-workstation
           profiles-dank
 
+          themes-catppuccin
+
           hardware-comet-lake
           hardware-elan-tp
           # hardware-fprint
@@ -41,7 +43,7 @@
       { pkgs, ... }:
       {
         imports = with self.modules.homeManager; [
-          themes-tony
+          themes-catppuccin
           profiles-dank
           profiles-graphical
           profiles-plasma
