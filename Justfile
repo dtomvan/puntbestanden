@@ -8,7 +8,7 @@ check:
     nix flake check
 
 clean:
-    rm result* repl-result*
+    rm -f result* repl-result*
 
 build:
     nix run .#nix-build-all
