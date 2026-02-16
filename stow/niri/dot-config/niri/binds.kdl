@@ -2,7 +2,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "foot"; }
-    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "rofi -show drun"; }
+    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn-sh "rofi -show drun"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn "swaylock"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
