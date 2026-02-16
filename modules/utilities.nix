@@ -51,6 +51,7 @@
             tokei
             xz
             zstd
+            nix-update
           ]
         );
     };
