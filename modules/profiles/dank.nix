@@ -28,10 +28,17 @@
   };
 
   flake.modules.homeManager.profiles-dank =
-    { lib, ... }:
+    { pkgs, lib, ... }:
     {
       # let DMS manage GTK themes
       gtk.enable = lib.mkForce false;
+      modules.terminals.foot.enable = lib.mkDefault true;
+      home.packages = with pkgs; [
+        wl-clipboard
+        brightnessctl
+        pipewire
+        rofi
+      ];
     };
 
   flake.modules.nixos.feather.services.displayManager.dms-greeter.enable = lib.mkForce false;
