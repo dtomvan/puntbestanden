@@ -2,7 +2,6 @@
 {
   inputs,
   self,
-  config,
   ...
 }:
 let
