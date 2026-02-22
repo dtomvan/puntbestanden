@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.profiles-base =
+  flake.modules.nixos.boot-linux-latest =
     { pkgs, ... }:
     {
       boot.kernelPackages = pkgs.linuxPackages_latest;
