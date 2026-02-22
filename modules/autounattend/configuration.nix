@@ -37,7 +37,6 @@ in
         inputs.home-manager.nixosModules.default
 
         ../hardware/_generated/autounattend.nix
-        "${config.autounattend.diskoFile}" # TODO: make this the universal disko file
       ];
 
       programs.nh.flake = lib.mkForce "/etc/nixos/";
