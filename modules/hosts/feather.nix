@@ -8,8 +8,6 @@
           profiles-workstation
           profiles-dank
 
-          boot-linux-latest
-
           themes-catppuccin
 
           hardware-comet-lake

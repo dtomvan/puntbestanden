@@ -1,7 +1,14 @@
 {
   flake.modules.nixos.hardware-nvidia =
-    { config, ... }:
     {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
+    {
+      # 6.18 is the last longterm that is supported by nvidia 580.
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
       boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
       services.xserver.videoDrivers = [ "nvidia" ];
       hardware.graphics = {
