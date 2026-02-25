@@ -1,6 +1,6 @@
 # Copyparty: unhardcode stateDir
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 10
 
 ../../modules/services/copyparty.nix
