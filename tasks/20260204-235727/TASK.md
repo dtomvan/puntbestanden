@@ -1,6 +1,6 @@
 # users-tomvd: move openssh keys elsewhere
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 
 ../../modules/profiles/base.nix

@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, config, ... }:
 {
   flake.modules.nixos.users-tomvd = {
     nix.settings = {
@@ -24,6 +24,8 @@
       ];
 
       hashedPassword = "$y$j9T$UNKC2ue19sYmCgHQGWcVE.$.6FqJwASbIV0O7c1hJM7BsPnGV6j98lMzr635nHmwA4";
+
+      openssh.authorizedKeys.keys = builtins.attrValues config.sshKeys;
     };
   };
 
