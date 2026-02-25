@@ -28,6 +28,7 @@ let
         ../hardware/_generated/${host.hostName}.nix
       ]
       ++ (map (u: self.modules.nixos."users-${u}") host.users);
+      specialArgs = { inherit host; };
     });
 in
 {

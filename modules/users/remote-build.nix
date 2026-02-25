@@ -1,12 +1,8 @@
-{ config, ... }:
-let
-  inherit (config) hosts;
-in
 {
   flake.modules.nixos.users-remote-build =
-    { lib, config, ... }:
+    args@{ lib, config, ... }:
     let
-      isBuilder = lib.filterAttrs (_n: h: h.hostName == config.networking.hostName) hosts != { };
+      isBuilder = args ? host;
       isLinux = lib.hasInfix "linux" config.nixpkgs.hostPlatform.system;
     in
     {

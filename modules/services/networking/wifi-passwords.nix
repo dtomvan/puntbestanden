@@ -1,14 +1,12 @@
-{ self, ... }:
 {
   flake.modules.nixos.networking-wifi-passwords =
-    { config, lib, ... }:
+    {
+      config,
+      lib,
+      host ? null,
+      ...
+    }:
     let
-      host = self.lib.getHost {
-        inherit config;
-        module = "wifi-passwords";
-        doThrow = false;
-      };
-
       makeSimpleNetwork =
         {
           ssid,

@@ -5,6 +5,7 @@
       { pkgs, lib, ... }:
       {
         imports = with self.modules.nixos; [
+          disko
           profiles-workstation
           themes-catppuccin
 

@@ -5,6 +5,7 @@
       { lib, ... }:
       {
         imports = with self.modules.nixos; [
+          disko
           profiles-workstation
           profiles-dank
 

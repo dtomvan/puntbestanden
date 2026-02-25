@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ inputs, ... }:
 {
   flake-file.inputs = {
     disko = {
@@ -7,15 +7,8 @@
     };
   };
 
-  flake.modules.nixos.profiles-base =
-    { config, lib, ... }:
-    let
-      inherit (self) hosts;
-      host =
-        lib.findSingle (h: h.hostName == config.networking.hostName) (throw "no host configured for disko")
-          (throw "multiple hosts with same hostname")
-          (lib.attrValues hosts);
-    in
+  flake.modules.nixos.disko =
+    { host, ... }:
     {
       imports = [
         inputs.disko.nixosModules.disko

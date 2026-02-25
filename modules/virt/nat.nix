@@ -1,14 +1,11 @@
-{ self, lib, ... }:
+{ lib, ... }:
 {
   # TODO: not put this under kvm
   flake.modules.nixos.virt-kvm =
-    { config, ... }:
-    let
-      host = self.lib.getHost {
-        inherit config;
-        module = "virt-kvm/nat";
-      };
-    in
+    {
+      host ? null,
+      ...
+    }:
     {
       networking.nat = {
         enable = true;

@@ -4,13 +4,13 @@ let
 in
 {
   flake.modules.nixos.nix-distributed-builds =
-    { config, ... }:
+    { host, ... }:
     {
       nix.distributedBuilds = true;
       nix.settings.builders-use-substitutes = true;
 
       nix.buildMachines =
-        builtins.map
+        map
           (
             h:
             {
@@ -21,7 +21,7 @@ in
             // (h.remoteBuild.settings or { })
           )
           (
-            builtins.filter (h: h.remoteBuild.enable && h.hostName != config.networking.hostName) # don't build for yourself
+            builtins.filter (h: h.remoteBuild.enable && h != host) # don't build for yourself
               (builtins.attrValues hosts)
           );
     };
