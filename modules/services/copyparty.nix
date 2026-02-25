@@ -37,14 +37,6 @@ in
         inherit group;
       };
 
-      sops.secrets.copyparty-weak = {
-        mode = "0400";
-        sopsFile = ../../secrets/copyparty-weak.secret;
-        format = "binary";
-        owner = user;
-        inherit group;
-      };
-
       systemd.tmpfiles.settings."10-copyparty" = {
         "${dropDir}" = {
           d = {
@@ -64,7 +56,7 @@ in
           ### connection
           # e.g. boomerparty, featherparty
           name = "${config.networking.hostName}party";
-          p = builtins.toString port;
+          p = toString port;
           z = true;
           no-robots = true;
 
@@ -107,7 +99,6 @@ in
         };
 
         accounts.${user}.passwordFile = config.sops.secrets.copyparty.path;
-        accounts.docs.passwordFile = config.sops.secrets.copyparty-weak.path;
 
         volumes =
           let
@@ -149,10 +140,8 @@ in
             };
 
             "/Documents" = {
+              inherit access;
               path = "/home/${user}/Documents";
-              access = access // {
-                rw = [ "docs" ];
-              };
               flags.e2ts = true;
             };
 
@@ -194,7 +183,7 @@ in
 
       systemd.services.copyparty =
         let
-          sessionBus = "/run/user/${builtins.toString config.users.users.${user}.uid}/bus";
+          sessionBus = "/run/user/${toString config.users.users.${user}.uid}/bus";
         in
         {
           serviceConfig = {
@@ -229,7 +218,6 @@ in
             services.openssh.enable = true;
             services.copyparty.accounts = {
               ${user}.passwordFile = lib.mkForce (builtins.toFile "copyparty-test-tomvd-password" "AAAA");
-              docs.passwordFile = lib.mkForce (builtins.toFile "copyparty-test-docs-password" "BBBB");
             };
             environment.systemPackages = [ pkgs.curl ];
           };
@@ -244,17 +232,12 @@ in
             # list
             machine.succeed("curl -f http://localhost:80/Music")
             machine.succeed("curl -fH pw:AAAA http://localhost:80")
-            machine.succeed("curl -fH pw:BBBB http://localhost:80/Documents")
 
             # upload
             machine.succeed("curl -fH pw:AAAA -H rand:8 -T /etc/os-release http://localhost:80")
-            machine.succeed("curl -fH pw:BBBB -H rand:8 -T /etc/os-release http://localhost:80/Documents")
 
             # fails due to insufficient space (requires a lot of headroom which vm tests don't get)
             machine.fail("curl -fT /etc/os-release http://localhost:80/drop")
-
-            # 403
-            machine.fail("curl -f http://localhost:80/Documents")
           '';
         }
       );
