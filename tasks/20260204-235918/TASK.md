@@ -1,6 +1,6 @@
 # nvidia: unpin driver when not on GTX cards
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 20
 
 > could differentiate with host.isNvidiaPascal or something and use production drivers on 20xx cards.

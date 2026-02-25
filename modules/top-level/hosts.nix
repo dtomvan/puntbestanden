@@ -4,6 +4,8 @@
 # 2. Create a file (usually in modules/hosts/) that sets modules.nixos.`hosts-foobar`
 # 3. nixos-generate-config --show-hardware-config > modules/hardware/_generated/foobar.nix
 {
+  # TASK(20260225-231620): make the hosts set less loose and more structured by
+  # defining each available option
   options.hosts = lib.mkOption {
     description = "an inventory of all systems configured using this flake";
     type = with lib.types; attrsOf raw;
@@ -19,6 +21,7 @@
         users = [ "tomvd" ];
         mainDisk = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
         wirelessInterface = "wlp7s0";
+        isNvidiaPascal = true;
         remoteBuild = {
           enable = true;
           settings = {
