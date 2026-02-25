@@ -17,6 +17,7 @@
           nixfmt.enable = true;
           shfmt.enable = true;
           statix.enable = true;
+          keep-sorted.enable = true;
         };
       };
 
@@ -25,6 +26,7 @@
         nixfmt-tree
         shfmt
         statix
+        keep-sorted
       ];
     };
 }
