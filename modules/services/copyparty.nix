@@ -16,10 +16,14 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  pkgs-overlays = [
+    inputs.copyparty.overlays.default
+  ];
+
   flake.modules.nixos.services-copyparty =
     { config, pkgs, ... }:
     let
-      package = pkgs.copyparty.override {
+      package = pkgs.copyparty-unstable.override {
         withFastThumbnails = true;
         withMediaProcessing = false; # uses ffmpeg, which can eat your CPU big time
         # uses mutagen, should be quicker as well, also saves closure size!
