@@ -44,6 +44,7 @@
         programs.less.enable = true;
 
         environment.systemPackages = with pkgs; [
+          # keep-sorted start
           bat
           btop
           dust
@@ -61,6 +62,7 @@
           ripgrep
           skim
           tealdeer
+          # keep-sorted end
         ];
       };
 
@@ -91,6 +93,7 @@
           };
 
           home.packages = with pkgs; [
+            # keep-sorted start
             flake-fmt
             npins
             ripdrag
@@ -99,6 +102,7 @@
             typst
             yazi
             yt-dlp
+            # keep-sorted end
           ];
         };
       };

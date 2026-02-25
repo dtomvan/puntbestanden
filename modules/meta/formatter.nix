@@ -13,20 +13,24 @@
     {
       treefmt = {
         programs = {
+          # keep-sorted start
           deadnix.enable = true;
+          keep-sorted.enable = true;
           nixfmt.enable = true;
           shfmt.enable = true;
           statix.enable = true;
-          keep-sorted.enable = true;
+          # keep-sorted end
         };
       };
 
       devshells.default.packages = with pkgs; [
+        # keep-sorted start
         deadnix
+        keep-sorted
         nixfmt-tree
         shfmt
         statix
-        keep-sorted
+        # keep-sorted end
       ];
     };
 }

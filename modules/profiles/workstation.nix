@@ -27,6 +27,7 @@
       ];
 
       environment.systemPackages = with pkgs; [
+        # keep-sorted start
         discord
         forge-sparks
         keepassxc
@@ -39,6 +40,7 @@
         signal-desktop
         telegram-desktop
         thunderbird
+        # keep-sorted end
       ];
     };
 }
