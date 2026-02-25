@@ -85,11 +85,6 @@ in
           # useful if you have podcasts or whatever
           rss = true;
 
-          # any messages from people with delete perms get notified
-          xm = "ad,,${lib.getExe' pkgs.libnotify "notify-send"},hey,--";
-          # notify on upload to host machine
-          xau = "f,,${lib.getExe' pkgs.libnotify "notify-send"},copy,--";
-
           # according to docs: checks for dangerous symlinks on startup
           # I have symlinks to the nix store so this one isn't really possible
           # ls = "**,*,ln,p,r";
@@ -180,23 +175,6 @@ in
             };
           };
       };
-
-      systemd.services.copyparty =
-        let
-          sessionBus = "/run/user/${toString config.users.users.${user}.uid}/bus";
-        in
-        {
-          serviceConfig = {
-            # allow port < 2^10
-            AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-            # allow notify-send to go on its quirky dbus business
-            BindReadOnlyPaths = [
-              "-/etc/machine-id"
-              "-${sessionBus}"
-            ];
-            Environment = [ "DBUS_SESSION_BUS_ADDRESS=unix:path=${sessionBus}" ];
-          };
-        };
     };
 
   # ensure that copyparty starts correctly given the config and that basic auth
