@@ -59,6 +59,7 @@
           profiles-dank
           profiles-graphical
           profiles-plasma
+          profiles-workstation
 
           firefox-ubo-only
 

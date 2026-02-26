@@ -96,6 +96,7 @@
       {
         imports = with self.modules.homeManager; [
           profiles-graphical
+          profiles-workstation
           themes-catppuccin
           profiles-plasma
 
