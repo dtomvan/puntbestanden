@@ -21,6 +21,7 @@
               localsend-rs
               nur
               vs2nix
+              copyparty
               ;
           }
         )
