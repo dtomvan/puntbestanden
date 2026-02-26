@@ -22,6 +22,7 @@
               nur
               vs2nix
               copyparty
+              tasks
               ;
           }
         )
