@@ -14,6 +14,7 @@ in
         self.modules.nixos.autounattend
         (self.lib.system "x86_64-linux")
       ];
+      specialArgs.host = null;
     };
     # allows rebuilding the config easier for a newcomer
     ${hostName} = autounattend;
@@ -34,6 +35,8 @@ in
         networking-tailscale
 
         inputs.home-manager.nixosModules.default
+        inputs.disko.nixosModules.default
+        ../community/autounattend/_disko.nix
 
         ../hardware/_generated/autounattend.nix
       ];
