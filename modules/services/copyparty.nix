@@ -179,6 +179,9 @@ in
             };
           };
       };
+
+      # allow port < 2^10
+      systemd.services.copyparty.serviceConfig.AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
     };
 
   # ensure that copyparty starts correctly given the config and that basic auth
