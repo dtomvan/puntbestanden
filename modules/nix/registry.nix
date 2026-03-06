@@ -18,7 +18,6 @@
           {
             inherit (inputs)
               disko
-              localsend-rs
               nur
               copyparty
               tasks
