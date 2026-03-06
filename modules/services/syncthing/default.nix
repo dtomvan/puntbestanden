@@ -15,7 +15,7 @@ toplevel@{ self, lib, ... }:
           id = "2TCHDIM-XCWIBM4-5DL2EK6-7Y7VOSO-TOSZYG6-JNYQYFU-PONSM2D-X2CITQT";
           autoAcceptFolders = true;
         };
-        a52 = {
+        "Nothing Phone (3a)" = {
           id = "3P4JOUH-NHDCUVU-I2QGOZ6-LNV7CPI-RMMZQEA-ZW3HR7X-LI46MSB-N7UIYQP";
           autoAcceptFolders = false;
         };
