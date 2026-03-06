@@ -102,8 +102,6 @@
           firefox-ubo-only
           mpd
           typst
-
-          plasma-boomer
         ];
 
         programs.firefox.profiles.default.extensions.packages = with pkgs.nur.repos.dtomvan; [

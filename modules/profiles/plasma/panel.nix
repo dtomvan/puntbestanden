@@ -1,8 +1,8 @@
 {
-  flake.modules.homeManager.plasma-boomer = {
+  flake.modules.homeManager.profiles-plasma = {
     programs.plasma.panels = [
       {
-        location = "bottom";
+        location = "top";
         hiding = "dodgewindows";
         lengthMode = "fill";
         opacity = "opaque";
@@ -24,16 +24,8 @@
               ];
             };
           }
-        ];
-      }
-      {
-        location = "top";
-        hiding = "dodgewindows";
-        lengthMode = "fill";
-        opacity = "opaque";
-        widgets = [
-          "org.kde.plasma.systemtray"
           "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.systemtray"
           "org.kde.plasma.digitalclock"
         ];
       }
