@@ -21,7 +21,6 @@
           # services-localsend-rs
           services-pinchflat
           services-syncthing
-          services-vintagestory
 
           virt-kvm
           virt-incus
