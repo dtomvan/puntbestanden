@@ -126,10 +126,6 @@
       };
       url = "github:dtomvan/localsend-rust-impl";
     };
-    mango = {
-      flake = false;
-      url = "github:DreamMaoMao/mango/0.11.0";
-    };
     nix-index-database = {
       inputs = {
         nixpkgs = {
@@ -202,14 +198,6 @@
         };
       };
       url = "github:numtide/treefmt-nix";
-    };
-    vs2nix = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-      url = "github:dtomvan/vs2nix";
     };
   };
 

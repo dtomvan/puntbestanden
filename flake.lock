@@ -369,24 +369,6 @@
         "type": "github"
       }
     },
-    "flake-parts_6": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib_3"
-      },
-      "locked": {
-        "lastModified": 1769996383,
-        "narHash": "sha256-AnYjnFWgS49RlqX7LrC4uA+sCCDBj0Ry/WOJ5XWAsa0=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "57928607ea566b5db3ad13af0e57e921e6b12381",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "locked": {
         "lastModified": 1678901627,
@@ -492,21 +474,6 @@
         "type": "github"
       }
     },
-    "import-tree_3": {
-      "locked": {
-        "lastModified": 1771045967,
-        "narHash": "sha256-oYO4poyw0Sb/db2PigqugMlDwsvwLg6CSpFrMUWxA3Q=",
-        "owner": "vic",
-        "repo": "import-tree",
-        "rev": "c968d3b54d12cf5d9c13f16f7c545a06c9d1fde6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vic",
-        "repo": "import-tree",
-        "type": "github"
-      }
-    },
     "lazy-apps": {
       "inputs": {
         "nixpkgs": [
@@ -549,23 +516,6 @@
       "original": {
         "owner": "dtomvan",
         "repo": "localsend-rust-impl",
-        "type": "github"
-      }
-    },
-    "mango": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1768912412,
-        "narHash": "sha256-zjMDW2Izd2GOKDfekf5/O1LaiI+rGzxmdhzOpzbAvvE=",
-        "owner": "DreamMaoMao",
-        "repo": "mango",
-        "rev": "d78526d1e92acc3c926c1da26d27708f500875aa",
-        "type": "github"
-      },
-      "original": {
-        "owner": "DreamMaoMao",
-        "ref": "0.11.0",
-        "repo": "mango",
         "type": "github"
       }
     },
@@ -639,21 +589,6 @@
       }
     },
     "nixpkgs-lib_2": {
-      "locked": {
-        "lastModified": 1769909678,
-        "narHash": "sha256-cBEymOf4/o3FD5AZnzC3J9hLbiZ+QDT/KDuyHXVJOpM=",
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "rev": "72716169fe93074c333e8d0173151350670b824c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib_3": {
       "locked": {
         "lastModified": 1769909678,
         "narHash": "sha256-cBEymOf4/o3FD5AZnzC3J9hLbiZ+QDT/KDuyHXVJOpM=",
@@ -792,7 +727,6 @@
         "import-tree": "import-tree",
         "lazy-apps": "lazy-apps",
         "localsend-rs": "localsend-rs",
-        "mango": "mango",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
@@ -802,8 +736,7 @@
         "srvos": "srvos",
         "systems": "systems_5",
         "tasks": "tasks",
-        "treefmt-nix": "treefmt-nix_4",
-        "vs2nix": "vs2nix"
+        "treefmt-nix": "treefmt-nix_4"
       }
     },
     "rust-analyzer-src": {
@@ -1098,28 +1031,6 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "vs2nix": {
-      "inputs": {
-        "flake-parts": "flake-parts_6",
-        "import-tree": "import-tree_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1771759717,
-        "narHash": "sha256-Zv6vC2mo6yxMyVQifWfVsOD9NIy/vNtrABbnn+g9iZ4=",
-        "owner": "dtomvan",
-        "repo": "vs2nix",
-        "rev": "58da0a48e9242b2cf35934a81482774263fbee8f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dtomvan",
-        "repo": "vs2nix",
         "type": "github"
       }
     }
