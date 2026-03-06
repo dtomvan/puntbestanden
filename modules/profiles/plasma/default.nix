@@ -33,10 +33,7 @@ in
         ) { };
       in
       {
-        imports = [
-          nixos.profiles-graphical
-          nixos.profiles-plasma-minimal
-        ];
+        imports = [ nixos.profiles-plasma-minimal ];
 
         environment.systemPackages =
           with pkgs.kdePackages;
