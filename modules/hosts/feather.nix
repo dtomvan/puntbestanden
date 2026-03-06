@@ -24,17 +24,6 @@
           users-remote-build
         ];
 
-        # remove this when reinstalling
-        fileSystems."/boot".device =
-          lib.mkForce "/dev/disk/by-partuuid/e1a459cf-9c29-490b-b00b-bcb5cc6c2d1a";
-        fileSystems."/" = {
-          device = lib.mkForce "/dev/disk/by-partuuid/5ae90318-d7e2-402a-a925-3e50a8161c29";
-          fsType = lib.mkForce "ext4";
-        };
-        swapDevices = lib.mkForce [
-          { device = "/dev/disk/by-partuuid/1e2efaee-12be-466e-a9bc-7dd6c0b31f9a"; }
-        ];
-
         programs.gaming-free = {
           enable = true;
           enableGraphical = true;
@@ -47,6 +36,9 @@
 
         environment.stub-ld.enable = false;
         networking.firewall.enable = false;
+
+        services.getty.autologinUser = "tomvd";
+        boot.initrd.luks.devices.crypted.device = lib.mkForce "/dev/nvme0n1p3";
 
         system.stateVersion = "24.11";
       };

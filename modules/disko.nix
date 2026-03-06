@@ -12,9 +12,17 @@
     {
       imports = [
         inputs.disko.nixosModules.disko
-        (import ./community/autounattend/_disko.nix {
-          device = host.mainDisk;
-        })
+        (import
+          (
+            if host.hostName == "feather" then
+              ./hardware/_disko-feather.nix
+            else
+              ./community/autounattend/_disko.nix
+          )
+          {
+            device = host.mainDisk;
+          }
+        )
       ];
     };
 
