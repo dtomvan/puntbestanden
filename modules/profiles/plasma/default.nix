@@ -19,19 +19,6 @@ in
         config,
         ...
       }:
-      let
-        ktailctl = pkgs.callPackage (
-          {
-            runCommand,
-            ktailctl,
-          }:
-          runCommand ktailctl.name { } ''
-            cp -r ${ktailctl} $out
-            substituteInPlace "$out/share/applications/org.fkoehler.KTailctl.desktop" \
-              --replace-fail KTailctl Tailscale
-          ''
-        ) { };
-      in
       {
         imports = [ nixos.profiles-plasma-minimal ];
 
@@ -45,7 +32,6 @@ in
             pkgs.haruna
             plasma-browser-integration
           ]
-          ++ lib.optionals config.services.tailscale.enable [ ktailctl ]
           ++ lib.optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];
       };
 
