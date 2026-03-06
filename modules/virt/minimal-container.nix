@@ -21,6 +21,8 @@ in
             };
           };
 
+          nixpkgs.flake.setFlakeRegistry = true;
+
           environment.systemPackages = with pkgs; [ git ];
 
           boot.isContainer = true;

@@ -62,8 +62,6 @@
           profiles-workstation
 
           firefox-ubo-only
-
-          plasma-feather
         ];
 
         programs.firefox.profiles.default.extensions.packages = [

@@ -7,7 +7,6 @@
           let
             inherit (lib)
               attrValues
-              mapAttrs
               mapAttrs'
               nameValuePair
               ;
@@ -29,27 +28,7 @@
           in
           mkDesktopFileFix {
             "firefox-devedition firefox-dev" = "firefox-devedition";
-          }
-          ++ [
-            {
-              description = "make overlayed work correctly";
-              match.window-class.value = "overlayed";
-              apply =
-                mapAttrs
-                  (_n: r: {
-                    value = r;
-                    apply = "force";
-                  })
-                  {
-                    desktops = "\\\\0"; # always on all desktops
-                    ignoregeometry = true;
-                    maximizehoriz = true;
-                    maximizevert = true;
-                    noborder = true;
-                    position = "0,0";
-                  };
-            }
-          ];
+          };
       };
     };
 }

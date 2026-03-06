@@ -109,17 +109,4 @@ in
       };
     };
   };
-
-  perSystem =
-    { pkgs, ... }:
-    {
-      packages.quickshellConfig = pkgs.replaceVars ./profiles/hyprland/shell.qml {
-        inherit (fixedWidth) family pointSize;
-        DEFAULT_AUDIO_SINK = null;
-      };
-      packages.myXmobarrc = pkgs.replaceVars ./profiles/xmonad/xmobarrc {
-        inherit (fixedWidth) family;
-        size = fixedWidth.pointSize;
-      };
-    };
 }

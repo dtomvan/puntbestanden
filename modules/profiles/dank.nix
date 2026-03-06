@@ -29,6 +29,17 @@
       #   platformTheme = "qt5ct"; # also does qt6ct
       #   style = lib.mkForce null; # so qt5ct can be overridden by dms
       # };
+
+      xdg.portal = {
+        enable = true;
+        extraPortals = with pkgs; [
+          kdePackages.xdg-desktop-portal-kde
+          xdg-desktop-portal-gtk
+        ];
+        config.common.default = "kde";
+        config.niri."org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
+      };
+
     };
 
   flake.modules.homeManager.profiles-dank =

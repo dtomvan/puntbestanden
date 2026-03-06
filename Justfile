@@ -19,6 +19,15 @@ deploy:
 cleanbuild: clean build
 all: check cleanbuild deploy
 
+push WHAT:
+    jj git push -c @-
+    gh pr create \
+        -B main \
+        -H "$(jj show -r 'closest_bookmark(@)' -T 'bookmarks.map(|b| b.name())' --no-patch | tr ' ' '\n' | sort | head -n1)" \
+        -t "{{WHAT}}" \
+        -F <(git log --oneline main..HEAD | sed 's|^|- |') \
+        -r dtomvan
+
 [private]
 run-stow ACTION PACKAGE +ARGS='':
 	stow -vv --dotfiles -t ~ -d ./stow {{ACTION}} {{PACKAGE}} {{ARGS}}

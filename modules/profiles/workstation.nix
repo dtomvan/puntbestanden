@@ -5,6 +5,7 @@
     {
       imports = with self.modules.nixos; [
         profiles-base
+        profiles-graphical
         profiles-plasma
 
         services-printing
