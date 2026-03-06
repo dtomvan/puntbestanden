@@ -23,7 +23,7 @@
 
           boot-systemd-boot
           users-root
-          users-tomvd # TASK(20260204-235727): this is required by services-ssh, remove explicit tomvd keys in there
+          users-tomvd
 
           services-ssh
 
