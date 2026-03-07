@@ -3,19 +3,21 @@ image: ubuntu:questing-20251217
 # Derived from https://github.com/cachix/install-nix-action/blob/master/install-nix.sh
 before_script: |
   enable_kvm() {
-    echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-install-nix-action-kvm.rules
-    sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+    echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | tee /etc/udev/rules.d/99-install-nix-action-kvm.rules
+    udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
   }
 
   echo '::group::Enabling KVM support'
   enable_kvm && echo 'Enabled KVM' || echo 'KVM is not available'
   echo '::endgroup::'
 
+  apt update && apt install curl ca-certificates
+
   nixConfig=$(mktemp)
   cat<<EOF > "$nixConfig"
   experimental-features = nix-command flakes pipe-operator
   access-tokens = gitlab.com=$AUTOMATION_ACCESS_TOKEN github.com=$GITHUB_TOKEN
-  trusted-users = root ${USER:-}
+  trusted-users = root
   EOF
 
   sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon --no-channel-add --nix-extra-conf-file "$nixConfig"
