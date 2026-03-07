@@ -8,3 +8,5 @@ nix-flake-check:
       - nix flake check -L
   only:
     - merge_requests
+    - pipelines
+    - schedules
