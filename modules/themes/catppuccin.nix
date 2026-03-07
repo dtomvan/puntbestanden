@@ -136,6 +136,18 @@ in
         pkgs.nur.repos.rycee.firefox-addons.firefox-color
       ];
 
+      programs.${if config.programs ? dms-shell then "dms-shell" else null} = {
+        theme = ../profiles/dank/catppuccin.json;
+        themeVariants = catppuccin;
+
+        session = lib.mkDefault {
+          wallpaperPath = wallpaper;
+          perMonitorWallpaper = false;
+          perModeWallpaper = false;
+          wallpaperCyclingEnabled = false;
+        };
+      };
+
       catppuccin = catppuccin // {
         alacritty.enable = true;
         bat.enable = true;

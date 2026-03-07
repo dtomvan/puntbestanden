@@ -38,6 +38,11 @@
   flake.modules.homeManager.profiles-dank =
     { pkgs, lib, ... }:
     {
+      # let HM manage DMS (see ./extra-options.nix)
+      programs.dms-shell = {
+        enable = true;
+        package = null;
+      };
       # let DMS manage GTK themes
       gtk.enable = lib.mkForce false;
       modules.terminals.foot.enable = lib.mkDefault true;

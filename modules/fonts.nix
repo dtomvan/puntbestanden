@@ -109,4 +109,9 @@ in
       };
     };
   };
+
+  flake.modules.homeManager.profiles-dank.programs.dms-shell.settings = {
+    fontFamily = family;
+    monoFontFamily = fixedWidth.family;
+  };
 }
