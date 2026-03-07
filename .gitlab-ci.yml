@@ -11,7 +11,7 @@ before_script: |
   enable_kvm && echo 'Enabled KVM' || echo 'KVM is not available'
   echo '::endgroup::'
 
-  apt update && apt install -y curl ca-certificates
+  apt update && apt install -y curl ca-certificates tar xz-utils
 
   nixConfig=$(mktemp)
   cat<<EOF > "$nixConfig"
