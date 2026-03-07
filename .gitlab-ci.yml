@@ -5,8 +5,6 @@ nix-flake-check:
   stage: check
   image: docker.nix-community.org/nixpkgs/nix-flakes
   script:
-      - nix flake check -L
-  only:
-    - merge_requests
-    - pipelines
-    - schedules
+    - nix flake check -L
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
