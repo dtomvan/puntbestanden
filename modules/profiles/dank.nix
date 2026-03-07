@@ -23,13 +23,6 @@
 
       environment.systemPackages = with pkgs; [ xwayland-satellite ];
 
-      # so dms can write its configs for qt apps
-      # qt = {
-      #   enable = true;
-      #   platformTheme = "qt5ct"; # also does qt6ct
-      #   style = lib.mkForce null; # so qt5ct can be overridden by dms
-      # };
-
       xdg.portal = {
         enable = true;
         extraPortals = with pkgs; [
