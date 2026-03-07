@@ -22,10 +22,10 @@ all: check cleanbuild deploy
 push WHAT:
     jj git push -c @-
     gh pr create \
-        -B main \
+        -B hoofdlijn \
         -H "$(jj show -r 'closest_bookmark(@)' -T 'bookmarks.map(|b| b.name())' --no-patch | tr ' ' '\n' | sort | head -n1)" \
         -t "{{WHAT}}" \
-        -F <(git log --oneline main..HEAD | sed 's|^|- |') \
+        -F <(git log --oneline hoofdlijn..HEAD | sed 's|^|- |') \
         -r dtomvan
 
 [private]
