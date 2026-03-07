@@ -1,0 +1,10 @@
+stages:
+  - check
+
+nix-flake-check:
+  stage: check
+  image: docker.nix-community.org/nixpkgs/nix-flakes
+  script:
+      - nix flake check -L
+  only:
+    - merge_requests
