@@ -13,6 +13,8 @@ in
           fonts
         ];
 
+        programs.foot.enable = true;
+
         environment.systemPackages = with pkgs; [
           alsa-utils
           pavucontrol
