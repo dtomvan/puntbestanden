@@ -15,12 +15,12 @@
         package = lib.mkPackageOption pkgs "foot" { };
       };
 
-      config = lib.mkIf cfg.foot.enable {
-        home.packages = [ cfg.foot.package ];
-        xdg.configFile."foot/foot.ini".text = ''
-          term=xterm-256color
-          font=${cfg.font.family}:size=${builtins.toString cfg.font.size}
-        '';
+      config.programs.foot = {
+        inherit (cfg.foot) enable package;
+        settings.main = {
+          term = "xterm-256color";
+          font = "${cfg.font.family}:size=${toString cfg.font.size}";
+        };
       };
     };
 }
