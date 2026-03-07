@@ -54,6 +54,33 @@
         pipewire
         rofi
       ];
+
+      services.hypridle = {
+        enable = true;
+        settings =
+          let
+            # DMS disables the monitors when the lock is called
+            lock_cmd = "dms ipc call lock lock";
+          in
+          {
+            general = {
+              inherit lock_cmd;
+              ignore_dbus_inhibit = false;
+            };
+
+            listener = [
+              {
+                timeout = 440;
+                on-timeout = "brightnessctl -s set 5%";
+                on-resume = "brightnessct -r";
+              }
+              {
+                timeout = 500;
+                on-timeout = lock_cmd;
+              }
+            ];
+          };
+      };
     };
 
   flake.modules.nixos.feather.services.displayManager.dms-greeter.enable = lib.mkForce false;
