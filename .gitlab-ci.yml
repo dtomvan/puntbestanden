@@ -1,5 +1,6 @@
 stages:
   - check
+  - update
 
 nix-flake-check:
   stage: check
@@ -8,3 +9,25 @@ nix-flake-check:
     - nix flake check -L
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+
+nix-flake-update:
+  stage: update
+  image: docker.nix-community.org/nixpkgs/nix-flakes
+  before_script: |
+    nix profile install nixpkgs#git nixpkgs#glab
+    git config --global user.email ${GITLAB_USER_EMAIL}
+    git config --global user.name ${GITLAB_USER_NAME}
+    git remote set-url origin https://oauth2:${AUTOMATION_ACCESS_TOKEN}@${CI_PROJECT_URL#https://}.git
+    glab auth login --hostname $CI_SERVER_HOST --job-token $AUTOMATION_ACCESS_TOKEN
+  script: |
+    echo "chore: nix flake update" > commitmsg
+    echo >> commitmsg
+    nix flake update 2>&1 | tee -a commitmsg
+    git commit -aF commitmsg
+    branchname="push-$(git rev-parse --short HEAD)"
+    git switch -c "$branchname"
+    glab mr create --fill --fill-commit-body --source-branch "$branchname" --push --yes
+
+  rules:
+    - if: $ACTION == "nix-flake-update"
