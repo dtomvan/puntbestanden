@@ -194,6 +194,8 @@
           runtimeInputs = [ pkgs.jujutsu ];
         })
         pkgs.eza
+        pkgs.glab
+        pkgs.forgejo-cli
       ];
     };
 
