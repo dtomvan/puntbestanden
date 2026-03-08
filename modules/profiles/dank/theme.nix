@@ -4,5 +4,7 @@
     popoutAnimationSpeed = 0;
     modalAnimationSpeed = 0;
     enableRippleEffects = false;
+    audioVisualizerEnabled = false;
+    waveProgressEnabled = false;
   };
 }
