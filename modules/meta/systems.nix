@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
   flake-file.inputs = {
     systems.url = "github:nix-systems/default";
   };
-  systems = import inputs.systems;
+  systems = lib.subtractLists [ "x86_64-darwin" ] (import inputs.systems);
 }
