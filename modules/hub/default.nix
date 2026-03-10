@@ -44,6 +44,8 @@ in
     services.getty.autologinUser = "me";
     # the ISO user wouldn't even know a hypothetical password
     security.sudo.wheelNeedsPassword = false;
+
+    system.stateVersion = "26.05";
   };
 
   flake.nixosConfigurations =

@@ -134,5 +134,7 @@ in
           Type = "oneshot";
         };
       };
+
+      system.stateVersion = "26.05";
     };
 }
