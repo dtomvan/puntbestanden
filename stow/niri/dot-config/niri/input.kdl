@@ -1,6 +1,8 @@
 input {
     keyboard {
-        xkb { }
+        xkb {
+            options "compose:ralt"
+        }
     }
 
     touchpad {
