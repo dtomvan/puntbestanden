@@ -44,7 +44,7 @@
         ++ lib.optionals cfg.enableBig (
           with pkgs;
           [
-            xonotic
+            # xonotic
             zeroad
           ]
         )
