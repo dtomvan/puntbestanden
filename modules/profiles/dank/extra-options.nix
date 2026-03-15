@@ -121,7 +121,7 @@
           KILL="${procps}/bin/kill"
 
           doRestart=0
-          dmsPid="$("$PIDOF" .dms-wrapped 2>/dev/null)"
+          dmsPid="$("$PIDOF" dms 2>/dev/null || "$PIDOF" .dms-wrapped 2>/dev/null || true)"
 
           declare -rA jsonFiles=(
             [${settingsFile}]=${jsonFormat.generate "hm-dms-settings.json" cfg.settings}
@@ -140,7 +140,6 @@
               "$jsonFile" \
               "$overrideFile" |
             "$SPONGE" "$jsonFile"
-
             if [ -n "$dmsPid" ] && jq -se '.[0] != .[1]' "$jsonFile" <(echo "$oldSettings"); then
               doRestart=1
             fi
