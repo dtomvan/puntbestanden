@@ -19,26 +19,13 @@
           { pkg = taplo; }
         ];
 
-      programs.mergiraf.enable = true;
+      programs.mergiraf = {
+        enable = true;
+        enableGitIntegration = true;
+        enableJujutsuIntegration = true;
+      };
       programs.jujutsu = {
         settings = {
-          merge-tools = {
-            mergiraf = {
-              program = "mergiraf";
-              merge-args = [
-                "merge"
-                "$base"
-                "$left"
-                "$right"
-                "-o"
-                "$output"
-                "--fast"
-              ];
-              merge-conflict-exit-codes = [ 1 ];
-              conflict-marker-style = "git";
-            };
-          };
-
           fix.tools = {
             nixfmt = {
               command = [ "nixfmt" ];
