@@ -13,7 +13,10 @@ in
           fonts
         ];
 
-        programs.foot.enable = true;
+        programs.foot = {
+          enable = true;
+          xdg.serverAutostart = true;
+        };
 
         environment.systemPackages = with pkgs; [
           alsa-utils
