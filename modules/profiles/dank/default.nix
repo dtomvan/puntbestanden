@@ -45,7 +45,6 @@
       };
       # let DMS manage GTK themes
       gtk.enable = lib.mkForce false;
-      modules.terminals.foot.enable = lib.mkDefault true;
       home.packages = with pkgs; [
         wl-clipboard
         brightnessctl

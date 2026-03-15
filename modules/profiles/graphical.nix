@@ -35,6 +35,7 @@ in
           terminals
         ];
 
+        modules.terminals.foot.enable = lib.mkDefault true;
         home.os.isGraphical = lib.mkDefault true;
 
         home.pointerCursor = {
