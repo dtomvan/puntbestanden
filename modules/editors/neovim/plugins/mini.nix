@@ -18,7 +18,7 @@
         comment = { };
         icons = { };
         indentscope = { };
-        git = {};
+        git = { };
         notify = { };
         sessions = { };
         statusline = { };
