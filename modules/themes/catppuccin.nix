@@ -152,7 +152,7 @@ in
       catppuccin = catppuccin // {
         sources.foot = options.catppuccin.sources.default.foot.overrideAttrs (
           _final: prev: {
-            postPatch = (prev.postPatch or "") + ''
+            postInstall = (prev.postInstall or "") + ''
               substituteInPlace $out/catppuccin-${catppuccin.flavor}.ini \
                 --replace-warn '[colors]' '[colors-dark]'
             '';
