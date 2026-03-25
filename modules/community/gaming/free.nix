@@ -12,6 +12,18 @@
     }:
     let
       inherit (lib) mkEnableOption;
+      inherit (pkgs)
+        angband
+        brogue-ce
+        cataclysm-dda
+        cataclysmDDA
+        mindustry
+        nethack
+        rogue
+        tome4
+        # xonotic
+        zeroad
+        ;
       cfg = config.programs.gaming-free;
     in
     {
@@ -24,35 +36,21 @@
         iWantToCompileCDDACurses = mkEnableOption "CDDA but without the tiles so a bit smaller than normal";
       };
       config.environment.systemPackages =
-        lib.optionals cfg.enable (
-          with pkgs;
-          [
-            angband
-            nethack
-            rogue
-          ]
-        )
-        ++ lib.optionals cfg.enableGraphical (
-          with pkgs;
-          [
-            brogue-ce
-            cataclysm-dda
-            mindustry
-            tome4
-          ]
-        )
-        ++ lib.optionals cfg.enableBig (
-          with pkgs;
-          [
-            # xonotic
-            zeroad
-          ]
-        )
-        ++ lib.optionals cfg.iWantToCompileCDDACurses (
-          with pkgs;
-          [
-            cataclysmDDA.stable.curses
-          ]
-        );
+        lib.optionals cfg.enable [
+          angband
+          nethack
+          rogue
+        ]
+        ++ lib.optionals cfg.enableGraphical [
+          brogue-ce
+          cataclysm-dda
+          mindustry
+          tome4
+        ]
+        ++ lib.optionals cfg.enableBig [
+          # xonotic
+          zeroad
+        ]
+        ++ lib.optionals cfg.iWantToCompileCDDACurses (lib.singleton cataclysmDDA.stable.curses);
     };
 }
