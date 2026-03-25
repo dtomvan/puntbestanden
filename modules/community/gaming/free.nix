@@ -9,21 +9,22 @@
   perSystem =
     { pkgs, lib, ... }:
     let
-      myCddaTree = "${inputs.nixpkgs-cdda.outPath}/pkgs/games/cataclysm-dda";
-      myCddaPackages = lib.recurseIntoAttrs (pkgs.callPackage myCddaTree { });
+      myCddaPackages = lib.recurseIntoAttrs (
+        pkgs.callPackage "${inputs.nixpkgs-cdda.outPath}/pkgs/games/cataclysm-dda" { }
+      );
       myCdda =
         { hasTiles }:
         myCddaPackages.dark-days-ahead.overrideAttrs (
           final: prev: {
             pname = if hasTiles then "${prev.pname}-tiles" else prev.pname;
-            version = "0.H-2025-07-10-0402";
+            version = "0.I-2026-03-23-0402";
             src = pkgs.fetchFromGitHub {
               owner = "CleverRaven";
               repo = "Cataclysm-DDA";
               tag = "cdda-${final.version}";
-              hash = "sha256-r4cl8cij68WmQRfg+DHQIeDBIwhgwSre6kAUYZaCPR8=n";
+              hash = "sha256-sfoZ8ey/hr0NGTJr/ywr/0/S6UcsSHkJoRfPaq7tfMc=";
             };
-            patches = [ "${myCddaTree}/dda/locale-path.patch" ];
+            patches = [ ./cdda-locale-path.patch ];
             inherit hasTiles;
           }
         );
