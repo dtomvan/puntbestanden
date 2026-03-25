@@ -137,6 +137,9 @@
     nixpkgs = {
       url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     };
+    nixpkgs-cdda = {
+      url = "github:RossSmyth/nixpkgs/cddaClean";
+    };
     nixvim = {
       inputs = {
         nixpkgs = {

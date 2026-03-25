@@ -2,9 +2,42 @@
 # closure size of all 3 together (except iWantToCompileCDDACurses): 7.2 GiB (as of 2025-11-19)
 # without the biggies: 2.4 GiB
 # just the non-graphical: 86.2 MiB
+{ inputs, ... }:
 {
+  flake-file.inputs.nixpkgs-cdda.url = "github:RossSmyth/nixpkgs/cddaClean";
+
+  perSystem =
+    { pkgs, lib, ... }:
+    let
+      myCddaTree = "${inputs.nixpkgs-cdda.outPath}/pkgs/games/cataclysm-dda";
+      myCddaPackages = lib.recurseIntoAttrs (pkgs.callPackage myCddaTree { });
+      myCdda =
+        { hasTiles }:
+        myCddaPackages.dark-days-ahead.overrideAttrs (
+          final: prev: {
+            pname = if hasTiles then "${prev.pname}-tiles" else prev.pname;
+            version = "0.H-2025-07-10-0402";
+            src = pkgs.fetchFromGitHub {
+              owner = "CleverRaven";
+              repo = "Cataclysm-DDA";
+              tag = "cdda-${final.version}";
+              hash = "sha256-r4cl8cij68WmQRfg+DHQIeDBIwhgwSre6kAUYZaCPR8=n";
+            };
+            patches = [ "${myCddaTree}/dda/locale-path.patch" ];
+            inherit hasTiles;
+          }
+        );
+    in
+    {
+      packages = {
+        myCdda = myCdda { hasTiles = true; };
+        myCddaCurses = myCdda { hasTiles = false; };
+      };
+    };
+
   flake.modules.nixos.gaming-free =
     {
+      self',
       pkgs,
       lib,
       config,
@@ -15,8 +48,6 @@
       inherit (pkgs)
         angband
         brogue-ce
-        cataclysm-dda
-        cataclysmDDA
         mindustry
         nethack
         rogue
@@ -43,7 +74,7 @@
         ]
         ++ lib.optionals cfg.enableGraphical [
           brogue-ce
-          cataclysm-dda
+          self'.packages.myCdda
           mindustry
           tome4
         ]
@@ -51,6 +82,6 @@
           # xonotic
           zeroad
         ]
-        ++ lib.optionals cfg.iWantToCompileCDDACurses (lib.singleton cataclysmDDA.stable.curses);
+        ++ lib.optionals cfg.iWantToCompileCDDACurses (lib.singleton self'.packages.myCddaCurses);
     };
 }

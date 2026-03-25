@@ -573,6 +573,22 @@
         "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz"
       }
     },
+    "nixpkgs-cdda": {
+      "locked": {
+        "lastModified": 1769547676,
+        "narHash": "sha256-bLIDvnU9O55G0o8K6RzJ8k+T2wH5AbyDHtQ7YmxwsWU=",
+        "owner": "RossSmyth",
+        "repo": "nixpkgs",
+        "rev": "109cf1642f651019441e843cd5840114c9bd6181",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RossSmyth",
+        "ref": "cddaClean",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1772328832,
@@ -729,6 +745,7 @@
         "localsend-rs": "localsend-rs",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-cdda": "nixpkgs-cdda",
         "nixvim": "nixvim",
         "nur": "nur",
         "plasma-manager": "plasma-manager",
