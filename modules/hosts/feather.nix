@@ -2,7 +2,7 @@
 {
   flake.modules = {
     nixos.hosts-feather =
-      { lib, ... }:
+      { config, lib, ... }:
       {
         imports = with self.modules.nixos; [
           disko
@@ -42,6 +42,8 @@
 
         virtualisation.libvirtd.onBoot = "ignore";
         systemd.services.podman.wantedBy = lib.mkForce [ ];
+
+        boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
 
         hardware.bluetooth.enable = true;
 
