@@ -53,9 +53,13 @@ in
           user = config.users.${username} or null;
         in
         {
-          programs.git.settings = lib.mkIf (user != null) {
-            signing.key = user.gpgPubKey or null;
-            user = {
+          programs.git = lib.mkIf (user != null) {
+            signing = {
+              format = if user.gpgPubKey != null then "openpgp" else null;
+              key = user.gpgPubKey or null;
+            };
+
+            settings.user = {
               name = user.fullName;
               inherit (user) email;
             };
