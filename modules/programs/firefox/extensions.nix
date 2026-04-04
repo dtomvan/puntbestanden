@@ -15,12 +15,13 @@
 
             ubo
             stylus
+
+            enhancer-for-youtube
           ]
           ++ (with pkgs.nur.repos.dtomvan; [
             darkreader
             obsidian-web-clipper
             steam-database
-            enhancer-for-youtube-bin
           ]);
 
           force = true;
