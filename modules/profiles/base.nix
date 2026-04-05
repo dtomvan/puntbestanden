@@ -68,6 +68,7 @@
 
     homeManager.profiles-base =
       {
+        self',
         inputs',
         config,
         lib,
@@ -97,6 +98,7 @@
             flake-fmt
             npins
             ripdrag
+            self'.packages.music-dlp
             stow
             treefmt
             typst
