@@ -22,6 +22,7 @@
 
           nix-distributed-builds
           users-remote-build
+          virt-nixos-containers
         ];
 
         # remove this when reinstalling
