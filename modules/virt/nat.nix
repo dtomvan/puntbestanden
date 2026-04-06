@@ -1,7 +1,6 @@
 { lib, ... }:
 {
-  # TODO: not put this under kvm
-  flake.modules.nixos.virt-kvm =
+  flake.modules.nixos.virt-nat =
     {
       host ? null,
       ...

@@ -23,6 +23,7 @@
           services-syncthing
 
           virt-kvm
+          virt-nat
           virt-incus
 
           nix-distributed-builds
