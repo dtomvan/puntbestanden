@@ -37,6 +37,8 @@
           { device = "/dev/disk/by-partuuid/1e2efaee-12be-466e-a9bc-7dd6c0b31f9a"; }
         ];
 
+        boot.kernelModules = lib.singleton "acpi_call";
+
         programs.gaming-free = {
           enable = true;
           enableGraphical = true;
