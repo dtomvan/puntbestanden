@@ -17,6 +17,7 @@
       config.environment.systemPackages =
         with pkgs;
         [
+          # keep-sorted start
           btrfs-progs
           curl
           dix
@@ -39,20 +40,23 @@
           util-linux
           wget
           zip
+          # keep-sorted end
         ]
         ++ lib.optionals cfg.enableLazyApps (
           lib.map (pkg: lazy-app.override { inherit pkg; }) [
+            # keep-sorted start
             bzip2
             cmake
             git-lfs
             lz4
             meson
+            nix-update
             nvd
             rar
             tokei
             xz
             zstd
-            nix-update
+            # keep-sorted end
           ]
         );
     };
