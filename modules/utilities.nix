@@ -25,6 +25,7 @@
           gcc
           git
           gnumake
+          incus.client
           jujutsu
           libarchive
           nix-diff
