@@ -22,17 +22,6 @@
         };
       };
 
-      services.${if config.services ? copyparty then "copyparty" else null} = {
-        volumes."/pinchflat" = {
-          path = config.services.pinchflat.mediaDir;
-          access.r = "*";
-          flags = {
-            e2ts = true;
-            dthumb = true;
-          };
-        };
-      };
-
       systemd.tmpfiles.settings."10-pinchflat" = lib.mkIf config.services.syncthing.enable {
         "/var/lib/pinchflat/media/.stfolder" = {
           d = {
