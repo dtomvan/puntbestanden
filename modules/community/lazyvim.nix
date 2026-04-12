@@ -13,10 +13,21 @@
 # ```
 {
   flake.modules.homeManager.lazyvim =
-    { lib, pkgs, ... }:
+    {
+      lib,
+      pkgs,
+      config,
+      ...
+    }:
+    let
+      isLegacy = lib.versionOlder config.home.stateVersion "26.05";
+    in
     {
       programs.neovim = {
         enable = true;
+
+        withRuby = lib.mkIf isLegacy false;
+        withPython3 = lib.mkIf isLegacy false;
 
         extraPackages = with pkgs; [
           # LazyVim
