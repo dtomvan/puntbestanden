@@ -4,6 +4,9 @@ let
   group = "users";
   port = 80;
   dropDir = "/srv/copyparty/drop";
+  ignorePatterns = [
+    "^\\.st(versions|folder)$" # ignore syncthing files
+  ];
 in
 {
   flake-file.inputs.copyparty = {
@@ -16,7 +19,12 @@ in
   ];
 
   flake.modules.nixos.services-copyparty =
-    { config, pkgs, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
       package = pkgs.copyparty-unstable.override {
         withFastThumbnails = true;
@@ -104,13 +112,19 @@ in
               access = access // {
                 r = "*";
               };
-              flags.e2ts = true;
+              flags = {
+                e2ts = true;
+                noidx = lib.concatStringsSep "|" ignorePatterns;
+              };
             };
 
             "/Documents" = {
               inherit access;
               path = "/home/${user}/Documents";
-              flags.e2ts = true;
+              flags = {
+                e2ts = true;
+                noidx = lib.concatStringsSep "|" ignorePatterns;
+              };
             };
 
             "/drop" = {
