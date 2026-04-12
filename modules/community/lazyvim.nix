@@ -30,6 +30,7 @@
         withPython3 = lib.mkIf isLegacy false;
 
         extraPackages = with pkgs; [
+          tree-sitter
           # LazyVim
           lua-language-server
           stylua
@@ -137,7 +138,7 @@
               }
             else
               drv;
-          lazyPath = pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
+          lazyPath = pkgs.linkFarm "lazy-plugins" (map mkEntryFromDrv plugins);
         in
         ''
           require("lazy").setup({
@@ -151,18 +152,20 @@
               -- fallback to download
               fallback = true,
             },
+            -- It tries to write to ${lazyPath}, which is immutable
+            readme = {
+              enabled = false,
+            },
             spec = {
               { "LazyVim/LazyVim", import = "lazyvim.plugins" },
               -- The following configs are needed for fixing lazyvim on nix
               -- force enable telescope-fzf-native.nvim
               { "nvim-telescope/telescope-fzf-native.nvim", enabled = true },
               -- disable mason.nvim, use programs.neovim.extraPackages
-              { "williamboman/mason-lspconfig.nvim", enabled = false },
-              { "williamboman/mason.nvim", enabled = false },
+              { "mason-org/mason-lspconfig.nvim", enabled = false },
+              { "mason-org/mason.nvim", enabled = false },
               -- import/override with your plugins
               { import = "config.plugins" },
-              -- treesitter handled by xdg.configFile."nvim/parser", put this line at the end of spec to clear ensure_installed
-              { "nvim-treesitter/nvim-treesitter", opts = { ensure_installed = {} } },
             },
           })
         '';
