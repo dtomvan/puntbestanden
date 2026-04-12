@@ -53,12 +53,6 @@ toplevel@{ self, lib, ... }:
             params.cleanoutDays = "30";
           };
         };
-        pinchflat = lib.mkIf config.services.pinchflat.enable {
-          id = "g7kr4-ewyfn";
-          path = "/var/lib/pinchflat/media";
-          devices = allDevices;
-          type = "sendonly";
-        };
       };
     in
     {
