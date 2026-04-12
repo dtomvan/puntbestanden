@@ -21,15 +21,18 @@ toplevel@{ self, lib, ... }:
         };
       };
       allDevices = builtins.attrNames devices;
+      ignoreCopyparty = lib.singleton ".hist";
       folders = {
         default = {
           path = "~/Sync";
           devices = allDevices;
+          ignorePatterns = ignoreCopyparty;
         };
         Documents = {
           id = "kmfc4-cvogr";
           path = "~/Documents";
           devices = allDevices;
+          ignorePatterns = ignoreCopyparty;
           versioning = {
             type = "trashcan";
             params.cleanoutDays = "90";
@@ -39,6 +42,7 @@ toplevel@{ self, lib, ... }:
           id = "xzsp4-pibte";
           path = "~/Pictures";
           devices = allDevices;
+          ignorePatterns = ignoreCopyparty;
           versioning = {
             type = "trashcan";
             params.cleanoutDays = "30";
@@ -48,6 +52,7 @@ toplevel@{ self, lib, ... }:
           id = "pmac7-de6gr";
           path = "~/Music";
           devices = allDevices;
+          ignorePatterns = ignoreCopyparty;
           versioning = {
             type = "trashcan";
             params.cleanoutDays = "30";
