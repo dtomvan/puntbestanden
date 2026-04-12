@@ -1,9 +1,4 @@
-{
-  inputs,
-  lib,
-  self,
-  ...
-}:
+{ inputs, self, ... }:
 let
   user = "tomvd";
   group = "users";
@@ -104,32 +99,6 @@ in
             access.A = [ user ];
           in
           {
-            "/" = {
-              inherit access;
-              path = "/home/${user}";
-              flags = {
-                hardlinkonly = true;
-                fk = 4;
-                # they call this "slightly faster" but forgot my home folder
-                # is HUGE
-                nodirsz = true;
-                # please support gitignore
-                noidx = lib.concatStringsSep "|" [
-                  ''\.iso$''
-                  ''^/home/${user}/\.''
-                  "^/home/${user}/repos"
-                  "^/home/${user}/projects"
-                  ''.*/\.git/.*''
-                  ''.*/\.jj/.*''
-                  ''.*/\.direnv/.*''
-                  ''.*/\.flox/.*''
-                  ".*/nix/store/.*"
-                  ".*/result.*"
-                  ".*/repl-result.*"
-                ];
-              };
-            };
-
             "/Music" = {
               path = "/home/${user}/Music";
               access = access // {
@@ -216,10 +185,10 @@ in
 
             # list
             machine.succeed("curl -f http://localhost:80/Music")
-            machine.succeed("curl -fH pw:AAAA http://localhost:80")
+            machine.succeed("curl -fH pw:AAAA http://localhost:80/Documents")
 
             # upload
-            machine.succeed("curl -fH pw:AAAA -H rand:8 -T /etc/os-release http://localhost:80")
+            machine.succeed("curl -fH pw:AAAA -H rand:8 -T /etc/os-release http://localhost:80/Documents")
 
             # fails due to insufficient space (requires a lot of headroom which vm tests don't get)
             machine.fail("curl -fT /etc/os-release http://localhost:80/drop")

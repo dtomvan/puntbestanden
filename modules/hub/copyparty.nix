@@ -19,9 +19,9 @@ in
     let
       copypartyConf = pkgs.replaceVars ./copyparty.conf {
         inherit qr;
-        ports = lib.concatMapStringsSep "," builtins.toString ports;
-        ftp = builtins.toString ftp;
-        tftp = builtins.toString tftp;
+        ports = lib.concatMapStringsSep "," toString ports;
+        ftp = toString ftp;
+        tftp = toString tftp;
       };
     in
     {
