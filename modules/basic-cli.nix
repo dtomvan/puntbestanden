@@ -130,6 +130,13 @@
 
           boom = "blast boomer";
           feat = "blast feather";
+
+          # TASK(20260414-214859): might as well remove sudo since run0 should
+          # be mostly compatible and run0 is objectively cooler and should be
+          # available on all nixos systems now. Also all I need is `permit
+          # %wheel` and that's already [the
+          # default](https://github.com/NixOS/nixpkgs/blob/7e495b747b51f95ae15e74377c5ce1fe69c1765f/nixos/modules/security/polkit.nix#L46)
+          sudo = "run0";
         };
       };
 
