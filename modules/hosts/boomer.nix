@@ -33,7 +33,6 @@
         programs.gaming-free = {
           enable = true;
           enableGraphical = true;
-          enableBig = true;
         };
 
         # <boomer patches from the shared disko config>

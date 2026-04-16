@@ -20,8 +20,6 @@
         nethack
         rogue
         tome4
-        # xonotic
-        zeroad
         ;
       cfg = config.programs.gaming-free;
     in
@@ -29,7 +27,6 @@
       options.programs.gaming-free = {
         enable = mkEnableOption "some great FOSS games";
         enableGraphical = mkEnableOption "some great FOSS games that require a graphical session";
-        enableBig = mkEnableOption "some great FOSS graphical games that have a big footprint (closure >1.5GiB)";
         # this option is useless because I'll probably only refer to the
         # package in question once in my dotfiles anyways
         iWantToCompileCDDACurses = mkEnableOption "CDDA but without the tiles so a bit smaller than normal";
@@ -45,10 +42,6 @@
           self'.packages.myCdda
           mindustry
           tome4
-        ]
-        ++ lib.optionals cfg.enableBig [
-          # xonotic
-          zeroad
         ]
         ++ lib.optionals cfg.iWantToCompileCDDACurses (lib.singleton self'.packages.myCddaCurses);
     };
