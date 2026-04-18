@@ -79,8 +79,6 @@
         flake-fmt = inputs'.flake-fmt.packages.default;
       in
       {
-        imports = with self.modules.homeManager; [ helix ];
-
         options = {
           home.os = {
             isGraphical = lib.mkEnableOption "features that work on x11/wayland desktops";
@@ -88,11 +86,6 @@
         };
 
         config = {
-          modules = {
-            helix.enable = true;
-            helix.lsp.enable = config.home.os.isGraphical;
-          };
-
           home.packages = with pkgs; [
             # keep-sorted start
             flake-fmt

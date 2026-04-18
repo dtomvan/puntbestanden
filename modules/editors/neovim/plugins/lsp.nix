@@ -1,9 +1,13 @@
-{ self, ... }:
 {
   flake.modules.nixvim.default =
-    { pkgs, lib, ... }:
+    {
+      self',
+      pkgs,
+      lib,
+      ...
+    }:
     let
-      lazyPkgs = self.lazy-lsps { inherit pkgs; };
+      inherit (self'.packages) lazyLsps;
     in
     {
       plugins = {
@@ -12,7 +16,7 @@
         none-ls.enable = true;
       };
 
-      extraPackages = [ lazyPkgs ];
+      extraPackages = [ lazyLsps ];
 
       lsp = {
         luaConfig.post =

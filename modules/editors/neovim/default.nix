@@ -17,6 +17,7 @@
   perSystem =
     {
       self',
+      inputs',
       pkgs,
       lib,
       system,
@@ -26,6 +27,7 @@
       nixvimConfigurations = {
         nixvim = inputs.nixvim.lib.evalNixvim {
           inherit system;
+          extraSpecialArgs = { inherit self' inputs'; };
           modules = [
             self.modules.nixvim.default
             { nixpkgs = { inherit pkgs; }; }

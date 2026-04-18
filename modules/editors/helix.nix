@@ -1,23 +1,11 @@
-{ self, ... }:
 {
   flake.modules.homeManager.helix =
-    {
-      pkgs,
-      lib,
-      config,
-      ...
-    }:
+    { self', pkgs, ... }:
     let
-      cfg = config.modules.helix;
-      lazyPkgs = self.lazy-lsps { inherit pkgs; };
+      inherit (self'.packages) lazyLsps;
     in
     {
-      options.modules.helix = {
-        enable = lib.mkEnableOption "install and configure hx";
-        lsp.enable = lib.mkEnableOption "download servers (lazy)";
-      };
-
-      config.programs.helix = lib.mkIf cfg.enable {
+      programs.helix = {
         enable = true;
         settings = {
           theme = "catppuccin_mocha";
@@ -53,9 +41,9 @@
             G = "goto_file_end";
           };
         };
-        extraPackages = lib.mkIf cfg.lsp.enable [
+        extraPackages = [
           pkgs.nixd
-          lazyPkgs
+          lazyLsps
         ];
       };
     };
