@@ -88,6 +88,7 @@ toplevel@{ self, lib, ... }:
           # if unset, after reinstallation of syncthing (or deleting configDir)
           # you'd get new device IDs. This way I hope to keep them for a little
           # longer.
+          # TASK(20260418-193932): rotate and put behind sops.
           cert = _pubkeys/${config.networking.hostName}.pem;
           key = config.sops.secrets.syncthing.path;
 
