@@ -22,7 +22,7 @@ in
 
   config.sshKeys = {
     boomer = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL8M2MZ3h6AGyUGmzIY5AG0nRYvh6DOAE4TbEmfSefdt tomvd@boomer";
-    feather = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILfGy4zOT23WZZX+8smSqFd1BFFrS2afwsYNfdgSDXh8 tomvd@feather";
+    feather = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ36mBHi2bPiILfqtV79sCNwj0lXP6xNZIj7bSmk8Fep tomvd@feather";
   };
 
   config.flake.modules.nixos.services-ssh = {
