@@ -70,7 +70,6 @@
       {
         self',
         inputs',
-        config,
         lib,
         pkgs,
         ...
@@ -82,6 +81,7 @@
         options = {
           home.os = {
             isGraphical = lib.mkEnableOption "features that work on x11/wayland desktops";
+            isPlasma = lib.mkEnableOption "features that work with plasma";
           };
         };
 

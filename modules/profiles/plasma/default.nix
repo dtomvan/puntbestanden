@@ -36,14 +36,13 @@ in
       };
 
     homeManager.profiles-plasma =
-      {
-        lib,
-        ...
-      }:
+      { lib, ... }:
       {
         imports = [
           inputs.plasma-manager.homeModules.plasma-manager
         ];
+
+        home.os.isPlasma = lib.mkDefault true;
 
         programs.plasma = {
           enable = false;

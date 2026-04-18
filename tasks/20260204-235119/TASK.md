@@ -1,6 +1,6 @@
 # firefox: only enable plasma-integration when on plasma
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 
 > maybe only on plasma do this??
