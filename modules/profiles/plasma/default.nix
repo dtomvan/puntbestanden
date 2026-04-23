@@ -45,10 +45,10 @@ in
         home.os.isPlasma = lib.mkDefault true;
 
         programs.plasma = {
-          enable = false;
+          enable = true;
 
           workspace = {
-            theme = lib.mkDefault "breeze-dark";
+            theme = lib.mkDefault "default"; # follow catppuccin colorScheme if applicable
             colorScheme = lib.mkDefault "BreezeDark";
             cursor = {
               theme = lib.mkDefault "default";
