@@ -906,7 +906,7 @@ Installing LSPs (I am on NixOS so there's a lotta ways...):
 - =nix-shell=
 - NixOS
 - Home-Manager
-- =nix profile install=
+- =nix profile add=
 - Distrobox?? But then I'd need to run Emacs itself from a distrobox
   also (which is possible with the =emacs-wayland= package, which also
   has PGTK and native-comp)

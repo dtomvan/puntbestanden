@@ -89,7 +89,7 @@
         };
 
       # function that just plainly installs profiles with the thing it's meant
-      # for: nix profile install..... why doesn't deploy-rs support this by default?
+      # for: nix profile add..... why doesn't deploy-rs support this by default?
       legacyPackages.activate =
         {
           profile ? "\${PROFILE:?}",
@@ -111,7 +111,7 @@
             fi
 
             echo installing new ${profileName} install...
-            nix profile install "${profile}"
+            nix profile add "${profile}"
 
             echo "done"
           '';
