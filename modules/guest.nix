@@ -76,7 +76,7 @@ in
         };
 
         nixpkgs.overlays = [ inputs.nur.overlays.default ];
-        home.stateVersion = "25.11";
+        home.stateVersion = "26.05";
       };
     };
 }
