@@ -31,6 +31,7 @@
         };
 
         AIControls.Default = "blocked";
+        SearchEngines.Default = "DuckDuckGo";
       };
 
     };
