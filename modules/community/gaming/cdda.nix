@@ -23,12 +23,12 @@
         (myCddaPackages.dark-days-ahead.overrideAttrs (
           final: prev: {
             pname = if hasTiles then "${prev.pname}-tiles" else prev.pname;
-            version = "0.I-2026-03-23-0402";
+            version = "0.I-unstable-2026-04-15";
             src = pkgs.fetchFromGitHub {
               owner = "CleverRaven";
               repo = "Cataclysm-DDA";
-              tag = "cdda-${final.version}";
-              hash = "sha256-sfoZ8ey/hr0NGTJr/ywr/0/S6UcsSHkJoRfPaq7tfMc=";
+              rev = "46730b6e7a9ed1c5eebf065a40760183d8d39fc2";
+              hash = "sha256-4RjYr3GNIeIKiSLJ046fALoogDcQlq+ouroYmASwC80=";
             };
             patches = [ ./cdda-locale-path.patch ];
             inherit hasTiles;
