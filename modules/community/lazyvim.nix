@@ -29,6 +29,10 @@
         withRuby = lib.mkIf isLegacy false;
         withPython3 = lib.mkIf isLegacy false;
 
+        initLua = ''
+          require("config.lazy")
+        '';
+
         extraPackages = with pkgs; [
           tree-sitter
           # LazyVim

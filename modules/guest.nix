@@ -43,12 +43,13 @@ in
       # create a writable init.lua that points to the home-manager generated init file for lazyvim.
       systemd.tmpfiles.rules = [
         "d /home/guest/.config/nvim/lua/config 0744 guest users -"
-        "f /home/guest/.config/nvim/init.lua 0644 guest users - require(\"config.lazy\")"
         "f /home/guest/.config/nvim/lua/config/plugins.lua 0644 guest users - return {}"
       ];
 
       # some modules depend on these. notable profiles-base
       home-manager.extraSpecialArgs = { inherit self' inputs'; };
+
+      home-manager.backupFileExtension = "bak";
 
       home-manager.users.guest = {
         imports =
