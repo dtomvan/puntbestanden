@@ -1,2 +1,2 @@
-spawn-sh-at-startup "dms run"
-spawn-sh-at-startup "cclipd -s 2 -t \"image/png\" -t \"image/*\" -t \"text/plain;charset=utf-8\" -t \"text/*\" -t \"*\""
+spawn-at-startup "dms" "run"
+spawn-at-startup "cclipd" "-s" "2" "-t" "image/png" "-t" "image/*" "-t" "text/plain;charset=utf-8" "-t" "text/*" "-t" "*"
