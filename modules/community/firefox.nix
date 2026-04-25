@@ -29,6 +29,8 @@
           MoreFromMozilla = false;
           FirefoxLabs = false;
         };
+
+        AIControls.Default = "blocked";
       };
 
     };
