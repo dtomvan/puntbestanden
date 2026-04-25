@@ -49,6 +49,7 @@
         wl-clipboard
         brightnessctl
         pipewire
+        nur.repos.dtomvan.cclip
         nur.repos.dtomvan.fsel
       ];
 

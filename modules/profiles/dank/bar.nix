@@ -25,7 +25,6 @@
       ];
       rightWidgets = [
         "systemTray"
-        "clipboard"
         "notificationButton"
         "battery"
         "controlCenterButton"

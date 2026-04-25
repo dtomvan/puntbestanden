@@ -4,6 +4,7 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fsel" { spawn-sh "foot -a fsel fsel --systemd-run --detach"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn "swaylock"; }
+    Super+Alt+V                                 { spawn "foot" "-a" "fsel" "fsel" "--cclip"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
