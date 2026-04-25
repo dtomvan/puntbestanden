@@ -49,7 +49,7 @@
         wl-clipboard
         brightnessctl
         pipewire
-        rofi
+        nur.repos.dtomvan.fsel
       ];
 
       services.hypridle = {

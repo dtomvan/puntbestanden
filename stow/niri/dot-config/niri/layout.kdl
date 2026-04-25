@@ -13,3 +13,7 @@ layout {
     }
 }
 
+window-rule {
+    match app-id="fsel"
+    default-column-width { proportion 0.33333; }
+}
