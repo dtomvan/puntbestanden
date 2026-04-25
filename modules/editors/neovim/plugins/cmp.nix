@@ -1,14 +1,11 @@
+{ lib, ... }:
 {
   flake.modules.nixvim.default = {
     plugins.friendly-snippets.enable = true;
-    performance.combinePlugins.standalonePlugins = [
-      "friendly-snippets"
-    ];
+    performance.combinePlugins.standalonePlugins = [ "friendly-snippets" ];
     plugins.nvim-snippets = {
       enable = true;
-      settings = {
-        friendly_snippets = true;
-      };
+      settings.friendly_snippets = true;
     };
     plugins.cmp = {
       enable = true;
@@ -28,12 +25,10 @@
         "<C-n>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
       };
     };
-    keymaps = [
-      {
-        key = "<c-y>";
-        action = "<cmd>lua vim.snippet.jump(1)<cr>";
-        mode = "i";
-      }
-    ];
+    keymaps = lib.singleton {
+      key = "<c-y>";
+      action = "<cmd>lua vim.snippet.jump(1)<cr>";
+      mode = "i";
+    };
   };
 }

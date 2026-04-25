@@ -179,6 +179,7 @@
       };
 
       systemd.user.settings.Manager.DefaultEnvironment = {
+        EDITOR = "nvim";
         PATH = concatStringsSep ":" (
           map (p: "%u/${p}") [
             "bin"
@@ -203,6 +204,7 @@
         pkgs.eza
         pkgs.glab
         pkgs.forgejo-cli
+        pkgs.neovim
       ];
     };
 

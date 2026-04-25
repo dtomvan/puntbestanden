@@ -7,7 +7,6 @@
 
   flake.modules.nixvim.default = {
     imports = [ inputs.tasks.modules.nixvim.default ];
-    # TODO: write as nixvim-native keys
     extraConfigLuaPost = ''
       vim.keymap.set("n", "<leader>tg", require'tasks'.go_to)
       vim.keymap.set("n", "<leader>tn", require'tasks'.create_from_todo)
@@ -24,23 +23,4 @@
       withCmp = true;
     };
   };
-
-  flake.modules.homeManager.profiles-workstation =
-    {
-      pkgs,
-      lib,
-      inputs',
-      ...
-    }:
-    {
-      home.packages = lib.singleton (
-        pkgs.writeShellApplication {
-          name = "tasks";
-          runtimeInputs = [ inputs'.tasks.packages.wrapper ];
-          text = ''
-            nvim --headless +"Tasks $*" +qa!
-          '';
-        }
-      );
-    };
 }

@@ -1,28 +1,11 @@
 {
-  flake.modules.nixvim.default.keymaps = [
-    {
-      action = ":";
-      key = ";";
-    }
-    {
-      action = ";";
-      key = ":";
-    }
-    {
-      action = "mlggyG`l";
-      key = "<space>y";
-    }
-    {
-      action = "<cr>";
-      key = ",<cr>";
-    }
-    {
-      action = "<cmd>cn<cr>";
-      key = "<space>j";
-    }
-    {
-      action = "<cmd>cp<cr>";
-      key = "<space>k";
-    }
-  ];
+  # yes it's lua again, it's simply more concise
+  flake.modules.nixvim.default.extraConfigLua = ''
+    vim.keymap.set('n', ':', ';')
+    vim.keymap.set('n', ';', ':')
+    vim.keymap.set('n', '<leader>y', 'mlggyG`l')
+    vim.keymap.set('n', '<localleader><cr>', '<cr>')
+    vim.keymap.set('n', '<leader>j', '<cmd>cnext<cr>')
+    vim.keymap.set('n', '<leader>k', '<cmd>cprev<cr>')
+  '';
 }

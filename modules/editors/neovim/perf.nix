@@ -11,9 +11,7 @@
       };
       combinePlugins = {
         enable = true;
-        standalonePlugins = [
-          "snacks.nvim"
-        ];
+        standalonePlugins = [ "snacks.nvim" ];
       };
     };
   };

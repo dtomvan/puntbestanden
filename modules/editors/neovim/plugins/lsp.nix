@@ -6,9 +6,6 @@
       lib,
       ...
     }:
-    let
-      inherit (self'.packages) lazyLsps;
-    in
     {
       plugins = {
         lspconfig.enable = true;
@@ -16,7 +13,7 @@
         none-ls.enable = true;
       };
 
-      extraPackages = [ lazyLsps ];
+      extraPackages = [ self'.packages.lazyLsps ];
 
       lsp = {
         luaConfig.post =
@@ -26,13 +23,11 @@
               "bashls",
               "clangd",
               "cmake",
-              "dockerls", -- dockerfile-language-server-nodejs
+              "dockerls",
               "emmet_ls",
               "kotlin_language_server",
               "pyright",
               "ruff",
-              -- commented because rustaceanvim loads the server automatically
-              -- "rust_analyzer",
               "svelte",
               "taplo",
               "terraformls",

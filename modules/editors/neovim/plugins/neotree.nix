@@ -1,18 +1,14 @@
 {
   flake.modules.nixvim.default =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
-      keymaps = [
-        {
-          action = "<cmd>Neotree toggle right<cr>";
-          key = "<f1>";
-        }
-      ];
+      keymaps = lib.singleton {
+        action = "<cmd>Neotree toggle right<cr>";
+        key = "<f1>";
+      };
 
       plugins.neo-tree.enable = true;
 
-      extraPlugins = with pkgs.vimPlugins; [
-        nvim-window-picker
-      ];
+      extraPlugins = lib.singleton pkgs.vimPlugins.nvim-window-picker;
     };
 }

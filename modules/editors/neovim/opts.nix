@@ -1,18 +1,16 @@
 {
-  flake.modules.nixvim.default = {
-    opts = {
-      sw = 4;
-      ts = 4;
-      sts = 4;
-      nu = true;
-      rnu = true;
+  flake.modules.nixvim.default.opts = {
+    shiftwidth = 4;
+    tabstop = 4;
+    softtabstop = 4;
+    number = true;
+    relativenumber = true;
 
-      et = true;
-      si = true;
+    expandtab = true;
+    smartindent = true;
 
-      wrap = true;
+    wrap = true;
 
-      scrolloff = 4;
-    };
+    scrolloff = 4;
   };
 }

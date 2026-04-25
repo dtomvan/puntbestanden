@@ -12,12 +12,13 @@
     ];
     plugins.telescope = {
       enable = true;
-      lazyLoad.settings.cmd = "Telescope";
 
-      extensions.fzy-native.enable = true;
-      extensions.fzy-native.settings = {
-        override_file_sorter = true;
-        override_generic_sorter = false;
+      extensions.fzy-native = {
+        enable = true;
+        settings = {
+          override_file_sorter = true;
+          override_generic_sorter = false;
+        };
       };
     };
   };
