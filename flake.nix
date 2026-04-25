@@ -135,7 +135,7 @@
       url = "github:nix-community/nix-index-database";
     };
     nixpkgs = {
-      url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      url = "github:dtomvan/nixpkgs/nixos-unstable-patched";
     };
     nixpkgs-cdda = {
       url = "github:RossSmyth/nixpkgs/cddaClean";
