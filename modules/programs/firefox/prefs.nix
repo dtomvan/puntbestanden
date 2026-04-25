@@ -43,6 +43,7 @@
       "trailhead.firstrun.didSeeAboutWelcome" = true;
       "browser.translations.automaticallyPopup" = false;
       "browser.urlbar.suggest.trending" = false; # "trending search suggestions" fuck off
+      "browser.ai.controls.default" = "blocked";
 
       # don't track me please
       "privacy.globalprivacycontrol.enabled" = true;
