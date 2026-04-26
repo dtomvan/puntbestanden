@@ -6,6 +6,7 @@
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
 
   nixConfig = {
+    extra-experimental-features = [ "pipe-operators" ];
     extra-substituters = [
       "https://catppuccin.cachix.org"
       "https://nix-community.cachix.org"
