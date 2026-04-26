@@ -24,10 +24,9 @@
     };
 
     flake-file = { inherit (config) nixConfig; };
-    flake.modules.nixos.nix-common = {
-      nix = {
-        settings = config.nixConfig;
-      };
-    };
+    flake.modules.nixos.nix-common.nix.settings = removeAttrs config.nixConfig [
+      "extra-experimental-features"
+      "experimental-features"
+    ];
   };
 }
