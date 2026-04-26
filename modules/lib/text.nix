@@ -21,13 +21,7 @@
     apply = lib.mapAttrs (
       _name: text:
       if lib.isAttrs text then
-        lib.pipe text.order [
-          (map (lib.flip lib.getAttr text.parts))
-          # (map (lib.splitString "\n"))
-          # (map (map lib.trim))
-          # (map lib.concatLines)
-          lib.concatStrings
-        ]
+        text.order |> map (lib.flip lib.getAttr text.parts) |> lib.concatStrings
       else
         text
     );

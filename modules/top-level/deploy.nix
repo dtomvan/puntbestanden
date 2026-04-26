@@ -15,9 +15,10 @@
     };
   };
 
-  flake.deploy.nodes = lib.pipe config.hosts [
-    (lib.filterAttrs (_n: v: !(v ? noConfig)))
-    (lib.mapAttrs' (
+  flake.deploy.nodes =
+    config.hosts
+    |> lib.filterAttrs (_n: v: !(v ? noConfig))
+    |> lib.mapAttrs' (
       _n: v:
       lib.nameValuePair v.hostName (
         withSystem v.system (
@@ -63,8 +64,7 @@
           }
         )
       )
-    ))
-  ];
+    );
 
   perSystem =
     { self', pkgs, ... }:

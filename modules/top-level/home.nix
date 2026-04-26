@@ -13,13 +13,9 @@ let
     filterAttrs
     listToAttrs
     nameValuePair
-    pipe
     ;
 
-  hosts = pipe config.hosts [
-    (filterAttrs (_k: v: !(v ? noConfig)))
-    attrValues
-  ];
+  hosts = config.hosts |> filterAttrs (_k: v: !(v ? noConfig)) |> attrValues;
 
   makeHome =
     {
@@ -77,11 +73,7 @@ in
     };
   };
 
-  flake.homeConfigurations = pipe config.users [
-    attrNames
-    (concatMap makeHomes)
-    listToAttrs
-  ];
+  flake.homeConfigurations = config.users |> attrNames |> concatMap makeHomes |> listToAttrs;
 
   text.readme.parts.home_configs = "\n- a dendritic home-manager config (TODO: list aspects here)";
 }

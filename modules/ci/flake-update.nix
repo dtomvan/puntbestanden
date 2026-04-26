@@ -19,12 +19,14 @@
               in
               {
                 permissions =
-                  lib.pipe
-                    [ "contents" "id-token" "issues" "pull-requests" ]
-                    [
-                      (lib.map (v: lib.nameValuePair v "write"))
-                      lib.listToAttrs
-                    ];
+                  [
+                    "contents"
+                    "id-token"
+                    "issues"
+                    "pull-requests"
+                  ]
+                  |> lib.map (v: lib.nameValuePair v "write")
+                  |> lib.listToAttrs;
 
                 runs-on = "ubuntu-latest";
 

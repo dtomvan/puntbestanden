@@ -26,12 +26,7 @@
     }:
     let
       backupdir = "/var/lib/nano/backupdir";
-      mkApp =
-        pkg:
-        lib.pipe { inherit pkg; } [
-          pkgs.lazy-app.override
-          lib.getExe
-        ];
+      mkApp = pkg: { inherit pkg; } |> pkgs.lazy-app.override |> lib.getExe;
 
       cfg = config.programs.nano;
     in

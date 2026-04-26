@@ -10,7 +10,6 @@ let
     filter
     mkEnableOption
     mkOption
-    pipe
     ;
   inherit (lib.types)
     attrsOf
@@ -129,15 +128,15 @@ in
 
     perSystem.legacyPackages.hosts = builtins.toFile "hosts.json" (builtins.toJSON config.hosts);
 
-    text.readme.parts.hostnames = ''
-      ## The hostnames
+    text.readme.parts.hostnames =
+      ''
+        ## The hostnames
 
-    ''
-    + pipe config.hosts [
-      attrValues
-      (filter (h: !(h ? noDoc)))
-      (map (h: "- `${h.hostName}`, ${h.description}"))
-      concatLines
-    ];
+      ''
+      + config.hosts
+      |> attrValues
+      |> filter (h: !(h ? noDoc))
+      |> map (h: "- `${h.hostName}`, ${h.description}")
+      |> concatLines;
   };
 }

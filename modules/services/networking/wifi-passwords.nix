@@ -57,18 +57,18 @@
       networking.networkmanager.ensureProfiles = {
         environmentFiles = lib.singleton config.sops.secrets.wifi-passwords.path;
         profiles =
-          lib.pipe
-            [
-              {
-                ssid = "H369A8D363E";
-                uuid = "edc1c000-5e83-41fb-a64e-b2814a532d9e";
-              }
-              {
-                ssid = "BWA-6A0F06";
-                uuid = "787845e2-1f4a-4f3e-b85b-4a8ba80dceb9";
-              }
-            ]
-            [ (map makeSimpleNetwork) lib.listToAttrs ];
+          [
+            {
+              ssid = "H369A8D363E";
+              uuid = "edc1c000-5e83-41fb-a64e-b2814a532d9e";
+            }
+            {
+              ssid = "BWA-6A0F06";
+              uuid = "787845e2-1f4a-4f3e-b85b-4a8ba80dceb9";
+            }
+          ]
+          |> map makeSimpleNetwork
+          |> lib.listToAttrs;
       };
     };
 }

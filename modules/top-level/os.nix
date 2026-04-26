@@ -13,7 +13,6 @@ let
     mapAttrs'
     nameValuePair
     nixosSystem
-    pipe
     ;
 
   inherit (config) hosts;
@@ -32,18 +31,12 @@ let
     });
 in
 {
-  flake.nixosConfigurations = pipe hosts [
-    (filterAttrs (_k: v: hasInfix "linux" v.system && !(v ? noConfig)))
-    (mapAttrs' makeNixos)
-  ];
+  flake.nixosConfigurations =
+    hosts |> filterAttrs (_k: v: hasInfix "linux" v.system && !(v ? noConfig)) |> mapAttrs' makeNixos;
 
   text.readme.parts.nixos_configs =
     let
-      n = pipe self.nixosConfigurations [
-        attrsToList
-        length
-        builtins.toString
-      ];
+      n = self.nixosConfigurations |> attrsToList |> length |> toString;
     in
     "- ${n} NixOS configs (well, this is a generated number so it's technically correct but don't over-estimate me)";
 }
