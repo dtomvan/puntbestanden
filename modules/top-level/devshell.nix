@@ -23,6 +23,7 @@
         packages = with pkgs; [
           just
           stow
+          nh
         ];
 
         # make all flake apps available as commands. Very useful in the context

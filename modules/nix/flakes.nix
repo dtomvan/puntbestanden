@@ -1,15 +1,9 @@
 {
-  flake.modules.nixos.nix-common =
-    { lib, ... }:
-    {
-      nix = {
-        settings = {
-          experimental-features = lib.mkDefault [
-            "nix-command"
-            "flakes"
-          ];
-        };
-        channel.enable = false;
-      };
-    };
+  flake.modules.nixos.nix-common.nix = {
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    channel.enable = false;
+  };
 }
