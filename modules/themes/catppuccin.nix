@@ -169,7 +169,6 @@ in
         foot.enable = true;
         ghostty.enable = true;
         glamour.enable = true;
-        skim.enable = true;
         yazi.enable = true;
         zellij.enable = true;
       };
