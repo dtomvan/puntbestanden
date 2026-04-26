@@ -8,7 +8,10 @@
 
   config = {
     nixConfig = {
-      extra-experimental-features = [ "pipe-operators" ];
+      extra-experimental-features = [
+        "pipe-operators"
+        "pipe-operator"
+      ];
       extra-substituters = [
         "https://nix-community.cachix.org"
         "https://cache.garnix.io"
