@@ -129,7 +129,7 @@ in
         defaultProfile = "Catppuccin";
         profiles.Catppuccin = {
           inherit colorScheme;
-          command = "${lib.getExe pkgs.bashInteractive}";
+          command = lib.getExe config.programs.bash.finalPackage;
         };
       };
 

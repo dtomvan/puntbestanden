@@ -21,13 +21,7 @@
           inherit (cfg.alacritty) package;
 
           settings = {
-            terminal.shell = {
-              program = lib.getExe pkgs.bashInteractive;
-              args = [
-                "-c"
-                (lib.getExe pkgs.zellij)
-              ];
-            };
+            terminal.shell.program = lib.getExe config.programs.zellij.finalPackage;
             font.size = cfg.font.size;
             font.normal.family = cfg.font.family;
             window.dynamic_title = true;

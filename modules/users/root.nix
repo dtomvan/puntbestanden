@@ -3,7 +3,7 @@
     { pkgs, ... }:
     {
       users.users.root = {
-        shell = pkgs.bash;
+        shell = pkgs.bashInteractive;
         initialHashedPassword = "$y$j9T$fTcxRBZwvzjTTvQNHDNDk/$CKiqCVJUBMl9UFMNjZXfIEHHPadkPHkciGctzKGu0HC";
       };
     };
