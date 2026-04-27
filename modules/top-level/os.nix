@@ -32,7 +32,7 @@ let
 in
 {
   flake.nixosConfigurations =
-    hosts |> filterAttrs (_k: v: hasInfix "linux" v.system && !(v ? noConfig)) |> mapAttrs' makeNixos;
+    hosts |> filterAttrs (_k: v: hasInfix "linux" v.system && v.hasConfig) |> mapAttrs' makeNixos;
 
   text.readme.parts.nixos_configs =
     let

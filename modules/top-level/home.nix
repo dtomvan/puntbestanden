@@ -8,14 +8,12 @@
 let
   inherit (inputs.nixpkgs.lib)
     attrNames
-    attrValues
     concatMap
-    filterAttrs
     listToAttrs
     nameValuePair
     ;
 
-  hosts = config.hosts |> filterAttrs (_k: v: !(v ? noConfig)) |> attrValues;
+  hosts = config.hosts |> builtins.attrValues |> builtins.filter (host: host.hasConfig);
 
   makeHome =
     {

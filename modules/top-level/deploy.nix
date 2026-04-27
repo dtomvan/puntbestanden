@@ -17,7 +17,7 @@
 
   flake.deploy.nodes =
     config.hosts
-    |> lib.filterAttrs (_n: v: !(v ? noConfig))
+    |> lib.filterAttrs (_n: v: v.hasConfig)
     |> lib.mapAttrs' (
       _n: v:
       lib.nameValuePair v.hostName (

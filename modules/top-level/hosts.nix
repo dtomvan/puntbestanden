@@ -81,6 +81,12 @@ let
       description = "Remote build settings";
       type = submodule remoteBuildModule;
     };
+    hasConfig = (mkEnableOption "configuring this host for nixos") // {
+      default = true;
+    };
+    hasDoc = (mkEnableOption "listing this hostname in readme.md with its description") // {
+      default = true;
+    };
   };
 in
 {
@@ -135,8 +141,7 @@ in
     + (
       config.hosts
       |> attrValues
-      # TODO
-      |> filter (h: !(h ? noDoc))
+      |> filter (h: h.hasDoc)
       |> map (h: "- `${h.hostName}`, ${h.description}")
       |> concatLines
     );
