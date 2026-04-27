@@ -128,15 +128,17 @@ in
 
     perSystem.legacyPackages.hosts = builtins.toFile "hosts.json" (builtins.toJSON config.hosts);
 
-    text.readme.parts.hostnames =
-      ''
-        ## The hostnames
+    text.readme.parts.hostnames = ''
+      ## The hostnames
 
-      ''
-      + config.hosts
+    ''
+    + (
+      config.hosts
       |> attrValues
+      # TODO
       |> filter (h: !(h ? noDoc))
       |> map (h: "- `${h.hostName}`, ${h.description}")
-      |> concatLines;
+      |> concatLines
+    );
   };
 }
