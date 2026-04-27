@@ -130,7 +130,7 @@
           util-linux
           w3m
           xorriso
-          xxHash
+          xxhash
         ]
       );
     };
