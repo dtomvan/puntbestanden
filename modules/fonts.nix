@@ -44,7 +44,7 @@ in
       };
 
       services = {
-        ${if config.services ? copyparty then "copyparty" else null} =
+        ${if config ? services.copyparty then "copyparty" else null} =
           lib.mkIf config.services.copyparty.enable
             {
               settings.html-head =

@@ -118,13 +118,13 @@ in
         };
       };
 
-      programs.${if config.programs ? plasma then "plasma" else null} = {
+      programs.${if config ? programs.plasma then "plasma" else null} = {
         workspace = { inherit colorScheme wallpaper; };
 
         kscreenlocker.appearance = { inherit wallpaper; };
       };
 
-      programs.${if config.programs ? konsole then "konsole" else null} = lib.mkDefault {
+      programs.${if config ? programs.konsole then "konsole" else null} = lib.mkDefault {
         enable = true;
         defaultProfile = "Catppuccin";
         profiles.Catppuccin = {
@@ -137,7 +137,7 @@ in
         pkgs.nur.repos.rycee.firefox-addons.firefox-color
       ];
 
-      programs.${if config.programs ? dms-shell then "dms-shell" else null} = {
+      programs.${if config ? programs.dms-shell then "dms-shell" else null} = {
         theme = ../profiles/dank/catppuccin.json;
         themeVariants = catppuccin;
 
