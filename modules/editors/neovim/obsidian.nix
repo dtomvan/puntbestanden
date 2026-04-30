@@ -2,6 +2,10 @@
   flake.modules.nixvim.default =
     { config, lib, ... }:
     {
+      # they want this or they are going to throw
+      # a warning at you... for dashes as bullet points...
+      opts.conceallevel = 1;
+
       plugins.obsidian = {
         enable = true;
 
