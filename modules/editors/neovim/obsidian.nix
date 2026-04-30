@@ -4,9 +4,12 @@
     {
       plugins.obsidian = {
         enable = true;
+
         lazyLoad.settings.cmd = "Obsidian";
+
         settings = {
           legacy_commands = false;
+          disable_frontmatter = true;
 
           completions = {
             nvim_cmp = lib.mkDefault config.plugins.cmp.enable;
