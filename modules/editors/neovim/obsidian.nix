@@ -4,7 +4,10 @@
     {
       plugins.obsidian = {
         enable = true;
+        lazyLoad.settings.cmd = "Obsidian";
         settings = {
+          legacy_commands = false;
+
           completions = {
             nvim_cmp = lib.mkDefault config.plugins.cmp.enable;
             blink = lib.mkDefault config.plugins.blink-cmp.enable;
