@@ -9,7 +9,8 @@
 
         settings = {
           legacy_commands = false;
-          disable_frontmatter = true;
+
+          frontmatter.enabled = false;
 
           completions = {
             nvim_cmp = lib.mkDefault config.plugins.cmp.enable;
