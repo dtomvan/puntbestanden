@@ -18,6 +18,10 @@
             url = "https://github.com/NixOS/nixpkgs/pulls?q=involves:dtomvan";
           }
           {
+            name = "nixos-unstable-patched";
+            url = "https://github.com/dtomvan/nixpkgs/tree/nixos-unstable-patched";
+          }
+          {
             name = "NüschtOS search";
             url = "https://search.nüschtos.de/";
           }
