@@ -97,16 +97,7 @@
 
       programs.btop.enable = true;
 
-      systemd.user.settings.Manager.DefaultEnvironment = {
-        EDITOR = "nvim";
-        PATH = lib.concatStringsSep ":" (
-          map (p: "%u/${p}") [
-            "bin"
-            ".cargo/bin"
-            ".local/bin"
-          ]
-        );
-      };
+      home.sessionVariables.EDITOR = "nvim";
 
       home.packages =
         let
