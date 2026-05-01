@@ -22,6 +22,10 @@
             url = "https://github.com/dtomvan/nixpkgs/tree/nixos-unstable-patched";
           }
           {
+            name = "Nix manual";
+            url = "https://nix.dev/manual/nix/latest/";
+          }
+          {
             name = "NüschtOS search";
             url = "https://search.nüschtos.de/";
           }
