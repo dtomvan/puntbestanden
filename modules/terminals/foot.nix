@@ -20,7 +20,7 @@
         settings.main = {
           term = "xterm-256color";
           font = "${cfg.font.family}:size=${toString cfg.font.size}";
-          shell = lib.getExe config.programs.zellij.finalPackage;
+          shell = lib.getExe config.programs.zellij.package;
         };
       };
     };
