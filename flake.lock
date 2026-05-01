@@ -560,22 +560,6 @@
         "type": "github"
       }
     },
-    "nixpkgs": {
-      "locked": {
-        "lastModified": 1777005340,
-        "narHash": "sha256-KnAZtsVzqFRjnIewdSj/CimQzuULxqs1HWS2yoPHX+0=",
-        "owner": "dtomvan",
-        "repo": "nixpkgs",
-        "rev": "b4841b3fd4c3ff640405973f2034ec20323304ab",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dtomvan",
-        "ref": "nixos-unstable-patched",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-cdda": {
       "locked": {
         "lastModified": 1769547676,
@@ -619,6 +603,44 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-patched": {
+      "locked": {
+        "lastModified": 1777268161,
+        "narHash": "sha256-bxrdOn8SCOv8tN4JbTF/TXq7kjo9ag4M+C8yzzIRYbE=",
+        "owner": "dtomvan",
+        "repo": "nixpkgs",
+        "rev": "1c3fe55ad329cbcb28471bb30f05c9827f724c76",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dtomvan",
+        "ref": "nixos-unstable-patched",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-patcher": {
+      "inputs": {
+        "flake-parts": [],
+        "nix-patcher": [],
+        "nixpkgs": [],
+        "nixpkgs-patched": "nixpkgs-patched",
+        "systems": []
+      },
+      "locked": {
+        "lastModified": 1777582107,
+        "narHash": "sha256-/pkv3SVEdGmLLq/2WCLyCEfUEnOmsypxcBjWtlyp71E=",
+        "owner": "dtomvan",
+        "repo": "nixpkgs-patcher",
+        "rev": "8bfb9724cd040935178630305a90938239059470",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dtomvan",
+        "repo": "nixpkgs-patcher",
         "type": "github"
       }
     },
@@ -747,8 +769,12 @@
         "lazy-apps": "lazy-apps",
         "localsend-rs": "localsend-rs",
         "nix-index-database": "nix-index-database",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": [
+          "nixpkgs-patcher",
+          "nixpkgs-patched"
+        ],
         "nixpkgs-cdda": "nixpkgs-cdda",
+        "nixpkgs-patcher": "nixpkgs-patcher",
         "nixvim": "nixvim",
         "nur": "nur",
         "plasma-manager": "plasma-manager",

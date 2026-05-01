@@ -139,10 +139,27 @@
       url = "github:nix-community/nix-index-database";
     };
     nixpkgs = {
-      url = "github:dtomvan/nixpkgs/nixos-unstable-patched";
+      follows = "nixpkgs-patcher/nixpkgs-patched";
     };
     nixpkgs-cdda = {
       url = "github:RossSmyth/nixpkgs/cddaClean";
+    };
+    nixpkgs-patcher = {
+      inputs = {
+        flake-parts = {
+          follows = "";
+        };
+        nix-patcher = {
+          follows = "";
+        };
+        nixpkgs = {
+          follows = "";
+        };
+        systems = {
+          follows = "";
+        };
+      };
+      url = "github:dtomvan/nixpkgs-patcher";
     };
     nixvim = {
       inputs = {
