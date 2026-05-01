@@ -35,6 +35,7 @@
       packages.activatable-nixvim = self'.legacyPackages.activationPackage {
         profile = self'.packages.nixvim.overrideAttrs { dontFixup = true; };
         profileName = "nixvim";
+        priority = 4; # ahead of default priority, so home-manager can also install neovim without both colliding
       };
 
       apps.nixvim-activate = {

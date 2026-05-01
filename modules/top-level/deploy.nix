@@ -94,7 +94,9 @@
         {
           profile ? "\${PROFILE:?}",
           profileName,
+          priority ? null,
         }:
+        assert priority == null || lib.isInt priority;
         pkgs.writeShellApplication {
           name = "activate";
           runtimeInputs = with pkgs; [
@@ -111,6 +113,10 @@
             fi
 
             echo installing new ${profileName} install...
+            declare -a extraArgs=()
+            if ${toString (priority != null)}; then
+              extraArgs+=(--priority "${toString priority}")
+            fi
             nix profile add "${profile}"
 
             echo "done"
