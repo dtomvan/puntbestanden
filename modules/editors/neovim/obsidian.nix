@@ -4,7 +4,7 @@
     {
       # they want this or they are going to throw
       # a warning at you... for dashes as bullet points...
-      opts.conceallevel = 1;
+      opts.conceallevel = 2;
 
       plugins.obsidian = {
         enable = true;
