@@ -74,6 +74,14 @@
       url = "github:dtomvan/localsend-rust-impl";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-facts = {
+      inputs = {
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:crertel/nix-facts";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
