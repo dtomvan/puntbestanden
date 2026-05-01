@@ -26,7 +26,14 @@
           }
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.systemtray"
-          "org.kde.plasma.digitalclock"
+          {
+            name = "org.kde.plasma.digitalclock";
+            config.Appearance = {
+              showDate = true;
+              dateFormat = "isoDate";
+              showWeekNumbers = true;
+            };
+          }
         ];
       }
     ];
