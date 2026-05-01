@@ -23,206 +23,103 @@
   };
 
   inputs = {
-    allfollow = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-      url = "github:dtomvan/allfollow/dtomvan/push-rzlonpxovrwz";
-    };
     catppuccin = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:catppuccin/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     copyparty = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:9001/copyparty";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
-      inputs = {
-        flake-compat = {
-          follows = "";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:serokell/deploy-rs";
+      inputs = {
+        flake-compat.follows = "";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     devour-flake = {
-      flake = false;
       url = "github:srid/devour-flake";
+      flake = false;
     };
     devshell = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     direnv-instant = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:Mic92/direnv-instant";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    files = {
-      url = "github:mightyiam/files";
-    };
-    flake-file = {
-      url = "github:vic/flake-file/c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1";
-    };
+    files.url = "github:mightyiam/files";
+    flake-file.url = "github:denful/flake-file";
     flake-fmt = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:Mic92/flake-fmt";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-    };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    import-tree = {
-      url = "github:vic/import-tree";
-    };
+    import-tree.url = "github:denful/import-tree";
     lazy-apps = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:dtomvan/lazy-apps";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     localsend-rs = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:dtomvan/localsend-rust-impl";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs = {
-      follows = "nixpkgs-patcher/nixpkgs-patched";
-    };
-    nixpkgs-cdda = {
-      url = "github:RossSmyth/nixpkgs/cddaClean";
-    };
+    nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
+    nixpkgs-cdda.url = "github:RossSmyth/nixpkgs/cddaClean";
     nixpkgs-patcher = {
-      inputs = {
-        flake-parts = {
-          follows = "";
-        };
-        nix-patcher = {
-          follows = "";
-        };
-        nixpkgs = {
-          follows = "";
-        };
-        systems = {
-          follows = "";
-        };
-      };
       url = "github:dtomvan/nixpkgs-patcher";
+      inputs = {
+        flake-parts.follows = "";
+        nix-patcher.follows = "";
+        nixpkgs.follows = "";
+        systems.follows = "";
+      };
     };
     nixvim = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nur = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     plasma-manager = {
-      inputs = {
-        home-manager = {
-          follows = "home-manager";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:nix-community/plasma-manager";
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
     };
     sops = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     srvos = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:nix-community/srvos";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    systems = {
-      url = "github:nix-systems/default";
-    };
+    systems.url = "github:nix-systems/default";
     tasks = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:dtomvan/tasks.nvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
       url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-
 }

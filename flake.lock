@@ -1,28 +1,5 @@
 {
   "nodes": {
-    "allfollow": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": "rust-overlay",
-        "systems": "systems"
-      },
-      "locked": {
-        "lastModified": 1752694596,
-        "narHash": "sha256-AA7uDNXMFg8b/FQM+zJQafBXdSckli41sYjRx0Lm8cM=",
-        "owner": "dtomvan",
-        "repo": "allfollow",
-        "rev": "32d9dcf78bb1f2e53284470825cce4800510d3f6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dtomvan",
-        "ref": "dtomvan/push-rzlonpxovrwz",
-        "repo": "allfollow",
-        "type": "github"
-      }
-    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": [
@@ -236,17 +213,16 @@
     },
     "flake-file": {
       "locked": {
-        "lastModified": 1756540347,
-        "narHash": "sha256-O306WrpZF8o7bNwx3fYZu5Qu6vHsS9k6rx01+e6ALwQ=",
-        "owner": "vic",
+        "lastModified": 1776202746,
+        "narHash": "sha256-RZVtJefKKy3Z2UvKWSbtRF3cUxt/2fHga2adN6MZQ1U=",
+        "owner": "denful",
         "repo": "flake-file",
-        "rev": "c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1",
+        "rev": "7d16dfaeb912d5efdff0d0eda2aabc0c934168dd",
         "type": "github"
       },
       "original": {
-        "owner": "vic",
+        "owner": "denful",
         "repo": "flake-file",
-        "rev": "c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1",
         "type": "github"
       }
     },
@@ -386,7 +362,7 @@
     },
     "flake-utils_2": {
       "inputs": {
-        "systems": "systems_3"
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1731533236,
@@ -448,13 +424,13 @@
       "locked": {
         "lastModified": 1773693634,
         "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
-        "owner": "vic",
+        "owner": "denful",
         "repo": "import-tree",
         "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
         "type": "github"
       },
       "original": {
-        "owner": "vic",
+        "owner": "denful",
         "repo": "import-tree",
         "type": "github"
       }
@@ -666,7 +642,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_4"
+        "systems": "systems_3"
       },
       "locked": {
         "lastModified": 1777080231,
@@ -752,7 +728,6 @@
     },
     "root": {
       "inputs": {
-        "allfollow": "allfollow",
         "catppuccin": "catppuccin",
         "copyparty": "copyparty",
         "deploy-rs": "deploy-rs",
@@ -780,7 +755,7 @@
         "plasma-manager": "plasma-manager",
         "sops": "sops",
         "srvos": "srvos",
-        "systems": "systems_5",
+        "systems": "systems_4",
         "tasks": "tasks",
         "treefmt-nix": "treefmt-nix_4"
       }
@@ -799,27 +774,6 @@
         "owner": "rust-lang",
         "ref": "nightly",
         "repo": "rust-analyzer",
-        "type": "github"
-      }
-    },
-    "rust-overlay": {
-      "inputs": {
-        "nixpkgs": [
-          "allfollow",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1751596734,
-        "narHash": "sha256-1tQOwmn3jEUQjH0WDJyklC+hR7Bj+iqx6ChtRX2QiPA=",
-        "owner": "oxalica",
-        "repo": "rust-overlay",
-        "rev": "e28ba067a9368286a8bc88b68dc2ca92181a09f0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "oxalica",
-        "repo": "rust-overlay",
         "type": "github"
       }
     },
@@ -864,7 +818,6 @@
       }
     },
     "systems": {
-      "flake": false,
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
@@ -939,21 +892,6 @@
         "type": "github"
       }
     },
-    "systems_6": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "tasks": {
       "inputs": {
         "flake-parts": "flake-parts_5",
@@ -962,7 +900,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_6",
+        "systems": "systems_5",
         "treefmt-nix": "treefmt-nix_3"
       },
       "locked": {
@@ -1064,7 +1002,7 @@
     },
     "utils": {
       "inputs": {
-        "systems": "systems_2"
+        "systems": "systems"
       },
       "locked": {
         "lastModified": 1731533236,
