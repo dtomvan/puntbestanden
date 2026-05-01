@@ -1,7 +1,7 @@
 { self, lib, ... }:
 {
   flake.modules.homeManager.basic-cli =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = with self.modules.homeManager; [
         git
@@ -130,10 +130,11 @@
               jj tug
               jj git push
             '';
-            runtimeInputs = [ pkgs.jujutsu ];
+            runtimeInputs = lib.singleton config.programs.jujutsu.package;
           })
           (pkgs.writeShellApplication {
             name = "jj-remote";
+            runtimeInputs = lib.singleton config.programs.jujutsu.package;
             text = ''
               reponame="$(basename "$(git rev-parse --show-toplevel)")"
               username="$1"
@@ -142,12 +143,14 @@
           })
           (pkgs.writeShellApplication {
             name = "jj-fetch";
+            runtimeInputs = lib.singleton config.programs.jujutsu.package;
             text = ''
               jj git fetch --remote "$1" --branch "$2"
             '';
           })
           (pkgs.writeShellApplication {
             name = "jj-track";
+            runtimeInputs = lib.singleton config.programs.jujutsu.package;
             text = ''
               jj bookmark track "$2"@"$1"
             '';
