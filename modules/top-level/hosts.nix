@@ -34,6 +34,24 @@ let
     };
   };
 
+  keyModule.options = {
+    key = mkOption {
+      description = "ssh public key (from ssh-keyscan) to allow";
+      type = str;
+      default = null;
+    };
+    allowedHosts = mkOption {
+      description = "which hosts are allowed to be reached, by hostname";
+      type = listOf str;
+      default = [ ];
+    };
+    allowedUsers = mkOption {
+      description = "which users are allowed to be reached, by username";
+      type = listOf str;
+      default = [ ];
+    };
+  };
+
   hostModule.options = {
     description = mkOption {
       description = "A description of what the hardware is, where the system is located, or a reminder about which system the host is referring to";
@@ -64,6 +82,10 @@ let
       description = "Disk where NixOS is installed to (and Disko manages), must be absolute, by-id.";
       type = strMatching "^/dev/disk/by-id/.*$";
       example = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
+    };
+    sshPubkey = mkOption {
+      description = "Public key that is recognized by other machines in authorized_keys";
+      type = nullOr (submodule keyModule);
     };
     wirelessInterface = mkOption {
       description = "Interface name where NetworkManager profiles are set";
@@ -104,6 +126,14 @@ in
         system = "x86_64-linux";
         users = [ "tomvd" ];
         mainDisk = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
+        sshPubkey = {
+          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm/zcLreRp8+urjzkMpU92xO4oVRoCzn2Em/kkpTjoy tomvd@boomer";
+          allowedHosts = [ "feather" ];
+          allowedUsers = [
+            "tomvd"
+            "root"
+          ];
+        };
         wirelessInterface = "wlp7s0";
         isNvidiaPascal = true;
         remoteBuild = {
@@ -127,6 +157,15 @@ in
         system = "x86_64-linux";
         users = [ "tomvd" ];
         mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
+        sshPubkey = {
+          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ36mBHi2bPiILfqtV79sCNwj0lXP6xNZIj7bSmk8Fep tomvd@feather";
+          allowedHosts = [ "boomer" ];
+          allowedUsers = [
+            "tomvd"
+            "root"
+          ];
+        };
+
         wirelessInterface = "wlp0s20f3";
         remoteBuild.enable = true;
       };

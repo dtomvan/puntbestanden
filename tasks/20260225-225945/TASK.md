@@ -1,6 +1,6 @@
 # per-user and/or less "global"?
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 - TAGS: ssh refactor
 
