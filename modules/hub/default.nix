@@ -81,7 +81,8 @@ in
               makeUsbBootable = true;
               # add inputs to image so that the self-installer can do it
               # without much copying
-              storeContents = lib.mapAttrsToList (_n: i: i.outPath) inputs;
+              storeContents =
+                inputs |> (a: removeAttrs a [ "nixpkgs-patcher" ]) |> lib.mapAttrsToList (_n: i: i.outPath);
             };
             # always copy to RAM
             boot.initrd.systemd.services.copytoram.unitConfig.ConditionKernelCommandLine = lib.mkForce null;
