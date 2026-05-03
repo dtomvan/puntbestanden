@@ -1,10 +1,10 @@
 keys:
-- &boomer age1p08uvpumsx02aj73dlww4sjz4qtkzpdc03cq4sglu205jq4kzfesklulr9
-- &feather age1gj2dmrhgcfde0s49yyr92wdv7e44wf5949ygc4mhrxywhr4tdpastk0ze2
+  - &boomer age1zd4mexvz3emumn8q0h6xyqfa509tr7sh8c0x5t6ggu7e6muj9gvsggzdd8
+  - &feather age1x4qd6smet538spmc2lvl8l5z067qtj7nn6xple9ucwre3w0rf9wqfplkg5
 
 creation_rules:
-- key_groups:
-  - age:
-    - *boomer
-    - *feather
-  path_regex: secrets/[^/]+.secret
+  - key_groups:
+      - age:
+          - *boomer
+          - *feather
+    path_regex: secrets/[^/]+.secret
