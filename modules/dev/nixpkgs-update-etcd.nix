@@ -19,7 +19,7 @@
           DO_BUILD="''${DO_BUILD:-1}"
           EXTRA_ARGS=( "$@" )
           if [ "$DO_BUILD" -eq 1 ]; then
-            EXTRA_ARGS+=(--build)
+            EXTRA_ARGS+=(--build --test)
           fi
 
           if [ "$(hostname)" == boomer ]; then
