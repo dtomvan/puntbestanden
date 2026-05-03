@@ -52,6 +52,8 @@ in
   config.flake.modules.nixos.services-ssh =
     { config, ... }:
     let
+      # grabs the host's config by hostname from keysPerHost, and wraps it in
+      # the correct nixos options under `users.users.<name>`
       maybeUserConfig = builtins.tryEval (
         mapAttrs (_n: keys: {
           openssh.authorizedKeys = { inherit keys; };

@@ -1,5 +1,40 @@
 { self, ... }:
 {
+  hosts.amdpc1 = {
+    description = "a reasonably sluggish Ryzen 5 2600 desktop PC";
+    hostName = "boomer";
+    system = "x86_64-linux";
+    users = [ "tomvd" ];
+    mainDisk = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
+    sshPubkey = {
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm/zcLreRp8+urjzkMpU92xO4oVRoCzn2Em/kkpTjoy tomvd@boomer";
+      # needs to be able to self-deploy
+      allowedHosts = [
+        "boomer"
+        "feather"
+      ];
+      allowedUsers = [
+        "tomvd"
+        "root"
+      ];
+    };
+    wirelessInterface = "wlp7s0";
+    isNvidiaPascal = true;
+    remoteBuild = {
+      enable = true;
+      settings = {
+        maxJobs = 12;
+        supportedFeatures = [
+          "benchmark"
+          "nixos-test"
+          "big-parallel"
+          "kvm"
+        ];
+        speedFactor = 4;
+      };
+    };
+  };
+
   flake.modules = {
     nixos.hosts-boomer =
       { pkgs, lib, ... }:

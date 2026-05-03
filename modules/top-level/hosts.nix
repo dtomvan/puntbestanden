@@ -1,8 +1,17 @@
 { config, lib, ... }:
 # How to add a host
-# 1. Add an entry to this file
-# 2. Create a file (usually in modules/hosts/) that sets modules.nixos.`hosts-foobar`
-# 3. nixos-generate-config --show-hardware-config > modules/hardware/_generated/foobar.nix
+# 1. Create a file (usually in modules/hosts/) that sets
+#    `flake.modules.nixos.hosts-foobar` and `hosts.foobar`
+# 2. nixos-generate-config --show-hardware-config > modules/hardware/_generated/foobar.nix
+# minimal hosts entry:
+# {
+#   hosts.foobar = {
+#     hostName = "foobar";
+#     system = "x86_64-linux";
+#     users = [ ];
+#     mainDisk = "/dev/disk/by-id/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+#   };
+# }
 let
   inherit (lib)
     attrValues
@@ -119,58 +128,6 @@ in
   };
 
   config = {
-    hosts = {
-      amdpc1 = {
-        description = "a reasonably sluggish Ryzen 5 2600 desktop PC";
-        hostName = "boomer";
-        system = "x86_64-linux";
-        users = [ "tomvd" ];
-        mainDisk = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
-        sshPubkey = {
-          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMm/zcLreRp8+urjzkMpU92xO4oVRoCzn2Em/kkpTjoy tomvd@boomer";
-          allowedHosts = [ "feather" ];
-          allowedUsers = [
-            "tomvd"
-            "root"
-          ];
-        };
-        wirelessInterface = "wlp7s0";
-        isNvidiaPascal = true;
-        remoteBuild = {
-          enable = true;
-          settings = {
-            maxJobs = 12;
-            supportedFeatures = [
-              "benchmark"
-              "nixos-test"
-              "big-parallel"
-              "kvm"
-            ];
-            speedFactor = 4;
-          };
-        };
-      };
-
-      tpx1g8 = {
-        description = "the ultra-light Thinkpad X1 Carbon G8";
-        hostName = "feather";
-        system = "x86_64-linux";
-        users = [ "tomvd" ];
-        mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
-        sshPubkey = {
-          key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ36mBHi2bPiILfqtV79sCNwj0lXP6xNZIj7bSmk8Fep tomvd@feather";
-          allowedHosts = [ "boomer" ];
-          allowedUsers = [
-            "tomvd"
-            "root"
-          ];
-        };
-
-        wirelessInterface = "wlp0s20f3";
-        remoteBuild.enable = true;
-      };
-    };
-
     perSystem.legacyPackages.hosts = builtins.toFile "hosts.json" (builtins.toJSON config.hosts);
 
     text.readme.parts.hostnames = ''

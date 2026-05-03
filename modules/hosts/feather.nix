@@ -1,5 +1,28 @@
 { self, ... }:
 {
+  hosts.tpx1g8 = {
+    description = "the ultra-light Thinkpad X1 Carbon G8";
+    hostName = "feather";
+    system = "x86_64-linux";
+    users = [ "tomvd" ];
+    mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
+    sshPubkey = {
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ36mBHi2bPiILfqtV79sCNwj0lXP6xNZIj7bSmk8Fep tomvd@feather";
+      # needs to be able to self-deploy
+      allowedHosts = [
+        "boomer"
+        "feather"
+      ];
+      allowedUsers = [
+        "tomvd"
+        "root"
+      ];
+    };
+
+    wirelessInterface = "wlp0s20f3";
+    remoteBuild.enable = true;
+  };
+
   flake.modules = {
     nixos.hosts-feather =
       { config, lib, ... }:
