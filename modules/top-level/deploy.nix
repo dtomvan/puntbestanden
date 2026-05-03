@@ -114,10 +114,10 @@
 
             echo installing new ${profileName} install...
             declare -a extraArgs=()
-            if ${toString (priority != null)}; then
+            ${lib.optionalString (priority != null) ''
               extraArgs+=(--priority "${toString priority}")
-            fi
-            nix profile add "${profile}"
+            ''}
+            nix profile add "${profile}" "''${extraArgs[@]}"
 
             echo "done"
           '';
