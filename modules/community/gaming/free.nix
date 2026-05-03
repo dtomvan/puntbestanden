@@ -29,7 +29,7 @@
         enableGraphical = mkEnableOption "some great FOSS games that require a graphical session";
         # this option is useless because I'll probably only refer to the
         # package in question once in my dotfiles anyways
-        iWantToCompileCDDACurses = mkEnableOption "CDDA but without the tiles so a bit smaller than normal";
+        iWantToCompileCDDA = mkEnableOption "CDDA but without the tiles so a bit smaller than normal";
       };
       config.environment.systemPackages =
         lib.optionals cfg.enable [
@@ -39,10 +39,9 @@
         ]
         ++ lib.optionals cfg.enableGraphical [
           brogue-ce
-          self'.packages.myCdda
           mindustry
           tome4
         ]
-        ++ lib.optionals cfg.iWantToCompileCDDACurses (lib.singleton self'.packages.myCddaCurses);
+        ++ lib.optionals cfg.iWantToCompileCDDA (lib.singleton self'.packages.myCdda);
     };
 }
