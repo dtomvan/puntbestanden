@@ -15,7 +15,13 @@
     { uses = "actions/checkout@v4"; }
     {
       uses = "cachix/install-nix-action@v31";
-      "with".github_access_token = "\${{ secrets.NIX_GITHUB_TOKEN }}";
+      "with" = {
+        github_access_token = "\${{ secrets.NIX_GITHUB_TOKEN }}";
+        # lix calls it pipe-operator, ccpnix pipe-operators
+        extra_nix_config = ''
+          experimental-features = nix-command flakes pipe-operator pipe-operators
+        '';
+      };
     }
   ];
 }
