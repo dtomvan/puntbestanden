@@ -6,19 +6,20 @@
 }:
 let
   hostName = "nixos";
+  cfg = inputs.nixpkgs.lib.nixosSystem {
+    modules = [
+      self.modules.nixos.autounattend
+      (self.lib.system "x86_64-linux")
+    ];
+    specialArgs.host = null;
+  };
 in
 {
-  flake.nixosConfigurations = rec {
-    autounattend = inputs.nixpkgs.lib.nixosSystem {
-      modules = [
-        self.modules.nixos.autounattend
-        (self.lib.system "x86_64-linux")
-      ];
-      specialArgs.host = null;
+  flake.nixosConfigurations = {
+      autounattend = cfg;
+      # allows rebuilding the config easier for a newcomer
+      ${hostName} = cfg;
     };
-    # allows rebuilding the config easier for a newcomer
-    ${hostName} = autounattend;
-  };
 
   flake.modules.nixos.autounattend =
     {
