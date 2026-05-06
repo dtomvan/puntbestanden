@@ -42,6 +42,7 @@ in
           inputs.plasma-manager.homeModules.plasma-manager
         ];
 
+        modules.terminals.alacritty.enable = true;
         home.os.isPlasma = lib.mkDefault true;
 
         programs.plasma = {

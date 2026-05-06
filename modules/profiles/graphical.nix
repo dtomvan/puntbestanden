@@ -59,10 +59,6 @@ in
             color-scheme = "prefer-dark";
           };
         };
-
-        modules.terminals = {
-          alacritty.enable = true;
-        };
       };
   };
 }
