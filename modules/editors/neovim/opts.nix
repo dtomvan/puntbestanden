@@ -1,5 +1,5 @@
 {
-  flake.modules.nixvim.default.opts = {
+  flake.modules.nixvim.minimal.opts = {
     shiftwidth = 4;
     tabstop = 4;
     softtabstop = 4;

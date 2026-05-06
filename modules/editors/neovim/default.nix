@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  self,
+  lib,
+  inputs,
+  ...
+}:
 {
   flake-file.inputs = {
     nixvim = {
@@ -14,10 +19,11 @@
     checks.enable = true;
   };
 
+  flake.modules.nixvim.default.imports = lib.singleton self.modules.nixvim.minimal;
+
   perSystem =
     {
       self',
-      lib,
       system,
       ...
     }:
@@ -27,6 +33,13 @@
           inherit system;
           modules = [
             self.modules.nixvim.default
+            (self.lib.system system)
+          ];
+        };
+        nixvim-minimal = inputs.nixvim.lib.evalNixvim {
+          inherit system;
+          modules = [
+            self.modules.nixvim.minimal
             (self.lib.system system)
           ];
         };

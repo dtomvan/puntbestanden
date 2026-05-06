@@ -1,5 +1,5 @@
 {
-  flake.modules.nixvim.default = {
+  flake.modules.nixvim.minimal = {
     luaLoader.enable = true;
     plugins.lz-n.enable = true;
 

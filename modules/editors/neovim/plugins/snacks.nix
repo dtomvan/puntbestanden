@@ -1,5 +1,5 @@
 {
-  flake.modules.nixvim.default.plugins.snacks = {
+  flake.modules.nixvim.minimal.plugins.snacks = {
     enable = true;
     settings = {
       bigfile.enabled = true;

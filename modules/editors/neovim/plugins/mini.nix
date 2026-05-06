@@ -1,5 +1,5 @@
 {
-  flake.modules.nixvim.default.plugins.mini = {
+  flake.modules.nixvim.minimal.plugins.mini = {
     enable = true;
     modules = {
       ai = { };

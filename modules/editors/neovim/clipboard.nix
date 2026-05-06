@@ -1,5 +1,5 @@
 {
-  flake.modules.nixvim.default.clipboard = {
+  flake.modules.nixvim.minimal.clipboard = {
     register = "unnamedplus";
     providers.wl-copy.enable = true;
   };
