@@ -57,12 +57,12 @@ in
       maybeUserConfig = builtins.tryEval (
         mapAttrs (_n: keys: {
           openssh.authorizedKeys = { inherit keys; };
-        }) keysPerHost.${config.networking.hostName}
+        }) keysPerHost.${config.networking.hostName} or { }
       );
     in
     {
       services.openssh.enable = true;
       programs.ssh = { inherit knownHosts; };
-      users.users = mkIf maybeUserConfig.success maybeUserConfig.value;
+      users.users = mkIf (maybeUserConfig.success && maybeUserConfig.value != null) maybeUserConfig.value;
     };
 }
