@@ -6,5 +6,6 @@ include "feather.kdl"
 include "input.kdl"
 include "layout.kdl"
 include "misc.kdl"
+include "noctalia.kdl"
 
 include "dms/colors.kdl"

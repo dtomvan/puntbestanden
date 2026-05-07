@@ -149,6 +149,17 @@ in
         };
       };
 
+      programs.${if config ? programs.noctalia-shell then "noctalia-shell" else null} = {
+        settings.colorSchemes.predefinedScheme = "Catppuccin";
+      };
+
+      xdg.cacheFile."noctalia/wallpapers.json" = {
+        source = pkgs.writers.writeJSON "wallpapers.json" {
+          defaultWallpaper = wallpaper;
+        };
+        force = true;
+      };
+
       catppuccin = catppuccin // {
         sources.foot = options.catppuccin.sources.default.foot.overrideAttrs (
           _final: prev: {

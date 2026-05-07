@@ -42,6 +42,7 @@
         imports = with self.modules.nixos; [
           disko
           profiles-workstation
+          profiles-noctalia
           themes-catppuccin
 
           guest
@@ -131,6 +132,7 @@
         imports = with self.modules.homeManager; [
           profiles-graphical
           profiles-workstation
+          profiles-noctalia
           themes-catppuccin
           profiles-plasma
 
