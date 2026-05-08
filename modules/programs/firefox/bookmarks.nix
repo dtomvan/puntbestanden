@@ -34,6 +34,10 @@
             url = "https://repology.org/maintainer/18gatenmaker6%40gmail.com";
           }
           {
+            name = "Nixpkgs security tracker";
+            url = "https://tracker.security.nixos.org/";
+          }
+          {
             name = "Nix package versions";
             url = "https://lazamar.co.uk/nix-versions/";
           }
