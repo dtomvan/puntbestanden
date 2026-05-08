@@ -10,7 +10,6 @@
       makeSimpleNetwork =
         {
           ssid,
-          user ? "tomvd",
           uuid,
           interface ? host.wirelessInterface or null,
           ...
@@ -19,7 +18,6 @@
           connection = {
             id = ssid;
             interface-name = interface;
-            permissions = "user:${user}:;";
             type = "wifi";
             inherit uuid;
           };
@@ -38,10 +36,7 @@
           wifi-security = {
             auth-alg = "open";
             key-mgmt = "wpa-psk";
-            leap-password-flags = "1";
-            psk = "\${psk_${ssid}}";
-            psk-flags = "1";
-            wep-key-flags = "1";
+            psk = "$psk_${ssid}";
           };
         };
     in
