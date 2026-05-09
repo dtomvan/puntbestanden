@@ -14,8 +14,7 @@ let
   communityModules =
     (flake-parts-lib.mkFlake { inherit inputs; } {
       # community tree requires flake-file
-      imports = [
-        (import lib/_import-tree.nix lib ./community)
+      imports = (import lib/_import-tree.nix lib ./community) ++ [
         inputs.flake-parts.flakeModules.modules
         inputs.flake-file.flakeModules.default
       ];
