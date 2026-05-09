@@ -66,7 +66,7 @@
                 --screenshots \
                 --timestr="%I:%M:%S %p" \
                 --datestr="%A, %d-%m-%Y" \
-                --font='JetBrainsMono Nerd Font' \
+                --font='AporeticSansM Nerd Font' \
                 --font-size=20 \
                 --effect-blur=10x3 \
                 --fade-in=1
