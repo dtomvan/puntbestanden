@@ -54,7 +54,6 @@
           steam
 
           # broken?
-          # services-localsend-rs
           services-pinchflat
           services-syncthing
 

@@ -71,10 +71,6 @@
       url = "github:dtomvan/lazy-apps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    localsend-rs = {
-      url = "github:dtomvan/localsend-rust-impl";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-facts = {
       url = "github:crertel/nix-facts";
       inputs.nixpkgs.follows = "nixpkgs";

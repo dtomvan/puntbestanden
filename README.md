@@ -56,13 +56,3 @@ store a couple of times. it is a cool party trick though.
 NEW: you can do this in YOUR repo too, with your own target config!
 
 Just run `nix flake init -t github:dtomvan/templates#autounattend` `:)`
-## For myself: How to bootstrap `localsend-rs` inside of the flake
-
-- Have one of the private keys corresponding to a pubkey listed in `.sops.yaml`
-  in `~/.config/sops/age/keys.txt`.
-- Enter the devshell (or nix-shell -p sops nh)
-- `nix flake lock --extra-access-tokens "$(sops decrypt secrets/localsend-rs.secret | awk '{print $3}')"`
-- `nh os switch`
-
-Afterwards, through the nixos module, the secret will get loaded into
-`nix.conf` and you can `nix flake update` for example without any manual setup
