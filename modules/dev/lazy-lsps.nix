@@ -7,30 +7,28 @@
     {
       packages.lazyLsps = pkgs.symlinkJoin {
         name = "lazy-language-servers";
-        paths =
-          with pkgs;
-          map lazy-app.override [
-            { pkg = bash-language-server; }
-            {
-              pkg = clang-tools;
-              exe = "clangd";
-            }
-            { pkg = cmake-language-server; }
-            { pkg = dockerfile-language-server; }
-            { pkg = emmet-language-server; }
-            { pkg = kotlin-language-server; }
-            {
-              pkg = pyright;
-              exe = "pyright-langserver";
-            }
-            { pkg = ruff; }
-            { pkg = rust-analyzer; }
-            { pkg = rustfmt; }
-            { pkg = svelte-language-server; }
-            { pkg = taplo; }
-            { pkg = terraform-ls; }
-            { pkg = yaml-language-server; }
-          ];
+        paths = map pkgs.lazy-app.override [
+          { pkg = pkgs.bash-language-server; }
+          {
+            pkg = pkgs.clang-tools;
+            exe = "clangd";
+          }
+          { pkg = pkgs.cmake-language-server; }
+          { pkg = pkgs.dockerfile-language-server; }
+          { pkg = pkgs.emmet-language-server; }
+          { pkg = pkgs.kotlin-language-server; }
+          {
+            pkg = pkgs.pyright;
+            exe = "pyright-langserver";
+          }
+          { pkg = pkgs.ruff; }
+          { pkg = pkgs.rust-analyzer; }
+          { pkg = pkgs.rustfmt; }
+          { pkg = pkgs.svelte-language-server; }
+          { pkg = pkgs.taplo; }
+          { pkg = pkgs.terraform-ls; }
+          { pkg = pkgs.yaml-language-server; }
+        ];
       };
     };
 }

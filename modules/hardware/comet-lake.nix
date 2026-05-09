@@ -7,15 +7,18 @@
 
       hardware.graphics = {
         enable = true;
+        # TODO: remove when steam becomes 64-bit
         enable32Bit = true;
-        extraPackages = with pkgs; [
-          intel-compute-runtime
-          intel-media-driver
-          vpl-gpu-rt
-        ];
+        extraPackages = builtins.attrValues {
+          inherit (pkgs)
+            intel-compute-runtime
+            intel-media-driver
+            vpl-gpu-rt
+            ;
+        };
 
-        extraPackages32 = with pkgs; [
-          driversi686Linux.intel-media-driver
+        extraPackages32 = [
+          pkgs.driversi686Linux.intel-media-driver
         ];
       };
     };

@@ -1,9 +1,13 @@
 { lib, ... }:
+let
+  inherit (lib) mkOption;
+  inherit (lib.types) attrs listOf;
+in
 {
-  options.flake.actions-setup = lib.mkOption {
+  options.flake.actions-setup = mkOption {
     description = "The common set of actions that need to be run before Nix-related stuff can happen in CI";
     default = [ ];
-    type = with lib.types; listOf attrs;
+    type = listOf attrs;
   };
 
   config.flake.actions-setup = [

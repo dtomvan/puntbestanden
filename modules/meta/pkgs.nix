@@ -4,14 +4,18 @@
   lib,
   ...
 }:
+let
+  inherit (lib) mkOption;
+  inherit (lib.types) listOf attrsOf raw;
+in
 {
   options = {
-    pkgs-overlays = lib.mkOption {
-      type = with lib.types; listOf raw;
+    pkgs-overlays = mkOption {
+      type = listOf raw;
       default = [ ];
     };
-    pkgs-config = lib.mkOption {
-      type = with lib.types; attrsOf raw;
+    pkgs-config = mkOption {
+      type = attrsOf raw;
       default = { };
     };
   };

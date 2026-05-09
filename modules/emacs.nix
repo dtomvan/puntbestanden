@@ -18,43 +18,41 @@
           # loosely keep this in sync with whatever is in the config. {,M}ELPA exists if
           # it is missing something
           basePackages =
-            with p;
-            [
-              beframe
-              catppuccin-theme
-              consult
-              consult-denote
-              corfu
-              denote
-              denote-markdown
-              eat
-              elfeed
-              elfeed-org
-              envrc
-              evil
-              evil-collection
-              evil-commentary
-              evil-org
-              evil-surround
-              goto-chg
-              magit
-              marginalia
-              markdown-mode
-              nix-mode
-              orderless
-              org
-              ox-typst
-              tree-sitter-langs
-              typst-ts-mode
-              ultra-scroll
-              undo-tree
-              vc-jj
-              vertico
-            ]
-            ++ (with pkgs; [
-              # used for cloning various packages if needed
-              git
-            ])
+            builtins.attrValues {
+              inherit (p)
+                beframe
+                catppuccin-theme
+                consult
+                consult-denote
+                corfu
+                denote
+                denote-markdown
+                eat
+                elfeed
+                elfeed-org
+                envrc
+                evil
+                evil-collection
+                evil-commentary
+                evil-org
+                evil-surround
+                goto-chg
+                magit
+                marginalia
+                markdown-mode
+                nix-mode
+                orderless
+                org
+                ox-typst
+                tree-sitter-langs
+                typst-ts-mode
+                ultra-scroll
+                undo-tree
+                vc-jj
+                vertico
+                ;
+            }
+            ++ lib.singleton pkgs.git
             # TASK(20260204-235041): add more langs
             ++ lib.map (l: pkgs.tree-sitter-grammars."tree-sitter-${l}") [
               "elisp"

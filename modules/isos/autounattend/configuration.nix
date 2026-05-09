@@ -28,19 +28,23 @@ in
       ...
     }:
     {
-      imports = with self.modules.nixos; [
-        profiles-base
-        profiles-plasma-minimal
+      imports =
+        builtins.attrValues {
+          inherit (self.modules.nixos)
+            profiles-base
+            profiles-plasma-minimal
 
-        # allows me to remote in people's PC for quick tech support
-        networking-tailscale
+            # allows me to remote in people's PC for quick tech support
+            networking-tailscale
+            ;
+        }
+        ++ [
+          inputs.home-manager.nixosModules.default
+          inputs.disko.nixosModules.default
 
-        inputs.home-manager.nixosModules.default
-        inputs.disko.nixosModules.default
-        ../../community/autounattend/_disko.nix
-
-        ../../hardware/_generated/autounattend.nix
-      ];
+          ../../community/autounattend/_disko.nix
+          ../../hardware/_generated/autounattend.nix
+        ];
 
       programs.nh.flake = lib.mkForce "/etc/nixos/";
 
@@ -48,13 +52,15 @@ in
 
       networking = { inherit hostName; };
 
-      environment.systemPackages = with pkgs; [
-        gh
-        git
-        # does not include optional deps like ffmpeg, imagemagick, saves ~500MiB
-        # closure size
-        yazi-unwrapped
-      ];
+      environment.systemPackages = builtins.attrValues {
+        inherit (pkgs)
+          gh
+          git
+          # does not include optional deps like ffmpeg, imagemagick, saves ~500MiB
+          # closure size
+          yazi-unwrapped
+          ;
+      };
 
       services.getty = {
         helpLine = lib.strings.trim ''

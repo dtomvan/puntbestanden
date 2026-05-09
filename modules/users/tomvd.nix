@@ -35,8 +35,10 @@
     timeZone = "Europe/Amsterdam";
   };
 
-  flake.modules.homeManager.users-tomvd.imports = with self.modules.homeManager; [
-    profiles-base
-    basic-cli
-  ];
+  flake.modules.homeManager.users-tomvd.imports = builtins.attrValues {
+    inherit (self.modules.homeManager)
+      profiles-base
+      basic-cli
+      ;
+  };
 }

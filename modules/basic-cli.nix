@@ -3,10 +3,12 @@
   flake.modules.homeManager.basic-cli =
     { pkgs, config, ... }:
     {
-      imports = with self.modules.homeManager; [
-        git
-        jujutsu
-      ];
+      imports = builtins.attrValues {
+        inherit (self.modules.homeManager)
+          git
+          jujutsu
+          ;
+      };
 
       home.shell.enableShellIntegration = true;
 
@@ -94,9 +96,15 @@
 
       home.packages =
         let
+          inherit (pkgs)
+            writeShellApplication
+            coreutils
+            mktemp
+            gum
+            ;
           evalExpr =
             name: expr:
-            pkgs.writeShellApplication {
+            writeShellApplication {
               inherit name;
               excludeShellChecks = [ "SC2016" ];
               text = ''
@@ -105,7 +113,7 @@
             };
         in
         [
-          (pkgs.writeShellApplication {
+          (writeShellApplication {
             name = "jj-sync";
             text = ''
               jj git fetch
@@ -116,7 +124,7 @@
             '';
             runtimeInputs = lib.singleton config.programs.jujutsu.package;
           })
-          (pkgs.writeShellApplication {
+          (writeShellApplication {
             name = "jj-remote";
             runtimeInputs = lib.singleton config.programs.jujutsu.package;
             text = ''
@@ -125,14 +133,14 @@
               jj git remote add "$username" "https://github.com/$username/$reponame"
             '';
           })
-          (pkgs.writeShellApplication {
+          (writeShellApplication {
             name = "jj-fetch";
             runtimeInputs = lib.singleton config.programs.jujutsu.package;
             text = ''
               jj git fetch --remote "$1" --branch "$2"
             '';
           })
-          (pkgs.writeShellApplication {
+          (writeShellApplication {
             name = "jj-track";
             runtimeInputs = lib.singleton config.programs.jujutsu.package;
             text = ''
@@ -141,9 +149,9 @@
           })
           (evalExpr "nix-source" ''$(printf 'with import <nixpkgs> {}; lib.concatLines [(%s.src.url or "") (%s.meta.homepage or "")]' "$@" "$@")'')
           (evalExpr "nix-maintainers" ''$(printf 'with import <nixpkgs> {}; lib.concatLines (lib.map (m: "@''${m.github}") (%s.meta.maintainers or []))' "$@")'')
-          (pkgs.writeShellApplication {
+          (writeShellApplication {
             name = "big-command";
-            runtimeInputs = with pkgs; [
+            runtimeInputs = [
               coreutils
               mktemp
               gum
@@ -164,11 +172,15 @@
               exit "$code"
             '';
           })
-          pkgs.eza
-          pkgs.glab
-          pkgs.forgejo-cli
-          pkgs.neovim
-        ];
+        ]
+        ++ builtins.attrValues {
+          inherit (pkgs)
+            eza
+            glab
+            forgejo-cli
+            neovim
+            ;
+        };
     };
 
   # dim the $SHLVL to the left of the default nixos prompt when SHLVL>1

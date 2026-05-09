@@ -27,27 +27,29 @@
     nixos.hosts-feather =
       { config, lib, ... }:
       {
-        imports = with self.modules.nixos; [
-          disko
-          profiles-workstation
-          profiles-dank
+        imports = builtins.attrValues {
+          inherit (self.modules.nixos)
+            disko
+            profiles-workstation
+            profiles-dank
 
-          themes-catppuccin
+            themes-catppuccin
 
-          hardware-comet-lake
-          hardware-elan-tp
-          # hardware-fprint
+            hardware-comet-lake
+            hardware-elan-tp
+            # hardware-fprint
 
-          steam
-          gaming-free
-          services-syncthing
-          virt-kvm
+            steam
+            gaming-free
+            services-syncthing
+            virt-kvm
 
-          nix-distributed-builds
-          users-remote-build
-          virt-nixos-containers
-          virt-nat
-        ];
+            nix-distributed-builds
+            users-remote-build
+            virt-nixos-containers
+            virt-nat
+            ;
+        };
 
         # remove this when reinstalling
         fileSystems."/boot".device =
@@ -61,6 +63,7 @@
         ];
 
         boot.kernelModules = lib.singleton "acpi_call";
+        boot.extraModulePackages = lib.singleton config.boot.kernelPackages.acpi_call;
 
         programs.gaming-free = {
           enable = true;
@@ -70,8 +73,6 @@
         virtualisation.libvirtd.onBoot = "ignore";
         systemd.services.podman.wantedBy = lib.mkForce [ ];
 
-        boot.extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
-
         hardware.bluetooth.enable = true;
 
         environment.stub-ld.enable = false;
@@ -80,21 +81,22 @@
       };
 
     homeManager."tomvd@feather" =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
-        imports = with self.modules.homeManager; [
-          themes-catppuccin
-          profiles-dank
-          profiles-graphical
-          profiles-plasma
-          profiles-workstation
+        imports = builtins.attrValues {
+          inherit (self.modules.homeManager)
+            themes-catppuccin
+            profiles-dank
+            profiles-graphical
+            profiles-plasma
+            profiles-workstation
 
-          firefox-ubo-only
-        ];
+            firefox-ubo-only
+            ;
+        };
 
-        programs.firefox.profiles.default.extensions.packages = [
-          pkgs.nur.repos.rycee.firefox-addons.onetab
-        ];
+        programs.firefox.profiles.default.extensions.packages =
+          lib.singleton pkgs.nur.repos.rycee.firefox-addons.onetab;
 
         programs.plasma.configFile.kwinrc.Xwayland.Scale = 1.5;
 

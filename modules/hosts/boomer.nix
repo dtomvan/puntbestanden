@@ -39,31 +39,33 @@
     nixos.hosts-boomer =
       { pkgs, lib, ... }:
       {
-        imports = with self.modules.nixos; [
-          disko
-          profiles-workstation
-          profiles-noctalia
-          themes-catppuccin
+        imports = builtins.attrValues {
+          inherit (self.modules.nixos)
+            disko
+            profiles-workstation
+            profiles-noctalia
+            themes-catppuccin
 
-          guest
+            guest
 
-          hardware-nvidia
-          hardware-ssd
+            hardware-nvidia
+            hardware-ssd
 
-          gaming-free
-          steam
+            gaming-free
+            steam
 
-          # broken?
-          services-pinchflat
-          services-syncthing
+            # broken?
+            services-pinchflat
+            services-syncthing
 
-          virt-kvm
-          virt-nat
-          virt-incus
+            virt-kvm
+            virt-nat
+            virt-incus
 
-          nix-distributed-builds
-          users-remote-build
-        ];
+            nix-distributed-builds
+            users-remote-build
+            ;
+        };
 
         programs.gaming-free = {
           enable = true;
@@ -89,23 +91,28 @@
         # <boomer patches from the shared disko config />
 
         environment.systemPackages =
-          with pkgs;
-          [
-            (prismlauncher.override {
-              jdks = [
-                jdk8
-                jdk17
-                jdk21
-                jdk25
-              ];
-            })
-          ]
-          ++ lib.map (pkg: lazy-app.override { inherit pkg; }) [
-            # rarely used
-            gimp
-            localsend
-            zotero
-          ];
+          lib.singleton (
+            pkgs.prismlauncher.override {
+              jdks = builtins.attrValues {
+                inherit (pkgs)
+                  jdk8
+                  jdk17
+                  jdk21
+                  jdk25
+                  ;
+              };
+            }
+          )
+          ++ lib.map (pkg: pkgs.lazy-app.override { inherit pkg; }) (
+            builtins.attrValues {
+              inherit (pkgs)
+                # rarely used
+                gimp
+                localsend
+                zotero
+                ;
+            }
+          );
 
         services.flatpak.packages = [
           "org.inkscape.Inkscape"
@@ -127,22 +134,26 @@
     homeManager."tomvd@boomer" =
       { pkgs, ... }:
       {
-        imports = with self.modules.homeManager; [
-          profiles-graphical
-          profiles-workstation
-          profiles-noctalia
-          themes-catppuccin
-          profiles-plasma
+        imports = builtins.attrValues {
+          inherit (self.modules.homeManager)
+            profiles-graphical
+            profiles-workstation
+            profiles-noctalia
+            themes-catppuccin
+            profiles-plasma
 
-          firefox-ubo-only
-          mpd
-          typst
-        ];
+            firefox-ubo-only
+            mpd
+            typst
+            ;
+        };
 
-        programs.firefox.profiles.default.extensions.packages = with pkgs.nur.repos.dtomvan; [
-          zotero-connector
-          violentmonkey
-        ];
+        programs.firefox.profiles.default.extensions.packages = builtins.attrValues {
+          inherit (pkgs.nur.repos.dtomvan)
+            zotero-connector
+            violentmonkey
+            ;
+        };
 
         home.stateVersion = "24.05";
       };

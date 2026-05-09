@@ -18,12 +18,14 @@ in
     in
     {
       fonts = {
-        packages = with pkgs; [
-          inter
-          liberation_ttf
-          monoFontPackage
-          noto-fonts-color-emoji
-        ];
+        packages = builtins.attrValues {
+          inherit (pkgs)
+            inter
+            liberation_ttf
+            monoFontPackage
+            noto-fonts-color-emoji
+            ;
+        };
 
         fontconfig = {
           useEmbeddedBitmaps = true;

@@ -26,16 +26,13 @@
   flake.modules.homeManager.lisp =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [
-        clojure
-        clojure-lsp
-        fennel-ls
-        luaPackages.fennel
-      ];
+      home.packages = builtins.attrValues {
+        inherit (pkgs)
+          clojure
+          clojure-lsp
+          fennel-ls
+          ;
+        inherit (pkgs.luaPackages) fennel;
+      };
     };
-
-  text.gitignore = ''
-    /.clj-kondo
-    /.lsp
-  '';
 }

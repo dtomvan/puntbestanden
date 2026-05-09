@@ -33,106 +33,118 @@
           require("config.lazy")
         '';
 
-        extraPackages = with pkgs; [
-          tree-sitter
-          # LazyVim
-          lua-language-server
-          stylua
-          # Telescope
-          ripgrep
-        ];
+        extraPackages = builtins.attrValues {
+          inherit (pkgs)
+            tree-sitter
+            # LazyVim
+            lua-language-server
+            stylua
+            # Telescope
+            ripgrep
+            ;
+        };
 
-        plugins = with pkgs.vimPlugins; [
-          lazy-nvim
-        ];
+        plugins = [ pkgs.vimPlugins.lazy-nvim ];
       };
 
       xdg.configFile."nvim/lua/config/lazy.lua".text =
         let
-          plugins = with pkgs.vimPlugins; [
-            # LazyVim
-            LazyVim
-            blink-cmp
-            bufferline-nvim
-            cmp-buffer
-            cmp-nvim-lsp
-            cmp-path
-            cmp_luasnip
-            conform-nvim
-            dashboard-nvim
-            dressing-nvim
-            flash-nvim
-            friendly-snippets
-            gitsigns-nvim
-            grug-far-nvim
-            indent-blankline-nvim
-            lazydev-nvim
-            lualine-nvim
-            mini-icons
-            neo-tree-nvim
-            neoconf-nvim
-            neodev-nvim
-            noice-nvim
-            nui-nvim
-            nvim-cmp
-            nvim-lint
-            nvim-lspconfig
-            nvim-notify
-            nvim-spectre
-            # TODO: nvim-treesitter tries to create a parser dir relative to
-            # itself, which would be immutable, so Lazy has to download
-            # nvim-treesitter here.
-            # nvim-treesitter
-            # nvim-treesitter-context
-            # nvim-treesitter-textobjects
-            nvim-ts-autotag
-            nvim-ts-context-commentstring
-            nvim-web-devicons
-            persistence-nvim
-            plenary-nvim
-            snacks-nvim
-            telescope-fzf-native-nvim
-            telescope-nvim
-            todo-comments-nvim
-            tokyonight-nvim
-            trouble-nvim
-            ts-comments-nvim
-            vim-illuminate
-            vim-startuptime
-            which-key-nvim
-            {
-              name = "LuaSnip";
-              path = luasnip;
+          inherit (pkgs.vimPlugins)
+            catppuccin-nvim
+            luasnip
+            mini-nvim
+            ;
+
+          plugins =
+            builtins.attrValues {
+              inherit (pkgs.vimPlugins)
+                # LazyVim
+                LazyVim
+                blink-cmp
+                bufferline-nvim
+                cmp-buffer
+                cmp-nvim-lsp
+                cmp-path
+                cmp_luasnip
+                conform-nvim
+                dashboard-nvim
+                dressing-nvim
+                flash-nvim
+                friendly-snippets
+                gitsigns-nvim
+                grug-far-nvim
+                indent-blankline-nvim
+                lazydev-nvim
+                lualine-nvim
+                mini-icons
+                neo-tree-nvim
+                neoconf-nvim
+                neodev-nvim
+                noice-nvim
+                nui-nvim
+                nvim-cmp
+                nvim-lint
+                nvim-lspconfig
+                nvim-notify
+                nvim-spectre
+                # TODO: nvim-treesitter tries to create a parser dir relative to
+                # itself, which would be immutable, so Lazy has to download
+                # nvim-treesitter here.
+                # nvim-treesitter
+                # nvim-treesitter-context
+                # nvim-treesitter-textobjects
+                nvim-ts-autotag
+                nvim-ts-context-commentstring
+                nvim-web-devicons
+                persistence-nvim
+                plenary-nvim
+                snacks-nvim
+                telescope-fzf-native-nvim
+                telescope-nvim
+                todo-comments-nvim
+                tokyonight-nvim
+                trouble-nvim
+                ts-comments-nvim
+                vim-illuminate
+                vim-startuptime
+                which-key-nvim
+                ;
             }
-            {
-              name = "catppuccin";
-              path = catppuccin-nvim;
-            }
-            {
-              name = "mini.ai";
-              path = mini-nvim;
-            }
-            {
-              name = "mini.bufremove";
-              path = mini-nvim;
-            }
-            {
-              name = "mini.comment";
-              path = mini-nvim;
-            }
-            {
-              name = "mini.indentscope";
-              path = mini-nvim;
-            }
-            {
-              name = "mini.pairs";
-              path = mini-nvim;
-            }
-            {
-              name = "mini.surround";
-              path = mini-nvim;
-            }
-          ];
+            ++ [
+              {
+                name = "LuaSnip";
+                path = luasnip;
+              }
+              {
+                name = "catppuccin";
+                path = catppuccin-nvim;
+              }
+              {
+                name = "mini.ai";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.bufremove";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.comment";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.indentscope";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.pairs";
+                path = mini-nvim;
+              }
+              {
+                name = "mini.surround";
+                path = mini-nvim;
+              }
+            ];
+
           mkEntryFromDrv =
             drv:
             if lib.isDerivation drv then
@@ -142,6 +154,7 @@
               }
             else
               drv;
+
           lazyPath = pkgs.linkFarm "lazy-plugins" (map mkEntryFromDrv plugins);
         in
         ''

@@ -1,8 +1,23 @@
-{ self, ... }:
+{ self, lib, ... }:
+let
+  inherit (lib)
+    concatLines
+    mkDefault
+    mkEnableOption
+    mkOption
+    optional
+    optionals
+    ;
+  inherit (lib.types)
+    listOf
+    package
+    str
+    ;
+in
 {
   # define a bash script which actually does the thing...
   perSystem =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     {
       packages.disk-usage-analyzer = pkgs.callPackage (
         {
@@ -54,7 +69,7 @@
             }
 
             buckets+=(
-              ${lib.concatLines defaultBuckets}
+              ${concatLines defaultBuckets}
             )
 
             if [ $# -gt 0 ] && [ "$1" == --help ]; then
@@ -108,63 +123,58 @@
 
   # make it configurable with a nixos module
   flake.modules.nixos.disk-usage-analyzer =
-    {
-      self',
-      lib,
-      config,
-      ...
-    }:
+    { self', config, ... }:
     let
       cfg = config.programs.disk-usage-analyzer;
       finalPackage = cfg.package.override {
         inherit (cfg.settings) defaultBuckets;
       };
       detectedBuckets =
-        lib.optionals config.programs.steam.enable [ "~/.steam/steam" ]
-        ++ lib.optionals config.boot.enableContainers [ "/var/lib/nixos-containers" ]
-        ++ lib.optionals config.programs.firefox.enable [ "~/.mozilla/firefox" ]
-        ++ lib.optionals config.services.flatpak.enable [
+        optionals config.programs.steam.enable [ "~/.steam/steam" ]
+        ++ optionals config.boot.enableContainers [ "/var/lib/nixos-containers" ]
+        ++ optionals config.programs.firefox.enable [ "~/.mozilla/firefox" ]
+        ++ optionals config.services.flatpak.enable [
           "~/.var"
           "/var/lib/flatpak"
         ]
-        ++ lib.optionals config.services.pinchflat.enable [ "/var/lib/pinchflat" ]
-        ++ lib.optionals config.virtualisation.docker.enable [ "/var/lib/docker" ]
-        ++ lib.optionals config.virtualisation.libvirtd.enable [ "/var/lib/libvirt" ]
-        ++ lib.optionals config.virtualisation.podman.enable [
+        ++ optionals config.services.pinchflat.enable [ "/var/lib/pinchflat" ]
+        ++ optionals config.virtualisation.docker.enable [ "/var/lib/docker" ]
+        ++ optionals config.virtualisation.libvirtd.enable [ "/var/lib/libvirt" ]
+        ++ optionals config.virtualisation.podman.enable [
           "~/.local/share/containers"
           "/var/lib/containers"
         ]
-        ++ lib.optionals config.virtualisation.waydroid.enable [
+        ++ optionals config.virtualisation.waydroid.enable [
           "/var/lib/waydroid"
           "~/.local/share/waydroid"
         ];
     in
     {
       options.programs.disk-usage-analyzer = {
-        enable = lib.mkEnableOption "disk usage analyzer CLI";
-        package = lib.mkOption {
+        enable = mkEnableOption "disk usage analyzer CLI";
+        package = mkOption {
           description = "the `disk-usage-analyzer' package to use";
-          type = lib.types.package;
+          type = package;
           default = self'.packages.disk-usage-analyzer;
         };
-        finalPackage = lib.mkOption {
-          type = lib.types.package;
+        finalPackage = mkOption {
+          type = package;
           visible = false;
           readOnly = true;
           description = "Resulting customized `disk-usage-analyzer' package";
         };
 
         settings = {
-          defaultBuckets = lib.mkOption {
+          defaultBuckets = mkOption {
             description = "list of (bash-escaped) paths to bucket in the analyzer, escape yourself if needed";
-            type = with lib.types; listOf str;
+            type = listOf str;
             default = [ ];
             example = [
               "$HOME/.cache"
               "/var/lib/libvirt"
             ];
           };
-          detectBuckets = lib.mkEnableOption "automatically detecting which buckets might be relevant given the rest of the system config";
+          detectBuckets = mkEnableOption "automatically detecting which buckets might be relevant given the rest of the system config";
         };
       };
 
@@ -181,22 +191,20 @@
             "~/Pictures"
             "~/Videos"
           ]
-          ++ lib.optionals cfg.settings.detectBuckets detectedBuckets;
+          ++ optionals cfg.settings.detectBuckets detectedBuckets;
         };
-        environment.systemPackages = lib.optional cfg.enable finalPackage;
+        environment.systemPackages = optional cfg.enable finalPackage;
       };
     };
 
   # enable this for all graphical systems as it won't change the system closure much
-  flake.modules.nixos.profiles-graphical =
-    { lib, ... }:
-    {
-      imports = [ self.modules.nixos.disk-usage-analyzer ];
-      programs.disk-usage-analyzer = {
-        enable = lib.mkDefault true;
-        settings.detectBuckets = lib.mkDefault true;
-      };
+  flake.modules.nixos.profiles-graphical = {
+    imports = [ self.modules.nixos.disk-usage-analyzer ];
+    programs.disk-usage-analyzer = {
+      enable = mkDefault true;
+      settings.detectBuckets = mkDefault true;
     };
+  };
 
   # set some more for boomer
   flake.modules.nixos.hosts-boomer.programs.disk-usage-analyzer.settings.defaultBuckets = [

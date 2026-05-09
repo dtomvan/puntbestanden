@@ -7,40 +7,54 @@
 #   you'd want to use the user on with host-specific settings.
 # Then, when used with NixOS, you should
 let
+  inherit (lib)
+    mapAttrs'
+    mkDefault
+    mkIf
+    mkOption
+    nameValuePair
+    ;
+  inherit (lib.types)
+    attrsOf
+    nullOr
+    str
+    submodule
+    ;
+
   userEntry.options = {
-    fullName = lib.mkOption {
+    fullName = mkOption {
       description = "Full user name (email)";
-      type = lib.types.str;
+      type = str;
     };
 
-    email = lib.mkOption {
+    email = mkOption {
       description = "Email for git/gpg/etc.";
-      type = lib.types.str;
+      type = str;
     };
 
-    gpgPubKey = lib.mkOption {
+    gpgPubKey = mkOption {
       description = "GPG public key fingerprint";
       default = null;
-      type = with lib.types; nullOr str;
+      type = nullOr str;
     };
 
-    locale = lib.mkOption {
+    locale = mkOption {
       description = "Default display language";
       default = null;
-      type = with lib.types; nullOr str;
+      type = nullOr str;
     };
 
-    timeZone = lib.mkOption {
+    timeZone = mkOption {
       description = "NixOS timezone";
       default = null;
-      type = with lib.types; nullOr str;
+      type = nullOr str;
     };
   };
 in
 {
-  options.users = lib.mkOption {
+  options.users = mkOption {
     description = "Defines users for home-manager/nixos";
-    type = with lib.types; attrsOf (submodule userEntry);
+    type = attrsOf (submodule userEntry);
     default = { };
   };
 
@@ -53,7 +67,7 @@ in
           user = config.users.${username} or null;
         in
         {
-          programs.git = lib.mkIf (user != null) {
+          programs.git = mkIf (user != null) {
             signing = {
               format = if user.gpgPubKey != null then "openpgp" else null;
               key = user.gpgPubKey or null;
@@ -73,18 +87,18 @@ in
           user = config.users.${username} or null;
         in
         {
-          programs.jujutsu.settings.user = lib.mkIf (user != null) {
+          programs.jujutsu.settings.user = mkIf (user != null) {
             inherit (user) email;
             name = user.fullName;
           };
         };
 
-      nixos = lib.mapAttrs' (
+      nixos = mapAttrs' (
         n: v:
-        lib.nameValuePair "users-${n}" {
+        nameValuePair "users-${n}" {
           users.users.${n}.isNormalUser = true;
-          time.timeZone = lib.mkIf (v.timeZone != null) (lib.mkDefault v.timeZone);
-          i18n.defaultLocale = lib.mkIf (v.locale != null) (lib.mkDefault v.locale);
+          time.timeZone = mkIf (v.timeZone != null) (mkDefault v.timeZone);
+          i18n.defaultLocale = mkIf (v.locale != null) (mkDefault v.locale);
         }
       ) config.users;
     };

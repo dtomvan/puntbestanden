@@ -61,9 +61,7 @@ toplevel@{ self, lib, ... }:
       };
     in
     {
-      imports = with self.modules.nixos; [
-        sops
-      ];
+      imports = [ self.modules.nixos.sops ];
 
       sops.secrets.syncthing = {
         mode = "0400";

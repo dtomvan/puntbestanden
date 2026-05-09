@@ -3,10 +3,15 @@
   perSystem =
     { pkgs, ... }:
     {
-      checks.actionlint =
-        pkgs.runCommandLocal "actionlint-check"
+      checks.actionlint = pkgs.callPackage (
+        {
+          runCommand,
+          actionlint,
+          shellcheck,
+        }:
+        runCommand "actionlint-check"
           {
-            nativeBuildInputs = with pkgs; [
+            nativeBuildInputs = [
               actionlint
               shellcheck
             ];
@@ -18,6 +23,7 @@
               ${../../.github/workflows}/*
 
             touch $out
-          '';
+          ''
+      ) { };
     };
 }

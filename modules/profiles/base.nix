@@ -11,25 +11,29 @@
     nixos.profiles-base =
       { pkgs, ... }:
       {
-        imports = with self.modules.nixos; [
-          inputs.srvos.nixosModules.mixins-terminfo
+        imports = builtins.attrValues {
+          inherit (inputs.srvos.nixosModules)
+            mixins-terminfo
+            ;
 
-          nix-common
+          inherit (self.modules.nixos)
+            nix-common
 
-          boot-systemd-boot
-          users-root
-          users-tomvd
+            boot-systemd-boot
+            users-root
+            users-tomvd
 
-          services-ssh
+            services-ssh
 
-          sops
+            sops
 
-          programs-comma
+            programs-comma
 
-          networking-wifi-passwords
+            networking-wifi-passwords
 
-          undollar
-        ];
+            undollar
+            ;
+        };
 
         programs.gnupg.agent = {
           enable = true;
@@ -38,27 +42,29 @@
 
         programs.less.enable = true;
 
-        environment.systemPackages = with pkgs; [
-          # keep-sorted start
-          bat
-          btop
-          dust
-          eza
-          fastfetchMinimal
-          fd
-          file
-          glow
-          gron
-          jq
-          just
-          neovim
-          nixfmt
-          rink
-          ripgrep
-          skim
-          tealdeer
-          # keep-sorted end
-        ];
+        environment.systemPackages = builtins.attrValues {
+          inherit (pkgs)
+            # keep-sorted start
+            bat
+            btop
+            dust
+            eza
+            fastfetchMinimal
+            fd
+            file
+            glow
+            gron
+            jq
+            just
+            neovim
+            nixfmt
+            rink
+            ripgrep
+            skim
+            tealdeer
+            # keep-sorted end
+            ;
+        };
       };
 
     homeManager.profiles-base =
@@ -68,27 +74,28 @@
         pkgs,
         ...
       }:
+      let
+        inherit (lib) mkEnableOption;
+      in
       {
-        options = {
-          home.os = {
-            isGraphical = lib.mkEnableOption "features that work on x11/wayland desktops";
-            isPlasma = lib.mkEnableOption "features that work with plasma";
-          };
+        options.home.os = {
+          isGraphical = mkEnableOption "features that work on x11/wayland desktops";
+          isPlasma = mkEnableOption "features that work with plasma";
         };
 
-        config = {
-          home.packages = with pkgs; [
-            # keep-sorted start
+        config.home.packages = builtins.attrValues {
+          # keep-sorted start
+          inherit (pkgs)
             npins
             ripdrag
-            self'.packages.music-dlp
             stow
             treefmt
             typst
             yazi
             yt-dlp
-            # keep-sorted end
-          ];
+            ;
+          inherit (self'.packages) music-dlp;
+          # keep-sorted end
         };
       };
   };

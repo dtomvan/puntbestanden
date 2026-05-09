@@ -82,10 +82,11 @@ in
           "polkit.service"
           "getty@tty1.service"
         ];
-        path = [ "/run/current-system/sw/" ];
-        script =
-          with pkgs;
-          # bash
+        path = [
+          "/run/current-system/sw/"
+          pkgs.systemd
+        ];
+        script = # bash
           ''
             set -euxo pipefail
 
@@ -124,7 +125,7 @@ in
             echo '--------------------------------------------------------------------------------'
 
             sleep 3
-            ${systemd}/bin/systemctl poweroff
+            systemctl poweroff
           '';
         environment = config.nix.envVars // {
           inherit (config.environment.sessionVariables) NIX_PATH;

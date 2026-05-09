@@ -32,10 +32,12 @@
           '');
       };
 
-      home.packages = with pkgs; [
-        mpc
-        mpd
-      ];
+      home.packages = builtins.attrValues {
+        inherit (pkgs)
+          mpc
+          mpd
+          ;
+      };
 
       services.mpd-mpris.enable = lib.mkIf isGraphical true;
       programs.ncmpcpp.enable = lib.mkIf isGraphical true;

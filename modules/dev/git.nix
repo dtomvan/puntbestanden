@@ -1,62 +1,43 @@
 {
-  flake.modules.homeManager.git =
-    {
-      pkgs,
-      ...
-    }:
-    {
-      programs.difftastic.git.enable = true;
+  flake.modules.homeManager.git = {
+    programs.difftastic.git.enable = true;
 
-      programs.git = {
-        enable = true;
+    programs.git = {
+      enable = true;
 
-        signing.signByDefault = false;
+      signing.signByDefault = false;
 
-        settings = {
-          advice.detachedHead = false;
+      settings = {
+        advice.detachedHead = false;
 
-          core = {
-            untrackedCache = true;
-          };
-
-          pull.rebase = true;
-
-          diff = {
-            tool = "nvimdiff";
-            colorMoved = "plain";
-          };
-
-          fetch = {
-            prune = true;
-            pruneTags = true;
-            all = true;
-          };
-
-          rebase = {
-            autoSquash = true;
-            autoStash = true;
-            updateRefs = true;
-          };
+        core = {
+          untrackedCache = true;
         };
-      };
 
-      programs.gh = {
-        enable = true;
-        extensions = with pkgs; [
-          gh-dash
-          gh-i
-          gh-s
-        ];
-        gitCredentialHelper.enable = true;
-      };
+        pull.rebase = true;
 
-      programs.gh-dash = {
-        enable = true;
-        settings = {
-          defaults = {
-            preview.width = 80;
-          };
+        diff = {
+          tool = "nvimdiff";
+          colorMoved = "plain";
+        };
+
+        fetch = {
+          prune = true;
+          pruneTags = true;
+          all = true;
+        };
+
+        rebase = {
+          autoSquash = true;
+          autoStash = true;
+          updateRefs = true;
         };
       };
     };
+
+    programs.gh = {
+      enable = true;
+      gitCredentialHelper.enable = true;
+    };
+  };
 }

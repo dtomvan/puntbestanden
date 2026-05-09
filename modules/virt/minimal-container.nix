@@ -1,32 +1,21 @@
-{
-  self,
-  inputs,
-  ...
-}:
-let
-  system = "x86_64-linux";
-in
+{ inputs, ... }:
 {
   flake.nixosConfigurations.minimal-container = inputs.nixpkgs.lib.nixosSystem {
-    modules = with self.modules.nixos; [
+    modules = [
       (
         { pkgs, ... }:
         {
-          nix = {
-            settings = {
-              experimental-features = [
-                "nix-command"
-                "flakes"
-              ];
-            };
-          };
+          nix.settings.experimental-features = [
+            "nix-command"
+            "flakes"
+          ];
 
           nixpkgs.flake.setFlakeRegistry = true;
 
-          environment.systemPackages = with pkgs; [ git ];
+          environment.systemPackages = [ pkgs.git ];
 
           boot.isContainer = true;
-          nixpkgs.hostPlatform = system;
+          nixpkgs.hostPlatform = "x86_64-linux";
           system.stateVersion = "25.11";
         }
       )

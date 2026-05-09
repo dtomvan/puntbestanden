@@ -3,9 +3,11 @@
     { pkgs, ... }:
     {
       virtualisation.podman.enable = true;
-      environment.systemPackages = with pkgs; [
-        distrobox
-        podman-compose
-      ];
+      environment.systemPackages = builtins.attrValues {
+        inherit (pkgs)
+          distrobox
+          podman-compose
+          ;
+      };
     };
 }

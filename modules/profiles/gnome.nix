@@ -8,20 +8,22 @@
         displayManager.gdm.enable = lib.mkDefault true;
       };
 
-      services.udev.packages = with pkgs; [ gnome-settings-daemon ];
+      services.udev.packages = [ pkgs.gnome-settings-daemon ];
 
       # Bloat
-      environment.gnome.excludePackages = with pkgs; [
-        atomix
-        cheese
-        epiphany
-        geary
-        gnome-characters
-        gnome-console
-        gnome-music
-        hitori
-        iagno
-        tali
-      ];
+      environment.gnome.excludePackages = builtins.attrValues {
+        inherit (pkgs)
+          atomix
+          cheese
+          epiphany
+          geary
+          gnome-characters
+          gnome-console
+          gnome-music
+          hitori
+          iagno
+          tali
+          ;
+      };
     };
 }

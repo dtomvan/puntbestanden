@@ -1,9 +1,6 @@
 {
   flake.modules.homeManager.firefox-ubo-only =
-    {
-      pkgs,
-      ...
-    }:
+    { pkgs, ... }:
     let
       privacySettings = {
         # clear all history, cookies, site data every time
@@ -24,13 +21,11 @@
           id = 1;
           bookmarks.force = true;
           bookmarks.settings = [ ];
-          extensions = with pkgs.nur.repos.rycee.firefox-addons; {
-            packages = [
-              ublock-origin
-            ];
+          extensions = [
+            pkgs.nur.repos.rycee.firefox-addons.ublock-origin
+          ];
 
-            force = true;
-          };
+          force = true;
 
           settings = privacySettings;
         };

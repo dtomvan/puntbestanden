@@ -1,15 +1,20 @@
+{ lib, ... }:
+let
+  inherit (lib) mkOption makeOverridable optionalString;
+  inherit (lib.strings) escapeShellArgs;
+  inherit (lib.types) listOf str;
+in
 {
   flake.modules.nixos.profiles-graphical =
     {
       self',
-      lib,
       config,
       ...
     }:
     {
-      options.services.flatpak.packages = lib.mkOption {
+      options.services.flatpak.packages = mkOption {
         description = "list of pre-installed flatpak apps";
-        type = with lib.types; listOf str;
+        type = listOf str;
         default = [
           "com.github.tchx84.Flatseal"
           "io.github.kolunmi.Bazaar"
@@ -35,12 +40,11 @@
   perSystem =
     {
       pkgs,
-      lib,
       self',
       ...
     }:
     {
-      legacyPackages.activatable-flatpak = lib.makeOverridable (
+      legacyPackages.activatable-flatpak = makeOverridable (
         {
           packages ? [ ],
         }:
@@ -53,8 +57,8 @@
               # if not: flatpak is already installed and thus it has to be under /run/current-system
               flatpak="''${PROFILE:-/run/current-system/sw}/bin/flatpak"
               "$flatpak" remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-              ${lib.optionalString (packages != [ ]) ''
-                "$flatpak" install --noninteractive --or-update ${lib.strings.escapeShellArgs packages}
+              ${optionalString (packages != [ ]) ''
+                "$flatpak" install --noninteractive --or-update ${escapeShellArgs packages}
               ''}
               "$flatpak" update --noninteractive
             '')

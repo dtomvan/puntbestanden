@@ -25,11 +25,13 @@
     perSystem =
       { pkgs, ... }:
       {
-        devshells.default.packages = with pkgs; [
-          age
-          sops
-          ssh-to-age
-        ];
+        devshells.default.packages = builtins.attrValues {
+          inherit (pkgs)
+            age
+            sops
+            ssh-to-age
+            ;
+        };
       };
   };
 }

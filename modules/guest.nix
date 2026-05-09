@@ -52,18 +52,19 @@ in
       home-manager.backupFileExtension = "bak";
 
       home-manager.users.guest = {
-        imports =
-          (with self.modules.homeManager; [
+        imports = builtins.attrValues {
+          inherit (self.modules.homeManager)
             firefox-ubo-only
             terminals
             profiles-base
-          ])
-          ++ (with communityModules.homeManager; [
+            ;
+          inherit (communityModules.homeManager)
             lazyvim
             firefox
             git
             jujutsu
-          ]);
+            ;
+        };
 
         programs.firefox = {
           enable = true;

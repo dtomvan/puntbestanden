@@ -11,8 +11,22 @@
   inputs,
   ...
 }:
+let
+  inherit (builtins) mapAttrs;
+  inherit (lib)
+    concatMapAttrsStringSep
+    getExe
+    literalExpression
+    mkBefore
+    mkDefault
+    mkEnableOption
+    mkOption
+    optionalString
+    ;
+  inherit (lib.types) attrsOf pathInStore;
+in
 {
-  flake-file.inputs.lazy-apps = lib.mkDefault {
+  flake-file.inputs.lazy-apps = mkDefault {
     url = "sourcehut:~rycee/lazy-apps";
     inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -20,23 +34,22 @@
   flake.modules.nixos.nano =
     {
       pkgs,
-      lib,
       config,
       ...
     }:
     let
       backupdir = "/var/lib/nano/backupdir";
-      mkApp = pkg: { inherit pkg; } |> pkgs.lazy-app.override |> lib.getExe;
+      mkApp = pkg: { inherit pkg; } |> pkgs.lazy-app.override |> getExe;
 
       cfg = config.programs.nano;
     in
     {
       options.programs.nano.formatters = {
-        enable = lib.mkEnableOption "formatting files directly in nano";
-        filetypes = lib.mkOption {
+        enable = mkEnableOption "formatting files directly in nano";
+        filetypes = mkOption {
           description = "A map from filetype to path to program used to format";
-          type = with lib.types; attrsOf pathInStore;
-          default = lib.mapAttrs (_n: mkApp) {
+          type = attrsOf pathInStore;
+          default = mapAttrs (_n: mkApp) {
             go = pkgs.gofumpt;
             json = pkgs.jq;
             nix = pkgs.nixfmt;
@@ -44,7 +57,7 @@
             rust = pkgs.rustfmt;
             sh = pkgs.shfmt;
           };
-          example = lib.literalExpression ''
+          example = literalExpression ''
             {
               java = pkgs.astyle;
               nix = pkgs.nixfmt;
@@ -67,7 +80,7 @@
         };
 
         # so many cool nano features which are just off by default...
-        programs.nano.nanorc = lib.mkBefore (
+        programs.nano.nanorc = mkBefore (
           ''
             # backup/history
             set backup
@@ -107,8 +120,8 @@
             set colonparsing
 
           ''
-          + lib.optionalString cfg.formatters.enable (
-            lib.concatMapAttrsStringSep "\n" (
+          + optionalString cfg.formatters.enable (
+            concatMapAttrsStringSep "\n" (
               lang: fmt: "extendsyntax ${lang} formatter \"${fmt}\""
             ) cfg.formatters.filetypes
           )

@@ -10,13 +10,15 @@
       # modules/community/autounattend/installer.nix...
       packages.nixos-self-install = pkgs.writeShellApplication {
         name = "nixos-self-install";
-        runtimeInputs = with pkgs; [
-          disko
-          gum
-          jq
-          nixos-install
-          util-linux
-        ];
+        runtimeInputs = builtins.attrValues {
+          inherit (pkgs)
+            disko
+            gum
+            jq
+            nixos-install
+            util-linux
+            ;
+        };
         text = ''
           declare -a blk
           mapfile -t blk < <(lsblk -J | jq -r '.blockdevices | map("/dev/\(.name)")[]')

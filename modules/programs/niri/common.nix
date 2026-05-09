@@ -5,14 +5,14 @@
       {
         programs.niri.enable = true;
 
-        environment.systemPackages = with pkgs; [ xwayland-satellite ];
+        environment.systemPackages = [ pkgs.xwayland-satellite ];
 
         xdg.portal = {
           enable = true;
-          extraPortals = with pkgs; [
-            kdePackages.xdg-desktop-portal-kde
-            xdg-desktop-portal-gtk
-          ];
+          extraPortals = builtins.attrValues {
+            inherit (pkgs) xdg-desktop-portal-gtk;
+            inherit (pkgs.kdePackages) xdg-desktop-portal-kde;
+          };
           config.common.default = "kde";
           config.niri."org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
         };

@@ -1,8 +1,12 @@
 { lib, config, ... }:
+let
+  inherit (lib) mkOption;
+  inherit (lib.types) attrsOf listOf str;
+in
 {
-  options.nixConfig = lib.mkOption {
+  options.nixConfig = mkOption {
     description = "caches to be passed to the flake's nixConfig and to nixos' nix.settings";
-    type = with lib.types; attrsOf (listOf str);
+    type = attrsOf (listOf str);
     default = { };
   };
 

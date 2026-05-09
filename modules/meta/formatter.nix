@@ -23,14 +23,16 @@
         };
       };
 
-      devshells.default.packages = with pkgs; [
-        # keep-sorted start
-        deadnix
-        keep-sorted
-        nixfmt-tree
-        shfmt
-        statix
-        # keep-sorted end
-      ];
+      devshells.default.packages = builtins.attrValues {
+        inherit (pkgs)
+          # keep-sorted start
+          deadnix
+          keep-sorted
+          nixfmt-tree
+          shfmt
+          statix
+          # keep-sorted end
+          ;
+      };
     };
 }

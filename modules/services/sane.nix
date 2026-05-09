@@ -4,11 +4,13 @@
     {
       hardware.sane = {
         enable = true;
-        extraBackends = with pkgs; [
-          hplip
-          ipp-usb
-          sane-airscan
-        ];
+        extraBackends = builtins.attrValues {
+          inherit (pkgs)
+            hplip
+            ipp-usb
+            sane-airscan
+            ;
+        };
       };
     };
 }

@@ -6,18 +6,16 @@
       ...
     }:
     {
-      home.packages =
-        with pkgs;
-        lib.map pkgs.lazy-app.override [
-          {
-            pkg = go;
-            exe = "gofmt";
-          }
-          { pkg = ruff; }
-          { pkg = rustfmt; }
-          { pkg = shfmt; }
-          { pkg = taplo; }
-        ];
+      home.packages = lib.map pkgs.lazy-app.override [
+        {
+          pkg = pkgs.go;
+          exe = "gofmt";
+        }
+        { pkg = pkgs.ruff; }
+        { pkg = pkgs.rustfmt; }
+        { pkg = pkgs.shfmt; }
+        { pkg = pkgs.taplo; }
+      ];
 
       programs.mergiraf = {
         enable = true;

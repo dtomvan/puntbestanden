@@ -10,7 +10,7 @@
             inherit (firefox) pname version;
             src = firefox;
 
-            nativeBuildInputs = with pkgs; [ desktop-file-utils ];
+            nativeBuildInputs = [ pkgs.desktop-file-utils ];
 
             installPhase = ''
               mkdir -p $out/share/applications

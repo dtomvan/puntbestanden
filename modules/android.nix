@@ -20,10 +20,12 @@
           # reccommended by odin4
           SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", MODE="0666", GROUP="plugdev"
         '';
-      environment.systemPackages = with pkgs; [
-        android-tools
-        heimdall
-      ];
-      services.udev.packages = with pkgs; [ heimdall ];
+      environment.systemPackages = builtins.attrValues {
+        inherit (pkgs)
+          android-tools
+          heimdall
+          ;
+      };
+      services.udev.packages = [ pkgs.heimdall ];
     };
 }

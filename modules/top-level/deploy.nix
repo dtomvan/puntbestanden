@@ -6,30 +6,38 @@
   config,
   ...
 }:
+let
+  inherit (builtins) listToAttrs;
+  inherit (lib)
+    filterAttrs
+    isInt
+    mapAttrs'
+    nameValuePair
+    optionalString
+    ;
+in
 {
-  flake-file.inputs = {
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "";
-    };
+  flake-file.inputs.deploy-rs = {
+    url = "github:serokell/deploy-rs";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.flake-compat.follows = "";
   };
 
   flake.deploy.nodes =
     config.hosts
-    |> lib.filterAttrs (_n: v: v.hasConfig)
-    |> lib.mapAttrs' (
+    |> filterAttrs (_n: v: v.hasConfig)
+    |> mapAttrs' (
       _n: v:
-      lib.nameValuePair v.hostName (
+      nameValuePair v.hostName (
         withSystem v.system (
           { system, self', ... }:
           let
-            deployLib = inputs.deploy-rs.lib.${system};
+            deployLib = inputs.deploy-rs.${system};
             hostConfig = self.nixosConfigurations.${v.hostName};
-            homeProfiles = lib.listToAttrs (
+            homeProfiles = listToAttrs (
               map (
                 user:
-                lib.nameValuePair "home-${user}" {
+                nameValuePair "home-${user}" {
                   inherit user;
                   path = deployLib.activate.home-manager self.homeConfigurations."${user}@${v.hostName}";
                 }
@@ -72,9 +80,9 @@
       # TASK(20260204-233523): this really bloats up a simple `nix flake
       # check`. disabling it for now, despite how eager the docs are to not
       # have me do that
-      # checks = inputs.deploy-rs.lib.${system}.deployChecks self.deploy;
+      # checks = inputs.deploy-rs.${system}.deployChecks self.deploy;
 
-      devshells.default.packages = with pkgs; [ deploy-rs ];
+      devshells.default.packages = [ pkgs.deploy-rs ];
 
       # TASK(20260204-234938): this is ugly, but yeah the API of deploy-rs
       # doesn't seem really flexible to me. How to fix?
@@ -96,35 +104,38 @@
           profileName,
           priority ? null,
         }:
-        assert priority == null || lib.isInt priority;
-        pkgs.writeShellApplication {
-          name = "activate";
-          runtimeInputs = with pkgs; [
-            nix
-            jq
-          ];
-          runtimeEnv = {
-            NIX_CONFIG = "extra-experimental-features = nix-command flakes";
-          };
-          text = ''
-            if nix profile list --json | jq -e '.elements.${profileName}' >/dev/null; then
-              echo removing existing ${profileName} install...
-              nix profile remove ${profileName}
-            fi
+        assert priority == null || isInt priority;
+        pkgs.callPackage (
+          {
+            writeShellApplication,
+            nix,
+            jq,
+          }:
+          writeShellApplication {
+            name = "activate";
+            runtimeInputs = [
+              nix
+              jq
+            ];
+            runtimeEnv = {
+              NIX_CONFIG = "extra-experimental-features = nix-command flakes";
+            };
+            text = ''
+              if nix profile list --json | jq -e '.elements.${profileName}' >/dev/null; then
+                echo removing existing ${profileName} install...
+                nix profile remove ${profileName}
+              fi
 
-            echo installing new ${profileName} install...
-            declare -a extraArgs=()
-            ${lib.optionalString (priority != null) ''
-              extraArgs+=(--priority "${toString priority}")
-            ''}
-            nix profile add "${profile}" "''${extraArgs[@]}"
+              echo installing new ${profileName} install...
+              declare -a extraArgs=()
+              ${optionalString (priority != null) ''
+                extraArgs+=(--priority "${toString priority}")
+              ''}
+              nix profile add "${profile}" "''${extraArgs[@]}"
 
-            echo "done"
-          '';
-        };
+              echo "done"
+            '';
+          }
+        ) { };
     };
-
-  text.gitignore = ''
-    /.deploy-gc
-  '';
 }

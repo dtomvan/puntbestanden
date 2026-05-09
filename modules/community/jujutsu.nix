@@ -4,7 +4,7 @@
   flake.modules.homeManager.jujutsu =
     { pkgs, ... }:
     {
-      home.packages = with pkgs; [ watchman ];
+      home.packages = [ pkgs.watchman ];
 
       programs.jujutsu.settings = {
         fsmonitor.watchman.register-snapshot-trigger = lib.mkDefault true;

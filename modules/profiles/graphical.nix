@@ -1,45 +1,46 @@
-{ self, ... }:
+{ self, lib, ... }:
 let
-  inherit (self.modules) homeManager;
+  inherit (lib) mkDefault mkIf;
 in
 {
   flake.modules = {
     nixos.profiles-graphical =
       { pkgs, ... }:
       {
-        imports = with self.modules.nixos; [
-          plymouth
-          hardware-sound
-          fonts
-        ];
+        imports = builtins.attrValues {
+          inherit (self.modules.nixos)
+            plymouth
+            hardware-sound
+            fonts
+            ;
+        };
 
         programs.foot = {
           enable = true;
           xdg.serverAutostart = true;
         };
 
-        environment.systemPackages = with pkgs; [
-          alsa-utils
-          pavucontrol
-          wl-clipboard
-        ];
+        environment.systemPackages = builtins.attrValues {
+          inherit (pkgs)
+            alsa-utils
+            pavucontrol
+            wl-clipboard
+            ;
+        };
       };
 
     homeManager.profiles-graphical =
+      { config, pkgs, ... }:
       {
-        config,
-        lib,
-        pkgs,
-        ...
-      }:
-      {
-        imports = with homeManager; [
-          firefox
-          terminals
-        ];
+        imports = builtins.attrValues {
+          inherit (self.modules.homeManager)
+            firefox
+            terminals
+            ;
+        };
 
-        modules.terminals.foot.enable = lib.mkDefault true;
-        home.os.isGraphical = lib.mkDefault true;
+        modules.terminals.foot.enable = mkDefault true;
+        home.os.isGraphical = mkDefault true;
 
         home.pointerCursor = {
           enable = true;
@@ -48,7 +49,7 @@ in
           size = 24;
           gtk.enable = true;
           x11.enable = true;
-          hyprcursor = lib.mkIf config.wayland.windowManager.hyprland.enable {
+          hyprcursor = mkIf config.wayland.windowManager.hyprland.enable {
             enable = true;
             size = 24;
           };

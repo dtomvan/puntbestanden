@@ -43,7 +43,7 @@ in
           "copyparty.service"
           "getty@tty1.service" # needed to display the credentials on login
         ];
-        path = with pkgs; [ phraze ];
+        path = lib.singleton pkgs.phraze;
         script = ''
           rand=`phraze -w4 -lq` # four short words, with a dash. entropy: 60-70 bits, its fineee
 

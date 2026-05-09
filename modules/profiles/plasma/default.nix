@@ -1,6 +1,12 @@
-{ self, inputs, ... }:
+{
+  self,
+  lib,
+  inputs,
+  ...
+}:
 let
   inherit (self.modules) nixos;
+  inherit (lib) mkDefault optionals;
 in
 {
   flake-file.inputs = {
@@ -15,7 +21,6 @@ in
     nixos.profiles-plasma =
       {
         pkgs,
-        lib,
         config,
         ...
       }:
@@ -23,40 +28,40 @@ in
         imports = [ nixos.profiles-plasma-minimal ];
 
         environment.systemPackages =
-          with pkgs.kdePackages;
-          [
-            filelight
-            kdeconnect-kde
-            krdc # remote desktop client, should get negotiated by kdeconnect
-            krfb # VNC share/server
-            pkgs.haruna
-            plasma-browser-integration
-          ]
-          ++ lib.optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];
+          builtins.attrValues {
+            inherit (pkgs.kdePackages)
+              filelight
+              kdeconnect-kde
+              krdc # remote desktop client, should get negotiated by kdeconnect
+              krfb # VNC share/server
+              plasma-browser-integration
+              ;
+
+            inherit (pkgs) haruna;
+          }
+          ++ optionals config.hardware.sane.enable [ pkgs.kdePackages.skanpage ];
       };
 
-    homeManager.profiles-plasma =
-      { lib, ... }:
-      {
-        imports = [
-          inputs.plasma-manager.homeModules.plasma-manager
-        ];
+    homeManager.profiles-plasma = {
+      imports = [
+        inputs.plasma-manager.homeModules.plasma-manager
+      ];
 
-        modules.terminals.alacritty.enable = true;
-        home.os.isPlasma = lib.mkDefault true;
+      modules.terminals.alacritty.enable = true;
+      home.os.isPlasma = mkDefault true;
 
-        programs.plasma = {
-          enable = true;
+      programs.plasma = {
+        enable = true;
 
-          workspace = {
-            theme = lib.mkDefault "default"; # follow catppuccin colorScheme if applicable
-            colorScheme = lib.mkDefault "BreezeDark";
-            cursor = {
-              theme = lib.mkDefault "default";
-              size = lib.mkDefault 24;
-            };
+        workspace = {
+          theme = mkDefault "default"; # follow catppuccin colorScheme if applicable
+          colorScheme = mkDefault "BreezeDark";
+          cursor = {
+            theme = mkDefault "default";
+            size = mkDefault 24;
           };
         };
       };
+    };
   };
 }
