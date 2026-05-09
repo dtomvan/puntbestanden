@@ -29,7 +29,6 @@ Learn more about it (in order of, well, "deepness" or complexity):
   - https://flake.parts/
   - https://flake.parts/options/flake-parts-modules.html
   - https://github.com/mightyiam/dendritic
-  - https://github.com/denful/import-tree/
   - https://github.com/denful/flake-file/
 ## The hostnames
 

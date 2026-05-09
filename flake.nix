@@ -3,7 +3,11 @@
 {
   description = "Home Manager configuration of tomvd";
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = import modules/lib/_import-tree.nix inputs.nixpkgs.lib ./modules;
+    };
 
   nixConfig = {
     extra-experimental-features = [
@@ -67,7 +71,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    import-tree.url = "github:denful/import-tree";
     lazy-apps = {
       url = "github:dtomvan/lazy-apps";
       inputs.nixpkgs.follows = "nixpkgs";

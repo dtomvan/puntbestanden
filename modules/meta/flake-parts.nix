@@ -7,14 +7,17 @@
 
   flake-file.inputs = {
     flake-parts.url = "github:hercules-ci/flake-parts";
-    import-tree.url = "github:denful/import-tree";
     flake-file.url = "github:denful/flake-file";
   };
 
-  flake-file.outputs = ''
-    inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; }
-    (inputs.import-tree ./modules)
-  '';
+  flake-file.outputs =
+    # nix
+    ''
+      inputs:
+      inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+        imports = import modules/lib/_import-tree.nix inputs.nixpkgs.lib ./modules;
+      }
+    '';
 
   text.readme.parts.dendritic = ''
     # Dendritic
@@ -32,7 +35,6 @@
       - https://flake.parts/
       - https://flake.parts/options/flake-parts-modules.html
       - https://github.com/mightyiam/dendritic
-      - https://github.com/denful/import-tree/
       - https://github.com/denful/flake-file/
   '';
 }

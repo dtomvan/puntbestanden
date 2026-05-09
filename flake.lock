@@ -420,36 +420,6 @@
         "type": "github"
       }
     },
-    "import-tree": {
-      "locked": {
-        "lastModified": 1773693634,
-        "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
-        "owner": "denful",
-        "repo": "import-tree",
-        "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "denful",
-        "repo": "import-tree",
-        "type": "github"
-      }
-    },
-    "import-tree_2": {
-      "locked": {
-        "lastModified": 1773693634,
-        "narHash": "sha256-BtZ2dtkBdSUnFPPFc+n0kcMbgaTxzFNPv2iaO326Ffg=",
-        "owner": "vic",
-        "repo": "import-tree",
-        "rev": "c41e7d58045f9057880b0d85e1152d6a4430dbf1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vic",
-        "repo": "import-tree",
-        "type": "github"
-      }
-    },
     "lazy-apps": {
       "inputs": {
         "nixpkgs": [
@@ -818,7 +788,6 @@
         "flake-fmt": "flake-fmt",
         "flake-parts": "flake-parts_2",
         "home-manager": "home-manager",
-        "import-tree": "import-tree",
         "lazy-apps": "lazy-apps",
         "localsend-rs": "localsend-rs",
         "nix-facts": "nix-facts",
@@ -990,7 +959,6 @@
     "tasks": {
       "inputs": {
         "flake-parts": "flake-parts_5",
-        "import-tree": "import-tree_2",
         "nix-github-actions": "nix-github-actions",
         "nixpkgs": [
           "nixpkgs"
@@ -999,11 +967,11 @@
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
-        "lastModified": 1776906493,
-        "narHash": "sha256-3c179eHhAzkOw3028VFS5/yOlAAJFT+C0uPM0qUqadU=",
+        "lastModified": 1778346971,
+        "narHash": "sha256-ocFvOSM4FTpuXCn5rMb45NHGpj+G0P5XtVFW01blVrw=",
         "owner": "dtomvan",
         "repo": "tasks.nvim",
-        "rev": "868b5b72fa0fd1a8211241e5c1849468994a21cc",
+        "rev": "466e1a8d6327bfb4f2c55f259fe249d9db401b68",
         "type": "github"
       },
       "original": {
