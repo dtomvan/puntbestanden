@@ -40,6 +40,12 @@
       programs.bash = {
         enable = true;
 
+        initExtra = # bash
+          ''
+            bind 'set show-all-if-ambiguous on'
+            bind 'tab:menu-complete'
+          '';
+
         shellAliases = {
           yr = "yazi result";
           n-b = "nix-build";
