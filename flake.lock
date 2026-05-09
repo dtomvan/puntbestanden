@@ -605,22 +605,22 @@
     "nixpkgs-patch-10": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-shcydaeguGjMilrsR8lUDtopcZd33y/vlI+4JFS8u7Q=",
+        "narHash": "sha256-oInNMaE9p2NSlR2LiaOp0VI8ePZ2urrcSKdo/MJwifE=",
         "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/compare/nixos-unstable...dtomvan:nixpkgs:dtomvan/push-vpwntxvmyuwy.diff"
+        "url": "https://github.com/dtomvan/nixpkgs/commit/1af0598daff7f663144defe209a776d1b4d178b4.patch"
       },
       "original": {
         "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/compare/nixos-unstable...dtomvan:nixpkgs:dtomvan/push-vpwntxvmyuwy.diff"
+        "url": "https://github.com/dtomvan/nixpkgs/commit/1af0598daff7f663144defe209a776d1b4d178b4.patch"
       }
     },
     "nixpkgs-patched": {
       "locked": {
-        "lastModified": 1777996068,
-        "narHash": "sha256-qjKrkqZh5a3dqw2/aPoo11tJLYgh1iqitkjaKf4NnXE=",
+        "lastModified": 1768758263,
+        "narHash": "sha256-Hxo6+zwJzbhgmD1X0+fGCi622APBE1/xeD9FUlNIz3c=",
         "owner": "dtomvan",
         "repo": "nixpkgs",
-        "rev": "e206715b7679f0943a58b903231c1ab72ff4a22f",
+        "rev": "0d90b7fcaf479cee47a98438ee53b3fa36f501b1",
         "type": "github"
       },
       "original": {
@@ -640,11 +640,11 @@
         "systems": []
       },
       "locked": {
-        "lastModified": 1777996129,
-        "narHash": "sha256-yURS5ObLffIXO+w37/JCWdOODk0BLI25aq6BwGGRH4A=",
+        "lastModified": 1778344942,
+        "narHash": "sha256-MgZ5wTzp/bF0nffkkKsFAIJJ0A9MOE/T9Xg5iElN8TA=",
         "owner": "dtomvan",
         "repo": "nixpkgs-patcher",
-        "rev": "a9b7135d45a48d65b892f6c81bff223b1511bfee",
+        "rev": "820913692f5002c8dd6da331b34da4a0c8b8a5f3",
         "type": "github"
       },
       "original": {
