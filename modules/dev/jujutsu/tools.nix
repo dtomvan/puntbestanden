@@ -2,11 +2,11 @@
   flake.modules.homeManager.jujutsu =
     {
       pkgs,
-      lib,
+      inputs',
       ...
     }:
     {
-      home.packages = lib.map pkgs.lazy-app.override [
+      home.packages = map inputs'.lazy-apps.packages.lazy-app.override [
         {
           pkg = pkgs.go;
           exe = "gofmt";

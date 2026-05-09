@@ -3,11 +3,11 @@
   # if you add/remove anything here, helix will pick it up no problem
   # automatically. Please update the neovim lspconfig block accordingly.
   perSystem =
-    { pkgs, ... }:
+    { inputs', pkgs, ... }:
     {
       packages.lazyLsps = pkgs.symlinkJoin {
         name = "lazy-language-servers";
-        paths = map pkgs.lazy-app.override [
+        paths = map inputs'.lazy-apps.packages.lazy-app.override [
           { pkg = pkgs.bash-language-server; }
           {
             pkg = pkgs.clang-tools;

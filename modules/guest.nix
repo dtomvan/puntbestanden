@@ -77,7 +77,6 @@ in
           };
         };
 
-        nixpkgs.overlays = [ inputs.nur.overlays.default ];
         home.stateVersion = "26.05";
       };
     };

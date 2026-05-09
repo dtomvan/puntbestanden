@@ -60,11 +60,7 @@ in
             allowUnfree = true;
           }
           // config.pkgs-config;
-          overlays = [
-            inputs.nur.overlays.default
-            inputs.lazy-apps.overlays.default
-          ]
-          ++ config.pkgs-overlays;
+          overlays = config.pkgs-overlays;
         };
       };
   };

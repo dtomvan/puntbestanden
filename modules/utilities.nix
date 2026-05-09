@@ -4,6 +4,7 @@
       config,
       pkgs,
       lib,
+      inputs',
       ...
     }:
     let
@@ -63,7 +64,7 @@
               ;
           }
           |> builtins.attrValues
-          |> lib.map (pkg: pkgs.lazy-app.override { inherit pkg; })
+          |> lib.map (pkg: inputs'.lazy-apps.packages.lazy-app.override { inherit pkg; })
         );
     };
 }

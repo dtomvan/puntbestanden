@@ -1,11 +1,11 @@
 {
   flake.modules.homeManager.firefox =
-    { pkgs, ... }:
+    { inputs', ... }:
     {
       programs.firefox.profiles.default = {
         extensions = {
           packages = builtins.attrValues {
-            inherit (pkgs.nur.repos.rycee.firefox-addons)
+            inherit (inputs'.nur.legacyPackages.repos.rycee.firefox-addons)
               dearrow
               enhancer-for-youtube
               keepassxc-browser
@@ -13,7 +13,7 @@
               sponsorblock
               stylus
               ;
-            inherit (pkgs.nur.repos.dtomvan)
+            inherit (inputs'.nur.legacyPackages.repos.dtomvan)
               darkreader
               obsidian-web-clipper
               steam-database
@@ -26,7 +26,7 @@
 
         settings =
           let
-            inherit (pkgs.nur.repos.dtomvan.ublock-origin) addonId;
+            inherit (inputs'.nur.legacyPackages.repos.dtomvan.ublock-origin) addonId;
           in
           {
             "sidebar.main.tools" = "${addonId},history,bookmarks";

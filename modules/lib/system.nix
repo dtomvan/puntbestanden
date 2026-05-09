@@ -1,5 +1,5 @@
 # sets the system for NixOS. takes a system, returns a NixOS module
-{ withSystem, ... }:
+{ withSystem, lib, ... }:
 {
   flake.lib.system =
     system:
@@ -12,7 +12,7 @@
       }:
       {
         _module.args = { inherit self' inputs'; };
-        nixpkgs = { inherit pkgs; };
+        nixpkgs.pkgs = lib.mkForce pkgs;
       }
     ));
 }
