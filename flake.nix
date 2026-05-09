@@ -125,7 +125,6 @@
       url = "github:nix-community/srvos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    systems.url = "github:nix-systems/default";
     tasks = {
       url = "github:dtomvan/tasks.nvim";
       inputs.nixpkgs.follows = "nixpkgs";

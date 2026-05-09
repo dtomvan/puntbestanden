@@ -804,7 +804,6 @@
         "plasma-manager": "plasma-manager",
         "sops": "sops",
         "srvos": "srvos",
-        "systems": "systems_5",
         "tasks": "tasks",
         "treefmt-nix": "treefmt-nix_5"
       }
@@ -941,21 +940,6 @@
         "type": "github"
       }
     },
-    "systems_6": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "tasks": {
       "inputs": {
         "flake-parts": "flake-parts_5",
@@ -963,7 +947,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_6",
+        "systems": "systems_5",
         "treefmt-nix": "treefmt-nix_4"
       },
       "locked": {
