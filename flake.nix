@@ -62,10 +62,6 @@
     };
     files.url = "github:mightyiam/files";
     flake-file.url = "github:denful/flake-file";
-    flake-fmt = {
-      url = "github:Mic92/flake-fmt";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     flake-parts.url = "github:hercules-ci/flake-parts";
     home-manager = {
       url = "github:nix-community/home-manager";

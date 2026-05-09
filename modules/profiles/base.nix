@@ -1,11 +1,6 @@
 { self, inputs, ... }:
 {
   flake-file.inputs = {
-    flake-fmt = {
-      url = "github:Mic92/flake-fmt";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     srvos = {
       url = "github:nix-community/srvos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -69,14 +64,10 @@
     homeManager.profiles-base =
       {
         self',
-        inputs',
         lib,
         pkgs,
         ...
       }:
-      let
-        flake-fmt = inputs'.flake-fmt.packages.default;
-      in
       {
         options = {
           home.os = {
@@ -88,7 +79,6 @@
         config = {
           home.packages = with pkgs; [
             # keep-sorted start
-            flake-fmt
             npins
             ripdrag
             self'.packages.music-dlp
