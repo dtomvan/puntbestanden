@@ -10,11 +10,16 @@
 
       home.shell.enableShellIntegration = true;
 
-      programs.atuin.enable = true;
+      programs.atuin = {
+        enable = true;
+        flags = [ "--disable-up-arrow" ];
+      };
+
       programs.direnv = {
         enable = lib.mkDefault true;
         nix-direnv.enable = true; # caching
       };
+
       programs.zoxide.enable = lib.mkDefault true;
 
       programs.nix-init = {
@@ -32,18 +37,6 @@
 
       programs.bash = {
         enable = true;
-
-        initExtra =
-          # bash
-          ''
-            source "${pkgs.bash-preexec}/share/bash/bash-preexec.sh"
-            bind 'set show-all-if-ambiguous on'
-            bind 'tab:menu-complete'
-
-            if [ -z "$container" ]; then
-              source <(atuin init bash --disable-up-arrow)
-            fi
-          '';
 
         shellAliases = {
           yr = "yazi result";
