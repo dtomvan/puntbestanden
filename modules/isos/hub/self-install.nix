@@ -35,7 +35,7 @@
           disko \
             -m destroy,format,mount \
             --argstr device "$target" \
-            ${../community/autounattend/_disko.nix}
+            ${../../community/autounattend/_disko.nix}
 
           nixos-generate-config \
             --show-hardware-config \

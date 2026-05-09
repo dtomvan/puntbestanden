@@ -16,10 +16,10 @@ let
 in
 {
   flake.nixosConfigurations = {
-      autounattend = cfg;
-      # allows rebuilding the config easier for a newcomer
-      ${hostName} = cfg;
-    };
+    autounattend = cfg;
+    # allows rebuilding the config easier for a newcomer
+    ${hostName} = cfg;
+  };
 
   flake.modules.nixos.autounattend =
     {
@@ -37,9 +37,9 @@ in
 
         inputs.home-manager.nixosModules.default
         inputs.disko.nixosModules.default
-        ../community/autounattend/_disko.nix
+        ../../community/autounattend/_disko.nix
 
-        ../hardware/_generated/autounattend.nix
+        ../../hardware/_generated/autounattend.nix
       ];
 
       programs.nh.flake = lib.mkForce "/etc/nixos/";
