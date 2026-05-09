@@ -121,7 +121,6 @@
         users.mutableUsers = false;
 
         environment.stub-ld.enable = false;
-        networking.firewall.enable = false;
 
         system.stateVersion = "24.05";
       };

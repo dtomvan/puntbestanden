@@ -75,7 +75,6 @@
         hardware.bluetooth.enable = true;
 
         environment.stub-ld.enable = false;
-        networking.firewall.enable = false;
 
         system.stateVersion = "24.11";
       };
