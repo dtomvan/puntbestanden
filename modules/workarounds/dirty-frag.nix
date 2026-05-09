@@ -15,7 +15,7 @@
 
       # ...and also just get rid of these modules since we don't need it
       boot.extraModprobeConfig = lib.concatMapStringsSep "\n" (
-        m: "install ${m} ${lib.getExe' "false" pkgs.coreutils}"
+        m: "install ${m} ${lib.getExe' pkgs.coreutils "false"}"
       ) vulnerableModules;
       boot.blacklistedKernelModules = vulnerableModules;
     };
