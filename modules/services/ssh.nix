@@ -6,7 +6,6 @@ let
     listToAttrs
     mapAttrs
     mapAttrs'
-    mapAttrsToList
     mergeAttrs
     mkIf
     nameValuePair
@@ -43,8 +42,9 @@ let
   # { <username> = [ "key1" "key2" "key3" ]; };
   keysPerHost =
     config.hosts
-    |> filterAttrs (_n: host: host.sshPubkey != null)
-    |> mapAttrsToList (_n: host: host.sshPubkey)
+    |> builtins.attrValues
+    |> builtins.filter (host: host.sshPubkey != null)
+    |> map (host: host.sshPubkey)
     |> explode
     |> collect;
 in
