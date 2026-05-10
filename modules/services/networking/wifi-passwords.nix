@@ -1,8 +1,45 @@
+{ self, lib, ... }:
+let
+  inherit (lib)
+    listToAttrs
+    mkOption
+    mkOptionDefault
+    nameValuePair
+    ;
+  inherit (lib.types) listOf submodule str;
+
+  networkModule.options = {
+    ssid = mkOption {
+      description = "wifi.ssid in nmconnection";
+      type = str;
+    };
+    uuid = mkOption {
+      description = "connection.uuid in nmconnection";
+      type = str;
+    };
+  };
+in
 {
-  flake.modules.nixos.networking-wifi-passwords =
+  options.flake.wifi-networks = mkOption {
+    description = "";
+    type = listOf (submodule networkModule);
+    default = [ ];
+  };
+
+  config.flake.wifi-networks = mkOptionDefault [
+    {
+      ssid = "H369A8D363E";
+      uuid = "edc1c000-5e83-41fb-a64e-b2814a532d9e";
+    }
+    {
+      ssid = "BWA-6A0F06";
+      uuid = "787845e2-1f4a-4f3e-b85b-4a8ba80dceb9";
+    }
+  ];
+
+  config.flake.modules.nixos.networking-wifi-passwords =
     {
       config,
-      lib,
       host ? null,
       ...
     }:
@@ -14,7 +51,7 @@
           interface ? host.wirelessInterface or null,
           ...
         }:
-        lib.nameValuePair ssid {
+        nameValuePair ssid {
           connection = {
             id = ssid;
             interface-name = interface;
@@ -36,34 +73,36 @@
           wifi-security = {
             auth-alg = "open";
             key-mgmt = "wpa-psk";
-            psk = "$psk_${ssid}";
           };
+        };
+
+      makeNmSecret =
+        { ssid, ... }:
+        {
+          matchId = ssid;
+          # wifi{,-security} -> 802-11-wireless{,-security} resp. for some reason
+          matchType = "802-11-wireless";
+          matchSetting = "802-11-wireless-security";
+          key = "psk";
+          file = config.sops.secrets.${ssid}.path;
+        };
+
+      makeSopsSecret =
+        { ssid, ... }:
+        nameValuePair ssid {
+          mode = "0400";
+          sopsFile = ../../../secrets/wifi.yaml;
+          format = "yaml";
+          owner = "root";
+          group = "root";
         };
     in
     {
-      sops.secrets.wifi-passwords = {
-        mode = "0440";
-        sopsFile = ../../../secrets/wifi-passwords.secret;
-        format = "binary";
-        owner = "root";
-        group = "root";
-      };
+      sops.secrets = self.wifi-networks |> map makeSopsSecret |> listToAttrs;
 
       networking.networkmanager.ensureProfiles = {
-        environmentFiles = lib.singleton config.sops.secrets.wifi-passwords.path;
-        profiles =
-          [
-            {
-              ssid = "H369A8D363E";
-              uuid = "edc1c000-5e83-41fb-a64e-b2814a532d9e";
-            }
-            {
-              ssid = "BWA-6A0F06";
-              uuid = "787845e2-1f4a-4f3e-b85b-4a8ba80dceb9";
-            }
-          ]
-          |> map makeSimpleNetwork
-          |> lib.listToAttrs;
+        secrets.entries = self.wifi-networks |> map makeNmSecret;
+        profiles = self.wifi-networks |> map makeSimpleNetwork |> listToAttrs;
       };
     };
 }

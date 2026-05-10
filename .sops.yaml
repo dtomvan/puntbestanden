@@ -7,4 +7,4 @@ creation_rules:
       - age:
           - *boomer
           - *feather
-    path_regex: secrets/[^/]+.secret
+    path_regex: secrets/[^/]+.(secret|yaml)
