@@ -23,6 +23,7 @@
           };
           bracketed = { };
           comment = { };
+          cmdline = { };
           icons = { };
           indentscope = { };
           git = { };
