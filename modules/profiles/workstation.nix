@@ -10,6 +10,8 @@
             profiles-graphical
             profiles-noctalia
 
+            programs-kdeconnect
+
             services-printing
             services-sane
 

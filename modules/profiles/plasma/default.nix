@@ -27,11 +27,12 @@ in
       {
         imports = [ nixos.profiles-plasma-minimal ];
 
+        programs.kdeconnect.enable = mkDefault true;
+
         environment.systemPackages =
           builtins.attrValues {
             inherit (pkgs.kdePackages)
               filelight
-              kdeconnect-kde
               krdc # remote desktop client, should get negotiated by kdeconnect
               krfb # VNC share/server
               plasma-browser-integration
