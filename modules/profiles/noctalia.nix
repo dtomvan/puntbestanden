@@ -28,6 +28,14 @@
       ];
       imports = [ self.modules.nixos.programs-niri-common ];
 
+      services.displayManager = {
+        sddm.enable = lib.mkForce false;
+        sddm.wayland.enable = lib.mkForce false;
+        gdm.enable = lib.mkForce false;
+        plasma-login-manager.enable = lib.mkForce false;
+        dms-greeter.enable = lib.mkForce false;
+      };
+
       programs.regreet = {
         enable = true;
         settings.GTK.application_prefer_dark_theme = true;
