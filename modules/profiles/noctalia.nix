@@ -104,9 +104,14 @@
               right = [
                 {
                   id = "Tray";
+                  colorizeIcons = true;
+                  drawerEnabled = false;
                 }
                 {
                   id = "NotificationHistory";
+                }
+                {
+                  id = "Volume";
                 }
                 {
                   id = "Battery";
