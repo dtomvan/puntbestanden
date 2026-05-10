@@ -31,7 +31,7 @@
           inherit (self.modules.nixos)
             disko
             profiles-workstation
-            profiles-dank
+            profiles-noctalia
 
             themes-catppuccin
 
@@ -86,7 +86,7 @@
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
             themes-catppuccin
-            profiles-dank
+            profiles-noctalia
             profiles-graphical
             profiles-plasma
             profiles-workstation
