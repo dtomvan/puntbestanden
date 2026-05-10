@@ -32,7 +32,7 @@ in
         withSystem v.system (
           { system, self', ... }:
           let
-            deployLib = inputs.deploy-rs.${system};
+            deployLib = inputs.deploy-rs.lib.${system};
             hostConfig = self.nixosConfigurations.${v.hostName};
             homeProfiles = listToAttrs (
               map (

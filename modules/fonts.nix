@@ -23,9 +23,9 @@ in
           inherit (pkgs)
             inter
             liberation_ttf
-            monoFontPackage
             noto-fonts-color-emoji
             ;
+          inherit monoFontPackage;
         };
 
         fontconfig = {
