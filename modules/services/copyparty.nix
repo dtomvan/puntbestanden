@@ -1,7 +1,5 @@
 { inputs, self, ... }:
 let
-  inherit (self.lib) system;
-
   user = "tomvd";
   group = "users";
   port = 80;
@@ -16,15 +14,19 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  pkgs-overlays = [
+    inputs.copyparty.overlays.default
+  ];
+
   flake.modules.nixos.services-copyparty =
     {
       config,
-      inputs',
+      pkgs,
       lib,
       ...
     }:
     let
-      package = inputs'.copyparty.packages.copyparty-unstable.override {
+      package = pkgs.copyparty-unstable.override {
         withFastThumbnails = true;
         withMediaProcessing = false; # uses ffmpeg, which can eat your CPU big time
         # uses mutagen, should be quicker as well, also saves closure size!
@@ -180,7 +182,6 @@ in
               self.modules.nixos.services-copyparty
               self.modules.nixos.users-tomvd
               inputs.sops.nixosModules.sops
-              (system "x86_64-linux") # required so the module can access `inputs'.copyparty.packages`
             ];
             services.openssh.enable = true;
             services.copyparty.accounts = {

@@ -9,13 +9,12 @@ in
 {
   flake.modules.nixos.fonts =
     {
-      inputs',
       pkgs,
       config,
       ...
     }:
     let
-      monoFontPackage = inputs'.nur.legacyPackages.repos.dtomvan.aporetic-patched;
+      monoFontPackage = pkgs.nur.repos.dtomvan.aporetic-patched;
     in
     {
       fonts = {

@@ -58,7 +58,6 @@ in
   flake.modules.homeManager.themes-catppuccin =
     {
       self',
-      inputs',
       pkgs,
       lib,
       config,
@@ -135,7 +134,7 @@ in
       };
 
       programs.firefox.profiles.default.extensions.packages = [
-        inputs'.nur.legacyPackages.repos.rycee.firefox-addons.firefox-color
+        pkgs.nur.repos.rycee.firefox-addons.firefox-color
       ];
 
       programs.${if config ? programs.dms-shell then "dms-shell" else null} = {

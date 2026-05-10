@@ -80,7 +80,7 @@
       };
 
     homeManager."tomvd@feather" =
-      { inputs', lib, ... }:
+      { pkgs, lib, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
@@ -90,7 +90,7 @@
         };
 
         programs.firefox.profiles.default.extensions.packages =
-          lib.singleton inputs'.nur.legacyPackages.repos.rycee.firefox-addons.onetab;
+          lib.singleton pkgs.nur.repos.rycee.firefox-addons.onetab;
 
         programs.plasma.configFile.kwinrc.Xwayland.Scale = 1.5;
 

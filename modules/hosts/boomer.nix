@@ -37,12 +37,7 @@
 
   flake.modules = {
     nixos.hosts-boomer =
-      {
-        inputs',
-        pkgs,
-        lib,
-        ...
-      }:
+      { pkgs, lib, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.nixos)
@@ -107,7 +102,7 @@
               };
             }
           )
-          ++ lib.map (pkg: inputs'.lazy-apps.packages.lazy-app.override { inherit pkg; }) (
+          ++ lib.map (pkg: pkgs.lazy-app.override { inherit pkg; }) (
             builtins.attrValues {
               inherit (pkgs)
                 # rarely used
@@ -136,7 +131,7 @@
       };
 
     homeManager."tomvd@boomer" =
-      { inputs', ... }:
+      { pkgs, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
@@ -149,7 +144,7 @@
         };
 
         programs.firefox.profiles.default.extensions.packages = builtins.attrValues {
-          inherit (inputs'.nur.legacyPackages.repos.dtomvan)
+          inherit (pkgs.nur.repos.dtomvan)
             zotero-connector
             violentmonkey
             ;

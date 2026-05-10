@@ -19,7 +19,7 @@
       };
 
     homeManager.programs-niri-common =
-      { pkgs, inputs', ... }:
+      { pkgs, ... }:
       {
         home.packages = builtins.attrValues {
           inherit (pkgs)
@@ -27,7 +27,7 @@
             brightnessctl
             pipewire
             ;
-          inherit (inputs'.nur.legacyPackages.repos.dtomvan)
+          inherit (pkgs.nur.repos.dtomvan)
             cclip
             fsel
             ;

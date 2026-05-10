@@ -6,7 +6,11 @@
 #   - (optional) sets formatters for specific filetypes, possibly through lazy-apps
 #
 # Enable the formatters with `programs.nano.formatters.enable`
-{ lib, inputs, ... }:
+{
+  lib,
+  inputs,
+  ...
+}:
 let
   inherit (builtins) mapAttrs;
   inherit (lib)
@@ -35,9 +39,7 @@ in
     }:
     let
       backupdir = "/var/lib/nano/backupdir";
-      # no inputs' here because I want it to be portable for everyone
-      mkApp =
-        pkg: { inherit pkg; } |> inputs.lazy-apps.packages.${pkgs.system}.lazy-app.override |> getExe;
+      mkApp = pkg: { inherit pkg; } |> pkgs.lazy-app.override |> getExe;
 
       cfg = config.programs.nano;
     in
@@ -124,6 +126,8 @@ in
             ) cfg.formatters.filetypes
           )
         );
+
+        nixpkgs.overlays = [ inputs.lazy-apps.overlays.default ];
       };
     };
 }
