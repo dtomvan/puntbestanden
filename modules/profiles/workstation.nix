@@ -1,49 +1,59 @@
 { self, ... }:
 {
-  flake.modules.nixos.profiles-workstation =
-    { pkgs, ... }:
-    {
-      imports = builtins.attrValues {
-        inherit (self.modules.nixos)
-          profiles-base
-          profiles-graphical
-          profiles-plasma
+  flake.modules = {
+    nixos.profiles-workstation =
+      { pkgs, ... }:
+      {
+        imports = builtins.attrValues {
+          inherit (self.modules.nixos)
+            profiles-base
+            profiles-graphical
+            profiles-noctalia
 
-          services-printing
-          services-sane
+            services-printing
+            services-sane
 
-          networking-tailscale
-          services-copyparty
-          services-keybase
-          utilities
-          virt-podman
-          ;
+            networking-tailscale
+            services-copyparty
+            services-keybase
+            utilities
+            virt-podman
+            ;
+        };
+
+        modules.utilities.enableLazyApps = true;
+
+        # assumes nix-flatpak is available
+        services.flatpak.packages = [
+          "com.obsproject.Studio"
+        ];
+
+        environment.systemPackages = builtins.attrValues {
+          inherit (pkgs)
+            # keep-sorted start
+            discord
+            forge-sparks
+            keepassxc
+            libreoffice-qt6-fresh
+            nixpkgs-reviewFull
+            obsidian
+            pdfarranger
+            pika-backup
+            python3
+            signal-desktop
+            telegram-desktop
+            thunderbird
+            # keep-sorted end
+            ;
+        };
       };
 
-      modules.utilities.enableLazyApps = true;
-
-      # assumes nix-flatpak is available
-      services.flatpak.packages = [
-        "com.obsproject.Studio"
-      ];
-
-      environment.systemPackages = builtins.attrValues {
-        inherit (pkgs)
-          # keep-sorted start
-          discord
-          forge-sparks
-          keepassxc
-          libreoffice-qt6-fresh
-          nixpkgs-reviewFull
-          obsidian
-          pdfarranger
-          pika-backup
-          python3
-          signal-desktop
-          telegram-desktop
-          thunderbird
-          # keep-sorted end
-          ;
-      };
+    homeManager.profiles-workstation.imports = builtins.attrValues {
+      inherit (self.modules.homeManager)
+        # profiles-base # can't import because profiles-base is already imported flake.modules.homeManager.users-tomvd
+        profiles-graphical
+        profiles-noctalia
+        ;
     };
+  };
 }

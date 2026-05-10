@@ -48,7 +48,6 @@
           inherit (self.modules.nixos)
             disko
             profiles-workstation
-            profiles-noctalia
             themes-catppuccin
 
             guest
@@ -141,13 +140,9 @@
       {
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
-            profiles-graphical
             profiles-workstation
-            profiles-noctalia
             themes-catppuccin
-            profiles-plasma
 
-            firefox-ubo-only
             mpd
             typst
             ;
