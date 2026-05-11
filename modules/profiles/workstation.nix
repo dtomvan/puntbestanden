@@ -50,12 +50,19 @@
         };
       };
 
-    homeManager.profiles-workstation.imports = builtins.attrValues {
-      inherit (self.modules.homeManager)
-        # profiles-base # can't import because profiles-base is already imported flake.modules.homeManager.users-tomvd
-        profiles-graphical
-        profiles-noctalia
-        ;
-    };
+    homeManager.profiles-workstation =
+      { pkgs, ... }:
+      {
+        imports = builtins.attrValues {
+          inherit (self.modules.homeManager)
+            # profiles-base # can't import because profiles-base is already imported flake.modules.homeManager.users-tomvd
+            profiles-graphical
+            profiles-noctalia
+            ;
+        };
+        home.packages = builtins.attrValues {
+          inherit (pkgs.nur.repos.dtomvan) blogtato sshp;
+        };
+      };
   };
 }
