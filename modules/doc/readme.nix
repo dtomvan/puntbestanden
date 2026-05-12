@@ -12,7 +12,6 @@
       "hostnames"
       "autounattend"
       "community_autounattend"
-      "localsend_rs"
     ];
 
     parts.intro =
