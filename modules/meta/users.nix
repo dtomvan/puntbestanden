@@ -8,15 +8,19 @@
 # Then, when used with NixOS, you should
 let
   inherit (lib)
+    literalExpression
     mapAttrs'
     mkDefault
+    mkEnableOption
     mkIf
     mkOption
     nameValuePair
     ;
   inherit (lib.types)
     attrsOf
+    functionTo
     nullOr
+    package
     str
     submodule
     ;
@@ -48,6 +52,18 @@ let
       description = "NixOS timezone";
       default = null;
       type = nullOr str;
+    };
+
+    nixvim = {
+      enable = mkEnableOption "installing nixvim";
+      package = mkOption {
+        description = "package selector for nixvim to install";
+        type = functionTo package |> nullOr;
+        default = null;
+        example = literalExpression ''
+          { self', host, ... }: if host.hostName == "feather" then self'.packages.nixvim-minimal else self'.packages.nixvim
+        '';
+      };
     };
   };
 in

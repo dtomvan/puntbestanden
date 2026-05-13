@@ -22,7 +22,7 @@
   flake.modules.nixvim.default.imports = lib.singleton self.modules.nixvim.minimal;
 
   perSystem =
-    { system, ... }:
+    { pkgs, system, ... }:
     {
       nixvimConfigurations = {
         nixvim = inputs.nixvim.lib.evalNixvim {
@@ -39,6 +39,29 @@
             (self.lib.system system)
           ];
         };
+      };
+
+      packages.nixvim-activate = pkgs.writeShellApplication {
+        name = "nixvim-activate";
+        runtimeInputs = [ pkgs.coreutils ];
+        text = ''
+          profileAttr="${../../..}#deploy.nodes.$(hostname).profiles.nixvim-$(whoami).path"
+
+          activator="$(nix build \
+            --print-out-paths \
+            --no-link \
+            "$profileAttr")"
+
+          PROFILE="$(nix build \
+            --print-out-paths \
+            --no-link \
+            "$profileAttr.base")"
+
+          export PROFILE
+
+          "$activator/bin/deploy-rs-activate" activate
+        '';
+        meta.description = "Activate your Nixvim configuration";
       };
     };
 }
