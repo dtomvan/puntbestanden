@@ -1,6 +1,6 @@
 # deploy: enable deploy-rs.lib.deployChecks? 
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 
 > this really bloats up a simple `nix flake check`. disabling it for now,

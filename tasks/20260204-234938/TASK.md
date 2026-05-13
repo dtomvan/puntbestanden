@@ -1,6 +1,6 @@
 # Deploy-rs: refactor 
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 
 > this is ugly, but yeah the API of deploy-rs doesn't seem really flexible to me. How to fix?

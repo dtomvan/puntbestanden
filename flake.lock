@@ -51,16 +51,15 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1778705291,
+        "lastModified": 1778706786,
         "narHash": "sha256-7G2/T492UmknDlYWDTMTWzU+mduxulSadhpTvNPpBTA=",
         "owner": "dtomvan",
         "repo": "deploy-rs",
-        "rev": "763f3ac4c33e70c1b350d08fd0cfde7463670c6b",
+        "rev": "a408ee4146f13fc52636ea61ccf919171caa99f1",
         "type": "github"
       },
       "original": {
         "owner": "dtomvan",
-        "ref": "refactor",
         "repo": "deploy-rs",
         "type": "github"
       }

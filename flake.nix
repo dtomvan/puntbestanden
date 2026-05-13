@@ -38,7 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
-      url = "github:dtomvan/deploy-rs/refactor";
+      url = "github:dtomvan/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devour-flake = {
