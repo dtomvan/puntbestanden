@@ -38,11 +38,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs = {
-        flake-compat.follows = "";
-        nixpkgs.follows = "nixpkgs";
-      };
+      url = "github:dtomvan/deploy-rs/refactor";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     devour-flake = {
       url = "github:srid/devour-flake";

@@ -22,11 +22,7 @@
   flake.modules.nixvim.default.imports = lib.singleton self.modules.nixvim.minimal;
 
   perSystem =
-    {
-      self',
-      system,
-      ...
-    }:
+    { system, ... }:
     {
       nixvimConfigurations = {
         nixvim = inputs.nixvim.lib.evalNixvim {
@@ -43,18 +39,6 @@
             (self.lib.system system)
           ];
         };
-      };
-
-      packages.activatable-nixvim = self'.legacyPackages.activationPackage {
-        profile = self'.packages.nixvim.overrideAttrs { dontFixup = true; };
-        profileName = "nixvim";
-        priority = 4; # ahead of default priority, so home-manager can also install neovim without both colliding
-      };
-
-      apps.nixvim-activate = {
-        type = "app";
-        meta.description = "Activate your Nixvim configuration";
-        program = lib.getExe' self'.packages.activatable-nixvim "activate";
       };
     };
 }
