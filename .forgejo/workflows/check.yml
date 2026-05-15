@@ -1,0 +1,10 @@
+jobs:
+  nix-flake-check:
+    runs-on: docker://git.toostveen.nl/lix-with-node:2.95.2
+    steps:
+      - uses: actions/checkout@v4
+      - run: nix flake lock
+      - run: nix flake check -L
+'on':
+  pull_request: {}
+  workflow_dispatch: {}
