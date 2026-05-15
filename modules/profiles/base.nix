@@ -21,7 +21,6 @@
 
             boot-systemd-boot
             users-root
-            users-tomvd
 
             services-ssh
 
