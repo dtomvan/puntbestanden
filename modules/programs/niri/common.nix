@@ -1,20 +1,43 @@
 {
   flake.modules = {
     nixos.programs-niri-common =
-      { pkgs, ... }:
+      {
+        pkgs,
+        lib,
+        config,
+        ...
+      }:
       {
         programs.niri.enable = true;
 
-        environment.systemPackages = [ pkgs.xwayland-satellite ];
+        environment.systemPackages = builtins.attrValues {
+          inherit (pkgs)
+            pcmanfm
+            udiskie
+            xwayland-satellite
+            ;
+        };
+
+        services.udisks2.enable = true;
+
+        qt = lib.mkIf (!config.services.desktopManager.plasma6.enable) {
+          enable = true;
+          style = "breeze";
+          platformTheme = "qt5ct";
+        };
 
         xdg.portal = {
           enable = true;
+
           extraPortals = builtins.attrValues {
             inherit (pkgs) xdg-desktop-portal-gtk;
             inherit (pkgs.kdePackages) xdg-desktop-portal-kde;
           };
-          config.common.default = "kde";
-          config.niri."org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
+
+          config = {
+            common.default = "kde";
+            niri."org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
+          };
         };
       };
 
