@@ -28,9 +28,9 @@
   };
 
   users.tomvd = {
-    fullName = "Tom van Dijk";
-    email = "18gatenmaker6@gmail.com";
-    gpgPubKey = "7A984C8207ADBA51";
+    fullName = "Tom Oostveen";
+    email = "tomoostveen.06@gmail.com";
+    gpgPubKey = "EFD11A9B09D8D2C6";
     locale = "en_US.UTF-8";
     timeZone = "Europe/Amsterdam";
 
