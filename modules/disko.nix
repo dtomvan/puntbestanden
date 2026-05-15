@@ -13,7 +13,7 @@
       imports = [
         inputs.disko.nixosModules.disko
         (import ./community/autounattend/_disko.nix {
-          device = host.mainDisk;
+          device = host.mainDisk or throw "disko imported but host.mainDisk not set";
         })
       ];
     };

@@ -89,7 +89,8 @@ let
     };
     mainDisk = mkOption {
       description = "Disk where NixOS is installed to (and Disko manages), must be absolute, by-id.";
-      type = strMatching "^/dev/disk/by-id/.*$";
+      # exception for hetzner bakkies
+      type = strMatching "^/dev/disk/by-id/.*$" |> nullOr;
       example = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
     };
     sshPubkey = mkOption {
