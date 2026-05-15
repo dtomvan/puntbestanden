@@ -76,6 +76,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
     nixpkgs-cdda.url = "github:RossSmyth/nixpkgs/cddaClean";
     nixpkgs-patcher = {

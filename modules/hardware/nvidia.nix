@@ -3,7 +3,7 @@
     {
       config,
       lib,
-      pkgs,
+      inputs',
       host ? null,
       ...
     }:
@@ -31,7 +31,7 @@
       }
       (lib.mkIf isNvidiaPascal {
         # 6.18 is the last longterm that is supported by nvidia 580.
-        boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_18;
+        boot.kernelPackages = lib.mkForce inputs'.nixos-small.legacyPackages.linuxPackages_6_18;
         # LTS until Aug 2028, let's hope I have a new graphics card by then
         hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       })

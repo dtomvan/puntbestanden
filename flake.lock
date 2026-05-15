@@ -51,11 +51,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1778706786,
-        "narHash": "sha256-7G2/T492UmknDlYWDTMTWzU+mduxulSadhpTvNPpBTA=",
+        "lastModified": 1778872289,
+        "narHash": "sha256-DGDuQyYip/7G7k+SuzUwrQlLNeHGNR3SN2Gt88au2Xw=",
         "owner": "dtomvan",
         "repo": "deploy-rs",
-        "rev": "a408ee4146f13fc52636ea61ccf919171caa99f1",
+        "rev": "b454b87f9e884c74ac98546cac6ef6c5279a7115",
         "type": "github"
       },
       "original": {
@@ -466,6 +466,22 @@
         "type": "github"
       }
     },
+    "nixos-small": {
+      "locked": {
+        "lastModified": 1778843877,
+        "narHash": "sha256-BxYhb8H0aVtiM1kGRt+S49NbsJMUMIHvOXxziE9u0nY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "758b562bc257084aef30b8e3efbdd61d292806c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-cdda": {
       "locked": {
         "lastModified": 1769547676,
@@ -758,6 +774,7 @@
         "lazy-apps": "lazy-apps",
         "nix-facts": "nix-facts",
         "nix-index-database": "nix-index-database",
+        "nixos-small": "nixos-small",
         "nixpkgs": [
           "nixpkgs-patcher",
           "nixpkgs-patched"

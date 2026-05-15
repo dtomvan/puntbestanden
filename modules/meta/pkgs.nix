@@ -38,6 +38,7 @@ in
       # TASK(20260501-093130): maybe incorporate the patcher in a subflake in
       # this tree so there's a SSOT for what nixpkgs I pull in?
       nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
+      nixos-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
       nur = {
         url = "github:nix-community/NUR";
