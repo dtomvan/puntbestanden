@@ -12,6 +12,7 @@
       allowedHosts = [
         "boomer"
         "feather"
+        "commitit"
       ];
       allowedUsers = [
         "tomvd"
