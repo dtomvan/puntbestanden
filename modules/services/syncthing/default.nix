@@ -7,11 +7,11 @@ toplevel@{ self, lib, ... }:
 
       username = "tomvd";
       devices = {
-        ${hosts.amdpc1.hostName} = {
+        ${hosts.amdpc1.networking.hostName} = {
           id = "3QIVELR-TAOILMZ-446OGI4-76UTNJD-ZA67C4P-X532YOE-ONJS5RY-LWY6HQZ";
           autoAcceptFolders = true;
         };
-        ${hosts.tpx1g8.hostName} = {
+        ${hosts.tpx1g8.networking.hostName} = {
           id = "2TCHDIM-XCWIBM4-5DL2EK6-7Y7VOSO-TOSZYG6-JNYQYFU-PONSM2D-X2CITQT";
           autoAcceptFolders = true;
         };

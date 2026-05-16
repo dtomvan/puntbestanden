@@ -2,7 +2,6 @@
 {
   hosts.amdpc1 = {
     description = "a reasonably sluggish Ryzen 5 2600 desktop PC";
-    hostName = "boomer";
     system = "x86_64-linux";
     users = [ "tomvd" ];
     mainDisk = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_1TB_S5H9NS0R412949Y";
@@ -19,7 +18,17 @@
         "root"
       ];
     };
-    networking.wirelessInterface = "wlp7s0";
+    networking = {
+      hostName = "boomer";
+      wirelessInterface = "wlp7s0";
+      wireguard = {
+        enable = true;
+        ips = [
+          "2001:db8:1234:ffff::1:1/128"
+          "10.0.0.1/32"
+        ];
+      };
+    };
     isNvidiaPascal = true;
     remoteBuild = {
       enable = true;

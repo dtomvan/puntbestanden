@@ -6,7 +6,7 @@
 }:
 {
   flake.modules.nixos.profiles-hetzner-bakkie =
-    { inputs', ... }:
+    { inputs', host, ... }:
     {
       imports = builtins.attrValues {
         inherit (inputs.srvos.nixosModules)
@@ -18,12 +18,13 @@
         inherit (self.modules.nixos)
           nix-sensible
           sops
-          # TASK(20260516-084906): replace tailscale with wireguard for declaratively onboarding
-          networking-tailscale
+          networking-wireguard
           services-ssh
           users-root
           ;
       };
+
+      systemd.network.networks."10-uplink".networkConfig.Address = lib.mkDefault host.networking.endpoint;
 
       time.timeZone = lib.mkForce "UTC";
       users.mutableUsers = lib.mkDefault false;

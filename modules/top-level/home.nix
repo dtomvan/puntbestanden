@@ -49,7 +49,8 @@ let
       host:
       makeHome {
         inherit user;
-        inherit (host) hostName system;
+        inherit (host) system;
+        inherit (host.networking) hostName;
       }
     ) hosts)
     ++ [

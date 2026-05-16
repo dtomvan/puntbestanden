@@ -15,7 +15,7 @@
             services-printing
             services-sane
 
-            networking-tailscale
+            networking-wireguard
             services-copyparty
             services-keybase
             utilities
