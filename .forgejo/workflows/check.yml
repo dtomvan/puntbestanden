@@ -1,6 +1,6 @@
 jobs:
   nix-flake-check:
-    runs-on: docker://git.toostveen.nl/lix-with-node:2.95.2
+    runs-on: nix
     steps:
       - uses: actions/checkout@v4
       - run: nix flake lock
