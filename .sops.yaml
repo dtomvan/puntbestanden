@@ -9,4 +9,4 @@ creation_rules:
           - *boomer
           - *feather
           - *commitit
-    path_regex: secrets/[^/]+.(secret|yaml)
+    path_regex: secrets/.+\.(secret|yaml)
