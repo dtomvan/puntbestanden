@@ -16,13 +16,18 @@
         mkIf
         ;
 
-      inherit (lib.types) listOf str;
+      inherit (lib.types) listOf nullOr str;
     in
     {
       # TASK(20260515-180913): make it possible to run multiple instances
       options.infra.fj.actions = {
         enable = mkEnableOption "Github actions on forgejo (same machine)";
         enableNative = mkEnableOption "Native actions thru the `native` label";
+        domain = mkOption {
+          description = "Domain which hosts the actual fj forge";
+          type = nullOr str;
+          default = cfg.domain or null;
+        };
         name = mkOption {
           description = "Name of the FJ actions runner in the dashboard";
           type = str;
