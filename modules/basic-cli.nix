@@ -187,6 +187,8 @@
             neovim
             ;
         };
+
+      programs.git-credential-keepassxc.enable = true;
     };
 
   # dim the $SHLVL to the left of the default nixos prompt when SHLVL>1
