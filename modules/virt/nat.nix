@@ -10,7 +10,9 @@
         enable = true;
         # Use "ve-*" when using nftables instead of iptables
         internalInterfaces = [ "ve-+" ];
-        externalInterface = lib.mkIf (host ? wirelessInterface) host.wirelessInterface;
+        externalInterface = lib.mkIf (
+          host ? networking.wirelessInterface
+        ) host.networking.wirelessInterface;
         # Lazy IPv6 connectivity for the container
         enableIPv6 = true;
       };

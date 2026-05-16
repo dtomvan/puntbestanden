@@ -18,6 +18,7 @@
 
           inherit (self.modules.nixos)
             nix-common
+            nix-sensible
 
             boot-systemd-boot
             users-root

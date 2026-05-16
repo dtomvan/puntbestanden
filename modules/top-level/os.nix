@@ -19,12 +19,12 @@ let
 
   makeNixos =
     _key: host:
-    nameValuePair host.hostName (nixosSystem {
+    nameValuePair host.networking.hostName (nixosSystem {
       modules = [
         (self.lib.system host.system)
-        { networking = { inherit (host) hostName; }; }
-        self.modules.nixos."hosts-${host.hostName}"
-        ../hardware/_generated/${host.hostName}.nix
+        { networking = { inherit (host.networking) hostName; }; }
+        self.modules.nixos."hosts-${host.networking.hostName}"
+        ../hardware/_generated/${host.networking.hostName}.nix
       ]
       ++ (map (u: self.modules.nixos."users-${u}") host.users);
       specialArgs = { inherit host; };

@@ -61,7 +61,7 @@ let
         type = functionTo package |> nullOr;
         default = null;
         example = literalExpression ''
-          { self', host, ... }: if host.hostName == "feather" then self'.packages.nixvim-minimal else self'.packages.nixvim
+          { self', host, ... }: if host.networking.hostName == "feather" then self'.packages.nixvim-minimal else self'.packages.nixvim
         '';
       };
     };

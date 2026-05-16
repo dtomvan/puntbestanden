@@ -2,7 +2,6 @@
 {
   hosts.tpx1g8 = {
     description = "the ultra-light Thinkpad X1 Carbon G8";
-    hostName = "feather";
     system = "x86_64-linux";
     users = [ "tomvd" ];
     mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
@@ -20,8 +19,24 @@
       ];
     };
 
-    wirelessInterface = "wlp0s20f3";
+    networking = {
+      hostName = "feather";
+
+      wirelessInterface = "wlp0s20f3";
+
+      wireguard = {
+        enable = true;
+        ips = [
+          "2001:db8:1234:ffff::1:2/128"
+          "10.0.0.2/32"
+        ];
+      };
+    };
     remoteBuild.enable = true;
+
+    enableHomeManager = true;
+    enableNixvim = true;
+    enableFlatpak = true;
   };
 
   flake.modules = {

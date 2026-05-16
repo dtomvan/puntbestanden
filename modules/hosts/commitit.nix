@@ -1,48 +1,33 @@
 let
   inherit (import ../_consts.nix) domain;
 in
-{
-  self,
-  lib,
-  inputs,
-  ...
-}:
+{ self, ... }:
 {
   hosts.hetzner1 = {
     description = "Hetzner bakkie for my own Forgejo instance";
-    hostName = "commitit";
     system = "x86_64-linux";
     users = [ "tomvd" ];
-  };
-
-  # opt-out of autowiring
-  # TASK(20260515-191237): hosts.<id>.{enableFlatpak,enableHomeManager,enableNixvim}?
-  deploy.nodes.commitit.profiles = {
-    home-tomvd.enable = false;
-    flatpak.enable = false;
-    nixvim-tomvd.enable = false;
+    networking = {
+      hostName = "commitit";
+      endpoint = "2a01:4f8:1c18:5b92::/64";
+      wireguard = {
+        enable = true;
+        endpoint = "[2a01:4f8:1c18:5b92::1]:51820";
+        ips = [
+          "2001:db8:1234:ffff::1:3/128"
+          "10.0.0.3/32"
+        ];
+      };
+    };
   };
 
   flake.modules.nixos.hosts-commitit =
     { pkgs, ... }:
     {
       imports = builtins.attrValues {
-        inherit (inputs.srvos.nixosModules)
-          server
-
-          mixins-nginx
-          ;
-
         inherit (self.modules.nixos)
-          # intentionally different naming
-          infra-common
+          profiles-hetzner-bakkie
           hardware-hetzner-cloud
-
-          sops
-          networking-tailscale
-          services-ssh
-          users-root
-
           lets-encrypt
           services-forgejo
           ;
@@ -59,18 +44,10 @@ in
         actions.enable = true;
       };
 
-      # FIXME: Hetzner Cloud doesn't provide us with that configuration
-      systemd.network.networks."10-uplink".networkConfig.Address = "2a01:4f8:1c18:5b92::/64";
-
       services.postgresql = {
         enable = true;
         package = pkgs.postgresql_18;
       };
-
-      # FIXME: this is a conflict resolution between srvos and users-tomvd
-      time.timeZone = lib.mkForce "UTC";
-
-      users.mutableUsers = false;
 
       system.stateVersion = "26.11";
     };

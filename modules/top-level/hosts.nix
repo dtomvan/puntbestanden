@@ -6,10 +6,10 @@
 # minimal hosts entry:
 # {
 #   hosts.foobar = {
-#     hostName = "foobar";
 #     system = "x86_64-linux";
 #     users = [ ];
 #     mainDisk = "/dev/disk/by-id/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+#     networking.hostName = "foobar";
 #   };
 # }
 let
@@ -19,12 +19,14 @@ let
     filter
     mkEnableOption
     mkOption
+    trim
     ;
   inherit (lib.types)
     attrsOf
     bool
     listOf
     nullOr
+    port
     raw
     str
     strMatching
@@ -61,17 +63,66 @@ let
     };
   };
 
+  networkingModule =
+    { config, ... }:
+    {
+      options = {
+        hostName = mkOption {
+          description = "What the value of `networking.hostName' will be";
+          type = str;
+          example = "elated-minsky";
+        };
+
+        wirelessInterface = mkOption {
+          description = "Interface name where NetworkManager profiles are set";
+          # TODO: is this pattern accurate?
+          type = nullOr (strMatching "^(en|wl)p[0-9a-f]+s[0-9a-f]+$");
+          default = null;
+          example = "wlp7s0";
+        };
+
+        endpoint = mkOption {
+          type = nullOr str;
+          default = null;
+        };
+
+        wireguard = {
+          enable = mkEnableOption "wireguard";
+
+          publicKey = mkOption {
+            type = str;
+            default = trim (builtins.readFile ../../secrets/wireguard/${config.hostName}.pub);
+          };
+
+          listenPort = mkOption {
+            type = port;
+            default = 51820;
+          };
+
+          endpoint = mkOption {
+            type = nullOr str;
+            default = null;
+          };
+
+          ips = mkOption {
+            type = listOf str;
+            default = [ ];
+          };
+
+          allowedIPs = mkOption {
+            type = listOf str;
+            default = config.wireguard.ips;
+          };
+        };
+      };
+    };
+
   hostModule.options = {
     description = mkOption {
       description = "A description of what the hardware is, where the system is located, or a reminder about which system the host is referring to";
       type = str;
       default = "No description set.";
       example = "That one Hetzner box";
-    };
-    hostName = mkOption {
-      description = "What the value of `networking.hostName' will be";
-      type = str;
-      example = "elated-minsky";
     };
     system = mkOption {
       description = "What the value of `nixpkgs.hostPlatform' will be";
@@ -97,13 +148,11 @@ let
       description = "Public key that is recognized by other machines in authorized_keys";
       type = nullOr (submodule keyModule);
     };
-    wirelessInterface = mkOption {
-      description = "Interface name where NetworkManager profiles are set";
-      # TODO: is this pattern accurate?
-      type = nullOr (strMatching "^(en|wl)p[0-9a-f]+s[0-9a-f]+$");
-      default = null;
-      example = "wlp7s0";
+
+    networking = mkOption {
+      type = submodule networkingModule;
     };
+
     isNvidiaPascal = mkOption {
       description = "Whether to pin the Nvidia driver to version 580, if applicable";
       type = bool;
@@ -119,6 +168,10 @@ let
     hasDoc = (mkEnableOption "listing this hostname in readme.md with its description") // {
       default = true;
     };
+
+    enableHomeManager = mkEnableOption "deploy-rs profiles for home-manager";
+    enableNixvim = mkEnableOption "deploy-rs profiles for nixvim";
+    enableFlatpak = mkEnableOption "deploy-rs profiles that declaratively install some flatpaks";
   };
 in
 {
@@ -139,7 +192,7 @@ in
       config.hosts
       |> attrValues
       |> filter (h: h.hasDoc)
-      |> map (h: "- `${h.hostName}`, ${h.description}")
+      |> map (h: "- `${h.networking.hostName}`, ${h.description}")
       |> concatLines
     );
   };

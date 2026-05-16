@@ -14,7 +14,7 @@ let
   knownHosts =
     config.hosts
     |> filterAttrs (_n: host: host ? sshPubkey.key)
-    |> mapAttrs' (_n: host: nameValuePair host.hostName { publicKey = host.sshPubkey.key; });
+    |> mapAttrs' (_n: host: nameValuePair host.networking.hostName { publicKey = host.sshPubkey.key; });
 
   # TODO: this HAS to be able to be done in a more easier/elegant way??
 

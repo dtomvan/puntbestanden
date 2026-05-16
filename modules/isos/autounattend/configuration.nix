@@ -89,10 +89,6 @@ in
           Or with flakes:
             $ sudo nixos-generate-config --flake --force
 
-          Or SSH into this device:
-            $ sudo hostname non-generic-name
-            $ sudo tailscale up
-
           Or, if you are dtomvan, grab one of your configs:
             # NH_FLAKE is already set
             $ nh os boot -H {boomer,feather}

@@ -4,7 +4,7 @@
 # - make my PC extremely unresponsive to the point where I can't even `ls`
 # - get my laptop extremely hot at times during a random GC
 {
-  flake.modules.nixos.nix-common = {
+  flake.modules.nixos.nix-sensible = {
     nix = {
       daemonCPUSchedPolicy = "batch";
       daemonIOSchedClass = "idle";

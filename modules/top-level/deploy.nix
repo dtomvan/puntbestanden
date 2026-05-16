@@ -10,6 +10,7 @@ let
   inherit (builtins) filter listToAttrs;
   inherit (lib)
     filterAttrs
+    optionalAttrs
     mapAttrs'
     nameValuePair
     ;
@@ -27,12 +28,12 @@ in
     |> filterAttrs (_n: v: v.hasConfig)
     |> mapAttrs' (
       _n: v:
-      nameValuePair v.hostName (
+      nameValuePair v.networking.hostName (
         withSystem v.system (
           systemArgs@{ inputs', self', ... }:
           let
             deployLib = inputs'.deploy-rs.legacyPackages.lib;
-            hostConfig = self.nixosConfigurations.${v.hostName};
+            hostConfig = self.nixosConfigurations.${v.networking.hostName};
 
             homeProfiles =
               v.users
@@ -41,7 +42,7 @@ in
                 nameValuePair "home-${user}" {
                   inherit user;
                   path = deployLib.activate.home-manager {
-                    base = self.homeConfigurations."${user}@${v.hostName}";
+                    base = self.homeConfigurations."${user}@${v.networking.hostName}";
                   };
                 }
               )
@@ -64,8 +65,7 @@ in
               |> listToAttrs;
           in
           {
-            # yes.
-            hostname = v.hostName;
+            hostname = v.networking.hostName;
 
             profiles = {
               system = {
@@ -76,6 +76,8 @@ in
                 };
               };
 
+            }
+            // optionalAttrs v.enableFlatpak {
               flatpak = {
                 user = "root";
                 sshUser = "root";
@@ -87,8 +89,8 @@ in
                 };
               };
             }
-            // homeProfiles
-            // nixvimProfiles;
+            // optionalAttrs v.enableHomeManager homeProfiles
+            // optionalAttrs v.enableNixvim nixvimProfiles;
           }
         )
       )

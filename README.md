@@ -3,7 +3,7 @@
 > Literally means "dotfiles" in Dutch: "punt" = "dot", "bestanden" = "files"
 
 What's in here:
-- 9 NixOS configs (well, this is a generated number so it's technically correct but don't over-estimate me)
+- 10 NixOS configs (well, this is a generated number so it's technically correct but don't over-estimate me)
 - a dendritic home-manager config (TODO: list aspects here)
 - An unhinged Emacs config
 - A lot less lines of neovim lua config compared to my [previous attempt](https://github.com/dtomvan/.config/tree/main/neovim/.config/nvim)
@@ -33,6 +33,7 @@ Learn more about it (in order of, well, "deepness" or complexity):
 ## The hostnames
 
 - `boomer`, a reasonably sluggish Ryzen 5 2600 desktop PC
+- `commitit`, Hetzner bakkie for my own Forgejo instance
 - `feather`, the ultra-light Thinkpad X1 Carbon G8
 # Autounattend
 This repository includes an "autounattend" installer ISO, which:

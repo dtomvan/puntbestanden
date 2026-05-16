@@ -14,7 +14,8 @@ in
           (
             h:
             {
-              inherit (h) system hostName;
+              inherit (h) system;
+              inherit (h.networking) hostName;
               sshUser = "remotebuild";
               sshKey = "/root/.ssh/remotebuild";
             }
