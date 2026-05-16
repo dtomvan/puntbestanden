@@ -22,22 +22,22 @@ in
 
   config = {
     flake-file.inputs = {
-      # nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-      nixpkgs-patcher = {
-        url = "github:dtomvan/nixpkgs-patcher";
-
-        # disable all irrelevant inputs here since I only care about the
-        # "resulting" nixpkgs-patched output
-        inputs.nixpkgs.follows = "";
-        inputs.systems.follows = "";
-        inputs.flake-parts.follows = "";
-        inputs.nix-patcher.follows = "";
-      };
+      nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      # nixpkgs-patcher = {
+      #   url = "github:dtomvan/nixpkgs-patcher";
+      #
+      #   # disable all irrelevant inputs here since I only care about the
+      #   # "resulting" nixpkgs-patched output
+      #   inputs.nixpkgs.follows = "";
+      #   inputs.systems.follows = "";
+      #   inputs.flake-parts.follows = "";
+      #   inputs.nix-patcher.follows = "";
+      # };
       # accepts nixpkgs from the flake.nix in nixpkgs-patcher...
       # HACK: this fixes an oversight where nixpkgs would lag behind if no patches are currently applied.
       # TASK(20260501-093130): maybe incorporate the patcher in a subflake in
       # this tree so there's a SSOT for what nixpkgs I pull in?
-      nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
+      # nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
       nixos-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
 
       nur = {

@@ -77,17 +77,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
-    nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     nixpkgs-cdda.url = "github:RossSmyth/nixpkgs/cddaClean";
-    nixpkgs-patcher = {
-      url = "github:dtomvan/nixpkgs-patcher";
-      inputs = {
-        flake-parts.follows = "";
-        nix-patcher.follows = "";
-        nixpkgs.follows = "";
-        systems.follows = "";
-      };
-    };
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
