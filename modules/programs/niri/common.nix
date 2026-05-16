@@ -31,12 +31,6 @@
 
           extraPortals = builtins.attrValues {
             inherit (pkgs) xdg-desktop-portal-gtk;
-            inherit (pkgs.kdePackages) xdg-desktop-portal-kde;
-          };
-
-          config = {
-            common.default = "kde";
-            niri."org.freedesktop.impl.portal.FileChooser" = [ "kde" ];
           };
         };
       };
