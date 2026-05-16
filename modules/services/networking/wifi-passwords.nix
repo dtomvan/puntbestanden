@@ -48,7 +48,7 @@ in
         {
           ssid,
           uuid,
-          interface ? host.wirelessInterface or null,
+          interface ? host.networking.wirelessInterface or null,
           ...
         }:
         nameValuePair ssid {

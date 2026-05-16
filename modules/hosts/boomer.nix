@@ -19,7 +19,7 @@
         "root"
       ];
     };
-    wirelessInterface = "wlp7s0";
+    networking.wirelessInterface = "wlp7s0";
     isNvidiaPascal = true;
     remoteBuild = {
       enable = true;

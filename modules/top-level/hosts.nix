@@ -61,6 +61,20 @@ let
     };
   };
 
+  networkingModule =
+    { config, ... }:
+    {
+      options = {
+        wirelessInterface = mkOption {
+          description = "Interface name where NetworkManager profiles are set";
+          # TODO: is this pattern accurate?
+          type = nullOr (strMatching "^(en|wl)p[0-9a-f]+s[0-9a-f]+$");
+          default = null;
+          example = "wlp7s0";
+        };
+      };
+    };
+
   hostModule.options = {
     description = mkOption {
       description = "A description of what the hardware is, where the system is located, or a reminder about which system the host is referring to";
@@ -97,13 +111,11 @@ let
       description = "Public key that is recognized by other machines in authorized_keys";
       type = nullOr (submodule keyModule);
     };
-    wirelessInterface = mkOption {
-      description = "Interface name where NetworkManager profiles are set";
-      # TODO: is this pattern accurate?
-      type = nullOr (strMatching "^(en|wl)p[0-9a-f]+s[0-9a-f]+$");
-      default = null;
-      example = "wlp7s0";
+
+    networking = mkOption {
+      type = submodule networkingModule;
     };
+
     isNvidiaPascal = mkOption {
       description = "Whether to pin the Nvidia driver to version 580, if applicable";
       type = bool;

@@ -20,7 +20,7 @@
       ];
     };
 
-    wirelessInterface = "wlp0s20f3";
+    networking.wirelessInterface = "wlp0s20f3";
     remoteBuild.enable = true;
 
     enableHomeManager = true;
