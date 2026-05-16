@@ -59,9 +59,7 @@
             url = "https://${cfg.domain}";
             tokenFile = config.sops.secrets.forgejo-runner-token.path;
             labels = [
-              "ubuntu-latest:docker://ghcr.io/catthehacker/ubuntu:act-24.04"
-              "nix:docker://ghcr.io/nixos/nix:latest"
-              "lix:docker://git.toostveen.nl/tomvd/lix-with-node:latest"
+              "nix:docker://git.toostveen.nl/tom/lix-with-node:latest"
             ]
             ++ lib.optionals cfg.actions.enableNative [
               "native:host"
