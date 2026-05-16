@@ -20,6 +20,11 @@ in
           xdg.serverAutostart = true;
         };
 
+        xdg.terminal-exec = {
+          enable = true;
+          settings.default = [ "foot.desktop" ];
+        };
+
         environment.systemPackages = builtins.attrValues {
           inherit (pkgs)
             alsa-utils
