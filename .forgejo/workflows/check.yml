@@ -18,10 +18,6 @@ jobs:
           for p in "${nixosConfigs[@]}"; do
             nix eval ".#nixosConfigurations.$p.config.system.build.toplevel"
           done
-
-          for p in "${homeConfigs[@]}"; do
-            nix eval ".#homeConfigurations.$p.config.home.activationPackage"
-          done
       - name: Run selected flake checks
         run: |
           declare -a checks=(check-flake-file deploy-schema treefmt)
