@@ -1,0 +1,34 @@
+"on":
+  schedule:
+    - cron: 0 5 * * 0
+  workflow_dispatch: {}
+
+jobs:
+  nix-flake-update:
+    runs-on: nix
+    steps:
+      - name: configure git
+        run: |
+          git config --global user.name "forgejo-actions[bot]"
+          git config --global user.email "forgejo@users.noreply.git"
+          git config --global push.default simple
+
+      - uses: actions/checkout@v4
+
+      - run: nix flake update --commit-lock-file
+
+      - name: send PR
+        run: |
+          base="$(git branch --show-current)"
+          if [[ "$(git rev-list origin/"$base"..HEAD --count)" -ne 0 ]]; then
+            head="push-$(git rev-parse --short HEAD)"
+            git switch -c "$head"
+            git push --force-with-lease origin "$head"
+            curl "$FORGEJO_SERVER_URL/api/v1/repos/$FORGEJO_REPOSITORY/pulls" \
+              -H "Authorization: token $FORGEJO_TOKEN" \
+              --json "{
+              \"base\": \"$base\",
+              \"head\": \"$head\",
+              \"title\": \"flake.lock: update\"
+              }"
+          fi
