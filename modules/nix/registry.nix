@@ -33,9 +33,8 @@
               id = "templates";
             };
             to = {
-              owner = "dtomvan";
-              repo = "templates";
-              type = "github";
+              type = "git";
+              url = "https://git.toostveen.nl/tom/templates";
             };
           };
         };
