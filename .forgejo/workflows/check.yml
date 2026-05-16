@@ -9,21 +9,26 @@ jobs:
         run: |
           declare -a packages=(nixvim nixvim-minimal)
           declare -a nixosConfigs=(boomer feather commitit)
-          declare -a homeConfigs=(tomvd@boomer tomvd@feather)
 
           for p in "${packages[@]}"; do
+            set -x
             nix eval ".#packages.x86_64-linux.$p"
+            set +x
           done
 
           for p in "${nixosConfigs[@]}"; do
+            set -x
             nix eval ".#nixosConfigurations.$p.config.system.build.toplevel"
+            set +x
           done
       - name: Run selected flake checks
         run: |
           declare -a checks=(check-flake-file deploy-schema treefmt)
 
           for p in "${checks[@]}"; do
+            set -x
             nix build ".#checks.x86_64-linux.$p"
+            set +x
           done
 
 "on":
