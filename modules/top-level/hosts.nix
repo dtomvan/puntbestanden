@@ -119,6 +119,10 @@ let
     hasDoc = (mkEnableOption "listing this hostname in readme.md with its description") // {
       default = true;
     };
+
+    enableHomeManager = mkEnableOption "deploy-rs profiles for home-manager";
+    enableNixvim = mkEnableOption "deploy-rs profiles for nixvim";
+    enableFlatpak = mkEnableOption "deploy-rs profiles that declaratively install some flatpaks";
   };
 in
 {

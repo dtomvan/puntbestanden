@@ -10,6 +10,7 @@ let
   inherit (builtins) filter listToAttrs;
   inherit (lib)
     filterAttrs
+    optionalAttrs
     mapAttrs'
     nameValuePair
     ;
@@ -76,6 +77,8 @@ in
                 };
               };
 
+            }
+            // optionalAttrs v.enableFlatpak {
               flatpak = {
                 user = "root";
                 sshUser = "root";
@@ -87,8 +90,8 @@ in
                 };
               };
             }
-            // homeProfiles
-            // nixvimProfiles;
+            // optionalAttrs v.enableHomeManager homeProfiles
+            // optionalAttrs v.enableNixvim nixvimProfiles;
           }
         )
       )

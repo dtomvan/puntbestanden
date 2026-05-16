@@ -15,14 +15,6 @@ in
     users = [ "tomvd" ];
   };
 
-  # opt-out of autowiring
-  # TASK(20260515-191237): hosts.<id>.{enableFlatpak,enableHomeManager,enableNixvim}?
-  deploy.nodes.commitit.profiles = {
-    home-tomvd.enable = false;
-    flatpak.enable = false;
-    nixvim-tomvd.enable = false;
-  };
-
   flake.modules.nixos.hosts-commitit =
     { pkgs, ... }:
     {

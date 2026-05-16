@@ -22,6 +22,10 @@
 
     wirelessInterface = "wlp0s20f3";
     remoteBuild.enable = true;
+
+    enableHomeManager = true;
+    enableNixvim = true;
+    enableFlatpak = true;
   };
 
   flake.modules = {

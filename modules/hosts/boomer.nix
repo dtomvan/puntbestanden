@@ -34,6 +34,9 @@
         speedFactor = 4;
       };
     };
+    enableHomeManager = true;
+    enableNixvim = true;
+    enableFlatpak = true;
   };
 
   flake.modules = {
