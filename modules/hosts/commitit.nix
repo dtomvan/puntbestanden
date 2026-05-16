@@ -1,12 +1,7 @@
 let
   inherit (import ../_consts.nix) domain;
 in
-{
-  self,
-  lib,
-  inputs,
-  ...
-}:
+{ self, ... }:
 {
   hosts.hetzner1 = {
     description = "Hetzner bakkie for my own Forgejo instance";
@@ -19,22 +14,9 @@ in
     { pkgs, ... }:
     {
       imports = builtins.attrValues {
-        inherit (inputs.srvos.nixosModules)
-          server
-
-          mixins-nginx
-          ;
-
         inherit (self.modules.nixos)
-          # intentionally different naming
-          infra-common
+          profiles-hetzner-bakkie
           hardware-hetzner-cloud
-
-          sops
-          networking-tailscale
-          services-ssh
-          users-root
-
           lets-encrypt
           services-forgejo
           ;
@@ -58,11 +40,6 @@ in
         enable = true;
         package = pkgs.postgresql_18;
       };
-
-      # FIXME: this is a conflict resolution between srvos and users-tomvd
-      time.timeZone = lib.mkForce "UTC";
-
-      users.mutableUsers = false;
 
       system.stateVersion = "26.11";
     };
