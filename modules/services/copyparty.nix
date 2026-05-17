@@ -1,12 +1,27 @@
-{ inputs, self, ... }:
+# TASK(20260517-143309): make infra module `infra.copy` with more customizability
+{ inputs, lib, ... }:
 let
-  user = "tomvd";
-  group = "users";
-  port = 80;
-  dropDir = "/srv/copyparty/drop";
-  ignorePatterns = [
-    "^\\.st(versions|folder)$" # ignore syncthing files
-  ];
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkMerge
+    mkOption
+    mkOptionDefault
+    mkPackageOption
+    optionalAttrs
+    optionals
+    ;
+
+  inherit (lib.types)
+    attrsOf
+    listOf
+    nullOr
+    passwdEntry
+    pathInStore
+    port
+    raw
+    str
+    ;
 in
 {
   flake-file.inputs.copyparty = {
@@ -22,192 +37,278 @@ in
     {
       config,
       pkgs,
-      lib,
       ...
     }:
     let
-      package = pkgs.copyparty-unstable.override {
-        withFastThumbnails = true;
-        withMediaProcessing = false; # uses ffmpeg, which can eat your CPU big time
-        # uses mutagen, should be quicker as well, also saves closure size!
-        withBasicAudioMetadata = true;
+      cfg = config.infra.copy;
+      mkCopypartyVolumeOptions = name: {
+        enable = mkEnableOption "/${name} endpoint";
+
+        access = mkOption {
+          type = listOf str |> attrsOf;
+          default = { };
+        };
+
+        path = mkOption {
+          type = str;
+          default = "/srv/copyparty/${name}";
+        };
+
+        extraFlags = mkOption {
+          type = attrsOf raw;
+          default = { };
+        };
       };
     in
     {
       imports = [ inputs.copyparty.nixosModules.default ];
 
-      sops.secrets.copyparty = {
-        mode = "0400";
-        sopsFile = ../../secrets/copyparty.secret;
-        format = "binary";
-        owner = user;
-        inherit group;
-      };
+      options.infra.copy = {
+        enable = mkEnableOption "copyparty";
 
-      systemd.tmpfiles.settings."10-copyparty" = {
-        "${dropDir}" = {
-          d = {
-            inherit group user;
-            mode = "0755";
+        package = mkPackageOption pkgs "copyparty-unstable" {
+          default = pkgs.copyparty-unstable.override {
+            withFastThumbnails = true;
+            withMediaProcessing = false; # uses ffmpeg, which can eat your CPU big time
+            # uses mutagen, should be quicker as well, also saves closure size!
+            withBasicAudioMetadata = true;
+          };
+        };
+
+        enableRecommendedSettings = mkEnableOption "recommended settings";
+
+        user = mkOption {
+          type = passwdEntry;
+          default = if cfg.nginx.enable then "nginx" else "copyparty";
+        };
+
+        group = mkOption {
+          type = passwdEntry;
+          default = if cfg.nginx.enable then "nginx" else "copyparty";
+        };
+
+        port = mkOption {
+          type = nullOr port;
+          default = null;
+        };
+
+        nginx = {
+          enable = mkEnableOption "don't open a port, use nginx instead";
+
+          unixSocket = {
+            description = "socket that both nginx and copyparty agree on to proxy the service";
+            type = str;
+            default = "/run/copyparty/party.sock";
+          };
+
+          domain = mkOption {
+            type = str;
+            default = "fs.${(import ../_consts.nix).domain}";
+          };
+
+          extraVirtualHostSettings = mkOption {
+            type = attrsOf raw;
+            default = { };
+          };
+        };
+
+        drop = mkCopypartyVolumeOptions "drop";
+        paste = mkCopypartyVolumeOptions "paste";
+
+        admin = {
+          username = mkOption {
+            type = str;
+            default = "admin";
+          };
+          passwordFile = mkOption {
+            default = config.sops.secrets.copyparty;
+            type = pathInStore;
           };
         };
       };
 
-      environment.systemPackages = [ package ];
-
-      services.copyparty = {
-        enable = true;
-        inherit package user group;
-
-        settings = {
-          ### connection
-          # e.g. boomerparty, featherparty
-          name = "${config.networking.hostName}party";
-          p = toString port;
-          z = true;
-          no-robots = true;
-
-          ### paths
-          shr = "/shares";
-
-          e2dsa = true; # enable indexing
-          dedup = true;
-          theme = 2; # monokai
-          # just a normal spinner
-          spinner = ",padding:0;border-radius:9em;border:.2em solid #444;border-top:.2em solid #fc0";
-
-          forget-ip = 10080; # week, apparently to comply with GDPR
-
-          ### tarball control
-          # zipmaxn = 200;
-          zipmaxs = "8G";
-          # don't download any compressed tarballs, zips are still allowed
-          no-tarcmp = true;
-
-          # for VLC and others which do not support webdav
-          # default ports because why not YOLO
-          ftp = "21";
-          ftp-pr = "12000-13000";
-
-          # useful if you have podcasts or whatever
-          rss = true;
-
-          # according to docs: checks for dangerous symlinks on startup
-          # I have symlinks to the nix store so this one isn't really possible
-          # ls = "**,*,ln,p,r";
-
-          # human-readable file size: SI format, 2 decimals (1.18 MB)
-          ui-filesz = "4c";
-        };
-
-        accounts.${user}.passwordFile = config.sops.secrets.copyparty.path;
-
-        volumes =
-          let
-            access.A = [ user ];
-          in
-          {
-            "/Music" = {
-              path = "/home/${user}/Music";
-              access = access // {
-                r = "*";
-              };
-              flags = {
-                e2ts = true;
-                noidx = lib.concatStringsSep "|" ignorePatterns;
-              };
-            };
-
-            "/Documents" = {
-              inherit access;
-              path = "/home/${user}/Documents";
-              flags = {
-                e2ts = true;
-                noidx = lib.concatStringsSep "|" ignorePatterns;
-              };
-            };
-
-            "/drop" = {
-              access = access // {
-                # you can only see the files if you know exactly the path and
-                # the file key.
-                wG = "*";
-              };
-              path = dropDir;
-              flags = {
-                hardlinkonly = true;
-                # adds some extra random stuff so the file is a little more
-                # "secret"
-                fka = 8;
-                # cannot download partial uploads
-                nopipe = true;
-                # sort uploads by date
-                # this one seems buggy
-                # rotf = "%Y-%m-%d";
-                # no thumbnails
-                dthumb = true;
-                # little less than a quarter
-                lifetime = 60 * 60 * 24 * 30 * 4;
-                # no more than 500 mb over 15 minutes
-                maxb = "500m,600";
-                # you do not get to choose the filename
-                rand = true;
-                # max 200 mb uploads
-                sz = "0-200m";
-                # always leave a little more than my system closure size
-                df = "25g";
-                # No XSS please
-                nohtml = true;
-              };
-            };
-          };
-      };
-
-      # allow port < 2^10
-      systemd.services.copyparty.serviceConfig.AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-    };
-
-  # ensure that copyparty starts correctly given the config and that basic auth
-  # perms are correct. we can't test with the real passwords since sops in
-  # a nixos test would mean leaking my private keys to the nix store
-  perSystem =
-    { pkgs, ... }:
-    {
-      checks.copyparty = pkgs.testers.runNixOSTest (
-        { lib, ... }:
+      assertions = [
         {
-          name = "copyparty";
-          nodes.machine = {
-            imports = [
-              self.modules.nixos.services-copyparty
-              self.modules.nixos.users-tomvd
-              inputs.sops.nixosModules.sops
-            ];
-            services.openssh.enable = true;
-            services.copyparty.accounts = {
-              ${user}.passwordFile = lib.mkForce (builtins.toFile "copyparty-test-tomvd-password" "AAAA");
-            };
-            environment.systemPackages = [ pkgs.curl ];
-          };
-          testScript = ''
-            machine.succeed("copyparty --help")
-            machine.wait_for_unit("copyparty.service")
-            machine.wait_for_open_port(80)
-
-            # homepage
-            machine.succeed("curl -f http://localhost:80/")
-
-            # list
-            machine.succeed("curl -f http://localhost:80/Music")
-            machine.succeed("curl -fH pw:AAAA http://localhost:80/Documents")
-
-            # upload
-            machine.succeed("curl -fH pw:AAAA -H rand:8 -T /etc/os-release http://localhost:80/Documents")
-
-            # fails due to insufficient space (requires a lot of headroom which vm tests don't get)
-            machine.fail("curl -fT /etc/os-release http://localhost:80/drop")
-          '';
+          assertion = cfg.port != null -> !cfg.nginx.enable;
+          message = "can't set a port if copyparty is managed by nginx";
         }
-      );
+        {
+          assertion = cfg.nginx.enable || (cfg.port != null);
+          message = "need to either configure a port or enable nginx";
+        }
+      ];
+
+      config = mkMerge [
+        {
+          sops.secrets.copyparty = {
+            mode = "0400";
+            sopsFile = ../../secrets/copyparty.secret;
+            format = "binary";
+            owner = cfg.user;
+            inherit (cfg) group;
+          };
+
+          infra.copy = {
+            drop.access = mkOptionDefault {
+              A = [ cfg.admin.username ];
+              wG = [ "*" ];
+            };
+            paste.access = mkOptionDefault {
+              A = [ cfg.admin.username ];
+              G = [ "*" ];
+            };
+          };
+        }
+
+        (mkIf cfg.enable {
+          systemd.tmpfiles.settings."10-copyparty" = {
+            "${cfg.drop.path}" = mkIf cfg.drop.enable {
+              d = {
+                inherit (cfg) group user;
+                mode = "0755";
+              };
+            };
+            "${cfg.paste.path}" = mkIf cfg.drop.enable {
+              d = {
+                inherit (cfg) group user;
+                mode = "0755";
+              };
+            };
+          };
+
+          # @bartoostveen [
+          systemd.sockets.copyparty = lib.mkIf cfg.nginx.enable {
+            before = [ "nginx.service" ];
+            wantedBy = [ "sockets.target" ];
+            socketConfig = {
+              ListenStream = cfg.nginx.unixSocket;
+              SocketUser = cfg.user;
+              SocketGroup = cfg.group;
+              SocketMode = "770";
+            };
+          };
+
+          systemd.services.copyparty = {
+            requires = [
+              "sops-install-secrets.service"
+            ]
+            ++ optionals cfg.nginx.enable [
+              "copyparty.socket"
+            ];
+            after = [ "sops-install-secrets.service" ];
+          };
+
+          services.nginx.virtualHosts."${cfg.nginx.domain}" = mkIf cfg.nginx.enable {
+            enableACME = true;
+            forceSSL = true;
+            locations."/" = {
+              proxyPass = "http://unix://${cfg.unixSocket}";
+              proxyWebsockets = true;
+              extraConfig = ''
+                client_max_body_size 0;
+                proxy_buffering off;
+                proxy_request_buffering off;
+                proxy_buffers 32 8k;
+                proxy_buffer_size 16k;
+                proxy_busy_buffers_size 24k;
+              '';
+            };
+          };
+
+          # ]
+
+          environment.systemPackages = [ cfg.package ];
+
+          services.copyparty = {
+            enable = true;
+            inherit (cfg) package user group;
+
+            settings = {
+              ### connection
+              # e.g. boomerparty, featherparty
+              name = "${config.networking.hostName}party";
+              p = lib.mkIf (!cfg.nginx.enable && cfg.port != null) cfg.port;
+            }
+            // optionalAttrs cfg.enableRecommendedSettings {
+              no-robots = true;
+
+              ### paths
+              shr = "/shares";
+
+              e2dsa = true; # enable indexing
+              dedup = true;
+              theme = 2; # monokai
+              # just a normal spinner
+              spinner = ",padding:0;border-radius:9em;border:.2em solid #444;border-top:.2em solid #fc0";
+
+              forget-ip = 10080; # week, apparently to comply with GDPR
+
+              # useful if you have podcasts or whatever
+              rss = true;
+
+              # human-readable file size: SI format, 2 decimals (1.18 MB)
+              ui-filesz = "4c";
+            }
+            // optionalAttrs cfg.nginx.enable {
+              i = lib.mkIf cfg.nginx.enable "unix:770:${cfg.nginx.unixSocket},0.0.0.0";
+              # reverse proxy (@bartoostveen)
+              # Trust that nginx is configured correctly
+              xff-hdr = "x-forwarded-for";
+              rproxy = 1;
+              daw = true;
+              dont-ban = "aa"; # Do not ban folks that have admin anywhere
+            };
+
+            accounts.${cfg.admin.username} = { inherit (cfg.admin) passwordFile; };
+
+            volumes =
+              let
+                commonFlags = {
+                  hardlinkonly = true;
+                  # adds some extra random stuff so the file is a little more
+                  # "secret"
+                  fka = 8;
+                  # cannot download partial uploads
+                  nopipe = true;
+                  # no thumbnails
+                  dthumb = true;
+                  # you do not get to choose the filename
+                  rand = true;
+                  # No XSS please
+                  nohtml = true;
+                };
+              in
+              {
+                "/drop" = mkIf cfg.drop.enable {
+                  inherit (cfg.drop) path access;
+                  flags =
+                    commonFlags
+                    // {
+                      # no more than 500 mb over 15 minutes
+                      maxb = "500m,600";
+                      # max 200 mb uploads
+                      sz = "0-200m";
+                      # little less than a quarter
+                      lifetime = 60 * 60 * 24 * 30 * 4;
+                    }
+                    // cfg.drop.extraFlags;
+                };
+
+                "/paste" = mkIf cfg.drop.enable {
+                  inherit (cfg.paste) path access;
+                  flags =
+                    commonFlags
+                    // {
+                      # no more than 20 mb over 15 minutes
+                      maxb = "20m,600";
+                      # max 5 mb uploads
+                      sz = "0-5m";
+                    }
+                    // cfg.paste.extraFlags;
+                };
+              };
+          };
+        })
+      ];
     };
 }

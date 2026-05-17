@@ -1,7 +1,7 @@
 let
   inherit (import ../_consts.nix) domain;
 in
-{ self, ... }:
+{ self, lib, ... }:
 {
   hosts.hetzner1 = {
     description = "Hetzner bakkie for my own Forgejo instance";
@@ -30,6 +30,7 @@ in
           hardware-hetzner-cloud
           lets-encrypt
           services-forgejo
+          services-copyparty
           ;
       };
 
@@ -44,9 +45,26 @@ in
         actions.enable = true;
       };
 
+      infra.copy = {
+        enable = true;
+        enableRecommendedSettings = true;
+        package = pkgs.copyparty.override {
+          withFTP = false;
+          withHashedPasswords = false;
+          withMediaProcessing = false;
+          withThumbnails = false;
+        };
+        nginx.enable = true;
+        paste.enable = true;
+      };
+
       services.postgresql = {
         enable = true;
         package = pkgs.postgresql_18;
+      };
+
+      services.copyparty = {
+        settings.e2dsa = lib.mkForce false;
       };
 
       system.stateVersion = "26.11";

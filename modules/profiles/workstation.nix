@@ -16,7 +16,6 @@
             services-sane
 
             networking-wireguard
-            services-copyparty
             services-keybase
             utilities
             virt-podman
