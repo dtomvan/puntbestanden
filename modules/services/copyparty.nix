@@ -17,7 +17,6 @@ let
     listOf
     nullOr
     passwdEntry
-    pathInStore
     port
     raw
     str
@@ -78,12 +77,12 @@ in
         enableRecommendedSettings = mkEnableOption "recommended settings";
 
         user = mkOption {
-          type = passwdEntry;
+          type = passwdEntry str;
           default = if cfg.nginx.enable then "nginx" else "copyparty";
         };
 
         group = mkOption {
-          type = passwdEntry;
+          type = passwdEntry str;
           default = if cfg.nginx.enable then "nginx" else "copyparty";
         };
 
@@ -95,7 +94,7 @@ in
         nginx = {
           enable = mkEnableOption "don't open a port, use nginx instead";
 
-          unixSocket = {
+          unixSocket = mkOption {
             description = "socket that both nginx and copyparty agree on to proxy the service";
             type = str;
             default = "/run/copyparty/party.sock";
@@ -121,25 +120,25 @@ in
             default = "admin";
           };
           passwordFile = mkOption {
-            default = config.sops.secrets.copyparty;
-            type = pathInStore;
+            default = config.sops.secrets.copyparty.path;
+            type = str;
           };
         };
       };
 
-      assertions = [
-        {
-          assertion = cfg.port != null -> !cfg.nginx.enable;
-          message = "can't set a port if copyparty is managed by nginx";
-        }
-        {
-          assertion = cfg.nginx.enable || (cfg.port != null);
-          message = "need to either configure a port or enable nginx";
-        }
-      ];
-
       config = mkMerge [
         {
+          assertions = [
+            {
+              assertion = cfg.port != null -> !cfg.nginx.enable;
+              message = "can't set a port if copyparty is managed by nginx";
+            }
+            {
+              assertion = cfg.nginx.enable || (cfg.port != null);
+              message = "need to either configure a port or enable nginx";
+            }
+          ];
+
           sops.secrets.copyparty = {
             mode = "0400";
             sopsFile = ../../secrets/copyparty.secret;
@@ -161,21 +160,6 @@ in
         }
 
         (mkIf cfg.enable {
-          systemd.tmpfiles.settings."10-copyparty" = {
-            "${cfg.drop.path}" = mkIf cfg.drop.enable {
-              d = {
-                inherit (cfg) group user;
-                mode = "0755";
-              };
-            };
-            "${cfg.paste.path}" = mkIf cfg.drop.enable {
-              d = {
-                inherit (cfg) group user;
-                mode = "0755";
-              };
-            };
-          };
-
           # @bartoostveen [
           systemd.sockets.copyparty = lib.mkIf cfg.nginx.enable {
             before = [ "nginx.service" ];
@@ -202,7 +186,7 @@ in
             enableACME = true;
             forceSSL = true;
             locations."/" = {
-              proxyPass = "http://unix://${cfg.unixSocket}";
+              proxyPass = "http://unix://${cfg.nginx.unixSocket}";
               proxyWebsockets = true;
               extraConfig = ''
                 client_max_body_size 0;
@@ -227,7 +211,6 @@ in
               ### connection
               # e.g. boomerparty, featherparty
               name = "${config.networking.hostName}party";
-              p = lib.mkIf (!cfg.nginx.enable && cfg.port != null) cfg.port;
             }
             // optionalAttrs cfg.enableRecommendedSettings {
               no-robots = true;
@@ -250,13 +233,16 @@ in
               ui-filesz = "4c";
             }
             // optionalAttrs cfg.nginx.enable {
-              i = lib.mkIf cfg.nginx.enable "unix:770:${cfg.nginx.unixSocket},0.0.0.0";
+              i = "unix:770:${cfg.nginx.unixSocket},0.0.0.0";
               # reverse proxy (@bartoostveen)
               # Trust that nginx is configured correctly
               xff-hdr = "x-forwarded-for";
               rproxy = 1;
               daw = true;
               dont-ban = "aa"; # Do not ban folks that have admin anywhere
+            }
+            // optionalAttrs (!cfg.nginx.enable) {
+              p = cfg.port;
             };
 
             accounts.${cfg.admin.username} = { inherit (cfg.admin) passwordFile; };
@@ -278,8 +264,8 @@ in
                   nohtml = true;
                 };
               in
-              {
-                "/drop" = mkIf cfg.drop.enable {
+              optionalAttrs cfg.drop.enable {
+                "/drop" = {
                   inherit (cfg.drop) path access;
                   flags =
                     commonFlags
@@ -293,8 +279,9 @@ in
                     }
                     // cfg.drop.extraFlags;
                 };
-
-                "/paste" = mkIf cfg.drop.enable {
+              }
+              // optionalAttrs cfg.paste.enable {
+                "/paste" = {
                   inherit (cfg.paste) path access;
                   flags =
                     commonFlags

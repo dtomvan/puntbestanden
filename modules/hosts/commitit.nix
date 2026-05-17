@@ -63,10 +63,6 @@ in
         package = pkgs.postgresql_18;
       };
 
-      services.copyparty = {
-        settings.e2dsa = lib.mkForce false;
-      };
-
       system.stateVersion = "26.11";
     };
 }
