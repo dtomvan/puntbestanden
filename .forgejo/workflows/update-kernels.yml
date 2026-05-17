@@ -15,7 +15,9 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - run: |
+      - name: perform update
+        id: update
+        run: |
           git switch "$FORGEJO_REF_NAME"
           kver() {
             nix eval --inputs-from . --raw nixos-small#linuxPackages_latest.kernel.version
@@ -23,14 +25,15 @@ jobs:
           old="$(kver)"
           nix flake update --commit-lock-file nixos-small
           new="$(kver)"
-          git commit --amend -m "chore: linux $old -> $new"
-          # HACK: drop the commit if kernel did not update, in order to make
-          # next step a no-op
-          if [ "$old" = "$new" ]; then
-            git reset --hard HEAD~
+          if [ "$old" != "$new" ]; then
+            git commit --amend -m "chore: linux $old -> $new"
+            echo continue=1 >> "$FORGEJO_OUTPUT"
+          else
+            echo continue=0 >> "$FORGEJO_OUTPUT"
           fi
 
       - name: send PR
+        if: ${ steps.update.outputs.continue == "1" }
         run: |
           base="$(git branch --show-current)"
           if [[ "$(git rev-list origin/"$base"..HEAD --count)" -ne 0 ]]; then
