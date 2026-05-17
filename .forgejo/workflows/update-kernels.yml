@@ -22,7 +22,7 @@ jobs:
           old="$(kver)"
           nix flake update --commit-lock-file nixos-small
           new="$(kver)"
-          git commit --amend -am "chore: linux $old -> $new"
+          git commit --amend -m "chore: linux $old -> $new"
           # HACK: drop the commit if kernel did not update, in order to make
           # next step a no-op
           if [ "$old" = "$new" ]; then
