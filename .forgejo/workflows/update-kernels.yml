@@ -16,6 +16,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - run: |
+          git switch "$FORGEJO_REF_NAME"
           kver() {
             nix eval --inputs-from . --raw nixos-small#linuxPackages_latest.kernel.version
           }
