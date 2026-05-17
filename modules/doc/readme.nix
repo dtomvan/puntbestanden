@@ -33,10 +33,5 @@
       '';
   };
 
-  perSystem.files.files = [
-    {
-      path_ = "README.md";
-      drv = builtins.toFile "README.md" config.text.readme;
-    }
-  ];
+  perSystem.files."README.md" = builtins.toFile "README.md" config.text.readme;
 }

@@ -18,11 +18,6 @@ in
   perSystem =
     { pkgs, ... }:
     {
-      files.files = [
-        {
-          path_ = ".editorconfig";
-          drv = (pkgs.formats.ini { }).generate ".editorconfig" settings;
-        }
-      ];
+      files.".editorconfig" = (pkgs.formats.ini { }).generate ".editorconfig" settings;
     };
 }

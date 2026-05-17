@@ -27,6 +27,7 @@
       systemd.network.networks."10-uplink".networkConfig.Address = lib.mkDefault host.networking.endpoint;
 
       time.timeZone = lib.mkForce "UTC";
+      programs.command-not-found.enable = lib.mkForce false;
       users.mutableUsers = lib.mkDefault false;
 
       nix = {
