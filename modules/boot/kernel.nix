@@ -2,6 +2,6 @@
   flake.modules.nixos.profiles-base =
     { inputs', ... }:
     {
-      boot.kernelPackages = inputs'.nixos-small.legacyPackages.linuxPackages;
+      boot.kernelPackages = inputs'.nixos-small.legacyPackages.linuxPackages_latest;
     };
 }

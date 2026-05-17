@@ -17,7 +17,7 @@ jobs:
 
       - run: |
           kver() {
-            nix eval --inputs-from . --raw nixos-small#linuxPackages.kernel.version
+            nix eval --inputs-from . --raw nixos-small#linuxPackages_latest.kernel.version
           }
           old="$(kver)"
           nix flake update --commit-lock-file nixos-small
