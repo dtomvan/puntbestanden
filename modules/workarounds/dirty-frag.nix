@@ -10,6 +10,7 @@
         ];
       in
       {
+        # TASK(20260517-203141): explicitly list extra modules per host that I need to load. How to do that????
         # disable loading kernel modules after we are fully initialized. This
         # does break apps like droidcam because it modprobes v4l2loopback JIT.
         security.lockKernelModules = lib.mkDefault true;
@@ -20,6 +21,6 @@
         ) vulnerableModules;
         boot.blacklistedKernelModules = vulnerableModules;
       };
-    feather.security.lockKernelModules = false;
+    hosts-feather.security.lockKernelModules = false;
   };
 }
