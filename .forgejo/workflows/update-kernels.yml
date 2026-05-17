@@ -33,7 +33,7 @@ jobs:
           fi
 
       - name: send PR
-        if: ${{ steps.update.outputs.continue == "1" }}
+        if: ${{ steps.update.outputs.continue == '1' }}
         run: |
           base="$(git branch --show-current)"
           if [[ "$(git rev-list origin/"$base"..HEAD --count)" -ne 0 ]]; then
