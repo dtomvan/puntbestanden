@@ -36,7 +36,7 @@ in
           program = pkgs.writeShellApplication {
             name = "write-files";
             runtimeInputs = [ pkgs.gitMinimal ];
-            preferLocalBuild = true;
+            derivationArgs.preferLocalBuild = true;
             text = ''
               pushd "$(git rev-parse --show-toplevel)"
             ''
