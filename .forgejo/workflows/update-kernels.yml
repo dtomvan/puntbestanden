@@ -1,0 +1,46 @@
+"on":
+  schedule:
+    - cron: "0 18 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  update-kernels:
+    runs-on: nix
+    steps:
+      - name: configure git
+        run: |
+          git config --global user.name "forgejo-actions[bot]"
+          git config --global user.email "forgejo@users.noreply.git"
+          git config --global push.default simple
+
+      - uses: actions/checkout@v4
+
+      - run: |
+          kver() {
+            nix eval --inputs-from . --raw nixos-small#linuxPackages.kernel.version
+          }
+          old="$(kver)"
+          nix flake update --commit-lock-file nixos-small
+          new="$(kver)"
+          git commit --amend -am "chore: linux $old -> $new"
+          # HACK: drop the commit if kernel did not update, in order to make
+          # next step a no-op
+          if [ "$old" = "$new" ]; then
+            git reset --hard HEAD~
+          fi
+
+      - name: send PR
+        run: |
+          base="$(git branch --show-current)"
+          if [[ "$(git rev-list origin/"$base"..HEAD --count)" -ne 0 ]]; then
+            head="push-$(git rev-parse --short HEAD)"
+            git switch -c "$head"
+            git push --force-with-lease origin "$head"
+            curl "$FORGEJO_SERVER_URL/api/v1/repos/$FORGEJO_REPOSITORY/pulls" \
+              -H "Authorization: token $FORGEJO_TOKEN" \
+              --json "{
+              \"base\": \"$base\",
+              \"head\": \"$head\",
+              \"title\": \"chore: update kernels\"
+              }"
+          fi
