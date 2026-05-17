@@ -50,7 +50,7 @@ in
 
         path = mkOption {
           type = str;
-          default = "/srv/copyparty/${name}";
+          default = "/var/lib/copyparty/${name}";
         };
 
         extraFlags = mkOption {
