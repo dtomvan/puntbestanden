@@ -17,6 +17,8 @@ in
       "${modulesPath}/profiles/image-based-appliance.nix"
     ];
 
+    programs.command-not-found.enable = lib.mkForce false;
+
     system.nixos.variant_id = "hub";
 
     users.allowNoPasswordLogin = true;

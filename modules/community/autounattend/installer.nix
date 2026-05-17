@@ -39,6 +39,8 @@ in
         "${modulesPath}/installer/cd-dvd/channel.nix"
       ];
 
+      programs.command-not-found.enable = lib.mkForce false;
+
       environment.sessionVariables.NIX_PATH = lib.mkForce "nixpkgs=${pkgs.path}";
 
       nix.settings.experimental-features = [
