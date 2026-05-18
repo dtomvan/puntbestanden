@@ -43,6 +43,7 @@ in
           name = "tomvd";
         };
         actions.enable = true;
+        signing.enable = true;
       };
 
       infra.copy = {
