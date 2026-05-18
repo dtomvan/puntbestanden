@@ -126,6 +126,10 @@
             }
           );
 
+        # regreet broken on nvidia???
+        programs.regreet.enable = lib.mkForce false;
+        services.displayManager.ly.enable = lib.mkForce true;
+
         services.flatpak.packages = [
           "org.inkscape.Inkscape"
           "io.github.dvlv.boxbuddyrs"
