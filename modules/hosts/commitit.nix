@@ -1,7 +1,7 @@
 let
   inherit (import ../_consts.nix) domain;
 in
-{ self, lib, ... }:
+{ self, ... }:
 {
   hosts.hetzner1 = {
     description = "Hetzner bakkie for my own Forgejo instance";
