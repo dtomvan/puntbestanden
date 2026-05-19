@@ -60,6 +60,9 @@
               APP_SLOGAN = "Voorbij programmeren, Wij Smeden.";
             };
 
+            # reuse database for saving sessions so that after restarting forgejo your session is kept
+            session.PROVIDER = "db";
+
             server = {
               DOMAIN = cfg.domain;
               # You need to specify this to remove the port from URLs in the web UI.
