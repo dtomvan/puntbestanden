@@ -8,11 +8,21 @@ jobs:
   update-kernels:
     runs-on: nix
     steps:
+      - name: import GPG key
+        run: |
+          gpg --import <(cat <<< "${GPG_PRIVKEY:?}")
+        env:
+          GPG_PRIVKEY: ${{ secrets.GPG_PRIVKEY }}
+
       - name: configure git
         run: |
           git config --global user.name "forgejo-actions[bot]"
-          git config --global user.email "forgejo@users.noreply.git"
+          git config --global user.email "forgejo@git.toostveen.nl"
           git config --global push.default simple
+          git config --global commit.gpgSign true
+          git config --global user.signingKey "${GPG_KEY_ID:?}"
+        env:
+          GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
 
       - uses: actions/checkout@v4
 
