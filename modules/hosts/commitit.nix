@@ -63,6 +63,16 @@ in
         package = pkgs.postgresql_18;
       };
 
+      environment.systemPackages = [
+        # quick script that forces the runner to repull the image on next
+        # workflow run. Because it isn't entirely clear to me when act does and
+        # doesn't pull a new image.
+        (pkgs.writeShellScriptBin "forgejo-actions-reload" ''
+          sudo HOME=/var/lib/gitea-runner \
+            podman rmi git.toostveen.nl/tom/lix-with-node
+        '')
+      ];
+
       system.stateVersion = "26.11";
     };
 }
