@@ -54,12 +54,19 @@
           database.type = "postgres";
           lfs.enable = cfg.lfsSupport;
 
-          settings.server = {
-            DOMAIN = cfg.domain;
-            # You need to specify this to remove the port from URLs in the web UI.
-            ROOT_URL = "https://${cfg.domain}/";
-            HTTP_PORT = cfg.httpPort;
-            SSH_PORT = lib.head config.services.openssh.ports |> mkIf cfg.enableSsh; # enable SSH authentication
+          settings = {
+            overall = {
+              APP_NAME = "Smederij";
+              APP_SLOGAN = "Voorbij programmeren, Wij Smeden.";
+            };
+
+            server = {
+              DOMAIN = cfg.domain;
+              # You need to specify this to remove the port from URLs in the web UI.
+              ROOT_URL = "https://${cfg.domain}/";
+              HTTP_PORT = cfg.httpPort;
+              SSH_PORT = lib.head config.services.openssh.ports |> mkIf cfg.enableSsh; # enable SSH authentication
+            };
           };
         };
       };
