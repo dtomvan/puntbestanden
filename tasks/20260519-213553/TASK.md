@@ -2,7 +2,7 @@
 
 - STATE: OPEN
 - PRIORITY: 80
-- TAGS: 
+- TAGS: forgejo
 
-- [ ] Enable forgejo dumps
+- [x] Enable forgejo dumps
 - [ ] Just backup by ssh pushing to both feather and boomer, idgaf I don't have a lot to backup anyways. it's all for when forgejo breaks or something...

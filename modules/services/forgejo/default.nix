@@ -54,6 +54,12 @@
           database.type = "postgres";
           lfs.enable = cfg.lfsSupport;
 
+          dump = {
+            enable = true;
+            type = "tar.xz";
+            age = "4w";
+          };
+
           settings = {
             DEFAULT = {
               APP_NAME = "Smederij";
