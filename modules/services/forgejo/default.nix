@@ -55,7 +55,7 @@
           lfs.enable = cfg.lfsSupport;
 
           settings = {
-            overall = {
+            DEFAULT = {
               APP_NAME = "Smederij";
               APP_SLOGAN = "Voorbij programmeren, Wij Smeden.";
             };
