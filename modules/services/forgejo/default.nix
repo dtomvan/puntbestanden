@@ -63,6 +63,8 @@
             # reuse database for saving sessions so that after restarting forgejo your session is kept
             session.PROVIDER = "db";
 
+            cron.ENABLED = true;
+
             server = {
               DOMAIN = cfg.domain;
               # You need to specify this to remove the port from URLs in the web UI.
