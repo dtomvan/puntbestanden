@@ -4,7 +4,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Lockfile
-        run: nix flake lock
+        run: nix flake lock --accept-flake-config
       - name: Eval
         run: |
           declare -a packages=(nixvim nixvim-minimal)
@@ -12,13 +12,13 @@ jobs:
 
           for p in "${packages[@]}"; do
             set -x
-            nix eval ".#packages.x86_64-linux.$p"
+            nix eval --accept-flake-config ".#packages.x86_64-linux.$p"
             set +x
           done
 
           for p in "${nixosConfigs[@]}"; do
             set -x
-            nix eval ".#nixosConfigurations.$p.config.system.build.toplevel"
+            nix eval --accept-flake-config ".#nixosConfigurations.$p.config.system.build.toplevel"
             set +x
           done
       - name: Run selected flake checks
@@ -27,7 +27,7 @@ jobs:
 
           for p in "${checks[@]}"; do
             set -x
-            nix build ".#checks.x86_64-linux.$p"
+            nix build --accept-flake-config ".#checks.x86_64-linux.$p"
             set +x
           done
 
