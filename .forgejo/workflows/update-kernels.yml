@@ -34,7 +34,7 @@ jobs:
             nix eval --inputs-from . --raw nixos-small#linuxPackages_latest.kernel.version
           }
           old="$(kver)"
-          nix flake update --commit-lock-file nixos-small
+          nix flake update --accept-flake-config --commit-lock-file nixos-small
           new="$(kver)"
           if [ "$old" != "$new" ]; then
             git commit --amend -m "chore: linux $old -> $new"
