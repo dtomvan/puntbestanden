@@ -8,6 +8,7 @@ let
     mapAttrs'
     mergeAttrs
     mkIf
+    mkMerge
     nameValuePair
     ;
 
@@ -63,6 +64,14 @@ in
     {
       services.openssh.enable = true;
       programs.ssh = { inherit knownHosts; };
-      users.users = mkIf (maybeUserConfig.success && maybeUserConfig.value != null) maybeUserConfig.value;
+      users.users = mkMerge [
+        (mkIf (maybeUserConfig.success && maybeUserConfig.value != null) maybeUserConfig.value)
+        {
+          tomvd.openssh.authorizedKeys.keys = [
+            # Nothing Phone (3a) key
+            "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO7XeCMqmJps9MSUI1g7UmMAKqsggo+XOjfO8P3zw16HON7eE/eMx8OZXhovfHXPEm+dxKjLyV3JepjH+JzPU3Q="
+          ];
+        }
+      ];
     };
 }
