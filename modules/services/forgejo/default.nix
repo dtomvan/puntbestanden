@@ -1,7 +1,12 @@
 # most of this is amalgamated from wiki.nixos.org pages
 {
   flake.modules.nixos.services-forgejo =
-    { lib, config, ... }:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     let
       cfg = config.infra.fj;
 
@@ -57,6 +62,9 @@
           dump = {
             enable = true;
             type = "tar.xz";
+            # human-readable format instead of default of plain timestamp.
+            # HACK: this uses shell injection which is based on an implementation detail where `cfg.dump.file` isn't escaped
+            file = "\"forgejo-dump-$(${lib.getExe' pkgs.coreutils "date"} -Is).tar.xz\"";
             age = "4w";
           };
 
