@@ -6,6 +6,6 @@
 
     NEW: you can do this in YOUR repo too, with your own target config!
 
-    Just run `nix flake init -t github:dtomvan/templates#autounattend` `:)`
+    Just run `nix flake init -t git+https://git.toostveen.nl/tom/templates#autounattend` `:)`
   '';
 }

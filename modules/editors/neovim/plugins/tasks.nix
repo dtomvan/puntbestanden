@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake-file.inputs.tasks = {
-    url = "github:dtomvan/tasks.nvim";
+    url = "git+https://git.toostveen.nl/tom/tasks.nvim";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 

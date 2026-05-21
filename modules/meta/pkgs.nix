@@ -47,7 +47,7 @@ in
 
       lazy-apps = {
         # my fork which adds "support" for devshells
-        url = "github:dtomvan/lazy-apps";
+        url = "git+https://git.toostveen.nl/tom/lazy-apps";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };

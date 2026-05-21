@@ -38,7 +38,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
-      url = "github:dtomvan/deploy-rs";
+      url = "git+https://git.toostveen.nl/tom/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     devour-flake = {
@@ -64,7 +64,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lazy-apps = {
-      url = "github:dtomvan/lazy-apps";
+      url = "git+https://git.toostveen.nl/tom/lazy-apps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     mwg = {
@@ -110,7 +110,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     tasks = {
-      url = "github:dtomvan/tasks.nvim";
+      url = "git+https://git.toostveen.nl/tom/tasks.nvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix = {

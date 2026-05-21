@@ -53,15 +53,15 @@
       "locked": {
         "lastModified": 1779015929,
         "narHash": "sha256-+NWx4Zb9aQxuwjL8E2MzyAaNa/cQtuFWQXXT5yUOujQ=",
-        "owner": "dtomvan",
-        "repo": "deploy-rs",
+        "ref": "refs/heads/master",
         "rev": "eb0703dfda9c5aba6533adb33a1340cc00420576",
-        "type": "github"
+        "revCount": 365,
+        "type": "git",
+        "url": "https://git.toostveen.nl/tom/deploy-rs"
       },
       "original": {
-        "owner": "dtomvan",
-        "repo": "deploy-rs",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.toostveen.nl/tom/deploy-rs"
       }
     },
     "devour-flake": {
@@ -376,15 +376,15 @@
       "locked": {
         "lastModified": 1768247242,
         "narHash": "sha256-sT3lgZnPfeFov8neHHN4iXkeSy+V4PBFgUbW3WJFCQ4=",
-        "owner": "dtomvan",
-        "repo": "lazy-apps",
+        "ref": "refs/heads/master",
         "rev": "61fb2f10eca1cbf5857fcf12df466631b502f5e7",
-        "type": "github"
+        "revCount": 26,
+        "type": "git",
+        "url": "https://git.toostveen.nl/tom/lazy-apps"
       },
       "original": {
-        "owner": "dtomvan",
-        "repo": "lazy-apps",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.toostveen.nl/tom/lazy-apps"
       }
     },
     "mwg": {
@@ -434,27 +434,6 @@
       "inputs": {
         "nixpkgs": [
           "deploy-rs",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1737420293,
-        "narHash": "sha256-F1G5ifvqTpJq7fdkT34e/Jy9VCyzd5XfJ9TO8fHhJWE=",
-        "owner": "nix-community",
-        "repo": "nix-github-actions",
-        "rev": "f4158fa080ef4503c8f4c820967d946c2af31ec9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nix-github-actions",
-        "type": "github"
-      }
-    },
-    "nix-github-actions_2": {
-      "inputs": {
-        "nixpkgs": [
-          "tasks",
           "nixpkgs"
         ]
       },
@@ -880,7 +859,6 @@
     "tasks": {
       "inputs": {
         "flake-parts": "flake-parts_7",
-        "nix-github-actions": "nix-github-actions_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -888,17 +866,17 @@
         "treefmt-nix": "treefmt-nix_5"
       },
       "locked": {
-        "lastModified": 1778346971,
-        "narHash": "sha256-ocFvOSM4FTpuXCn5rMb45NHGpj+G0P5XtVFW01blVrw=",
-        "owner": "dtomvan",
-        "repo": "tasks.nvim",
-        "rev": "466e1a8d6327bfb4f2c55f259fe249d9db401b68",
-        "type": "github"
+        "lastModified": 1778947526,
+        "narHash": "sha256-O82V9G4yyWTpupI4y0oAZQXvWyacCBIleLV3UKNJ2U4=",
+        "ref": "refs/heads/main",
+        "rev": "6eb536190cfc9be1f071754066d1b7f133579177",
+        "revCount": 90,
+        "type": "git",
+        "url": "https://git.toostveen.nl/tom/tasks.nvim"
       },
       "original": {
-        "owner": "dtomvan",
-        "repo": "tasks.nvim",
-        "type": "github"
+        "type": "git",
+        "url": "https://git.toostveen.nl/tom/tasks.nvim"
       }
     },
     "treefmt-nix": {
