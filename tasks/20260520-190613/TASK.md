@@ -1,6 +1,6 @@
 # merge-when-green
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 - TAGS: ci
 
