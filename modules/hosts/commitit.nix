@@ -35,6 +35,7 @@ in
           lets-encrypt
           services-forgejo
           services-copyparty
+          services-miniflux
           ;
       };
 
@@ -61,6 +62,11 @@ in
         };
         nginx.enable = true;
         paste.enable = true;
+      };
+
+      infra.miniflux = {
+        enable = true;
+        nginx.enable = true;
       };
 
       services.postgresql = {
