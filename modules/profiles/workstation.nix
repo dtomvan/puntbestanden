@@ -36,6 +36,7 @@
             forge-sparks
             keepassxc
             libreoffice-qt6-fresh
+            mpv
             nixpkgs-reviewFull
             obsidian
             pdfarranger
