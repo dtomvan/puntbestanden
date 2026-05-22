@@ -13,9 +13,13 @@ in
       wireguard = {
         enable = true;
         endpoint = "[2a01:4f8:1c18:5b92::1]:51820";
+        allowedIPs = [
+          "10.0.0.0/24"
+          "fd42:42:42::/64"
+        ];
         ips = [
-          "2001:db8:1234:ffff::1:3/128"
           "10.0.0.3/32"
+          "fd42:42:42::3/128"
         ];
       };
     };
@@ -31,6 +35,7 @@ in
           lets-encrypt
           services-forgejo
           services-copyparty
+          services-miniflux
           ;
       };
 
@@ -57,6 +62,11 @@ in
         };
         nginx.enable = true;
         paste.enable = true;
+      };
+
+      infra.miniflux = {
+        enable = true;
+        nginx.enable = true;
       };
 
       services.postgresql = {

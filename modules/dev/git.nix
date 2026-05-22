@@ -32,6 +32,10 @@
           autoStash = true;
           updateRefs = true;
         };
+
+        safe.directory = [
+          "/var/lib/comin/repository"
+        ];
       };
     };
 
