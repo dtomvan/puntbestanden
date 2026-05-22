@@ -1,6 +1,8 @@
 # TASK(20260517-143309): make infra module `infra.copy` with more customizability
 { inputs, lib, ... }:
 let
+  defaultDomain = "fs.${(import ../_consts.nix).domain}";
+
   inherit (lib)
     mkEnableOption
     mkIf
@@ -10,6 +12,7 @@ let
     mkPackageOption
     optionalAttrs
     optionals
+    singleton
     ;
 
   inherit (lib.types)
@@ -102,7 +105,7 @@ in
 
           domain = mkOption {
             type = str;
-            default = "fs.${(import ../_consts.nix).domain}";
+            default = defaultDomain;
           };
 
           extraVirtualHostSettings = mkOption {
@@ -297,5 +300,35 @@ in
           };
         })
       ];
+    };
+
+  perSystem =
+    { pkgs, inputs', ... }:
+    {
+      packages.pb = pkgs.writeShellApplication {
+        name = "pb";
+        runtimeInputs = builtins.attrValues {
+          # unoverlayed because otherwise it's broken
+          inherit (inputs'.nixpkgs.legacyPackages)
+            copyparty-min
+            ;
+          inherit (pkgs)
+            sops
+            coreutils
+            ;
+        };
+        text = ''
+          tmp="$(mktemp /tmp/XXXXXXXX.txt)"
+          cat > "$tmp"
+          u2c -u -a "$(sops decrypt ${../../secrets/copyparty.secret})" "''${1:-https://${defaultDomain}/paste}" "$tmp"
+          rm "$tmp"
+        '';
+      };
+    };
+
+  flake.modules.nixos.profiles-workstation =
+    { self', ... }:
+    {
+      environment.systemPackages = singleton self'.packages.pb;
     };
 }
