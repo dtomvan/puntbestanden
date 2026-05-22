@@ -18,10 +18,6 @@
             url = "https://github.com/NixOS/nixpkgs/pulls?q=involves:dtomvan";
           }
           {
-            name = "nixos-unstable-patched";
-            url = "https://github.com/dtomvan/nixpkgs/tree/nixos-unstable-patched";
-          }
-          {
             name = "Add to Miniflux";
             url = "javascript:location.href='https://rss.toostveen.nl/bookmarklet?uri='+encodeURIComponent(window.location.href)";
           }
