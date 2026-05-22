@@ -1,4 +1,3 @@
-# TASK(20260517-143309): make infra module `infra.copy` with more customizability
 { inputs, lib, ... }:
 let
   defaultDomain = "fs.${(import ../_consts.nix).domain}";
