@@ -9,11 +9,7 @@
     { inputs', host, ... }:
     {
       imports = builtins.attrValues {
-        inherit (inputs.srvos.nixosModules)
-          server
-
-          mixins-nginx
-          ;
+        inherit (inputs.srvos.nixosModules) server;
 
         inherit (self.modules.nixos)
           nix-sensible
@@ -21,6 +17,7 @@
           networking-wireguard
           services-ssh
           users-root
+          services-nginx
           ;
       };
 
