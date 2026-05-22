@@ -60,7 +60,7 @@
             ;
         };
         home.packages = builtins.attrValues {
-          inherit (pkgs.nur.repos.dtomvan) blogtato sshp;
+          inherit (pkgs.nur.repos.dtomvan) sshp;
         };
       };
   };
