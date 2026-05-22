@@ -22,6 +22,10 @@
             url = "https://github.com/dtomvan/nixpkgs/tree/nixos-unstable-patched";
           }
           {
+            name = "Add to Miniflux";
+            url = "javascript:location.href='https://rss.toostveen.nl/bookmarklet?uri='+encodeURIComponent(window.location.href)";
+          }
+          {
             name = "Nix manual";
             url = "https://nix.dev/manual/nix/latest/";
           }
