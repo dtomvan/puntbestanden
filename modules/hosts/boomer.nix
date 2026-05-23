@@ -66,8 +66,6 @@
             gaming-free
             steam
 
-            # broken?
-            services-pinchflat
             services-syncthing
 
             virt-kvm
