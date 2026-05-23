@@ -11,11 +11,12 @@ in
 {
   flake.modules.nixos.hub = {
     imports = [
-      self.modules.nixos.services-ssh
       inputs.copyparty.nixosModules.default
       # make it more vacuum
       "${modulesPath}/profiles/image-based-appliance.nix"
     ];
+
+    services.openssh.enable = true;
 
     programs.command-not-found.enable = lib.mkForce false;
 
