@@ -87,6 +87,7 @@ in
         };
       };
 
+      # HACK: prometheus-http-config has to correspond to grafana-default-password... sigh
       config = mkMerge [
         {
           sops.secrets.grafana-default-password = {
@@ -171,6 +172,9 @@ in
                 url = "http://${config.services.prometheus.listenAddress}:${toString config.services.prometheus.port}";
                 isDefault = true;
                 editable = false;
+                basicAuth = true;
+                basicAuthUser = cfg.admin.username;
+                secureJsonData.basicAuthPassword = "$__file{${cfg.admin.passwordFile}}";
               };
 
               dashboards.settings.providers = [
