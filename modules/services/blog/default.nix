@@ -1,3 +1,4 @@
+{ self, ... }:
 {
   perSystem =
     { pkgs, ... }:
@@ -17,6 +18,10 @@
         pkgs.runCommand "my-jorge-blog" { nativeBuildInputs = [ pkgs.nur.repos.dtomvan.jorge ]; }
           ''
             cp -r ${./.}/* .
+            substituteInPlace layouts/default.html \
+              --subst-var-by NIX_REV "${
+                if self ? sourceInfo.rev then "commit/${self.sourceInfo.rev}" else "branch/hoofdlijn"
+              }"
             chmod -R +w *
             jorge build
             cp -r target $out
