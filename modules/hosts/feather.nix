@@ -32,7 +32,7 @@
         ];
       };
     };
-    remoteBuild.enable = true;
+    remoteBuild.enable = false;
 
     enableHomeManager = true;
     enableNixvim = true;

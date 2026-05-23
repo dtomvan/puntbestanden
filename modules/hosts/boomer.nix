@@ -31,7 +31,7 @@
     };
     isNvidiaPascal = true;
     remoteBuild = {
-      enable = true;
+      enable = false;
       settings = {
         maxJobs = 12;
         supportedFeatures = [

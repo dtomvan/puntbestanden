@@ -410,6 +410,26 @@
         "url": "https://git.toostveen.nl/tom/merge-when-green-fj.git"
       }
     },
+    "nix-cache-beacon": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779419437,
+        "narHash": "sha256-NyAMLWmp3QdChialUPdr6yxJD6uooW4mLQ30R6tR5JQ=",
+        "owner": "adisbladis",
+        "repo": "nix-cache-beacon",
+        "rev": "657f7730b94b612a14ed0a9b31fcc3829cd6232f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adisbladis",
+        "repo": "nix-cache-beacon",
+        "type": "github"
+      }
+    },
     "nix-facts": {
       "inputs": {
         "nixpkgs": [
@@ -741,6 +761,7 @@
         "home-manager": "home-manager",
         "lazy-apps": "lazy-apps",
         "mwg": "mwg",
+        "nix-cache-beacon": "nix-cache-beacon",
         "nix-facts": "nix-facts",
         "nix-index-database": "nix-index-database",
         "nixos-small": "nixos-small",
