@@ -1,0 +1,14 @@
+---
+layout: default
+---
+
+<p>200 OK.</p>
+
+<p>Just a quick placeholder for my domain <a href="https://toostveen.nl">toostveen.nl</a> using the simple <a href="https://github.com/facundoolano/jorge"><code>jorge</code></a> SSG.</p>
+
+{% for post in site.posts limit:3 %}
+{% include post_preview.html %}
+{% endfor %}
+
+<!-- <p>See the full <a href="/blog">blog archive</a> or subscribe to the <a href="/feed.xml">feed</a>.</p> -->
+<br/>

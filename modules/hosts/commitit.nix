@@ -41,6 +41,7 @@ in
           services-copyparty
           services-miniflux
           services-monitoring
+          services-blog
           ;
       };
 

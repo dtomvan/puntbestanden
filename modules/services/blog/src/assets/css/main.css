@@ -1,0 +1,312 @@
+html {
+    color-scheme: light dark;
+    overflow-y: scroll;
+}
+
+body {
+    max-width: 38em;
+    margin: 0 auto;
+    padding: 0 1rem;
+    width: auto;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.6;
+
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    /* https://stackoverflow.com/a/38347131/993769 */
+    text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+}
+
+.footer {
+    padding: 2rem 0 1rem;
+    margin-top: auto;
+}
+
+@media screen and (max-width: 480px) {
+    .hidden-mobile {
+        display: none!important;
+    }
+}
+
+@media screen and (min-width: 481px) {
+    .hidden-desktop {
+        display: none!important;
+    }
+}
+
+nav {
+    margin: 1rem 0;
+    line-height: 1.8;
+    border-bottom: 1px solid;
+    display: flex;
+}
+.nav-right {
+    margin-left: auto;
+}
+nav a:not(:last-child) {
+    margin-right: 1rem
+}
+nav a:hover {
+    text-decoration: none;
+}
+
+.layout-post li p {
+    margin: 0 0 0.5rem 0;
+}
+
+li:not(:last-child) {
+    padding-bottom: .75rem;
+}
+
+a, a:visited {
+    text-decoration: none;
+}
+/*
+Set visited links to the same color as regular ones.
+Hardcoding Firefox colors since I couldn't find a portable way of reusing the browser defaults.
+*/
+a:visited {
+    color:rgb(0, 0, 238);
+}
+@media (prefers-color-scheme: dark) {
+    a:visited {
+        color:rgb(140, 140, 255);
+    }
+}
+a:hover {
+    text-decoration: underline
+}
+
+a.title {
+    color: black;
+    padding-right: .25rem;
+}
+@media (prefers-color-scheme: dark) {
+    a.title {
+        color: white;
+    }
+}
+
+.footer, .footer a, .date, .tags, .tags a {
+    color: silver;
+}
+.date {
+    padding-right: .5rem;
+    white-space: nowrap;
+}
+.tags {
+    display: inline-block;
+}
+
+article.post {
+    display: flex;
+    padding-bottom: .5rem;
+}
+
+.center-block {
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    border-top:1px solid lightgray;
+}
+
+/* tweaks for post content style */
+.layout-post img {
+    max-width: 75%;
+    max-height: 400px;
+}
+
+img.cover-img {
+    width: 100%;
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: -2rem;
+}
+
+.layout-post {
+    hyphens: auto;
+    text-align: justify;
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-font-smoothing: antialiased !important;
+    text-rendering: optimizelegibility !important;
+    letter-spacing: .03em;
+}
+
+.layout-post .title {
+    hyphens:none;
+}
+
+.layout-post header {
+    margin: 3rem 0 5rem;
+    text-align: left;
+}
+
+.layout-post header.with-cover {
+    margin-top: -0.5rem;
+}
+
+pre {
+    overflow-x: auto;
+    padding: 1rem;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.src pre::-webkit-scrollbar {
+    display: none;
+}
+
+/* There are several code rendering scenarios that need to be handled reasonably:
+- light vs dark preferred color scheme
+- pre code blocks vs inline code spans
+- language set vs no language set
+- markdown vs org rendering
+
+Need to decide between:
+- fixing the color scheme of the page + using one of chroma's themes
+- supporting both light/dark and disabling syntax highlighting altogether
+- supporting light/dark, picking a theme and patching it to render decently
+  with both preferences (as done below, assuming chroma's github theme)
+*/
+.layout-post :not(pre) > code {
+    padding: .2em .4em;
+    background-color: whitesmoke!important;
+    color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    .layout-post :not(pre) > code {
+        background-color: rgba(110, 118, 129, 0.4)!important;
+        color: white;
+    }
+}
+
+.layout-post pre, .layout-post code {
+    border-radius: 6px;
+    background-color: whitesmoke!important;
+    font-size: 0.9rem;
+    hyphens: none;
+    color: black;
+}
+
+blockquote {
+    border-left: 2px solid whitesmoke;
+    padding-left: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+@media screen and (max-width: 480px) {
+    blockquote {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
+
+.layout-post p.verse {
+    text-align: right;
+}
+
+.layout-post p {
+    margin-bottom: 1.5rem;
+}
+
+.layout-post p + h2 {
+    padding-top: 1.5rem;
+}
+
+.layout-post .center-block {
+    margin: 2rem 0;
+}
+
+/* override in mobile devices for more compact text */
+@media screen and (max-width: 768px) {
+    .layout-post {
+        letter-spacing: unset;
+        hyphens: none;
+        text-align: left;
+    }
+
+    .layout-post p {
+        margin: 1rem 0;
+    }
+
+    .layout-post p + p {
+        text-indent: 0;
+    }
+
+    .layout-post img {
+        max-width: 100%;
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+@media screen and (max-width: 480px) {
+    td { display: inline-block }
+}
+
+td, th {
+    padding: .5rem;
+}
+
+
+hr.footnotes-separatator {
+    display:none;
+}
+
+/* makes footnote number and text display in the same line  */
+.footnote-definition {
+    display: flex;
+    vertical-align: top;
+    margin-bottom: .4rem;
+}
+.footnote-body, .footnote-body p {
+    display: inline;
+    margin-left: 0.25rem;
+}
+
+/* These control the expand/collapse behavior of the tags page */
+details summary {
+    list-style: none;
+    cursor: pointer;
+}
+
+details summary h3::after {
+    content: "[+]";
+    font-size: small;
+    font-weight: normal;
+    font-family: monospace;
+    vertical-align: middle;
+}
+
+details[open] summary h3::after {
+    content: "[-]"
+}
+
+details > summary::-webkit-details-marker {
+    display: none;
+}

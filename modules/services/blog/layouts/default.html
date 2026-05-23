@@ -1,0 +1,11 @@
+---
+layout: base
+---
+{% include nav.html %}
+
+<div class="layout-{{ page.layout }}">
+    {% if page.title %}<h2>{{page.title}}</h2>{% endif %}
+    {{ content }}
+    <br/>
+</div>
+<p class="footer center-block">powered by <a href="https://jorge.olano.dev">jorge</a></p>

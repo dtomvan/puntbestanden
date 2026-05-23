@@ -1,0 +1,13 @@
+name: "Tom Oostveen"
+author: "Tom Oostveen"
+url: "https://toostveen.nl"
+description: "Placeholder"
+contact:
+  - name: PGP
+    href: https://keyoxide.org/91C74999F109AE74854AC519EFD11A9B09D8D2C6
+  - name: IM
+    href: https://matrix.to/#/@tvd:matrix.org
+  - name: SCM
+    href: https://git.toostveen.nl/tom
+  - name: MS-SCM
+    href: https://github.com/dtomvan

@@ -1,0 +1,19 @@
+<nav>
+    <a href="/">{{ site.config.name }}</a>
+    <!-- <a href="/blog/">blog</a> -->
+
+    <div class="nav-right">
+        <div class="hidden-mobile">
+            {% assign sections = page.submenu %}
+            {% for section in sections %}
+            <a href="{{section[1]}}">{{section[0]}}</a>
+            {% endfor %}
+            {% for item in site.config.contact %}
+            <a href="{{item.href}}">{{item.name}}</a>
+            {% endfor %}
+        </div>
+        <div class="hidden-desktop">
+            <a href="/contact">Contact</a></li>
+        </div>
+    </div>
+</nav>
