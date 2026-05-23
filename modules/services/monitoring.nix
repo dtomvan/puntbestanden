@@ -11,7 +11,6 @@ let
     singleton
     ;
   inherit (lib.types)
-    attrs
     str
     listOf
     package
