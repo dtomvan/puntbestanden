@@ -16,9 +16,11 @@ let
   inherit (lib)
     attrValues
     concatLines
+    concatMapStringsSep
     filter
     mkEnableOption
     mkOption
+    singleton
     trim
     ;
   inherit (lib.types)
@@ -188,7 +190,25 @@ in
   };
 
   config = {
-    perSystem.legacyPackages.hosts = builtins.toFile "hosts.json" (builtins.toJSON config.hosts);
+    perSystem =
+      { pkgs, self', ... }:
+      {
+        legacyPackages.hosts = builtins.toFile "hosts.json" (builtins.toJSON config.hosts);
+        devshells.default.packages = singleton self'.packages.perhost;
+        packages.perhost = pkgs.writeShellApplication {
+          name = "perhost";
+          runtimeInputs = [ pkgs.nur.repos.dtomvan.sshp ];
+          runtimeEnv.hosts =
+            config.hosts |> attrValues |> concatMapStringsSep "\n" (h: h.networking.hostName);
+          text = ''
+            echo Will execute: "$*"
+            read -r -n 1 -p 'is this okay? [yN]' choice
+            if [[ "$choice" =~ [yY] ]]; then
+              sshp -f <(printf '%s\n' "''${hosts:?}") "$@"
+            fi
+          '';
+        };
+      };
 
     text.readme.parts.hostnames = ''
       ## The hostnames
