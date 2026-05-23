@@ -18,6 +18,7 @@ let
     ;
 
   nodeExporterPort = 9100;
+  systemdExporterPort = 9558;
 in
 {
   flake.modules.nixos.prometheus-node-exporter =
@@ -36,6 +37,13 @@ in
         disabledCollectors = [ "textfile" ];
         openFirewall = true;
         firewallFilter = "-i wg0 -p tcp -m tcp --dport ${toString nodeExporterPort}";
+      };
+
+      services.prometheus.exporters.systemd = mkIf host.prometheus.exportNode {
+        enable = true;
+        port = systemdExporterPort;
+        openFirewall = true;
+        firewallFilter = "-i wg0 -p tcp -m tcp --dport ${toString systemdExporterPort}";
       };
     };
 
@@ -200,16 +208,31 @@ in
             enableReload = true;
             webExternalUrl = "https://${cfg.prometheus.domain}";
             webConfigFile = config.sops.secrets.prometheus-http-config.path;
-            scrapeConfigs = singleton {
-              job_name = "node";
-              static_configs =
-                toplevel.config.hosts
-                |> attrValues
-                |> filter (h: h.prometheus.exportNode)
-                |> map (h: {
-                  targets = singleton "${h.networking.hostName}:${toString nodeExporterPort}";
-                });
-            };
+            scrapeConfigs =
+              map
+                (
+                  { job_name, port }:
+                  {
+                    inherit job_name;
+                    static_configs =
+                      toplevel.config.hosts
+                      |> attrValues
+                      |> filter (h: h.prometheus.exportNode)
+                      |> map (h: {
+                        targets = singleton "${h.networking.hostName}:${toString port}";
+                      });
+                  }
+                )
+                [
+                  {
+                    job_name = "node";
+                    port = nodeExporterPort;
+                  }
+                  {
+                    job_name = "systemd";
+                    port = systemdExporterPort;
+                  }
+                ];
           };
         })
       ];
