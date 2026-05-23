@@ -10,6 +10,7 @@
     };
 
   nixConfig = {
+    allow-import-from-derivation = false;
     extra-experimental-features = [
       "pipe-operators"
       "pipe-operator"
