@@ -2,7 +2,6 @@
 
 include "autostart.kdl"
 include "binds.kdl"
-include "feather.kdl"
 include "input.kdl"
 include "layout.kdl"
 include "misc.kdl"
