@@ -16,7 +16,6 @@ let
   inherit (lib.types)
     attrsOf
     listOf
-    nullOr
     passwdEntry
     port
     raw
@@ -34,11 +33,7 @@ in
   ];
 
   flake.modules.nixos.services-copyparty =
-    {
-      config,
-      pkgs,
-      ...
-    }:
+    { config, pkgs, ... }:
     let
       cfg = config.infra.copy;
       mkCopypartyVolumeOptions = name: {
@@ -88,8 +83,8 @@ in
         };
 
         port = mkOption {
-          type = nullOr port;
-          default = null;
+          type = port;
+          default = 3923;
         };
 
         nginx = {
@@ -130,17 +125,6 @@ in
 
       config = mkMerge [
         {
-          assertions = [
-            {
-              assertion = cfg.port != null -> !cfg.nginx.enable;
-              message = "can't set a port if copyparty is managed by nginx";
-            }
-            {
-              assertion = cfg.nginx.enable || (cfg.port != null);
-              message = "need to either configure a port or enable nginx";
-            }
-          ];
-
           sops.secrets.copyparty = {
             mode = "0400";
             sopsFile = ../../secrets/copyparty.secret;
@@ -237,18 +221,20 @@ in
 
               # human-readable file size: SI format, 2 decimals (1.18 MB)
               ui-filesz = "4c";
+
+              # prometheus at /.cpr/metrics
+              stats = true;
+              stats-u = "*";
             }
             // optionalAttrs cfg.nginx.enable {
               i = "unix:770:${cfg.nginx.unixSocket},0.0.0.0";
+              p = cfg.port;
               # reverse proxy (@bartoostveen)
               # Trust that nginx is configured correctly
               xff-hdr = "x-forwarded-for";
               rproxy = 1;
               daw = true;
               dont-ban = "aa"; # Do not ban folks that have admin anywhere
-            }
-            // optionalAttrs (!cfg.nginx.enable) {
-              p = cfg.port;
             };
 
             accounts.${cfg.admin.username} = { inherit (cfg.admin) passwordFile; };
@@ -331,6 +317,11 @@ in
                     // cfg.paste.extraFlags;
                 };
               };
+          };
+
+          infra.monitoring.extraScrapeConfigs.copyparty = {
+            inherit (cfg) port;
+            metrics_path = "/.cpr/metrics/";
           };
         })
       ];
