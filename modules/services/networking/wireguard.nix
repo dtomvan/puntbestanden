@@ -18,7 +18,22 @@ let
       name = host.networking.hostName;
       inherit (host.networking.wireguard) allowedIPs endpoint publicKey;
       persistentKeepalive = 25;
-    });
+    })
+    |> (
+      l:
+      l
+      ++ (lib.optionals (client.networking.wireguard.endpoint != null) [
+        {
+          name = "nothing-phone-2a";
+          publicKey = "JSx4vrmxqFBzN72SSfzLRtBS+OPatD4hKMrHNrqr1Vk=";
+          allowedIPs = [
+            "10.0.0.4/32"
+            "fd42:42:42::4/128"
+          ];
+          persistentKeepalive = 25;
+        }
+      ])
+    );
 
   hostsFor =
     host:
