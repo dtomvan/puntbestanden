@@ -80,6 +80,11 @@
         boot.kernelModules = lib.singleton "acpi_call";
         boot.extraModulePackages = lib.singleton config.boot.kernelPackages.acpi_call;
 
+        services.kmscon = {
+          enable = true;
+          hwRender = true;
+        };
+
         programs.gaming-free = {
           enable = true;
           enableGraphical = true;

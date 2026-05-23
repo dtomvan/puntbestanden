@@ -45,6 +45,16 @@ in
         fontSize = fixedWidth.pointSize;
       };
 
+      services.kmscon = {
+        fonts = lib.singleton {
+          name = fixedWidth.family;
+          package = monoFontPackage;
+        };
+        extraConfig = ''
+          font-size=${toString fixedWidth.pointSize}
+        '';
+      };
+
       services = {
         ${if config ? services.copyparty then "copyparty" else null} =
           lib.mkIf config.services.copyparty.enable
