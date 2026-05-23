@@ -23,6 +23,7 @@ in
         ];
       };
     };
+    prometheus.exportNode = true;
   };
 
   flake.modules.nixos.hosts-commitit =
@@ -36,6 +37,7 @@ in
           services-forgejo
           services-copyparty
           services-miniflux
+          services-monitoring
           ;
       };
 
@@ -68,6 +70,8 @@ in
         enable = true;
         nginx.enable = true;
       };
+
+      infra.monitoring.enable = true;
 
       services.postgresql = {
         enable = true;
