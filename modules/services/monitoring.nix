@@ -10,7 +10,12 @@ let
     mkDefault
     singleton
     ;
-  inherit (lib.types) str listOf package;
+  inherit (lib.types)
+    attrs
+    str
+    listOf
+    package
+    ;
 
   nodeExporterPort = 9100;
 in

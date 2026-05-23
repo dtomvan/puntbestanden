@@ -23,7 +23,10 @@ in
         ];
       };
     };
-    prometheus.exportNode = true;
+    prometheus = {
+      exportNode = true;
+      exportNginx = true;
+    };
   };
 
   flake.modules.nixos.hosts-commitit =

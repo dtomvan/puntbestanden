@@ -1,7 +1,10 @@
-{ inputs, lib, ... }:
+toplevel@{ inputs, lib, ... }:
+let
+  nginxExporterPort = 9113;
+in
 {
   flake.modules.nixos.services-nginx =
-    { config, ... }:
+    { config, host, ... }:
     {
       imports = [ inputs.srvos.nixosModules.mixins-nginx ];
 
@@ -83,5 +86,37 @@
           '';
         };
       };
+
+      services.prometheus.exporters.nginx =
+        lib.mkIf (host.prometheus.exportNginx && host.networking.wireguard.enable)
+          {
+            enable = true;
+            port = nginxExporterPort;
+            openFirewall = true;
+            firewallFilter = "-i wg0 -p tcp -m tcp --dport ${toString nginxExporterPort}";
+          };
+    };
+
+  flake.modules.nixos.services-monitoring =
+    { pkgs, ... }:
+    {
+      services.prometheus.scrapeConfigs = lib.singleton {
+        job_name = "nginx";
+        static_configs =
+          toplevel.config.hosts
+          |> builtins.attrValues
+          |> builtins.filter (h: h.prometheus.exportNginx)
+          |> map (h: {
+            targets = lib.singleton "${h.networking.hostName}:${toString nginxExporterPort}";
+          });
+      };
+
+      infra.monitoring.grafana.dashboards = lib.singleton (
+        pkgs.fetchurl {
+          name = "prometheus-nginx-exporter.json";
+          url = "https://grafana.com/api/dashboards/14900/revisions/2/download";
+          hash = "sha256-9iOEwKdFxOyw2T7Non4k2yUwiajWpH3qgQTyJRrttwM=";
+        }
+      );
     };
 }
