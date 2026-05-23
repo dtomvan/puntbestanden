@@ -78,6 +78,8 @@
               HTTP_PORT = cfg.httpPort;
               SSH_PORT = lib.head config.services.openssh.ports |> mkIf cfg.enableSsh; # enable SSH authentication
             };
+
+            repository.DISABLE_DOWNLOAD_SOURCE_ARCHIVES = mkDefault true;
           };
         };
       };
