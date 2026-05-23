@@ -173,10 +173,6 @@ in
         alacritty.enable = true;
         bat.enable = true;
         btop.enable = true;
-        firefox = {
-          enable = true;
-          profiles.default.enable = true;
-        };
         foot.enable = true;
         ghostty.enable = true;
         glamour.enable = true;
