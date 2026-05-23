@@ -1,7 +1,7 @@
 { inputs, lib, ... }:
 {
   flake.modules.nixos.services-nginx =
-    { pkgs, config, ... }:
+    { config, ... }:
     {
       imports = [ inputs.srvos.nixosModules.mixins-nginx ];
 
@@ -25,25 +25,33 @@
 
         commonHttpConfig =
           let
-            realIps =
-              file:
-              builtins.readFile file
-              |> lib.splitString "\n"
-              |> lib.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};");
-
-            v4 = pkgs.fetchurl {
-              url = "https://www.cloudflare.com/ips-v4";
-              hash = "sha256-8Cxtg7wBqwroV3Fg4DbXAMdFU1m84FTfiE5dfZ5Onns=";
-            };
-
-            v6 = pkgs.fetchurl {
-              url = "https://www.cloudflare.com/ips-v6";
-              hash = "sha256-np054+g7rQDE3sr9U8Y/piAp89ldto3pN9K+KCNMoKk=";
-            };
+            realIps = lib.concatMapStringsSep "\n" (x: "set_real_ip_from  ${x};") [
+              "173.245.48.0/20"
+              "103.21.244.0/22"
+              "103.22.200.0/22"
+              "103.31.4.0/22"
+              "141.101.64.0/18"
+              "108.162.192.0/18"
+              "190.93.240.0/20"
+              "188.114.96.0/20"
+              "197.234.240.0/22"
+              "198.41.128.0/17"
+              "162.158.0.0/15"
+              "104.16.0.0/13"
+              "104.24.0.0/14"
+              "172.64.0.0/13"
+              "131.0.72.0/22"
+              "2400:cb00::/32"
+              "2606:4700::/32"
+              "2803:f800::/32"
+              "2405:b500::/32"
+              "2405:8100::/32"
+              "2a06:98c0::/29"
+              "2c0f:f248::/32"
+            ];
           in
           ''
-            ${realIps v4}
-            ${realIps v6}
+            ${realIps}
             real_ip_header CF-Connecting-IP;
 
             log_format main '$remote_addr - $remote_user [$time_local] '
