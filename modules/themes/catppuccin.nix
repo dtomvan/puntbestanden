@@ -133,9 +133,18 @@ in
         };
       };
 
-      programs.firefox.profiles.default.extensions.packages = [
-        pkgs.nur.repos.rycee.firefox-addons.firefox-color
-      ];
+      programs.firefox.profiles.default.extensions = {
+        packages = [
+          pkgs.nur.repos.rycee.firefox-addons.firefox-color
+        ];
+        settings."FirefoxColor@mozilla.com" = {
+          force = true;
+          settings = {
+            firstRunDone = true;
+            theme = import ./_catppuccin-firefox.nix;
+          };
+        };
+      };
 
       programs.${if config ? programs.dms-shell then "dms-shell" else null} = {
         theme = ../profiles/dank/catppuccin.json;
