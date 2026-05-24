@@ -192,21 +192,37 @@ in
   config = {
     perSystem =
       { pkgs, self', ... }:
+      let
+        mkPerhost =
+          { name, mapper }:
+          pkgs.writeShellApplication {
+            inherit name;
+            runtimeInputs = [ pkgs.nur.repos.dtomvan.sshp ];
+            runtimeEnv.hosts = config.hosts |> attrValues |> concatMapStringsSep "\n" mapper;
+            text = ''
+              echo Will execute: "$*"
+              echo On these hosts:
+              echo "$hosts"
+              read -r -n 1 -p 'is this okay? [yN]' choice
+              if [[ "$choice" =~ [yY] ]]; then
+                sshp -f <(printf '%s\n' "''${hosts:?}") "$@"
+              fi
+            '';
+          };
+      in
       {
         legacyPackages.hosts = builtins.toFile "hosts.json" (builtins.toJSON config.hosts);
-        devshells.default.packages = singleton self'.packages.perhost;
-        packages.perhost = pkgs.writeShellApplication {
+        devshells.default.packages = [
+          self'.packages.perhost
+          self'.packages.perroot
+        ];
+        packages.perroot = mkPerhost {
+          name = "perroot";
+          mapper = h: "root@${h.networking.hostName}";
+        };
+        packages.perhost = mkPerhost {
           name = "perhost";
-          runtimeInputs = [ pkgs.nur.repos.dtomvan.sshp ];
-          runtimeEnv.hosts =
-            config.hosts |> attrValues |> concatMapStringsSep "\n" (h: h.networking.hostName);
-          text = ''
-            echo Will execute: "$*"
-            read -r -n 1 -p 'is this okay? [yN]' choice
-            if [[ "$choice" =~ [yY] ]]; then
-              sshp -f <(printf '%s\n' "''${hosts:?}") "$@"
-            fi
-          '';
+          mapper = h: h.networking.hostName;
         };
       };
 
