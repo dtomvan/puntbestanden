@@ -12,6 +12,7 @@
         <name>{{ site.config.author }}</name>
     </author>
     {% for post in site.posts limit:10 %}
+        {% unless post.hidden %}
         <entry {% if post.lang %}xml:lang="{{post.lang}}"{% endif %}>
             {% assign post_title = post.title | strip_html | normalize_whitespace | xml_escape %}
             <title type="html">{{ post.title }}</title>
@@ -31,5 +32,6 @@
             <media:content medium="image" url="{{ post.image | absolute_url }}"  xmlns:media="http://search.yahoo.com/mrss/"/>
             {% endif %}
         </entry>
+        {% endunless %}
     {% endfor %}
 </feed>

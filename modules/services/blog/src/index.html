@@ -7,8 +7,12 @@ layout: default
 <p>Just a quick placeholder for my domain <a href="https://toostveen.nl">toostveen.nl</a> using the simple <a href="https://github.com/facundoolano/jorge"><code>jorge</code></a> SSG.</p>
 
 {% for post in site.posts limit:3 %}
+{% unless post.hidden %}
 {% include post_preview.html %}
+{% endunless %}
 {% endfor %}
+
+<p>For now, this holds a <a href="/blog/blogroll">blogroll</a>.</p>
 
 <!-- <p>See the full <a href="/blog">blog archive</a> or subscribe to the <a href="/feed.xml">feed</a>.</p> -->
 <br/>
