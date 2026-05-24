@@ -2,6 +2,8 @@ name: "Tom Oostveen"
 author: "Tom Oostveen"
 url: "https://toostveen.nl"
 description: "Placeholder"
+highlight_theme: catppuccin-mocha
+post_format: ":year-:month-:day-:title.md"
 contact:
   - name: PGP
     href: https://keyoxide.org/91C74999F109AE74854AC519EFD11A9B09D8D2C6
