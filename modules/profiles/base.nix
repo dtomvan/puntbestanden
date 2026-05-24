@@ -1,4 +1,4 @@
-{ self, inputs, ... }:
+{ self, ... }:
 {
   flake-file.inputs = {
     srvos = {
@@ -12,9 +12,10 @@
       { pkgs, ... }:
       {
         imports = builtins.attrValues {
-          inherit (inputs.srvos.nixosModules)
-            mixins-terminfo
-            ;
+          # TASK(20260524-145336): broken
+          # inherit (inputs.srvos.nixosModules)
+          #   mixins-terminfo
+          #   ;
 
           inherit (self.modules.nixos)
             nix-common
