@@ -31,10 +31,10 @@ in
       imports =
         builtins.attrValues {
           inherit (self.modules.nixos)
-            profiles-base
+            nix-common
+            nix-sensible
+            boot-systemd-boot
             profiles-plasma-minimal
-
-            # allows me to remote in people's PC for quick tech support
             networking-tailscale
             ;
         }
@@ -46,7 +46,16 @@ in
           ../../hardware/_generated/autounattend.nix
         ];
 
-      programs.nh.flake = lib.mkForce "/etc/nixos/";
+      services.displayManager.plasma-login-manager.settings.Autologin = {
+        User = "nixos";
+        Session = "plasma.desktop";
+      };
+
+      programs.nh = {
+        enable = true;
+        flake = "/etc/nixos/";
+        clean.enable = true;
+      };
 
       nix.channel.enable = lib.mkForce true;
 
@@ -59,21 +68,23 @@ in
           # does not include optional deps like ffmpeg, imagemagick, saves ~500MiB
           # closure size
           yazi-unwrapped
+          bazaar
           ;
       };
 
       services.getty = {
         helpLine = lib.strings.trim ''
           root password is "nixos"
-          me password is "me"
+          nixos password is "nixos"
           use nmtui to connect to Wi-Fi
         '';
       };
 
-      home-manager.users.me = {
-        home.homeDirectory = "/home/me";
-        home.file.README.text = ''
-          You made it!
+      home-manager.users.nixos = {
+        home.homeDirectory = "/home/nixos";
+        home.file."Desktop/README.txt".text = ''
+          You made it! Your initial password for both root and user is: nixos
+
           Further steps:
 
           Either clone your own dotfiles:
@@ -89,10 +100,6 @@ in
           Or with flakes:
             $ sudo nixos-generate-config --flake --force
 
-          Or, if you are dtomvan, grab one of your configs:
-            # NH_FLAKE is already set
-            $ nh os boot -H {boomer,feather}
-
         '';
 
         programs.bash = {
@@ -102,15 +109,15 @@ in
               fastfetch
               systemd-analyze
 
-              echo 'cat README for help'
+              echo 'cat Desktop/README.txt for help'
             '';
         };
-        home.stateVersion = "25.05";
+        home.stateVersion = "26.05";
       };
 
-      users.users.me = {
+      users.users.nixos = {
         isNormalUser = true;
-        initialPassword = "me";
+        initialPassword = "nixos";
       };
 
       users.users.root.initialPassword = "nixos";
@@ -119,13 +126,11 @@ in
       time.timeZone = "UTC";
       i18n.defaultLocale = "en_US.UTF-8";
 
-      # We're using flakes here, don't grab the database from a non-existing
-      # channel, but from the input
-      programs.command-not-found.dbPath = "${inputs.nixpkgs.outPath}/programs.sqlite";
+      services.openssh.enable = true;
 
       programs.less.enable = true;
       networking.firewall.enable = true;
 
-      system.stateVersion = "25.05";
+      system.stateVersion = "26.05";
     };
 }
