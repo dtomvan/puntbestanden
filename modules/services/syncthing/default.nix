@@ -1,37 +1,41 @@
 toplevel@{ self, lib, ... }:
 {
   flake.modules.nixos.services-syncthing =
-    { config, ... }:
+    { config, host, ... }:
     let
-      inherit (toplevel.config) hosts;
-
       username = "tomvd";
-      devices = {
-        ${hosts.amdpc1.networking.hostName} = {
-          id = "3QIVELR-TAOILMZ-446OGI4-76UTNJD-ZA67C4P-X532YOE-ONJS5RY-LWY6HQZ";
-          autoAcceptFolders = true;
-        };
-        ${hosts.tpx1g8.networking.hostName} = {
-          id = "2TCHDIM-XCWIBM4-5DL2EK6-7Y7VOSO-TOSZYG6-JNYQYFU-PONSM2D-X2CITQT";
-          autoAcceptFolders = true;
-        };
-        "Nothing Phone (3a)" = {
-          id = "3P4JOUH-NHDCUVU-I2QGOZ6-LNV7CPI-RMMZQEA-ZW3HR7X-LI46MSB-N7UIYQP";
-          autoAcceptFolders = false;
-        };
-      };
+      devices =
+        toplevel.config.hosts
+        |> lib.filterAttrs (_: h: builtins.pathExists ./_ids/${h.networking.hostName})
+        |> lib.mapAttrs (
+          _: h: {
+            id = builtins.readFile ./_ids/${h.networking.hostName} |> lib.trim;
+            autoAcceptFolders = true;
+          }
+        )
+        |> (
+          a:
+          a
+          // {
+            "Nothing Phone (3a)" = {
+              id = "3P4JOUH-NHDCUVU-I2QGOZ6-LNV7CPI-RMMZQEA-ZW3HR7X-LI46MSB-N7UIYQP";
+              autoAcceptFolders = false;
+            };
+          }
+        );
+      notServers = builtins.attrNames devices |> lib.filter (n: n != "hetzner1");
       allDevices = builtins.attrNames devices;
       ignoreCopyparty = lib.singleton ".hist";
       folders = {
         default = {
           path = "~/Sync";
-          devices = allDevices;
+          devices = notServers;
           ignorePatterns = ignoreCopyparty;
         };
         Documents = {
           id = "kmfc4-cvogr";
           path = "~/Documents";
-          devices = allDevices;
+          devices = notServers;
           ignorePatterns = ignoreCopyparty;
           versioning = {
             type = "trashcan";
@@ -41,7 +45,7 @@ toplevel@{ self, lib, ... }:
         Pictures = {
           id = "xzsp4-pibte";
           path = "~/Pictures";
-          devices = allDevices;
+          devices = notServers;
           ignorePatterns = ignoreCopyparty;
           versioning = {
             type = "trashcan";
@@ -51,11 +55,22 @@ toplevel@{ self, lib, ... }:
         Music = {
           id = "pmac7-de6gr";
           path = "~/Music";
-          devices = allDevices;
+          devices = notServers;
           ignorePatterns = ignoreCopyparty;
           versioning = {
             type = "trashcan";
             params.cleanoutDays = "30";
+          };
+        };
+        # TASK(20260524-141049): figure out how to refactor
+        forgejo = {
+          id = "sda23-jklj8";
+          path = if host == toplevel.config.hosts.hetzner1 then "/var/lib/forgejo" else "~/Forgejo";
+          type = if host == toplevel.config.hosts.hetzner1 then "sendonly" else "receiveonly";
+          devices = allDevices;
+          versioning = {
+            type = "trashcan";
+            params.cleanoutDays = "90";
           };
         };
       };
@@ -71,36 +86,72 @@ toplevel@{ self, lib, ... }:
         inherit (config.services.syncthing) group;
       };
 
+      sops.secrets.syncthing-gui-password = {
+        mode = "0400";
+        sopsFile = ../../../secrets/syncthing-gui-password.secret;
+        format = "binary";
+        owner = config.services.syncthing.user;
+        inherit (config.services.syncthing) group;
+      };
+
+      users.groups.syncthing = { };
+      users.users.tomvd.extraGroups = [ "syncthing" ];
+
       services.syncthing = {
         enable = true;
-        # no own group
-        group = "users";
+        group = "syncthing";
         user = username;
         dataDir = "/home/${username}";
+        guiAddress = lib.mkIf (host == toplevel.config.hosts.hetzner1) "10.0.0.3:8384";
+        guiPasswordFile = config.sops.secrets.syncthing-gui-password.path;
 
         extraFlags = [ "--allow-newer-config" ];
 
         settings = {
           inherit devices folders;
 
-          # if unset, after reinstallation of syncthing (or deleting configDir)
-          # you'd get new device IDs. This way I hope to keep them for a little
-          # longer.
-          # TASK(20260418-193932): rotate and put behind sops.
           cert = _pubkeys/${config.networking.hostName}.pem;
           key = config.sops.secrets.syncthing.path;
 
-          gui = {
-            # Yes, this is the option name
-            enabled = true;
-            user = username;
-            password = "$2a$10$bYZG2XbEoOuRxX4A1e46cOIvTgoPfLQRGa4fKnqAI1L8vwMfdB0ri";
-          };
-
-          options = {
-            urAccepted = 3;
-          };
+          options.urAccepted = 3;
         };
+      };
+    };
+
+  perSystem =
+    { pkgs, ... }:
+    {
+      packages.genst = pkgs.writeShellApplication {
+        name = "genst";
+        runtimeInputs = builtins.attrValues {
+          inherit (pkgs)
+            gitMinimal
+            hostname-debian
+            coreutils
+            syncthing
+            xml2
+            ripgrep
+            ;
+        };
+        text = ''
+          pushd "$(git rev-parse --show-toplevel)"
+          hostname="''${1:-$(hostname)}"
+          tmp="$(mktemp -d)"
+          cleanup () {
+            rm -r "$tmp"
+            exit
+          }
+          trap cleanup EXIT ERR SIGINT
+
+          syncthing generate --home="$tmp"
+          mkdir -p modules/services/syncthing/_ids modules/services/syncthing/_pubkeys secrets
+          cp "$tmp/cert.pem" "modules/services/syncthing/_pubkeys/$hostname.pem"
+          xml2 < "$tmp/config.xml" | rg '^/configuration/device/@id=(.*)' -r '$1' > "modules/services/syncthing/_ids/$hostname"
+
+          target="secrets/syncthing.$hostname.secret"
+          # shellcheck disable=SC2094
+          cat "$tmp/key.pem" | sops encrypt --filename-override "$target" > "$target"
+        '';
       };
     };
 }
