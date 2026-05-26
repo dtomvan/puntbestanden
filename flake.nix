@@ -72,6 +72,10 @@
       url = "git+https://git.toostveen.nl/tom/merge-when-green-fj.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    ncro = {
+      url = "github:feel-co/ncro";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-cache-beacon = {
       url = "github:adisbladis/nix-cache-beacon";
       inputs.nixpkgs.follows = "nixpkgs";

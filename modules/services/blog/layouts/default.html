@@ -8,4 +8,21 @@ layout: base
     {{ content }}
     <br/>
 </div>
-<p class="footer center-block">powered by <a href="https://jorge.olano.dev">jorge</a> | <a href="https://git.toostveen.nl/tom/puntbestanden/src/@NIX_REV@/modules/services/blog">Source</a></p>
+<p class="footer center-block">
+{% if "@with_nix_webring@" != "0" %}
+    <a href="https://nixwebr.ing/prev/dtomvan">prev</a>
+    |
+    <a href="https://nixwebr.ing/">
+        <img height=22
+             alt="nix webring"
+             title="nix webring"
+             style="vertical-align: middle;"
+             src="/assets/img/nix-webring.svg" />
+    </a>
+    |
+    <a href="https://nixwebr.ing/next/dtomvan">next</a>
+    <br/>
+    <a href="https://nixwebr.ing/rand">I'm feeling lucky</a>
+    <br />
+{% endif %}
+powered by <a href="https://jorge.olano.dev">jorge</a> | <a href="https://git.toostveen.nl/tom/puntbestanden/src/@nix_rev@/modules/services/blog">Source</a></p>
