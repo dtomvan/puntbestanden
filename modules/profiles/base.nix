@@ -51,7 +51,6 @@
             btop
             dust
             eza
-            fastfetchMinimal
             fd
             file
             glow
@@ -66,6 +65,7 @@
             tealdeer
             # keep-sorted end
             ;
+          inherit (pkgs.fastfetch) minimal;
         };
       };
 
