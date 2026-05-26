@@ -8,6 +8,8 @@
 
     boot.loader.grub.enable = true;
 
+    zramSwap.enable = true;
+
     disko.devices = {
       disk = {
         main = {
