@@ -10,6 +10,8 @@
 
     zramSwap.enable = true;
 
+    boot.kernel.sysctl."vm.swappiness" = 20; # in case I add swap in the disko setup below? Would've probably been a good idea.
+
     disko.devices = {
       disk = {
         main = {
