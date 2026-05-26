@@ -410,6 +410,26 @@
         "url": "https://git.toostveen.nl/tom/merge-when-green-fj.git"
       }
     },
+    "ncro": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779813828,
+        "narHash": "sha256-pSchJPII8onD2B9OpE8ij9xl7Tb2AtgDzR+oOrBAHBA=",
+        "owner": "feel-co",
+        "repo": "ncro",
+        "rev": "7db44b309357537418ed141ea11fef49d4113a51",
+        "type": "github"
+      },
+      "original": {
+        "owner": "feel-co",
+        "repo": "ncro",
+        "type": "github"
+      }
+    },
     "nix-cache-beacon": {
       "inputs": {
         "nixpkgs": [
@@ -761,6 +781,7 @@
         "home-manager": "home-manager",
         "lazy-apps": "lazy-apps",
         "mwg": "mwg",
+        "ncro": "ncro",
         "nix-cache-beacon": "nix-cache-beacon",
         "nix-facts": "nix-facts",
         "nix-index-database": "nix-index-database",

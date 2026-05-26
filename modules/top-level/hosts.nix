@@ -20,7 +20,6 @@ let
     filter
     mkEnableOption
     mkOption
-    singleton
     trim
     ;
   inherit (lib.types)

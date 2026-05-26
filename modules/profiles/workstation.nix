@@ -43,6 +43,7 @@
             pika-backup
             python3
             signal-desktop
+            sxiv
             telegram-desktop
             thunderbird
             # keep-sorted end
