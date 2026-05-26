@@ -100,12 +100,18 @@ a.title {
     }
 }
 
-.footer, .footer a, .date, .tags, .tags a {
+.footer, .date, .tags, .tags a {
     color: var(--ctp-latte-overlay0);
+}
+.footer a {
+    color: hsl(from var(--ctp-latte-blue) h calc(s - 40) calc(l - 10));
 }
 @media (prefers-color-scheme: dark) {
     .footer, .footer a, .date, .tags, .tags a {
         color: var(--ctp-mocha-overlay0);
+    }
+    .footer a {
+        color: hsl(from var(--ctp-mocha-blue) h calc(s - 40) calc(l - 10));
     }
 }
 .date {
