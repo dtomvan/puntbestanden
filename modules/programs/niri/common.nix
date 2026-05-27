@@ -43,6 +43,7 @@
             wl-clipboard
             brightnessctl
             pipewire
+            playerctl
             ;
           inherit (pkgs.nur.repos.dtomvan)
             cclip
