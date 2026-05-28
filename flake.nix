@@ -15,12 +15,6 @@
       "pipe-operators"
       "pipe-operator"
     ];
-    extra-substituters = [
-      "https://catppuccin.cachix.org"
-      "https://noctalia.cachix.org"
-      "https://nix-community.cachix.org"
-      "https://cache.garnix.io"
-    ];
     extra-trusted-public-keys = [
       "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
       "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="

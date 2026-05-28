@@ -33,7 +33,10 @@ in
     };
 
     flake-file = {
-      inherit (config) nixConfig;
+      nixConfig = removeAttrs config.nixConfig [
+        "substituters"
+        "extra-substituters"
+      ];
       inputs.ncro = {
         url = "github:feel-co/ncro";
         inputs.nixpkgs.follows = "nixpkgs";
