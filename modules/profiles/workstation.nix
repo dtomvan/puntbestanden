@@ -63,6 +63,7 @@
         };
         home.packages = builtins.attrValues {
           inherit (pkgs.nur.repos.dtomvan) sshp;
+          inherit (pkgs) dysk;
         };
       };
   };
