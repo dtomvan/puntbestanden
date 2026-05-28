@@ -82,6 +82,12 @@
             repository.DISABLE_DOWNLOAD_SOURCE_ARCHIVES = mkDefault true;
           };
         };
+
+        systemd.services.forgejo-dump.serviceConfig.ExecStart =
+          let
+            dumpCfg = config.services.forgejo.dump;
+          in
+          lib.mkForce "${lib.getExe' config.services.forgejo.package "forgejo"} dump --type ${dumpCfg.type} --skip-repo-archives --skip-package-data";
       };
     };
 }
