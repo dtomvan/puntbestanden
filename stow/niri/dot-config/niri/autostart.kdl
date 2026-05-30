@@ -3,4 +3,5 @@
 // so this should go well.
 spawn-at-startup "dms" "run"
 spawn-at-startup "noctalia-shell"
+spawn-at-startup "noctalia" // noctalia v5 alpha
 spawn-at-startup "cclipd" "-s" "2" "-t" "image/png" "-t" "image/*" "-t" "text/plain;charset=utf-8" "-t" "text/*" "-t" "*"

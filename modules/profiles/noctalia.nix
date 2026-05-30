@@ -6,7 +6,12 @@
 }:
 {
   flake-file.inputs.noctalia-shell = {
-    url = "github:noctalia-dev/noctalia-shell/v4.7.6";
+    url = "github:noctalia-dev/noctalia-shell";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  flake-file.inputs.noctalia = {
+    url = "github:noctalia-dev/noctalia-shell/v5";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -18,36 +23,49 @@
   };
 
   flake.modules.nixos.profiles-noctalia =
-    { inputs', config, ... }:
     {
-      assertions = [
-        {
-          assertion = !config.services.displayManager.dms-greeter.enable;
-          message = "noctalia conflicts with dms";
-        }
-      ];
+      inputs',
+      config,
+      pkgs,
+      ...
+    }:
+    {
+      options.programs.noctalia-shell.package = lib.mkPackageOption pkgs "noctalia-shell" { };
+
       imports = [ self.modules.nixos.programs-niri-common ];
 
-      services.displayManager = {
-        sddm.enable = lib.mkForce false;
-        sddm.wayland.enable = lib.mkForce false;
-        gdm.enable = lib.mkForce false;
-        plasma-login-manager.enable = lib.mkForce false;
-        dms-greeter.enable = lib.mkForce false;
+      config = {
+        assertions = [
+          {
+            assertion = !config.services.displayManager.dms-greeter.enable;
+            message = "noctalia conflicts with dms";
+          }
+        ];
+
+        services.displayManager = {
+          sddm.enable = lib.mkForce false;
+          sddm.wayland.enable = lib.mkForce false;
+          gdm.enable = lib.mkForce false;
+          plasma-login-manager.enable = lib.mkForce false;
+          dms-greeter.enable = lib.mkForce false;
+        };
+
+        programs.regreet = {
+          enable = true;
+          settings.GTK.application_prefer_dark_theme = true;
+        };
+
+        environment.systemPackages = lib.singleton config.programs.noctalia-shell.package;
+
+        specialisation.noctalia-alpha.configuration.programs.noctalia-shell.package =
+          inputs'.noctalia.packages.default;
+
+        # recommended by docs
+        networking.networkmanager.enable = lib.mkDefault true;
+        hardware.bluetooth.enable = lib.mkDefault true;
+        services.power-profiles-daemon.enable = lib.mkDefault true;
+        services.upower.enable = lib.mkDefault true;
       };
-
-      programs.regreet = {
-        enable = true;
-        settings.GTK.application_prefer_dark_theme = true;
-      };
-
-      environment.systemPackages = lib.singleton inputs'.noctalia-shell.packages.default;
-
-      # recommended by docs
-      networking.networkmanager.enable = lib.mkDefault true;
-      hardware.bluetooth.enable = lib.mkDefault true;
-      services.power-profiles-daemon.enable = lib.mkDefault true;
-      services.upower.enable = lib.mkDefault true;
     };
 
   flake.modules.homeManager.profiles-noctalia =
