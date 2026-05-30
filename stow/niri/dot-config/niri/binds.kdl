@@ -3,7 +3,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fsel" { spawn "foot" "-a" "fsel" "fsel" "--systemd-run" "--detach"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn-sh "noctalia-shell ipc call lockScreen lock || swaylock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn-sh "noctalia-shell ipc call lockScreen lock || noctalia msg screen-lock || swaylock"; }
     Super+Alt+V                                 { spawn "foot" "-a" "fsel" "fsel" "--cclip"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+" "-l" "1.0"; }
@@ -149,7 +149,7 @@ binds {
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Ctrl+Alt+Delete { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "toggle"; }
+    Ctrl+Alt+Delete { spawn-sh "noctalia-shell ipc call sessionMenu toggle || noctalia msg panel-toggle session"; }
 
     Mod+Shift+P { power-off-monitors; }
 }
