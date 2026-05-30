@@ -46,6 +46,7 @@
             sxiv
             telegram-desktop
             thunderbird
+            zathura
             # keep-sorted end
             ;
         };
