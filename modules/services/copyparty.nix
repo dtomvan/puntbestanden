@@ -317,9 +317,9 @@ in
             ;
         };
         text = ''
-          tmp="$(mktemp /tmp/XXXXXXXX.txt)"
+          tmp="$(mktemp "/tmp/XXXXXXXX.''${1:-txt}")"
           cat > "$tmp"
-          u2c -u -a "$(sops decrypt ${../../secrets/copyparty.secret})" "''${1:-https://${defaultDomain}/paste}" "$tmp"
+          u2c -u -a "$(sops decrypt ${../../secrets/copyparty.secret})" "''${2:-https://${defaultDomain}/paste}" "$tmp"
           rm "$tmp"
         '';
       };
