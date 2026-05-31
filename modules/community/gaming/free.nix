@@ -5,7 +5,6 @@
 {
   flake.modules.nixos.gaming-free =
     {
-      self',
       pkgs,
       lib,
       config,
@@ -42,6 +41,6 @@
           mindustry
           tome4
         ];
-        # ++ lib.optionals cfg.iWantToCompileCDDA (lib.singleton self'.packages.myCdda);
+      # ++ lib.optionals cfg.iWantToCompileCDDA (lib.singleton self'.packages.myCdda);
     };
 }
