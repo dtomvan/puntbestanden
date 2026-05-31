@@ -1,7 +1,13 @@
-toplevel@{ lib, ... }:
+toplevel@{ self, lib, ... }:
 let
   inherit (import ../_consts.nix) domain;
-  inherit (builtins) attrValues filter;
+  inherit (builtins)
+    attrNames
+    attrValues
+    elemAt
+    filter
+    tryEval
+    ;
   inherit (lib)
     mkOption
     mkEnableOption
@@ -15,35 +21,14 @@ let
     listOf
     package
     ;
-
-  nodeExporterPort = 9100;
-  systemdExporterPort = 9558;
 in
 {
-  flake.modules.nixos.prometheus-node-exporter =
-    { host, ... }:
-    {
-      assertions = [
-        {
-          assertion = host.prometheus.exportNode -> host.networking.wireguard.enable;
-          message = "You need to have wireguard enabled in order for prometheus-node-exporter to work";
-        }
-      ];
-
-      services.prometheus.exporters.node = mkIf host.prometheus.exportNode {
-        enable = true;
-        port = nodeExporterPort;
-        disabledCollectors = [ "textfile" ];
-      };
-
-      services.prometheus.exporters.systemd = mkIf host.prometheus.exportNode {
-        enable = true;
-        port = systemdExporterPort;
-      };
-    };
-
   flake.modules.nixos.services-monitoring =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      config,
+      ...
+    }:
     let
       cfg = config.infra.monitoring;
     in
@@ -204,30 +189,35 @@ in
             webExternalUrl = "https://${cfg.prometheus.domain}";
             webConfigFile = config.sops.secrets.prometheus-http-config.path;
             scrapeConfigs =
-              map
-                (
-                  { job_name, port }:
-                  {
-                    inherit job_name;
-                    static_configs =
-                      toplevel.config.hosts
-                      |> attrValues
-                      |> filter (h: h.prometheus.exportNode)
-                      |> map (h: {
-                        targets = singleton "${h.networking.hostName}:${toString port}";
-                      });
-                  }
-                )
-                [
-                  {
-                    job_name = "node";
-                    port = nodeExporterPort;
-                  }
-                  {
-                    job_name = "systemd";
-                    port = systemdExporterPort;
-                  }
-                ];
+              config.services.prometheus.exporters
+              |> attrNames
+              |> map (name: {
+                job_name = name;
+                static_configs = singleton {
+                  targets =
+                    toplevel.config.hosts
+                    |> attrValues
+                    |> filter (
+                      h:
+                      let
+                        inherit (h.networking) hostName;
+                        wgEnable = h.networking.wireguard.enable;
+                        thisConfig = self.nixosConfigurations.${hostName}.config.services.prometheus.exporters.${name};
+                        e = tryEval (thisConfig ? enable && thisConfig.enable);
+                      in
+                      wgEnable && e.success && e.value
+                    )
+                    |> map (
+                      h:
+                      let
+                        inherit (h.networking) hostName;
+                        thisConfig = self.nixosConfigurations.${hostName}.config.services.prometheus.exporters.${name};
+                      in
+                      "${hostName}:${toString thisConfig.port}"
+                    );
+                };
+              })
+              |> filter (job: elemAt job.static_configs 0 |> (sc: sc.targets != [ ]));
           };
         })
       ];

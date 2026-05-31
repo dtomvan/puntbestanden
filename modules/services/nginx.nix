@@ -1,13 +1,7 @@
-toplevel@{ inputs, lib, ... }:
-let
-  nginxExporterPort = 9113;
-  nginxLogExporterPort = 9114;
-  reqLimitZoneName = "reqlimit";
-  connLimitZoneName = "connlimit";
-in
+{ inputs, lib, ... }:
 {
   flake.modules.nixos.services-nginx =
-    { config, host, ... }:
+    { config, ... }:
     {
       imports = [ inputs.srvos.nixosModules.mixins-nginx ];
 
@@ -55,6 +49,8 @@ in
               "2a06:98c0::/29"
               "2c0f:f248::/32"
             ];
+            reqLimitZoneName = "reqlimit";
+            connLimitZoneName = "connlimit";
           in
           # nginx
           ''
@@ -113,48 +109,11 @@ in
           '';
         };
       };
-
-      services.prometheus.exporters.nginx =
-        lib.mkIf (host.prometheus.exportNginx && host.networking.wireguard.enable)
-          {
-            enable = true;
-            port = nginxExporterPort;
-          };
-
-      services.prometheus.exporters.nginxlog =
-        lib.mkIf (host.prometheus.exportNginx && host.networking.wireguard.enable)
-          {
-            enable = true;
-            port = nginxLogExporterPort;
-          };
     };
 
   flake.modules.nixos.services-monitoring =
     { pkgs, ... }:
     {
-      services.prometheus.scrapeConfigs = [
-        {
-          job_name = "nginx";
-          static_configs =
-            toplevel.config.hosts
-            |> builtins.attrValues
-            |> builtins.filter (h: h.prometheus.exportNginx)
-            |> map (h: {
-              targets = lib.singleton "${h.networking.hostName}:${toString nginxExporterPort}";
-            });
-        }
-        {
-          job_name = "nginxlog";
-          static_configs =
-            toplevel.config.hosts
-            |> builtins.attrValues
-            |> builtins.filter (h: h.prometheus.exportNginx)
-            |> map (h: {
-              targets = lib.singleton "${h.networking.hostName}:${toString nginxLogExporterPort}";
-            });
-        }
-      ];
-
       infra.monitoring.grafana.dashboards = lib.singleton (
         pkgs.fetchurl {
           name = "prometheus-nginx-exporter.json";

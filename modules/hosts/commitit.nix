@@ -23,10 +23,6 @@ in
         ];
       };
     };
-    prometheus = {
-      exportNode = true;
-      exportNginx = true;
-    };
   };
 
   flake.modules.nixos.hosts-commitit =
@@ -80,6 +76,13 @@ in
       services.postgresql = {
         enable = true;
         package = pkgs.postgresql_18;
+      };
+
+      services.prometheus.exporters = {
+        nginx.enable = true;
+        nginxlog.enable = true;
+        node.enable = true;
+        systemd.enable = true;
       };
 
       environment.systemPackages = [

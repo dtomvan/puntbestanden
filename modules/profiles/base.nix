@@ -22,7 +22,6 @@
             users-root
 
             services-ssh
-            prometheus-node-exporter
 
             sops
 

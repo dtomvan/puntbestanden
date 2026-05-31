@@ -18,7 +18,6 @@
           services-ssh
           users-root
           services-nginx
-          prometheus-node-exporter
           ;
       };
 

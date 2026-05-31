@@ -164,11 +164,6 @@ let
       type = submodule remoteBuildModule;
     };
 
-    prometheus = {
-      exportNode = mkEnableOption "node exporter";
-      exportNginx = mkEnableOption "Nginx exporter";
-    };
-
     hasConfig = (mkEnableOption "configuring this host for nixos") // {
       default = true;
     };
