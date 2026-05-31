@@ -9,19 +9,6 @@
       imports = import modules/lib/_import-tree.nix inputs.nixpkgs.lib ./modules;
     };
 
-  nixConfig = {
-    allow-import-from-derivation = false;
-    extra-experimental-features = [
-      "pipe-operators"
-      "pipe-operator"
-    ];
-    extra-trusted-public-keys = [
-      "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
-      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-  };
-
   inputs = {
     catppuccin = {
       url = "github:catppuccin/nix";

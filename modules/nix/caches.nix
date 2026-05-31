@@ -1,50 +1,22 @@
-toplevel@{
-  lib,
-  config,
-  inputs,
-  ...
-}:
 let
-  inherit (lib) mkOption;
-  inherit (lib.types) attrsOf listOf str;
+  caches = [
+    "https://catppuccin.cachix.org"
+    "https://noctalia.cachix.org"
+    "https://nix-community.cachix.org"
+  ];
+  extra-trusted-public-keys = [
+    "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+  ];
 in
+{ inputs, ... }:
 {
-  options.nixConfig = mkOption {
-    description = "caches to be passed to the flake's nixConfig and to nixos' nix.settings";
-    type = attrsOf (listOf str);
-    default = { };
-  };
-
   config = {
-    nixConfig = {
-      extra-experimental-features = [
-        "pipe-operators"
-        "pipe-operator"
-      ];
-      extra-substituters = [
-        "https://nix-community.cachix.org"
-      ];
-
-      extra-trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
+    flake-file.inputs.ncro = {
+      url = "github:feel-co/ncro";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    flake-file = {
-      nixConfig = removeAttrs config.nixConfig [
-        "substituters"
-        "extra-substituters"
-      ];
-      inputs.ncro = {
-        url = "github:feel-co/ncro";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-    };
-
-    flake.modules.nixos.nix-common.nix.settings = removeAttrs config.nixConfig [
-      "extra-experimental-features"
-      "experimental-features"
-    ];
 
     flake.modules.nixos.profiles-workstation =
       {
@@ -77,28 +49,7 @@ in
             ++ map (url: {
               inherit url;
               priority = 20;
-            }) toplevel.config.nixConfig.extra-substituters;
-
-            mesh = {
-              enabled = lib.mkDefault true;
-              private-key = config.sops.secrets.ncro-secret.path;
-              peers =
-                toplevel.config.hosts
-                |> builtins.attrValues
-                |> lib.filter (
-                  h:
-                  h.networking.wireguard.enable && builtins.pathExists ../../secrets/ncro-${h.networking.hostName}.pub
-                )
-                |> map (h: {
-                  addr =
-                    let
-                      ip =
-                        builtins.elemAt h.networking.wireguard.ips 0 |> lib.splitString "/" |> (s: builtins.elemAt s 0);
-                    in
-                    "${ip}:7946";
-                  public_key = builtins.readFile ../../secrets/ncro-${h.networking.hostName}.pub |> lib.trim;
-                });
-            };
+            }) caches;
           };
         };
 
@@ -123,6 +74,13 @@ in
         };
 
         nix.settings = {
+          inherit extra-trusted-public-keys;
+
+          extra-experimental-features = [
+            "pipe-operators"
+            "pipe-operator"
+          ];
+
           substituters = lib.mkForce [
             "http://localhost:8080"
             # add a second cache.nixos.org here for in case ncro is broken/stopped
