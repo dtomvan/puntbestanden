@@ -109,6 +109,23 @@
           '';
         };
       };
+
+      services.prometheus.exporters.nginxlog = {
+        enable = lib.mkDefault true;
+        # why isn't this the default????
+        settings.namespaces =
+          lib.singleton {
+            name = "default";
+            format = ''$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'';
+            source.files = [
+              "/var/log/nginx/access.log"
+              "/var/log/nginx/error.log"
+            ];
+          }
+          |> lib.mkDefault;
+      };
+
+      systemd.services.prometheus-nginxlog-exporter.serviceConfig.SupplementaryGroups = [ "nginx" ];
     };
 
   flake.modules.nixos.services-monitoring =
