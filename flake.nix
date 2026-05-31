@@ -83,7 +83,6 @@
     };
     nixos-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-    nixpkgs-cdda.url = "github:RossSmyth/nixpkgs/cddaClean";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
