@@ -21,6 +21,9 @@
 
   flake.modules.nixvim.default.imports = lib.singleton self.modules.nixvim.minimal;
 
+  # TASK(20260531-115603)
+  flake.modules.nixvim.minimal.version.enableNixpkgsReleaseCheck = false;
+
   perSystem =
     { pkgs, system, ... }:
     {
