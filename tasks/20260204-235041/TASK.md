@@ -1,6 +1,6 @@
 # add more tree-sitter langs to emacs
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 20
 
 ../../modules/emacs.nix

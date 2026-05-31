@@ -1,6 +1,6 @@
 # vte: broken
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 - TAGS: 
 ../../modules/profiles/base.nix
