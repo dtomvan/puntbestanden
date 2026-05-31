@@ -76,11 +76,6 @@ in
         nix.settings = {
           inherit extra-trusted-public-keys;
 
-          extra-experimental-features = [
-            "pipe-operators"
-            "pipe-operator"
-          ];
-
           substituters = lib.mkForce [
             "http://localhost:8080"
             # add a second cache.nixos.org here for in case ncro is broken/stopped
