@@ -48,7 +48,7 @@ in
     # the ISO user wouldn't even know a hypothetical password
     security.sudo.wheelNeedsPassword = false;
 
-    system.stateVersion = "26.05";
+    system.stateVersion = "26.11";
   };
 
   flake.nixosConfigurations =

@@ -112,7 +112,7 @@ in
               echo 'cat Desktop/README.txt for help'
             '';
         };
-        home.stateVersion = "26.05";
+        home.stateVersion = "26.11";
       };
 
       users.users.nixos = {
@@ -131,6 +131,6 @@ in
       programs.less.enable = true;
       networking.firewall.enable = true;
 
-      system.stateVersion = "26.05";
+      system.stateVersion = "26.11";
     };
 }

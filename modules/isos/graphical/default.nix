@@ -57,7 +57,7 @@ in
             homeDirectory = "/home/nixos";
             sessionVariables.EDITOR = "nvim";
             shell.enableShellIntegration = true;
-            stateVersion = "26.05";
+            stateVersion = "26.11";
             username = "nixos";
             packages = builtins.attrValues {
               inherit (self'.packages) nixvim-minimal;
@@ -114,7 +114,7 @@ in
         };
       };
 
-      system.stateVersion = "26.05";
+      system.stateVersion = "26.11";
     };
 
   flake.nixosConfigurations.graphical-iso = inputs.nixpkgs.lib.nixosSystem {

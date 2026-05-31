@@ -97,7 +97,7 @@
 
         environment.stub-ld.enable = false;
 
-        system.stateVersion = "24.11";
+        system.stateVersion = "26.11";
       };
 
     homeManager."tomvd@feather" =
@@ -121,7 +121,7 @@
         programs.${if options ? programs.plasma then "plasma" else null}.configFile.kwinrc.Xwayland.Scale =
           1.5;
 
-        home.stateVersion = "24.05";
+        home.stateVersion = "26.11";
       };
   };
 }

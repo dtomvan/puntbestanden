@@ -20,7 +20,7 @@
       ...
     }:
     let
-      isLegacy = lib.versionOlder config.home.stateVersion "26.05";
+      isLegacy = lib.versionOlder config.home.stateVersion "26.11";
     in
     {
       programs.neovim = {

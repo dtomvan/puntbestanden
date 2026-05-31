@@ -142,7 +142,7 @@
 
         environment.stub-ld.enable = false;
 
-        system.stateVersion = "24.05";
+        system.stateVersion = "26.11";
       };
 
     homeManager."tomvd@boomer" =
@@ -165,7 +165,7 @@
             ;
         };
 
-        home.stateVersion = "24.05";
+        home.stateVersion = "26.11";
       };
   };
 
