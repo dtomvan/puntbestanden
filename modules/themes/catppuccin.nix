@@ -172,6 +172,9 @@ in
           }
         );
 
+        enable = true;
+        autoEnable = false;
+
         alacritty.enable = true;
         bat.enable = true;
         btop.enable = true;
