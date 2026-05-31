@@ -1,7 +1,5 @@
 { inputs, ... }:
 {
-  flake-file.inputs.nixpkgs-cdda.url = "github:RossSmyth/nixpkgs/cddaClean";
-
   perSystem =
     { pkgs, lib, ... }:
     let

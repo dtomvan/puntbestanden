@@ -41,7 +41,7 @@
           brogue-ce
           mindustry
           tome4
-        ]
-        ++ lib.optionals cfg.iWantToCompileCDDA (lib.singleton self'.packages.myCdda);
+        ];
+        # ++ lib.optionals cfg.iWantToCompileCDDA (lib.singleton self'.packages.myCdda);
     };
 }
