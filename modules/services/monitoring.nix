@@ -34,15 +34,11 @@ in
         enable = true;
         port = nodeExporterPort;
         disabledCollectors = [ "textfile" ];
-        openFirewall = true;
-        firewallFilter = "-i wg0 -p tcp -m tcp --dport ${toString nodeExporterPort}";
       };
 
       services.prometheus.exporters.systemd = mkIf host.prometheus.exportNode {
         enable = true;
         port = systemdExporterPort;
-        openFirewall = true;
-        firewallFilter = "-i wg0 -p tcp -m tcp --dport ${toString systemdExporterPort}";
       };
     };
 

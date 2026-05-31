@@ -1,6 +1,9 @@
 toplevel@{ inputs, lib, ... }:
 let
   nginxExporterPort = 9113;
+  nginxLogExporterPort = 9114;
+  reqLimitZoneName = "reqlimit";
+  connLimitZoneName = "connlimit";
 in
 {
   flake.modules.nixos.services-nginx =
@@ -53,6 +56,7 @@ in
               "2c0f:f248::/32"
             ];
           in
+          # nginx
           ''
             ${realIps}
             real_ip_header CF-Connecting-IP;
@@ -63,6 +67,29 @@ in
 
             access_log /var/log/nginx/access.log main;
             error_log /var/log/nginx/error.log warn;
+
+            geo $whitelist {
+              default 0;
+              127.0.0.0/24 1;
+              ${lib.optionalString config.networking.wireguard.enable "10.0.0.0/8 1;"}
+            }
+
+            map $whitelist $limit {
+              0 $binary_remote_addr;
+              1 "";
+            }
+
+            limit_conn_zone      $limit    zone=${connLimitZoneName}:10m;
+            limit_conn           ${connLimitZoneName} 1000;
+            limit_conn_log_level warn;
+            limit_conn_status    429;
+
+            limit_req_zone $limit zone=${reqLimitZoneName}:10m rate=20r/s;
+            limit_req_log_level warn;
+            limit_req_status     429;
+            limit_req zone=${reqLimitZoneName} burst=100 nodelay;
+
+            add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
           '';
       };
 
@@ -92,24 +119,41 @@ in
           {
             enable = true;
             port = nginxExporterPort;
-            openFirewall = true;
-            firewallFilter = "-i wg0 -p tcp -m tcp --dport ${toString nginxExporterPort}";
+          };
+
+      services.prometheus.exporters.nginxlog =
+        lib.mkIf (host.prometheus.exportNginx && host.networking.wireguard.enable)
+          {
+            enable = true;
+            port = nginxLogExporterPort;
           };
     };
 
   flake.modules.nixos.services-monitoring =
     { pkgs, ... }:
     {
-      services.prometheus.scrapeConfigs = lib.singleton {
-        job_name = "nginx";
-        static_configs =
-          toplevel.config.hosts
-          |> builtins.attrValues
-          |> builtins.filter (h: h.prometheus.exportNginx)
-          |> map (h: {
-            targets = lib.singleton "${h.networking.hostName}:${toString nginxExporterPort}";
-          });
-      };
+      services.prometheus.scrapeConfigs = [
+        {
+          job_name = "nginx";
+          static_configs =
+            toplevel.config.hosts
+            |> builtins.attrValues
+            |> builtins.filter (h: h.prometheus.exportNginx)
+            |> map (h: {
+              targets = lib.singleton "${h.networking.hostName}:${toString nginxExporterPort}";
+            });
+        }
+        {
+          job_name = "nginxlog";
+          static_configs =
+            toplevel.config.hosts
+            |> builtins.attrValues
+            |> builtins.filter (h: h.prometheus.exportNginx)
+            |> map (h: {
+              targets = lib.singleton "${h.networking.hostName}:${toString nginxLogExporterPort}";
+            });
+        }
+      ];
 
       infra.monitoring.grafana.dashboards = lib.singleton (
         pkgs.fetchurl {
