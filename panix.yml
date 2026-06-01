@@ -7,9 +7,13 @@ fleet:
         boomer:
           machines:
             boomer:
+              tags:
+                - desktop
         feather:
           machines:
-            feather: {}
+            feather:
+              tags:
+                - desktop
         commitit:
           machines:
             commitit:
