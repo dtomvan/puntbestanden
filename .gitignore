@@ -5,5 +5,5 @@
 /repl-result*
 /.clj-kondo
 /.lsp
-/panix.log
+/panix*.log
 /panix-snapshot-*.json
