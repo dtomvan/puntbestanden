@@ -13,7 +13,7 @@ in
       packages.my-wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha;
     };
 
-  flake-file.inputs.catppuccin = {
+  flake-inputs.catppuccin = {
     url = "github:catppuccin/nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -126,7 +126,7 @@ in
         };
       };
 
-      programs.firefox.profiles.default.extensions = {
+      programs.firefox.profiles.dev-edition-default.extensions = {
         packages = [
           pkgs.nur.repos.rycee.firefox-addons.firefox-color
         ];

@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mihakrumpestar/panix/v0.7.0/gen/panix-schema.yaml
+
+fleet:
+  flakes:
+    puntbestanden:
+      configurations:
+        boomer:
+          machines:
+            boomer:
+        feather:
+          machines:
+            feather: {}
+        commitit:
+          machines:
+            commitit:
+              tags:
+                - hetzner
+
+flags:
+  logging:
+    log_file: panix.log
+  snapshot:
+    dir: .

@@ -2,7 +2,7 @@
 {
   # HACK: the nix-index database may not exactly correspond the nixpkgs I pull
   # in, so keep that in mind
-  flake-file.inputs.nix-index-database = {
+  flake-inputs.nix-index-database = {
     url = "github:nix-community/nix-index-database";
     inputs.nixpkgs.follows = "nixpkgs";
   };

@@ -10,23 +10,18 @@ check:
 clean:
     rm -f result* repl-result*
 
-build:
-    nix run .#nix-build-all
+deploy panixargs='' deploy-rsargs='':
+    nix develop -c panix deploy --exit-on-complete --log {{panixargs}}
+    nix develop -c deploy -sk {{deploy-rsargs}}
 
-deploy:
-    nix develop -c deploy -sk
-
-cleanbuild: clean build
-all: check cleanbuild deploy
+all: check deploy
 
 push WHAT:
     jj git push -c @-
-    gh pr create \
-        -B hoofdlijn \
-        -H "$(jj show -r 'closest_bookmark(@)' -T 'bookmarks.map(|b| b.name())' --no-patch | tr ' ' '\n' | sort | head -n1)" \
-        -t "{{WHAT}}" \
-        -F <(git log --oneline hoofdlijn..HEAD | sed 's|^|- |') \
-        -r dtomvan
+    fj --host git.toostveen.nl pr create \
+        --head "$(jj show -r 'closest_bookmark(@)' -T 'bookmarks.map(|b| b.name())' --no-patch | tr ' ' '\n' | sort | head -n1)" \
+        --base hoofdlijn \
+        --autofill
 
 [private]
 run-stow ACTION PACKAGE +ARGS='':

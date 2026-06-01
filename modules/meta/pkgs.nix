@@ -21,7 +21,7 @@ in
   };
 
   config = {
-    flake-file.inputs = {
+    flake-inputs = {
       nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
       # nixpkgs-patcher = {
       #   url = "github:dtomvan/nixpkgs-patcher";

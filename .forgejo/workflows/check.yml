@@ -23,7 +23,7 @@ jobs:
           done
       - name: Run selected flake checks
         run: |
-          declare -a checks=(check-flake-file treefmt)
+          declare -a checks=(treefmt)
 
           for p in "${checks[@]}"; do
             set -x

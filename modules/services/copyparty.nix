@@ -25,7 +25,7 @@ let
     ;
 in
 {
-  flake-file.inputs.copyparty = {
+  flake-inputs.copyparty = {
     url = "github:9001/copyparty";
     inputs.nixpkgs.follows = "nixpkgs";
   };

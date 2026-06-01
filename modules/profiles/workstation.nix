@@ -24,11 +24,6 @@
 
         modules.utilities.enableLazyApps = true;
 
-        # assumes nix-flatpak is available
-        services.flatpak.packages = [
-          "com.obsproject.Studio"
-        ];
-
         environment.systemPackages = builtins.attrValues {
           inherit (pkgs)
             # keep-sorted start
@@ -46,6 +41,7 @@
             sxiv
             telegram-desktop
             thunderbird
+            zathura
             # keep-sorted end
             ;
         };

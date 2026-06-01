@@ -13,10 +13,9 @@ let
   # my own shit
   communityModules =
     (flake-parts-lib.mkFlake { inherit inputs; } {
-      # community tree requires flake-file
       imports = (import lib/_import-tree.nix lib ./community) ++ [
         inputs.flake-parts.flakeModules.modules
-        inputs.flake-file.flakeModules.default
+        self.flakeModules.flake-inputs
       ];
     }).modules;
 in
@@ -67,9 +66,7 @@ in
 
         programs.firefox = {
           enable = true;
-          package = self'.legacyPackages.makeFakeFirefox pkgs.firefox-devedition {
-            args = "-P ubo-only";
-          };
+          package = pkgs.firefox-devedition;
           profiles.ubo-only = {
             id = lib.mkForce 0;
             isDefault = lib.mkForce true;

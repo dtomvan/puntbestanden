@@ -5,14 +5,15 @@
   ...
 }:
 {
-  flake-file.inputs.noctalia-shell = {
-    url = "github:noctalia-dev/noctalia-shell";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
-  flake-file.inputs.noctalia = {
-    url = "github:noctalia-dev/noctalia-shell/v5";
-    inputs.nixpkgs.follows = "nixpkgs";
+  flake-inputs = {
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell/v5";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    noctalia-shell = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   flake.modules.nixos.profiles-noctalia =

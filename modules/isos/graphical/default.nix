@@ -92,11 +92,9 @@ in
 
             firefox = {
               enable = true;
-              package = self'.legacyPackages.makeFakeFirefox pkgs.firefox-devedition {
-                args = "-P ubo-only";
-              };
+              package = pkgs.firefox-devedition;
               profiles = {
-                default = {
+                dev-edition-default = {
                   isDefault = lib.mkForce false;
                   # new assertion that you must ack that setting extensions
                   # will remove existing ones

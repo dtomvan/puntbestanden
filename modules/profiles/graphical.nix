@@ -25,6 +25,8 @@ in
           settings.default = [ "foot.desktop" ];
         };
 
+        security.polkit.enable = true;
+
         environment.systemPackages = builtins.attrValues {
           inherit (pkgs)
             alsa-utils

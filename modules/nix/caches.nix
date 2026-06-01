@@ -13,7 +13,7 @@ in
 { inputs, ... }:
 {
   config = {
-    flake-file.inputs.ncro = {
+    flake-inputs.ncro = {
       url = "github:feel-co/ncro";
       inputs.nixpkgs.follows = "nixpkgs";
     };

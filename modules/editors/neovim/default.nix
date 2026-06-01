@@ -5,11 +5,9 @@
   ...
 }:
 {
-  flake-file.inputs = {
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  flake-inputs.nixvim = {
+    url = "github:nix-community/nixvim";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 
   imports = [ inputs.nixvim.flakeModules.default ];
