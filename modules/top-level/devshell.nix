@@ -24,6 +24,10 @@
             stow
             nh
             ;
+          inherit (pkgs.nur.repos.dtomvan)
+            panix
+            sshp
+            ;
         };
 
         # make all flake apps available as commands. Very useful in the context
