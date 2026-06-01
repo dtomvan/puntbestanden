@@ -3,11 +3,13 @@ let
     "https://catppuccin.cachix.org"
     "https://noctalia.cachix.org"
     "https://nix-community.cachix.org"
+    "https://attic.bartoostveen.nl/dtomvan-nur"
   ];
   extra-trusted-public-keys = [
     "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
+    "dtomvan-nur:UyHAqPSYjeqV2WZalOzuEnsy9iqXiskJ0S31Y/gZUdw="
   ];
 in
 { inputs, ... }:
