@@ -45,7 +45,17 @@
     };
     enableHomeManager = true;
     enableNixvim = true;
-    enableFlatpak = true;
+    flatpak = {
+      enable = true;
+      packages = [
+        "com.obsproject.Studio"
+        "in.cinny.Cinny"
+        "org.inkscape.Inkscape"
+        "io.github.dvlv.boxbuddyrs"
+        "com.github.wwmm.easyeffects"
+        "org.vinegarhq.Sober"
+      ];
+    };
   };
 
   flake.modules = {
@@ -127,13 +137,6 @@
         # regreet broken on nvidia???
         programs.regreet.enable = lib.mkForce false;
         services.displayManager.ly.enable = lib.mkForce true;
-
-        services.flatpak.packages = [
-          "org.inkscape.Inkscape"
-          "io.github.dvlv.boxbuddyrs"
-          "com.github.wwmm.easyeffects"
-          "org.vinegarhq.Sober"
-        ];
 
         hardware.bluetooth.enable = true;
 

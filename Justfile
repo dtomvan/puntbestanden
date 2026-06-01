@@ -10,8 +10,9 @@ check:
 clean:
     rm -f result* repl-result*
 
-deploy:
-    nix develop -c deploy -sk
+deploy panixargs='' deploy-rsargs='':
+    nix develop -c panix deploy --exit-on-complete --log {{panixargs}}
+    nix develop -c deploy -sk {{deploy-rsargs}}
 
 all: check deploy
 

@@ -30,10 +30,33 @@ in
       _n: v:
       nameValuePair v.networking.hostName (
         withSystem v.system (
-          systemArgs@{ inputs', self', ... }:
+          systemArgs@{ inputs', pkgs, ... }:
           let
             deployLib = inputs'.deploy-rs.legacyPackages.lib;
-            hostConfig = self.nixosConfigurations.${v.networking.hostName};
+
+            flatpakProfiles.flatpak = {
+              user = "root";
+              sshUser = "root";
+              path = deployLib.activate.custom {
+                base = pkgs.runCommand "empty" { } ''
+                  mkdir -p $out
+                '';
+                activate =
+                  #bash
+                  let
+                    inherit (v.flatpak) packages;
+                    inherit (lib) optionalString escapeShellArgs;
+                  in
+                  ''
+                    flatpak="/run/current-system/sw/bin/flatpak"
+                    "$flatpak" remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+                    ${optionalString (packages != [ ]) ''
+                      "$flatpak" install --noninteractive --or-update ${escapeShellArgs packages}
+                    ''}
+                    "$flatpak" update --noninteractive
+                  '';
+              };
+            };
 
             homeProfiles =
               v.users
@@ -67,30 +90,10 @@ in
           {
             hostname = v.networking.hostName;
 
-            profiles = {
-              system = {
-                user = "root";
-                sshUser = "root";
-                path = deployLib.activate.nixos {
-                  base = hostConfig;
-                };
-              };
-
-            }
-            // optionalAttrs v.enableFlatpak {
-              flatpak = {
-                user = "root";
-                sshUser = "root";
-                path = deployLib.activate.custom {
-                  base = self'.legacyPackages.activatable-flatpak {
-                    inherit (hostConfig.config.services.flatpak) packages;
-                  };
-                  activate = "./bin/flatpak-managed-install";
-                };
-              };
-            }
-            // optionalAttrs v.enableHomeManager homeProfiles
-            // optionalAttrs v.enableNixvim nixvimProfiles;
+            profiles =
+              optionalAttrs v.flatpak.enable flatpakProfiles
+              // optionalAttrs v.enableHomeManager homeProfiles
+              // optionalAttrs v.enableNixvim nixvimProfiles;
           }
         )
       )

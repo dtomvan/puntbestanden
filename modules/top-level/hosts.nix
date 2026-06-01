@@ -178,7 +178,21 @@ let
 
     enableHomeManager = mkEnableOption "deploy-rs profiles for home-manager";
     enableNixvim = mkEnableOption "deploy-rs profiles for nixvim";
-    enableFlatpak = mkEnableOption "deploy-rs profiles that declaratively install some flatpaks";
+    flatpak = {
+      enable = mkEnableOption "deploy-rs profiles that declaratively install some flatpaks";
+      packages = mkOption {
+        description = "list of pre-installed flatpak apps";
+        type = listOf str;
+        default = [
+          "com.github.tchx84.Flatseal"
+          "io.github.kolunmi.Bazaar"
+        ];
+        example = [
+          "org.kde.okular"
+          "com.discordapp.Discord"
+        ];
+      };
+    };
   };
 in
 {

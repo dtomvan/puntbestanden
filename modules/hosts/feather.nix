@@ -36,7 +36,13 @@
 
     enableHomeManager = true;
     enableNixvim = true;
-    enableFlatpak = true;
+    flatpak = {
+      enable = true;
+      packages = [
+        "com.obsproject.Studio"
+        "io.github.dvlv.boxbuddyrs"
+      ];
+    };
   };
 
   flake.modules = {
