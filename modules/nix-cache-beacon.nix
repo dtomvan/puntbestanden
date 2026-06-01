@@ -1,6 +1,6 @@
 { inputs, lib, ... }:
 {
-  flake-file.inputs.nix-cache-beacon = {
+  flake-inputs.nix-cache-beacon = {
     url = "github:adisbladis/nix-cache-beacon";
     inputs.nixpkgs.follows = "nixpkgs";
   };

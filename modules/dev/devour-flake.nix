@@ -1,8 +1,8 @@
 { inputs, ... }:
 {
-  flake-file.inputs = {
-    devour-flake.url = "github:srid/devour-flake";
-    devour-flake.flake = false;
+  flake-inputs.devour-flake = {
+    url = "github:srid/devour-flake";
+    flake = false;
   };
 
   perSystem =

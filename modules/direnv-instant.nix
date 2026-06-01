@@ -1,5 +1,5 @@
 {
-  flake-file.inputs.direnv-instant = {
+  flake-inputs.direnv-instant = {
     url = "github:Mic92/direnv-instant";
     inputs.nixpkgs.follows = "nixpkgs";
   };

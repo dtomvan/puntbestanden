@@ -16,7 +16,7 @@ let
     ;
 in
 {
-  flake-file.inputs.deploy-rs = {
+  flake-inputs.deploy-rs = {
     url = "git+https://git.toostveen.nl/tom/deploy-rs";
     inputs.nixpkgs.follows = "nixpkgs";
   };

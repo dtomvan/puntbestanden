@@ -17,8 +17,11 @@ let
         concatMap (
           filename:
           let
-            subpath = folder + "/${filename}";
-            type = contents.${filename};
+            # HACK: no dollar+bracket templating here, because that would be
+            # the only reason I would need to escape this file when copypasted
+            # in a bash heredoc, which I do in modules/top-level/flake-inputs.nix
+            subpath = "/" + folder + "/" + filename;
+            type = builtins.getAttr filename contents;
           in
           if condition { inherit filename type; } then
             if type == "regular" then

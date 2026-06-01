@@ -13,7 +13,7 @@ in
       packages.my-wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha;
     };
 
-  flake-file.inputs.catppuccin = {
+  flake-inputs.catppuccin = {
     url = "github:catppuccin/nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };

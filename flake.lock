@@ -159,21 +159,6 @@
         "type": "github"
       }
     },
-    "flake-file": {
-      "locked": {
-        "lastModified": 1779051720,
-        "narHash": "sha256-+jbXnODsR19pFKB0x/6kHhFgW6yV6N+CGClFr45eDU8=",
-        "owner": "denful",
-        "repo": "flake-file",
-        "rev": "c58eb27d9434e5be0c8693f1eb18d47035bc21ba",
-        "type": "github"
-      },
-      "original": {
-        "owner": "denful",
-        "repo": "flake-file",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -447,26 +432,6 @@
       "original": {
         "owner": "adisbladis",
         "repo": "nix-cache-beacon",
-        "type": "github"
-      }
-    },
-    "nix-facts": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1775371175,
-        "narHash": "sha256-vmD/KVUI4so0Tms4p+Ls5nojtikUzUFuVf4TPtCMLo4=",
-        "owner": "crertel",
-        "repo": "nix-facts",
-        "rev": "99295d3df0cf91cc763e6e693ac4c6227d025ff2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "crertel",
-        "repo": "nix-facts",
         "type": "github"
       }
     },
@@ -780,14 +745,12 @@
         "devshell": "devshell",
         "direnv-instant": "direnv-instant",
         "disko": "disko",
-        "flake-file": "flake-file",
         "flake-parts": "flake-parts_3",
         "home-manager": "home-manager",
         "lazy-apps": "lazy-apps",
         "mwg": "mwg",
         "ncro": "ncro",
         "nix-cache-beacon": "nix-cache-beacon",
-        "nix-facts": "nix-facts",
         "nix-index-database": "nix-index-database",
         "nixos-small": "nixos-small",
         "nixpkgs": "nixpkgs",

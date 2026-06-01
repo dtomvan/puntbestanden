@@ -65,11 +65,9 @@ in
 {
   imports = [ inputs.home-manager.flakeModules.default ];
 
-  flake-file.inputs = {
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  flake-inputs.home-manager = {
+    url = "github:nix-community/home-manager";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 
   flake.homeConfigurations = config.users |> attrNames |> concatMap makeHomes |> listToAttrs;

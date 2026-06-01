@@ -1,10 +1,8 @@
 { self, inputs, ... }:
 {
-  flake-file.inputs = {
-    srvos = {
-      url = "github:nix-community/srvos";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  flake-inputs.srvos = {
+    url = "github:nix-community/srvos";
+    inputs.nixpkgs.follows = "nixpkgs";
   };
 
   flake.modules = {

@@ -4,11 +4,9 @@
 }:
 {
   config = {
-    flake-file.inputs = {
-      sops = {
-        url = "github:Mic92/sops-nix";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+    flake-inputs.sops = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     flake.modules.nixos.sops = {

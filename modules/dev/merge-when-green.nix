@@ -1,5 +1,5 @@
 {
-  flake-file.inputs.mwg = {
+  flake-inputs.mwg = {
     url = "git+https://git.toostveen.nl/tom/merge-when-green-fj.git";
     inputs.nixpkgs.follows = "nixpkgs";
   };

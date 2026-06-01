@@ -1,6 +1,4 @@
-# This module does the following:
-# - Adds `lazy-apps` to the flake.nix through github:vic/flake-file
-# - Provides a nano config, which:
+# Provides a nano config, which:
 #   - Has sensible defaults
 #   - Sets a global backupdir
 #   - (optional) sets formatters for specific filetypes, possibly through lazy-apps
@@ -18,7 +16,6 @@ let
     getExe
     literalExpression
     mkBefore
-    mkDefault
     mkEnableOption
     mkOption
     optionalString
@@ -26,11 +23,6 @@ let
   inherit (lib.types) attrsOf pathInStore;
 in
 {
-  flake-file.inputs.lazy-apps = mkDefault {
-    url = "sourcehut:~rycee/lazy-apps";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   flake.modules.nixos.nano =
     {
       pkgs,
