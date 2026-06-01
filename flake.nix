@@ -79,10 +79,6 @@
       };
       "url" = "git+https://git.toostveen.nl/tom/deploy-rs";
     };
-    "devour-flake" = {
-      "flake" = false;
-      "url" = "github:srid/devour-flake";
-    };
     "devshell" = {
       "inputs" = {
         "nixpkgs" = {

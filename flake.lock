@@ -64,22 +64,6 @@
         "url": "https://git.toostveen.nl/tom/deploy-rs"
       }
     },
-    "devour-flake": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1770055559,
-        "narHash": "sha256-peb6VlxIDoqaHkGPanQ35p8SXy9t54NIJ8XJHgMSuFg=",
-        "owner": "srid",
-        "repo": "devour-flake",
-        "rev": "e65d15fd4ef46dbde90ac59be581b2a286c35d0f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srid",
-        "repo": "devour-flake",
-        "type": "github"
-      }
-    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -741,7 +725,6 @@
         "catppuccin": "catppuccin",
         "copyparty": "copyparty",
         "deploy-rs": "deploy-rs",
-        "devour-flake": "devour-flake",
         "devshell": "devshell",
         "direnv-instant": "direnv-instant",
         "disko": "disko",

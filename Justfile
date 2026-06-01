@@ -10,14 +10,10 @@ check:
 clean:
     rm -f result* repl-result*
 
-build:
-    nix run .#nix-build-all
-
 deploy:
     nix develop -c deploy -sk
 
-cleanbuild: clean build
-all: check cleanbuild deploy
+all: check deploy
 
 push WHAT:
     jj git push -c @-
