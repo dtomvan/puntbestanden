@@ -45,14 +45,9 @@ in
         fontSize = fixedWidth.pointSize;
       };
 
-      services.kmscon = {
-        fonts = lib.singleton {
-          name = fixedWidth.family;
-          package = monoFontPackage;
-        };
-        extraConfig = ''
-          font-size=${toString fixedWidth.pointSize}
-        '';
+      services.kmscon.config = {
+        font-name = fixedWidth.family;
+        font-size = fixedWidth.pointSize;
       };
 
       services = {

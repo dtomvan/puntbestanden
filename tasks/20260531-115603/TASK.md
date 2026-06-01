@@ -1,6 +1,6 @@
 # mkHomeDefaults: remove enableNixpkgsReleaseCheck = false
 
-- STATE: OPEN
+- STATE: CLOSED
 - PRIORITY: 50
 - TAGS: 
 ../../modules/lib/mkHomeDefaults.nix
