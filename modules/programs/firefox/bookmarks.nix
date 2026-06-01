@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.firefox.programs.firefox.profiles.default = {
+  flake.modules.homeManager.firefox.programs.firefox.profiles.dev-edition-default = {
     bookmarks.force = true;
     bookmarks.settings = [
       {

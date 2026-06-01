@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.firefox.programs.firefox.profiles.default = {
+  flake.modules.homeManager.firefox.programs.firefox.profiles.dev-edition-default = {
     settings = {
       "widget.use-xdg-desktop-portal.file-picker" = 1;
       "extensions.autoDisableScopes" = 0;

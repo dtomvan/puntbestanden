@@ -115,7 +115,7 @@
             ;
         };
 
-        programs.firefox.profiles.default.extensions.packages =
+        programs.firefox.profiles.dev-edition-default.extensions.packages =
           lib.singleton pkgs.nur.repos.rycee.firefox-addons.onetab;
 
         programs.${if options ? programs.plasma then "plasma" else null}.configFile.kwinrc.Xwayland.Scale =

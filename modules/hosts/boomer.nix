@@ -158,7 +158,7 @@
             ;
         };
 
-        programs.firefox.profiles.default.extensions.packages = builtins.attrValues {
+        programs.firefox.profiles.dev-edition-default.extensions.packages = builtins.attrValues {
           inherit (pkgs.nur.repos.dtomvan)
             zotero-connector
             violentmonkey

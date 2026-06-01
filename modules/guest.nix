@@ -67,9 +67,7 @@ in
 
         programs.firefox = {
           enable = true;
-          package = self'.legacyPackages.makeFakeFirefox pkgs.firefox-devedition {
-            args = "-P ubo-only";
-          };
+          package = pkgs.firefox-devedition;
           profiles.ubo-only = {
             id = lib.mkForce 0;
             isDefault = lib.mkForce true;

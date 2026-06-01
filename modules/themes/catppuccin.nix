@@ -126,7 +126,7 @@ in
         };
       };
 
-      programs.firefox.profiles.default.extensions = {
+      programs.firefox.profiles.dev-edition-default.extensions = {
         packages = [
           pkgs.nur.repos.rycee.firefox-addons.firefox-color
         ];

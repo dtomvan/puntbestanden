@@ -1,4 +1,3 @@
-# TASK(20260204-235119): maybe only on plasma do this??
 {
   flake.modules.homeManager.firefox =
     {

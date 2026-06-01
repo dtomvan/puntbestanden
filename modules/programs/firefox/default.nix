@@ -1,11 +1,12 @@
 {
   flake.modules.homeManager.firefox =
-    { config, ... }:
+    { config, pkgs, ... }:
     {
       programs.firefox = {
         enable = true;
+        package = pkgs.firefox-devedition;
         configPath = "${config.xdg.configHome}/mozilla/firefox";
-        profiles.default = {
+        profiles.dev-edition-default = {
           isDefault = true;
           userChrome = ''
             TabsToolbar { visibility: collapse !important; }
