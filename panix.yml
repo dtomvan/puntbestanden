@@ -1,6 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mihakrumpestar/panix/v0.7.0/gen/panix-schema.yaml
 
 fleet:
+  ssh:
+    username: root
   flakes:
     puntbestanden:
       configurations:
@@ -25,3 +27,6 @@ flags:
     log_file: panix.log
   snapshot:
     dir: .
+  # I've got ssh setup so that the keys are allowed locally, but I haven't
+  # setup passwordless sudo for my desktops because that's scary
+  local_machine_hostname: DONT_YOU_DARE_USE_LOCAL_SUDO_JUST_SSH_INTO_YOURSELF
