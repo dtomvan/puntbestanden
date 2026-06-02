@@ -5,6 +5,7 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: fsel" { spawn "foot" "-a" "fsel" "fsel" "--systemd-run" "--detach"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn-sh "noctalia-shell ipc call lockScreen lock || noctalia msg screen-lock || swaylock"; }
     Super+Alt+V                                 { spawn "foot" "-a" "fsel" "fsel" "--cclip"; }
+    Super+Period                                 { spawn "foot" "-a" "fsel" "emojipick"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+" "-l" "1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }

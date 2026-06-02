@@ -25,6 +25,7 @@ in
           settings.default = [ "foot.desktop" ];
         };
 
+        services.flatpak.enable = true;
         security.polkit.enable = true;
 
         environment.systemPackages = builtins.attrValues {
