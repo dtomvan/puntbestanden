@@ -266,7 +266,20 @@ in
                   nohtml = true;
                 };
               in
-              optionalAttrs cfg.drop.enable {
+              {
+                "/pub" = {
+                  path = "/srv/copyparty/pub";
+                  access = {
+                    A = [ cfg.admin.username ];
+                    r = [ "*" ];
+                  };
+                };
+                "/priv" = {
+                  path = "/srv/copyparty/priv";
+                  access.A = [ cfg.admin.username ];
+                };
+              }
+              // optionalAttrs cfg.drop.enable {
                 "/drop" = {
                   inherit (cfg.drop) path access;
                   flags =
