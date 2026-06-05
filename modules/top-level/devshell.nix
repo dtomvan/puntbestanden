@@ -28,6 +28,18 @@
             panix
             sshp
             ;
+          pn = pkgs.writeShellApplication {
+            name = "pn";
+            text = ''
+              bail () {
+                echo "$0: FATAL: $*"
+                exit 1
+              }
+              target="$1"; shift || bail No target provided
+              action="$1"; shift || bail No action provided
+              panix deploy "--activation-mode=$action" "--tags=$target" --log --exit-on-complete --require-all-success
+            '';
+          };
         };
 
         # make all flake apps available as commands. Very useful in the context
