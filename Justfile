@@ -8,7 +8,7 @@ check:
     nix flake check
 
 clean:
-    rm -f result* repl-result*
+    rm -f result* repl-result* panix.*.log
 
 deploy panixargs='' deploy-rsargs='':
     nix develop -c panix deploy --exit-on-complete --log {{panixargs}}
