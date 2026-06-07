@@ -1,42 +1,17 @@
-{ inputs, ... }:
 {
-  flake.modules.nixos.nix-common =
-    { lib, ... }:
-    {
-      nixpkgs.flake.setFlakeRegistry = true;
-      nix.registry =
-        (lib.mapAttrs
-          # WHY can't this be key as indirect reference name then value as
-          # a path, DONE
-          (name: value: {
-            from = {
-              type = "indirect";
-              id = name;
-            };
-            flake = value;
-          })
-          {
-            inherit (inputs)
-              disko
-              nur
-              copyparty
-              tasks
-              ;
-          }
-        )
-        // {
-          # loosey goosey dependency, it's fine though. always pull the latest
-          # one please!
-          templates = {
-            from = {
-              type = "indirect";
-              id = "templates";
-            };
-            to = {
-              type = "git";
-              url = "https://git.toostveen.nl/tom/templates";
-            };
-          };
-        };
+  flake.modules.nixos.nix-common = {
+    nixpkgs.flake.setFlakeRegistry = true;
+    # loosey goosey dependency, it's fine though. always pull the latest
+    # one please!
+    nix.registry.templates = {
+      from = {
+        type = "indirect";
+        id = "templates";
+      };
+      to = {
+        type = "git";
+        url = "https://git.toostveen.nl/tom/templates";
+      };
     };
+  };
 }
