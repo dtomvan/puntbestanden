@@ -47,7 +47,7 @@
 
   flake.modules = {
     nixos.hosts-feather =
-      { config, lib, ... }:
+      { lib, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.nixos)
@@ -58,6 +58,7 @@
 
             hardware-comet-lake
             hardware-elan-tp
+            hardware-tpacpi
             # hardware-fprint
 
             steam
@@ -82,9 +83,6 @@
         swapDevices = lib.mkForce [
           { device = "/dev/disk/by-partuuid/1e2efaee-12be-466e-a9bc-7dd6c0b31f9a"; }
         ];
-
-        boot.kernelModules = lib.singleton "acpi_call";
-        boot.extraModulePackages = lib.singleton config.boot.kernelPackages.acpi_call;
 
         services.kmscon = {
           enable = true;
