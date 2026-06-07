@@ -25,14 +25,6 @@
           style = "breeze";
           platformTheme = "qt5ct";
         };
-
-        xdg.portal = {
-          enable = true;
-
-          extraPortals = builtins.attrValues {
-            inherit (pkgs) xdg-desktop-portal-gtk;
-          };
-        };
       };
 
     homeManager.programs-niri-common =

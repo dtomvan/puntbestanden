@@ -2,7 +2,7 @@
 {
   flake.modules = {
     nixos.profiles-workstation =
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.nixos)
@@ -23,6 +23,8 @@
         };
 
         modules.utilities.enableLazyApps = true;
+
+        services.gnome.gnome-keyring.enable = lib.mkForce false;
 
         environment.systemPackages = builtins.attrValues {
           inherit (pkgs)
@@ -52,11 +54,12 @@
       {
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
-            # profiles-base # can't import because profiles-base is already imported flake.modules.homeManager.users-tomvd
             profiles-graphical
             profiles-noctalia
+            programs-keepassxc
             ;
         };
+
         home.packages = builtins.attrValues {
           inherit (pkgs.nur.repos.dtomvan) sshp;
           inherit (pkgs) dysk;
