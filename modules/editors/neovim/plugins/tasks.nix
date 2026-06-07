@@ -3,6 +3,8 @@
   flake-inputs.tasks = {
     url = "git+https://git.toostveen.nl/tom/tasks.nvim";
     inputs.nixpkgs.follows = "nixpkgs";
+    inputs.flake-parts.follows = "flake-parts";
+    inputs.treefmt-nix.follows = "treefmt-nix";
   };
 
   flake.modules.nixvim.default = {

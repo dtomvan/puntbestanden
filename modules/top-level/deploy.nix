@@ -19,6 +19,8 @@ in
   flake-inputs.deploy-rs = {
     url = "git+https://git.toostveen.nl/tom/deploy-rs";
     inputs.nixpkgs.follows = "nixpkgs";
+    inputs.flake-parts.follows = "flake-parts";
+    inputs.treefmt-nix.follows = "treefmt-nix";
   };
 
   imports = [ inputs.deploy-rs.flakeModules.default ];

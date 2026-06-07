@@ -73,8 +73,14 @@
     };
     "deploy-rs" = {
       "inputs" = {
+        "flake-parts" = {
+          "follows" = "flake-parts";
+        };
         "nixpkgs" = {
           "follows" = "nixpkgs";
+        };
+        "treefmt-nix" = {
+          "follows" = "treefmt-nix";
         };
       };
       "url" = "git+https://git.toostveen.nl/tom/deploy-rs";
@@ -89,8 +95,14 @@
     };
     "direnv-instant" = {
       "inputs" = {
+        "flake-parts" = {
+          "follows" = "flake-parts";
+        };
         "nixpkgs" = {
           "follows" = "nixpkgs";
+        };
+        "treefmt-nix" = {
+          "follows" = "treefmt-nix";
         };
       };
       "url" = "github:Mic92/direnv-instant";
@@ -154,6 +166,9 @@
     };
     "nixvim" = {
       "inputs" = {
+        "flake-parts" = {
+          "follows" = "flake-parts";
+        };
         "nixpkgs" = {
           "follows" = "nixpkgs";
         };
@@ -170,6 +185,9 @@
     };
     "nur" = {
       "inputs" = {
+        "flake-parts" = {
+          "follows" = "flake-parts";
+        };
         "nixpkgs" = {
           "follows" = "nixpkgs";
         };
@@ -205,8 +223,14 @@
     };
     "tasks" = {
       "inputs" = {
+        "flake-parts" = {
+          "follows" = "flake-parts";
+        };
         "nixpkgs" = {
           "follows" = "nixpkgs";
+        };
+        "treefmt-nix" = {
+          "follows" = "treefmt-nix";
         };
       };
       "url" = "git+https://git.toostveen.nl/tom/tasks.nvim";

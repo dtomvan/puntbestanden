@@ -2,6 +2,8 @@
   flake-inputs.direnv-instant = {
     url = "github:Mic92/direnv-instant";
     inputs.nixpkgs.follows = "nixpkgs";
+    inputs.flake-parts.follows = "flake-parts";
+    inputs.treefmt-nix.follows = "treefmt-nix";
   };
   flake.modules.homeManager.basic-cli =
     {

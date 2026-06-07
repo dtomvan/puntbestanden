@@ -43,6 +43,7 @@ in
       nur = {
         url = "github:nix-community/NUR";
         inputs.nixpkgs.follows = "nixpkgs";
+        inputs.flake-parts.follows = "flake-parts";
       };
 
       lazy-apps = {
