@@ -27,5 +27,9 @@
         '';
       };
     };
-  flake.modules.nixos.profiles-workstation = { self', ... }: { environment.systemPackages = [ self'.packages.emojipick ]; };
+  flake.modules.nixos.profiles-workstation =
+    { self', ... }:
+    {
+      environment.systemPackages = [ self'.packages.emojipick ];
+    };
 }
