@@ -122,14 +122,6 @@
       };
       "url" = "git+https://git.toostveen.nl/tom/lazy-apps";
     };
-    "mwg" = {
-      "inputs" = {
-        "nixpkgs" = {
-          "follows" = "nixpkgs";
-        };
-      };
-      "url" = "git+https://git.toostveen.nl/tom/merge-when-green-fj.git";
-    };
     "ncro" = {
       "inputs" = {
         "nixpkgs" = {
