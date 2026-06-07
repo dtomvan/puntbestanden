@@ -1,6 +1,3 @@
-// ! Auto-generated file. Do not edit directly.
-// Remove `include "dms/colors.kdl"` from your config to override.
-
 layout {
     background-color "transparent"
 

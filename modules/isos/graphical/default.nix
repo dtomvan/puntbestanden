@@ -33,8 +33,6 @@ in
       # we use wayland the entire way through and don't want lightdm.
       services.xserver.enable = lib.mkForce false;
 
-      services.displayManager.dms-greeter.enable = lib.mkForce false;
-
       environment.defaultPackages = lib.mkForce [ ]; # nothing related to us
 
       home-manager = {

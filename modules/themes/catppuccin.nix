@@ -54,7 +54,6 @@ in
       pkgs,
       lib,
       config,
-      options,
       ...
     }:
     let
@@ -139,27 +138,9 @@ in
         };
       };
 
-      programs.${if config ? programs.dms-shell then "dms-shell" else null} = {
-        theme = ../profiles/dank/catppuccin.json;
-        themeVariants = catppuccin;
-
-        session = lib.mkDefault {
-          wallpaperPath = wallpaper;
-          perMonitorWallpaper = false;
-          perModeWallpaper = false;
-          wallpaperCyclingEnabled = false;
-        };
-      };
-
-      programs.${if config ? programs.noctalia-shell then "noctalia-shell" else null} = {
-        settings.colorSchemes.predefinedScheme = "Catppuccin";
-      };
-
-      xdg.cacheFile."noctalia/wallpapers.json" = {
-        source = pkgs.writers.writeJSON "wallpapers.json" {
-          defaultWallpaper = wallpaper;
-        };
-        force = true;
+      programs.${if config ? programs.noctalia then "noctalia" else null}.settings = {
+        wallpaper.default.path = wallpaper;
+        theme.builtin = "Catppuccin";
       };
 
       catppuccin = catppuccin // {

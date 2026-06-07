@@ -3,7 +3,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fsel" { spawn "foot" "-a" "fsel" "fsel" "--systemd-run" "--detach"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn-sh "noctalia-shell ipc call lockScreen lock || noctalia msg screen-lock || swaylock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn "noctalia" "msg" "screen-lock"; }
     Super+Alt+V                                 { spawn "foot" "-a" "fsel" "fsel" "--cclip"; }
     Super+Period                                 { spawn "foot" "-a" "fsel" "emojipick"; }
 
@@ -150,7 +150,7 @@ binds {
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Ctrl+Alt+Delete { spawn-sh "noctalia-shell ipc call sessionMenu toggle || noctalia msg panel-toggle session"; }
+    Ctrl+Alt+Delete { spawn "noctalia" "msg" "panel-toggle" "session"; }
 
     Mod+Shift+P { power-off-monitors; }
 }

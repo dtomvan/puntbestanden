@@ -118,14 +118,4 @@ in
       };
     };
   };
-
-  flake.modules.homeManager.profiles-dank.programs.dms-shell.settings = {
-    fontFamily = family;
-    monoFontFamily = fixedWidth.family;
-  };
-
-  flake.modules.homeManager.profiles-noctalia.programs.noctalia-shell.settings.ui = {
-    fontDefault = family;
-    fontFixed = fixedWidth.family;
-  };
 }

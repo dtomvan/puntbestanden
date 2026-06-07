@@ -2,10 +2,9 @@
 
 include "autostart.kdl"
 include "binds.kdl"
+include "colors.kdl"
 include "input.kdl"
 include "layout.kdl"
 include "misc.kdl"
 include "noctalia.kdl"
 include "screensharing.kdl"
-
-include "dms/colors.kdl"
