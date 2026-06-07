@@ -1,108 +1,51 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 let
+  inherit (lib) getExe mkDefault;
   catppuccin = {
+    enable = true;
+    autoEnable = false;
+
     accent = "peach";
     flavor = "mocha";
   };
   colorScheme = "CatppuccinMochaPeach";
 in
 {
-  perSystem =
-    { pkgs, ... }:
-    {
-      packages.my-wallpaper = pkgs.nixos-artwork.wallpapers.nineish-catppuccin-mocha;
-    };
-
   flake-inputs.catppuccin = {
     url = "github:catppuccin/nix";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.modules.nixos.themes-catppuccin =
-    {
-      self',
-      lib,
-      config,
-      ...
-    }:
-    let
-      myPkgs = self'.packages;
-    in
-    {
-      imports = [
-        inputs.catppuccin.nixosModules.catppuccin
-      ];
+  flake.modules.nixos.themes-catppuccin = {
+    imports = [
+      inputs.catppuccin.nixosModules.catppuccin
+    ];
 
-      inherit catppuccin;
-
-      boot = {
-        # manually re-implement catppuccin module because I want control of mkOverride calls
-        plymouth = {
-          theme = lib.mkOverride 999 "catppuccin-${config.catppuccin.flavor}";
-          themePackages = lib.mkOverride 999 [ "${config.catppuccin.sources.plymouth}" ];
-        };
-        loader.grub = {
-          theme = lib.mkDefault "${config.catppuccin.sources.grub}/share/grub/themes/catppuccin-${config.catppuccin.flavor}-grub-theme";
-          splashImage = lib.mkOverride 999 myPkgs.my-wallpaper.passthru.kdeFilePath;
-        };
-      };
+    catppuccin = catppuccin // {
+      plymouth.enable = true;
+      sddm.enable = true;
     };
+  };
 
   flake.modules.homeManager.themes-catppuccin =
-    {
-      self',
-      pkgs,
-      lib,
-      config,
-      ...
-    }:
+    { pkgs, config, ... }:
     let
-      myPkgs = self'.packages;
+      catppuccin-kde = pkgs.callPackage ./_catppuccin-kde.nix { inherit colorScheme; };
 
-      catppuccin-kde = pkgs.callPackage (
-        { stdenvNoCC, fetchFromGitHub }:
-        stdenvNoCC.mkDerivation (finalAttrs: {
-          pname = "catppuccin-kde";
-          version = "0.2.6";
-
-          src = fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "kde";
-            tag = "v${finalAttrs.version}";
-            hash = "sha256-pfG0L4eSXLYLZM8Mhla4yalpEro74S9kc0sOmQtnG3w=";
-          };
-
-          postPatch = ''
-            chmod +x **.sh
-            patchShebangs .
-            # we will not be using wget, unzip, or lookandfeeltool, so I won't
-            # put it in the closure.
-            sed -Ei -e '/^check_command_exists ".*"$/d' install.sh
-          '';
-
-          installPhase = ''
-            runHook preInstall
-              # mocha, peach, default decorations, only build colorscheme
-              ./install.sh 1 7 1 color
-              install -m644 ./dist/${colorScheme}.colors $out
-            runHook postInstall
-          '';
-        })
-      ) { };
-
-      wallpaper = myPkgs.my-wallpaper.passthru.kdeFilePath;
+      inherit (pkgs.nixos-artwork.wallpapers) nineish-catppuccin-mocha;
+      wallpaper = nineish-catppuccin-mocha.passthru.kdeFilePath;
     in
     {
       imports = [
         inputs.catppuccin.homeModules.catppuccin
       ];
 
-      xdg.dataFile."color-schemes/${colorScheme}.colors" = lib.mkDefault {
+      xdg.dataFile."color-schemes/${colorScheme}.colors" = mkDefault {
         force = true;
         source = catppuccin-kde;
       };
 
-      xdg.dataFile."konsole/${colorScheme}.colorscheme" = lib.mkDefault {
+      xdg.dataFile."konsole/${colorScheme}.colorscheme" = mkDefault {
         force = true;
         source = pkgs.fetchurl {
           url = "https://raw.githubusercontent.com/catppuccin/konsole/3b64040e3f4ae5afb2347e7be8a38bc3cd8c73a8/themes/catppuccin-mocha.colorscheme";
@@ -110,18 +53,18 @@ in
         };
       };
 
-      programs.${if config ? programs.plasma then "plasma" else null} = {
+      programs.${if config ? programs.plasma then "plasma" else null} = mkDefault {
         workspace = { inherit colorScheme wallpaper; };
 
         kscreenlocker.appearance = { inherit wallpaper; };
       };
 
-      programs.${if config ? programs.konsole then "konsole" else null} = lib.mkDefault {
+      programs.${if config ? programs.konsole then "konsole" else null} = mkDefault {
         enable = true;
         defaultProfile = "Catppuccin";
         profiles.Catppuccin = {
           inherit colorScheme;
-          command = lib.getExe config.programs.bash.finalPackage;
+          command = getExe config.programs.bash.finalPackage;
         };
       };
 
@@ -144,18 +87,6 @@ in
       };
 
       catppuccin = catppuccin // {
-        sources.foot = options.catppuccin.sources.default.foot.overrideAttrs (
-          _final: prev: {
-            postInstall = (prev.postInstall or "") + ''
-              substituteInPlace $out/catppuccin-${catppuccin.flavor}.ini \
-                --replace-warn '[colors]' '[colors-dark]'
-            '';
-          }
-        );
-
-        enable = true;
-        autoEnable = false;
-
         alacritty.enable = true;
         bat.enable = true;
         btop.enable = true;

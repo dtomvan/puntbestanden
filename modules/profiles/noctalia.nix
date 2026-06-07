@@ -37,11 +37,7 @@
     };
 
   flake.modules.homeManager.profiles-noctalia =
-    {
-      pkgs,
-      self',
-      ...
-    }:
+    { pkgs, ... }:
     {
       imports = [
         self.modules.homeManager.programs-niri-common
@@ -89,7 +85,6 @@
             settings_show_advanced = true;
             telemetry_enabled = false;
           };
-          wallpaper.default.path = self'.packages.my-wallpaper.passthru.kdeFilePath;
           widget = {
             battery = {
               display_mode = "graphic";
