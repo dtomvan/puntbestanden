@@ -1,4 +1,9 @@
-{ self, inputs, ... }:
+{
+  self,
+  config,
+  inputs,
+  ...
+}:
 let
   inherit (self.lib) system;
 in
@@ -29,6 +34,22 @@ in
       boot.kernelPackages = inputs'.nixos-small.legacyPackages.linuxPackages_latest;
 
       services.openssh.enable = true;
+
+      # ooh, scary backdoor! No, just for panix. Also this is my personal ISO
+      # for deployage to graphical systems which I control so why would you
+      # even be worried... if I want to "backdoor" my own systems then so be
+      # it!!!
+      users.users =
+        let
+          keys = [
+            config.hosts.amdpc1.sshPubkey.key
+            config.hosts.tpx1g8.sshPubkey.key
+          ];
+        in
+        {
+          root.openssh.authorizedKeys = { inherit keys; };
+          nixos.openssh.authorizedKeys = { inherit keys; };
+        };
 
       # we use wayland the entire way through and don't want lightdm.
       services.xserver.enable = lib.mkForce false;
