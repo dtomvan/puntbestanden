@@ -85,7 +85,6 @@ in
                   niri-session
                 fi
               '';
-              shellAliases.sudo = "run0";
             };
 
             firefox = {
