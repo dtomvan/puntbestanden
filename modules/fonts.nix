@@ -37,14 +37,6 @@ in
         };
       };
 
-      # ah yes, very unhardcoded
-      boot.loader.grub = {
-        font = "${monoFontPackage}/share/fonts/truetype/${
-          lib.replaceStrings [ " " ] [ "" ] fixedWidth.family
-        }-Regular.ttf";
-        fontSize = fixedWidth.pointSize;
-      };
-
       services.kmscon.config = {
         font-name = fixedWidth.family;
         font-size = fixedWidth.pointSize;
