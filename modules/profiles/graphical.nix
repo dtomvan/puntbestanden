@@ -1,6 +1,6 @@
 { self, lib, ... }:
 let
-  inherit (lib) mkDefault mkIf;
+  inherit (lib) mkDefault;
 in
 {
   flake.modules = {
@@ -38,7 +38,7 @@ in
       };
 
     homeManager.profiles-graphical =
-      { config, pkgs, ... }:
+      { pkgs, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
@@ -57,10 +57,6 @@ in
           size = 24;
           gtk.enable = true;
           x11.enable = true;
-          hyprcursor = mkIf config.wayland.windowManager.hyprland.enable {
-            enable = true;
-            size = 24;
-          };
         };
 
         dconf.settings = {
