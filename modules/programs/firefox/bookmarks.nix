@@ -129,6 +129,10 @@
               }
             ];
           }
+          {
+            name = "To my students";
+            url = "http://ozark.hendrix.edu/~yorgey/forest/00FD/index.xml";
+          }
         ];
       }
     ];
