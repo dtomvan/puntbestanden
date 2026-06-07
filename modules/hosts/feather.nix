@@ -107,12 +107,7 @@
       };
 
     homeManager."tomvd@feather" =
-      {
-        pkgs,
-        lib,
-        options,
-        ...
-      }:
+      { config, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
@@ -121,10 +116,7 @@
             ;
         };
 
-        programs.firefox.profiles.dev-edition-default.extensions.packages =
-          lib.singleton pkgs.nur.repos.rycee.firefox-addons.onetab;
-
-        programs.${if options ? programs.plasma then "plasma" else null}.configFile.kwinrc.Xwayland.Scale =
+        programs.${if config ? programs.plasma then "plasma" else null}.configFile.kwinrc.Xwayland.Scale =
           1.5;
 
         home.stateVersion = "26.11";
