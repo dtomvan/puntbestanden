@@ -5,9 +5,6 @@
     {
       # self-install the live NixOS environment to a different disk, as to
       # kind-of "clone" the current setup somewhere else.
-      #
-      # Yes, this is in many ways similar to the script in
-      # modules/community/autounattend/installer.nix...
       packages.nixos-self-install = pkgs.writeShellApplication {
         name = "nixos-self-install";
         runtimeInputs = builtins.attrValues {
@@ -37,7 +34,7 @@
           disko \
             -m destroy,format,mount \
             --argstr device "$target" \
-            ${../../community/autounattend/_disko.nix}
+            ${./_disko.nix}
 
           nixos-generate-config \
             --show-hardware-config \

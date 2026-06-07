@@ -10,10 +10,61 @@
     {
       imports = [
         inputs.disko.nixosModules.disko
-        (import ./community/autounattend/_disko.nix {
-          device = host.mainDisk or throw "disko imported but host.mainDisk not set";
-        })
       ];
+
+      config = {
+        assertions = [
+          {
+            assertion = host.mainDisk != null;
+            message = "host.mainDisk must be set when disko is imported";
+          }
+        ];
+
+        disko.devices.disk.main = {
+          device = host.mainDisk;
+
+          type = "disk";
+
+          content = {
+            type = "gpt";
+            partitions = {
+              BOOT = {
+                size = "1G";
+                type = "EF00";
+                content = {
+                  type = "filesystem";
+                  format = "vfat";
+                  mountpoint = "/boot";
+                  mountOptions = [
+                    "fmask=0022"
+                    "dmask=0022"
+                  ];
+                };
+              };
+              swap = {
+                size = "8G"; # TODO: adjust per-machine
+                content = {
+                  type = "swap";
+                  discardPolicy = "both";
+                  resumeDevice = false;
+                };
+              };
+              NIXOS = {
+                size = "100%";
+                content = {
+                  type = "filesystem";
+                  format = "xfs";
+                  mountpoint = "/";
+                  mountOptions = [
+                    "defaults"
+                    "noatime" # saves overhead
+                  ];
+                };
+              };
+            };
+          };
+        };
+      };
     };
 
   perSystem =

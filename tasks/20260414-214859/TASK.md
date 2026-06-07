@@ -18,5 +18,5 @@ default](https://github.com/NixOS/nixpkgs/blob/7e495b747b51f95ae15e74377c5ce1fe6
 
 Available in nixos since 24.11, time to use it!
 
-BTW: don't forget other occurrences of `sudo` in this repo, and also do the removal for autounattend
+BTW: don't forget other occurrences of `sudo` in this repo
 

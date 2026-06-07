@@ -10,8 +10,6 @@
       "disko_install"
       "dendritic"
       "hostnames"
-      "autounattend"
-      "community_autounattend"
     ];
 
     parts.intro =

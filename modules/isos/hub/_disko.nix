@@ -1,4 +1,3 @@
-# NB: this is the disko file for the TARGET system.
 { device, ... }:
 {
   disko.devices.disk.main = {
