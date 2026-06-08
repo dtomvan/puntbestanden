@@ -3,6 +3,9 @@
 fleet:
   ssh:
     username: root
+  nix:
+    copy_flags:
+      - --substitute-on-destination
   flakes:
     puntbestanden:
       configurations:
