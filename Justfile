@@ -6,6 +6,7 @@ check:
     nix fmt
     nix run .#write-files
     nix flake check
+    panix build --exit-on-complete --require-all-success
 
 clean:
     rm -f result* repl-result* panix.*.log
