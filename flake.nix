@@ -181,7 +181,7 @@
           "follows" = "nixpkgs";
         };
       };
-      "url" = "github:noctalia-dev/noctalia-shell/v5";
+      "url" = "github:noctalia-dev/noctalia";
     };
     "nur" = {
       "inputs" = {
