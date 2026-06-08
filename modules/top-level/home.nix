@@ -70,7 +70,11 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.homeConfigurations = config.users |> attrNames |> concatMap makeHomes |> listToAttrs;
+  flake.homeConfigurations =
+    config.users
+    |> attrNames
+    |> concatMap makeHomes
+    |> listToAttrs;
 
   text.readme.parts.home_configs = "\n- a dendritic home-manager config (TODO: list aspects here)";
 }

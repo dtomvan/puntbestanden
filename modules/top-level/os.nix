@@ -36,7 +36,11 @@ in
 
   text.readme.parts.nixos_configs =
     let
-      n = self.nixosConfigurations |> attrsToList |> length |> toString;
+      n =
+        self.nixosConfigurations
+        |> attrsToList
+        |> length
+        |> toString;
     in
     "- ${n} NixOS configs (well, this is a generated number so it's technically correct but don't over-estimate me)";
 }

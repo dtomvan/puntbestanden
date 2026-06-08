@@ -85,7 +85,10 @@ in
               # add inputs to image so that the self-installer can do it
               # without much copying
               storeContents =
-                inputs |> (a: removeAttrs a [ "nixpkgs-patcher" ]) |> builtins.attrValues |> map (i: i.outPath);
+                inputs
+                |> (a: removeAttrs a [ "nixpkgs-patcher" ])
+                |> builtins.attrValues
+                |> map (i: i.outPath);
             };
             # always copy to RAM
             boot.initrd.systemd.services.copytoram.unitConfig.ConditionKernelCommandLine = lib.mkForce null;
