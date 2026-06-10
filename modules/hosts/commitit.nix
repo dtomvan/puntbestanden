@@ -38,6 +38,7 @@ in
           services-miniflux
           services-monitoring
           services-blog
+          services-matrix
           ;
       };
 
@@ -65,6 +66,8 @@ in
         nginx.enable = true;
         paste.enable = true;
       };
+
+      infra.matrix.enable = true;
 
       infra.miniflux = {
         enable = true;
