@@ -87,7 +87,31 @@ in
               forceSSL = true;
 
               locations = {
-                "/".root = pkgs.cinny.override { conf.hashRouter.enabled = true; };
+                "/".root = pkgs.cinny.override {
+                  conf = {
+                    hashRouter.enabled = true;
+                    defaultHomeserver = 0;
+                    homeserverList = [ cfg.fqdn ];
+                    allowCustomHomeservers = false;
+                    featuredCommunities = {
+                      spaces = [
+                        "#space:nixos.org"
+                        "#forgejo:matrix.org"
+                        "#space:continuwuity.org"
+                        "#kde-community:kde.org"
+                        "#public-space:archlinux.org"
+                        "#fedora-space:fedoraproject.org"
+                        "#codeberg-space:matrix.org"
+                        "#home:fosdem.org"
+                        "#welcome:mozilla.org"
+                      ];
+                      rooms = [
+                        "#keepassxc:mozilla.org"
+                      ];
+                      servers = [ ];
+                    };
+                  };
+                };
                 "/_matrix".proxyPass = socket;
               };
             };
