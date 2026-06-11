@@ -87,7 +87,7 @@ in
               forceSSL = true;
 
               locations = {
-                "/".root = pkgs.cinny;
+                "/".root = pkgs.cinny.override { conf.hashRouter.enabled = true; };
                 "/_matrix".proxyPass = socket;
               };
             };
