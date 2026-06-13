@@ -39,6 +39,7 @@ in
           services-monitoring
           services-blog
           services-matrix
+          services-hedgedoc
           ;
       };
 
@@ -75,6 +76,8 @@ in
       };
 
       infra.matrix.enable = true;
+
+      infra.md.enable = true;
 
       infra.miniflux = {
         enable = true;
