@@ -34,7 +34,6 @@
             keepassxc
             libreoffice-qt6-fresh
             mpv
-            nixpkgs-reviewFull
             obsidian
             pdfarranger
             pika-backup
@@ -46,6 +45,7 @@
             zathura
             # keep-sorted end
             ;
+          inherit (pkgs.lixPackageSets.stable) nixpkgs-reviewFull;
         };
       };
 
