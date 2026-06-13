@@ -375,11 +375,28 @@ in
           rm "$tmp.$ext"
         '';
       };
+
+      packages.scratch = pkgs.writeShellApplication {
+        name = "scratch";
+        runtimeInputs = builtins.attrValues {
+          inherit (pkgs) coreutils wl-clipboard;
+        };
+        derivationArgs = {
+          preferLocalBuild = true;
+          allowSubstitutes = false;
+        };
+        text = ''
+          tmp="$(mktemp | tee /dev/stderr >(wl-copy))"
+          tee "$tmp"
+        '';
+      };
     };
 
   flake.modules.nixos.profiles-workstation =
     { self', ... }:
     {
-      environment.systemPackages = singleton self'.packages.pb;
+      environment.systemPackages = builtins.attrValues {
+        inherit (self'.packages) pb scratch;
+      };
     };
 }
