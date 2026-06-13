@@ -37,7 +37,7 @@
             (import inputs.nixos-small {
               inherit (host) system;
               config.allowUnfree = true;
-            }).linuxPackages_6_18;
+            }).linuxPackages_7_0;
         # LTS until Aug 2028, let's hope I have a new graphics card by then
         hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       })
