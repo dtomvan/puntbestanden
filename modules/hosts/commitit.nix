@@ -64,7 +64,14 @@ in
           withThumbnails = false;
         };
         nginx.enable = true;
-        paste.enable = true;
+        paste = {
+          enable = true;
+          extraFlags.vmaxb = "200m";
+        };
+        scrot = {
+          enable = true;
+          extraFlags.vmaxb = "2g";
+        };
       };
 
       infra.matrix.enable = true;

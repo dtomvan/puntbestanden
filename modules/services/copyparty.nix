@@ -115,6 +115,7 @@ in
 
         drop = mkCopypartyVolumeOptions "drop";
         paste = mkCopypartyVolumeOptions "paste";
+        scrot = mkCopypartyVolumeOptions "scrot";
 
         admin = {
           username = mkOption {
@@ -155,6 +156,10 @@ in
               wG = [ "*" ];
             };
             paste.access = mkOptionDefault {
+              A = [ cfg.admin.username ];
+              G = [ "*" ];
+            };
+            scrot.access = mkOptionDefault {
               A = [ cfg.admin.username ];
               G = [ "*" ];
             };
@@ -264,6 +269,10 @@ in
                   rand = true;
                   # No XSS please
                   nohtml = true;
+                  # no subfolders
+                  nosub = true;
+                  # always leave at least 4g of available disk space
+                  df = "4g";
                 };
               in
               {
@@ -285,10 +294,10 @@ in
                   flags =
                     commonFlags
                     // {
-                      # no more than 500 mb over 15 minutes
-                      maxb = "500m,600";
-                      # max 200 mb uploads
-                      sz = "0-200m";
+                      # no more than 300 mb over 15 minutes
+                      maxb = "300m,600";
+                      # max 100 mb uploads
+                      sz = "0-100m";
                       # little less than a quarter
                       lifetime = 60 * 60 * 24 * 30 * 4;
                     }
@@ -298,6 +307,20 @@ in
               // optionalAttrs cfg.paste.enable {
                 "/paste" = {
                   inherit (cfg.paste) path access;
+                  flags =
+                    commonFlags
+                    // {
+                      # no more than 20 mb over 15 minutes
+                      maxb = "20m,600";
+                      # max 10 mb uploads
+                      sz = "0-10m";
+                    }
+                    // cfg.paste.extraFlags;
+                };
+              }
+              // optionalAttrs cfg.scrot.enable {
+                "/scrot" = {
+                  inherit (cfg.scrot) path access;
                   flags =
                     commonFlags
                     // {
