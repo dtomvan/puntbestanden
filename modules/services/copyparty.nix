@@ -362,13 +362,18 @@ in
           tmp="$(mktemp)"
           cat > "$tmp"
           ext="$(file --brief --extension "$tmp" | awk -F/ '{ print $1 }')"
+          mime="$(file --brief --mime-type "$tmp")"
           case "$ext" in
-            txt)
-              drop="paste";;
             png | jpg | jpeg)
               drop="scrot";;
             *)
-              drop="priv";;
+              if [[ "$mime" =~ ^text/ ]]; then
+                drop="paste"
+                ext="txt"
+              else
+                drop="priv"
+              fi
+              ;;
           esac
           mv "$tmp" "$tmp.$ext"
           u2c -u -a "$(sops decrypt ${../../secrets/copyparty.secret})" "''${1:-"https://${defaultDomain}/$drop"}" "$tmp.$ext"
