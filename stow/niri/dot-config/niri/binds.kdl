@@ -3,7 +3,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
     Mod+D hotkey-overlay-title="Run an Application: fsel" { spawn "foot" "-a" "fsel" "fsel" "--systemd-run" "--detach"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn "noctalia" "msg" "screen-lock"; }
+    Super+Alt+L hotkey-overlay-title="Lock the Screen: " { spawn "noctalia" "msg" "session" "lock"; }
     Super+Alt+V                                 { spawn "foot" "-a" "fsel" "fsel" "--cclip"; }
     Super+Period                                 { spawn "foot" "-a" "fsel" "emojipick"; }
 
