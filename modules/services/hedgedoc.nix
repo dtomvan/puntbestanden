@@ -67,9 +67,9 @@ in
               inherit (cfg) domain;
               protocolUseSSL = true;
               enableUploads = "registered";
-              disableNoteCreation = true;
               email = false;
               allowEmailRegister = false;
+              allowAnonymous = false;
             }
             // cfg.extraSettings;
           };
