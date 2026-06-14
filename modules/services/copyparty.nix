@@ -11,7 +11,6 @@ let
     mkPackageOption
     optionalAttrs
     optionals
-    singleton
     ;
 
   inherit (lib.types)
