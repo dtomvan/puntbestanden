@@ -26,7 +26,10 @@
         settings = {
           fix.tools = {
             nixfmt = {
-              command = [ "nixfmt" ];
+              command = [
+                "nixfmt"
+                "-"
+              ];
               patterns = [ "glob:'**/*.nix'" ];
             };
 
