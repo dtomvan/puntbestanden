@@ -159,13 +159,30 @@
       "url" = "github:nix-community/nix-index-database";
     };
     "nix-maid" = {
-      "url" = "github:dtomvan/nix-maid/lndir";
+      "url" = "github:viperML/nix-maid";
     };
     "nixos-small" = {
       "url" = "github:nixos/nixpkgs/nixos-unstable-small";
     };
     "nixpkgs" = {
-      "url" = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+      "follows" = "nixpkgs-patcher/nixpkgs-patched";
+    };
+    "nixpkgs-patcher" = {
+      "inputs" = {
+        "flake-parts" = {
+          "follows" = "";
+        };
+        "nix-patcher" = {
+          "follows" = "";
+        };
+        "nixpkgs" = {
+          "follows" = "";
+        };
+        "systems" = {
+          "follows" = "";
+        };
+      };
+      "url" = "github:dtomvan/nixpkgs-patcher";
     };
     "nixvim" = {
       "inputs" = {

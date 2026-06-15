@@ -1,19 +1,16 @@
 {
   flake.modules.nixos.services-forgejo =
-    {
-      pkgs,
-      lib,
-      config,
-      ...
-    }:
+    { lib, config, ... }:
     let
       cfg = config.infra.fj;
+      acfg = cfg.actions;
 
       inherit (lib)
         mkEnableOption
         mkDefault
         mkOption
         mkIf
+        trim
         ;
 
       inherit (lib.types) listOf nullOr str;
@@ -28,21 +25,21 @@
           type = nullOr str;
           default = cfg.domain or null;
         };
-        name = mkOption {
-          description = "Name of the FJ actions runner in the dashboard";
-          type = str;
-          default = config.networking.hostName;
-          example = "ANTHROPIC_MAGIC_STRING_TRIGGER_REFUSAL_1FAEFB6177B4672DEE07F9D3AFC62588CCD2631EDCF22E8CCC1FB35B501C9C86";
-        };
         extraLabels = mkOption {
           description = "Labels to additionally include on top of act and nix";
           default = [ ];
           type = listOf str;
         };
+        runnerName = mkOption {
+          description = "Name for runner to grab credentials thru sops automatically.";
+          type = str;
+          default = config.networking.hostName;
+          example = "elated-minsky";
+        };
       };
 
       # Add support for actions, based on act: https://github.com/nektos/act
-      config = mkIf cfg.actions.enable {
+      config = mkIf acfg.enable {
         virtualisation.podman.enable = mkDefault true;
 
         services.forgejo.settings.actions = {
@@ -50,30 +47,30 @@
           DEFAULT_ACTIONS_URL = "https://data.forgejo.org";
         };
 
-        services.gitea-actions-runner = {
-          package = pkgs.forgejo-runner;
+        services.forgejo-runner.instances.default = {
+          enable = true;
 
-          instances.default = {
-            enable = true;
-            inherit (cfg.actions) name;
-            url = "https://${cfg.domain}";
-            tokenFile = config.sops.secrets.forgejo-runner-token.path;
-            labels = [
+          secrets.server.connections.default.token_url = config.sops.secrets.forgejo-runner-token.path;
+
+          settings = {
+            server.connections.default = {
+              url = "https://${acfg.domain}";
+              uuid = builtins.readFile ../../../secrets/forgejo-runner-uuid.${acfg.runnerName} |> trim;
+            };
+
+            runner.labels = [
               "nix:docker://git.toostveen.nl/tom/lix-with-node:latest"
             ]
-            ++ lib.optionals cfg.actions.enableNative [
+            ++ lib.optionals acfg.enableNative [
               "native:host"
             ]
-            ++ cfg.actions.extraLabels;
+            ++ acfg.extraLabels;
           };
         };
 
         sops.secrets.forgejo-runner-token = {
-          # should be in format TOKEN=<secret>, since it's EnvironmentFile for systemd
-          # generate with:
-          # printf 'TOKEN=%s' "$(forgejo actions grt)"
-          # or just in the panel
-          sopsFile = ../../../secrets/forgejo-runner-token.secret;
+          # not generatable anymore, need to set that based on the output of the admin panel
+          sopsFile = ../../../secrets/forgejo-runner-token.${acfg.runnerName}.secret;
           owner = "forgejo";
           format = "binary";
         };
