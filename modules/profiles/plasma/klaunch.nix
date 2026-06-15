@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.profiles-plasma.programs.plasma.configFile.klaunchrc = {
+  flake.modules.maid.profiles-plasma.kconfig.settings.klaunchrc = {
     BusyCursorSettings.Bouncing = false;
     FeedbackStyle.BusyCursor = false;
   };

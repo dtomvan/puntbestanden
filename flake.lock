@@ -55,11 +55,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779015929,
-        "narHash": "sha256-+NWx4Zb9aQxuwjL8E2MzyAaNa/cQtuFWQXXT5yUOujQ=",
+        "lastModified": 1781559549,
+        "narHash": "sha256-hiULr27laYmXGEziofzw+w+fmJsigqSqmcH29VW2ejE=",
         "ref": "refs/heads/master",
-        "rev": "eb0703dfda9c5aba6533adb33a1340cc00420576",
-        "revCount": 365,
+        "rev": "0d7abc3ecbe6d50928f62b8f06e9057f574a8fb8",
+        "revCount": 367,
         "type": "git",
         "url": "https://git.toostveen.nl/tom/deploy-rs"
       },
@@ -328,6 +328,22 @@
         "type": "github"
       }
     },
+    "nix-maid": {
+      "locked": {
+        "lastModified": 1781635712,
+        "narHash": "sha256-FMCCzcPNfI1jxIt89zCqwFy6oq7TSL5MpClCIuz1JVk=",
+        "owner": "dtomvan",
+        "repo": "nix-maid",
+        "rev": "b2fc8413bbba4277db47525e6bbab3508f03d081",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dtomvan",
+        "ref": "lndir",
+        "repo": "nix-maid",
+        "type": "github"
+      }
+    },
     "nixos-small": {
       "locked": {
         "lastModified": 1781523379,
@@ -455,29 +471,6 @@
         "type": "github"
       }
     },
-    "plasma-manager": {
-      "inputs": {
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1775856943,
-        "narHash": "sha256-b7Mp7P+q2Md5AGt4rjHfMcBykzMumFTen10ST++AuTU=",
-        "owner": "nix-community",
-        "repo": "plasma-manager",
-        "rev": "a524a6160e6df89f7673ba293cf7d78b559eb1a5",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "plasma-manager",
-        "type": "github"
-      }
-    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -516,12 +509,12 @@
         "ncro": "ncro",
         "nix-cache-beacon": "nix-cache-beacon",
         "nix-index-database": "nix-index-database",
+        "nix-maid": "nix-maid",
         "nixos-small": "nixos-small",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "noctalia": "noctalia",
         "nur": "nur",
-        "plasma-manager": "plasma-manager",
         "sops": "sops",
         "srvos": "srvos",
         "tasks": "tasks",

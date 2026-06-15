@@ -1,8 +1,3 @@
 {
-  flake.modules.homeManager.profiles-plasma.programs.okular = {
-    enable = true;
-    general = {
-      openFileInTabs = true;
-    };
-  };
+  flake.modules.maid.profiles-plasma.kconfig.settings.okularpartrc.General.OpenFileInTabs = true;
 }

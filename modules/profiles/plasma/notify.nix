@@ -1,7 +1,6 @@
 {
-  flake.modules.homeManager.profiles-plasma.programs.plasma.configFile.plasmanotifyrc.Notifications =
-    {
-      PopupPosition = "BottomRight";
-      PopupTimeout = 10000;
-    };
+  flake.modules.maid.profiles-plasma.kconfig.settings.plasmanotifyrc.Notifications = {
+    PopupPosition = "BottomRight";
+    PopupTimeout = 10000;
+  };
 }

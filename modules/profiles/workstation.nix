@@ -8,7 +8,6 @@
           inherit (self.modules.nixos)
             profiles-base
             profiles-graphical
-            profiles-noctalia
 
             programs-kdeconnect
 
@@ -49,18 +48,25 @@
         };
       };
 
-    homeManager.profiles-workstation =
+    homeManager.profiles-workstation = {
+      imports = builtins.attrValues {
+        inherit (self.modules.homeManager)
+          profiles-graphical
+          programs-keepassxc
+          ;
+      };
+    };
+
+    maid.profiles-workstation =
       { pkgs, ... }:
       {
         imports = builtins.attrValues {
-          inherit (self.modules.homeManager)
-            profiles-graphical
-            profiles-noctalia
-            programs-keepassxc
+          inherit (self.modules.maid)
+            profiles-base
             ;
         };
 
-        home.packages = builtins.attrValues {
+        packages = builtins.attrValues {
           inherit (pkgs.nur.repos.dtomvan) sshp;
           inherit (pkgs) dysk;
         };

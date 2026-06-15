@@ -1,15 +1,13 @@
 {
-  flake.modules.homeManager.profiles-plasma.programs.plasma.powerdevil.battery = {
-    dimDisplay = {
-      enable = true;
-      idleTimeout = 300; # 5 minutes
+  flake.modules.maid.profiles-plasma.kconfig.settings.powerdevilrc = {
+    "Battery/Display" = {
+      DimDisplayIdleTimeoutSec = 300; # 5 min
+      DimDisplayWhenIdle = true;
+      TurnOffDisplayIdleTimeoutSec = 480; # 8 min
     };
-    turnOffDisplay = {
-      idleTimeout = 480; # 8 minutes
-    };
-    autoSuspend = {
-      action = "sleep";
-      idleTimeout = 600; # 10 minutes
+    "Battery/SuspendAndShutdown" = {
+      AutoSuspendAction = 1; # sleep
+      AutoSuspendIdleTimeoutSec = 600; # 10 min
     };
   };
 }

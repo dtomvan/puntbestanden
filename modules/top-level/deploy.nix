@@ -32,7 +32,12 @@ in
       _n: v:
       nameValuePair v.networking.hostName (
         withSystem v.system (
-          systemArgs@{ inputs', pkgs, ... }:
+          systemArgs@{
+            self',
+            inputs',
+            pkgs,
+            ...
+          }:
           let
             deployLib = inputs'.deploy-rs.legacyPackages.lib;
 
@@ -88,6 +93,21 @@ in
                 }
               )
               |> listToAttrs;
+
+            maidProfiles =
+              v.users
+              |> map (
+                user:
+                nameValuePair "maid-${user}" {
+                  inherit user;
+                  path = deployLib.activate.profile {
+                    base = self'.packages."maid-${user}@${v.networking.hostName}";
+                    profileName = "nix-maid";
+                    activate = "\"$PROFILE/bin/activate\"";
+                  };
+                }
+              )
+              |> listToAttrs;
           in
           {
             hostname = v.networking.hostName;
@@ -95,7 +115,8 @@ in
             profiles =
               optionalAttrs v.flatpak.enable flatpakProfiles
               // optionalAttrs v.enableHomeManager homeProfiles
-              // optionalAttrs v.enableNixvim nixvimProfiles;
+              // optionalAttrs v.enableNixvim nixvimProfiles
+              // optionalAttrs v.enableMaid maidProfiles;
           }
         )
       )

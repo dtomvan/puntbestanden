@@ -64,34 +64,12 @@ in
       programs.regreet.font.name = family;
     };
 
-  flake.modules.homeManager.profiles-plasma = {
-    programs.plasma = {
-      fonts = {
-        inherit fixedWidth;
-        general = {
-          inherit family;
-          pointSize = 11;
-        };
-        menu = {
-          inherit family;
-          pointSize = 10;
-        };
-        small = {
-          inherit family;
-          pointSize = 8;
-        };
-        toolbar = {
-          inherit family;
-          pointSize = 10;
-        };
-      };
-    };
-
-    programs.kate.editor.font = fixedWidth;
-    programs.konsole.profiles.Catppuccin.font = {
-      name = fixedWidth.family;
-      size = fixedWidth.pointSize + 2;
-    };
+  flake.modules.maid.profiles-plasma.kconfig.settings.kdeglobals.General = {
+    fixed = "${fixedWidth.family},${toString fixedWidth.pointSize},-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+    font = "${family},11,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+    menuFont = "${family},10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+    smallestReadableFont = "${family},8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
+    toolBarFont = "${family},10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1";
   };
 
   flake.modules.homeManager.profiles-graphical.gtk.font.name = family;

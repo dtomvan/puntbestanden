@@ -45,6 +45,7 @@
     };
     enableHomeManager = true;
     enableNixvim = true;
+    enableMaid = true;
     flatpak = {
       enable = true;
       packages = [
@@ -60,12 +61,13 @@
 
   flake.modules = {
     nixos.hosts-boomer =
-      { pkgs, lib, ... }:
+      { lib, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.nixos)
             disko
             profiles-workstation
+            profiles-noctalia
             themes-catppuccin
 
             guest
@@ -110,30 +112,6 @@
         ];
         # <boomer patches from the shared disko config />
 
-        environment.systemPackages =
-          lib.singleton (
-            pkgs.prismlauncher.override {
-              jdks = builtins.attrValues {
-                inherit (pkgs)
-                  jdk8
-                  jdk17
-                  jdk21
-                  jdk25
-                  ;
-              };
-            }
-          )
-          ++ lib.map (pkg: pkgs.lazy-app.override { inherit pkg; }) (
-            builtins.attrValues {
-              inherit (pkgs)
-                # rarely used
-                gimp
-                localsend
-                zotero
-                ;
-            }
-          );
-
         # regreet broken on nvidia???
         programs.regreet.enable = lib.mkForce false;
         services.displayManager.ly.enable = lib.mkForce true;
@@ -157,7 +135,6 @@
             themes-catppuccin
 
             mpd
-            typst
             ;
         };
 
@@ -170,6 +147,42 @@
 
         home.stateVersion = "26.11";
       };
+
+    maid."tomvd@boomer" = { pkgs, ... }: {
+      imports = builtins.attrValues {
+        inherit (self.modules.maid)
+          profiles-workstation
+          profiles-noctalia
+          themes-catppuccin
+          ;
+      };
+
+      packages =
+        builtins.attrValues {
+          inherit (pkgs) mpc typst;
+          prismlauncher = pkgs.prismlauncher.override {
+            jdks = builtins.attrValues {
+              inherit (pkgs)
+                jdk8
+                jdk17
+                jdk21
+                jdk25
+                ;
+            };
+          };
+        }
+        ++ map (pkg: pkgs.lazy-app.override { inherit pkg; }) (
+          builtins.attrValues {
+            inherit (pkgs)
+              # rarely used
+              gimp
+              localsend
+              zotero
+              ;
+          }
+        );
+
+    };
   };
 
   perSystem =

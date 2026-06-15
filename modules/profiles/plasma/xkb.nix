@@ -1,7 +1,7 @@
 {
-  flake.modules.homeManager.profiles-plasma.programs.plasma.configFile.xkbrc.layout = {
+  flake.modules.maid.profiles-plasma.kconfig.settings.xkbrc.layout = {
     DisplayNames = ",";
-    LayoutList = "us,gr";
+    LayoutList = "us";
     Options = "compose:ralt";
     ResetOldOptions = true;
     Use = true;

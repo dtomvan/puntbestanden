@@ -36,6 +36,7 @@
 
     enableHomeManager = true;
     enableNixvim = true;
+    enableMaid = true;
     flatpak = {
       enable = true;
       packages = [
@@ -52,8 +53,8 @@
         imports = builtins.attrValues {
           inherit (self.modules.nixos)
             disko
+            profiles-noctalia
             profiles-workstation
-
             themes-catppuccin
 
             hardware-comet-lake
@@ -104,20 +105,29 @@
         system.stateVersion = "26.11";
       };
 
-    homeManager."tomvd@feather" =
-      { config, ... }:
-      {
-        imports = builtins.attrValues {
-          inherit (self.modules.homeManager)
-            themes-catppuccin
-            profiles-workstation
-            ;
-        };
-
-        programs.${if config ? programs.plasma then "plasma" else null}.configFile.kwinrc.Xwayland.Scale =
-          1.5;
-
-        home.stateVersion = "26.11";
+    homeManager."tomvd@feather" = {
+      imports = builtins.attrValues {
+        inherit (self.modules.homeManager)
+          themes-catppuccin
+          profiles-base
+          programs-keepassxc
+          profiles-graphical
+          ;
       };
+
+      home.stateVersion = "26.11";
+    };
+
+    maid."tomvd@feather" = {
+      imports = builtins.attrValues {
+        inherit (self.modules.maid)
+          profiles-workstation
+          profiles-noctalia
+          themes-catppuccin
+          ;
+      };
+
+      kconfig.settings.kwinrc.Xwayland.Scale = 1.5;
+    };
   };
 }

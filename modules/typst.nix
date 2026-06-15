@@ -6,10 +6,4 @@
       sources.formatting.typstyle.enable = true;
     };
   };
-
-  flake.modules.homeManager.typst =
-    { pkgs, ... }:
-    {
-      home.packages = [ pkgs.typst ];
-    };
 }

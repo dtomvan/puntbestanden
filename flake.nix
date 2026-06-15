@@ -158,6 +158,9 @@
       };
       "url" = "github:nix-community/nix-index-database";
     };
+    "nix-maid" = {
+      "url" = "github:dtomvan/nix-maid/lndir";
+    };
     "nixos-small" = {
       "url" = "github:nixos/nixpkgs/nixos-unstable-small";
     };
@@ -193,17 +196,6 @@
         };
       };
       "url" = "github:nix-community/NUR";
-    };
-    "plasma-manager" = {
-      "inputs" = {
-        "home-manager" = {
-          "follows" = "home-manager";
-        };
-        "nixpkgs" = {
-          "follows" = "nixpkgs";
-        };
-      };
-      "url" = "github:nix-community/plasma-manager";
     };
     "sops" = {
       "inputs" = {

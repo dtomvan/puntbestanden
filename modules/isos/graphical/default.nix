@@ -21,6 +21,7 @@ in
       imports = builtins.attrValues {
         graphical-base = "${modulesPath}/installer/cd-dvd/installation-cd-graphical-base.nix";
         inherit (inputs.home-manager.nixosModules) home-manager;
+        inherit (inputs.nix-maid.nixosModules) default;
 
         inherit (self.modules.nixos)
           boot-systemd-boot
@@ -50,7 +51,30 @@ in
         in
         {
           root.openssh.authorizedKeys = { inherit keys; };
-          nixos.openssh.authorizedKeys = { inherit keys; };
+          nixos = {
+            openssh.authorizedKeys = { inherit keys; };
+
+            maid = {
+              _module.args = { inherit self' inputs'; }; # TODO: factor out?
+              imports = builtins.attrValues {
+                inherit (self.modules.maid)
+                  profiles-workstation
+                  profiles-noctalia
+                  ;
+              };
+
+              packages = builtins.attrValues {
+                inherit (self'.packages) nixvim-minimal;
+                inherit (pkgs)
+                  # keep-sorted start
+                  fd
+                  jjui
+                  ripgrep
+                  # keep-sorted end
+                  ;
+              };
+            };
+          };
         };
 
       # we use wayland the entire way through and don't want lightdm.
@@ -68,7 +92,6 @@ in
           imports = builtins.attrValues {
             inherit (self.modules.homeManager)
               terminals
-              profiles-noctalia
               themes-catppuccin
               firefox-ubo-only # yay, ublock origin in an installer ISO!
               ;
@@ -80,16 +103,6 @@ in
             shell.enableShellIntegration = true;
             stateVersion = "26.11";
             username = "nixos";
-            packages = builtins.attrValues {
-              inherit (self'.packages) nixvim-minimal;
-              inherit (pkgs)
-                # keep-sorted start
-                fd
-                jjui
-                ripgrep
-                # keep-sorted end
-                ;
-            };
           };
 
           modules.terminals.foot.enable = true;

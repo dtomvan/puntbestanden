@@ -27,10 +27,10 @@
         };
       };
 
-    homeManager.programs-niri-common =
+    maid.programs-niri-common =
       { pkgs, ... }:
       {
-        home.packages = builtins.attrValues {
+        packages = builtins.attrValues {
           inherit (pkgs)
             wl-clipboard
             brightnessctl

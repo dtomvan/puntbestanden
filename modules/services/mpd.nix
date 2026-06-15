@@ -1,11 +1,6 @@
 {
   flake.modules.homeManager.mpd =
-    {
-      config,
-      pkgs,
-      lib,
-      ...
-    }:
+    { config, lib, ... }:
     let
       inherit (config.home.os) isGraphical;
     in
@@ -32,15 +27,8 @@
           '');
       };
 
-      home.packages = builtins.attrValues {
-        inherit (pkgs)
-          mpc
-          mpd
-          ;
-      };
-
       services.mpd-mpris.enable = lib.mkIf isGraphical true;
-      programs.ncmpcpp.enable = lib.mkIf isGraphical true;
+      programs.ncmpcpp.enable = true;
       xdg.userDirs.enable = true;
     };
 }

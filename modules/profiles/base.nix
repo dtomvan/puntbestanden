@@ -1,4 +1,12 @@
-{ self, inputs, ... }:
+{
+  self,
+  inputs,
+  lib,
+  ...
+}:
+let
+  inherit (lib) mkEnableOption mkForce;
+in
 {
   flake-inputs.srvos = {
     url = "github:nix-community/srvos";
@@ -61,40 +69,40 @@
             tealdeer
             # keep-sorted end
             ;
-          inherit (pkgs.fastfetch) minimal;
         };
       };
 
-    homeManager.profiles-base =
-      {
-        self',
-        lib,
-        pkgs,
-        ...
-      }:
-      let
-        inherit (lib) mkEnableOption;
-      in
-      {
-        options.home.os = {
-          isGraphical = mkEnableOption "features that work on x11/wayland desktops";
-          isPlasma = mkEnableOption "features that work with plasma";
-        };
-
-        config.home.packages = builtins.attrValues {
-          # keep-sorted start
-          inherit (pkgs)
-            npins
-            ripdrag
-            stow
-            treefmt
-            typst
-            yazi
-            yt-dlp
-            ;
-          inherit (self'.packages) music-dlp;
-          # keep-sorted end
-        };
+    homeManager.profiles-base = {
+      options.home.os = {
+        isGraphical = mkEnableOption "features that work on x11/wayland desktops";
       };
+      # HACK: default is tray.target which conflicts with nix-maid and I don't need it
+      config.systemd.user.targets = mkForce {};
+    };
+
+    maid.profiles-base = { self', pkgs, ... }: {
+      imports = builtins.attrValues {
+        inherit (self.modules.maid)
+          basic-cli
+          jujutsu
+          ;
+      };
+
+      packages = builtins.attrValues {
+        # keep-sorted start
+        inherit (pkgs)
+          npins
+          ripdrag
+          stow
+          treefmt
+          typst
+          yazi
+          yt-dlp
+          ;
+        inherit (pkgs.fastfetch) minimal;
+        inherit (self'.packages) music-dlp;
+        # keep-sorted end
+      };
+    };
   };
 }

@@ -172,6 +172,7 @@ let
     };
 
     enableHomeManager = mkEnableOption "deploy-rs profiles for home-manager";
+    enableMaid = mkEnableOption "deploy-rs profiles for nix-maid";
     enableNixvim = mkEnableOption "deploy-rs profiles for nixvim";
     flatpak = {
       enable = mkEnableOption "deploy-rs profiles that declaratively install some flatpaks";
