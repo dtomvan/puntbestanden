@@ -203,6 +203,14 @@
       };
       "url" = "github:noctalia-dev/noctalia";
     };
+    "noctalia-greeter" = {
+      "inputs" = {
+        "nixpkgs" = {
+          "follows" = "nixpkgs";
+        };
+      };
+      "url" = "github:noctalia-dev/noctalia-greeter";
+    };
     "nur" = {
       "inputs" = {
         "flake-parts" = {

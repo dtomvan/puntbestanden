@@ -1,6 +1,7 @@
 {
   self,
   lib,
+  inputs,
   ...
 }:
 let
@@ -18,10 +19,18 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  flake-inputs.noctalia-greeter = {
+    url = "github:noctalia-dev/noctalia-greeter";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   flake.modules.nixos.profiles-noctalia =
     { inputs', ... }:
     {
-      imports = [ self.modules.nixos.programs-niri-common ];
+      imports = [
+        self.modules.nixos.programs-niri-common
+        inputs.noctalia-greeter.nixosModules.default
+      ];
 
       services.displayManager = {
         sddm.enable = mkForce false;
@@ -30,10 +39,7 @@ in
         plasma-login-manager.enable = mkForce false;
       };
 
-      programs.regreet = {
-        enable = true;
-        settings.GTK.application_prefer_dark_theme = true;
-      };
+      programs.noctalia-greeter.enable = true;
 
       environment.systemPackages = singleton inputs'.noctalia.packages.default;
 

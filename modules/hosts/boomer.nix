@@ -112,10 +112,6 @@
         ];
         # <boomer patches from the shared disko config />
 
-        # regreet broken on nvidia???
-        programs.regreet.enable = lib.mkForce false;
-        services.displayManager.ly.enable = lib.mkForce true;
-
         hardware.bluetooth.enable = true;
 
         # WARNING: this requires a user to be set, or the root password to be known.
