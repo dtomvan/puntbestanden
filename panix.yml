@@ -1,6 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mihakrumpestar/panix/v0.7.0/gen/panix-schema.yaml
 
 fleet:
+  activation_mode: boot
   ssh:
     username: root
   nix:
