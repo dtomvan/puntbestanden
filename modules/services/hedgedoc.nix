@@ -69,7 +69,8 @@ in
               enableUploads = "registered";
               email = false;
               allowEmailRegister = false;
-              allowAnonymous = false;
+              allowAnonymous = false;    # don't allow anonymous users to *create* their own notes...
+              allowAnonymousEdits = true; # but allow users to opt-in to using the "freely" permission to allow guests to edit an existing note
             }
             // cfg.extraSettings;
           };
