@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "bart": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781634365,
+        "narHash": "sha256-lxEOFShGNpAadPeIRwLRO6Ew+wPh+1e4H9SLgJzTHTI=",
+        "owner": "bartoostveen",
+        "repo": "infra",
+        "rev": "1e4d2fda1460e30748cffd0107491085e21baeb1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bartoostveen",
+        "repo": "infra",
+        "type": "github"
+      }
+    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": [
@@ -567,6 +583,7 @@
     },
     "root": {
       "inputs": {
+        "bart": "bart",
         "catppuccin": "catppuccin",
         "copyparty": "copyparty",
         "deploy-rs": "deploy-rs",

@@ -39,6 +39,7 @@ in
           services-monitoring
           services-blog
           services-matrix
+          services-mautrix-telegram
           services-hedgedoc
           ;
       };
@@ -75,7 +76,10 @@ in
         };
       };
 
-      infra.matrix.enable = true;
+      infra.matrix = {
+        enable = true;
+        telegram.enable = true;
+      };
 
       infra.md.enable = true;
 

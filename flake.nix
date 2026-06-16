@@ -55,6 +55,10 @@
     );
 
   inputs = {
+    "bart" = {
+      "flake" = false;
+      "url" = "github:bartoostveen/infra";
+    };
     "catppuccin" = {
       "inputs" = {
         "nixpkgs" = {
