@@ -77,7 +77,7 @@ in
         isGraphical = mkEnableOption "features that work on x11/wayland desktops";
       };
       # HACK: default is tray.target which conflicts with nix-maid and I don't need it
-      config.systemd.user.targets = mkForce {};
+      config.systemd.user.targets = mkForce { };
     };
 
     maid.profiles-base = { self', pkgs, ... }: {
