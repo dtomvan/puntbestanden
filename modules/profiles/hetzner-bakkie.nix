@@ -62,5 +62,12 @@
           dates = "weekly";
         };
       };
+
+      # the journal can get huge on systems that serve (a lot of) HTTP requests
+      # over the internet, such as matrix/nginx/forgejo, so we keep the journal
+      # to a "slim" 1.5G in the case of commitit as of 2026-06-17, for instance
+      services.journald.extraConfig = ''
+        MaxRetentionSec=2week
+      '';
     };
 }
