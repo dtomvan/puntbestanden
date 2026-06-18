@@ -41,6 +41,7 @@ in
           services-matrix
           services-mautrix-telegram
           services-hedgedoc
+          services-syncthing
           ;
       };
 
