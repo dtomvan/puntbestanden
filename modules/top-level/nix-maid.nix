@@ -39,25 +39,7 @@ let
             imports = [
               (self.modules.maid."${user}@${host.networking.hostName}" or { })
               (self.modules.maid.${user} or { })
-              {
-                # these options only have effect when profiles-plasma is
-                # imported, but for simplicity just unconditionally making them
-                # available.
-                options.kconfig = {
-                  colorScheme = mkOption {
-                    type = str;
-                    default = "BreezeDark";
-                  };
-                  wallpaper = mkOption {
-                    type = nullOr str;
-                    default = null;
-                  };
-                  extraAutostart = mkOption {
-                    type = lines;
-                    default = "";
-                  };
-                };
-              }
+              self.modules.maid.maid-common
             ];
             _module.args = { inherit self' inputs'; };
           }
@@ -74,5 +56,23 @@ in
       |> attrNames
       |> concatMap (makeNixMaid system)
       |> listToAttrs;
+  };
+
+  # these options only have effect when profiles-plasma is
+  # imported, but for simplicity just unconditionally making them
+  # available.
+  flake.modules.maid.maid-common.options.kconfig = {
+    colorScheme = mkOption {
+      type = str;
+      default = "BreezeDark";
+    };
+    wallpaper = mkOption {
+      type = nullOr str;
+      default = null;
+    };
+    extraAutostart = mkOption {
+      type = lines;
+      default = "";
+    };
   };
 }

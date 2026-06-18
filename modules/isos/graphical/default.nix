@@ -58,10 +58,14 @@ in
               _module.args = { inherit self' inputs'; }; # TODO: factor out?
               imports = builtins.attrValues {
                 inherit (self.modules.maid)
+                  maid-common
                   profiles-workstation
                   profiles-noctalia
+                  themes-catppuccin
                   ;
               };
+
+              file.xdg_config.niri.source = ../../../stow/niri/dot-config/niri;
 
               packages = builtins.attrValues {
                 inherit (self'.packages) nixvim-minimal;
@@ -106,12 +110,6 @@ in
           };
 
           modules.terminals.foot.enable = true;
-
-          # link muh dotfiles
-          xdg.configFile.niri = {
-            source = ../../../stow/niri/dot-config/niri;
-            recursive = true;
-          };
 
           programs = {
             bash = {

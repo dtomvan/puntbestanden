@@ -43,7 +43,9 @@ in
           _module.args = { inherit self' inputs'; }; # TODO: factor out?
           imports = builtins.attrValues {
             inherit (self.modules.maid)
+              maid-common
               profiles-noctalia
+              themes-catppuccin
               ;
           };
 
