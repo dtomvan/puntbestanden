@@ -32,6 +32,9 @@ in
           ;
       };
 
+      # enabled by profiles-noctalia, prevents autologin
+      programs.noctalia-greeter.enable = lib.mkForce false;
+
       boot.kernelPackages = inputs'.nixos-small.legacyPackages.linuxPackages_latest;
       boot.initrd.supportedFilesystems.zfs = lib.mkForce false; # TODO: not up-to-date for 7.1
       boot.supportedFilesystems.zfs = lib.mkForce false;
