@@ -28,14 +28,27 @@ in
       ...
     }:
     {
+      # TODO: this may break if either of these modules are imported elsewhere.
+      # Maybe just put these modules in profiles-base and call it a day?
       imports = [
         inputs.home-manager.nixosModules.default
+        inputs.nix-maid.nixosModules.default
       ];
 
       users.users.guest = {
         isNormalUser = true;
         createHome = true;
         password = "guest";
+        maid = {
+          _module.args = { inherit self' inputs'; }; # TODO: factor out?
+          imports = builtins.attrValues {
+            inherit (self.modules.maid)
+              profiles-noctalia
+              ;
+          };
+
+          file.xdg_config.niri.source = ../stow/niri/dot-config/niri;
+        };
       };
 
       # create a writable init.lua that points to the home-manager generated init file for lazyvim.
