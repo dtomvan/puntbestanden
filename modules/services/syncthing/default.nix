@@ -95,7 +95,14 @@ toplevel@{ self, lib, ... }:
       };
 
       users.groups.syncthing = { };
-      users.users.tomvd.extraGroups = [ "syncthing" ];
+      users.users.tomvd.extraGroups = [
+        "syncthing"
+        "forgejo"
+      ];
+
+      systemd.tmpfiles.settings."10-forgejo-stfolder" = lib.mkIf (
+        host == toplevel.config.hosts.hetzner1
+      ) { "/var/lib/forgjeo/.stfolder".d = { }; };
 
       services.syncthing = {
         enable = true;
