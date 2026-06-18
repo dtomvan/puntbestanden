@@ -28,7 +28,6 @@
         environment.systemPackages = builtins.attrValues {
           inherit (pkgs)
             # keep-sorted start
-            discord
             forge-sparks
             keepassxc
             libreoffice-qt6-fresh

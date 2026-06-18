@@ -49,8 +49,8 @@
     flatpak = {
       enable = true;
       packages = [
+        "com.discordapp.Discord"
         "com.obsproject.Studio"
-        "in.cinny.Cinny"
         "org.inkscape.Inkscape"
         "io.github.dvlv.boxbuddyrs"
         "com.github.wwmm.easyeffects"

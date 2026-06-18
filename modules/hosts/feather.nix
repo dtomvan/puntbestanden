@@ -40,6 +40,7 @@
     flatpak = {
       enable = true;
       packages = [
+        "com.discordapp.Discord"
         "com.obsproject.Studio"
         "io.github.dvlv.boxbuddyrs"
       ];
