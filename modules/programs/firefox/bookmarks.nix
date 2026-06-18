@@ -74,6 +74,10 @@
                 url = "https://fs.toostveen.nl";
               }
               {
+                name = "md";
+                url = "https://md.toostveen.nl";
+              }
+              {
                 name = "rss";
                 url = "https://rss.toostveen.nl";
               }
@@ -84,6 +88,14 @@
               {
                 name = "prometheus";
                 url = "https://prometheus.toostveen.nl";
+              }
+              {
+                name = "Cloudflare";
+                url = "https://dash.cloudflare.com";
+              }
+              {
+                name = "Hetzner";
+                url = "https://console.hetzner.com";
               }
             ];
           }
