@@ -37,6 +37,7 @@
             chmod -R +w *
             install -Dm400 ${nixIcon} -t src/assets/img
             substituteAllInPlace layouts/default.html
+            substituteAllInPlace layouts/post.html
             jorge build
             cp -r target $out
           '';
