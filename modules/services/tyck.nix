@@ -95,12 +95,10 @@
             BASE_URL = "https://${cfg.host}/tyck"; # to match nginx proxy config
             DATABASE_URL = "postgres:///tyck?host=/var/run/postgresql";
             MODERATORS_HTPASSWD = mkIf (cfg.passwordFile != null) cfg.passwordFile;
+            MIGRATE_DB = "true";
           };
 
           serviceConfig = {
-            ExecStartPre = "${getExe' pkgs.sqlx-cli "sqlx"} migrate run --source ${
-              cfg.package.passthru.migrations or "${cfg.package.src}/migrations"
-            } --no-dotenv";
             ExecStart = getExe' cfg.package "tyck";
             EnvironmentFile = mkIf (cfg.environmentFile != null) cfg.environmentFile;
             User = "tyck";
