@@ -14,6 +14,11 @@ layout: base
     {{ content }}
 </div>
 
+{% unless page.draft %}
+<h1>Comments</h1>
+<!--# include virtual="/tyck/post/{{ page.slug }}/comments" -->
+{% endunless %}
+
 <br/>
 <br/>
 

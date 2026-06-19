@@ -43,9 +43,30 @@
     };
 
   flake.modules.nixos.services-blog =
-    { self', ... }:
+    { self', config, ... }:
+    let
+      inherit (import ../../_consts.nix) domain;
+    in
     {
-      services.nginx.virtualHosts."${(import ../../_consts.nix).domain}" = {
+      imports = [ self.modules.nixos.services-tyck ];
+
+      sops.secrets.tyck = {
+        sopsFile = ../../../secrets/tyck-htpasswd.secret;
+        owner = "tyck";
+        group = "tyck";
+        mode = "0440";
+        format = "binary";
+      };
+
+      # TODO: setup email notifs (which email provider?? my own??!?!?!????)
+      # or just fork the project so that it supports webhooks?
+      services.tyck = {
+        enable = true;
+        host = domain;
+        passwordFile = config.sops.secrets.tyck.path;
+      };
+
+      services.nginx.virtualHosts."${domain}" = {
         enableACME = true;
         forceSSL = true;
 

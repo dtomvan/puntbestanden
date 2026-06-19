@@ -90,6 +90,10 @@
                 url = "https://prometheus.toostveen.nl";
               }
               {
+                name = "comments moderation";
+                url = "https://toostveen.nl/tyck/comments/moderation";
+              }
+              {
                 name = "Cloudflare";
                 url = "https://dash.cloudflare.com";
               }
