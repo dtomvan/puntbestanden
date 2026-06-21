@@ -5,6 +5,8 @@ fleet:
   ssh:
     username: root
   nix:
+    build_flags:
+      - --keep-going
     copy_flags:
       - --substitute-on-destination
   flakes:
