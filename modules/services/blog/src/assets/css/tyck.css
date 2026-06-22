@@ -1,0 +1,45 @@
+ /* adapted from https://natkr.com/tyck.css */
+
+#tyck-comment-posted {
+  border-left:1px dashed var(--ctp-blue);
+  padding:0 10px;
+  margin:10px 0
+}
+.tyck-comments {
+  margin:10px 0;
+  padding:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px
+}
+.tyck-comment {
+  list-style:none;
+  border-left:1px dashed var(--ctp-blue);
+  padding:10px
+}
+.tyck-comment h2 {
+  margin:0
+}
+.tyck-comment p {
+  margin:0;
+  margin-top:8px
+}
+.tyck-comment-form {
+  padding:10px;
+  border-left:1px dashed var(--ctp-surface1)
+}
+.tyck-comment-form h2 {
+  margin:0
+}
+.tyck-comment-form label,
+.tyck-comment-form label input,
+.tyck-comment-form label textarea {
+  display:block;
+  width:100%
+}
+.tyck-comment-form textarea {
+  height:10lh
+}
+.tyck-comment-form button {
+  display:block
+}
