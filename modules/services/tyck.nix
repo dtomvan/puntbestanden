@@ -87,7 +87,7 @@
           wantedBy = [ "multi-user.target" ];
           after = [ "network-online.target" ];
           wants = [ "network-online.target" ];
-          requires = [ "postgresql.target" ];
+          requires = [ "postgresql.service" ];
 
           environment = {
             HOST = "127.0.0.1";
@@ -123,6 +123,10 @@
             SystemCallArchitectures = "native";
             SystemCallErrorNumber = "EPERM";
             SystemCallFilter = "@system-service";
+
+            RestartSec = "1s";
+            RestartSteps = 4;
+            RestartMaxDelaySec = "50s";
           };
         };
 
