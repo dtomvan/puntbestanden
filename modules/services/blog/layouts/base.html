@@ -12,6 +12,43 @@
         {% endif %}
         <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="{{ site.config.name }}"/>
         <link rel="stylesheet" href="/assets/css/main.css">
+        
+        <script>
+            // very cursed. the 2 link tags below load in either the light or
+            // dark color scheme depending on the system preference. If it's
+            // unavailable the below block will fallback to light. Afterwards make
+            // the toggle that will remove the "default colorscheme" stylesheets
+            // and insert a new one that points to the user override.
+            if (window.matchMedia('(prefers-color-scheme: dark)').media === 'not all') {
+                document.documentElement.style.display = 'none';
+                document.head.insertAdjacentHTML(
+                    'beforeend',
+                    '<link class="system-colorscheme" rel="stylesheet" href="/assets/css/light.css" onload="document.documentElement.style.display = \'\'">',
+                );
+            }
+
+            window.colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? "dark" : "light";
+            document.head.insertAdjacentHTML(
+                'beforeend',
+                `<link id="color-override" rel="stylesheet" href="/assets/css/${window.colorScheme}.css">`,
+            );
+            addEventListener("DOMContentLoaded", (event) => {
+                const toggleColorScheme = () => {
+                    window.colorScheme = window.colorScheme == 'dark' ? 'light' : 'dark';
+                    document.getElementById("color-override").href = `/assets/css/${window.colorScheme}.css`;
+                    document.querySelectorAll('link[rel="stylesheet"].system-colorscheme').forEach(n => document.head.removeChild(n))
+                };
+                document.querySelector("button.light-dark-toggle").onclick = toggleColorScheme;
+            })
+        </script>
+        <link class="system-colorscheme" rel="stylesheet" href="/assets/css/dark.css" media="(prefers-color-scheme: dark)" />
+        <link
+        class="system-colorscheme"
+        rel="stylesheet"
+        href="/assets/css/light.css"
+        media="(prefers-color-scheme: light)"
+        />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -52,6 +89,8 @@
 
     </head>
     <body>
+        <button class="toggle mono-toggle" onclick="document.body.classList.toggle('mono')"><span class="sans-serif">sans-serif</span> | <span class="monospace">mono</span></button>
+        <button class="toggle light-dark-toggle">light | dark</button>
         <div class="content">
             {{ content }}
         </div>
