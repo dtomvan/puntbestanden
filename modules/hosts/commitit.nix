@@ -42,6 +42,8 @@ in
           services-mautrix-telegram
           services-hedgedoc
           services-syncthing
+
+          themes-catppuccin
           ;
       };
 

@@ -20,6 +20,7 @@ in
     ];
 
     catppuccin = catppuccin // {
+      forgejo.enable = true;
       plymouth.enable = true;
       sddm.enable = true;
     };
