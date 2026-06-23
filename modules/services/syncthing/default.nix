@@ -25,55 +25,59 @@ toplevel@{ self, lib, ... }:
         );
       notServers = builtins.attrNames devices |> lib.filter (n: n != "hetzner1");
       allDevices = builtins.attrNames devices;
+      isCommitit = host == toplevel.config.hosts.hetzner1;
       ignoreCopyparty = lib.singleton ".hist";
-      folders = {
-        default = {
-          path = "~/Sync";
-          devices = notServers;
-          ignorePatterns = ignoreCopyparty;
-        };
-        Documents = {
-          id = "kmfc4-cvogr";
-          path = "~/Documents";
-          devices = notServers;
-          ignorePatterns = ignoreCopyparty;
-          versioning = {
-            type = "trashcan";
-            params.cleanoutDays = "90";
+      folders =
+        lib.optionalAttrs (!isCommitit) {
+          default = {
+            path = "~/Sync";
+            devices = notServers;
+            ignorePatterns = ignoreCopyparty;
+          };
+          Documents = {
+            id = "kmfc4-cvogr";
+            path = "~/Documents";
+            devices = notServers;
+            ignorePatterns = ignoreCopyparty;
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "90";
+            };
+          };
+          Pictures = {
+            id = "xzsp4-pibte";
+            path = "~/Pictures";
+            devices = notServers;
+            ignorePatterns = ignoreCopyparty;
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "30";
+            };
+          };
+          Music = {
+            id = "pmac7-de6gr";
+            path = "~/Music";
+            devices = notServers;
+            ignorePatterns = ignoreCopyparty;
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "30";
+            };
+          };
+        }
+        // {
+          # TASK(20260524-141049): figure out how to refactor
+          forgejo = {
+            id = "sda23-jklj8";
+            path = if isCommitit then "/var/lib/forgejo" else "~/Forgejo";
+            type = if isCommitit then "sendonly" else "receiveonly";
+            devices = allDevices;
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "90";
+            };
           };
         };
-        Pictures = {
-          id = "xzsp4-pibte";
-          path = "~/Pictures";
-          devices = notServers;
-          ignorePatterns = ignoreCopyparty;
-          versioning = {
-            type = "trashcan";
-            params.cleanoutDays = "30";
-          };
-        };
-        Music = {
-          id = "pmac7-de6gr";
-          path = "~/Music";
-          devices = notServers;
-          ignorePatterns = ignoreCopyparty;
-          versioning = {
-            type = "trashcan";
-            params.cleanoutDays = "30";
-          };
-        };
-        # TASK(20260524-141049): figure out how to refactor
-        forgejo = {
-          id = "sda23-jklj8";
-          path = if host == toplevel.config.hosts.hetzner1 then "/var/lib/forgejo" else "~/Forgejo";
-          type = if host == toplevel.config.hosts.hetzner1 then "sendonly" else "receiveonly";
-          devices = allDevices;
-          versioning = {
-            type = "trashcan";
-            params.cleanoutDays = "90";
-          };
-        };
-      };
     in
     {
       imports = [ self.modules.nixos.sops ];
@@ -100,16 +104,16 @@ toplevel@{ self, lib, ... }:
         "forgejo"
       ];
 
-      systemd.tmpfiles.settings."10-forgejo-stfolder" = lib.mkIf (
-        host == toplevel.config.hosts.hetzner1
-      ) { "/var/lib/forgjeo/.stfolder".d = { }; };
+      systemd.tmpfiles.settings."10-forgejo-stfolder" = lib.mkIf isCommitit {
+        "/var/lib/forgjeo/.stfolder".d = { };
+      };
 
       services.syncthing = {
         enable = true;
         group = "syncthing";
         user = username;
         dataDir = "/home/${username}";
-        guiAddress = lib.mkIf (host == toplevel.config.hosts.hetzner1) "10.0.0.3:8384";
+        guiAddress = lib.mkIf isCommitit "10.0.0.3:8384";
         guiPasswordFile = config.sops.secrets.syncthing-gui-password.path;
 
         extraFlags = [ "--allow-newer-config" ];
