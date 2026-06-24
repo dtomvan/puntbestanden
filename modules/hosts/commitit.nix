@@ -23,6 +23,9 @@ in
         ];
       };
     };
+    extraScrapeConfigs = {
+      forgejo.port = 3000;
+    };
   };
 
   flake.modules.nixos.hosts-commitit =

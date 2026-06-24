@@ -189,6 +189,20 @@ let
         ];
       };
     };
+
+    extraScrapeConfigs = mkOption {
+      description = "Scrape configs to be picked up by prometheus";
+      default = { };
+      type =
+        submodule {
+          options = {
+            port = mkOption {
+              type = port;
+            };
+          };
+        }
+        |> attrsOf;
+    };
   };
 in
 {

@@ -71,6 +71,8 @@
 
             cron.ENABLED = true;
 
+            metrics.ENABLED = true;
+
             server = {
               DOMAIN = cfg.domain;
               # You need to specify this to remove the port from URLs in the web UI.
