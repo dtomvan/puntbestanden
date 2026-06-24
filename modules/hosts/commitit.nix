@@ -91,7 +91,9 @@ in
         nginx.enable = true;
       };
 
-      infra.monitoring.enable = true;
+      infra.monitoring = {
+        prometheus.enable = true;
+      };
 
       services.postgresql = {
         enable = true;
