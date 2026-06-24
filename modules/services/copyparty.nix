@@ -366,7 +366,10 @@ in
             png | jpg | jpeg)
               drop="scrot";;
             *)
-              if [[ "$mime" =~ ^text/ ]]; then
+              if [ "$mime" = "application/xhtml+xml" ] || [ "$mime" = "text/html" ]; then
+                drop="paste"
+                ext="html"
+              elif [[ "$mime" =~ ^text/ ]]; then
                 drop="paste"
                 ext="txt"
               else
