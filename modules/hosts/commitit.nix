@@ -100,13 +100,6 @@ in
         package = pkgs.postgresql_18;
       };
 
-      services.prometheus.exporters = {
-        nginx.enable = true;
-        nginxlog.enable = true;
-        node.enable = true;
-        systemd.enable = true;
-      };
-
       system.stateVersion = "26.11";
     };
 }

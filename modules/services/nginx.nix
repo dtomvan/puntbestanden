@@ -110,6 +110,7 @@
         };
       };
 
+      services.prometheus.exporters.nginx.enable = lib.mkDefault true;
       services.prometheus.exporters.nginxlog = {
         enable = lib.mkDefault true;
         # why isn't this the default????

@@ -69,5 +69,10 @@
       services.journald.extraConfig = ''
         MaxRetentionSec=2week
       '';
+
+      services.prometheus.exporters = {
+        node.enable = lib.mkDefault true;
+        systemd.enable = lib.mkDefault true;
+      };
     };
 }
