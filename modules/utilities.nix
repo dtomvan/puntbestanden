@@ -19,6 +19,7 @@
         builtins.attrValues {
           inherit (pkgs)
             # keep-sorted start
+            aha
             btrfs-progs
             curl
             dix
