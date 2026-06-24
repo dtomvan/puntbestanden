@@ -81,10 +81,10 @@
                 name = "rss";
                 url = "https://rss.toostveen.nl";
               }
-              {
-                name = "grafana";
-                url = "https://grafana.toostveen.nl";
-              }
+              # {
+              #   name = "grafana";
+              #   url = "https://grafana.toostveen.nl";
+              # }
               {
                 name = "prometheus";
                 url = "https://prometheus.toostveen.nl";
