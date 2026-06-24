@@ -1,4 +1,4 @@
-toplevel@{ config, ... }:
+toplevel:
 {
   flake.modules.nixos.services-monitoring =
     { lib, config, ... }:
