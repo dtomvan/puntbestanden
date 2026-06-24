@@ -93,6 +93,7 @@ in
 
       infra.monitoring = {
         prometheus.enable = true;
+        alertmanager.enable = true;
       };
 
       services.postgresql = {

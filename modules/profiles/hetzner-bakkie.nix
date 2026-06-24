@@ -18,8 +18,11 @@
           services-ssh
           users-root
           services-nginx
+          services-alertmanager
           ;
       };
+
+      infra.monitoring.alertmanager.enable = lib.mkDefault true;
 
       systemd.network.networks."10-uplink".networkConfig.Address = lib.mkDefault host.networking.endpoint;
 

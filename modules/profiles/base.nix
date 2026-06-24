@@ -30,6 +30,7 @@ in
             users-root
 
             services-ssh
+            services-alertmanager
 
             sops
 
@@ -40,6 +41,8 @@ in
             undollar
             ;
         };
+
+        infra.monitoring.alertmanager.enable = lib.mkDefault true;
 
         programs.gnupg.agent = {
           enable = true;
