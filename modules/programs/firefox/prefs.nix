@@ -45,6 +45,21 @@
       "browser.urlbar.suggest.trending" = false; # "trending search suggestions" fuck off
       "browser.ai.controls.default" = "blocked";
 
+      "browser.ml.chat.enabled" = false;
+      "browser.ml.chat.menu" = false;
+      "browser.ml.chat.page" = false;
+      "browser.ml.chat.page.footerBadge" = false;
+      "browser.ml.chat.page.menuBadge" = false;
+      "browser.ml.chat.shortcuts" = false;
+      "browser.ml.chat.shortcuts.custom" = false;
+      "browser.ml.enable" = false;
+      "browser.ml.linkPreview.enabled" = false;
+      "browser.tabs.groups.smart.enabled" = false;
+      "browser.tabs.groups.smart.searchTopicEnabled" = false;
+      "extensions.ml.enabled" = false;
+      "pdfjs.enableAltTextModelDownload" = false;
+      "pdfjs.enableGuessAltText" = false;
+
       # don't track me please
       "privacy.globalprivacycontrol.enabled" = true;
 
