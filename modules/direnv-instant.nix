@@ -5,7 +5,7 @@
     inputs.flake-parts.follows = "flake-parts";
     inputs.treefmt-nix.follows = "treefmt-nix";
   };
-  flake.modules.homeManager.basic-cli =
+  flake.modules.homeManager.profiles-workstation =
     {
       inputs',
       lib,
