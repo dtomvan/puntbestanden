@@ -8,3 +8,13 @@ include "layout.kdl"
 include "misc.kdl"
 include "noctalia.kdl"
 include "screensharing.kdl"
+
+output "PNP(AOC) 2590G5 0x0002048E" {
+    mode "1920x1080@74.973"
+
+    hot-corners {
+        top-left
+    }
+
+    layout { }
+}
