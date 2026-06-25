@@ -1,5 +1,39 @@
 {
   "nodes": {
+    "avalanche": {
+      "inputs": {
+        "nixpkgs": [
+          "nixocaine",
+          "nam-shub-of-enki",
+          "nixpkgs"
+        ],
+        "nixpkgs-2505": "nixpkgs-2505",
+        "pre-commit-hooks": [
+          "nixocaine",
+          "nam-shub-of-enki",
+          "pre-commit-hooks"
+        ],
+        "systems": "systems_2",
+        "treefmt-nix": [
+          "nixocaine",
+          "nam-shub-of-enki",
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1765198317,
+        "narHash": "sha256-IQoB7lK8cJzWG3hEZrPe0Zoa8/1LRwcgTSoX9mpr20E=",
+        "ref": "refs/heads/main",
+        "rev": "01af515b690125cb0b636a86ab95cace3c0cc8c6",
+        "revCount": 160,
+        "type": "git",
+        "url": "https://git.madhouse-project.org/algernon/avalanche.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.madhouse-project.org/algernon/avalanche.git"
+      }
+    },
     "bart": {
       "flake": false,
       "locked": {
@@ -242,6 +276,34 @@
         "type": "github"
       }
     },
+    "iocaine-stable": {
+      "inputs": {
+        "nixpkgs": [
+          "nixocaine",
+          "nixpkgs"
+        ],
+        "pre-commit-hooks": [
+          "nixocaine",
+          "pre-commit-hooks"
+        ],
+        "systems": "systems",
+        "treefmt-nix": [
+          "nixocaine",
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1779742069,
+        "narHash": "sha256-adsQuSL4F1mfSsUtLwdgUtHVYessBM31tlBU8Rbbst4=",
+        "rev": "6dab9ec9bc05b8f70e2941ca24d0f4a778dea872",
+        "type": "tarball",
+        "url": "https://git.madhouse-project.org/api/v1/repos/iocaine/iocaine/archive/6dab9ec9bc05b8f70e2941ca24d0f4a778dea872.tar.gz?rev=6dab9ec9bc05b8f70e2941ca24d0f4a778dea872"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://git.madhouse-project.org/iocaine/iocaine/archive/iocaine-3.5.0.tar.gz"
+      }
+    },
     "lazy-apps": {
       "inputs": {
         "nixpkgs": [
@@ -261,6 +323,41 @@
       "original": {
         "type": "git",
         "url": "https://git.toostveen.nl/tom/lazy-apps"
+      }
+    },
+    "nam-shub-of-enki": {
+      "inputs": {
+        "avalanche": "avalanche",
+        "iocaine": [
+          "nixocaine",
+          "iocaine-stable"
+        ],
+        "nixpkgs": [
+          "nixocaine",
+          "nixpkgs"
+        ],
+        "pre-commit-hooks": [
+          "nixocaine",
+          "pre-commit-hooks"
+        ],
+        "treefmt-nix": [
+          "nixocaine",
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1780214260,
+        "narHash": "sha256-JKsPXxXokBIAcwD5hc+8M248dShtvNS+MbGJdo/p8ws=",
+        "ref": "iocaine-3.x",
+        "rev": "736d63d9524bb9817ccb8080402bfa07b1106f51",
+        "revCount": 346,
+        "type": "git",
+        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
+      },
+      "original": {
+        "ref": "iocaine-3.x",
+        "type": "git",
+        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
       }
     },
     "ncro": {
@@ -359,6 +456,32 @@
         "type": "github"
       }
     },
+    "nixocaine": {
+      "inputs": {
+        "iocaine-stable": "iocaine-stable",
+        "nam-shub-of-enki": "nam-shub-of-enki",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pre-commit-hooks": [],
+        "systems": "systems_3",
+        "treefmt-nix": []
+      },
+      "locked": {
+        "lastModified": 1780214293,
+        "narHash": "sha256-qmlzbb0FjVpVLusw7xPpxVS74oNdNaBLZheDW9qZSk8=",
+        "ref": "stable",
+        "rev": "36c1a15ecbea53bf8b4380b5b44a04372d67192e",
+        "revCount": 135,
+        "type": "git",
+        "url": "https://git.madhouse-project.org/iocaine/nixocaine/"
+      },
+      "original": {
+        "ref": "stable",
+        "type": "git",
+        "url": "https://git.madhouse-project.org/iocaine/nixocaine/"
+      }
+    },
     "nixos-small": {
       "locked": {
         "lastModified": 1781971108,
@@ -371,6 +494,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-unstable-small",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-2505": {
+      "locked": {
+        "lastModified": 1764939437,
+        "narHash": "sha256-4TLFHUwXraw9Df5mXC/vCrJgb50CRr3CzUzF0Mn3CII=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "00d2457e2f608b4be6fe8b470b0a36816324b0ae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -478,7 +617,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems"
+        "systems": "systems_4"
       },
       "locked": {
         "lastModified": 1781963068,
@@ -597,6 +736,7 @@
         "nix-cache-beacon": "nix-cache-beacon",
         "nix-index-database": "nix-index-database",
         "nix-maid": "nix-maid",
+        "nixocaine": "nixocaine",
         "nixos-small": "nixos-small",
         "nixpkgs": [
           "nixpkgs-patcher",
@@ -655,6 +795,48 @@
     },
     "systems": {
       "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "id": "systems",
+        "type": "indirect"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "id": "systems",
+        "type": "indirect"
+      }
+    },
+    "systems_3": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "id": "systems",
+        "type": "indirect"
+      }
+    },
+    "systems_4": {
+      "locked": {
         "lastModified": 1774449309,
         "narHash": "sha256-brhZ8DmuGtzkCYHJg4HEd602amKm89Y9ytsFZ5uWD1w=",
         "owner": "nix-systems",
@@ -669,7 +851,7 @@
         "type": "github"
       }
     },
-    "systems_2": {
+    "systems_5": {
       "locked": {
         "lastModified": 1774449309,
         "narHash": "sha256-brhZ8DmuGtzkCYHJg4HEd602amKm89Y9ytsFZ5uWD1w=",
@@ -693,7 +875,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "systems": "systems_2",
+        "systems": "systems_5",
         "treefmt-nix": [
           "treefmt-nix"
         ]

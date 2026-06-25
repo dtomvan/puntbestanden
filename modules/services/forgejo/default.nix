@@ -1,5 +1,13 @@
 # most of this is amalgamated from wiki.nixos.org pages
+{ inputs, ... }:
 {
+  flake-inputs.nixocaine = {
+    url = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.pre-commit-hooks.follows = "";
+    inputs.treefmt-nix.follows = "";
+  };
+
   flake.modules.nixos.services-forgejo =
     { lib, config, ... }:
     let
@@ -15,6 +23,8 @@
       inherit (lib.types) str port;
     in
     {
+      imports = [ inputs.nixocaine.nixosModules.default ];
+
       options.infra.fj = {
         enable = mkEnableOption "forgejo";
         enableActions = mkEnableOption "Github actions on forgejo";
@@ -32,21 +42,21 @@
           default = 3000;
           type = port;
         };
+
+        iocaine = {
+          enable = mkEnableOption "rerouting nginx thru iocaine first" // {
+            default = true;
+          };
+          port = mkOption {
+            description = "The port that iocaine runs on";
+            default = 42069;
+            type = port;
+          };
+        };
       };
 
       config = mkIf cfg.enable {
         services.openssh.enable = mkDefault true |> mkIf cfg.enableSsh;
-
-        services.nginx = {
-          virtualHosts.${cfg.domain} = {
-            forceSSL = true;
-            enableACME = true;
-            extraConfig = ''
-              client_max_body_size 512M;
-            '';
-            locations."/".proxyPass = "http://localhost:${toString cfg.httpPort}";
-          };
-        };
 
         services.forgejo = {
           enable = true;
@@ -90,6 +100,57 @@
             dumpCfg = config.services.forgejo.dump;
           in
           lib.mkForce "${lib.getExe' config.services.forgejo.package "forgejo"} dump --type ${dumpCfg.type} --skip-repo-archives --skip-package-data";
+
+        # this map may or may not reroute GET and HEAD requests to iocaine,
+        # depending on whether or not it's enabled. This allows me to proxy to
+        # "$upstream_location" unconditionally below.
+        services.nginx.commonHttpConfig =
+          let
+            inherit (cfg) httpPort;
+            proxiedPort = if cfg.iocaine.enable then cfg.iocaine.port else cfg.httpPort;
+          in
+          ''
+            map $request_method $upstream_location {
+              GET      http://127.0.0.1:${toString proxiedPort};
+              HEAD     http://127.0.0.1:${toString proxiedPort};
+              default  http://127.0.0.1:${toString httpPort};
+            }
+          '';
+
+        services.nginx.virtualHosts.${cfg.domain} = {
+          forceSSL = true;
+          enableACME = true;
+          extraConfig = ''
+            client_max_body_size 512M;
+            recursive_error_pages on;
+          '';
+          locations = {
+            "/" = {
+              proxyPass = "$upstream_location";
+
+              extraConfig = lib.optionalString cfg.iocaine.enable ''
+                proxy_cache off;
+                proxy_intercept_errors on;
+                error_page 421 = @fallback;
+              '';
+            };
+          }
+          // lib.optionalAttrs cfg.iocaine.enable {
+            "@fallback".proxyPass = "http://localhost:${toString cfg.httpPort}";
+          };
+        };
+
+        services.iocaine = lib.mkIf cfg.iocaine.enable {
+          enable = true;
+          config = {
+            handler.default = { };
+            server.default = {
+              bind = "127.0.0.1:${toString cfg.iocaine.port}";
+              mode = "http";
+              use.handler-from = "default";
+            };
+          };
+        };
       };
     };
 }

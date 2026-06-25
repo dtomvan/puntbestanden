@@ -165,6 +165,20 @@
     "nix-maid" = {
       "url" = "github:viperML/nix-maid";
     };
+    "nixocaine" = {
+      "inputs" = {
+        "nixpkgs" = {
+          "follows" = "nixpkgs";
+        };
+        "pre-commit-hooks" = {
+          "follows" = "";
+        };
+        "treefmt-nix" = {
+          "follows" = "";
+        };
+      };
+      "url" = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
+    };
     "nixos-small" = {
       "url" = "github:nixos/nixpkgs/nixos-unstable-small";
     };
