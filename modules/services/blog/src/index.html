@@ -10,14 +10,18 @@ layout: default
 
 <p>For now, this holds a <a href="/blog/blogroll">blogroll</a>.</p>
 
+<hr/>
+
+<h4>Recent posts</h4>
+
 {% for post in site.posts limit:3 %}
 {% unless post.hidden %}
 {% include post_preview.html %}
 {% endunless %}
 {% endfor %}
 
-<!-- <p>See the full <a href="/blog">blog archive</a> or subscribe to the <a href="/feed.xml">feed</a>.</p> -->
-<br/>
+<p>See the full <a href="/blog">blog archive</a> or subscribe to the <a href="/feed.xml">feed</a>.</p>
+
 <hr/>
 
 <p>Now, let's to the 88x31 buttons thing because I'm so quirky and whimsical (credits to <a href="https://poz.pet"><b>poz</b></a> for most of these):</p>
