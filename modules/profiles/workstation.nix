@@ -29,6 +29,7 @@
           inherit (pkgs)
             # keep-sorted start
             forge-sparks
+            gram
             keepassxc
             libreoffice-qt6-fresh
             mpv
