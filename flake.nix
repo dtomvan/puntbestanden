@@ -146,14 +146,6 @@
       };
       "url" = "github:feel-co/ncro";
     };
-    "nix-cache-beacon" = {
-      "inputs" = {
-        "nixpkgs" = {
-          "follows" = "nixpkgs";
-        };
-      };
-      "url" = "github:adisbladis/nix-cache-beacon";
-    };
     "nix-index-database" = {
       "inputs" = {
         "nixpkgs" = {
