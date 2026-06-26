@@ -1,4 +1,5 @@
 target
+result
 .DS_Store
 nohup.out
 src/assets/img/nix-snowflake.png
