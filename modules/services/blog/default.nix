@@ -29,7 +29,7 @@
           {
             nativeBuildInputs = [ pkgs.nur.repos.dtomvan.jorge ];
 
-            with_nix_webring = "0";
+            with_nix_webring = "1";
             nix_rev = if self ? sourceInfo.rev then "commit/${self.sourceInfo.rev}" else "branch/hoofdlijn";
           }
           ''
