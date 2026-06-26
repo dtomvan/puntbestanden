@@ -1,0 +1,9 @@
+The CC-BY-NC-SA-4.0 license only applies to the website contents here. The
+CSS,JS,NIX code can still be licensed under MIT. All markup is seen as
+a creative work and hence is licensed CC-BY-NC-SA-4.0 . The rendered website
+will mention the license at the bottom of the page where it is applicable.
+
+I do not own or have authority over the following (and hence I cannot license under CC-BY-NC-SA-4.0):
+- The Catppuccin colorscheme
+- The 88x31 buttons
+- The jorge static site generator (https://jorge.olano.dev/)
