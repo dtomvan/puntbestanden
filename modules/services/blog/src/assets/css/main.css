@@ -357,3 +357,11 @@ details[open] summary h3::after {
 details > summary::-webkit-details-marker {
     display: none;
 }
+
+section header.quirky-buttons img, button {
+    transition: .1s;
+}
+
+section header.quirky-buttons img:hover, button:hover {
+    transform: scale(1.2);
+}

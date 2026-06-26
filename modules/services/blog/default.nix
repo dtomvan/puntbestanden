@@ -38,6 +38,7 @@
             install -Dm400 ${nixIcon} -t src/assets/img
             substituteAllInPlace layouts/default.html
             substituteAllInPlace layouts/post.html
+            substituteAllInPlace src/index.html
             jorge build
             cp -r target $out
           '';
