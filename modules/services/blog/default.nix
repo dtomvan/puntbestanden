@@ -35,11 +35,13 @@
           ''
             cp -r ${./.}/* .
             chmod -R +w *
-            install -Dm400 ${nixIcon} -t src/assets/img
             substituteAllInPlace layouts/default.html
             substituteAllInPlace layouts/post.html
             substituteAllInPlace src/index.html
             jorge build
+
+            install -Dm400 ${nixIcon} target/assets/img/nix-webring.svg
+
             cp -r target $out
           '';
     };
