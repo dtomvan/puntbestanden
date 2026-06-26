@@ -24,7 +24,7 @@
               "clangd",
               "cmake",
               "dockerls",
-              "emmet_ls",
+              "emmet_language_server",
               "kotlin_language_server",
               "pyright",
               "ruff",
