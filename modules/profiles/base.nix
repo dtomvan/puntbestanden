@@ -94,6 +94,7 @@ in
       packages = builtins.attrValues {
         # keep-sorted start
         inherit (pkgs)
+          fastfetch-unwrapped
           npins
           ripdrag
           stow
@@ -102,7 +103,6 @@ in
           yazi
           yt-dlp
           ;
-        inherit (pkgs.fastfetch) minimal;
         inherit (self'.packages) music-dlp;
         # keep-sorted end
       };
