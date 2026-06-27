@@ -27,6 +27,9 @@
       packages.blog =
         pkgs.runCommand "my-jorge-blog"
           {
+            preferLocalBuild = true;
+            allowSubstitutes = false;
+
             nativeBuildInputs = [ pkgs.nur.repos.dtomvan.jorge ];
 
             with_nix_webring = "1";
