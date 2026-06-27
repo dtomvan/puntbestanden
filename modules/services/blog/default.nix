@@ -35,8 +35,7 @@
           ''
             cp -r ${./.}/* .
             chmod -R +w *
-            substituteAllInPlace layouts/default.html
-            substituteAllInPlace layouts/post.html
+            substituteAllInPlace includes/footer-common.html
             substituteAllInPlace src/index.html
             jorge build
 
