@@ -33,20 +33,21 @@ in
     {
       imports = builtins.attrValues {
         inherit (self.modules.nixos)
-          profiles-hetzner-bakkie
+          # keep-sorted start
           hardware-hetzner-cloud
           lets-encrypt
-          services-forgejo
-          services-copyparty
-          services-miniflux
-          services-monitoring
+          profiles-hetzner-bakkie
           services-blog
+          services-copyparty
+          services-forgejo
+          services-hedgedoc
           services-matrix
           services-mautrix-telegram
-          services-hedgedoc
+          services-miniflux
+          services-monitoring
           services-syncthing
-
           themes-catppuccin
+          # keep-sorted end
           ;
       };
 
