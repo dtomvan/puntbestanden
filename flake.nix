@@ -155,7 +155,7 @@
       "url" = "github:nix-community/nix-index-database";
     };
     "nix-maid" = {
-      "url" = "github:viperML/nix-maid";
+      "url" = "github:viperML/nix-maid/b2fc8413bbba4277db47525e6bbab3508f03d081";
     };
     "nixocaine" = {
       "inputs" = {

@@ -48,7 +48,7 @@ let
     );
 in
 {
-  flake-inputs.nix-maid.url = "github:viperML/nix-maid";
+  flake-inputs.nix-maid.url = "github:viperML/nix-maid/b2fc8413bbba4277db47525e6bbab3508f03d081";
 
   perSystem = { system, ... }: {
     packages =
