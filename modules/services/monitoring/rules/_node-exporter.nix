@@ -124,21 +124,21 @@
           severity = "critical";
         };
       }
-      {
-        alert = "HostDiskMayFillIn24Hours";
-        annotations = {
-          description = ''
-            Filesystem will likely run out of space within the next 24 hours.
-              VALUE = {{ $value }}
-              LABELS = {{ $labels }}'';
-          summary = "Host disk may fill in 24 hours (instance {{ $labels.instance }})";
-        };
-        expr = "predict_linear(node_filesystem_avail_bytes{fstype!~\"^(fuse.*|tmpfs|cifs|nfs)\"}[3h], 86400) <= 0 and node_filesystem_avail_bytes > 0";
-        for = "2m";
-        labels = {
-          severity = "warning";
-        };
-      }
+      # {
+      #   alert = "HostDiskMayFillIn24Hours";
+      #   annotations = {
+      #     description = ''
+      #       Filesystem will likely run out of space within the next 24 hours.
+      #         VALUE = {{ $value }}
+      #         LABELS = {{ $labels }}'';
+      #     summary = "Host disk may fill in 24 hours (instance {{ $labels.instance }})";
+      #   };
+      #   expr = "predict_linear(node_filesystem_avail_bytes{fstype!~\"^(fuse.*|tmpfs|cifs|nfs)\"}[3h], 86400) <= 0 and node_filesystem_avail_bytes > 0";
+      #   for = "2m";
+      #   labels = {
+      #     severity = "warning";
+      #   };
+      # }
       {
         alert = "HostOutOfInodes";
         annotations = {
