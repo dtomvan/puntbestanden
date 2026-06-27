@@ -52,6 +52,11 @@
             default = 42069;
             type = port;
           };
+          metricsPort = mkOption {
+            description = "The port that iocaine runs its metrics on";
+            default = 42042;
+            type = port;
+          };
         };
       };
 
@@ -144,12 +149,28 @@
           enable = true;
           config = {
             handler.default = { };
-            server.default = {
-              bind = "127.0.0.1:${toString cfg.iocaine.port}";
-              mode = "http";
-              use.handler-from = "default";
+            server = {
+              default = {
+                bind = "127.0.0.1:${toString cfg.iocaine.port}";
+                mode = "http";
+                use = {
+                  handler-from = "default";
+                  metrics = "metrics";
+                };
+              };
+              metrics = {
+                bind = "0.0.0.0:${toString cfg.iocaine.metricsPort}";
+                mode = "prometheus";
+                persist-path = "qmk-metrics.json";
+                persist-interval = "1h";
+              };
             };
           };
+        };
+
+        infra.monitoring.extraScrapeConfigs = {
+          iocaine.port = cfg.iocaine.metricsPort;
+          forgejo.port = cfg.httpPort;
         };
       };
     };

@@ -3,25 +3,47 @@ let
   inherit (builtins)
     attrNames
     attrValues
-    concatLists
+    concatMap
     elemAt
     filter
     tryEval
     ;
 
   inherit (lib)
-    uniqueStrings
+    attrsToList
     singleton
     mkOption
     mkIf
     mkEnableOption
     mkMerge
     ;
-  inherit (lib.types) str;
+  inherit (lib.types)
+    str
+    submodule
+    attrsOf
+    raw
+    port
+    ;
 
   inherit (import ../../_consts.nix) domain;
 in
 {
+  flake.modules.nixos.common-options.options.infra.monitoring.extraScrapeConfigs = mkOption {
+    description = "Scrape configs to be picked up by prometheus";
+    default = { };
+    type =
+      submodule {
+        freeformType = attrsOf raw;
+
+        options = {
+          port = mkOption {
+            type = port;
+          };
+        };
+      }
+      |> attrsOf;
+  };
+
   flake.modules.nixos.services-monitoring =
     { config, ... }:
     let
@@ -98,23 +120,25 @@ in
                   })
                   |> filter (job: elemAt job.static_configs 0 |> (sc: sc.targets != [ ]));
 
-                extraJobNames =
-                  hostsOnWireguard
-                  |> map (h: h.extraScrapeConfigs |> attrNames)
-                  |> concatLists
-                  |> uniqueStrings;
-
                 extrasOnWireguard =
-                  extraJobNames
-                  |> map (name: {
-                    job_name = name;
-                    static_configs = singleton {
-                      targets =
-                        hostsOnWireguard
-                        |> filter (h: h.extraScrapeConfigs ? name)
-                        |> map (h: "${h.networking.hostName}:${toString h.extraScrapeConfigs.${name}.port}");
-                    };
-                  });
+                  hostsOnWireguard
+                  |> concatMap (
+                    h:
+                    let
+                      inherit (h.networking) hostName;
+                      inherit (self.nixosConfigurations.${hostName}.config.infra.monitoring) extraScrapeConfigs;
+                    in
+                    extraScrapeConfigs
+                    |> attrsToList
+                    |> map (
+                      { name, value }:
+                      (removeAttrs value [ "port" ])
+                      // {
+                        job_name = "${name}-${hostName}";
+                        static_configs = singleton { targets = singleton "${hostName}:${toString value.port}"; };
+                      }
+                    )
+                  );
               in
               exportersOnWireguard ++ extrasOnWireguard;
           };
