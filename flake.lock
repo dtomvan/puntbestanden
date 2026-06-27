@@ -727,10 +727,33 @@
         "noctalia": "noctalia",
         "noctalia-greeter": "noctalia-greeter",
         "nur": "nur",
+        "run0-sudo-shim": "run0-sudo-shim",
         "sops": "sops",
         "srvos": "srvos",
         "tasks": "tasks",
         "treefmt-nix": "treefmt-nix"
+      }
+    },
+    "run0-sudo-shim": {
+      "inputs": {
+        "nix-github-actions": [],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": []
+      },
+      "locked": {
+        "lastModified": 1781524338,
+        "narHash": "sha256-K+nghy9uAIJQ6Ox9hc3U+utiPJMwskwhPorJ7y7ZZow=",
+        "owner": "LordGrimmauld",
+        "repo": "run0-sudo-shim",
+        "rev": "6e397eebae4c7f3acb8eca080d1c56be5be19e44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LordGrimmauld",
+        "repo": "run0-sudo-shim",
+        "type": "github"
       }
     },
     "sops": {

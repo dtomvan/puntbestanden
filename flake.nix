@@ -232,6 +232,20 @@
       };
       "url" = "github:nix-community/NUR";
     };
+    "run0-sudo-shim" = {
+      "inputs" = {
+        "nix-github-actions" = {
+          "follows" = "";
+        };
+        "nixpkgs" = {
+          "follows" = "nixpkgs";
+        };
+        "treefmt-nix" = {
+          "follows" = "";
+        };
+      };
+      "url" = "github:LordGrimmauld/run0-sudo-shim";
+    };
     "sops" = {
       "inputs" = {
         "nixpkgs" = {

@@ -13,6 +13,13 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
+  flake-inputs.run0-sudo-shim = {
+    url = "github:LordGrimmauld/run0-sudo-shim";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.nix-github-actions.follows = "";
+    inputs.treefmt-nix.follows = "";
+  };
+
   flake.modules = {
     nixos.profiles-base =
       { pkgs, ... }:
@@ -21,6 +28,8 @@ in
           inherit (inputs.srvos.nixosModules)
             mixins-terminfo
             ;
+
+          inherit (inputs.run0-sudo-shim.nixosModules) default;
 
           inherit (self.modules.nixos)
             nix-common
@@ -73,6 +82,8 @@ in
             # keep-sorted end
             ;
         };
+
+        security.run0-sudo-shim.enable = true;
       };
 
     homeManager.profiles-base = {
