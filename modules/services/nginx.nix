@@ -126,6 +126,17 @@
           |> lib.mkDefault;
       };
 
+      # make recent nginx logs available in the journal, but don't keep them.
+      # The actual logs are written to /var/log/nginx anyways.
+      # TODO: make rfc42-style after https://github.com/NixOS/nixpkgs/pull/455499
+      environment.etc."systemd/journald@nginx.conf".text = ''
+        [Journal]
+        Storage=volatile
+        RuntimeMaxUse=10M
+      '';
+
+      systemd.services.nginx.serviceConfig.LogNamespace = "nginx";
+
       systemd.services.prometheus-nginxlog-exporter.serviceConfig.SupplementaryGroups = [ "nginx" ];
 
       # 4 weeks ~= a month, I don't need half a year of logs (default = 26)
