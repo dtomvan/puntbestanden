@@ -157,29 +157,6 @@
         })
         (evalExpr "nix-source" ''$(printf 'with import <nixpkgs> {}; lib.concatLines [(%s.src.url or "") (%s.meta.homepage or "")]' "$@" "$@")'')
         (evalExpr "nix-maintainers" ''$(printf 'with import <nixpkgs> {}; lib.concatLines (lib.map (m: "@''${m.github}") (%s.meta.maintainers or []))' "$@")'')
-        (writeShellApplication {
-          name = "big-command";
-          runtimeInputs = [
-            coreutils
-            mktemp
-            gum
-          ];
-          text = ''
-            # assumes shell is in path
-            shell="$(basename "''${SHELL:?}")"
-            tmp="$(mktemp /tmp/XXXXXXX.sh)"
-            test -w "$tmp"
-            chmod +x "$tmp"
-            { echo "#!/usr/bin/env $shell"; echo; } >> "$tmp"
-            "$EDITOR" "$tmp"
-            gum confirm --default=no "Run \`$tmp\`?"$'\n\n'"$(cat "$tmp")"
-            "$tmp" || true
-            code="$?"
-            echo "Program was $tmp" >&2
-            echo "exit $code" >&2
-            exit "$code"
-          '';
-        })
       ]
       ++ builtins.attrValues {
         inherit (pkgs)
