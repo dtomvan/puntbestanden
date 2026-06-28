@@ -1,7 +1,7 @@
 { self, ... }:
 {
   perSystem =
-    { pkgs, ... }:
+    { self', pkgs, ... }:
     let
       # nixIcon = "${pkgs.nixos-icons}/share/icons/hicolor/256x256/apps/nix-snowflake.png";
       nixIcon = pkgs.fetchurl {
@@ -46,15 +46,39 @@
 
             cp -r target $out
           '';
+
+      packages.blog-push = pkgs.writeShellApplication {
+        name = "blog-push";
+        runtimeInputs = [
+          self'.packages.git-pages-push
+        ];
+        derivationArgs = {
+          preferLocalBuild = true;
+          allowSubstitutes = false;
+        };
+        inheritPath = false;
+        text = ''
+          git-pages-push ${self'.packages.blog} https://testing.toostveen.nl testing.toostveen.nl
+          echo deployed to testing! is this ok?
+          read -r -n 1 -p 'is this okay? [yN]' choice
+          if [[ "$choice" =~ [yY] ]]; then
+            git-pages-push ${self'.packages.blog} https://toostveen.nl toostveen.nl
+          fi
+        '';
+      };
     };
 
   flake.modules.nixos.services-blog =
-    { self', config, ... }:
+    { config, self', ... }:
     let
       inherit (import ../../_consts.nix) domain;
+      port = 8754;
     in
     {
-      imports = [ self.modules.nixos.services-tyck ];
+      imports = [
+        self.modules.nixos.services-tyck
+        self.modules.nixos.services-git-pages
+      ];
 
       sops.secrets.tyck = {
         sopsFile = ../../../secrets/tyck-htpasswd.secret;
@@ -72,11 +96,28 @@
         passwordFile = config.sops.secrets.tyck.path;
       };
 
+      infra.git-pages = {
+        enable = true;
+        inherit port;
+        caddyPort = null;
+      };
+
       services.nginx.virtualHosts."${domain}" = {
         enableACME = true;
         forceSSL = true;
 
-        locations."/".root = self'.packages.blog;
+        serverAliases = [ "testing.${domain}" ];
+
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:${toString port}";
+          extraConfig = ''
+            proxy_pass_header Server;
+            proxy_intercept_errors on;
+            error_page 404 = /.fallback/$uri;
+          '';
+        };
+
+        locations."/.fallback/".alias = "${self'.packages.blog}/";
       };
     };
 }

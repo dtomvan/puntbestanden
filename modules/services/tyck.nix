@@ -62,8 +62,10 @@
           {
             assertion =
               config.services.nginx.enable
-              && (config.services.nginx.virtualHosts.${cfg.host}.locations."/".root != null);
-            message = ''Nginx must be enabled with the virtualHost for `${cfg.host}` configured as a static site. I.e. `services.nginx.virtualHosts."${cfg.host}".locations."/".root` must not be null.'';
+              && (
+                with config.services.nginx.virtualHosts.${cfg.host}.locations."/"; root != null || proxyPass != null
+              );
+            message = ''Nginx must be enabled with the virtualHost for `${cfg.host}` configured. I.e. `services.nginx.virtualHosts."${cfg.host}".locations."/"` must be set.'';
           }
         ];
 

@@ -1,0 +1,19 @@
+name: Publish
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - hoofdlijn
+jobs:
+  publish:
+    runs-on: nix
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lockfile
+        run: nix flake lock --accept-flake-config
+      - run: nix build .#blog
+      - uses: actions/git-pages@v2
+        with:
+          site: https://toostveen.nl
+          token: ${{ forge.token }}
+          source: result/
