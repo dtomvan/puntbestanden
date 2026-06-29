@@ -7,3 +7,4 @@
 /.lsp
 /panix*.log
 /panix-snapshot-*.json
+.nixos-test-history
