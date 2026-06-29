@@ -117,7 +117,12 @@
           '';
         };
 
-        locations."/.fallback/".alias = "${self'.packages.blog}/";
+        locations."/.fallback/" = {
+          alias = "${self'.packages.blog}/";
+          extraConfig = ''
+            ssi on;
+          '';
+        };
       };
     };
 }
