@@ -58,6 +58,8 @@
               uuid = builtins.readFile ../../../secrets/forgejo-runner-uuid.${acfg.runnerName} |> trim;
             };
 
+            container.network = "host";
+
             runner.labels = [
               "nix:docker://git.toostveen.nl/tom/lix-with-node:latest"
             ]
