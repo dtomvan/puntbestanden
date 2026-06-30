@@ -1,77 +1,61 @@
 { self, ... }:
 {
-  perSystem =
-    { self', pkgs, ... }:
-    let
-      # nixIcon = "${pkgs.nixos-icons}/share/icons/hicolor/256x256/apps/nix-snowflake.png";
-      nixIcon = pkgs.fetchurl {
-        url = "https://raw.githubusercontent.com/imnotpoz/nixwebr.ing/7a074f42cce4517819085247cae0a46c06974b5d/site/nix-webring.svg";
-        hash = "sha256-H9vFuKSK0ZoRLJCnEmni33vkizc9aAzpkNqpixfjK98=";
+  perSystem = { self', pkgs, ... }: {
+    devShells.blog = pkgs.mkShellNoCC {
+      packages = builtins.attrValues {
+        inherit (pkgs) coreutils git;
+        inherit (pkgs.nur.repos.dtomvan) jorge;
       };
-    in
-    {
-      devShells.blog = pkgs.mkShellNoCC {
-        packages = builtins.attrValues {
-          inherit (pkgs) coreutils git;
-          inherit (pkgs.nur.repos.dtomvan) jorge;
-        };
-        shellHook = ''
-          pushd "$(git rev-parse --show-toplevel)/modules/services/blog"
+      shellHook = ''
+        pushd "$(git rev-parse --show-toplevel)/modules/services/blog"
 
-          install -Dm600 ${nixIcon} src/assets/img/nix-webring.svg
+        nohup jorge serve &
+      '';
+    };
 
-          nohup jorge serve &
-        '';
-      };
-
-      packages.blog =
-        pkgs.runCommand "my-jorge-blog"
-          {
-            preferLocalBuild = true;
-            allowSubstitutes = false;
-
-            nativeBuildInputs = [ pkgs.nur.repos.dtomvan.jorge ];
-
-            with_nix_webring = "1";
-            nix_rev = if self ? sourceInfo.rev then "commit/${self.sourceInfo.rev}" else "branch/hoofdlijn";
-          }
-          ''
-            cp -r ${./.}/* .
-            chmod -R +w *
-            substituteAllInPlace includes/footer-common.html
-            substituteAllInPlace src/index.html
-            jorge build
-
-            install -Dm400 ${nixIcon} target/assets/img/nix-webring.svg
-
-            cp -r target $out
-
-            # HACK: make a .fallback symlink so that we don't need to do any
-            # rewriting inside nginx.conf and we won't need try_files, alias,
-            # or anything, really.
-            ln -s . $out/.fallback
-          '';
-
-      packages.blog-push = pkgs.writeShellApplication {
-        name = "blog-push";
-        runtimeInputs = [
-          self'.packages.git-pages-push
-        ];
-        derivationArgs = {
+    packages.blog =
+      pkgs.runCommand "my-jorge-blog"
+        {
           preferLocalBuild = true;
           allowSubstitutes = false;
-        };
-        inheritPath = false;
-        text = ''
-          git-pages-push ${self'.packages.blog} https://testing.toostveen.nl testing.toostveen.nl
-          echo deployed to testing! is this ok?
-          read -r -n 1 -p 'is this okay? [yN]' choice
-          if [[ "$choice" =~ [yY] ]]; then
-            git-pages-push ${self'.packages.blog} https://toostveen.nl toostveen.nl
-          fi
+
+          nativeBuildInputs = [
+            pkgs.nur.repos.dtomvan.jorge
+            pkgs.envsubst
+            pkgs.moreutils
+          ];
+
+          rev = if self ? sourceInfo.rev then "commit/${self.sourceInfo.rev}" else "branch/hoofdlijn";
+        }
+        ''
+          cp -r ${./.}/* .
+          chmod -R +w *
+
+          ./build.sh
+
+          cp -r target $out
         '';
+
+    packages.blog-push = pkgs.writeShellApplication {
+      name = "blog-push";
+      runtimeInputs = [
+        self'.packages.git-pages-push
+      ];
+      derivationArgs = {
+        preferLocalBuild = true;
+        allowSubstitutes = false;
       };
+      inheritPath = false;
+      text = ''
+        git-pages-push ${self'.packages.blog} https://testing.toostveen.nl testing.toostveen.nl
+        echo deployed to testing! is this ok?
+        read -r -n 1 -p 'is this okay? [yN]' choice
+        if [[ "$choice" =~ [yY] ]]; then
+          git-pages-push ${self'.packages.blog} https://toostveen.nl toostveen.nl
+        fi
+      '';
     };
+  };
 
   flake.modules.nixos.services-blog =
     { config, self', ... }:
