@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-rev="${rev:-"commit/$(git rev-parse HEAD)"}"
-export rev
+REV="${REV:-"commit/$(git rev-parse HEAD)"}"
+export REV
 
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 

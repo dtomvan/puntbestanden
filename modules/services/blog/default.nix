@@ -25,13 +25,13 @@
             pkgs.moreutils
           ];
 
-          rev = if self ? sourceInfo.rev then "commit/${self.sourceInfo.rev}" else "branch/hoofdlijn";
+          REV = if self ? sourceInfo.rev then "commit/${self.sourceInfo.rev}" else "branch/hoofdlijn";
         }
         ''
           cp -r ${./.}/* .
           chmod -R +w *
 
-          ./build.sh
+          bash build.sh
 
           cp -r target $out
         '';
