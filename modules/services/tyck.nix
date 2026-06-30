@@ -132,12 +132,11 @@
           };
         };
 
-        services.nginx.virtualHosts."${cfg.host}".locations = {
-          "/".extraConfig = ''
+        services.nginx.virtualHosts."${cfg.host}" = {
+          extraConfig = ''
             ssi on;
           '';
-
-          "/tyck/".extraConfig = ''
+          locations."/tyck/".extraConfig = ''
             proxy_pass http://127.0.0.1:${toString cfg.tyckPort}/;
             proxy_set_header X-Forwarded-For $remote_addr;
             proxy_set_header X-Original-Uri $request_uri;

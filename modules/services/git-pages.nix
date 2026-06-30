@@ -97,11 +97,14 @@ in
                 machine.wait_for_unit("caddy.service")
                 machine.wait_for_open_port(80)
                 machine.wait_for_unit("git-pages.service")
-                machine.fail("curl -f http://localhost:3000/.git-pages/health")
-                machine.succeed("curl -f http://localhost:3000/ -X PUT --data-binary @${testSite} --header 'Content-Type: application/x-tar'")
+                machine.wait_for_open_port(3001)
+                machine.wait_for_open_port(3002)
+                machine.fail("curl -f http://localhost/.git-pages/health")
+                machine.succeed("curl -f http://localhost/ -X PUT --data-binary @${testSite} --header 'Content-Type: application/x-tar'")
                 machine.succeed("sleep 1")
-                machine.succeed("curl -f http://localhost:3000/.git-pages/health")
-                machine.succeed("curl -f http://localhost:3000/ | grep -F 'It works!'")
+                machine.succeed("curl -f http://localhost/.git-pages/health")
+                machine.succeed("curl -f http://localhost/ | grep -F 'It works!'")
+                machine.succeed("curl -f http://localhost:3002/metrics")
               '';
             }
           );
@@ -111,6 +114,7 @@ in
             let
               cfg = config.git-pages;
               configFile = "git-pages.toml";
+              configDrv = format.generate "git-pages.toml" cfg.settings;
               configOutPath = config.configData.${configFile}.path;
 
               format = prev.formats.toml { };
@@ -136,7 +140,7 @@ in
                   configOutPath
                 ];
 
-                configData."${configFile}".source = format.generate "git-pages.toml" cfg.settings;
+                configData."${configFile}".source = configDrv;
 
                 systemd.service = {
                   description = "git-pages forge-agnostic static site server";
@@ -145,6 +149,7 @@ in
                   after = [ "network.target" ];
                   wants = [ "network.target" ];
                   wantedBy = [ "multi-user.target" ];
+                  restartTriggers = [ configDrv ];
                   serviceConfig = {
                     ExecStartPre = "${getExe' final.coreutils "mkdir"} -p data";
                     Restart = "always";
@@ -222,13 +227,13 @@ in
       config = {
         infra.git-pages.settings = {
           server = {
-            pages = mkOptionDefault "tcp/localhost:${toString cfg.port}";
-            caddy = mkOptionDefault "tcp/localhost:${
-              if cfg.caddyPort == null then "-" else toString cfg.caddyPort
-            }";
-            metrics = mkOptionDefault "tcp/localhost:${
-              if cfg.metricsPort == null then "-" else toString cfg.metricsPort
-            }";
+            pages = mkOptionDefault "tcp/0.0.0.0:${toString cfg.port}";
+            caddy = mkOptionDefault (
+              if cfg.caddyPort == null then "-" else "tcp/0.0.0.0:${toString cfg.caddyPort}"
+            );
+            metrics = mkOptionDefault (
+              if cfg.metricsPort == null then "-" else "tcp/0.0.0.0:${toString cfg.metricsPort}"
+            );
           };
         };
 
