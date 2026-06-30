@@ -24,7 +24,7 @@ jobs:
         env:
           GPG_KEY_ID: ${{ vars.GPG_KEY_ID }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: perform update
         id: update
