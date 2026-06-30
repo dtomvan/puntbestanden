@@ -45,6 +45,11 @@
             install -Dm400 ${nixIcon} target/assets/img/nix-webring.svg
 
             cp -r target $out
+
+            # HACK: make a .fallback symlink so that we don't need to do any
+            # rewriting inside nginx.conf and we won't need try_files, alias,
+            # or anything, really.
+            ln -s . $out/.fallback
           '';
 
       packages.blog-push = pkgs.writeShellApplication {
@@ -111,14 +116,16 @@
         locations."/" = {
           proxyPass = "http://127.0.0.1:${toString port}";
           extraConfig = ''
+            ssi on;
             proxy_pass_header Server;
+            proxy_set_header Accept-Encoding "";
             proxy_intercept_errors on;
             error_page 404 = /.fallback/$uri;
           '';
         };
 
-        locations."/.fallback/" = {
-          alias = "${self'.packages.blog}/";
+        locations."/.fallback" = {
+          root = self'.packages.blog;
           extraConfig = ''
             ssi on;
           '';
