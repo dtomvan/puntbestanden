@@ -16,4 +16,4 @@ jobs:
         with:
           site: https://toostveen.nl
           token: ${{ forge.token }}
-          source: result/
+          source: result
