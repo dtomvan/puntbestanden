@@ -5,7 +5,7 @@ let
   tag = "jorge";
 in
 {
-  flake.modules.nixos.services-forgejo.services.forgejo-runner.instances.default.settings.runner.labels =
+  flake.modules.nixos.services-forgejo.infra.fj.actions.extraLabels =
     singleton "jorge:docker://${name}:${tag}";
 
   perSystem = { pkgs, self', ... }: {

@@ -1,13 +1,14 @@
+let
+  name = "git.toostveen.nl/tom/lix-with-node";
+in
+{ lib, ... }:
 {
+  flake.modules.nixos.services-forgejo.infra.fj.actions.extraLabels =
+    lib.singleton "nix:docker://${name}:latest";
+
   perSystem =
-    {
-      self',
-      pkgs,
-      lib,
-      ...
-    }:
+    { self', pkgs, ... }:
     let
-      name = "git.toostveen.nl/tom/lix-with-node";
       tag = pkgs.lixPackageSets.latest.lix.version;
     in
     {

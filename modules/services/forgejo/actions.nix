@@ -60,13 +60,11 @@
 
             container.network = "host";
 
-            runner.labels = [
-              "nix:docker://git.toostveen.nl/tom/lix-with-node:latest"
-            ]
-            ++ lib.optionals acfg.enableNative [
-              "native:host"
-            ]
-            ++ acfg.extraLabels;
+            runner.labels =
+              lib.optionals acfg.enableNative [
+                "native:host"
+              ]
+              ++ acfg.extraLabels;
           };
         };
 
