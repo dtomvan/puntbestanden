@@ -6,14 +6,12 @@ on:
       - hoofdlijn
 jobs:
   publish:
-    runs-on: nix
+    runs-on: jorge
     steps:
       - uses: actions/checkout@v6
-      - name: Lockfile
-        run: nix flake lock --accept-flake-config
-      - run: nix build .#blog
+      - run: bash modules/services/blog/build.sh
       - uses: actions/git-pages@v2
         with:
           site: https://toostveen.nl
           token: ${{ forge.token }}
-          source: result
+          source: modules/services/blog/target
