@@ -59,18 +59,20 @@
       name = "blog-push";
       runtimeInputs = [
         self'.packages.git-pages-push
+        pkgs.gitMinimal
       ];
       derivationArgs = {
         preferLocalBuild = true;
         allowSubstitutes = false;
       };
-      inheritPath = false;
       text = ''
-        git-pages-push ${self'.packages.blog} https://testing.toostveen.nl testing.toostveen.nl
+        pushd "$(git rev-parse --show-toplevel)"
+        blog="$(nix build .#blog --print-out-paths)"
+        git-pages-push "$blog" https://testing.toostveen.nl testing.toostveen.nl
         echo deployed to testing! is this ok?
         read -r -n 1 -p 'is this okay? [yN]' choice
         if [[ "$choice" =~ [yY] ]]; then
-          git-pages-push ${self'.packages.blog} https://toostveen.nl toostveen.nl
+          git-pages-push "$blog" https://toostveen.nl toostveen.nl
         fi
       '';
     };
