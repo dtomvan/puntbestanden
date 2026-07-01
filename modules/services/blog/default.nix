@@ -5,6 +5,7 @@
       packages = builtins.attrValues {
         inherit (pkgs) coreutils git;
         inherit (pkgs.nur.repos.dtomvan) jorge;
+        inherit (self'.packages) send-webmention blog-push;
       };
       shellHook = ''
         pushd "$(git rev-parse --show-toplevel)/modules/services/blog"
@@ -35,6 +36,24 @@
 
           cp -r target $out
         '';
+
+    packages.send-webmention = pkgs.writeShellApplication {
+      name = "send-webmention";
+      runtimeInputs = builtins.attrNames {
+        inherit (pkgs) coreutils gnugrep curl;
+      };
+      derivationArgs = {
+        preferLocalBuild = true;
+        allowSubstitutes = false;
+      };
+      inheritPath = false;
+      text = ''
+        my_url="''${1:?}"
+        target_url="''${2:?}"
+
+        curl -i -d "source=$my_url&target=$target_url" $(curl -i -s "$target_url" | grep 'rel="webmention"' | grep -o -E 'https?://[^ ">]+' | sort | uniq)
+      '';
+    };
 
     packages.blog-push = pkgs.writeShellApplication {
       name = "blog-push";
