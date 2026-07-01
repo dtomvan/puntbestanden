@@ -1,12 +1,16 @@
 ---
 layout: default
+with-nav: false
 ---
 
-<p>Hi, my name is Tom Oostveen. I am a prospect student Computing Science at the University of Groningen, Netherlands 🇳🇱.</p>
+<div class="h-card">
+    {% include nav.html %}
+    <p class="p-note">Hi, my name is <span class="p-name">Tom Oostveen</span>. I am a prospect student Computing Science at the University of <span class="p-locality">Groningen</span>, <span class="p-country-name">Netherlands</span> 🇳🇱.</p>
 
-<p>This is just a quick landing page, don't expect much of it :-)</p>
+    <p>This is just a quick landing page, don't expect much of it :-)</p>
 
-<p>You can find me elsewhere through the links above, most notably I go by <code>@dtomvan</code> often.</p>
+    <p>You can find me elsewhere through the links above, most notably I go by <code>@<span class="p-nickname">dtomvan</span></code> often.</p>
+</div>
 
 <p>For now, this holds a <a href="/blog/blogroll">blogroll</a>.</p>
 

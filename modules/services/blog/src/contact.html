@@ -4,6 +4,6 @@ layout: default
 <h2 class="title">Contact</h2>
 <ul>
 {% for item in site.config.contact %}
-<li><a rel="me" href="{{item.href}}">{{item.name}}</a></li>
+<li><a class="{{item.class}}" rel="me" href="{{item.href}}">{{item.name}}</a></li>
 {% endfor %}
 </ul>

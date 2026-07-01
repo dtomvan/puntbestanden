@@ -7,13 +7,19 @@ post_format: ":year-:month-:day-:title.md"
 contact:
   - name: PGP
     href: https://keyoxide.org/91C74999F109AE74854AC519EFD11A9B09D8D2C6
+    class: u-url
   - name: IM
     href: https://matrix.to/#/@tom:toostveen.nl
+    class: u-url
   - name: SCM
     href: https://git.toostveen.nl/tom
+    class: u-url
   - name: MS-SCM
     href: https://github.com/dtomvan
+    class: u-url
   - name: MAIL
     href: mailto:tomoostveen.06@gmail.com
+    class: u-email
   - name: TOOT
     href: https://toot.cat/@dtomvan
+    class: u-url

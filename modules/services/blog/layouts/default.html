@@ -1,13 +1,19 @@
 ---
 layout: base
 ---
-{% include nav.html %}
+
+{% if page.with-nav != false %}
+    <div class="h-card">
+        {% include nav.html %}
+    </div>
+{% endif %}
 
 <div class="layout-{{ page.layout }}">
     {% if page.title %}<h2>{{page.title}}</h2>{% endif %}
     {{ content }}
     <br/>
 </div>
+
 <p class="footer center-block">
 <a href="https://nixwebr.ing/prev/dtomvan">prev</a>
 |
