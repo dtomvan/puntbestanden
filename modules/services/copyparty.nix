@@ -313,6 +313,8 @@ in
                       maxb = "20m,600";
                       # max 5 mb uploads
                       sz = "0-5m";
+                      # 30 days, idgaf about my random screenshots
+                      lifetime = 60 * 60 * 24 * 30;
                     }
                     // cfg.paste.extraFlags;
                 };
