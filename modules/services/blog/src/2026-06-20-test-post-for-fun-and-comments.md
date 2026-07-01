@@ -15,3 +15,9 @@ a single request, and everything is static. All that changes is that your
 website will be doing a postgres query for the list of comments, and you'll be
 substituted a different page. Which basically makes my site half-SSG... it's
 neat, I think. Great for the small web. Go check it out.
+
+{% assign cite-title = "Comments!" %}
+{% assign cite-published = "2025-07-29" %}
+{% assign cite-author = "Natalie Klestrup Röijezon" %}
+{% assign cite-url = "https://natkr.com/2025-07-29-comments/" %}
+{% include cite.html %}
