@@ -51,7 +51,7 @@
         my_url="''${1:?}"
         target_url="''${2:?}"
 
-        curl -i -d "source=$my_url&target=$target_url" $(curl -i -s "$target_url" | grep 'rel="webmention"' | grep -o -E 'https?://[^ ">]+' | sort | uniq)
+        curl -i -d "source=$my_url&target=$target_url" "$(curl -i -s "$target_url" | grep 'rel="webmention"' | grep -o -E 'https?://[^ ">]+' | sort | uniq)"
       '';
     };
 
