@@ -5,8 +5,8 @@ title: Tags
 
 {% for tag in site.tags %}
 <details>
-    <summary>
-        <h3><a href="#{{tag[0]}}" class="title" id="{{tag[0]}}">#{{tag[0]}}</a></h3>
+    <summary class="tag-header">
+        <a href="#{{tag[0]}}" class="title" id="{{tag[0]}}">#{{tag[0]}}</a> <span class="tag-post-amount">[{{tag[1] | size}}]</span>
     </summary>
 
     {% for post in tag[1] %}

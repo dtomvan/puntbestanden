@@ -336,24 +336,17 @@ hr.footnotes-separatator {
 
 /* These control the expand/collapse behavior of the tags page */
 details summary {
-    list-style: none;
     cursor: pointer;
 }
 
-details summary h3::after {
-    content: "[+]";
+details summary.tag-header {
+    font-size: large;
+    font-weight: bold;
+}
+
+details summary.tag-header > span.tag-post-amount {
     font-size: small;
-    font-weight: normal;
-    font-family: monospace;
-    vertical-align: middle;
-}
-
-details[open] summary h3::after {
-    content: "[-]"
-}
-
-details > summary::-webkit-details-marker {
-    display: none;
+    font-weight: regular;
 }
 
 section header.quirky-buttons img, button {
