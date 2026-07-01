@@ -38,6 +38,15 @@ layout: base
 
     {% unless page.draft %}
     <h1>Comments</h1>
+    <details>
+        <summary>Help</summary>
+        <blockquote><p>The comments on this blog are self-hosted, so you don't have to worry
+        about a TOS or something (rest assured <a href="https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/">kami</a>).
+        I'll just approve your comment if it isn't total nonsense or really
+        offensive. E-mail me if you think I'm taking too long with approval or
+        if you have any questions.</p></blockquote>
+    </details>
+
     <!--# include virtual="/tyck/post/{{ page.slug }}/comments" -->
     {% endunless %}
 
