@@ -1,15 +1,15 @@
 ---
 layout: default
 # submenu: [["/feed", "/feed.xml"], ["/tags", "/blog/tags"]]
-title: Blog
 ---
 
-{% assign posts_by_year = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
-{% for year in posts_by_year %}
-  {% unless forloop.first%}
-  <br/>
-  {% endunless %}
-  {% for post in year.items %}
-    {% include post_preview.html %}
-  {% endfor %}
-{% endfor %}
+<section class="h-feed">
+    <h1 class="p-name"><a href="/blog" class="u-url">Blog archive</a></h1>
+    {% assign posts_by_year = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+    {% for year in posts_by_year %}
+    <h2>{{year.name}}</h2>
+      {% for post in year.items %}
+        {% include post_preview.html %}
+      {% endfor %}
+    {% endfor %}
+</section>
