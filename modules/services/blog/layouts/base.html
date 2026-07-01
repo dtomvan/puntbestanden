@@ -11,15 +11,17 @@
         <title>{{ site.config.name }}</title>
         {% endif %}
         <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="{{ site.config.name }}"/>
-        <link rel="stylesheet" href="/assets/css/main.css">
-        <link rel="stylesheet" href="/assets/css/tyck.css">
+        <!-- we add a pseudo-random (as far as the browser is concerned) variable here, so that each redeployment the browser has to refetch the sheet -->
+        <!-- the added benefit of using the git rev is that the browser can still keep a cache if nothing changed -->
+        <link rel="stylesheet" href="/assets/css/main.css?bust_cache=${REV}">
+        <link rel="stylesheet" href="/assets/css/tyck.css?bust_cache=${REV}">
         
         <script src="/assets/js/colorscheme.js"></script>
-        <link class="system-colorscheme" rel="stylesheet" href="/assets/css/dark.css" media="(prefers-color-scheme: dark)" />
+        <link class="system-colorscheme" rel="stylesheet" href="/assets/css/dark.css?bust_cache=${REV}" media="(prefers-color-scheme: dark)" />
         <link
         class="system-colorscheme"
         rel="stylesheet"
-        href="/assets/css/light.css"
+        href="/assets/css/light.css?bust_cache=${REV}"
         media="(prefers-color-scheme: light)"
         />
 
