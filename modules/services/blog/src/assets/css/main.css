@@ -204,7 +204,7 @@ img.cover-img {
 }
 
 .layout-post header {
-    margin: 3rem 0 5rem;
+    margin: 3rem 0 2rem;
     text-align: left;
 }
 
@@ -364,4 +364,10 @@ section header.quirky-buttons img, button {
 
 section header.quirky-buttons img:hover, button:hover {
     transform: scale(1.2);
+}
+
+img.octicon {
+    vertical-align: middle;
+    filter: invert(100%);
+    height: 16px;
 }
