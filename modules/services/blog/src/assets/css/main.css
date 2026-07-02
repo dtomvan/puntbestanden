@@ -361,3 +361,38 @@ span.subtitle {
     /* h3 without actually being a structural h3, cause that makes no sense */
     font-size: larger;
 }
+
+/* https://petermolnar.net/article/how-to-make-a-print-css/ */
+@media print {
+    * {
+        background-color: #fff !important;
+        color: #222;
+        font-size: 11pt !important;
+        font-family: Helvetica, sans-serif !important;
+    }
+    
+    @page {
+        margin: 0.5in;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid !important;
+    }
+
+    p, li, blockquote, figure, img {
+        page-break-inside: avoid !important;
+    }
+
+    button.toggle, nav {
+        display: none!important;
+    }
+
+    a,a:visited {
+        color: #0000FF!important;
+    }
+
+    img.octicon {
+        color: unset!important;
+        filter: unset!important;
+    }
+}
