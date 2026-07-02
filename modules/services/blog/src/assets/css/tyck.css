@@ -35,7 +35,14 @@
 .tyck-comment-form label input,
 .tyck-comment-form label textarea {
   display:block;
-  width:100%
+  width:100%;
+}
+.tyck-comment-form textarea,
+.tyck-comment-form input {
+  padding: 6px;
+  border-radius: 6px;
+  background-color: var(--ctp-crust);
+  border: 0;
 }
 .tyck-comment-form textarea {
   height:10lh
