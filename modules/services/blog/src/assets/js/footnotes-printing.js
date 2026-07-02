@@ -65,14 +65,16 @@
                 var thisClass = coll[i].className;
                 var notImportant =
                     coll[i].classList.contains("tag")
+                    || coll[i].classList.contains("p-category")
                     || coll[i].classList.contains("date")
-                    || coll[i].classList.contains("u-url")
                     || coll[i].classList.contains("p-author")
                     || coll[i].classList.contains("print-hide")
+                    || coll[i].classList.contains("no-footnote")
                     ;
                 if ( (coll[i].getAttribute('href') ||
                     coll[i].getAttribute('cite')) && ! notImportant) {
                     thisLink = coll[i].getAttribute('href') ? coll[i].href : coll[i].cite;
+                    if (thisLink == coll[i].innerText) continue;
                     var note = document.createElement('sup');
                     addClass.apply(note,['printOnly']);
                     var note_txt;

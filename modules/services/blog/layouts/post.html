@@ -16,7 +16,7 @@ layout: base
                 {% if page.cover-img %}
                 <img class="cover-img" src="{{ page.cover-img | absolute_url }}">
                 {% endif %}
-                <a class="u-url" href="{{ page.url | absolute_url }}">
+                <a class="no-footnote u-url" href="{{ page.url | absolute_url }}">
                     <time class="dt-published date" datetime="{{ page.date | date: "%F %H:%M:%S" }}">{{ page.date | date: "%Y-%m-%d" }}</time>
                 </a>
                 <span class="tags">
