@@ -112,10 +112,6 @@ nav a:hover {
     margin: 0 0 0.5rem 0;
 }
 
-li:not(:last-child) {
-    padding-bottom: .75rem;
-}
-
 a, a:visited {
     text-decoration: none;
 }
@@ -362,6 +358,16 @@ span.subtitle {
     font-size: larger;
 }
 
+@media screen {
+    li:not(:last-child) {
+        padding-bottom: .75rem;
+    }
+
+    .printOnly {
+      display: none;
+    }
+}
+
 /* https://petermolnar.net/article/how-to-make-a-print-css/ */
 @media print {
     * {
@@ -394,5 +400,15 @@ span.subtitle {
     img.octicon {
         color: unset!important;
         filter: unset!important;
+    }
+
+    a:link:after,
+    a:visited:after {
+      content: " (" attr(href) ") ";
+      font-size: 90%;
+    }
+    html.noted a:link:after,
+    html.noted a:visited:after {
+      content: '';
     }
 }
