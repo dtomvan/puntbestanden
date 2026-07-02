@@ -227,6 +227,22 @@ Upstream jorge handles this differently, but I decided to render codeblocks as c
     hyphens: none;
 }
 
+/* prevent preformatted stuff to be really small compared to the heading itself */
+.layout-post h1 pre,
+.layout-post h2 pre,
+.layout-post h3 pre,
+.layout-post h4 pre,
+.layout-post h5 pre,
+.layout-post h6 pre,
+.layout-post h1 code,
+.layout-post h2 code,
+.layout-post h3 code,
+.layout-post h4 code,
+.layout-post h5 code,
+.layout-post h6 code {
+    font-size: unset;
+}
+
 blockquote {
     border-left: 2px solid var(--ctp-overlay2);
     padding-left: 1rem;
