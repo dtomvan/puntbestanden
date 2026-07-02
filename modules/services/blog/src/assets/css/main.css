@@ -374,6 +374,25 @@ span.subtitle {
     font-size: larger;
 }
 
+#webrings-intro, #webrings-intro > span {
+    text-decoration: underline;
+}
+
+#webrings-intro > span {
+    display: inline-block;
+    transition: opacity 1s ease-out;
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+}
+
+#webrings-intro:hover > span {
+    opacity: 1;
+    width: auto;
+}
+
 @media screen {
     li:not(:last-child) {
         padding-bottom: .75rem;
