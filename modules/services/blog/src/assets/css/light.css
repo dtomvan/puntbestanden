@@ -27,3 +27,23 @@
   --ctp-mantle: #e6e9ef;
   --ctp-crust: #dce0e8;
 }
+
+button {
+    color: var(--ctp-base);
+    background-color: var(--ctp-text);
+}
+button:hover {
+    background-color: var(--ctp-subtext0);
+}
+
+a {
+    color: hsl(from var(--ctp-blue) h s 55%)
+}
+
+a:visited {
+    color: hsl(from var(--ctp-mauve) h s 55%)
+}
+
+.footer, .date, .tags, .tags a {
+    color: var(--ctp-subtext1);
+}
