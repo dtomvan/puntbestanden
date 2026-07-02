@@ -60,7 +60,8 @@
             addClass.apply(ol,['printOnly']);
             var myArr = [];
             var thisLink;
-            var num = 1;
+            var num = 1 + document.querySelectorAll('.footnotes[role="doc-endnotes"] li').length;
+            ol.setAttribute("start", num);
             for (var i=0; i<coll.length; i++) {
                 var thisClass = coll[i].className;
                 var notImportant =
@@ -74,7 +75,10 @@
                 if ( (coll[i].getAttribute('href') ||
                     coll[i].getAttribute('cite')) && ! notImportant) {
                     thisLink = coll[i].getAttribute('href') ? coll[i].href : coll[i].cite;
-                    if (thisLink == coll[i].innerText) continue;
+                    if (thisLink == coll[i].innerText
+                        || thisLink == `${coll[i].innerText}/`
+                        || thisLink.includes("#fn:")
+                        || thisLink.includes("#fnref:")) continue;
                     var note = document.createElement('sup');
                     addClass.apply(note,['printOnly']);
                     var note_txt;
