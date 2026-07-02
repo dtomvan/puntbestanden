@@ -424,8 +424,14 @@ span.subtitle {
         page-break-inside: avoid !important;
     }
 
-    button.toggle, form.tyck-comment-form, .print-hide {
+    button.toggle, form.tyck-comment-form, .print-hide, #webrings, #webrings > br {
         display: none!important;
+    }
+
+    #webrings {
+        width: 0;
+        height: 0!important;
+        margin: 0!important;
     }
 
     a,a:visited {

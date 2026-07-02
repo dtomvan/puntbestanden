@@ -9,10 +9,10 @@
             <a href="{{section[1]}}">{{section[0]}}</a>
             {% endfor %}
             {% for item in site.config.contact %}
-            <a class="{{item.class}}" rel="me" href="{{item.href}}">{{item.name}}</a>
+            <a class="{{item.class}} no-footnote" rel="me" href="{{item.href}}">{{item.name}}</a>
             {% endfor %}
         </div>
-        <div class="hidden-desktop">
+        <div class="hidden-desktop print-hide">
             <a rel="me" href="/contact">Contact</a></li>
         </div>
     </div>

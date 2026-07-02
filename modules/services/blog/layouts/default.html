@@ -18,26 +18,29 @@ layout: base
 
 
 <p class="footer center-block">
-<i id="webrings-intro">Rings on my finger <span>(i.e. webrings this blog is part of)</span></i>
-<br/>
-<a href="https://nixwebr.ing/prev/dtomvan">prev</a>
-|
-<a href="https://nixwebr.ing/">
-    <img height=22
-         alt="nix webring"
-         title="nix webring"
-         style="vertical-align: middle;"
-         src="/assets/img/nix-webring.svg" />
-</a>
-|
-<a href="https://nixwebr.ing/next/dtomvan">next</a>
-<br/>
-<a href="https://nixwebr.ing/rand">I'm feeling lucky</a>
-<br/>
-<a href="https://xn--sr8hvo.ws/previous">prev</a>
-<a href="https://xn--sr8hvo.ws">🕸💍</a>
-<a href="https://xn--sr8hvo.ws/next">next</a>
-<br/>
-<br/>
-{% include footer-common.html %}
+    <!-- cannot be div because that would make the contents here non-inline, which would break text-align -->
+    <span id="webrings">
+        <i id="webrings-intro">Rings on my finger <span>(i.e. webrings this blog is part of)</span></i>
+        <br/>
+        <a href="https://nixwebr.ing/prev/dtomvan">prev</a>
+        |
+        <a href="https://nixwebr.ing/">
+            <img height=22
+            alt="nix webring"
+            title="nix webring"
+            style="vertical-align: middle;"
+            src="/assets/img/nix-webring.svg" />
+        </a>
+        |
+        <a href="https://nixwebr.ing/next/dtomvan">next</a>
+        <br/>
+        <a href="https://nixwebr.ing/rand">I'm feeling lucky</a>
+        <br/>
+        <a href="https://xn--sr8hvo.ws/previous">prev</a>
+        <a href="https://xn--sr8hvo.ws">🕸💍</a>
+        <a href="https://xn--sr8hvo.ws/next">next</a>
+    </span>
+    <br/>
+    <br/>
+    {% include footer-common.html %}
 </p>
