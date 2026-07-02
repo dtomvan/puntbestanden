@@ -383,7 +383,7 @@ span.subtitle {
         page-break-inside: avoid !important;
     }
 
-    button.toggle, nav, form.tyck-comments-form, .print-hide {
+    button.toggle, nav, form.tyck-comment-form, .print-hide {
         display: none!important;
     }
 
