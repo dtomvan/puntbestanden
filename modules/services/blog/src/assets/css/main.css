@@ -452,4 +452,8 @@ span.subtitle {
     html.noted a:visited:after {
       content: '';
     }
+
+    nav {
+        border-bottom: none;
+    }
 }
