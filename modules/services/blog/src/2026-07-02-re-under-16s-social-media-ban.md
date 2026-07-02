@@ -4,7 +4,7 @@ summary: A quick ramble on the UK social media ban for teens
 tags: 
    - politics
    - JulyReply
-date: 2026-07-02T23:09:36+02:00
+date: 2026-07-02T11:03:22+02:00
 layout: post
 lang: en
 draft: false

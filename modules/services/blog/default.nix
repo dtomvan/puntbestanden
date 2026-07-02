@@ -46,7 +46,6 @@
         preferLocalBuild = true;
         allowSubstitutes = false;
       };
-      inheritPath = false;
       text = ''
         my_url="''${1:?}"
         target_url="''${2:?}"

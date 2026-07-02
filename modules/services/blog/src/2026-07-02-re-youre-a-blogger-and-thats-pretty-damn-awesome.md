@@ -2,7 +2,7 @@
 title: "Re: you're a blogger, and that's pretty damn awesome"
 subtitle: "(and JulyReply 2026)"
 summary: "I felt seen by Robert for entering JulyReply 2026 :)"
-date: 2026-07-02T19:08:23+02:00
+date: 2026-07-02T23:09:36+02:00
 layout: post
 lang: en
 tags:
@@ -23,8 +23,6 @@ For anyone who doesn't know me: hi, my name is Tom, I'm a semi-intermediate prog
 Shameless plug: I've retroactively posted my old note-taking solution comparison "blog" post, and I've written [another reply to a post just this morning](/2026-07-02-re-under-16s-social-media-ban), so if you like what you're reading, please don't hesitate do [add this blog to your reader](https://subscribeopenly.net/subscribe/?url=https%3A%2F%2Ftoostveen.nl%2Ffeed.xml) or [following me on mastodon](https://toot.cat/@dtomvan). I'd appreciate it. I'd like to keep this endeavour small, but I don't mind a little audience :)
 
 To Robert personally: thank you for being such a beacon of light in this community. I've read a lot that folks are inspired by your words and your actions, and so am I.
-
-I'll be sending you a [webmention](https://indieweb.org/Webmention) (manually, that is), let's see if that works!
 
 But over with the fluff, let's get to work! (or not, let's not get burnt out of blogging immediately...)
 
