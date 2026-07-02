@@ -9,8 +9,10 @@ layout: base
 {% endif %}
 
 <div class="layout-{{ page.layout }}">
-    {% if page.title %}<h2>{{page.title}}</h2>{% endif %}
-    {{ content }}
+    <main id="main-content">
+        {% if page.title %}<h2>{{page.title}}</h2>{% endif %}
+        {{ content }}
+    </main>
     <br/>
 </div>
 
