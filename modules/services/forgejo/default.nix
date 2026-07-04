@@ -9,7 +9,12 @@
   };
 
   flake.modules.nixos.services-forgejo =
-    { lib, config, ... }:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }:
     let
       cfg = config.infra.fj;
 
@@ -104,7 +109,16 @@
           let
             dumpCfg = config.services.forgejo.dump;
           in
-          lib.mkForce "${lib.getExe' config.services.forgejo.package "forgejo"} dump --type ${dumpCfg.type} --skip-repo-archives --skip-package-data";
+          lib.mkForce (
+            pkgs.writeShellScript "forgejo-dump-start" ''
+              ${lib.getExe' config.services.forgejo.package "forgejo"} \
+              dump \
+              --type ${dumpCfg.type} \
+              --skip-repo-archives \
+              --skip-package-data
+              chmod -R g+r /var/lib/forgejo/dump
+            ''
+          );
 
         # this map may or may not reroute GET and HEAD requests to iocaine,
         # depending on whether or not it's enabled. This allows me to proxy to
