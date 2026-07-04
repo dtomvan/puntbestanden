@@ -31,7 +31,7 @@ We have mistaken social media and games for a universal socializing space for ki
 
 In theory, these people would actually benefit from using independent social networks such as Mastodon, right? But then again try finding your actual niche over there, if your niche isn't just "tech" or "programming" or "art" 😅
 
-I've come to understand that the UK, after banning websites deemed pornographical under the age of 18 (which ended up including Wikipedia [^3] of all places), is enforcing that the platforms have to now come up with a way to reasonably verify that a user is age 16 and above. We all know how this goes, it's happened before: every citizen of the UK where "the algorithm" for some reason decides that you're too young, has to upload government ID, most likely to one of those scummy 3rd-party vendors like Persona, who leak their data all the time...[^4][^5]
+I've come to understand that the UK, after banning websites deemed pornographical under the age of 18 (which ended up including Wikipedia [^3] of all places), is enforcing that the platforms have to now come up with a way to reasonably verify that a user is age 16 and above. We all know how this goes, it's happened before: every citizen of the UK where "the algorithm" for some reason decides that you're too young, has to upload government ID, most likely to one of those scummy 3rd-party vendors like Persona, who leak their data all the time...[^4] [^5]
 
 > That said, just about everyone I know will just scan their passport and not think twice about it 🤷
 
