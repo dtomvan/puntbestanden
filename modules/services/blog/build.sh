@@ -6,7 +6,7 @@ export REV
 cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1
 
 subst() {
-    envsubst -i "$1" | sponge "$1"
+  envsubst -i "$1" | sponge "$1"
 }
 subst includes/footer-common.html
 subst src/index.html

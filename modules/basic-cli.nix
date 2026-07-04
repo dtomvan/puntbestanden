@@ -106,9 +106,6 @@
       let
         inherit (pkgs)
           writeShellApplication
-          coreutils
-          mktemp
-          gum
           ;
         evalExpr =
           name: expr:
