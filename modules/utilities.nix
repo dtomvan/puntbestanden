@@ -36,6 +36,7 @@
             nurl
             pciutils
             pkg-config
+            smartmontools
             unzip
             usbutils
             util-linux
