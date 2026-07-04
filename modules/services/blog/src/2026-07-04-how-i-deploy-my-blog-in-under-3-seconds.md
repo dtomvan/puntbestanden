@@ -96,7 +96,7 @@ jobs:
       - uses: actions/git-pages@v2
         with:
           site: https://toostveen.nl
-          token: ${{ forge.token }}
+          token: {% raw %}${{ forge.token }}{% endraw %}
           source: modules/services/blog/target
 ```
 
