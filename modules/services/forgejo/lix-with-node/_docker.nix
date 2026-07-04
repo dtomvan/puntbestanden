@@ -120,15 +120,17 @@ let
     "${gname}".gid = gid;
   };
 
-  userToPasswd = k:
+  userToPasswd =
+    k:
     {
       uid,
       gid ? 65534,
       home ? "/var/empty",
       description ? "",
       shell ? "/bin/false",
+      groups ? [ ],
     }:
-    "${k}:x:${toString uid}:${toString gid}:${description}:${home}:${shell}";
+    "${k}:x:${toString uid}:${toString gid}:${description}:${home}:${shell} # in ${lib.concatStringsSep "," groups}";
   passwdContents = lib.concatStringsSep "\n" (lib.attrValues (lib.mapAttrs userToPasswd users));
 
   userToShadow = k: _: "${k}:!:1::::::";
@@ -138,18 +140,19 @@ let
   # {
   #   group = [ "user1" "user2" ];
   # }
-  groupMemberMap = let
+  groupMemberMap =
+    let
       # Create a flat list of user/group mappings
       mappings = builtins.foldl' (
-          acc: user:
-          let
-            groups = users.${user}.groups or [ ];
-          in
-          acc
-          ++ map (group: {
-            inherit user group;
-          }) groups
-        ) [ ] (lib.attrNames users);
+        acc: user:
+        let
+          groups = users.${user}.groups or [ ];
+        in
+        acc
+        ++ map (group: {
+          inherit user group;
+        }) groups
+      ) [ ] (lib.attrNames users);
     in
     builtins.foldl' (
       acc: v:
