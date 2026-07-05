@@ -6,15 +6,15 @@ date: 2026-07-02T23:09:36+02:00
 layout: post
 lang: en
 tags:
-    - meta
-    - rant
-    - JulyReply
+  - meta
+  - rant
+  - JulyReply
 draft: false
 ---
 
 In-reply-to: https://robertbirming.com/blogger-pretty-awesome/
 
-Look mom, that's me! Thank you for your words of wisdom. Happy to be entering such a welcoming and encouraging community. At the risk of becoming a full-time *metablogging* smartypants, I really do think I should've started doing this sooner. Writing really is a way of thinking. I have been writing for myself in an old Obsidian vault for a while now, but doing that feels like you're never really making an *end product* or something... and then also there's never really any (peer) pressure to write something for other people to see. (oh, and with the added benefit of not using non-FOSS software as part of my writing stack, I just use Neovim now)
+Look mom, that's me! Thank you for your words of wisdom. Happy to be entering such a welcoming and encouraging community. At the risk of becoming a full-time _metablogging_ smartypants, I really do think I should've started doing this sooner. Writing really is a way of thinking. I have been writing for myself in an old Obsidian vault for a while now, but doing that feels like you're never really making an _end product_ or something... and then also there's never really any (peer) pressure to write something for other people to see. (oh, and with the added benefit of not using non-FOSS software as part of my writing stack, I just use Neovim now)
 
 # So, `$ whoami`?
 

@@ -5,4 +5,3 @@
 - TAGS: refactor top-level
 
 ../../modules/top-level/hosts.nix
-

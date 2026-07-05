@@ -2,6 +2,5 @@
 
 - STATE: CLOSED
 - PRIORITY: 50
-- TAGS: 
-../../modules/profiles/base.nix
-
+- TAGS:
+  ../../modules/profiles/base.nix

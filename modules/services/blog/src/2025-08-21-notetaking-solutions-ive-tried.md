@@ -1,7 +1,7 @@
 ---
-title:      "Notetaking solutions I've tried"
-date:       2025-08-21T22:59:29+02:00
-tags:       ["emacs", "neovim", "notetaking"]
+title: "Notetaking solutions I've tried"
+date: 2025-08-21T22:59:29+02:00
+tags: ["emacs", "neovim", "notetaking"]
 layout: post
 draft: false
 ---
@@ -31,6 +31,7 @@ Beware: this is a bit of a ramble. Forgive me for my sub-par writing
 skills.
 
 # [Obsidian](https://obsidian.md)
+
 The one I've used for the longest, and which has carried me through
 high school. It's killer for making notes for school, quickly jotting
 down stuff and then later iterating on it until you have something
@@ -47,7 +48,7 @@ bummer, but I can live with it. If I want to use something more
 lightweight to edit my notes I am free to do so.
 
 The problem is that Obsidian vaults are _nearly_ interoperable with
-all editors, *nearly*. The linking and tagging doesn't translate over
+all editors, _nearly_. The linking and tagging doesn't translate over
 well to any other editor that tries to understand Markdown links, so
 your Obsidian vault can only come to its full fruition in, well,
 Obsidian itself. People talk about vendor lock-in all the time when it
@@ -57,7 +58,9 @@ sadly...
 4/5
 
 # [Logseq](https://logseq.com/)
+
 It's basically an Obsidian clone, except it has some funky features:
+
 - The outlining is strictly bullet-point based
 - It has built-in queries and inline bells and whistles, powered by EDN
   (the entire "backend" to the Electron app is written in Clojure)
@@ -69,7 +72,7 @@ It's basically an Obsidian clone, except it has some funky features:
   - Pages
 - It indexes everything in a database, further creating some amount of lock-in
   - To be fair, the notes are openable from nvim/obsidian, because
-	it's just markdown in a wonky directory structure after all
+    it's just markdown in a wonky directory structure after all
 
 The thing with Logseq is that in its current state it needs a lot of
 work (they are doing a complete "v2" overhaul at time of writing
@@ -81,6 +84,7 @@ nicely IMHO.
 3/5
 
 # [Dendron](https://dendron.so/)
+
 This is a VSCode extension, which might sound good to you, but I
 promise you it isn't practical. The VSCode shell and extension
 framework only gets in the way of good UX. Sure, you can carry over
@@ -115,7 +119,8 @@ want to be doing it, and it feels like unneeded boilerplate code
 3/5
 
 # [Notion](https://notion.so)
-This one looked cool at first, for *NORMIES*!!!
+
+This one looked cool at first, for _NORMIES_!!!
 
 I'll keep this one short, there's been a lot of critique on this one
 for it's cloud-onlyness, corporateness, slowness, you name
@@ -125,6 +130,7 @@ handles 200 billion notes without crashing", by Coding with Lewis on
 YouTube).
 
 # [Neovim](https://neovim.org) + [Neorg](https://github.com/nvim-neorg/neorg)
+
 I didn't dive to deep into this one, because it felt way too
 convoluted, and my Neovim config was dangerously close to 10kLoC at
 the time, so I got rid of it quite quickly.
@@ -139,6 +145,7 @@ of my notes into it.
 4/5
 
 # [Neovim](https://neovim.org) + plain markdown
+
 I know this is the note-taking system I should be using, be it with or
 without vimwiki. The problem with it is: it's boring. This is also the
 reason I know it's probably the best one on the list (simple and
@@ -150,6 +157,7 @@ the "productivity treadmill"... such a bummer...
 4/5
 
 # [QOwnNotes](https://www.qownnotes.org/)
+
 This is one of the better ones on the list. It is foremost a QT
 app, but it works on basically anything, even macOS. It's basically a
 less bloated Obsidian. The surrounding ecosystem isn't as big, but there
@@ -176,6 +184,7 @@ wikilinks...
 
 There's just one thing for me holding it back, and it's the
 _jank_. Just a few points:
+
 - The default dark theme is as ugly as can be
 - The settings menu is ugly, convoluted and slow
 - The default keybinds often don't make sense (`C-S-a` for the command palette, for example)
@@ -183,6 +192,7 @@ _jank_. Just a few points:
 4/5 because of it's jankiness
 
 # [Emacs](https://www.gnu.org/software/emacs/) + [Orgmode](https://orgmode.org)
+
 The OG note-taking system. It's been around since 2003, just a year
 before [Markdown was invented](https://daringfireball.net/projects/markdown/).
 Since then, it's `org-capture`'d all sorts of note-taking gurus,
@@ -209,6 +219,7 @@ hell).
 5/5
 
 # [Emacs](https://www.gnu.org/software/emacs/) + [denote](https://github.com/protesilaos/denote)
+
 Denote isn't much of a piece of software or a system, but rather a way
 to name your files. It also stores relevant information in the notes'
 frontmatter, but it can work with any filetype, like videos or PDFs,
@@ -219,6 +230,7 @@ previous entry on the list. You can just replace `org-capture` with
 `denote` most of the time when you want to create a note for something.
 
 While using denote, your filenames will take the form of:
+
 ```
 YYYMMDDTHHmmss--slugified-name__tag1_tag2.{org,md,txt}
 ```
@@ -248,6 +260,7 @@ past 3 years, judging from the GitHub history.
 5/5, very much subject to change because I haven't used it a lot yet
 
 # [nb](https://github.com/xwmx/nb)
+
 This tool is a single, huge, feature-rich, probably
 Swiss-cheese-shaped, BASH script that probably only the author and God
 understand, for managing Markdown files and their attachments.
@@ -263,6 +276,7 @@ but it's just not for me.
 3/5
 
 # BONUS: Task management
+
 This last section isn't really about "note-taking" apps, but more
 about managing your tasks list. Currently, I'm not really using either
 one, I just schedule "events" in my Google calendar when I want to do
@@ -270,6 +284,7 @@ or think about a task, which isn't really a proper, coherent,
 "system", isn't it?
 
 ## todo.txt/[ntodotxt](https://github.com/tmaegel/ntodotxt) for Android
+
 Same as with the Neovim + plain markdown case. I know this is the one
 I should be using, but it's the most boring, so my brain refuses to
 start using it for all of my task management.
@@ -292,7 +307,9 @@ your laptop is turned on, for example.
 4/5
 
 ## [Taskwarrior](https://taskwarrior.org)
-This one is really cool. I'll just list some of its features off  the top of my head:
+
+This one is really cool. I'll just list some of its features off the top of my head:
+
 - Extensive querying
 - Automatic urgency scoring based on priority, deadline, effort, etc.
 - Hence can basically choose for you which task to do next through the
@@ -310,6 +327,7 @@ to think about taskwarrior doesn't have that setup already?)
 4/5
 
 ## Google keep/calendar/tasks
+
 I know that I should be degoogling, and I want to, but the Google
 "workspace" ecosystem has been way too convenient for me. Is this what
 Apple users feel like all the time when they feel like this "need" an
@@ -322,6 +340,7 @@ best in the entire ecosystem.
 4/5
 
 ## [Todoist](https://www.todoist.com/)
+
 This one might seem like you are finally being productive and finally
 getting your life together and organized, but it's not: it's just
 adding a lot of noise and extra features you now "have to use" before
@@ -341,6 +360,7 @@ VC money needs to make some ROI...
 2/5
 
 ## Obsidian again
+
 Obsidian for task management is kind-of a mixed bag for me. I just
 don't know how it's supposed to work. The only thing in Obsidian that
 would come close to the Orgmode agende I've found so far is the
@@ -370,6 +390,7 @@ and back. And generally that's really for documenting context.
 2/5
 
 # BONUS 2: AI in note-taking
+
 There has been a new hype (a sub-hype to the general AI hype if you
 will) to incorporate LLMs and decision-making-algorithms into
 note-taking and task management respectively. I have a more general
@@ -399,6 +420,7 @@ To anyone considering buying a subscription to these platforms: please
 think twice, _do not waste your money_. I cannot stress it enough.
 
 # Conclusion?
+
 I hope that, if you are still looking for the "perfect match" for your
 notes/PKM, this post has helped you a bit with choosing your next (and
 _definitely_ last) one. In the end, just use whatever works, I guess.

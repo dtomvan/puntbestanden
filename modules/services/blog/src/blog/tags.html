@@ -5,12 +5,11 @@ title: Tags
 
 {% for tag in site.tags %}
 <details>
-    <summary class="tag-header">
-        <a href="#{{tag[0]}}" class="title" id="{{tag[0]}}">#{{tag[0]}}</a> <span class="tag-post-amount">[{{tag[1] | size}}]</span>
-    </summary>
+  <summary class="tag-header">
+    <a href="#{{tag[0]}}" class="title" id="{{tag[0]}}">#{{tag[0]}}</a>
+    <span class="tag-post-amount">[{{tag[1] | size}}]</span>
+  </summary>
 
-    {% for post in tag[1] %}
-    {% include post_preview.html %}
-    {% endfor %}
+  {% for post in tag[1] %} {% include post_preview.html %} {% endfor %}
 </details>
 {% endfor %}

@@ -3,5 +3,4 @@
 - STATE: OPEN
 - PRIORITY: 80
 - TAGS: security kernel
-../../modules/workarounds/dirty-frag.nix
-
+  ../../modules/workarounds/dirty-frag.nix

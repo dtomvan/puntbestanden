@@ -1,9 +1,9 @@
 ---
 title: "Re: Under-16s Social Media Ban"
 summary: A quick ramble on the UK social media ban for teens
-tags: 
-   - politics
-   - JulyReply
+tags:
+  - politics
+  - JulyReply
 date: 2026-07-02T11:03:22+02:00
 layout: post
 lang: en
@@ -16,7 +16,7 @@ In-reply-to: https://thomasrigby.com/posts/under-16s-social-media-ban/
 
 While I am in fact not so much qualified to talk about this compared to Thomas Rigby -- I'm just Some Local Programmer after all (who doesn't even live in the UK) -- I do think I have some things to say (don't we all?).
 
-What I see and hear around me a lot, even *Anno Domini MMXXVI*[^1], is that parents simply have no idea what their kids are doing on the internet. And then even the parts they *do* know about, are deliberate: they are put on YouTube (the normal kind, not the Kids variant, which still arguably is pedagogically garbage), Instagram, TikTok, the like, from a very very young age. That does a couple things:
+What I see and hear around me a lot, even _Anno Domini MMXXVI_[^1], is that parents simply have no idea what their kids are doing on the internet. And then even the parts they _do_ know about, are deliberate: they are put on YouTube (the normal kind, not the Kids variant, which still arguably is pedagogically garbage), Instagram, TikTok, the like, from a very very young age. That does a couple things:
 
 1. It reinforces the relative "normalcy" of these platforms being used by preteens or early teens
 2. It messes with the kids' brains before they have a chance to develop it and think critically
@@ -50,7 +50,11 @@ Happy [JulyReply 2026](https://robertbirming.com/julyreply-2026-blog-connecting/
 ![julyreply-2026](/assets/img/julyreply-2026.svg)
 
 [^1]: For the uninitiated, this is just Latin/Roman numerals for "The year of the Lord, 2026" or 2026 AD
+
 [^2]: https://www.bbc.com/news/articles/cjr11qqvvwlo
+
 [^3]: I've read this nice post by `algernon` documenting their XMPP journey: https://chronicles.mad-scientist.club/tales/chatting-on-the-wire/
+
 [^4]: https://www.malwarebytes.com/blog/news/2026/02/age-verification-vendor-persona-left-frontend-exposed
+
 [^5]: https://www.theverge.com/tech/947157/passports-data-breach-cannabis-club-systems-nefos-puffpal

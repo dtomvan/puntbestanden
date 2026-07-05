@@ -2,7 +2,7 @@
 
 - STATE: OPEN
 - PRIORITY: 50
-- TAGS: 
+- TAGS:
 
 ../../modules/services/miniflux.nix
 

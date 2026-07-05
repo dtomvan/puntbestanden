@@ -2,6 +2,5 @@
 
 - STATE: OPEN
 - PRIORITY: 50
-- TAGS: 
-../../modules/services/forgejo/actions.nix
-
+- TAGS:
+  ../../modules/services/forgejo/actions.nix

@@ -2,6 +2,5 @@
 
 - STATE: CLOSED
 - PRIORITY: 50
-- TAGS: 
-../../modules/services/syncthing/default.nix
-
+- TAGS:
+  ../../modules/services/syncthing/default.nix

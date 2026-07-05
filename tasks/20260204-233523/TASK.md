@@ -1,4 +1,4 @@
-# deploy: enable deploy-rs.lib.deployChecks? 
+# deploy: enable deploy-rs.lib.deployChecks?
 
 - STATE: CLOSED
 - PRIORITY: 50

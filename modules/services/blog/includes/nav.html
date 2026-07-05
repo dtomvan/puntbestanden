@@ -1,19 +1,19 @@
 <nav>
-    <a class="p-name no-footnote u-url" rel="me" href="{{ site.config.url }}">{{ site.config.name }}</a>
-    <!-- <a href="/blog/">blog</a> -->
+  <a class="p-name no-footnote u-url" rel="me" href="{{ site.config.url }}"
+    >{{ site.config.name }}</a
+  >
+  <!-- <a href="/blog/">blog</a> -->
 
-    <div class="nav-right">
-        <div class="hidden-mobile">
-            {% assign sections = page.submenu %}
-            {% for section in sections %}
-            <a href="{{section[1]}}">{{section[0]}}</a>
-            {% endfor %}
-            {% for item in site.config.contact %}
-            <a class="{{item.class}} no-footnote" rel="me" href="{{item.href}}">{{item.name}}</a>
-            {% endfor %}
-        </div>
-        <div class="hidden-desktop print-hide">
-            <a rel="me" href="/contact">Contact</a></li>
-        </div>
+  <div class="nav-right">
+    <div class="hidden-mobile">
+      {% assign sections = page.submenu %} {% for section in sections %}
+      <a href="{{section[1]}}">{{section[0]}}</a>
+      {% endfor %} {% for item in site.config.contact %}
+      <a class="{{item.class}} no-footnote" rel="me" href="{{item.href}}">{{item.name}}</a>
+      {% endfor %}
     </div>
+    <div class="hidden-desktop print-hide">
+      <a rel="me" href="/contact">Contact</a>
+    </div>
+  </div>
 </nav>

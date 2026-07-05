@@ -2,6 +2,5 @@
 
 - STATE: CLOSED
 - PRIORITY: 50
-- TAGS: 
-../../modules/profiles/hetzner-bakkie.nix
-
+- TAGS:
+  ../../modules/profiles/hetzner-bakkie.nix

@@ -5,60 +5,76 @@ layout: base
 {% include nav.html %}
 
 <article class="h-entry">
-    <div class="layout-{{ page.layout }}" lang="{{ page.lang | default:site.config.lang | default:'en' }}">
-        <main id="main-content">
-            <header {% if page.cover-img %}class="with-cover"{% endif %}>
-                {% if page.title %}
-                    <h1 class="title p-name">{{ page.title }}</h1>
-                {% endif %}
-                {% if page.subtitle %}<span class="subtitle">{{ page.subtitle }}</span>{% endif  %}
-                <p>
-                {% if page.cover-img %}
-                <img class="cover-img" src="{{ page.cover-img | absolute_url }}">
-                {% endif %}
-                <a class="no-footnote u-url" href="{{ page.url | absolute_url }}">
-                    <time class="dt-published date" datetime="{{ page.date | date: "%F %H:%M:%S" }}">{{ page.date | date: "%Y-%m-%d" }}</time>
-                </a>
-                <span class="tags">
-                    {% for tag in page.tags %}
-                    <a class="p-category tag" href="/blog/tags#{{tag}}">#{{tag}}</a>
-                    {% endfor %}
-                </span>
-                <br/>
-                <img alt="person icon" src="/assets/img/person.svg" class="octicon" /> <a class="h-card p-author" href="{{ site.config.url }}">{{ site.config.author }}</a>
-            </header>
+  <div
+    class="layout-{{ page.layout }}"
+    lang="{{ page.lang | default:site.config.lang | default:'en' }}"
+  >
+    <main id="main-content">
+      <header {% if page.cover-img %}class="with-cover" {% endif %}>
+        {% if page.title %}
+        <h1 class="title p-name">{{ page.title }}</h1>
+        {% endif %} {% if page.subtitle %}<span class="subtitle">{{ page.subtitle }}</span>{% endif
+        %}
+        <p>
+          {% if page.cover-img %}
+          <img class="cover-img" src="{{ page.cover-img | absolute_url }}" />
+          {% endif %}
+          <a class="no-footnote u-url" href="{{ page.url | absolute_url }}">
+            <time class="dt-published date" datetime="{{ page.date | date: '%F %H:%M:%S' }}"
+              >{{ page.date | date: "%Y-%m-%d" }}</time
+            >
+          </a>
+          <span class="tags">
+            {% for tag in page.tags %}
+            <a class="p-category tag" href="/blog/tags#{{tag}}">#{{tag}}</a>
+            {% endfor %}
+          </span>
+          <br />
+          <img alt="person icon" src="/assets/img/person.svg" class="octicon" />
+          <a class="h-card p-author" href="{{ site.config.url }}">{{ site.config.author }}</a>
+        </p>
+      </header>
 
-            {% if page.summary %}
-                <p class="p-summary"><b>Summary: </b>{{ page.summary }}</p>
-            {% endif %}
+      {% if page.summary %}
+      <p class="p-summary"><b>Summary: </b>{{ page.summary }}</p>
+      {% endif %}
 
-            <div class="e-content">
-                {{ content }}
-            </div>
-        </main>
-    </div>
+      <div class="e-content">{{ content }}</div>
+    </main>
+  </div>
 
-    {% unless page.draft %}
-    <a href="https://share.joinmastodon.org/#text={{page.title|xml_escape}} - {{site.config.author}} - {{page.url|absolute_url}}" target="_blank" rel="noopener">Share on Mastodon</a>
+  {% unless page.draft %}
+  <a
+    href="https://share.joinmastodon.org/#text={{page.title|xml_escape}} - {{site.config.author}} - {{page.url|absolute_url}}"
+    target="_blank"
+    rel="noopener"
+    >Share on Mastodon</a
+  >
 
-    <h1>Comments</h1>
-    <details class="comments-help print-hide">
-        <summary>Help</summary>
-        <blockquote><p>The comments on this blog are self-hosted, so you don't have to worry
-        about a TOS or something (rest assured <a href="https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/">kami</a>).
-        I'll just approve your comment if it isn't total nonsense or really
-        offensive. E-mail me if you think I'm taking too long with approval or
-        if you have any questions.</p></blockquote>
-    </details>
+  <h1>Comments</h1>
+  <details class="comments-help print-hide">
+    <summary>Help</summary>
+    <blockquote>
+      <p>
+        The comments on this blog are self-hosted, so you don't have to worry about a TOS or
+        something (rest assured
+        <a
+          href="https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/"
+          >kami</a
+        >). I'll just approve your comment if it isn't total nonsense or really offensive. E-mail me
+        if you think I'm taking too long with approval or if you have any questions.
+      </p>
+    </blockquote>
+  </details>
 
-    <!--# include virtual="/tyck/post/{{ page.slug }}/comments" -->
-    {% endunless %}
+  <!--# include virtual="/tyck/post/{{ page.slug }}/comments" -->
+  {% endunless %}
 
-    <br/>
-    <br/>
+  <br />
+  <br />
 
-    <p class="center-block footer">
-        <br/>
-        {% include footer-common.html %}
-    </p>
+  <p class="center-block footer">
+    <br />
+    {% include footer-common.html %}
+  </p>
 </article>

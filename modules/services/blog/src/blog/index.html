@@ -4,12 +4,9 @@ layout: default
 ---
 
 <section class="h-feed">
-    <h1 class="p-name"><a href="/blog" class="u-url no-footnote">Blog archive</a></h1>
-    {% assign posts_by_year = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
-    {% for year in posts_by_year %}
-    <h2>{{year.name}}</h2>
-      {% for post in year.items %}
-        {% include post_preview.html %}
-      {% endfor %}
-    {% endfor %}
+  <h1 class="p-name"><a href="/blog" class="u-url no-footnote">Blog archive</a></h1>
+  {% assign posts_by_year = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %} {% for
+  year in posts_by_year %}
+  <h2>{{year.name}}</h2>
+  {% for post in year.items %} {% include post_preview.html %} {% endfor %} {% endfor %}
 </section>

@@ -1,9 +1,9 @@
 @-moz-document domain("hydra.nixos.org") {
-body {
+  body {
     font-family: sans-serif;
-}
+  }
 
-pre {
+  pre {
     font-family: monospace;
-}
+  }
 }

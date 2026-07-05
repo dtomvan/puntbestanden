@@ -1,76 +1,83 @@
 ---
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta charset="utf-8">
-        {% if page.title %}
-        <title>{{page.head_title|default: page.title }} | {{ site.config.name }}</title>
-        {% else %}
-        <title>{{ site.config.name }}</title>
-        {% endif %}
-        <link type="application/atom+xml" rel="alternate" href="/feed.xml" title="{{ site.config.name }}"/>
-        <!-- we add a pseudo-random (as far as the browser is concerned) variable here, so that each redeployment the browser has to refetch the sheet -->
-        <!-- the added benefit of using the git rev is that the browser can still keep a cache if nothing changed -->
-        <link rel="stylesheet" href="/assets/css/main.css?bust_cache=${REV}">
-        <link rel="stylesheet" href="/assets/css/tyck.css?bust_cache=${REV}">
-        
-        <script src="/assets/js/colorscheme.js"></script>
-        <script src="/assets/js/footnotes-printing.js"></script>
-        <link class="system-colorscheme" rel="stylesheet" href="/assets/css/dark.css?bust_cache=${REV}" media="(prefers-color-scheme: dark)" />
-        <link
-        class="system-colorscheme"
-        rel="stylesheet"
-        href="/assets/css/light.css?bust_cache=${REV}"
-        media="(prefers-color-scheme: light)"
-        />
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    {% if page.title %}
+    <title>{{page.head_title|default: page.title }} | {{ site.config.name }}</title>
+    {% else %}
+    <title>{{ site.config.name }}</title>
+    {% endif %}
+    <link
+      type="application/atom+xml"
+      rel="alternate"
+      href="/feed.xml"
+      title="{{ site.config.name }}"
+    />
+    <!-- we add a pseudo-random (as far as the browser is concerned) variable here, so that each redeployment the browser has to refetch the sheet -->
+    <!-- the added benefit of using the git rev is that the browser can still keep a cache if nothing changed -->
+    <link rel="stylesheet" href="/assets/css/main.css?bust_cache=${REV}" />
+    <link rel="stylesheet" href="/assets/css/tyck.css?bust_cache=${REV}" />
 
-        <link rel="icon" href="/assets/img/favicon.svg" />
+    <script src="/assets/js/colorscheme.js"></script>
+    <script src="/assets/js/footnotes-printing.js"></script>
+    <link
+      class="system-colorscheme"
+      rel="stylesheet"
+      href="/assets/css/dark.css?bust_cache=${REV}"
+      media="(prefers-color-scheme: dark)"
+    />
+    <link
+      class="system-colorscheme"
+      rel="stylesheet"
+      href="/assets/css/light.css?bust_cache=${REV}"
+      media="(prefers-color-scheme: light)"
+    />
 
-        <link rel="me" href="https://toot.cat/@dtomvan">
-        <meta name="fediverse:creator" content="@dtomvan@toot.cat">
+    <link rel="icon" href="/assets/img/favicon.svg" />
 
-        <meta name="author" content="{{site.config.author}}">
-        <meta property="og:article:author" content="{{ site.config.author }}">
-        <meta property="og:site_name" content="{{ site.config.name }}">
+    <link rel="me" href="https://toot.cat/@dtomvan" />
+    <meta name="fediverse:creator" content="@dtomvan@toot.cat" />
 
-        {% if page.title %}
-        <meta property="og:title" content="{{ page.title|default: site.config.name }}">
-        <meta name="twitter:title" content="{{ page.title|default: site.config.name }}">
-        {% endif %}
+    <meta name="author" content="{{site.config.author}}" />
+    <meta property="og:article:author" content="{{ site.config.author }}" />
+    <meta property="og:site_name" content="{{ site.config.name }}" />
 
-        {% if page.excerpt or site.config.description %}
-        <meta name="description" content="{{ page.excerpt | default:site.config.description }}">
-        <meta name="og:description" content="{{ page.excerpt | default:site.config.description }}">
-        <meta name="twitter:description" content="{{ page.excerpt | default:site.config.description }}">
-        {% endif %}
+    {% if page.title %}
+    <meta property="og:title" content="{{ page.title|default: site.config.name }}" />
+    <meta name="twitter:title" content="{{ page.title|default: site.config.name }}" />
+    {% endif %} {% if page.excerpt or site.config.description %}
+    <meta name="description" content="{{ page.excerpt | default:site.config.description }}" />
+    <meta name="og:description" content="{{ page.excerpt | default:site.config.description }}" />
+    <meta
+      name="twitter:description"
+      content="{{ page.excerpt | default:site.config.description }}"
+    />
+    {% endif %} {% if page.layout == "post" %}
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content="{{ page.date | date_to_xmlschema }}" />
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <link rel="canonical" href="{{ page.url | absolute_url }}" />
+    {% else %}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ page.url | absolute_url }}" />
+    <link rel="canonical" href="{{ page.url | absolute_url  }}" />
+    {% endif %} {% if page.image != "" %}
+    <meta property="og:image" content="{{ page.image | absolute_url }}" />
+    <meta name="twitter:image" content="{{ page.image | absolute_url }}" />
+    {% endif %}
+  </head>
+  <body>
+    <a href="#main-content" class="skip">Skip to main content</a>
 
-        {% if page.layout == "post" %}
-        <meta property="og:type" content="article">
-        <meta property="og:article:published_time" content="{{ page.date | date_to_xmlschema }}">
-        <meta property="og:url" content="{{ page.url | absolute_url }}">
-        <link rel="canonical" href="{{ page.url | absolute_url }}">
-        {% else %}
-        <meta property="og:type" content="website">
-        <meta property="og:url" content="{{ page.url | absolute_url }}">
-        <link rel="canonical" href="{{ page.url | absolute_url  }}">
-        {% endif %}
+    <button class="toggle mono-toggle" onclick="document.body.classList.toggle('mono')">
+      <span class="sans-serif">sans-serif</span> | <span class="monospace">mono</span>
+    </button>
+    <button class="toggle light-dark-toggle">light | dark</button>
 
-        {% if page.image != "" %}
-        <meta property="og:image" content="{{ page.image | absolute_url }}">
-        <meta name="twitter:image" content="{{ page.image | absolute_url }}">
-        {% endif %}
-
-    </head>
-    <body>
-        <a href="#main-content" class="skip">Skip to main content</a>
-
-        <button class="toggle mono-toggle" onclick="document.body.classList.toggle('mono')"><span class="sans-serif">sans-serif</span> | <span class="monospace">mono</span></button>
-        <button class="toggle light-dark-toggle">light | dark</button>
-
-        <div class="content">
-            {{ content }}
-        </div>
-    </body>
+    <div class="content">{{ content }}</div>
+  </body>
 </html>

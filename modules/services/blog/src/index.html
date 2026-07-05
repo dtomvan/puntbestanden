@@ -4,39 +4,83 @@ with-nav: false
 ---
 
 <div class="h-card">
-    {% include nav.html %}
-    <p class="p-note">Hi, my name is Tom Oostveen. I am a prospect student Computing Science at the University of <span class="p-locality">Groningen</span>, <span class="p-country-name">Netherlands</span> 🇳🇱.</p>
+  {% include nav.html %}
+  <p class="p-note">
+    Hi, my name is Tom Oostveen. I am a prospect student Computing Science at the University of
+    <span class="p-locality">Groningen</span>, <span class="p-country-name">Netherlands</span> 🇳🇱.
+  </p>
 
-    <p>This started out as a quick and dirty placeholder for my domainname, but I decided "fuck it" and started blogging. Shoutout (I am Gen Z after all) to <a href="https://robertbirming.com">Robert Birming</a> for inspiring me!</p>
+  <p>
+    This started out as a quick and dirty placeholder for my domainname, but I decided "fuck it" and
+    started blogging. Shoutout (I am Gen Z after all) to
+    <a href="https://robertbirming.com">Robert Birming</a> for inspiring me!
+  </p>
 
-    <p>I am interested in the smallweb, linux (preferably NixOS), STEM/CS, Neovim, Rust, Emacs, note-taking, and a tad bit of philosophy. My blog includes, but isn't limited to, those topics :)</p>
+  <p>
+    I am interested in the smallweb, linux (preferably NixOS), STEM/CS, Neovim, Rust, Emacs,
+    note-taking, and a tad bit of philosophy. My blog includes, but isn't limited to, those topics
+    :)
+  </p>
 
-    <p>You can find me elsewhere through the links above, most notably I go by <code>@<span class="p-nickname">dtomvan</span></code> often.</p>
+  <p>
+    You can find me elsewhere through the links above, most notably I go by
+    <code>@<span class="p-nickname">dtomvan</span></code> often.
+  </p>
 </div>
 
 <p>Also, I've a <a href="/blog/blogroll">blogroll</a>.</p>
 
-<hr/>
+<hr />
 
 <h4>Recent posts</h4>
 
-{% for post in site.posts limit:10 %}
-{% unless post.hidden %}
-{% include post_preview.html %}
-{% endunless %}
-{% endfor %}
+{% for post in site.posts limit:10 %} {% unless post.hidden %} {% include post_preview.html %} {%
+endunless %} {% endfor %}
 
-<p>See the full <a href="/blog">blog archive</a> or subscribe to the <a href="/feed.xml">feed</a>.</p>
+<p>
+  See the full <a href="/blog">blog archive</a> or subscribe to the <a href="/feed.xml">feed</a>.
+</p>
 
-<hr/>
+<hr />
 
-<p>Now, let's do the 88x31 buttons thing because I'm so quirky and whimsical (credits to <a href="https://poz.pet"><b>poz</b></a> for most of these):</p>
+<p>
+  Now, let's do the 88x31 buttons thing because I'm so quirky and whimsical (credits to
+  <a href="https://poz.pet"><b>poz</b></a> for most of these):
+</p>
 <section>
-    <header class="quirky-buttons" style="display:flex;">
-        <div style="flex:1;"><a class="no-footnote" href="https://nixos.org"><img loading="lazy" alt="Powered by NixOS" src="/assets/img/powered-by-nixos.gif" /></a></div>
-        <div style="flex:1;"><a class="no-footnote" title="I use nixvim BTW" href="https://git.toostveen.nl/tom/puntbestanden/src/${REV}/modules/editors/neovim"><img loading="lazy" src="/assets/img/made-with-neovim.gif" alt="Made with Neovim" /></a></div>
-        <div style="flex:1;"><a class="no-footnote" href="https://forgejo.org"><img loading="lazy" src="/assets/img/forgejo.gif" alt="Install Forgejo NOW!" /></a></div>
-        <div style="flex:1;"><a class="no-footnote" href="https://firefox.com"><img loading="lazy" src="/assets/img/firefox4.gif" alt="Tested on Firefox" /></a></div>
-        <div style="flex:1;"><a class="no-footnote" href="https://robertbirming.com/julyreply/"><img loading="lazy" src="/assets/img/julyreply-twotone.svg" width=88 height=31 alt="Julyreply, I'm in" /></a></div>
-    </header>
+  <header class="quirky-buttons" style="display: flex">
+    <div style="flex: 1">
+      <a class="no-footnote" href="https://nixos.org"
+        ><img loading="lazy" alt="Powered by NixOS" src="/assets/img/powered-by-nixos.gif"
+      /></a>
+    </div>
+    <div style="flex: 1">
+      <a
+        class="no-footnote"
+        title="I use nixvim BTW"
+        href="https://git.toostveen.nl/tom/puntbestanden/src/${REV}/modules/editors/neovim"
+        ><img loading="lazy" src="/assets/img/made-with-neovim.gif" alt="Made with Neovim"
+      /></a>
+    </div>
+    <div style="flex: 1">
+      <a class="no-footnote" href="https://forgejo.org"
+        ><img loading="lazy" src="/assets/img/forgejo.gif" alt="Install Forgejo NOW!"
+      /></a>
+    </div>
+    <div style="flex: 1">
+      <a class="no-footnote" href="https://firefox.com"
+        ><img loading="lazy" src="/assets/img/firefox4.gif" alt="Tested on Firefox"
+      /></a>
+    </div>
+    <div style="flex: 1">
+      <a class="no-footnote" href="https://robertbirming.com/julyreply/"
+        ><img
+          loading="lazy"
+          src="/assets/img/julyreply-twotone.svg"
+          width="88"
+          height="31"
+          alt="Julyreply, I'm in"
+      /></a>
+    </div>
+  </header>
 </section>

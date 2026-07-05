@@ -2,6 +2,5 @@
 
 - STATE: CLOSED
 - PRIORITY: 50
-- TAGS: 
-../../modules/lib/mkHomeDefaults.nix
-
+- TAGS:
+  ../../modules/lib/mkHomeDefaults.nix

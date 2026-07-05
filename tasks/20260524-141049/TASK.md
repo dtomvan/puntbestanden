@@ -2,6 +2,5 @@
 
 - STATE: OPEN
 - PRIORITY: 10
-- TAGS: 
-../../modules/services/syncthing/default.nix
-
+- TAGS:
+  ../../modules/services/syncthing/default.nix

@@ -1,10 +1,11 @@
-# Deploy-rs: refactor 
+# Deploy-rs: refactor
 
 - STATE: CLOSED
 - PRIORITY: 50
 
 > this is ugly, but yeah the API of deploy-rs doesn't seem really flexible to me. How to fix?
-../../modules/top-level/deploy.nix
+> ../../modules/top-level/deploy.nix
+
 ```nix
       legacyPackages.activationPackage =
         args:

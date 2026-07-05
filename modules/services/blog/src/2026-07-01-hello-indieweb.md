@@ -5,7 +5,7 @@ summary: I've implemented several Microformats on this website.
 date: 2026-07-01T17:33:57+02:00
 layout: post
 lang: en
-tags: [indieweb,microblogging,microformats]
+tags: [indieweb, microblogging, microformats]
 draft: false
 ---
 
@@ -40,7 +40,7 @@ rewrite](https://github.com/yt-dlp/yt-dlp/issues/16766), which got over 1000
 reactions and 100 comments, whereas as [similar
 announcement](https://github.com/yt-dlp/yt-dlp/issues/16766) had zero
 discussion whatsoever. This goes to show that the "aggregator public" is a lot
-less focused and tends to form opinions on stuff they don't *actually* care
+less focused and tends to form opinions on stuff they don't _actually_ care
 about, solely for the purpose of "internet discourse". This is discussion for
 the sake of discussion, which isn't productive at all.
 

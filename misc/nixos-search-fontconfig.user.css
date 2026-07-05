@@ -1,5 +1,5 @@
 @-moz-document domain("search.nixos.org") {
-body{
-    font-family: sans-serif!important;
-}
+  body {
+    font-family: sans-serif !important;
+  }
 }

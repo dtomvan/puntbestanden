@@ -2,6 +2,5 @@
 
 - STATE: CLOSED
 - PRIORITY: 50
-- TAGS: 
-../../modules/services/copyparty.nix
-
+- TAGS:
+  ../../modules/services/copyparty.nix

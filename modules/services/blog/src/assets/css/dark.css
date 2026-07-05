@@ -28,24 +28,27 @@
 }
 
 img.octicon {
-    filter: invert(100%);
+  filter: invert(100%);
 }
 
 button {
-    background-color: var(--ctp-surface1);
+  background-color: var(--ctp-surface1);
 }
 button:hover {
-    background-color: var(--ctp-overlay0);
+  background-color: var(--ctp-overlay0);
 }
 
 a {
-    color: var(--ctp-blue);
+  color: var(--ctp-blue);
 }
 a:visited {
-    color: var(--ctp-mauve);
+  color: var(--ctp-mauve);
 }
 
-.footer, .date, .tags, .tags a {
-    /* darkest I can make it while staying accessible, and hopefully creating enough contrast with the rest of the text in the line */
-    color: rgb(from var(--ctp-subtext0) r g b / 75%);
+.footer,
+.date,
+.tags,
+.tags a {
+  /* darkest I can make it while staying accessible, and hopefully creating enough contrast with the rest of the text in the line */
+  color: rgb(from var(--ctp-subtext0) r g b / 75%);
 }

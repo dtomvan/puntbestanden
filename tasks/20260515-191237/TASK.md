@@ -2,6 +2,5 @@
 
 - STATE: CLOSED
 - PRIORITY: 50
-- TAGS: 
-../../modules/hosts/commitit.nix
-
+- TAGS:
+  ../../modules/hosts/commitit.nix
