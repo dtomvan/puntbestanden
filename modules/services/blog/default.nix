@@ -1,6 +1,13 @@
 { self, ... }:
 {
+  flake.modules.nixvim.default.lsp.servers.oxfmt.enable = true;
+
   perSystem = { self', pkgs, ... }: {
+    treefmt.programs.oxfmt = {
+      enable = true;
+      excludes = [ "README.md" ];
+    };
+
     devShells.blog = pkgs.mkShellNoCC {
       packages = builtins.attrValues {
         inherit (pkgs) coreutils git;
