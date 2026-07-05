@@ -42,6 +42,7 @@ in
           services-mautrix-telegram
           services-miniflux
           services-monitoring
+          services-readeck
           services-syncthing
           themes-catppuccin
           # keep-sorted end
@@ -96,6 +97,8 @@ in
         prometheus.enable = true;
         alertmanager.enable = true;
       };
+
+      infra.readeck.enable = true;
 
       services.postgresql = {
         enable = true;
