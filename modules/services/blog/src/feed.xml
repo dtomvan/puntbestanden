@@ -2,6 +2,29 @@
 ---
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" {% if site.config.lang %}xml:lang="{{ site.lang }}"{% endif %}>
+<script src="/assets/js/atom-html-transformer.js" xmlns="http://www.w3.org/1999/xhtml"></script>
+   
+<link rel="stylesheet" href="/assets/css/dark.css" xmlns="http://www.w3.org/1999/xhtml" />
+
+  <style xmlns="http://www.w3.org/1999/xhtml">
+  feed {
+      font-family: sans-serif;
+      max-width: 38em;
+      margin: 0 auto;
+      padding: 1rem;
+      width: auto;
+      font-family: sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      line-height: 1.6;
+      background-color: var(--ctp-base);
+      color: var(--ctp-text);
+  }
+  entry {
+      margin-bottom: 2rem;
+  }
+  </style>
     <generator uri="https://jorge.olano.dev/" version="0.0.1">jorge</generator>
     <link href="{{ page.url | absolute_url}}" rel="self" type="application/atom+xml"/>
     <link href="{{ site.config.url }}" rel="alternate" type="text/html"/>
