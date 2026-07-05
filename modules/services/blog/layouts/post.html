@@ -39,6 +39,8 @@ layout: base
     </div>
 
     {% unless page.draft %}
+    <a href="https://share.joinmastodon.org/#text={{page.title|xml_escape}} - {{site.config.author}} - {{page.url|absolute_url}}" target="_blank" rel="noopener">Share on Mastodon</a>
+
     <h1>Comments</h1>
     <details class="comments-help print-hide">
         <summary>Help</summary>
