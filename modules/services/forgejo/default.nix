@@ -13,6 +13,7 @@
       pkgs,
       lib,
       config,
+      inputs',
       ...
     }:
     let
@@ -162,13 +163,13 @@
         services.iocaine = lib.mkIf cfg.iocaine.enable {
           enable = true;
           config = {
-            handler.default = { };
+            handler.main.path = "${inputs'.nixocaine.packages.nam-shub-of-enki}";
             server = {
               default = {
                 bind = "127.0.0.1:${toString cfg.iocaine.port}";
                 mode = "http";
                 use = {
-                  handler-from = "default";
+                  handler-from = "main";
                   metrics = "metrics";
                 };
               };
