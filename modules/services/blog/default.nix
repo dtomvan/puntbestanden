@@ -161,6 +161,7 @@ in
           extraConfig = ''
             proxy_cache off;
             proxy_intercept_errors on;
+            proxy_pass_header Server;
             error_page 421 = @git-pages;
           '';
         };
