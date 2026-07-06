@@ -182,6 +182,7 @@ in
           root = self'.packages.blog;
           extraConfig = ''
             ssi on;
+            error_page 404 /404;
           '';
         };
       };
