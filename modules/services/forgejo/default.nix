@@ -1,13 +1,5 @@
 # most of this is amalgamated from wiki.nixos.org pages
-{ inputs, ... }:
 {
-  flake-inputs.nixocaine = {
-    url = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
-    inputs.nixpkgs.follows = "nixpkgs";
-    inputs.pre-commit-hooks.follows = "";
-    inputs.treefmt-nix.follows = "";
-  };
-
   flake.modules.nixos.services-forgejo =
     {
       pkgs,
@@ -29,8 +21,6 @@
       inherit (lib.types) str port;
     in
     {
-      imports = [ inputs.nixocaine.nixosModules.default ];
-
       options.infra.fj = {
         enable = mkEnableOption "forgejo";
         enableActions = mkEnableOption "Github actions on forgejo";

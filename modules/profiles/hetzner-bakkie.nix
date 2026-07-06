@@ -5,6 +5,13 @@
   ...
 }:
 {
+  flake-inputs.nixocaine = {
+    url = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
+    inputs.nixpkgs.follows = "nixpkgs";
+    inputs.pre-commit-hooks.follows = "";
+    inputs.treefmt-nix.follows = "";
+  };
+
   flake.modules.nixos.profiles-hetzner-bakkie =
     { inputs', host, ... }:
     {
@@ -20,6 +27,8 @@
           services-nginx
           services-alertmanager
           ;
+
+        inherit (inputs.nixocaine.nixosModules) default;
       };
 
       infra.monitoring.alertmanager.enable = lib.mkDefault true;
