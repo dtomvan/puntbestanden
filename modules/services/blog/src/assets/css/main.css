@@ -350,6 +350,10 @@ details summary.tag-header > span.tag-post-amount {
   font-weight: regular;
 }
 
+section header.quirky-buttons img {
+  image-rendering: pixelated;
+}
+
 section header.quirky-buttons img,
 button {
   transition: 0.1s;
