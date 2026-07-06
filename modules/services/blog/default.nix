@@ -1,3 +1,6 @@
+let
+  iocainePort = 23363;
+in
 { self, ... }:
 {
   flake.modules.nixvim.default.lsp.servers.oxfmt.enable = true;
@@ -118,16 +121,55 @@
         caddyPort = null;
       };
 
+      services.iocaine = {
+        enable = true;
+        config = {
+          server = {
+            blog = {
+              bind = "127.0.0.1:${toString iocainePort}";
+              mode = "http";
+              use = {
+                handler-from = "main";
+                metrics = "metrics";
+              };
+            };
+          };
+        };
+      };
+
+      services.nginx.commonHttpConfig = ''
+        map $request_method $blog_upstream_location {
+          GET      http://127.0.0.1:${toString iocainePort};
+          HEAD     http://127.0.0.1:${toString iocainePort};
+          default  http://127.0.0.1:${toString port};
+        }
+      '';
+
       services.nginx.virtualHosts."${domain}" = {
         enableACME = true;
         forceSSL = true;
 
+        extraConfig = ''
+          client_max_body_size 512M;
+          recursive_error_pages on;
+        '';
+
         serverAliases = [ "testing.${domain}" ];
 
         locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString port}";
+          proxyPass = "$blog_upstream_location";
+          extraConfig = ''
+            proxy_cache off;
+            proxy_intercept_errors on;
+            error_page 421 = @git-pages;
+          '';
+        };
+
+        locations."@git-pages" = {
+          proxyPass = "http://localhost:${toString port}";
           extraConfig = ''
             ssi on;
+            proxy_cache off;
             proxy_pass_header Server;
             proxy_set_header Accept-Encoding "";
             proxy_intercept_errors on;

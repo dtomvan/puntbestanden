@@ -119,8 +119,8 @@
             inherit (cfg) httpPort;
             proxiedPort = if cfg.iocaine.enable then cfg.iocaine.port else cfg.httpPort;
           in
-          ''
-            map $request_method $upstream_location {
+          lib.optionalString cfg.iocaine.enable ''
+            map $request_method $forgejo_upstream_location {
               GET      http://127.0.0.1:${toString proxiedPort};
               HEAD     http://127.0.0.1:${toString proxiedPort};
               default  http://127.0.0.1:${toString httpPort};
@@ -136,7 +136,7 @@
           '';
           locations = {
             "/" = {
-              proxyPass = "$upstream_location";
+              proxyPass = "$forgejo_upstream_location";
 
               extraConfig = lib.optionalString cfg.iocaine.enable ''
                 proxy_cache off;
