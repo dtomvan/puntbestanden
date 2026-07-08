@@ -77,6 +77,16 @@ toplevel@{ self, lib, ... }:
               params.cleanoutDays = "90";
             };
           };
+          hedgedoc = {
+            id = "add98-dey7m";
+            path = if isCommitit then "/var/lib/hedgedoc" else "~/Hedgedoc";
+            type = if isCommitit then "sendonly" else "receiveonly";
+            devices = allDevices;
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "90";
+            };
+          };
         };
     in
     {
@@ -102,10 +112,12 @@ toplevel@{ self, lib, ... }:
       users.users.tomvd.extraGroups = [
         "syncthing"
         "forgejo"
+        "hedgedoc"
       ];
 
-      systemd.tmpfiles.settings."10-forgejo-stfolder" = lib.mkIf isCommitit {
-        "/var/lib/forgjeo/.stfolder".d = { };
+      systemd.tmpfiles.settings."10-stfolder" = lib.mkIf isCommitit {
+        "/var/lib/forgejo/.stfolder".d = { };
+        "/var/lib/hedgedoc/.stfolder".d = { };
       };
 
       services.syncthing = {
