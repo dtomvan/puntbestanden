@@ -35,6 +35,10 @@ in
       ssid = "BWA-6A0F06";
       uuid = "787845e2-1f4a-4f3e-b85b-4a8ba80dceb9";
     }
+    {
+      ssid = "ASUS_D0_5G";
+      uuid = "6d2cf195-4351-40e8-ab61-e2e6acf60767";
+    }
   ];
 
   config.flake.modules.nixos.networking-wifi-passwords =
