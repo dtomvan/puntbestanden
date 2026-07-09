@@ -14,9 +14,6 @@ tags:
 draft: false
 ---
 
-Does the indieweb use algospeak?
-===
-
 Over the past couple years I've noticed a sort-of trend on the medium-to-small web. People seem to speak and write differently here compared to bigger platforms and spaces. IANAL, I Am Not A Linguist, so these are just some loose observations I've seen around the internet. I'm just putting these thoughts out there to see if anyone has anything to say.
 
 While I am new to having my own website, I have been lurking for a while now. The contrast between people on Twitter (and sometimes even Mastodon) and bloggers on their personal sites feels important. On those short-form "shout-into-the-ether" platforms people seem to write more authoratively and even a bit performatively to me -- with their big, important titles like "How to use 200 agents at the same time to write a single app in world-record pace". While blogs that appear on Bubbles or Bear feel more humble and honest to me as a reader, personal, even. Sometimes platforms like Lobsters and Hacker News seem to struggle from this phenomenon as well, where discussion for the sake of discussion is quite common (re: [Hello IndieWeb](/2026-07-01-hello-indieweb))
