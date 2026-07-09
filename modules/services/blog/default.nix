@@ -11,6 +11,19 @@ in
       excludes = [ "README.md" ];
     };
 
+    files."modules/programs/firefox/blogroll.json" =
+      pkgs.runCommand "blogroll.json"
+        {
+          nativeBuildInputs = [
+            pkgs.jq
+            pkgs.nur.repos.dtomvan.jorge
+          ];
+        }
+        ''
+          pushd ${./.}
+          jorge meta site.config.blogroll | jq 'sort_by(.name)' > $out
+        '';
+
     devShells.blog = pkgs.mkShellNoCC {
       packages = builtins.attrValues {
         inherit (pkgs) coreutils git;

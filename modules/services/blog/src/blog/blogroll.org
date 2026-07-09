@@ -18,12 +18,6 @@ But what is a blogroll?
 
 It's basically just a corner in a blog that points at other blogs, creating a "chain". https://blogroll.org/
 
-- [[https://writingslowly.com/][Writing Slowly]], about note-making, and writing, mostly
-- [[https://v5.chriskrycho.com][Sympolymathesy]], I know him from his notes on jujutsu, but highly varying topics
-- [[https://xenodium.com/][Xenodium]], about Emacs, software, and notetaking
-- [[https://protesilaos.com/][Protesilaos Stavrou]], about Emacs, and philosophy
-- [[https://jamesg.blog/][James' Coffee blog]], about smallweb, writing, etc.
-- [[https://pluralistic.net/][Pluralistic]], about enshittification by the one and only Cory Doctorow
-- [[https://fasterthanli.me][Fasterthanlime]], originally about Rust, but now more broadly about computers etc.
-- [[https://excipio.tech/][Excipio]], about personal digital sovereignty / privacy
-- [[https://veronicaexplains.net/][Veronica Explains]], Linux, retro computing, digital minimalism
+{% for item in site.config.blogroll %}
+- [[{{item.url}}][{{item.name}}]], {{item.desc}}
+{% endfor %}

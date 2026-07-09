@@ -1,0 +1,47 @@
+[
+  {
+    "desc": "about personal digital sovereignty / privacy",
+    "name": "Excipio",
+    "url": "https://excipio.tech/"
+  },
+  {
+    "desc": "originally about Rust, but now more broadly about computers etc.",
+    "name": "Fasterthanlime",
+    "url": "https://fasterthanli.me"
+  },
+  {
+    "desc": "about smallweb, writing, etc.",
+    "name": "James' Coffee blog",
+    "url": "https://jamesg.blog/"
+  },
+  {
+    "desc": "about enshittification by the one and only Cory Doctorow",
+    "name": "Pluralistic",
+    "url": "https://pluralistic.net/"
+  },
+  {
+    "desc": "about Emacs, and philosophy",
+    "name": "Protesilaos Stavrou",
+    "url": "https://protesilaos.com/"
+  },
+  {
+    "desc": "I know him from his notes on jujutsu, but highly varying topics",
+    "name": "Sympolymathesy",
+    "url": "https://v5.chriskrycho.com"
+  },
+  {
+    "desc": "Linux, retro computing, digital minimalism",
+    "name": "Veronica Explains",
+    "url": "https://veronicaexplains.net/"
+  },
+  {
+    "desc": "about note-making, and writing, mostly",
+    "name": "Writing Slowly",
+    "url": "https://writingslowly.com/"
+  },
+  {
+    "desc": "about Emacs, software, and notetaking",
+    "name": "Xenodium",
+    "url": "https://xenodium.com/"
+  }
+]

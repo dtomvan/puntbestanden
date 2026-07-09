@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   flake.modules.homeManager.firefox.programs.firefox.profiles.dev-edition-default = {
     bookmarks.force = true;
@@ -148,6 +149,10 @@
                 url = "https://app.cinny.in";
               }
             ];
+          }
+          {
+            name = "blogs";
+            bookmarks = lib.importJSON ./blogroll.json |> map (b: removeAttrs b [ "desc" ]);
           }
           {
             name = "To my students";

@@ -23,3 +23,31 @@ contact:
   - name: TOOT
     href: https://toot.cat/@dtomvan
     class: u-url
+blogroll:
+  - name: Writing Slowly
+    url: https://writingslowly.com/
+    desc: about note-making, and writing, mostly
+  - name: Sympolymathesy
+    url: https://v5.chriskrycho.com
+    desc: I know him from his notes on jujutsu, but highly varying topics
+  - name: Xenodium
+    url: https://xenodium.com/
+    desc: about Emacs, software, and notetaking
+  - name: Protesilaos Stavrou
+    url: https://protesilaos.com/
+    desc: about Emacs, and philosophy
+  - name: James' Coffee blog
+    url: https://jamesg.blog/
+    desc: about smallweb, writing, etc.
+  - name: Pluralistic
+    url: https://pluralistic.net/
+    desc: about enshittification by the one and only Cory Doctorow
+  - name: Fasterthanlime
+    url: https://fasterthanli.me
+    desc: originally about Rust, but now more broadly about computers etc.
+  - name: Excipio
+    url: https://excipio.tech/
+    desc: about personal digital sovereignty / privacy
+  - name: Veronica Explains
+    url: https://veronicaexplains.net/
+    desc: Linux, retro computing, digital minimalism
