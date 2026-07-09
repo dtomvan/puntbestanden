@@ -33,15 +33,28 @@ in
         inputs.catppuccin.homeModules.catppuccin
       ];
 
-      programs.firefox.profiles.dev-edition-default.extensions = {
-        packages = [
-          pkgs.nur.repos.rycee.firefox-addons.firefox-color
-        ];
-        settings."FirefoxColor@mozilla.com" = {
-          force = true;
-          settings = {
-            firstRunDone = true;
-            theme = import ./_catppuccin-firefox.nix;
+      programs.firefox.profiles.dev-edition-default = {
+        # catppuccin mocha for reader mode
+        settings = {
+          "reader.color_scheme" = "custom";
+          "reader.content_width" = "5";
+          "reader.custom_colors.background" = "#1e1e2e";
+          "reader.custom_colors.foreground" = "#cdd6f4";
+          "reader.custom_colors.selection-highlight" = "#f9e2af";
+          "reader.custom_colors.unvisited-links" = "#89b4fa";
+          "reader.custom_colors.visited-links" = "#b4befe";
+          "reader.font_size" = "4";
+        };
+        extensions = {
+          packages = [
+            pkgs.nur.repos.rycee.firefox-addons.firefox-color
+          ];
+          settings."FirefoxColor@mozilla.com" = {
+            force = true;
+            settings = {
+              firstRunDone = true;
+              theme = import ./_catppuccin-firefox.nix;
+            };
           };
         };
       };
