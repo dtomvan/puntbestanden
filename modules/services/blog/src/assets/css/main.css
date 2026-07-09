@@ -384,6 +384,11 @@ span.subtitle {
   font-size: larger;
 }
 
+span.warning-text {
+    color: var(--ctp-yellow);
+    font-weight: bold;
+}
+
 #webrings-intro,
 #webrings-intro > span {
   text-decoration: underline;
