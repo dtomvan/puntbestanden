@@ -10,8 +10,6 @@ hidden: true
 #+OPTIONS: toc:nil num:nil
 #+LANGUAGE: en
 
-While I do not have any content on this website as of yet, I do however ship a small unordered list of blogs I like.
-
 #+begin_quote
 But what is a blogroll?
 #+end_quote
