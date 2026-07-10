@@ -20,11 +20,11 @@ While I am new to having my own website, I have been lurking for a while now. Th
 
 > the "aggregator public" is a lot less focused and tends to form opinions on stuff they don't _actually_ care about, solely for the purpose of "internet discourse". This is discussion for the sake of discussion, which isn't productive at all.
 
-But enough about my love-hate relationship with Lobsters and Hacker News :) Let's get to the point.
+But enough about my love-hate relationship with Lobsters and Hacker News [^1] :) Let's get to the point.
 
 ## Algospeak
 
-Algospeak is a term for specific use of language to appease an algorithm or otherwise to maximise reception. While the term is more widely used for _self-censorship_ [^1], today I want to consider the wider sense of the word that is using your words in a specific way to maximise reception online.
+Algospeak is a term for specific use of language to appease an algorithm or otherwise to maximise reception. While the term is more widely used for _self-censorship_ [^2], today I want to consider the wider sense of the word that is using your words in a specific way to maximise reception online.
 
 One could also call the latter a form of _clickbait_. In a way that's what you're doing when artificially making your writing more interesting than it actually is. But the word clickbait rather implies a certain semi-exploitative intent to me, but that's not what I mean.
 
@@ -34,4 +34,5 @@ But then again, these are just suspicions to me. I haven't ran the numbers. Mayb
 
 See also: [Stop writing for Bubbles -- Happily Imperfect](https://www.gordonmclean.co.uk/2026/07/02/stop-writing-for-bubbles/)
 
-[^1]: https://en.wikipedia.org/wiki/Algospeak
+[^1]: See also this post that strongly resonates with me: https://akselmo.dev/posts/leaving-lobste-rs-rant/
+[^2]: https://en.wikipedia.org/wiki/Algospeak
