@@ -1,10 +1,10 @@
 {
   flake.modules.homeManager.firefox =
-    { pkgs, ... }:
+    { inputs', ... }:
     {
       programs.firefox = {
         enable = true;
-        package = pkgs.firefox-devedition;
+        package = inputs'.nixpkgs-firefox.legacyPackages.firefox-devedition;
         profiles.dev-edition-default = {
           isDefault = true;
           userChrome = ''

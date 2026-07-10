@@ -177,6 +177,9 @@
     "nixpkgs" = {
       "follows" = "nixpkgs-patcher/nixpkgs-patched";
     };
+    "nixpkgs-firefox" = {
+      "url" = "github:nixos/nixpkgs/65179426c83bb3f6bc14898b42ea1c6f01d374b0";
+    };
     "nixpkgs-patcher" = {
       "inputs" = {
         "flake-parts" = {
