@@ -34,7 +34,7 @@ with-nav: false
 
 <h4>Recent posts</h4>
 
-{% for post in site.posts limit:10 %} {% unless post.hidden %} {% include post_preview.html %} {%
+{% for post in site.posts limit:5 %} {% unless post.hidden %} {% include post_preview.html %} {%
 endunless %} {% endfor %}
 
 <p>
