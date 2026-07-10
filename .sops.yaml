@@ -2,11 +2,13 @@ keys:
   - &boomer age1zd4mexvz3emumn8q0h6xyqfa509tr7sh8c0x5t6ggu7e6muj9gvsggzdd8
   - &commitit age16f3r9vr9r6gjtuluxhweg0pqhh4xtjgj7003wuhwfyh2afvva38sjthml8
   - &feather age1rffej7dwp4z6vwv36hywkrvku7h5qrgghy63faaya4lm9jh2gckquea45r
+  - &feather_host age1x4qd6smet538spmc2lvl8l5z067qtj7nn6xple9ucwre3w0rf9wqfplkg5
 
 creation_rules:
   - key_groups:
       - age:
           - *boomer
           - *feather
+          - *feather_host
           - *commitit
     path_regex: secrets/.+\.(secret|yaml)
