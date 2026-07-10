@@ -385,8 +385,8 @@ span.subtitle {
 }
 
 span.warning-text {
-    color: var(--ctp-yellow);
-    font-weight: bold;
+  color: var(--ctp-yellow);
+  font-weight: bold;
 }
 
 #webrings-intro,

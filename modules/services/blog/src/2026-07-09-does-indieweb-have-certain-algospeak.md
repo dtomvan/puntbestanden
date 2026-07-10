@@ -24,9 +24,9 @@ But enough about my love-hate relationship with Lobsters and Hacker News :) Let'
 
 ## Algospeak
 
-Algospeak is a term for specific use of language to appease an algorithm or otherwise to maximise reception. While the term is more widely used for *self-censorship* [^1], today I want to consider the wider sense of the word that is using your words in a specific way to maximise reception online.
+Algospeak is a term for specific use of language to appease an algorithm or otherwise to maximise reception. While the term is more widely used for _self-censorship_ [^1], today I want to consider the wider sense of the word that is using your words in a specific way to maximise reception online.
 
-One could also call the latter a form of *clickbait*. In a way that's what you're doing when artificially making your writing more interesting than it actually is. But the word clickbait rather implies a certain semi-exploitative intent to me, but that's not what I mean.
+One could also call the latter a form of _clickbait_. In a way that's what you're doing when artificially making your writing more interesting than it actually is. But the word clickbait rather implies a certain semi-exploitative intent to me, but that's not what I mean.
 
 What I do mean here is how we tend to write inside of our niche. We don't have algorithms usually, but we do keep in mind our audience. On the web -- especially the smaller web -- we exhibit a lot of diversity in our language, but I still think there's a common tone we all more or less hover around. We tend to be less formal, maybe even a bit more to-the-point...
 

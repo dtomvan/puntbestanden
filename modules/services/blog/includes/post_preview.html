@@ -16,8 +16,7 @@
       <span class="tags hidden-mobile">
         {% for tag in post.tags %}
         <a class="p-category" href="/blog/tags#{{tag}}">#{{tag}}</a>
-        {% endfor %}
-        {% if post.draft %}
+        {% endfor %} {% if post.draft %}
         <span class="warning-text"> [draft]</span>
         {% endif %}
       </span>
