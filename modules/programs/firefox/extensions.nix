@@ -12,11 +12,11 @@
               plasma-integration
               sponsorblock
               stylus
+              steam-database
               ;
             inherit (pkgs.nur.repos.dtomvan)
               darkreader
               obsidian-web-clipper
-              steam-database
               ublock-origin
               ;
           };
