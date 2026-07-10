@@ -16,7 +16,12 @@
         mkIf
         getExe'
         ;
-      inherit (types) str port nullOr;
+      inherit (types)
+        attrs
+        str
+        port
+        nullOr
+        ;
     in
     {
       options.services.tyck = {
@@ -28,6 +33,12 @@
             "dtomvan"
             "tyck"
           ];
+        };
+
+        settings = mkOption {
+          description = "Settings to be passed as flags to Tyck";
+          type = attrs;
+          default = { };
         };
 
         tyckPort = mkOption {
@@ -90,6 +101,7 @@
           after = [ "network-online.target" ];
           wants = [ "network-online.target" ];
           requires = [ "postgresql.service" ];
+          script = "${getExe' cfg.package "tyck"} ${lib.cli.toCommandLineShellGNU { } cfg.settings}";
 
           environment = {
             HOST = "127.0.0.1";
@@ -101,7 +113,6 @@
           };
 
           serviceConfig = {
-            ExecStart = getExe' cfg.package "tyck";
             EnvironmentFile = mkIf (cfg.environmentFile != null) cfg.environmentFile;
             User = "tyck";
             Group = "tyck";

@@ -124,6 +124,7 @@ in
       # or just fork the project so that it supports webhooks?
       services.tyck = {
         enable = true;
+        settings.enable-javascript = true;
         host = domain;
         passwordFile = config.sops.secrets.tyck.path;
       };
