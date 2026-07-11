@@ -35,7 +35,7 @@ layout: base
         </p>
       </header>
 
-      {% if page.summary %}
+      {% if page.summary and page.show-summary != false %}
       <p class="p-summary"><b>Summary: </b>{{ page.summary }}</p>
       {% endif %}
 
