@@ -21,7 +21,7 @@ Please read the above post first. It's really bite-sized. This started as a comm
 
 I don't think it's fair to say "we" have made AI. Researchers and VC funds and (wannabe) billionaires did. Except for the people who are way too gullible to reject these technologies, who can actually push back on it? I mean, we do live in a society yada yada and we collectively started voting with our wallets and data so the companies continued doing their shitty practices, but really that "voting" in my experience mostly stems from ignorance, and the lack of thinking critically about "does this technology exist to serve me, or to serve the billionaires?"
 
-I for one was really really surprised to find out how many people around me started relying of ChatGPT, and how nobody really stopped to think about how a handful of years ago nobody even knew what an LLM was...
+I for one was really really surprised to find out how many people around me started relying on ChatGPT, and how nobody really stopped to think about how a handful of years ago nobody even knew what an LLM was...
 
 ---
 
