@@ -8,4 +8,8 @@ addEventListener("DOMContentLoaded", (event) => {
   if (monoPref === "true") {
     document.body.classList.add("mono");
   }
+  document.getElementById("reset-btn").addEventListener("click", (event) => {
+    localStorage.removeItem("wants-monospace");
+    document.body.classList.remove("mono");
+  });
 });

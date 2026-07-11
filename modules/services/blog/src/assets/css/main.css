@@ -54,6 +54,10 @@ button.light-dark-toggle {
   top: 4em;
 }
 
+button#reset-btn {
+  top: 8em;
+}
+
 button.toggle {
   font-weight: bold;
   position: absolute;

@@ -22,7 +22,7 @@ function activateColorScheme(colorScheme) {
 
   document
     .querySelectorAll('link[rel="stylesheet"].system-colorscheme')
-    .forEach((n) => document.head.removeChild(n));
+    .forEach((n) => n.setAttribute("disabled", "true"));
 }
 
 addEventListener("DOMContentLoaded", (event) => {
@@ -42,5 +42,14 @@ addEventListener("DOMContentLoaded", (event) => {
 
     activateColorScheme(window.colorScheme);
   };
+
   document.querySelector("button.light-dark-toggle").onclick = toggleColorScheme;
+
+  document.getElementById("reset-btn").addEventListener("click", (event) => {
+    localStorage.removeItem("preferred-color-scheme");
+    document
+      .querySelectorAll('link[rel="stylesheet"].system-colorscheme')
+      .forEach((n) => n.removeAttribute("disabled"));
+    document.head.removeChild(document.getElementById("color-override"));
+  });
 });
