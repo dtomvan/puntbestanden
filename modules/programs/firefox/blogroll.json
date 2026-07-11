@@ -1,67 +1,67 @@
 [
   {
-    "desc": "I've found myself reading her stuff often, she appears a lot on the bearblog discovery feed!",
     "name": "Becky (onlinegoddess)",
-    "url": "https://onlinegoddess.net/"
+    "url": "https://onlinegoddess.net/",
+    "desc": "I've found myself reading her stuff often, she appears a lot on the bearblog discovery feed!"
   },
   {
-    "desc": "his website is older than Google! Has a lot of interesting thoughts about writing, creativity, and growing as a person.",
     "name": "Dave Gauer (ratfactor)",
-    "url": "https://ratfactor.com/"
+    "url": "https://ratfactor.com/",
+    "desc": "his website is older than Google! Has a lot of interesting thoughts about writing, creativity, and growing as a person."
   },
   {
-    "desc": "about personal digital sovereignty / privacy",
     "name": "Excipio",
-    "url": "https://excipio.tech/"
+    "url": "https://excipio.tech/",
+    "desc": "about personal digital sovereignty / privacy"
   },
   {
-    "desc": "originally about Rust, but now more broadly about computers etc.",
     "name": "Fasterthanlime",
-    "url": "https://fasterthanli.me"
+    "url": "https://fasterthanli.me",
+    "desc": "originally about Rust, but now more broadly about computers etc."
   },
   {
-    "desc": "Just a great lad who has a lot of great takes about internet discourse.",
     "name": "Happily imperfect",
-    "url": "https://www.gordonmclean.co.uk/"
+    "url": "https://www.gordonmclean.co.uk/",
+    "desc": "Just a great lad who has a lot of great takes about internet discourse."
   },
   {
-    "desc": "about smallweb, writing, etc.",
     "name": "James' Coffee blog",
-    "url": "https://jamesg.blog/"
+    "url": "https://jamesg.blog/",
+    "desc": "about smallweb, writing, etc."
   },
   {
-    "desc": "about enshittification by the one and only Cory Doctorow",
     "name": "Pluralistic",
-    "url": "https://pluralistic.net/"
+    "url": "https://pluralistic.net/",
+    "desc": "about enshittification by the one and only Cory Doctorow"
   },
   {
-    "desc": "about Emacs, and philosophy",
     "name": "Protesilaos Stavrou",
-    "url": "https://protesilaos.com/"
+    "url": "https://protesilaos.com/",
+    "desc": "about Emacs, and philosophy"
   },
   {
-    "desc": "He's an absolute legend, who got me into blogging in the first place!",
     "name": "Robert Birming",
-    "url": "https://robertbirming.com/"
+    "url": "https://robertbirming.com/",
+    "desc": "He's an absolute legend, who got me into blogging in the first place!"
   },
   {
-    "desc": "I know him from his notes on jujutsu, but highly varying topics",
     "name": "Sympolymathesy",
-    "url": "https://v5.chriskrycho.com"
+    "url": "https://v5.chriskrycho.com",
+    "desc": "I know him from his notes on jujutsu, but highly varying topics"
   },
   {
-    "desc": "Linux, retro computing, digital minimalism",
     "name": "Veronica Explains",
-    "url": "https://veronicaexplains.net/"
+    "url": "https://veronicaexplains.net/",
+    "desc": "Linux, retro computing, digital minimalism"
   },
   {
-    "desc": "about note-making, and writing, mostly",
     "name": "Writing Slowly",
-    "url": "https://writingslowly.com/"
+    "url": "https://writingslowly.com/",
+    "desc": "about note-making, and writing, mostly"
   },
   {
-    "desc": "about Emacs, software, and notetaking",
     "name": "Xenodium",
-    "url": "https://xenodium.com/"
+    "url": "https://xenodium.com/",
+    "desc": "about Emacs, software, and notetaking"
   }
 ]
