@@ -16,6 +16,6 @@ But what is a blogroll?
 
 It's basically just a corner in a blog that points at other blogs, creating a "chain". https://blogroll.org/
 
-{% for item in site.config.blogroll %}
+{% for item in site.data.blogroll %}
 - [[{{item.url}}][{{item.name}}]], {{item.desc}}
 {% endfor %}

@@ -4,7 +4,7 @@ layout: default
 
 <h2 class="title">Contact</h2>
 <ul>
-  {% for item in site.config.contact %}
+  {% for item in site.data.contact %}
   <li><a class="{{item.class}}" rel="me" href="{{item.href}}">{{item.name}}</a></li>
   {% endfor %}
 </ul>

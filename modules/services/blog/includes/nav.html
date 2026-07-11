@@ -8,7 +8,7 @@
     <div class="hidden-mobile">
       {% assign sections = page.submenu %} {% for section in sections %}
       <a href="{{section[1]}}">{{section[0]}}</a>
-      {% endfor %} {% for item in site.config.contact %}
+      {% endfor %} {% for item in site.data.contact %}
       <a class="{{item.class}} no-footnote" rel="me" href="{{item.href}}">{{item.name}}</a>
       {% endfor %}
     </div>

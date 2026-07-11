@@ -11,18 +11,9 @@ in
       excludes = [ "README.md" ];
     };
 
-    files."modules/programs/firefox/blogroll.json" =
-      pkgs.runCommand "blogroll.json"
-        {
-          nativeBuildInputs = [
-            pkgs.jq
-            pkgs.nur.repos.dtomvan.jorge
-          ];
-        }
-        ''
-          pushd ${./.}
-          jorge meta site.config.blogroll | jq 'sort_by(.name)' > $out
-        '';
+    files."modules/programs/firefox/blogroll.json" = pkgs.runCommand "blogroll.json" {
+      nativeBuildInputs = [ pkgs.yq ];
+    } "yq 'sort_by(.name)' < ${./data/blogroll.yml} > $out";
 
     devShells.blog = pkgs.mkShellNoCC {
       packages = builtins.attrValues {
