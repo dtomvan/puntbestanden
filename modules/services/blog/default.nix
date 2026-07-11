@@ -198,6 +198,7 @@ in
         locations."/" = {
           proxyPass = "$blog_upstream_location";
           extraConfig = ''
+            access_log off;
             proxy_cache off;
             proxy_intercept_errors on;
             proxy_pass_header Server;

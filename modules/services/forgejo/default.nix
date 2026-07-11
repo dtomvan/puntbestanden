@@ -142,6 +142,7 @@
                 proxy_cache off;
                 proxy_intercept_errors on;
                 error_page 421 = @fallback;
+                access_log off;
               '';
             };
           }
