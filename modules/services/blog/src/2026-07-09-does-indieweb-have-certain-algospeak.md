@@ -35,4 +35,5 @@ But then again, these are just suspicions to me. I haven't ran the numbers. Mayb
 See also: [Stop writing for Bubbles -- Happily Imperfect](https://www.gordonmclean.co.uk/2026/07/02/stop-writing-for-bubbles/)
 
 [^1]: See also this post that strongly resonates with me: https://akselmo.dev/posts/leaving-lobste-rs-rant/
+
 [^2]: https://en.wikipedia.org/wiki/Algospeak

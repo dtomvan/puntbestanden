@@ -32,4 +32,5 @@ Thank you for listening to my rant. Happy [JulyReply](https://robertbirming.com/
 ![julyreply-2026](/assets/img/julyreply-2026.svg)
 
 [^1]: re: [AI 'Therapist' told me to kill myself and others -- Caelan Conrad](https://www.youtube.com/watch?v=lfEJ4DbjZYg); it's a YouTube video, apologies, but I think a really important one
+
 [^2]: also, this is kind-of hypocritical, since I fall back on an LLM if I can't figure out something nontrivial to point me in the right direction, every now and again (lately: nginx configurations 😂)
