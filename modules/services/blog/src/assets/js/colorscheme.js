@@ -11,7 +11,13 @@ if (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") {
   );
 }
 
-window.colorScheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+const preferredColorScheme = localStorage.getItem("preferred-color-scheme");
+window.colorScheme =
+  preferredColorScheme != null
+    ? preferredColorScheme
+    : window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
 document.head.insertAdjacentHTML(
   "beforeend",
   `<link id="color-override" rel="stylesheet" href="/assets/css/${window.colorScheme}.css">`,
@@ -19,6 +25,8 @@ document.head.insertAdjacentHTML(
 addEventListener("DOMContentLoaded", (event) => {
   const toggleColorScheme = () => {
     window.colorScheme = window.colorScheme == "dark" ? "light" : "dark";
+    localStorage.setItem("preferred-color-scheme", window.colorScheme);
+
     document.getElementById("color-override").href = `/assets/css/${window.colorScheme}.css`;
     document
       .querySelectorAll('link[rel="stylesheet"].system-colorscheme')
