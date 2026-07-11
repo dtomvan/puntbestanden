@@ -1,9 +1,43 @@
 let
   iocainePort = 23363;
 in
-{ self, ... }:
+{ self, lib, ... }:
 {
   flake.modules.nixvim.default.lsp.servers.oxfmt.enable = true;
+
+  flake.modules.homeManager.jujutsu = { pkgs, ... }: {
+    programs.jujutsu.settings.fix.tools.oxfmt = {
+      command = [
+        (lib.getExe pkgs.oxfmt)
+        "--stdin-filepath=$path"
+        "-"
+      ];
+
+      # adapted from treefmt-nix
+      patterns = [
+        "glob:'**/*.cjs'"
+        "glob:'**/*.css'"
+        "glob:'**/*.graphql'"
+        "glob:'**/*.hbs'"
+        "glob:'**/*.html'"
+        "glob:'**/*.js'"
+        "glob:'**/*.json'"
+        "glob:'**/*.json5'"
+        "glob:'**/*.jsonc'"
+        "glob:'**/*.jsx'"
+        "glob:'**/*.md'"
+        "glob:'**/*.mdx'"
+        "glob:'**/*.mjs'"
+        "glob:'**/*.mustache'"
+        "glob:'**/*.scss'"
+        "glob:'**/*.ts'"
+        "glob:'**/*.tsx'"
+        "glob:'**/*.vue'"
+        "glob:'**/*.yaml'"
+        "glob:'**/*.yml'"
+      ];
+    };
+  };
 
   perSystem = { self', pkgs, ... }: {
     treefmt.programs.oxfmt = {
