@@ -77,7 +77,7 @@ I can't recommend it enough for people who've seen [Hugo](https://gohugo.io) and
 
 The latter might require some explanation. You set a `TXT` record called `_git-pages-forge-allowlist` with your DNS provider (Cloudflare, in my case), and you set it to the exact URL that points to the git repo that you control and contains the source code for your blog (in my case it's `https://git.toostveen.nl/tom/puntbestanden`). Here's what that looks like for me in the Cloudflare control panel for DNS records:
 
-![What I described above, just visually. Not a lot of extra context to provide in the alt text, sorry](/assets/img/2026-07-04-how-i-deploy-my-blog-in-under-3-seconds/cf-dns.png)
+![What I described above, just visually. Not a lot of extra context to provide in the alt text, sorry](/assets/img/{{page.slug}}/cf-dns.png)
 
 All of this just so I can automate deploying my static site on `git push`... GitHub actually does all of this behind the scenes for you, but that doesn't mean you should use it, as it locks you into Microslop's enshittified code forge with as big as an uptime percentage figure as the fraction of clankers on it... There, I've said it. So on with Forgejo!
 
@@ -195,7 +195,7 @@ scp -r target/* root@toostveen.nl:/var/lib/nginx/www
 
 ... and you've also written a 3-second deployment! But then again you won't get niceties like a `Source` link that links to the exact commit the blog was built against:
 
-![a `Source` link that links to `https://git.toostveen.nl/tom/puntbestanden/src/commit/3f6521681e1b6f0dbd7c7872562c9568915a8b5c/modules/services/blog`](/assets/img/2026-07-04-how-i-deploy-my-blog-in-under-3-seconds/source-link.png)
+![a `Source` link that links to `https://git.toostveen.nl/tom/puntbestanden/src/commit/3f6521681e1b6f0dbd7c7872562c9568915a8b5c/modules/services/blog`](/assets/img/{{page.slug}}/source-link.png)
 
 ... and, well, you probably won't have much fun 😁 (believe it or not, for a computer toucher like me this is actually considered fun, despite the 3am Nginx fighting I did)
 
