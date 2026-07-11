@@ -50,20 +50,14 @@ layout: base
     rel="noopener"
     >Share on Mastodon</a
   >
-  {% endunless %}
-    
-  {% if page.date %}
-  {% assign previous = page.next %}
-  {% assign next = page.previous %}
-  {% endif %}
-  <div class="pagination" style="display:flex">
-      {% if previous %}
-      <span>← <a class="title" href="{{previous.url}}"> {{ previous.title }}</a></span>
-      {% endif %}
-
-      {% if next %}
-      <span style="margin-left: auto"><a class="title" href="{{next.url}}">{{next.title}}</a> →</p>
-      {% endif %}
+  {% endunless %} {% if page.date %} {% assign previous = page.next %} {% assign next =
+  page.previous %} {% endif %}
+  <div class="pagination" style="display: flex">
+    {% if previous %}
+    <span>← <a class="title" href="{{previous.url}}"> {{ previous.title }}</a></span>
+    {% endif %} {% if next %}
+    <span style="margin-left: auto"><a class="title" href="{{next.url}}">{{next.title}}</a> →</span>
+    {% endif %}
   </div>
 
   {% unless page.draft %}
