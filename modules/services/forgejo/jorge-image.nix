@@ -10,6 +10,7 @@ in
 
   perSystem = { pkgs, self', ... }: {
     packages.jorge-image = self'.packages.lix-with-node.override {
+      inherit name tag;
       extraPkgs = builtins.attrValues {
         inherit (pkgs.nur.repos.dtomvan) jorge;
         inherit (pkgs)
