@@ -172,7 +172,7 @@
       "url" = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
     };
     "nixos-small" = {
-      "url" = "github:nixos/nixpkgs/nixos-unstable-small";
+      "url" = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
     };
     "nixpkgs" = {
       "follows" = "nixpkgs-patcher/nixpkgs-patched";

@@ -38,7 +38,7 @@ in
       # TASK(20260501-093130): maybe incorporate the patcher in a subflake in
       # this tree so there's a SSOT for what nixpkgs I pull in?
       nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
-      nixos-small.url = "github:nixos/nixpkgs/nixos-unstable-small";
+      nixos-small.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
       nixpkgs-firefox.url = "github:nixos/nixpkgs/65179426c83bb3f6bc14898b42ea1c6f01d374b0"; # TODO: this is the old branch where the build succeeded for firefox-devedition
 
       nur = {
