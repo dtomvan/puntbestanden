@@ -2,11 +2,23 @@
   inputs,
   config,
   lib,
+  self,
   ...
 }:
 let
   inherit (lib) mkOption;
   inherit (lib.types) listOf attrsOf raw;
+
+  # HACK: only support x86_64-linux, because otherwise `nix flake show`
+  # wouldn't work anymore... sigh...
+  pkgs' = import inputs.nixpkgs { system = "x86_64-linux"; };
+  nixpkgsPatched = pkgs'.applyPatches {
+    name = "source";
+    src = inputs.nixpkgs;
+    patches = import ./_nixpkgs-patches.nix {
+      inherit (pkgs') fetchpatch fetchpatch2;
+    };
+  };
 in
 {
   options = {
@@ -22,24 +34,8 @@ in
 
   config = {
     flake-inputs = {
-      # nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
-      nixpkgs-patcher = {
-        url = "github:dtomvan/nixpkgs-patcher";
-
-        # disable all irrelevant inputs here since I only care about the
-        # "resulting" nixpkgs-patched output
-        inputs.nixpkgs.follows = "";
-        inputs.systems.follows = "";
-        inputs.flake-parts.follows = "";
-        inputs.nix-patcher.follows = "";
-      };
-      # accepts nixpkgs from the flake.nix in nixpkgs-patcher...
-      # HACK: this fixes an oversight where nixpkgs would lag behind if no patches are currently applied.
-      # TASK(20260501-093130): maybe incorporate the patcher in a subflake in
-      # this tree so there's a SSOT for what nixpkgs I pull in?
-      nixpkgs.follows = "nixpkgs-patcher/nixpkgs-patched";
+      nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
       nixos-small.url = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
-      nixpkgs-firefox.url = "github:nixos/nixpkgs/65179426c83bb3f6bc14898b42ea1c6f01d374b0"; # TODO: this is the old branch where the build succeeded for firefox-devedition
 
       nur = {
         url = "github:nix-community/NUR";
@@ -55,9 +51,12 @@ in
     };
 
     perSystem =
-      { system, ... }:
+      { pkgs, system, ... }:
+      let
+        nixpkgs = if system == "x86_64-linux" then nixpkgsPatched else inputs.nixpkgs;
+      in
       {
-        _module.args.pkgs = import inputs.nixpkgs {
+        _module.args.pkgs = import nixpkgs {
           inherit system;
           config = {
             allowUnfree = true;
@@ -69,6 +68,25 @@ in
           ]
           ++ config.pkgs-overlays;
         };
+
+        # copied from nixpkgs' flake.nix so I can redirect the base eval path
+        # to the new nixpkgs. So that not only package definitions can see
+        # patches, but also NixOS modules etc.
+        legacyPackages.nixosSystem =
+          args:
+          import "${nixpkgs}/nixos/lib/eval-config.nix" (
+            {
+              inherit (pkgs) lib;
+              system = null;
+              modules = args.modules ++ [
+                (self.lib.system system)
+                {
+                  nixpkgs.flake.source = nixpkgs.outPath;
+                }
+              ];
+            }
+            // removeAttrs args [ "modules" ]
+          );
       };
   };
 }

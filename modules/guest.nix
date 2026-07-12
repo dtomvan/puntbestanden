@@ -74,7 +74,7 @@ in
 
         programs.firefox = {
           enable = true;
-          package = inputs'.nixpkgs-firefox.legacyPackages.firefox-devedition;
+          package = pkgs.firefox-devedition;
           profiles.ubo-only = {
             id = lib.mkForce 0;
             isDefault = lib.mkForce true;

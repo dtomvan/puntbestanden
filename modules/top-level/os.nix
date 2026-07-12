@@ -2,6 +2,7 @@
   self,
   config,
   inputs,
+  withSystem,
   ...
 }:
 let
@@ -12,24 +13,26 @@ let
     length
     mapAttrs'
     nameValuePair
-    nixosSystem
     ;
 
   inherit (config) hosts;
 
   makeNixos =
     _key: host:
-    nameValuePair host.networking.hostName (nixosSystem {
-      modules = [
-        (self.lib.system host.system)
-        { networking = { inherit (host.networking) hostName; }; }
-        self.modules.nixos."hosts-${host.networking.hostName}"
-        self.modules.nixos.common-options
-        ../hardware/_generated/${host.networking.hostName}.nix
-      ]
-      ++ (map (u: self.modules.nixos."users-${u}") host.users);
-      specialArgs = { inherit host; };
-    });
+    (withSystem host.system (
+      { self', ... }:
+      self'.legacyPackages.nixosSystem {
+        modules = [
+          { networking = { inherit (host.networking) hostName; }; }
+          self.modules.nixos."hosts-${host.networking.hostName}"
+          self.modules.nixos.common-options
+          ../hardware/_generated/${host.networking.hostName}.nix
+        ]
+        ++ (map (u: self.modules.nixos."users-${u}") host.users);
+        specialArgs = { inherit host; };
+      }
+      |> nameValuePair host.networking.hostName
+    ));
 in
 {
   flake.nixosConfigurations =

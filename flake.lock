@@ -502,6 +502,19 @@
         "url": "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst"
       }
     },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1783776592,
+        "narHash": "sha256-+GVwKnbbSmf4cWMJyRzvw8H5yFknmkLoPD5v6snqPzo=",
+        "rev": "e7a3ca8092b61ff85b6a45bf863ea2b2d6a661b3",
+        "type": "tarball",
+        "url": "https://releases.nixos.org/nixos/unstable/nixos-26.11pre1032869.e7a3ca8092b6/nixexprs.tar.zst?lastModified=1783776592&rev=e7a3ca8092b61ff85b6a45bf863ea2b2d6a661b3"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst"
+      }
+    },
     "nixpkgs-2505": {
       "locked": {
         "lastModified": 1764939437,
@@ -518,22 +531,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-firefox": {
-      "locked": {
-        "lastModified": 1782959384,
-        "narHash": "sha256-xnJJk+ct+D2+wdRxj1wk36w5zV9RVESwRqcklPdt3fM=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "65179426c83bb3f6bc14898b42ea1c6f01d374b0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "65179426c83bb3f6bc14898b42ea1c6f01d374b0",
-        "type": "github"
-      }
-    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1782614948,
@@ -546,70 +543,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "type": "github"
-      }
-    },
-    "nixpkgs-patch-10": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-yMWfhiedIXS8KzzzUt13QRpKT9IXxJOxhvMiRGGk3C0=",
-        "type": "file",
-        "url": "https://github.com/dtomvan/nixpkgs/commit/7488a70e4a522236091ddf0d108ac0e7e6febfc0.patch"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/dtomvan/nixpkgs/commit/7488a70e4a522236091ddf0d108ac0e7e6febfc0.patch"
-      }
-    },
-    "nixpkgs-patch-20": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-mD9ymwRZeXKVdzYJWrI54u/tHmmdLmEMew6llBe3ZTw=",
-        "type": "file",
-        "url": "https://github.com/nixos/nixpkgs/commit/59fe8116c3606fd4e50aa5dda343de448d134fb2.patch"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/nixos/nixpkgs/commit/59fe8116c3606fd4e50aa5dda343de448d134fb2.patch"
-      }
-    },
-    "nixpkgs-patched": {
-      "locked": {
-        "lastModified": 1783704418,
-        "narHash": "sha256-7026C2XOTrdzexNfmKch0O+ObefBy1bv4QOupzyqAro=",
-        "owner": "dtomvan",
-        "repo": "nixpkgs",
-        "rev": "f47b0db5e6eaf82672129c524dfb45c217f0eecc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dtomvan",
-        "ref": "nixos-unstable-patched",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-patcher": {
-      "inputs": {
-        "flake-parts": [],
-        "nix-patcher": [],
-        "nixpkgs": [],
-        "nixpkgs-patch-10": "nixpkgs-patch-10",
-        "nixpkgs-patch-20": "nixpkgs-patch-20",
-        "nixpkgs-patched": "nixpkgs-patched",
-        "systems": []
-      },
-      "locked": {
-        "lastModified": 1783724090,
-        "narHash": "sha256-rI2b47uoHpbcVLfemUqlUJ8jHOtLeROTdxNna7dK2zs=",
-        "owner": "dtomvan",
-        "repo": "nixpkgs-patcher",
-        "rev": "c7ef4359d07dba6b36be989a3d5bd3b293f4e8f4",
-        "type": "github"
-      },
-      "original": {
-        "owner": "dtomvan",
-        "repo": "nixpkgs-patcher",
         "type": "github"
       }
     },
@@ -758,12 +691,7 @@
         "nix-maid": "nix-maid",
         "nixocaine": "nixocaine",
         "nixos-small": "nixos-small",
-        "nixpkgs": [
-          "nixpkgs-patcher",
-          "nixpkgs-patched"
-        ],
-        "nixpkgs-firefox": "nixpkgs-firefox",
-        "nixpkgs-patcher": "nixpkgs-patcher",
+        "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
         "noctalia": "noctalia",
         "noctalia-greeter": "noctalia-greeter",

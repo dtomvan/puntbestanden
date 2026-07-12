@@ -4,9 +4,6 @@
   inputs,
   ...
 }:
-let
-  inherit (self.lib) system;
-in
 {
   flake.modules.nixos.graphical-iso =
     {
@@ -149,11 +146,8 @@ in
       system.stateVersion = "26.11";
     };
 
-  flake.nixosConfigurations.graphical-iso = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
-      self.modules.nixos.graphical-iso
-      (system "x86_64-linux")
-    ];
+  flake.nixosConfigurations.graphical-iso = self.legacyPackages.x86_64-linux.nixosSystem {
+    modules = [ self.modules.nixos.graphical-iso ];
   };
 
   perSystem.packages.graphical-iso =

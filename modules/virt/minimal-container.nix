@@ -1,6 +1,6 @@
-{ inputs, ... }:
+{ self, ... }:
 {
-  flake.nixosConfigurations.minimal-container = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.minimal-container = self.legacyPackages.x86_64-linux.nixosSystem {
     modules = [
       (
         { pkgs, ... }:
@@ -15,7 +15,6 @@
           environment.systemPackages = [ pkgs.git ];
 
           boot.isContainer = true;
-          nixpkgs.hostPlatform = "x86_64-linux";
           system.stateVersion = "26.11";
         }
       )
