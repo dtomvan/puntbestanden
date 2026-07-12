@@ -151,6 +151,14 @@
           };
         };
 
+        environment.etc."systemd/journald@iocaine.conf".text = ''
+          [Journal]
+          Storage=volatile
+          RuntimeMaxUse=10M
+        '';
+
+        systemd.services.iocaine.serviceConfig.LogNamespace = "iocaine";
+
         services.iocaine = lib.mkIf cfg.iocaine.enable {
           enable = true;
           config = {
