@@ -465,10 +465,11 @@
     },
     "nixos-small": {
       "locked": {
-        "lastModified": 1783728000,
-        "narHash": "sha256-OZQPY9FIEq5WpJl8Tf3ke5EMsYvbQtN0vBzhjDjkixM=",
+        "lastModified": 1783847910,
+        "narHash": "sha256-MtV3IYE5wazxyGg2uYL6jRn2OTadvxbKN8CGkTc/HEE=",
+        "rev": "4ebb8d6c14644779d1ba80cc1a9b50861a2214d0",
         "type": "tarball",
-        "url": "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/unstable-small/nixos-26.11pre1033190.4ebb8d6c1464/nixexprs.tar.zst?lastModified=1783847910&rev=4ebb8d6c14644779d1ba80cc1a9b50861a2214d0"
       },
       "original": {
         "type": "tarball",
