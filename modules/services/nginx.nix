@@ -139,8 +139,12 @@
 
       systemd.services.prometheus-nginxlog-exporter.serviceConfig.SupplementaryGroups = [ "nginx" ];
 
-      # 4 weeks ~= a month, I don't need half a year of logs (default = 26)
-      services.logrotate.settings.nginx.rotate = lib.mkForce 4;
+      services.logrotate.settings.nginx = {
+        # 4 weeks ~= a month, I don't need half a year of logs (default = 26)
+        rotate = lib.mkForce 4;
+        # compress immediately. I get too much spam not to do that.
+        delaycompress = lib.mkForce false;
+      };
     };
 
   flake.modules.nixos.services-monitoring =
