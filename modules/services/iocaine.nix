@@ -7,7 +7,7 @@
     inputs.treefmt-nix.follows = "";
   };
 
-  flake.modukes.nixos.services-iocaine =
+  flake.modules.nixos.services-iocaine =
     {
       pkgs,
       lib,
