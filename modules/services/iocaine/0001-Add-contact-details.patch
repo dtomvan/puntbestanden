@@ -1,0 +1,23 @@
+From 5e7ac4af66f0e40cce348634a04c08b0d95f22d9 Mon Sep 17 00:00:00 2001
+From: Tom Oostveen <tomoostveen.06@gmail.com>
+Date: Mon, 13 Jul 2026 11:47:39 +0200
+Subject: Add contact details
+
+---
+ org/module/templates/html.org | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/org/module/templates/html.org b/org/module/templates/html.org
+index ff09690..a9c54bd 100644
+--- a/org/module/templates/html.org
++++ b/org/module/templates/html.org
+@@ -67,6 +67,9 @@ Perhaps the most important part of [[id:6281355a-8998-45fc-b79d-7924d323ab1e][ga
+         <p>
+           If you are not, and you feel you have been served garbage by mistake, please contact the owner of the site you're visiting.{% if request_id %} They might be able to help you better, if you tell them <code>x-request-id: {{ request_id }}</code>.{% endif %}
+         </p>
++        <p>
++          Please contact Tom Oostveen if you have any problems. You can find their email address on their GitHub, at dtomvan. (deliberately not writing my email here verbatim to prevent spam a little bit)
++        </p>
+       </footer>
+     </div>
+     <script src='{{ url_id }}{{ assets.script_name }}.js'></script>

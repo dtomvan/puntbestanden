@@ -14,6 +14,13 @@
       inputs',
       ...
     }:
+    let
+      nsoePackage = inputs'.nixocaine.packages.nam-shub-of-enki.overrideAttrs {
+        patches = [
+          ./iocaine/0001-Add-contact-details.patch
+        ];
+      };
+    in
     {
       imports = [ inputs.nixocaine.nixosModules.default ];
 
@@ -22,7 +29,7 @@
         initial-seed-file = "/run/current-system/boot.json";
 
         handler.main = {
-          path = "${inputs'.nixocaine.packages.nam-shub-of-enki}";
+          path = "${nsoePackage}";
           config = {
             inherits = "recommended";
             logging.classification.enable = true;
