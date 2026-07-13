@@ -202,6 +202,7 @@ in
             proxy_cache off;
             proxy_intercept_errors on;
             proxy_pass_header Server;
+            proxy_set_header X-Request-ID $request_id;
             error_page 421 = @git-pages;
           '';
         };

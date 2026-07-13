@@ -153,8 +153,7 @@
 
         environment.etc."systemd/journald@iocaine.conf".text = ''
           [Journal]
-          Storage=volatile
-          RuntimeMaxUse=10M
+          SystemMaxUse=1G
         '';
 
         systemd.services.iocaine.serviceConfig.LogNamespace = "iocaine";
