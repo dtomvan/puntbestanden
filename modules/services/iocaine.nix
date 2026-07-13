@@ -72,6 +72,12 @@
                 enable = true;
                 identifiers = [ "clanker_mode" ]; # default is a dot, which isn't a good idea
               };
+              custom_agents = {
+                allow = [
+                  # used by IndieAuth
+                  "Ruby"
+                ];
+              };
             };
           };
         };
