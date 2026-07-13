@@ -9,6 +9,7 @@
 
   flake.modules.nixos.services-iocaine =
     {
+      config,
       pkgs,
       lib,
       inputs',
@@ -53,6 +54,12 @@
               ];
             };
             checks = {
+              asn = {
+                enable = true;
+                filter_aggressives = true;
+                # This file is unfree and requires setting up an account. Deliberately not using requireFile here.
+                database_path = "/var/lib/iocaine/GeoLite2-ASN.mmdb";
+              };
               anti_robots_txt.enable = true; # blocklist for specific bots that are known to not respect your robots.txt
               browser_verification.enable = false; # seems to trip up some old browsers, and also vivaldi
               commercial_scrapers.enable = true;
@@ -67,6 +74,70 @@
               };
             };
           };
+        };
+      };
+
+      sops.secrets.maxmind-credentials = {
+        sopsFile = ../../secrets/maxmind-credentials.secret;
+        mode = "0400";
+        format = "binary";
+      };
+
+      systemd.services.iocaine-update-maxminddb = {
+        wantedBy = [ "iocaine.service" ];
+        before = [ "iocaine.service" ];
+        after = [ "sops-install-secrets.service" ];
+        requires = [ "sops-install-secrets.service" ];
+
+        path = with pkgs; [
+          coreutils
+          curl
+          gnutar
+        ];
+        script = ''
+          set -euo pipefail
+
+          pushd "$STATE_DIRECTORY"
+
+          tarball="$(mktemp)"
+          cleanup () {
+            rm "$tarball"
+            exit
+          }
+          trap cleanup EXIT ERR SIGINT
+
+          last_modified="$(curl --write-out '%header{last-modified}' \
+            -I -L -o /dev/null --silent \
+            -u "$ACCOUNT_ID:$LICENSE_KEY" \
+            'https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz')"
+          last_modified_s="$(date --date="$last_modified" +%s)"
+          existing_mtime_s="$(stat -c %Y GeoLite2-ASN.mmdb)"
+
+          if [ "$last_modified_s" -le "$existing_mtime_s" ]; then
+            exit
+          fi
+
+          curl -o "$tarball" -J -L -u "$ACCOUNT_ID:$LICENSE_KEY" 'https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz'
+          tar xzvf "$tarball" "GeoLite2-ASN.mmdb"
+        '';
+        serviceConfig = {
+          EnvironmentFile = config.sops.secrets.maxmind-credentials.path;
+          StateDirectory = "iocaine";
+          DynamicUser = true;
+          ProtectHome = true;
+          MemoryDenyWriteExecute = true;
+          PrivateDevices = true;
+          ProtectSystem = "strict";
+          ProtectControlGroups = true;
+          RestrictSUIDSGID = true;
+          RestrictRealtime = true;
+          LockPersonality = true;
+          ProtectKernelLogs = true;
+          ProtectKernelTunables = true;
+          ProtectHostname = true;
+          ProtectKernelModules = true;
+          PrivateUsers = true;
+          ProtectClock = true;
         };
       };
     };
