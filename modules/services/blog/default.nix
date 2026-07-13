@@ -162,16 +162,12 @@ in
 
       services.iocaine = {
         enable = true;
-        config = {
-          server = {
-            blog = {
-              bind = "127.0.0.1:${toString iocainePort}";
-              mode = "http";
-              use = {
-                handler-from = "main";
-                metrics = "metrics";
-              };
-            };
+        config.server.blog = {
+          bind = "127.0.0.1:${toString iocainePort}";
+          mode = "http";
+          use = {
+            handler-from = "main";
+            metrics = "metrics";
           };
         };
       };
