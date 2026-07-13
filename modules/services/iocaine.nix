@@ -99,6 +99,13 @@
 
           pushd "$STATE_DIRECTORY"
 
+          # HACK: touch with very old timestamp when the file doesn't exist.
+          # So we don't have to complicate the branching later down the line,
+          # and stat will always succeed.
+          if ! [ -e GeoLite2-ASN.mmdb ]; then
+            touch -t 197001010001 GeoLite2-ASN.mmdb
+          fi
+
           tarball="$(mktemp)"
           cleanup () {
             rm "$tarball"
