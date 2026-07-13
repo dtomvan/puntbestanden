@@ -143,15 +143,23 @@
           };
         };
 
-        services.nginx.virtualHosts."${cfg.host}" = {
-          extraConfig = ''
-            ssi on;
+        services.nginx = {
+          commonHttpConfig = ''
+            limit_req_zone $limit zone=tyck:10m rate=1r/m;
           '';
-          locations."/tyck/".extraConfig = ''
-            proxy_pass http://127.0.0.1:${toString cfg.tyckPort}/;
-            proxy_set_header X-Forwarded-For $remote_addr;
-            proxy_set_header X-Original-Uri $request_uri;
-          '';
+          virtualHosts."${cfg.host}" = {
+            extraConfig = ''
+              ssi on;
+            '';
+            locations."/tyck/".extraConfig = ''
+              proxy_pass http://127.0.0.1:${toString cfg.tyckPort}/;
+              proxy_set_header X-Forwarded-For $remote_addr;
+              proxy_set_header X-Original-Uri $request_uri;
+            '';
+            locations."~* /tyck/[^/]+/new".extraConfig = ''
+              limit_req zone=tyck burst=3 nodelay;
+            '';
+          };
         };
       };
     };
