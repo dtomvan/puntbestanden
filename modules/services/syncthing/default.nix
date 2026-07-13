@@ -87,6 +87,16 @@ toplevel@{ self, lib, ... }:
               params.cleanoutDays = "90";
             };
           };
+          c10y = {
+            id = "nqq98-qrl7z";
+            path = if isCommitit then "/var/lib/continuwuity" else "~/c10y";
+            type = if isCommitit then "sendonly" else "receiveonly";
+            devices = allDevices;
+            versioning = {
+              type = "trashcan";
+              params.cleanoutDays = "90";
+            };
+          };
         };
     in
     {
@@ -113,11 +123,13 @@ toplevel@{ self, lib, ... }:
         "syncthing"
         "forgejo"
         "hedgedoc"
+        "continuwuity"
       ];
 
       systemd.tmpfiles.settings."10-stfolder" = lib.mkIf isCommitit {
         "/var/lib/forgejo/.stfolder".d = { };
         "/var/lib/hedgedoc/.stfolder".d = { };
+        "/var/lib/continuwuity/.stfolder".d = { };
       };
 
       services.syncthing = {

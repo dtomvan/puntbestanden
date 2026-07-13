@@ -31,6 +31,12 @@ in
       };
 
       config = mkIf cfg.enable {
+        # so syncthing can read along
+        systemd.services.continuwuity.serviceConfig = {
+          DynamicUser = lib.mkForce false;
+          StateDirectoryMode = lib.mkForce "0750";
+        };
+
         services.matrix-continuwuity = {
           enable = true;
           settings.global = {
