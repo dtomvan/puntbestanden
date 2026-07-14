@@ -151,6 +151,32 @@
             ];
           }
           {
+            name = "RUG";
+            bookmarks = [
+              {
+                name = "Welcome page FSE-BSC-CS";
+                url = "https://www.rug.nl/fse/education/welcome-packages/bsc/bsc-computing-science/computing-science";
+              }
+              {
+                name = "Brightspace";
+                url = "https://brightspace.rug.nl";
+              }
+              {
+                name = "Algemene info FSE-BSC-CS";
+                url = "https://student.portal.rug.nl/infonet/studenten/fse/programmes/bsc-cs/";
+              }
+              {
+                name = "rooster";
+                url = "https://rooster.rug.nl/";
+              }
+              {
+                name = "Quick links FSE";
+                url = "https://student.portal.rug.nl/infonet/studenten/fse/";
+              }
+
+            ];
+          }
+          {
             name = "blogs";
             bookmarks = lib.importJSON ./blogroll.json |> map (b: removeAttrs b [ "desc" ]);
           }
