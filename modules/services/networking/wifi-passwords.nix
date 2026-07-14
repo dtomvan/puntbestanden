@@ -102,11 +102,53 @@ in
         };
     in
     {
-      sops.secrets = self.wifi-networks |> map makeSopsSecret |> listToAttrs;
+      sops.secrets =
+        (self.wifi-networks ++ [ { ssid = "eduroam"; } ]) |> map makeSopsSecret |> listToAttrs;
 
       networking.networkmanager.ensureProfiles = {
-        secrets.entries = self.wifi-networks |> map makeNmSecret;
-        profiles = self.wifi-networks |> map makeSimpleNetwork |> listToAttrs;
+        secrets.entries = (self.wifi-networks |> map makeNmSecret) ++ [
+          {
+            matchId = "eduroam";
+            matchType = "802-11-wireless";
+            matchSetting = "802-1x";
+            key = "password";
+            file = config.sops.secrets.eduroam.path;
+          }
+        ];
+        profiles = (self.wifi-networks |> map makeSimpleNetwork |> listToAttrs) // {
+          eduroam = {
+            "802-1x" = {
+              anonymous-identity = "anonymous@student.rug.nl"; # TODO: I assumed this, the actual docs say "leave empty"
+              ca-cert = "/etc/ssl/certs/ca-bundle.crt"; # use system certs
+              domain-suffix-match = "rug.nl";
+              eap = "peap";
+              identity = "s6771092@student.rug.nl";
+              phase2-autheap = "mschapv2";
+            };
+            connection = {
+              id = "eduroam";
+              interface-name = host.networking.wirelessInterface or null;
+              type = "wifi";
+              uuid = "216cd576-39ae-4f3e-b61c-7e236f5fee79";
+            };
+            ipv4 = {
+              method = "auto";
+            };
+            ipv6 = {
+              addr-gen-mode = "default";
+              method = "auto";
+            };
+            proxy = { };
+            wifi = {
+              mode = "infrastructure";
+              ssid = "eduroam";
+            };
+            wifi-security = {
+              auth-alg = "open";
+              key-mgmt = "wpa-eap";
+            };
+          };
+        };
       };
     };
 }
