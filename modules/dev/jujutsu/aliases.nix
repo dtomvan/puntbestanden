@@ -50,6 +50,14 @@
           "trunk()..closest_bookmark(@-) & description(glob:\"wip:*\")"
         ];
 
+        review = [
+          "log"
+          "-r"
+          "trunk()..@"
+          "-p"
+          "--reversed"
+        ];
+
         sync = [
           "git"
           "fetch"
