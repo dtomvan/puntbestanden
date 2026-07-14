@@ -44,6 +44,7 @@ in
           services-monitoring
           services-readeck
           services-syncthing
+          services-xandikos
           themes-catppuccin
           # keep-sorted end
           ;
