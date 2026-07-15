@@ -37,6 +37,7 @@
             pdfarranger
             pika-backup
             python3
+            signal-desktop
             sxiv
             thunderbird
             zathura
