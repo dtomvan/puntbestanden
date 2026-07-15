@@ -28,13 +28,6 @@ in
       ...
     }:
     {
-      # TODO: this may break if either of these modules are imported elsewhere.
-      # Maybe just put these modules in profiles-base and call it a day?
-      imports = [
-        inputs.home-manager.nixosModules.default
-        inputs.nix-maid.nixosModules.default
-      ];
-
       users.users.guest = {
         isNormalUser = true;
         createHome = true;

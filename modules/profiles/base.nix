@@ -24,32 +24,36 @@ in
     nixos.profiles-base =
       { pkgs, ... }:
       {
-        imports = builtins.attrValues {
-          inherit (inputs.srvos.nixosModules)
-            mixins-terminfo
-            ;
+        imports =
+          (builtins.attrValues {
+            inherit (inputs.srvos.nixosModules)
+              mixins-terminfo
+              ;
 
-          inherit (inputs.run0-sudo-shim.nixosModules) default;
+            inherit (self.modules.nixos)
+              nix-common
+              nix-sensible
 
-          inherit (self.modules.nixos)
-            nix-common
-            nix-sensible
+              boot-systemd-boot
+              users-root
 
-            boot-systemd-boot
-            users-root
+              services-ssh
+              services-alertmanager
 
-            services-ssh
-            services-alertmanager
+              sops
 
-            sops
+              programs-comma
 
-            programs-comma
+              networking-wifi-passwords
 
-            networking-wifi-passwords
-
-            undollar
-            ;
-        };
+              undollar
+              ;
+          })
+          ++ [
+            inputs.home-manager.nixosModules.default
+            inputs.nix-maid.nixosModules.default
+            inputs.run0-sudo-shim.nixosModules.default
+          ];
 
         infra.monitoring.alertmanager.enable = lib.mkDefault true;
 
