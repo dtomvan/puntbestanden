@@ -1,6 +1,7 @@
 let
   domain = "cal.${(import ../_consts.nix).domain}";
 in
+{ lib, ... }:
 {
   flake.modules.nixos.services-xandikos =
     { config, modulesPath, ... }:
@@ -240,4 +241,21 @@ in
         )
       ];
     };
+
+  flake.modules.homeManager.profiles-workstation = {
+    accounts.calendar.accounts = {
+      calendar = {
+        thunderbird = {
+          enable = true;
+          color = "#333";
+        };
+        primary = true;
+        remote = {
+          type = "caldav";
+          url = "https://${domain}/user/calendars/calendar"; # default-dependent FWIW
+          userName = "tom";
+        };
+      };
+    };
+  };
 }

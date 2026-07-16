@@ -52,6 +52,7 @@
         inherit (self.modules.homeManager)
           profiles-graphical
           programs-keepassxc
+          programs-thunderbird
           ;
       };
     };
