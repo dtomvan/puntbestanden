@@ -98,9 +98,19 @@ let
     };
 in
 {
-  flake-inputs.bart = {
-    url = "github:bartoostveen/infra";
-    flake = false;
+  flake-inputs = {
+    bart = {
+      url = "github:bartoostveen/infra";
+      flake = false;
+    };
+    bart-packages = {
+      url = "git+https://git.bartoostveen.nl/bart/nix-packages.git";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        treefmt-nix.follows = "treefmt-nix";
+        flake-parts.follows = "flake-parts";
+      };
+    };
   };
 
   pkgs-config.permittedInsecurePackages = [ "olm-3.2.16" ];
@@ -110,10 +120,7 @@ in
     myOwnInfraModuleOnTop
   ];
 
-  perSystem = { pkgs, ... }: {
-    legacyPackages.bart = pkgs.lib.filesystem.packagesFromDirectoryRecursive {
-      inherit (pkgs) callPackage newScope;
-      directory = "${inputs.bart}/pkgs";
-    };
+  perSystem = { inputs', ... }: {
+    legacyPackages.bart = inputs'.bart-packages.legacyPackages;
   };
 }

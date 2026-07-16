@@ -59,6 +59,20 @@
       "flake" = false;
       "url" = "github:bartoostveen/infra";
     };
+    "bart-packages" = {
+      "inputs" = {
+        "flake-parts" = {
+          "follows" = "flake-parts";
+        };
+        "nixpkgs" = {
+          "follows" = "nixpkgs";
+        };
+        "treefmt-nix" = {
+          "follows" = "treefmt-nix";
+        };
+      };
+      "url" = "git+https://git.bartoostveen.nl/bart/nix-packages.git";
+    };
     "catppuccin" = {
       "inputs" = {
         "nixpkgs" = {
