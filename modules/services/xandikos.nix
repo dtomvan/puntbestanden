@@ -55,7 +55,8 @@ in
               mkRenamedOptionModule
               ;
 
-            inherit (lib.cli) toCommandLineShellGNU;
+            inherit (lib.cli) toCommandLineShell;
+            inherit (lib.generators) mkValueStringDefault;
 
             inherit (lib.types)
               attrsOf
@@ -205,7 +206,14 @@ in
                   RestrictRealtime = true;
                   RestrictSUIDSGID = true;
                   ExecStart = ''
-                    ${getExe cfg.package} ${toCommandLineShellGNU { } cfg.settings}
+                    ${getExe cfg.package} ${
+                      toCommandLineShell (optionName: {
+                        option = if (builtins.stringLength optionName) > 1 then "--${optionName}" else "-${optionName}";
+                        sep = null;
+                        explicitBool = false;
+                        formatArg = mkValueStringDefault { };
+                      }) cfg.settings
+                    }
                   '';
                 };
               };
