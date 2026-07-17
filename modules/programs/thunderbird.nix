@@ -1,4 +1,13 @@
 { config, ... }:
+let
+  thunderbird = {
+    enable = true;
+    perIdentitySettings = id: {
+      "mail.identity.id_${id}.protectSubject" = false;
+      "mail.identity.id_${id}.autoEncryptDrafts" = false;
+    };
+  };
+in
 {
   flake.modules.homeManager.programs-thunderbird = {
     programs.thunderbird = {
@@ -14,14 +23,14 @@
         address = config.users.tomvd.email;
         flavor = "gmail.com";
         gpg.key = config.users.tomvd.gpgPubKey;
-        thunderbird.enable = true;
+        inherit thunderbird;
         primary = true;
       };
       alt = {
         realName = config.users.tomvd.fullName;
         address = "18gatenmaker6@gmail.com";
         flavor = "gmail.com";
-        thunderbird.enable = true;
+        inherit thunderbird;
       };
     };
   };
