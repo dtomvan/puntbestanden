@@ -14,11 +14,17 @@ in
       enable = true;
       profiles.default = {
         isDefault = true;
+        withExternalGnupg = true;
+        accountsOrder = [
+          "main"
+          "alt"
+        ];
       };
     };
 
     accounts.email.accounts = {
       main = {
+        name = config.users.tomvd.email;
         realName = config.users.tomvd.fullName;
         address = config.users.tomvd.email;
         flavor = "gmail.com";
@@ -28,6 +34,7 @@ in
       };
       alt = {
         realName = config.users.tomvd.fullName;
+        name = "18gatenmaker6@gmail.com";
         address = "18gatenmaker6@gmail.com";
         flavor = "gmail.com";
         inherit thunderbird;
