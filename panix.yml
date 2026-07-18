@@ -7,6 +7,10 @@ fleet:
   nix:
     build_flags:
       - --keep-going
+      - --max-jobs
+      - "1"
+      - --cores
+      - "1"
     copy_flags:
       - --substitute-on-destination
   flakes:
