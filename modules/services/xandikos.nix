@@ -1,7 +1,6 @@
 let
   domain = "cal.${(import ../_consts.nix).domain}";
 in
-{ lib, ... }:
 {
   flake.modules.nixos.services-xandikos =
     { config, modulesPath, ... }:

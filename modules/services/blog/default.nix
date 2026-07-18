@@ -42,7 +42,10 @@ in
   perSystem = { self', pkgs, ... }: {
     treefmt.programs.oxfmt = {
       enable = true;
-      excludes = [ "README.md" ];
+      excludes = [
+        "README.md"
+        "secrets/**"
+      ];
     };
 
     files."modules/programs/firefox/blogroll.json" = pkgs.runCommand "blogroll.json" {
