@@ -11,7 +11,7 @@ let
 in
 {
   flake.modules.nixos.services-matrix =
-    { config, pkgs, ... }:
+    { config, self', ... }:
     let
       cfg = config.infra.matrix;
     in
@@ -93,7 +93,7 @@ in
               forceSSL = true;
 
               locations = {
-                "/".root = pkgs.cinny.override {
+                "/".root = self'.legacyPackages.bart.sable.override {
                   conf = {
                     hashRouter.enabled = true;
                     defaultHomeserver = 0;
