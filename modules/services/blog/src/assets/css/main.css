@@ -132,6 +132,33 @@ a.title {
   padding-right: 0.25rem;
 }
 
+/* This section for external link marking is inspired by brennan.day! */
+
+a[href^="http://"]:not([href*="toostveen.nl"])::after,
+a[href^="https://"]:not([href*="toostveen.nl"])::after {
+  content: "➚";
+  font-size: 0.75em;
+  line-height: 1;
+}
+
+/* Exceptions to the rule */
+a.no-footnote::after,
+a.no-external-icon::after,
+.quirky-buttons a::after,
+#webrings a::after,
+a[rel="me"]::after,
+a[href*="localhost"]::after,
+a[href^="/"]::after {
+  content: "" !important;
+}
+
+@media print {
+    a[href^="http://"]::after,
+    a[href^="https://"]::after {
+        content: ""!important;
+    }
+}
+
 .footer a {
   color: hsl(from var(--ctp-blue) h calc(s - 40) calc(l - 10));
 }
