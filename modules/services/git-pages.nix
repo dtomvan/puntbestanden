@@ -275,6 +275,7 @@ in
         token="$(sops decrypt ${../../secrets/git-pages-push-token.secret} | tr -d '\n')"
         git-pages-cli \
           "''${2:-"https://${(import ../_consts.nix).domain}"}" \
+          --atomic \
           --upload-dir "$outPath" \
           --server "''${3:-"${(import ../_consts.nix).domain}"}" \
           --token "$token"
