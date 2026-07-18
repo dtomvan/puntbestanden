@@ -13,6 +13,8 @@ layout: base
       <header {% if page.cover-img %}class="with-cover" {% endif %}>
         {% if page.title %}
         <h1 class="title p-name">{{ page.title }}</h1>
+        {% elsif page.repost_title %}
+        <h1 class="title p-name">Repost: {{ page.repost_title }}</h1>
         {% endif %} {% if page.subtitle %}<span class="subtitle">{{ page.subtitle }}</span>{% endif
         %}
         <p>
@@ -31,7 +33,15 @@ layout: base
           </span>
           <br />
           <img alt="person icon" src="/assets/img/person.svg" class="octicon" />
-          <a class="h-card p-author" href="{{ site.config.url }}">{{ site.config.author }}</a>
+          <a
+            class="h-card p-author"
+            {%
+            unless
+            page.repost_url
+            %}href="{{ site.config.url }}"
+            {%endunless%}
+            >{{ post.author | default:site.config.author }}</a
+          >
         </p>
       </header>
 
@@ -39,11 +49,20 @@ layout: base
       <p class="p-summary"><b>Summary: </b>{{ page.summary }}</p>
       {% endif %}
 
-      <div class="e-content">{{ content }}</div>
+      <div class="e-content">
+        {% if page.repost_url %}
+        <p>
+          This page is a repost of <a href="{{page.repost_url}}">{{page.repost_title}}</a> by {% if
+          page.author_url %}<a href="{{page.author_url}}">{{page.author}}</a>{% else
+          %}{{page.author}}{% endif %}. Go check it out!
+        </p>
+        {% endif %}
+        {{ content }}
+      </div>
     </main>
   </div>
 
-  {% unless page.draft %}
+  {% unless page.draft or page.repost_url %}
   <a
     href="https://share.joinmastodon.org/#text={{page.title|xml_escape}} - {{site.config.author}} - {{page.url|absolute_url}}"
     target="_blank"
@@ -60,7 +79,7 @@ layout: base
     {% endif %}
   </div>
 
-  {% unless page.draft %}
+  {% unless page.draft or page.repost_url %}
   <h1>Reactions</h1>
   <p>If you want to send a textual reaction, do so by email or toot!</p>
   <!-- <details class="comments-help print-hide"> -->

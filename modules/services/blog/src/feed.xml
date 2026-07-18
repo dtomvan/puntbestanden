@@ -15,11 +15,11 @@
         {% unless post.hidden %}
         <entry {% if post.lang %}xml:lang="{{post.lang}}"{% endif %}>
             {% assign post_title = post.title | strip_html | normalize_whitespace | xml_escape %}
-            <title type="html">{{ post.title }}</title>
-            <link href="{{ post.url | absolute_url }}" rel="alternate" type="text/html" title="{{ post.title }}"/>
+            <title type="html">{% if post.repost_title %}Repost: {{post.repost_title}}{%else%}{{ post_title }}{%endif%}</title>
+            <link href="{{ post.url | absolute_url }}" rel="alternate" type="text/html" title="{% if post.repost_title %}Repost: {{post.repost_title}}{%else%}{{ post_title }}{%endif%}"/>
             <published>{{ post.date | date_to_xmlschema }}</published>
-            <updated>{{ post.date | date_to_xmlschema }}</updated>
-            <id>{{ post.url | absolute_url }}</id>
+            <updated>{{ post.updated | default:post.date | date_to_xmlschema }}</updated>
+            <id>{{ post.repost_url | default:post.url | absolute_url }}</id>
             <author>
                 <name>{{ post.author | default:site.config.author }}</name>
             </author>

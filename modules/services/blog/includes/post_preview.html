@@ -3,8 +3,13 @@
     >{{ post.date | date: "%Y-%m-%d" }}</time
   >
   <div>
-    <a class="title u-url" href="{{ post.url }}">
-      {% if post.title %}
+    <a
+      class="title u-url"
+      href="{% if post.repost_url %}{{post.repost_url}}{%else%}{{ post.url | absolute_url }}{%endif%}"
+    >
+      {% if post.repost_title %}
+      <span class="p-name">Repost: {{post.repost_title}}</span>
+      {% elsif post.title %}
       <span class="p-name">{{post.title}}</span>
       {% elsif post.summary %}
       <span class="p-summary">{{ post.summary }}</span>
