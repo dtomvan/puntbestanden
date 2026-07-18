@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mihakrumpestar/panix/v0.7.0/gen/panix-schema.yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mihakrumpestar/panix/v0.8.1/gen/panix-schema.yaml
 
 fleet:
   activation_mode: boot
@@ -37,6 +37,8 @@ flags:
     log_file: panix.log
   snapshot:
     dir: .
+  tui:
+    command_output_max_lines: 1000
   # I've got ssh setup so that the keys are allowed locally, but I haven't
   # setup passwordless sudo for my desktops because that's scary
   local_machine_hostname: DONT_YOU_DARE_USE_LOCAL_SUDO_JUST_SSH_INTO_YOURSELF
