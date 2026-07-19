@@ -45,11 +45,24 @@
             <id>{{ post.repost_url | default:post.url | absolute_url }}</id>
             <author>
                 <name>{{ post.author | default:site.config.author }}</name>
+                {% if post.author_url %}<uri>{{ post.author_url }}</uri>{% endif %}
             </author>
             {% for tag in post.tags %}
             <category term="{{ tag }}"/>
             {% endfor %}
-            <summary type="html"><![CDATA[{% if post.summary %}{{ post.summary | strip_html | normalize_whitespace }}{%else%}{{ post.excerpt | strip_html | normalize_whitespace }}{%endif%}
+            <summary type="html"><![CDATA[
+            {% if post.repost_url %}
+              <p>
+                  This is a repost of <a href="{{post.repost_url}}">{{post.repost_title}}</a> by {% if
+                  post.author_url %}<a href="{{post.author_url}}">{{post.author}}</a>{% else
+                  %}{{post.author}}{% endif %}. Go check it out!
+              </p>
+            {% endif %}
+            {% if post.summary %}
+                {{ post.summary | strip_html | normalize_whitespace }}
+            {%else%}
+                {{ post.excerpt | strip_html | normalize_whitespace }}
+            {%endif%}
             <hr/><p>If you're reading this, you're using RSS! You are officially amazing. Thank you for reading!</p>]]></summary>
             {% if post.image %}
             <media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="{{ post.image | absolute_url }}"/>
