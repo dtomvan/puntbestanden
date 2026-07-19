@@ -25,9 +25,13 @@
     {
       imports = [ inputs.nixocaine.nixosModules.default ];
 
+      networking.nftables.enable = lib.mkDefault true;
+
       services.iocaine.config = {
         # very random, yes
         initial-seed-file = "/run/current-system/boot.json";
+
+        firewall.enable = true;
 
         handler.main = {
           path = "${nsoePackage}";
@@ -53,6 +57,9 @@
                 })
               ];
             };
+
+            firewall.block_rule_hits = [ "generated_urls" ];
+
             checks = {
               asn = {
                 enable = true;
