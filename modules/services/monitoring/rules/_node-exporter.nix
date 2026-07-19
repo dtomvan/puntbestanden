@@ -259,21 +259,21 @@
           severity = "warning";
         };
       }
-      {
-        alert = "HostContextSwitchingHigh";
-        annotations = {
-          description = ''
-            Context switching is growing on the node (twice the daily average during the last 15m)
-              VALUE = {{ $value }}
-              LABELS = {{ $labels }}'';
-          summary = "Host context switching high (instance {{ $labels.instance }})";
-        };
-        expr = "(rate(node_context_switches_total[15m])/count without(mode,cpu) (node_cpu_seconds_total{mode=\"idle\"})) / (rate(node_context_switches_total[1d])/count without(mode,cpu) (node_cpu_seconds_total{mode=\"idle\"})) > 2 and rate(node_context_switches_total[1d]) > 0";
-        for = "0m";
-        labels = {
-          severity = "warning";
-        };
-      }
+      # {
+      #   alert = "HostContextSwitchingHigh";
+      #   annotations = {
+      #     description = ''
+      #       Context switching is growing on the node (twice the daily average during the last 15m)
+      #         VALUE = {{ $value }}
+      #         LABELS = {{ $labels }}'';
+      #     summary = "Host context switching high (instance {{ $labels.instance }})";
+      #   };
+      #   expr = "(rate(node_context_switches_total[15m])/count without(mode,cpu) (node_cpu_seconds_total{mode=\"idle\"})) / (rate(node_context_switches_total[1d])/count without(mode,cpu) (node_cpu_seconds_total{mode=\"idle\"})) > 2 and rate(node_context_switches_total[1d]) > 0";
+      #   for = "0m";
+      #   labels = {
+      #     severity = "warning";
+      #   };
+      # }
       {
         alert = "HostSwapIsFillingUp";
         annotations = {
