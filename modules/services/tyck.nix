@@ -137,6 +137,7 @@
             SystemCallErrorNumber = "EPERM";
             SystemCallFilter = "@system-service";
 
+            Restart = "on-failure";
             RestartSec = "1s";
             RestartSteps = 4;
             RestartMaxDelaySec = "50s";
