@@ -99,6 +99,7 @@
           coreutils
           curl
           gnutar
+          gzip
         ];
         script = ''
           set -euo pipefail
@@ -113,8 +114,10 @@
           fi
 
           tarball="$(mktemp)"
+          unpackdir="$(mktemp -d)"
           cleanup () {
             rm "$tarball"
+            rm -r "$unpackdir"
             exit
           }
           trap cleanup EXIT ERR SIGINT
@@ -131,7 +134,8 @@
           fi
 
           curl -o "$tarball" -J -L -u "$ACCOUNT_ID:$LICENSE_KEY" 'https://download.maxmind.com/geoip/databases/GeoLite2-ASN/download?suffix=tar.gz'
-          tar xzvf "$tarball" "GeoLite2-ASN.mmdb"
+          tar -C "$unpackdir" -xzvf "$tarball"
+          mv "$unpackdir"/*/GeoLite2-ASN.mmdb .
         '';
         serviceConfig = {
           EnvironmentFile = config.sops.secrets.maxmind-credentials.path;
