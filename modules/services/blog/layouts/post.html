@@ -40,7 +40,7 @@ layout: base
             page.repost_url
             %}href="{{ site.config.url }}"
             {%endunless%}
-            >{{ post.author | default:site.config.author }}</a
+            >{{ page.author | default:site.config.author }}</a
           >
         </p>
       </header>
