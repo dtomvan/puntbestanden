@@ -31,6 +31,8 @@
       programs.command-not-found.enable = lib.mkForce false;
       users.mutableUsers = lib.mkDefault false;
 
+      networking.nftables.enable = lib.mkDefault true;
+
       nix = {
         channel.enable = lib.mkForce false;
         gc.automatic = lib.mkForce false;

@@ -13,6 +13,7 @@
       pkgs,
       lib,
       inputs',
+      host,
       ...
     }:
     let
@@ -164,6 +165,28 @@
           PrivateUsers = true;
           ProtectClock = true;
         };
+      };
+
+      users.users = lib.optionalAttrs (builtins.elem "tomvd" host.users) {
+        tomvd.maid.file.home.".bashrc".text = /* bash */ ''
+          tableop() {
+            op="${"1:?"}"
+            shift
+            sudo nft "$op" element inet iocaine blocks_"${"1:?"}" \{\ "${"2:?"}"\ \}
+          }
+
+          ioban() {
+            tableop add "$@"
+          }
+
+          iounban() {
+            tableop delete "$@"
+          }
+
+          io check() {
+            tableop get "$@"
+          }
+        '';
       };
     };
 }
