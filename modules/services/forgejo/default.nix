@@ -138,6 +138,8 @@
               proxyPass = "$forgejo_upstream_location";
 
               extraConfig = lib.optionalString cfg.iocaine.enable ''
+                proxy_set_header X-Forwarded-For $remote_addr;
+                proxy_set_header X-Original-Uri $request_uri;
                 proxy_cache off;
                 proxy_intercept_errors on;
                 error_page 421 = @fallback;
@@ -160,7 +162,7 @@
         services.iocaine = lib.mkIf cfg.iocaine.enable {
           enable = true;
           config = {
-            handler.main.config.cookie_monster.forgejo_hosts = [ cfg.domain ];
+            handler.main.config.checks.cookie-monster.forgejo-hosts = [ cfg.domain ];
 
             server = {
               default = {

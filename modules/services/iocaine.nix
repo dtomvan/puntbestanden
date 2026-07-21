@@ -58,33 +58,34 @@
               ];
             };
 
-            firewall.block_rule_hits = [ "generated_urls" ];
+            firewall.block-rule-hits = [
+              "ai.robots.txt"
+              "faked-browser"
+            ];
 
             checks = {
+              enable = [
+                "asn"
+                "anti-robots-txt" # blocklist for specific bots that are known to not respect your robots.txt
+                "commercial-scrapers"
+                "cookie-monster"
+                "firefox-ai"
+                "generated-urls"
+              ];
+              disable = [
+                "browser-verification" # seems to trip up some old browsers, and also vivaldi
+              ];
               asn = {
-                enable = true;
-                filter_aggressives = true;
+                filter-aggressives = true;
                 # This file is unfree and requires setting up an account. Deliberately not using requireFile here.
-                database_path = "/var/lib/iocaine/GeoLite2-ASN.mmdb";
+                database-path = "/var/lib/iocaine/GeoLite2-ASN.mmdb";
               };
-              anti_robots_txt.enable = true; # blocklist for specific bots that are known to not respect your robots.txt
-              browser_verification.enable = false; # seems to trip up some old browsers, and also vivaldi
-              commercial_scrapers.enable = true;
-              cookie_monster = {
-                enable = true;
-                forgejo_challenge = "automatic";
-              };
-              firefox_ai.enable = true; # no thanks
-              generated_urls = {
-                enable = true;
-                identifiers = [ "clanker_mode" ]; # default is a dot, which isn't a good idea
-              };
-              custom_agents = {
-                allow = [
-                  # used by IndieAuth
-                  "Ruby"
-                ];
-              };
+              cookie-monster.forgejo-challenge = "manual";
+              generated-urls.identifiers = [ "clanker-mode" ];
+              custom-agents.allow = [
+                # used by IndieAuth
+                "Ruby"
+              ];
             };
           };
         };

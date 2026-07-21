@@ -202,6 +202,8 @@ in
             proxy_intercept_errors on;
             proxy_pass_header Server;
             proxy_set_header X-Request-ID $request_id;
+            proxy_set_header X-Forwarded-For $remote_addr;
+            proxy_set_header X-Original-Uri $request_uri;
             error_page 421 = @git-pages;
           '';
         };
