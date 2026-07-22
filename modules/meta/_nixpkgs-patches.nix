@@ -3,7 +3,7 @@
   (fetchpatch2 {
     url = "https://github.com/NixOS/nixpkgs/commit/979b6b58c3d421eefe520bb10e7cd1794ecabfdd.patch";
     excludes = [ "doc" ];
-    hash = "sha256-t2/02DZw4Bn6W4C1BBDQZP3LoCuHkXjnb5lvJB8obTg=";
+    hash = "sha256-RO1PYEIX1NPKq0rCXsHzjuZTcl/2QAbCLCnXReEYErs=";
   })
   # nixos/forgejo-runner: init
   (fetchpatch2 {
