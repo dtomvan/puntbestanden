@@ -47,6 +47,7 @@ a:visited {
 .footer,
 .date,
 .tags,
-.tags a {
+.tags a,
+.reading-time {
   color: var(--ctp-subtext1);
 }

@@ -17,32 +17,38 @@ layout: base
         <h1 class="title p-name">Repost: {{ page.repost_title }}</h1>
         {% endif %} {% if page.subtitle %}<span class="subtitle">{{ page.subtitle }}</span>{% endif
         %}
-        <p>
-          {% if page.cover-img %}
-          <img class="cover-img" src="{{ page.cover-img | absolute_url }}" />
-          {% endif %}
-          <a class="no-footnote u-url" href="{{ page.url | absolute_url }}">
-            <time class="dt-published date" datetime="{{ page.date | date: '%F %H:%M:%S' }}"
-              >{{ page.date | date: "%Y-%m-%d" }}</time
+        <aside class="misc-article-details">
+          <p>
+            {% if page.cover-img %}
+            <img class="cover-img" src="{{ page.cover-img | absolute_url }}" />
+            {% endif %}
+            <a class="no-footnote u-url" href="{{ page.url | absolute_url }}">
+              <time class="dt-published date" datetime="{{ page.date | date: '%F %H:%M:%S' }}"
+                >{{ page.date | date: "%Y-%m-%d" }}</time
+              >
+            </a>
+            <span class="tags">
+              {% for tag in page.tags %}
+              <a class="p-category tag" href="/blog/tags#{{tag}}">#{{tag}}</a>
+              {% endfor %}
+            </span>
+            <br />
+            {% unless page.no-reading-time %}
+            <span class="reading-time">{{ content | split: " " | size | divided_by: 180 }} min</span>
+            <br />
+            {% endunless %}
+            <img alt="person icon" src="/assets/img/person.svg" class="octicon" />
+            <a
+              class="h-card p-author"
+              {%
+              unless
+              page.repost_url
+              %}href="{{ site.config.url }}"
+              {%endunless%}
+              >{{ page.author | default:site.config.author }}</a
             >
-          </a>
-          <span class="tags">
-            {% for tag in page.tags %}
-            <a class="p-category tag" href="/blog/tags#{{tag}}">#{{tag}}</a>
-            {% endfor %}
-          </span>
-          <br />
-          <img alt="person icon" src="/assets/img/person.svg" class="octicon" />
-          <a
-            class="h-card p-author"
-            {%
-            unless
-            page.repost_url
-            %}href="{{ site.config.url }}"
-            {%endunless%}
-            >{{ page.author | default:site.config.author }}</a
-          >
-        </p>
+          </p>
+        </aside>
       </header>
 
       {% if page.summary and page.show-summary != false %}
@@ -61,43 +67,45 @@ layout: base
     </main>
   </div>
 
-  {% unless page.draft or page.repost_url %}
-  <a
-    href="https://share.joinmastodon.org/#text={{page.title|xml_escape}} - {{site.config.author}} - {{page.url|absolute_url}}"
-    target="_blank"
-    rel="noopener"
-    >Share on Mastodon</a
-  >
-  {% endunless %} {% if page.date %} {% assign previous = page.next %} {% assign next =
-  page.previous %} {% endif %}
-  <div class="pagination" style="display: flex">
-    {% if previous %}
-    <span>← <a class="title" href="{{previous.url}}"> {{ previous.title }}</a></span>
-    {% endif %} {% if next %}
-    <span style="margin-left: auto"><a class="title" href="{{next.url}}">{{next.title}}</a> →</span>
-    {% endif %}
-  </div>
+  <footer class="social-footer">
+    {% unless page.draft or page.repost_url %}
+    <a
+      href="https://share.joinmastodon.org/#text={{page.title|xml_escape}} - {{site.config.author}} - {{page.url|absolute_url}}"
+      target="_blank"
+      rel="noopener"
+      >Share on Mastodon</a
+    >
+    {% endunless %} {% if page.date %} {% assign previous = page.next %} {% assign next =
+    page.previous %} {% endif %}
+    <div class="pagination" style="display: flex">
+      {% if previous %}
+      <span>← <a class="title" href="{{previous.url}}"> {{ previous.title }}</a></span>
+      {% endif %} {% if next %}
+      <span style="margin-left: auto"><a class="title" href="{{next.url}}">{{next.title}}</a> →</span>
+      {% endif %}
+    </div>
 
-  {% unless page.draft or page.repost_url %}
-  <h1>Reactions</h1>
-  <p>If you want to send a textual reaction, do so by email or toot!</p>
-  <!-- <details class="comments-help print-hide"> -->
-  <!--   <summary>Help</summary> -->
-  <!--   <blockquote> -->
-  <!--     <p> -->
-  <!--       The comments on this blog are self-hosted, so you don't have to worry about a TOS or -->
-  <!--       something (rest assured -->
-  <!--       <a -->
-  <!--         href="https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/" -->
-  <!--         >kami</a -->
-  <!--       >). I'll just approve your comment if it isn't total nonsense or really offensive. E-mail me -->
-  <!--       if you think I'm taking too long with approval or if you have any questions. -->
-  <!--     </p> -->
-  <!--   </blockquote> -->
-  <!-- </details> -->
+    {% unless page.draft or page.repost_url %}
+    <h1>Reactions</h1>
+    <p>If you want to send a textual reaction, do so by email or toot!</p>
+    <!-- <details class="comments-help print-hide"> -->
+    <!--   <summary>Help</summary> -->
+    <!--   <blockquote> -->
+    <!--     <p> -->
+    <!--       The comments on this blog are self-hosted, so you don't have to worry about a TOS or -->
+    <!--       something (rest assured -->
+    <!--       <a -->
+    <!--         href="https://kami.bearblog.dev/why-comment-sections-suck-rei-want-to-comment-on-your-blog-post/" -->
+    <!--         >kami</a -->
+    <!--       >). I'll just approve your comment if it isn't total nonsense or really offensive. E-mail me -->
+    <!--       if you think I'm taking too long with approval or if you have any questions. -->
+    <!--     </p> -->
+    <!--   </blockquote> -->
+    <!-- </details> -->
 
-  <!--# include virtual="/tyck/post/{{ page.slug }}/reactions" -->
-  {% endunless %}
+    <!--# include virtual="/tyck/post/{{ page.slug }}/reactions" -->
+    {% endunless %}
+  </footer>
 
   <br />
   <br />

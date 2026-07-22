@@ -461,6 +461,7 @@ span.warning-text {
     color: #222;
     font-size: 11pt !important;
     font-family: Helvetica, sans-serif !important;
+    font-size-adjust: none!important;
   }
 
   @page {
@@ -488,7 +489,8 @@ span.warning-text {
   form.tyck-comment-form,
   .print-hide,
   #webrings,
-  #webrings > br {
+  #webrings > br,
+  footer.social-footer {
     display: none !important;
   }
 

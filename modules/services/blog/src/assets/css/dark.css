@@ -48,7 +48,8 @@ a:visited {
 .footer,
 .date,
 .tags,
-.tags a {
+.tags a,
+.reading-time {
   /* darkest I can make it while staying accessible, and hopefully creating enough contrast with the rest of the text in the line */
   color: rgb(from var(--ctp-subtext0) r g b / 75%);
 }
