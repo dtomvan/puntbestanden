@@ -3,6 +3,19 @@ layout: default
 title: Tags
 ---
 
+<script>
+    // quick and dirty script that will open up a tag listing if a user navigated to it directly
+    addEventListener("DOMContentLoaded", () => {
+        document.body
+            .querySelectorAll("details:has(summary.tag-header)")
+            .forEach(n => n.querySelector("a").addEventListener("focus", () => n.setAttribute("open", true)))
+
+        if (location.hash != '') {
+            document.body.querySelector(`details:has(${location.hash})`).setAttribute("open", true)
+        }
+    })
+</script>
+
 {% for tag in site.tags %}
 <details>
   <summary class="tag-header">
