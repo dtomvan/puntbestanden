@@ -10,6 +10,7 @@ tags:
   - smallweb
   - forgejo
   - nixos
+  - linux
   - git-pages
   - system-building
 draft: false
