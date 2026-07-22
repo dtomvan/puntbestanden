@@ -36,6 +36,10 @@ body.mono {
   font-size-adjust: 0.7;
 }
 
+body.mono pre {
+  font-size-adjust: none;
+}
+
 button {
   border: none;
   padding: 5px;
