@@ -16,11 +16,11 @@ title: Tags
     })
 </script>
 
-{% for tag in site.tags %}
+{% for tag in site.tags | keys | sort_natural %}
 <details>
   <summary class="tag-header">
-    <a href="#{{tag[0]}}" class="title" id="{{tag[0]}}">#{{tag[0]}}</a>
-    <span class="tag-post-amount">[{{tag[1] | size}}]</span>
+    <a href="#{{tag}}" class="title" id="{{tag}}">#{{tag}}</a>
+    <span class="tag-post-amount">[{{site.tags[tag] | size}}]</span>
   </summary>
 
   {% for post in tag[1] %} {% include post_preview.html %} {% endfor %}
