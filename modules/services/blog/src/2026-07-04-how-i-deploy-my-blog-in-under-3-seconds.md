@@ -7,12 +7,10 @@ date: 2026-07-04T18:52:14+02:00
 lang: en
 tags:
   - jorge
-  - smallweb
   - forgejo
   - nixos
   - linux
   - git-pages
-  - system-building
 draft: false
 ---
 

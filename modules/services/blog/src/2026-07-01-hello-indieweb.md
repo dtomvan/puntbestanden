@@ -5,7 +5,7 @@ summary: I've implemented several Microformats on this website.
 date: 2026-07-01T17:33:57+02:00
 layout: post
 lang: en
-tags: [indieweb, microblogging, microformats]
+tags: [indieweb,microformats]
 draft: false
 ---
 
