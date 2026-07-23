@@ -26,7 +26,7 @@
   }
   </style>
     <generator uri="https://jorge.olano.dev/" version="0.0.1">jorge</generator>
-    <link href="{{ page.url | absolute_url}}" rel="self" type="application/atom+xml"/>
+    <link href="{{ page.url  }}" rel="self" type="application/atom+xml"/>
     <link href="{{ site.config.url }}" rel="alternate" type="text/html"/>
     <updated>{{ "now" | date_to_xmlschema }}</updated>
     <id>{{ page.url | absolute_url}}</id>
