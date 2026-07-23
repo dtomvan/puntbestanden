@@ -15,6 +15,7 @@
             nix-update
           ];
           runtimeEnv.etcds = [
+            "3.5"
             "3.6"
             "3.7"
           ];
