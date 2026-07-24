@@ -118,7 +118,7 @@
         settings.namespaces =
           lib.singleton {
             name = "default";
-            format = ''$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"'';
+            format = ''$remote_addr - $remote_user [$time_iso8601] '$host "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" ($request_id)'';
             source.files = [
               "/var/log/nginx/access.log"
               "/var/log/nginx/error.log"
