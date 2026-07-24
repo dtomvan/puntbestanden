@@ -146,6 +146,9 @@
                 access_log off;
               '';
             };
+            "/v2".extraConfig = ''
+              limit_req off;
+            '';
           }
           // lib.optionalAttrs cfg.iocaine.enable {
             "@fallback".proxyPass = "http://localhost:${toString cfg.httpPort}";
