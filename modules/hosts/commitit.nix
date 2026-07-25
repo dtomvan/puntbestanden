@@ -12,7 +12,7 @@ in
       endpoint = "2a01:4f8:1c18:5b92::/64";
       wireguard = {
         enable = true;
-        endpoint = "[2a01:4f8:1c18:5b92::1]:51820";
+        endpoint = "91.98.231.12:51820";
         allowedIPs = [
           "10.0.0.0/24"
           "fd42:42:42::/64"
