@@ -183,7 +183,7 @@
             tableop delete "$@"
           }
 
-          io check() {
+          iocheck() {
             tableop get "$@"
           }
         '';
