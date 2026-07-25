@@ -98,7 +98,7 @@ in
 
       programs.gaming-free = {
         enable = true;
-        enableGraphical = true;
+        # enableGraphical = true;
       };
 
       # <boomer patches from the shared disko config>

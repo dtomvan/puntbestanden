@@ -93,7 +93,7 @@
 
         programs.gaming-free = {
           enable = true;
-          enableGraphical = true;
+          # enableGraphical = true;
         };
 
         virtualisation.libvirtd.onBoot = "ignore";
