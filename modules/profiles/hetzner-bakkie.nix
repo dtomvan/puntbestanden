@@ -10,6 +10,7 @@
     {
       imports = builtins.attrValues {
         inherit (inputs.srvos.nixosModules) server;
+        inherit (inputs.nix-maid.nixosModules) default;
 
         inherit (self.modules.nixos)
           nix-sensible
