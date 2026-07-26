@@ -1,5 +1,6 @@
 ---
 title: Hello IndieWeb!
+replies_url: https://toot.cat/@dtomvan/116845823897161009
 subtitle: ...and the slop that are link aggregators, sadly.
 summary: I've implemented several Microformats on this website.
 date: 2026-07-01T17:33:57+02:00

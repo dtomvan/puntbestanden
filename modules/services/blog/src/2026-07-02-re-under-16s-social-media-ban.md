@@ -1,5 +1,6 @@
 ---
 title: "Re: Under-16s Social Media Ban"
+replies_url: https://toot.cat/@dtomvan/116852482163705972
 summary: A quick ramble on the UK social media ban for teens
 tags:
   - politics

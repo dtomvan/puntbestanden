@@ -1,5 +1,6 @@
 ---
 title: "Re: Asking: Should I Take Notes on This?"
+replies_url: https://toot.cat/@dtomvan/116890567161158939
 summary: |
   The other end of the spectrum: obsessively taking in notes on everything
   without actually stopping and making sure it's actually worthwhile in the

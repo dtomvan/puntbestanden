@@ -1,5 +1,6 @@
 ---
 title: Does the indieweb use algospeak?
+replies_url: https://toot.cat/@dtomvan/116890215532050088
 summary: |
   I think the concept of algospeak, where language is used deliberately to
   appease an algorithm or otherwise to maximise reception online, could apply

@@ -1,5 +1,6 @@
 ---
 title: How I deploy my blog in under 3 seconds
+replies_url: https://toot.cat/@dtomvan/116862859723478959
 subtitle: or the deadly poison known as overengineering
 layout: post
 summary: Using jorge, git-pages, and nix to make a blog is a little overkill, but fun!

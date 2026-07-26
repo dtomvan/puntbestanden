@@ -1,5 +1,6 @@
 ---
 title: "Re: you're a blogger, and that's pretty damn awesome"
+replies_url: https://toot.cat/@dtomvan/116852482163705972
 subtitle: "(and JulyReply 2026)"
 summary: "I felt seen by Robert for entering JulyReply 2026 :)"
 date: 2026-07-02T23:09:36+02:00
