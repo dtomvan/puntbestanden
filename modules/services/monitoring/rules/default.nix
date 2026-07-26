@@ -22,6 +22,7 @@
         type = submodule {
           imports = [
             ./_node-exporter.nix
+            ./_nsoe.nix
           ];
 
           options.groups = mkOption {
