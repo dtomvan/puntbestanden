@@ -60,6 +60,7 @@
 
         services.forgejo = {
           enable = true;
+          package = mkDefault pkgs.forgejo;
 
           database.type = "postgres";
           lfs.enable = cfg.lfsSupport;
