@@ -88,6 +88,9 @@ layout: base
     {% unless page.draft or page.repost_url %}
     <h1>Reactions</h1>
     <p>If you want to send a textual reaction, do so by email or toot!</p>
+    {% if page.replies_url %}
+    <p><a href="{{page.replies_url}}" target="_blank">External comments</a></p>
+    {% endif %}
     <!-- <details class="comments-help print-hide"> -->
     <!--   <summary>Help</summary> -->
     <!--   <blockquote> -->

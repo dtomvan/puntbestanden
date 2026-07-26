@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 entry > * {
                     display: none;
                 }
-                feed > title, entry, entry title, entry content, entry i, entry author {
+                feed > title, entry, entry title, entry content, entry i, entry author, entry p.replies-link {
                     display: block;
                 }
                 entry a.tag {
@@ -99,5 +99,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             category.outerHTML = tag.outerHTML;
         })
+
+        var repliesLink = entry.querySelector('link[rel="replies"]');
+        if (repliesLink) {
+            entry.insertAdjacentElement("beforeend", h("p", { class: "replies-link" }, h("a", { href: repliesLink.getAttribute("href") }, repliesLink.getAttribute("title"))));
+        }
     });
 });

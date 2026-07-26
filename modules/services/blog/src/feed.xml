@@ -40,6 +40,7 @@
             {% assign post_title = post.title | strip_html | normalize_whitespace | xml_escape %}
             <title type="html">{% if post.repost_title %}Repost: {{post.repost_title}}{%else%}{{ post_title }}{%endif%}</title>
             <link href="{{ post.url | absolute_url }}" rel="alternate" type="text/html" title="{% if post.repost_title %}Repost: {{post.repost_title}}{%else%}{{ post_title }}{%endif%}"/>
+            {%if post.replies_url%}<link href="{{ post.replies_url }}" rel="replies" type="text/html" title="Comments"/>{%endif%}
             <published>{{ post.date | date_to_xmlschema }}</published>
             <updated>{{ post.updated | default:post.date | date_to_xmlschema }}</updated>
             <id>{{ post.repost_url | default:post.url | absolute_url }}</id>

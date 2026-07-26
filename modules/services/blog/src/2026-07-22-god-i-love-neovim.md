@@ -1,5 +1,6 @@
 ---
 title: God I love Neovim
+replies_url: https://toot.cat/@dtomvan/116965713389345949
 date: 2026-07-22T22:36:38+02:00
 layout: post
 lang: en
