@@ -49,7 +49,6 @@
               "2a06:98c0::/29"
               "2c0f:f248::/32"
             ];
-            reqLimitZoneName = "reqlimit";
             connLimitZoneName = "connlimit";
           in
           # nginx
@@ -81,10 +80,8 @@
             limit_conn_log_level warn;
             limit_conn_status    429;
 
-            limit_req_zone $limit zone=${reqLimitZoneName}:10m rate=20r/s;
             limit_req_log_level warn;
             limit_req_status     429;
-            limit_req zone=${reqLimitZoneName} burst=100 nodelay;
 
             add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
           '';

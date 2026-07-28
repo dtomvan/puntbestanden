@@ -150,6 +150,7 @@
           }
           // lib.optionalAttrs cfg.iocaine.enable {
             "@fallback".proxyPass = "http://localhost:${toString cfg.httpPort}";
+            "/v2".proxyPass = "http://localhost:${toString cfg.httpPort}";
           };
         };
 
