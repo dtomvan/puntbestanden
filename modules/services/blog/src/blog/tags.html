@@ -23,6 +23,6 @@ title: Tags
     <span class="tag-post-amount">[{{site.tags[tag] | size}}]</span>
   </summary>
 
-  {% for post in tag[1] %} {% include post_preview.html %} {% endfor %}
+  {% for post in site.tags[tag] %} {% include post_preview.html %} {% endfor %}
 </details>
 {% endfor %}
