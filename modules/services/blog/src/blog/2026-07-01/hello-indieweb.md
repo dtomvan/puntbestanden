@@ -8,6 +8,8 @@ layout: post
 lang: en
 tags: [indieweb,microformats]
 draft: false
+aliases:
+    - /2026-07-01-hello-indieweb
 ---
 
 **Assumed audience:** either the IndieWeb-curious or IndieWeb enthusiasts, optional: people who have experience with the big web, especially aggregators

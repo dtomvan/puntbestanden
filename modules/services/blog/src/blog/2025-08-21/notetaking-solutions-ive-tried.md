@@ -4,6 +4,8 @@ date: 2025-08-21T22:59:29+02:00
 tags: ["emacs", "neovim", "notetaking"]
 layout: post
 draft: false
+aliases:
+    - /2025-08-21-notetaking-solutions-ive-tried
 ---
 
 As a former high school student and soon-to-be college student, I have

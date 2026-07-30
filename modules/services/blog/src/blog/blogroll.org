@@ -1,11 +1,10 @@
 ---
 title: Blogroll
-date: 2026-05-24T02:04:16+02:00
 layout: default
 lang: en
 tags: []
-draft: false
-hidden: true
+aliases:
+    - /blogroll
 ---
 #+OPTIONS: toc:nil num:nil
 #+LANGUAGE: en

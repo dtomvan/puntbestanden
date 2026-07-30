@@ -3,4 +3,4 @@ author: "Tom Oostveen"
 url: "https://toostveen.nl"
 description: "Placeholder"
 highlight_theme: catppuccin-mocha
-post_format: ":year-:month-:day-:title.md"
+post_format: "blog/:year-:month-:day/:title.md"

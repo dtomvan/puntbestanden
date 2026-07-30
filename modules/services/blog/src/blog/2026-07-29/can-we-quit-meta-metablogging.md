@@ -8,6 +8,8 @@ tags:
     - bubbles
     - bearblog
 draft: false
+aliases:
+    - /2026-07-29-can-we-quit-meta-metablogging
 ---
 
 Some might argue this is **meta-meta-metablogging**, and you'd be right... but let's be honest, this has been the upteenth [^1] time I've seen someone write "let's avoid just blogging about Bubbles for the clicks", because it just becomes slop. It doesn't add anything to the discourse anymore. In the valliant effort of trying to get people to stop metablogging, we engage in it... And it makes me sad. Bubbles is just Yet Another Feed Aggregator, but a curated one, that's it. It's nothing revolutionary, let's be honest. While I really like Bubbles and what it stands for, let's not treat it as anything that's theoretically interesting or something. So without wasting any more words on this, let's quit this blogception!

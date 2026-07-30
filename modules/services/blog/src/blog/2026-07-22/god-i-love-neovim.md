@@ -9,6 +9,8 @@ tags:
   - tricks
   - dx
 draft: false
+aliases:
+    - /2026-07-22-god-i-love-neovim
 ---
 
 If I had a nickel for every time this happened to me, I'd be rich, but

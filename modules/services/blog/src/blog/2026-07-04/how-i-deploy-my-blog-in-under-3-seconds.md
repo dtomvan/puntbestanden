@@ -13,6 +13,8 @@ tags:
   - linux
   - git-pages
 draft: false
+aliases:
+    - /2026-07-04-how-i-deploy-my-blog-in-under-3-seconds
 ---
 
 Pardon the clickbait-y title. I swear this is interesting!
