@@ -16,6 +16,7 @@
       {% else %} Note {% endif %}
     </a>
     <small>
+      {% if post.commentary %}<a href="{{ post.url }}">[commentary]</a>{%endif%}
       {% if post.favorite %} <a href="/blog/tags#⭐" style="text-decoration: none">⭐</a> {% endif
       %}
       <span class="tags hidden-mobile">
