@@ -56,7 +56,7 @@ in
       packages = builtins.attrValues {
         inherit (pkgs) coreutils git;
         inherit (pkgs.nur.repos.dtomvan) jorge;
-        inherit (self'.packages) send-webmention blog-push;
+        inherit (self'.packages) send-webmention blog-push repost;
       };
       shellHook = ''
         pushd "$(git rev-parse --show-toplevel)/modules/services/blog"
