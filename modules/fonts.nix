@@ -61,7 +61,7 @@ in
             };
       };
 
-      programs.regreet.font.name = family;
+      services.displayManager.regreet.font.name = family;
     };
 
   flake.modules.maid.profiles-plasma.kconfig.settings.kdeglobals.General = {
