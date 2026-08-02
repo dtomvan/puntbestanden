@@ -10,7 +10,7 @@ layout: post
 lang: en
 draft: false
 aliases:
-    - /2026-07-02-re-under-16s-social-media-ban
+  - /2026-07-02-re-under-16s-social-media-ban
 ---
 
 **Content warning:** politics, kids' mental health (implied)

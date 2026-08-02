@@ -12,7 +12,7 @@ layout: post
 lang: en
 draft: false
 aliases:
-    - /2026-07-11-re-we-made-ai-stop-complaining
+  - /2026-07-11-re-we-made-ai-stop-complaining
 ---
 
 In-reply-to: https://www.gordonmclean.co.uk/2026/07/11/we-made-ai-stop-complaining/

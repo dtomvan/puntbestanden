@@ -6,10 +6,10 @@ summary: I've implemented several Microformats on this website.
 date: 2026-07-01T17:33:57+02:00
 layout: post
 lang: en
-tags: [indieweb,microformats]
+tags: [indieweb, microformats]
 draft: false
 aliases:
-    - /2026-07-01-hello-indieweb
+  - /2026-07-01-hello-indieweb
 ---
 
 **Assumed audience:** either the IndieWeb-curious or IndieWeb enthusiasts, optional: people who have experience with the big web, especially aggregators

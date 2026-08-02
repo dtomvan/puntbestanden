@@ -14,7 +14,7 @@ tags:
   - JulyReply
 draft: false
 aliases:
-    - /2026-07-09-re-asking-should-i-take-notes-on-this
+  - /2026-07-09-re-asking-should-i-take-notes-on-this
 ---
 
 In-reply-to: https://v5.chriskrycho.com/notes/asking-should-i-take-notes-on-this/

@@ -14,7 +14,7 @@ tags:
   - language
 draft: false
 aliases:
-    - /2026-07-09-does-indieweb-have-certain-algospeak
+  - /2026-07-09-does-indieweb-have-certain-algospeak
 ---
 
 Over the past couple years I've noticed a sort-of trend on the medium-to-small web. People seem to speak and write differently here compared to bigger platforms and spaces. IANAL, I Am Not A Linguist, so these are just some loose observations I've seen around the internet. I'm just putting these thoughts out there to see if anyone has anything to say.

@@ -12,7 +12,7 @@ tags:
   - JulyReply
 draft: false
 aliases:
-    - /2026-07-02-re-youre-a-blogger-and-thats-pretty-damn-awesome.md
+  - /2026-07-02-re-youre-a-blogger-and-thats-pretty-damn-awesome.md
 ---
 
 In-reply-to: https://robertbirming.com/blogger-pretty-awesome/

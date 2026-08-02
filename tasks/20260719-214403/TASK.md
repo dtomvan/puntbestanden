@@ -10,11 +10,11 @@ The base properties all trivially map to an entry in the YAML frontmatter, so im
 
 ```markdown
 ---
-title: {{name}}
-summary: {{summary}}
-date: {{published}}
-updated: {{updated}} # to be implemented still
-tags: {{category}} # both are arrays, so you'd only have to parse the url-encoded array into a YAML array
+title: { { name } }
+summary: { { summary } }
+date: { { published } }
+updated: { { updated } } # to be implemented still
+tags: { { category } } # both are arrays, so you'd only have to parse the url-encoded array into a YAML array
 ---
 
 {{content}}
