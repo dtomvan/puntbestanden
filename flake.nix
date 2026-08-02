@@ -202,14 +202,6 @@
       };
       "url" = "github:nix-community/nixvim";
     };
-    "noctalia" = {
-      "inputs" = {
-        "nixpkgs" = {
-          "follows" = "nixpkgs";
-        };
-      };
-      "url" = "github:noctalia-dev/noctalia";
-    };
     "noctalia-greeter" = {
       "inputs" = {
         "nixpkgs" = {

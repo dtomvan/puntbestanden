@@ -14,18 +14,13 @@ let
   inherit (lib.types) toml;
 in
 {
-  flake-inputs.noctalia = {
-    url = "github:noctalia-dev/noctalia";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   flake-inputs.noctalia-greeter = {
     url = "github:noctalia-dev/noctalia-greeter";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
   flake.modules.nixos.profiles-noctalia =
-    { inputs', ... }:
+    { pkgs, ... }:
     {
       imports = [
         self.modules.nixos.programs-niri-common
@@ -41,7 +36,7 @@ in
 
       programs.noctalia-greeter.enable = true;
 
-      environment.systemPackages = singleton inputs'.noctalia.packages.default;
+      environment.systemPackages = singleton pkgs.noctalia;
 
       # recommended by docs
       networking.networkmanager.enable = mkDefault true;
