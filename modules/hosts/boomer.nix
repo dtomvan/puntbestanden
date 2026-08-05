@@ -145,10 +145,8 @@ in
         my.plasma.enable = withPlasma;
 
         programs.firefox.profiles.dev-edition-default.extensions.packages = builtins.attrValues {
-          inherit (pkgs.nur.repos.dtomvan)
-            zotero-connector
-            violentmonkey
-            ;
+          inherit (pkgs.nur.repos.dtomvan) zotero-connector;
+          inherit (pkgs.nur.repos.rycee.firefox-addons) violentmonkey;
         };
 
         home.stateVersion = "26.11";
