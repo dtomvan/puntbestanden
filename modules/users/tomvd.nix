@@ -33,11 +33,6 @@
     gpgPubKey = "EFD11A9B09D8D2C6";
     locale = "en_US.UTF-8";
     timeZone = "Europe/Amsterdam";
-
-    nixvim = {
-      enable = true;
-      package = { self', ... }: self'.packages.nixvim.overrideAttrs { dontFixup = true; };
-    };
   };
 
   flake.modules.homeManager.users-tomvd.imports = builtins.attrValues {

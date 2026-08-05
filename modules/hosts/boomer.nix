@@ -46,9 +46,7 @@ in
         speedFactor = 4;
       };
     };
-    enableHomeManager = true;
-    enableNixvim = true;
-    enableMaid = true;
+
     flatpak = {
       enable = true;
       packages = [

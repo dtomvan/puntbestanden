@@ -34,9 +34,6 @@
     };
     remoteBuild.enable = false;
 
-    enableHomeManager = true;
-    enableNixvim = true;
-    enableMaid = true;
     flatpak = {
       enable = true;
       packages = [

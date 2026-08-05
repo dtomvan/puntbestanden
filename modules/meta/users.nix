@@ -53,18 +53,6 @@ let
       default = null;
       type = nullOr str;
     };
-
-    nixvim = {
-      enable = mkEnableOption "installing nixvim";
-      package = mkOption {
-        description = "package selector for nixvim to install";
-        type = functionTo package |> nullOr;
-        default = null;
-        example = literalExpression ''
-          { self', host, ... }: if host.networking.hostName == "feather" then self'.packages.nixvim-minimal else self'.packages.nixvim
-        '';
-      };
-    };
   };
 in
 {

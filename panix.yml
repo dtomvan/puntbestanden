@@ -29,8 +29,47 @@ fleet:
           commitit:
             machines:
               commitit:
+                ssh:
+                  hostname: 2a01:4f8:1c18:5b92::1
                 tags:
                   - hetzner
+
+        homeConfigurations:
+          "tomvd@boomer":
+            user: tomvd
+            machines:
+              boomer:
+          "tomvd@feather":
+            user: tomvd
+            machines:
+              feather:
+
+        packages:
+          nixvim:
+            user: tomvd
+            machines:
+              boomer:
+              feather:
+          "maid-tomvd@boomer":
+            user: tomvd
+            preset:
+              activation_path: bin/activate
+            machines:
+              boomer:
+          "maid-tomvd@feather":
+            user: tomvd
+            preset:
+              activation_path: bin/activate
+            machines:
+              feather:
+          "maid-tomvd@commitit":
+            user: tomvd
+            preset:
+              activation_path: bin/activate
+            machines:
+              commitit:
+                ssh:
+                  hostname: 2a01:4f8:1c18:5b92::1
 
 flags:
   activation_mode:

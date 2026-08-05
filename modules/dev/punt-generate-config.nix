@@ -44,9 +44,6 @@ in
 
                     networking.hostName = "''${hostname}";
 
-                    enableHomeManager = true;
-                    enableNixvim = true;
-                    enableMaid = true;
                     flatpak = {
                       enable = true;
                       packages = [
