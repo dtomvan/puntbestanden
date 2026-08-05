@@ -1,7 +1,6 @@
-# yaml-language-server: $schema=https://raw.githubusercontent.com/mihakrumpestar/panix/v0.8.1/gen/panix-schema.yaml
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mihakrumpestar/panix/v0.9.0/gen/panix-schema.yaml
 
 fleet:
-  activation_mode: boot
   ssh:
     username: root
   nix:
@@ -15,24 +14,29 @@ fleet:
       - --substitute-on-destination
   flakes:
     puntbestanden:
-      configurations:
-        boomer:
-          machines:
-            boomer:
-              tags:
-                - desktop
-        feather:
-          machines:
-            feather:
-              tags:
-                - desktop
-        commitit:
-          machines:
-            commitit:
-              tags:
-                - hetzner
+      installables:
+        nixosConfigurations:
+          boomer:
+            machines:
+              boomer:
+                tags:
+                  - desktop
+          feather:
+            machines:
+              feather:
+                tags:
+                  - desktop
+          commitit:
+            machines:
+              commitit:
+                tags:
+                  - hetzner
 
 flags:
+  activation_mode:
+    pertype:
+      nixosConfigurations: boot
+      homeConfigurations: switch
   logging:
     log_file: panix.log
   snapshot:
