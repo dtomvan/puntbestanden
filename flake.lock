@@ -538,26 +538,6 @@
         "type": "github"
       }
     },
-    "noctalia-greeter": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1786236850,
-        "narHash": "sha256-K1AkQg+pZyI/vuIrz7s8sGxqTsCrVJwOOK/ttOwh+q0=",
-        "owner": "noctalia-dev",
-        "repo": "noctalia-greeter",
-        "rev": "763411f5ebd864adba27db9354a1d5724c15704c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "noctalia-dev",
-        "repo": "noctalia-greeter",
-        "type": "github"
-      }
-    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -624,7 +604,6 @@
         "nixos-small": "nixos-small",
         "nixpkgs": "nixpkgs",
         "nixvim": "nixvim",
-        "noctalia-greeter": "noctalia-greeter",
         "nur": "nur",
         "run0-sudo-shim": "run0-sudo-shim",
         "sops": "sops",

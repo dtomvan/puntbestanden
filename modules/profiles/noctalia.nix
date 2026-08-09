@@ -1,7 +1,6 @@
 {
   self,
   lib,
-  inputs,
   ...
 }:
 let
@@ -14,17 +13,12 @@ let
   inherit (lib.types) toml;
 in
 {
-  flake-inputs.noctalia-greeter = {
-    url = "github:noctalia-dev/noctalia-greeter";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   flake.modules.nixos.profiles-noctalia =
     { pkgs, ... }:
     {
       imports = [
         self.modules.nixos.programs-niri-common
-        inputs.noctalia-greeter.nixosModules.default
+        ./_noctalia-greeter.nix
       ];
 
       services.displayManager = {
@@ -34,7 +28,7 @@ in
         plasma-login-manager.enable = mkForce false;
       };
 
-      programs.noctalia-greeter.enable = true;
+      services.displayManager.noctalia-greeter.enable = true;
 
       environment.systemPackages = singleton pkgs.noctalia;
 
