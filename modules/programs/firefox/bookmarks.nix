@@ -65,6 +65,14 @@
                 name = "Nixpkgs security tracker";
                 url = "https://tracker.security.nixos.org/";
               }
+              {
+                name = "NUR tom search";
+                url = "https://search.boostveen.nl/packages?scope=dtomvan-nur-packages";
+              }
+              {
+                name = "NUR bart search";
+                url = "https://search.boostveen.nl/packages?scope=bart-packages";
+              }
             ];
           }
           {
