@@ -36,6 +36,10 @@ in
       uuid = "787845e2-1f4a-4f3e-b85b-4a8ba80dceb9";
     }
     {
+      ssid = "ASUS_D0_2G";
+      uuid = "3c441810-6bf3-4db9-907e-3975ecdba053";
+    }
+    {
       ssid = "ASUS_D0_5G";
       uuid = "6d2cf195-4351-40e8-ab61-e2e6acf60767";
     }
