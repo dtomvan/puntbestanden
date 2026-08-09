@@ -74,14 +74,6 @@ fleet:
               activation_path: bin/activate
             machines:
               feather:
-          "maid-tomvd@commitit":
-            user: tomvd
-            preset:
-              activation_path: bin/activate
-            machines:
-              commitit:
-                ssh:
-                  hostname: 91.98.231.12
 
 flags:
   activation_mode:
