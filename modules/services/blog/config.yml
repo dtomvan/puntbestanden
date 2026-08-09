@@ -2,5 +2,5 @@ name: "Tom Oostveen"
 author: "Tom Oostveen"
 url: "https://toostveen.nl"
 description: "Placeholder"
-highlight_theme: catppuccin-mocha
+highlight_theme: custom
 post_format: "blog/:year-:month-:day/:title.md"
