@@ -42,7 +42,7 @@
             sources = {
               wordlists =
                 pkgs.fetchurl {
-                  url = "https://cgit.git.savannah.gnu.org/cgit/miscfiles.git/plain/web2?id=fc51530ea66019efba9e961578df986a950cbb65";
+                  url = "https://git.toostveen.nl/cgit/miscfiles/raw/commit/fc51530ea66019efba9e961578df986a950cbb65/web2";
                   hash = "sha256-KSmJWrP+x4xpY+vly7NJP+T8nhHroJWlInh7ivxTqGM=";
                 }
                 |> lib.singleton;
