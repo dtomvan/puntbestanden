@@ -8,6 +8,8 @@
             requests
             mf2py
           ];
+          # lines with hardcoded storepaths may get really long, and I've no idea what to do about it
+          flakeIgnore = [ "E501" ];
         }
         # python
         ''
