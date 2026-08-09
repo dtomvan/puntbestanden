@@ -26,11 +26,11 @@ in
             name = "flatpak-managed-activate";
             text = ''
               flatpak="/run/current-system/sw/bin/flatpak"
-              "$flatpak" remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+              "$flatpak" remote-add --if-not-exists --system flathub https://dl.flathub.org/repo/flathub.flatpakrepo
               ${optionalString (packages != [ ]) ''
-                "$flatpak" install --noninteractive --or-update ${escapeShellArgs packages}
+                "$flatpak" install --noninteractive --or-update --system flathub ${escapeShellArgs packages}
               ''}
-              "$flatpak" update --noninteractive
+              "$flatpak" update --noninteractive --system
             '';
           }
           |> nameValuePair "flatpak-${v.networking.hostName}"
