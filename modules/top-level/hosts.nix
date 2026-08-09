@@ -172,7 +172,7 @@ let
     };
 
     flatpak = {
-      enable = mkEnableOption "deploy-rs profiles that declaratively install some flatpaks";
+      enable = mkEnableOption "scripts that declaratively install some flatpaks";
       packages = mkOption {
         description = "list of pre-installed flatpak apps";
         type = listOf str;

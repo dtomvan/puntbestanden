@@ -117,33 +117,6 @@
         "type": "github"
       }
     },
-    "deploy-rs": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nix-github-actions": "nix-github-actions",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "treefmt-nix": [
-          "treefmt-nix"
-        ]
-      },
-      "locked": {
-        "lastModified": 1781559549,
-        "narHash": "sha256-hiULr27laYmXGEziofzw+w+fmJsigqSqmcH29VW2ejE=",
-        "ref": "refs/heads/master",
-        "rev": "0d7abc3ecbe6d50928f62b8f06e9057f574a8fb8",
-        "revCount": 367,
-        "type": "git",
-        "url": "https://git.toostveen.nl/tom/deploy-rs"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.toostveen.nl/tom/deploy-rs"
-      }
-    },
     "devshell": {
       "inputs": {
         "nixpkgs": [
@@ -406,27 +379,6 @@
         "type": "github"
       }
     },
-    "nix-github-actions": {
-      "inputs": {
-        "nixpkgs": [
-          "deploy-rs",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1737420293,
-        "narHash": "sha256-F1G5ifvqTpJq7fdkT34e/Jy9VCyzd5XfJ9TO8fHhJWE=",
-        "owner": "nix-community",
-        "repo": "nix-github-actions",
-        "rev": "f4158fa080ef4503c8f4c820967d946c2af31ec9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "nix-github-actions",
-        "type": "github"
-      }
-    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -659,7 +611,6 @@
         "bart-packages": "bart-packages",
         "catppuccin": "catppuccin",
         "copyparty": "copyparty",
-        "deploy-rs": "deploy-rs",
         "devshell": "devshell",
         "direnv-instant": "direnv-instant",
         "disko": "disko",

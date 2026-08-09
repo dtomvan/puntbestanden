@@ -89,20 +89,6 @@
       };
       "url" = "github:9001/copyparty";
     };
-    "deploy-rs" = {
-      "inputs" = {
-        "flake-parts" = {
-          "follows" = "flake-parts";
-        };
-        "nixpkgs" = {
-          "follows" = "nixpkgs";
-        };
-        "treefmt-nix" = {
-          "follows" = "treefmt-nix";
-        };
-      };
-      "url" = "git+https://git.toostveen.nl/tom/deploy-rs";
-    };
     "devshell" = {
       "inputs" = {
         "nixpkgs" = {

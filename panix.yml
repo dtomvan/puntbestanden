@@ -50,6 +50,18 @@ fleet:
             machines:
               boomer:
               feather:
+          flatpak-boomer:
+            user: tomvd
+            preset:
+              activation_path: bin/flatpak-managed-activate
+            machines:
+              boomer:
+          flatpak-feather:
+            user: tomvd
+            preset:
+              activation_path: bin/flatpak-managed-activate
+            machines:
+              feather:
           "maid-tomvd@boomer":
             user: tomvd
             preset:
