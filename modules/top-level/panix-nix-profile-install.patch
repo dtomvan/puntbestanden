@@ -1,0 +1,121 @@
+diff --git a/internal/workflow/phaseops/activate.go b/internal/workflow/phaseops/activate.go
+index 5bb2248c67..b7d626e18c 100644
+--- a/internal/workflow/phaseops/activate.go
++++ b/internal/workflow/phaseops/activate.go
+@@ -8,6 +8,7 @@
+ 	"github.com/mihakrumpestar/panix/internal/config/tree/installable"
+ 	"github.com/mihakrumpestar/panix/internal/config/tree/machine"
+ 	"github.com/mihakrumpestar/panix/internal/executioner"
++	"github.com/mihakrumpestar/panix/pkg/nixver"
+ 	"github.com/pkg/errors"
+ )
+ 
+@@ -71,16 +72,21 @@
+ 
+ func activatePackage(
+ 	exc *executioner.Executioner,
+-	_ *machine.Machine,
++	machine *machine.Machine,
+ 	preset installable.Preset,
+ 	closure string,
+ 	targetUser string,
+ 	nixCfg *nix.NixConfig,
+ ) error {
++	sC := machine.GetActiveSSH()
++	nixProfileSubCmd := "add"
++	if sC.NixInfo.Flavor == nixver.FlavorLix {
++		nixProfileSubCmd = "install"
++	}
+ 	args := slices.Concat(
+ 		[]string{"nix"},
+ 		nixCfg.GetExperimentalFeatures(),
+-		[]string{"profile", "add"},
++		[]string{"profile", nixProfileSubCmd},
+ 		nixCfg.GetProfileAddDefaultFlags(),
+ 		[]string{closure},
+ 	)
+diff --git a/pkg/ssh/ssh_client.go b/pkg/ssh/ssh_client.go
+index 7c7a42d4c0..12f08e9d42 100644
+--- a/pkg/ssh/ssh_client.go
++++ b/pkg/ssh/ssh_client.go
+@@ -33,11 +33,11 @@
+ 	isLocal         bool
+ 	hostnameIsAlias bool
+ 	alias           string
+-	nixInfo         nixver.Info // runtime-detected nix implementation
++	NixInfo         nixver.Info // runtime-detected nix implementation
+ }
+ 
+ func (sC *SSHClient) Init(machineName, localMachine string, nixInfo nixver.Info) error {
+-	sC.nixInfo = nixInfo
++	sC.NixInfo = nixInfo
+ 
+ 	var err error
+ 
+@@ -150,7 +150,7 @@
+ 
+ 	url := "ssh-ng://" + sC.Username + "@" + sC.Hostname
+ 
+-	if sC.nixInfo.Flavor == nixver.FlavorLix {
++	if sC.NixInfo.Flavor == nixver.FlavorLix {
+ 		url += "?port=" + sC.PortString()
+ 	} else {
+ 		url += ":" + sC.PortString()
+@@ -158,7 +158,7 @@
+ 
+ 	if sC.IdentityFile != "" {
+ 		sep := "?"
+-		if sC.nixInfo.Flavor == nixver.FlavorLix {
++		if sC.NixInfo.Flavor == nixver.FlavorLix {
+ 			sep = "&"
+ 		}
+ 
+diff --git a/pkg/ssh/ssh_client_test.go b/pkg/ssh/ssh_client_test.go
+index 08c29de0ef..127ad3a863 100644
+--- a/pkg/ssh/ssh_client_test.go
++++ b/pkg/ssh/ssh_client_test.go
+@@ -392,7 +392,7 @@
+ 		Username:        SSHDefaultUsername,
+ 		Port:            SSHDefaultPort,
+ 		hostnameIsAlias: false,
+-		nixInfo:         lixInfo,
++		NixInfo:         lixInfo,
+ 	}
+ 
+ 	assertion := assert.New(t)
+@@ -407,7 +407,7 @@
+ 		Port:            2222,
+ 		Username:        "root",
+ 		hostnameIsAlias: false,
+-		nixInfo:         lixInfo,
++		NixInfo:         lixInfo,
+ 	}
+ 
+ 	assertion := assert.New(t)
+@@ -423,7 +423,7 @@
+ 		Port:            SSHDefaultPort,
+ 		IdentityFile:    "/home/user/.ssh/id_ed25519",
+ 		hostnameIsAlias: false,
+-		nixInfo:         lixInfo,
++		NixInfo:         lixInfo,
+ 	}
+ 
+ 	assertion := assert.New(t)
+@@ -439,7 +439,7 @@
+ 		Username:        "builder",
+ 		IdentityFile:    "/home/user/.ssh/builder_key",
+ 		hostnameIsAlias: false,
+-		nixInfo:         lixInfo,
++		NixInfo:         lixInfo,
+ 	}
+ 
+ 	assertion := assert.New(t)
+@@ -455,7 +455,7 @@
+ 		Port:            SSHDefaultPort,
+ 		IdentityFile:    "/home/user/.ssh/id_ed25519",
+ 		hostnameIsAlias: false,
+-		nixInfo:         lixInfo,
++		NixInfo:         lixInfo,
+ 	}
+ 
+ 	assertion := assert.New(t)
