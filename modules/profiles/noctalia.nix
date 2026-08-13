@@ -16,10 +16,7 @@ in
   flake.modules.nixos.profiles-noctalia =
     { pkgs, ... }:
     {
-      imports = [
-        self.modules.nixos.programs-niri-common
-        ./_noctalia-greeter.nix
-      ];
+      imports = [ self.modules.nixos.programs-niri-common ];
 
       services.displayManager = {
         sddm.enable = mkForce false;
