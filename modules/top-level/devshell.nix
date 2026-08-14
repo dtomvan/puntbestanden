@@ -24,12 +24,7 @@
             stow
             nh
             ;
-          inherit (pkgs.nur.repos.dtomvan) sshp;
-          panix = pkgs.nur.repos.dtomvan.panix.overrideAttrs {
-            patches = [
-              ./panix-nix-profile-install.patch
-            ];
-          };
+          inherit (pkgs.nur.repos.dtomvan) sshp panix;
           pn = pkgs.writeShellApplication {
             name = "pn";
             text = ''
