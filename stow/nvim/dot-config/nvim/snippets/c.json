@@ -1,0 +1,6 @@
+{
+    "skel": {
+        "prefix": "skel",
+        "body": "/∗ file : $1.c ∗/\n/∗ author : Tom Oostveen (S6771092@student.rug.nl) ∗/\n/∗ date : $2 ∗/\n/∗ version: 1.0 ∗ /"
+    }
+}
