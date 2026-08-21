@@ -11,13 +11,15 @@ let
 
   # HACK: only support x86_64-linux, because otherwise `nix flake show`
   # wouldn't work anymore... sigh...
+  patches = import ./_nixpkgs-patches.nix {
+    inherit (pkgs') fetchpatch fetchpatch2;
+  };
+
   pkgs' = import inputs.nixpkgs { system = "x86_64-linux"; };
   nixpkgsPatched = pkgs'.applyPatches {
+    inherit patches;
     name = "source";
     src = inputs.nixpkgs;
-    patches = import ./_nixpkgs-patches.nix {
-      inherit (pkgs') fetchpatch fetchpatch2;
-    };
   };
 in
 {
@@ -53,7 +55,7 @@ in
     perSystem =
       { pkgs, system, ... }:
       let
-        nixpkgs = if system == "x86_64-linux" then nixpkgsPatched else inputs.nixpkgs;
+        nixpkgs = if system == "x86_64-linux" && patches != [ ] then nixpkgsPatched else inputs.nixpkgs;
       in
       {
         _module.args.pkgs = import nixpkgs {
