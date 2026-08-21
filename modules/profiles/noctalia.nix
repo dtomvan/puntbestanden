@@ -86,6 +86,7 @@ in
             borders = false;
             shadow = false;
           };
+          polkit_agent = true;
           settings_show_advanced = true;
           telemetry_enabled = false;
         };
