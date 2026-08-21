@@ -51,13 +51,13 @@ fleet:
               boomer:
               feather:
           flatpak-boomer:
-            user: tomvd
+            user: root
             preset:
               activation_path: bin/flatpak-managed-activate
             machines:
               boomer:
           flatpak-feather:
-            user: tomvd
+            user: root
             preset:
               activation_path: bin/flatpak-managed-activate
             machines:
