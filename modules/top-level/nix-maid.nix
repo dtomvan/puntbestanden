@@ -48,7 +48,11 @@ let
     );
 in
 {
-  flake-inputs.nix-maid.url = "github:viperML/nix-maid/b2fc8413bbba4277db47525e6bbab3508f03d081";
+  flake-inputs.nix-maid.url = "git+https://codeberg.org/viperML/nix-maid";
+  flake-inputs.kconfig-declarative = {
+    url = "git+https://codeberg.org/viperML/kconfig-declarative";
+    flake = false;
+  };
 
   perSystem = { system, ... }: {
     packages =
@@ -61,18 +65,22 @@ in
   # these options only have effect when profiles-plasma is
   # imported, but for simplicity just unconditionally making them
   # available.
-  flake.modules.maid.maid-common.options.kconfig = {
-    colorScheme = mkOption {
-      type = str;
-      default = "BreezeDark";
+  flake.modules.maid.maid-common = { pkgs, ... }: {
+    options.kconfig = {
+      colorScheme = mkOption {
+        type = str;
+        default = "BreezeDark";
+      };
+      wallpaper = mkOption {
+        type = nullOr str;
+        default = null;
+      };
+      extraAutostart = mkOption {
+        type = lines;
+        default = "";
+      };
     };
-    wallpaper = mkOption {
-      type = nullOr str;
-      default = null;
-    };
-    extraAutostart = mkOption {
-      type = lines;
-      default = "";
-    };
+
+    config.kconfig.package = pkgs.callPackage inputs.kconfig-declarative { };
   };
 }

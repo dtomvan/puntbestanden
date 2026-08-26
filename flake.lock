@@ -303,6 +303,22 @@
         "url": "https://git.madhouse-project.org/iocaine/iocaine/archive/iocaine-3.5.0.tar.gz"
       }
     },
+    "kconfig-declarative": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767464959,
+        "narHash": "sha256-mLrvQ7oNcueBVmNcot+aKwOYLDhvQQt8idUvr1fZOP4=",
+        "ref": "refs/heads/main",
+        "rev": "d936b450b065cbc15c3db5efc37cec527bce655e",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://codeberg.org/viperML/kconfig-declarative"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/viperML/kconfig-declarative"
+      }
+    },
     "lazy-apps": {
       "inputs": {
         "nixpkgs": [
@@ -401,18 +417,17 @@
     },
     "nix-maid": {
       "locked": {
-        "lastModified": 1781635712,
-        "narHash": "sha256-FMCCzcPNfI1jxIt89zCqwFy6oq7TSL5MpClCIuz1JVk=",
-        "owner": "viperML",
-        "repo": "nix-maid",
-        "rev": "b2fc8413bbba4277db47525e6bbab3508f03d081",
-        "type": "github"
+        "lastModified": 1783804358,
+        "narHash": "sha256-SxgdtD4DBslk8u5MIzh4Hs/7vcuPHn4cD2h5I3Mufz4=",
+        "ref": "refs/heads/master",
+        "rev": "0e0feba21016c1285382e32ea894ace731f49d3b",
+        "revCount": 125,
+        "type": "git",
+        "url": "https://codeberg.org/viperML/nix-maid"
       },
       "original": {
-        "owner": "viperML",
-        "repo": "nix-maid",
-        "rev": "b2fc8413bbba4277db47525e6bbab3508f03d081",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/viperML/nix-maid"
       }
     },
     "nixocaine": {
@@ -596,6 +611,7 @@
         "disko": "disko",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
+        "kconfig-declarative": "kconfig-declarative",
         "lazy-apps": "lazy-apps",
         "ncro": "ncro",
         "nix-index-database": "nix-index-database",
