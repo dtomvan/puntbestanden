@@ -51,8 +51,8 @@
         imports = builtins.attrValues {
           inherit (self.modules.nixos)
             disko
-            profiles-noctalia
             profiles-workstation
+            profiles-plasma
             themes-catppuccin
 
             hardware-comet-lake
@@ -71,6 +71,8 @@
             virt-nat
             ;
         };
+
+        my.plasma.enable = true;
 
         # remove this when reinstalling
         fileSystems."/boot".device =
@@ -108,10 +110,12 @@
         inherit (self.modules.homeManager)
           themes-catppuccin
           profiles-base
+          profiles-plasma
           programs-keepassxc
           profiles-graphical
           ;
       };
+      my.plasma.enable = true;
 
       home.stateVersion = "26.11";
     };
@@ -120,10 +124,11 @@
       imports = builtins.attrValues {
         inherit (self.modules.maid)
           profiles-workstation
-          profiles-noctalia
+          profiles-plasma
           themes-catppuccin
           ;
       };
+      my.plasma.enable = true;
 
       kconfig.settings.kwinrc.Xwayland.Scale = 1.5;
     };

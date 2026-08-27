@@ -72,7 +72,7 @@ in
     };
 
   flake.modules.maid.themes-catppuccin =
-    { config, pkgs, ... }:
+    { pkgs, ... }:
     let
       colorScheme = "CatppuccinMochaPeach";
       catppuccin-kde = pkgs.callPackage ./_catppuccin-kde.nix { inherit colorScheme; };
@@ -84,7 +84,7 @@ in
 
       file.xdg_data."color-schemes/${colorScheme}.colors".source = catppuccin-kde;
 
-      programs.${if config ? programs.noctalia then "noctalia" else null}.settings = {
+      programs.noctalia.settings = {
         wallpaper.default.path = wallpaper;
         theme.builtin = "Catppuccin";
       };
