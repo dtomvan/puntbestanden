@@ -119,6 +119,7 @@ in
                   };
                 };
                 "/_matrix".proxyPass = socket;
+                "/_continuwuity".proxyPass = socket;
               };
             };
           };
