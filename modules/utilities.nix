@@ -33,7 +33,6 @@
             nix-diff
             nix-output-monitor
             nix-tree
-            nurl
             pciutils
             pkg-config
             smartmontools
@@ -44,6 +43,7 @@
             zip
             # keep-sorted end
             ;
+          inherit (pkgs.lixPackageSets.stable) nurl;
           inherit (pkgs.incus) client;
         }
         ++ optionals cfg.enableLazyApps (
