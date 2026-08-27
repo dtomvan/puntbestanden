@@ -51,6 +51,7 @@ in
         config = lib.mkIf config.my.plasma.enable {
           kconfig.settings = {
             kcminputrc.Mouse.cursorSize = 24;
+            kwalletrc.KSecretD.Enabled = false;
           };
 
           file.xdg_config."autostart/plasma-theme.desktop".source =
