@@ -36,16 +36,16 @@ in
       services.upower.enable = mkDefault true;
     };
 
+  flake.modules.maid.maid-common.options.programs.noctalia.settings = mkOption {
+    type = toml;
+    default = { };
+  };
+
   flake.modules.maid.profiles-noctalia =
     { pkgs, config, ... }:
     {
       imports = builtins.attrValues {
         inherit (self.modules.maid) programs-niri-common;
-      };
-
-      options.programs.noctalia.settings = mkOption {
-        type = toml;
-        default = { };
       };
 
       config.file.xdg_state."noctalia/settings.toml".source =
