@@ -42,6 +42,10 @@
                 url = "https://github.com/NixOS/nixpkgs/";
               }
               {
+                name = "Vimjoyer course";
+                url = "https://vimjoyer.com/course";
+              }
+              {
                 name = "nixpkgs pulls";
                 url = "https://github.com/NixOS/nixpkgs/pulls?q=involves:dtomvan";
               }
