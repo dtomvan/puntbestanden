@@ -31,6 +31,12 @@ in
         inherit thunderbird;
         primary = true;
       };
+      "t.oostveen@student.rug.nl" = {
+        realName = "Tom Oostveen";
+        address = "t.oostveen@student.rug.nl";
+        flavor = "gmail.com";
+        inherit thunderbird;
+      };
       "18gatenmaker6@gmail.com" = {
         realName = config.users.tomvd.fullName;
         address = "18gatenmaker6@gmail.com";
