@@ -116,6 +116,10 @@ in
             timeout = 660;
           };
         };
+        # so noctalia doesn't remove my ~/.config/niri/noctalia.kdl, which is
+        # a special path that noctalia can override or delete depending on your
+        # settings...
+        theme.templates.builtin_ids = [ "niri" ];
       };
     };
 

@@ -7,6 +7,8 @@ include "input.kdl"
 include "layout.kdl"
 include "misc.kdl"
 include "screensharing.kdl"
+include "noctalia.kdl"
+include "noctalia-etc.kdl"
 
 output "PNP(AOC) 2590G5 0x0002048E" {
     mode "1920x1080@74.973"
@@ -17,3 +19,4 @@ output "PNP(AOC) 2590G5 0x0002048E" {
 
     layout { }
 }
+

@@ -1,23 +1,35 @@
-window-rule {
-  // Rounded corners for a modern look.
-  geometry-corner-radius 20
-
-  // Clips window contents to the rounded corner boundaries.
-  clip-to-geometry true
-}
-
-debug {
-  // Allows notification actions and window activation from Noctalia.
-  honor-xdg-activation-with-invalid-serial
-}
-
-// Set the regular wallpaper on the backdrop.
-layer-rule {
-  match namespace="^noctalia-wallpaper*"
-  place-within-backdrop true
-}
-
-// Set transparent workspace background color so you see the backdrop at all times.
 layout {
-  background-color "transparent"
+
+    focus-ring {
+        active-color   "#cba6f7"
+        inactive-color "#1e1e2e"
+        urgent-color   "#f38ba8"
+    }
+
+    border {
+        active-color   "#cba6f7"
+        inactive-color "#1e1e2e"
+        urgent-color   "#f38ba8"
+    }
+
+    shadow {
+        color "#11111b70"
+    }
+
+    tab-indicator {
+        active-color   "#cba6f7"
+        inactive-color "#6d10da"
+        urgent-color   "#f38ba8"
+    }
+
+    insert-hint {
+        color "#cba6f780"
+    }
+}
+
+recent-windows {
+    highlight {
+        active-color "#cba6f7"
+        urgent-color "#f38ba8"
+    }
 }
