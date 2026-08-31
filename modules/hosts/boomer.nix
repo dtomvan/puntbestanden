@@ -65,7 +65,6 @@
           disko
           profiles-workstation
           profiles-noctalia
-          profiles-plasma
           themes-catppuccin
 
           guest
@@ -146,7 +145,6 @@
         inherit (self.modules.maid)
           profiles-workstation
           profiles-noctalia
-          profiles-plasma
           themes-catppuccin
           ;
       };
