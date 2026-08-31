@@ -31,7 +31,7 @@
             forge-sparks
             gram
             keepassxc
-            libreoffice-qt6-fresh
+            libreoffice-qt-stable
             mpv
             obsidian
             pdfarranger
