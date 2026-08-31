@@ -33,6 +33,7 @@ let
         inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
+            inputs.sops.homeManagerModules.sops
             (self.lib.mkHomeDefaults user)
             (self.modules.homeManager."${user}@${hostName}" or { })
             (self.modules.homeManager."users-${user}" or { })

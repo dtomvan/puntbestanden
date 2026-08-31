@@ -113,6 +113,7 @@
           profiles-plasma
           programs-keepassxc
           profiles-graphical
+          copyparty-fuse
           ;
       };
       my.plasma.enable = true;

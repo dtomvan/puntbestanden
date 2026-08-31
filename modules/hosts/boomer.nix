@@ -135,6 +135,7 @@ in
             profiles-workstation
             profiles-plasma
             themes-catppuccin
+            copyparty-fuse
 
             mpd
             ;
