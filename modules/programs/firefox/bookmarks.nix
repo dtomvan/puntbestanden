@@ -189,6 +189,10 @@
                 name = "Homework";
                 url = "https://themis.housing.rug.nl";
               }
+              {
+                name = "FitchVIZIER";
+                url = "https://fitch.rug.themisjudge.nl/";
+              }
             ];
           }
           {
