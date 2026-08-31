@@ -22,7 +22,7 @@ in
       {
         imports = [ nixos.profiles-plasma-minimal ];
 
-        config = lib.mkIf config.my.plasma.enable {
+        config = {
           programs.kdeconnect.enable = mkDefault true;
 
           environment.systemPackages =
@@ -48,7 +48,7 @@ in
         cfg = config.kconfig;
       in
       {
-        config = lib.mkIf config.my.plasma.enable {
+        config = {
           kconfig.settings = {
             kcminputrc.Mouse.cursorSize = 24;
             kwalletrc.KSecretD.Enabled = false;

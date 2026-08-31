@@ -1,7 +1,4 @@
 { self, lib, ... }:
-let
-  withPlasma = false;
-in
 {
   hosts.amdpc1 = {
     description = "a reasonably sluggish Ryzen 5 2600 desktop PC";
@@ -56,8 +53,6 @@ in
         "io.github.dvlv.boxbuddyrs"
         "com.github.wwmm.easyeffects"
         "org.vinegarhq.Sober"
-      ]
-      ++ lib.optionals (!withPlasma) [
         "org.kde.skanpage"
       ];
     };
@@ -91,8 +86,6 @@ in
           users-remote-build
           ;
       };
-
-      my.plasma.enable = withPlasma;
 
       programs.gaming-free = {
         enable = true;
@@ -133,15 +126,12 @@ in
         imports = builtins.attrValues {
           inherit (self.modules.homeManager)
             profiles-workstation
-            profiles-plasma
             themes-catppuccin
             copyparty-fuse
 
             mpd
             ;
         };
-
-        my.plasma.enable = withPlasma;
 
         programs.firefox.profiles.dev-edition-default.extensions.packages = builtins.attrValues {
           inherit (pkgs.nur.repos.dtomvan) zotero-connector;
@@ -160,8 +150,6 @@ in
           themes-catppuccin
           ;
       };
-
-      my.plasma.enable = withPlasma;
 
       packages =
         builtins.attrValues {

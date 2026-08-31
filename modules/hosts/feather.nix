@@ -72,8 +72,6 @@
             ;
         };
 
-        my.plasma.enable = true;
-
         # remove this when reinstalling
         fileSystems."/boot".device =
           lib.mkForce "/dev/disk/by-partuuid/e1a459cf-9c29-490b-b00b-bcb5cc6c2d1a";
@@ -110,14 +108,11 @@
         inherit (self.modules.homeManager)
           themes-catppuccin
           profiles-base
-          profiles-plasma
           programs-keepassxc
           profiles-graphical
           copyparty-fuse
           ;
       };
-      my.plasma.enable = true;
-
       home.stateVersion = "26.11";
     };
 
@@ -129,8 +124,6 @@
           themes-catppuccin
           ;
       };
-      my.plasma.enable = true;
-
       kconfig.settings.kwinrc.Xwayland.Scale = 1.5;
     };
   };

@@ -1,15 +1,9 @@
 { lib, ... }:
-let
-  options.my.plasma.enable = lib.mkEnableOption "plasma" // {
-    default = true;
-  };
-in
 {
   flake.modules.nixos.profiles-plasma-minimal =
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     {
-      inherit options;
-      config = lib.mkIf config.my.plasma.enable {
+      config = {
         services = {
           desktopManager.plasma6.enable = true;
           displayManager = {
@@ -26,7 +20,4 @@ in
         };
       };
     };
-
-  flake.modules.homeManager.profiles-plasma = { inherit options; };
-  flake.modules.maid.profiles-plasma = { inherit options; };
 }
