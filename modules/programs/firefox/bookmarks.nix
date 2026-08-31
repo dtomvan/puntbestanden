@@ -170,16 +170,24 @@
                 url = "https://www.rug.nl/fse/education/welcome-packages/bsc/bsc-computing-science/computing-science";
               }
               {
-                name = "Brightspace";
-                url = "https://brightspace.rug.nl";
-              }
-              {
                 name = "Algemene info FSE-BSC-CS";
                 url = "https://student.portal.rug.nl/infonet/studenten/fse/programmes/bsc-cs/";
               }
               {
+                name = "Brightspace";
+                url = "https://brightspace.rug.nl";
+              }
+              {
+                name = "Student portal";
+                url = "https://student.portal.rug.nl";
+              }
+              {
                 name = "rooster";
                 url = "https://rooster.rug.nl/";
+              }
+              {
+                name = "ocasys";
+                url = "https://ocasys.rug.nl/";
               }
               {
                 name = "Quick links FSE";
@@ -192,6 +200,10 @@
               {
                 name = "FitchVIZIER";
                 url = "https://fitch.rug.themisjudge.nl/";
+              }
+              {
+                name = "Cover";
+                url = "https://svcover.nl";
               }
             ];
           }
