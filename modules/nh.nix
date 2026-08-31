@@ -9,6 +9,9 @@
         extraArgs = "--keep 5 --keep-since 14d --nogcroots";
       };
     };
-    environment.variables.NH_SHOW_ACTIVATION_LOGS = 1;
+    environment.variables = {
+      NH_SHOW_ACTIVATION_LOGS = 1;
+      NH_ELEVATION_STRATEGY = "run0";
+    };
   };
 }
