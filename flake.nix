@@ -159,7 +159,7 @@
       "url" = "github:nix-community/nix-index-database";
     };
     "nix-maid" = {
-      "url" = "git+https://codeberg.org/viperML/nix-maid";
+      "url" = "git+https://codeberg.org/dtomvan/nix-maid";
     };
     "nixocaine" = {
       "inputs" = {

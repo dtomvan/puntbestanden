@@ -417,17 +417,17 @@
     },
     "nix-maid": {
       "locked": {
-        "lastModified": 1783804358,
-        "narHash": "sha256-SxgdtD4DBslk8u5MIzh4Hs/7vcuPHn4cD2h5I3Mufz4=",
+        "lastModified": 1788196123,
+        "narHash": "sha256-7bFZr17XkT8aA62cW6Hhmxdnn2iu23Ce6TAqUHADOyI=",
         "ref": "refs/heads/master",
-        "rev": "0e0feba21016c1285382e32ea894ace731f49d3b",
-        "revCount": 125,
+        "rev": "715d0994df461040419ad987138799bda23c9249",
+        "revCount": 126,
         "type": "git",
-        "url": "https://codeberg.org/viperML/nix-maid"
+        "url": "https://codeberg.org/dtomvan/nix-maid"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/viperML/nix-maid"
+        "url": "https://codeberg.org/dtomvan/nix-maid"
       }
     },
     "nixocaine": {

@@ -48,7 +48,7 @@ let
     );
 in
 {
-  flake-inputs.nix-maid.url = "git+https://codeberg.org/viperML/nix-maid";
+  flake-inputs.nix-maid.url = "git+https://codeberg.org/dtomvan/nix-maid";
   flake-inputs.kconfig-declarative = {
     url = "git+https://codeberg.org/viperML/kconfig-declarative";
     flake = false;
