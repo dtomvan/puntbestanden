@@ -185,7 +185,10 @@
                 name = "Quick links FSE";
                 url = "https://student.portal.rug.nl/infonet/studenten/fse/";
               }
-
+              {
+                name = "Homework";
+                url = "https://themis.housing.rug.nl";
+              }
             ];
           }
           {
