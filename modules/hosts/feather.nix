@@ -6,7 +6,7 @@
     users = [ "tomvd" ];
     mainDisk = "/dev/disk/by-id/nvme-2-Power_SSD7015A_1TB_P1360761115";
     sshPubkey = {
-      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPEAGWn9EODHqle1nbySh5v0yQzWUIPYd5spSaMHYLdK tomvd@feather";
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB1CxgYaRCTFM8zpxe8tRTN1aM76QWZlDP6NscPSArM6 tomvd@feather";
       # needs to be able to self-deploy
       allowedHosts = [
         "boomer"
