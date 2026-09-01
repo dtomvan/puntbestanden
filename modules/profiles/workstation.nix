@@ -21,6 +21,8 @@
             ;
         };
 
+        documentation.dev.enable = true;
+
         modules.utilities.enableLazyApps = true;
 
         services.gnome.gnome-keyring.enable = lib.mkForce false;
@@ -32,6 +34,7 @@
             gram
             keepassxc
             libreoffice-qt-stable
+            man-pages
             mpv
             obsidian
             pdfarranger
