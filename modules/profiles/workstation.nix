@@ -47,6 +47,14 @@
             # keep-sorted end
             ;
           inherit (pkgs.lixPackageSets.stable) nixpkgs-reviewFull;
+          vscode = pkgs.vscode.fhsWithPackages (
+            ps: with ps; [
+              glibc.dev
+              openssl.dev
+              pkg-config
+              zlib
+            ]
+          );
         };
       };
 
