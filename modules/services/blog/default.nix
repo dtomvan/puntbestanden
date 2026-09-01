@@ -192,7 +192,10 @@ in
           recursive_error_pages on;
         '';
 
-        serverAliases = [ "testing.${domain}" ];
+        serverAliases = [
+          "testing.${domain}"
+          "cs.${domain}"
+        ];
 
         locations."/" = {
           proxyPass = "$blog_upstream_location";
