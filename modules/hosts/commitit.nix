@@ -87,6 +87,24 @@ in
         telegram.enable = true;
       };
 
+      services.matrix-continuwuity.package = pkgs.matrix-continuwuity.overrideAttrs (
+        final: _prev: {
+          version = "0-unstable-2026-09-01";
+          src = pkgs.fetchFromGitea {
+            domain = "forgejo.ellis.link";
+            owner = "continuwuation";
+            repo = "continuwuity";
+            rev = "62822febfebeec41e905237b14bbeb586f280283";
+            hash = "sha256-U5bhe1PyGyIBc1SvNjgOt5IBA41SSlH1OIHOF0Vx/vY=";
+          };
+          cargoHash = null;
+          cargoDeps = pkgs.rustPlatform.fetchCargoVendor {
+            inherit (final) pname version src;
+            hash = "sha256-cdbKkjwpKHuBABeXY/qlWD7alH74nLPnkkpTXH+9WrY=";
+          };
+        }
+      );
+
       infra.md.enable = true;
 
       infra.miniflux = {
