@@ -194,7 +194,7 @@
                 url = "https://student.portal.rug.nl/infonet/studenten/fse/";
               }
               {
-                name = "Homework";
+                name = "Themis";
                 url = "https://themis.housing.rug.nl";
               }
               {
@@ -204,6 +204,14 @@
               {
                 name = "Cover";
                 url = "https://svcover.nl";
+              }
+              {
+                name = "Progress";
+                url = "https://progresswww.nl";
+              }
+              {
+                name = "Printing";
+                url = "https://rug.mycampusprint.nl/Login/Login";
               }
             ];
           }
