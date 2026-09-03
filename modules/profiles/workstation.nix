@@ -33,6 +33,7 @@
             forge-sparks
             gram
             keepassxc
+            keyguard
             libreoffice-qt-stable
             man-pages
             mpv

@@ -44,6 +44,7 @@ in
           services-monitoring
           services-readeck
           services-syncthing
+          services-vaultwarden
           services-xandikos
           themes-catppuccin
           # keep-sorted end
@@ -118,6 +119,7 @@ in
       };
 
       infra.readeck.enable = true;
+      infra.vaultwarden.enable = true;
 
       services.postgresql = {
         enable = true;
