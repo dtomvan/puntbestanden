@@ -247,6 +247,14 @@
       };
       "url" = "git+https://git.toostveen.nl/tom/tasks.nvim";
     };
+    "tree-sitter-fitch" = {
+      "inputs" = {
+        "nixpkgs" = {
+          "follows" = "nixpkgs";
+        };
+      };
+      "url" = "git+https://git.toostveen.nl/tom/tree-sitter-fitch";
+    };
     "treefmt-nix" = {
       "inputs" = {
         "nixpkgs" = {
