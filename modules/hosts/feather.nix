@@ -52,7 +52,7 @@
           inherit (self.modules.nixos)
             disko
             profiles-workstation
-            profiles-plasma
+            profiles-noctalia
             themes-catppuccin
 
             hardware-comet-lake
@@ -120,7 +120,7 @@
       imports = builtins.attrValues {
         inherit (self.modules.maid)
           profiles-workstation
-          profiles-plasma
+          profiles-noctalia
           themes-catppuccin
           ;
       };
