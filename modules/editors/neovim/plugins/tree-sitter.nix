@@ -4,13 +4,17 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  flake.modules.nixvim.default = { config, inputs', ... }: {
-    plugins.treesitter = {
-      enable = true;
-      settings.highlight.enable = true;
-      grammarPackages = config.plugins.treesitter.package.allGrammars ++ [
-        inputs'.tree-sitter-fitch.packages.default
-      ];
+  flake.modules.nixvim.default =
+    { config, inputs', ... }:
+    let
+      tree-sitter-fitch = inputs'.tree-sitter-fitch.packages.default;
+    in
+    {
+      plugins.treesitter = {
+        enable = true;
+        settings.highlight.enable = true;
+        grammarPackages = config.plugins.treesitter.package.allGrammars ++ [ tree-sitter-fitch ];
+        languageRegister.fitch = "fitch";
+      };
     };
-  };
 }

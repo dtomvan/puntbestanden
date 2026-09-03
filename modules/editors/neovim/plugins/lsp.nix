@@ -13,7 +13,10 @@
         none-ls.enable = true;
       };
 
-      extraPackages = [ self'.packages.lazyLsps ];
+      extraPackages = [
+        self'.packages.lazyLsps
+        pkgs.nur.repos.dtomvan.fitch-vizier
+      ];
 
       lsp = {
         luaConfig.post =

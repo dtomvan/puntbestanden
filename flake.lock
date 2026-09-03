@@ -597,11 +597,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788670675,
-        "narHash": "sha256-JPszcyBy+RXu6biXRVkS3pZ2FQhRiPvq/v7vLUgo3d4=",
+        "lastModified": 1788716332,
+        "narHash": "sha256-AWMe/AwMlTqBGt5fTwQ9uTzOpjRpLmWP0Bm5aqCqoVM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "6686b52399203abab17b7c4e96fe411729ae9ca8",
+        "rev": "b351b2bd0a2348f4cea1e37bdc2e0f37572e072f",
         "type": "github"
       },
       "original": {
@@ -899,11 +899,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1788461591,
-        "narHash": "sha256-turH1SRTeEIKyBeBwGT+zkqDhfT7IFPclfOBh6cYclk=",
+        "lastModified": 1788716659,
+        "narHash": "sha256-TPCBs4n13Ns3wPqO6bkKGE6xbPV88kouppL5ZIT5qgE=",
         "ref": "refs/heads/main",
-        "rev": "fefd7eea9c583e12c4fcf725225dbcc0b89b0262",
-        "revCount": 1,
+        "rev": "55d63069ef054a110a0bb57bfc9e0c09e29f76e3",
+        "revCount": 2,
         "type": "git",
         "url": "https://git.toostveen.nl/tom/tree-sitter-fitch"
       },
