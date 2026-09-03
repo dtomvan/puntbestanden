@@ -44,6 +44,7 @@
           ''
             bind 'set show-all-if-ambiguous on'
             bind 'tab:menu-complete'
+            shopt -s autocd
           '';
 
         shellAliases = {
