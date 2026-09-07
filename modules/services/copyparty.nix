@@ -354,7 +354,9 @@ in
           tmp="$(mktemp)"
           cat > "$tmp"
           ext="$(file --brief --extension "$tmp" | awk -F/ '{ print $1 }')"
+          ext="''${ext%%$'\n'}"
           mime="$(file --brief --mime-type "$tmp")"
+          mime="''${mime%%$'\n'}"
           case "$ext" in
             png | jpg | jpeg)
               drop="scrot";;
@@ -362,6 +364,12 @@ in
               if [ "$mime" = "application/xhtml+xml" ] || [ "$mime" = "text/html" ]; then
                 drop="paste"
                 ext="html"
+              elif [[ "$mime" = "text/x-c" ]]; then
+                drop="paste"
+                ext="c"
+              elif [[ "$mime" = "application/json" ]]; then
+                drop="paste"
+                ext="json"
               elif [[ "$mime" =~ ^text/ ]]; then
                 drop="paste"
                 ext="txt"
