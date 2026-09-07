@@ -1,4 +1,7 @@
 {
   flake.modules.maid.profiles-workstation = { pkgs, ... }: { packages = [ pkgs.dafny ]; };
-  flake.modules.nixvim.default.lsp.servers.dafny.enable = true;
+  flake.modules.nixvim.default = {
+    lsp.servers.dafny.enable = true;
+    plugins.overseer.enable = true;
+  };
 }
