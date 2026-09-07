@@ -1,6 +1,6 @@
 {
     "skel": {
         "prefix": "skel",
-        "body": "/∗ file : $1.c ∗/\n/∗ author : Tom Oostveen (S6771092@student.rug.nl) ∗/\n/∗ date : $2 ∗/\n/∗ version: 1.0 ∗ /"
+        "body": "/* file : $1.c */\n/* author : Tom Oostveen (t.oostveen@student.rug.nl) */\n/* date : $2 */\n/* version: 1.0 */\n\n/* Description:\n * $4\n */\n\n#include <stdio.h>\n#include <stdlib.h>\n\nint main(int argc, char** argv) {\n    return 0;\n}"
     }
 }
