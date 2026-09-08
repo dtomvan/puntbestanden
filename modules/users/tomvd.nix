@@ -39,6 +39,7 @@
     inherit (self.modules.homeManager)
       profiles-base
       basic-cli
+      cs-calendars
       ;
   };
 }

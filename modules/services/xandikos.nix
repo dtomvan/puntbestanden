@@ -246,7 +246,7 @@ in
       calendar = {
         thunderbird = {
           enable = true;
-          color = "#333";
+          color = "#fff";
         };
         primary = true;
         remote = {
