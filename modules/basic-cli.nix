@@ -49,6 +49,10 @@
 
         shellAliases = {
           yr = "yazi result";
+          yd = "yazi ~/Documents";
+          ydl = "yazi ~/Downloads";
+          yp = "yazi ~/projects";
+
           n-b = "nix-build";
           nb = "nix build";
           n-s = "nix-shell";
