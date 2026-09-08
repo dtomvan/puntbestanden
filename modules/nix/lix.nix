@@ -3,5 +3,6 @@
     { pkgs, ... }:
     {
       nix.package = pkgs.lixPackageSets.stable.lix;
+      nix.settings.log-format = "multiline";
     };
 }
