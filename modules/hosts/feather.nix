@@ -109,7 +109,7 @@
           themes-catppuccin
           profiles-base
           programs-keepassxc
-          profiles-graphical
+          profiles-workstation
           copyparty-fuse
           ;
       };

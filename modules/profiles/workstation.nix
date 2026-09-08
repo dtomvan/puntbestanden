@@ -1,8 +1,8 @@
-{ self, ... }:
+{ self, lib, ... }:
 {
   flake.modules = {
     nixos.profiles-workstation =
-      { pkgs, lib, ... }:
+      { pkgs, ... }:
       {
         imports = builtins.attrValues {
           inherit (self.modules.nixos)
@@ -58,13 +58,41 @@
         };
       };
 
-    homeManager.profiles-workstation = {
+    homeManager.profiles-workstation = { pkgs, ... }: {
       imports = builtins.attrValues {
         inherit (self.modules.homeManager)
           profiles-graphical
           programs-keepassxc
           programs-thunderbird
           ;
+      };
+
+      xdg.mimeApps = {
+        enable = true;
+        defaultApplicationPackages = builtins.attrValues {
+          inherit (pkgs)
+            libreoffice-qt-stable
+            mpv
+            sxiv
+            thunderbird
+            zathura
+            ;
+        };
+        defaultApplications = {
+          "application/pdf" = "org.pwmt.zathura.desktop";
+          "x-scheme-handler/tg" = "org.telegram.desktop.desktop";
+          "x-scheme-handler/tonsite" = "org.telegram.desktop.desktop";
+          "x-scheme-handler/sgnl" = "signal.desktop";
+          "x-scheme-handler/signalcaptcha" = "signal.desktop";
+        };
+        associations.added = {
+          "x-scheme-handler/mailto" = "thunderbird.desktop";
+          "x-scheme-handler/webcal" = "thunderbird.desktop";
+          "x-scheme-handler/webcals" = "thunderbird.desktop";
+          "x-scheme-handler/net-thunderbird" = "thunderbird.desktop";
+          "application/x-extension-ics" = "thunderbird.desktop";
+          "text/calendar" = "thunderbird.desktop";
+        };
       };
     };
 
