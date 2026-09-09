@@ -1,1 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128"><rect fill="#fff" width="100%" height="100%" /><text xml:space="preserve" x="-2.56" y="82.805" style="font-size:111.569px;font-family:monospace;fill:#000;" transform="scale(.65926 1.51686)">TOM</text></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <rect
+     style="fill:#1e1e2e;fill-opacity:1;stroke:none;stroke-width:5.00012;stroke-linejoin:round"
+     id="rect4"
+     width="128"
+     height="128"
+     x="0"
+     y="0" />
+  <g
+     id="g1"
+     transform="matrix(2.3452902,0,0,2.3452902,-86.098567,-86.098577)">
+    <path
+       d="M 82.266411,86.380196 H 45.733589 v -3.192785 h 5.710172 V 44.812599 h -5.710172 v -3.192785 h 36.041624 v 9.946752 h -3.683982 v -6.26277 h -20.5689 V 60.285323 H 72.19686 V 54.69795 h 3.683982 V 69.556678 H 72.19686 V 63.969305 H 57.522331 v 18.726909 h 21.060098 v -6.26277 h 3.683982 z"
+       style="fill:#cdd6f4"/>
+  </g>
+</svg>
