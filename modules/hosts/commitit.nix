@@ -44,6 +44,7 @@ in
           services-monitoring
           services-readeck
           services-syncthing
+          services-url
           services-vaultwarden
           services-xandikos
           themes-catppuccin
@@ -109,6 +110,11 @@ in
       infra.md.enable = true;
 
       infra.miniflux = {
+        enable = true;
+        nginx.enable = true;
+      };
+
+      infra.url = {
         enable = true;
         nginx.enable = true;
       };
