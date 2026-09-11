@@ -3,7 +3,7 @@ return {
     builder = function()
         local shortfile = vim.fn.expand("%:t")
         local file = vim.fn.expand("%:p")
-        local exe = vim.fn.expand("%:p:r")
+        local exe = vim.fs.joinpath(vim.fn.expand("%:p:h"), "a.out")
         local shortexe = vim.fn.expand("%:t:r")
         return {
             name = "build and run " .. shortfile,
