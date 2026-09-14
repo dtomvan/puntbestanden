@@ -12,7 +12,7 @@ return {
                 tasks = {
                     {
                         name = "build " .. shortfile,
-                        cmd = { "gcc", "-o", exe, file },
+                        cmd = { "gcc", "-Wall", "-pedantic", "-lm", "-o", exe, file },
                         components = {
                             {
                                 "open_output",
