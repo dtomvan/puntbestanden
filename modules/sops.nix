@@ -9,6 +9,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # HACK: workaround go pin for sops-nix
+    pkgs-overlays = [ (_final: prev: { buildGo125Module = prev.buildGoModule; }) ];
+
     flake.modules.nixos.sops = {
       imports = [
         inputs.sops.nixosModules.sops
