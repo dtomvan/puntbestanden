@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   flake-inputs.nixocaine = {
     url = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
@@ -24,11 +23,9 @@
       };
     in
     {
-      imports = [ inputs.nixocaine.nixosModules.default ];
-
       networking.nftables.enable = lib.mkDefault true;
 
-      services.iocaine.config = {
+      services.iocaine.settings = {
         # very random, yes
         initial-seed-file = "/run/current-system/boot.json";
 
