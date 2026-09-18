@@ -163,7 +163,7 @@
 
         services.iocaine = lib.mkIf cfg.iocaine.enable {
           enable = true;
-          config = {
+          settings = {
             handler.main.config.checks.cookie-monster.forgejo-hosts = [ cfg.domain ];
 
             server = {

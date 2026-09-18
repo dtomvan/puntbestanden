@@ -165,7 +165,7 @@ in
 
       services.iocaine = {
         enable = true;
-        config.server.blog = {
+        settings.server.blog = {
           bind = "127.0.0.1:${toString iocainePort}";
           mode = "http";
           use = {
