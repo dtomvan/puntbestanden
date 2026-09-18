@@ -58,7 +58,7 @@
         };
       };
 
-    homeManager.profiles-workstation = { pkgs, ... }: {
+    homeManager.profiles-workstation = { pkgs, config, ... }: {
       imports = builtins.attrValues {
         inherit (self.modules.homeManager)
           profiles-graphical
@@ -77,6 +77,7 @@
             thunderbird
             zathura
             ;
+          firefox = config.programs.firefox.finalPackage;
         };
         defaultApplications = {
           "application/pdf" = "org.pwmt.zathura.desktop";
