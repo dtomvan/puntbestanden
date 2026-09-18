@@ -526,6 +526,36 @@ span.warning-text {
   }
 }
 
+figure:has(img.headshot) {
+  float: left;
+  margin-left: 0;
+  margin-right: 1em;
+}
+
+img.headshot {
+    max-width: 200px;
+}
+
+figure:has(img.headshot) > figcaption {
+  color: var(--ctp-subtext0);
+  font-size-adjust: .4;
+  max-width: 200px;
+}
+
+@media screen and (max-width: 480px) {
+  figure:has(img.headshot) {
+    float: unset;
+    display: block;
+  }
+  figure:has(img.headshot) > figcaption {
+    display: inline;
+  }
+  img.headshot {
+    display: block;
+    margin: auto;
+  }
+}
+
 /* Background */
 .bg {
   color: var(--ctp-text);
