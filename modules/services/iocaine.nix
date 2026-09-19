@@ -14,6 +14,7 @@
       lib,
       inputs',
       host,
+      modulesPath,
       ...
     }:
     let
@@ -25,6 +26,7 @@
     in
     {
       imports = [ inputs.nixocaine.nixosModules.default ];
+      disabledModules = [ "${modulesPath}/services/networking/iocaine.nix" ];
 
       networking.nftables.enable = lib.mkDefault true;
 
