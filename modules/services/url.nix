@@ -55,6 +55,7 @@ in
               sopsFile = ../../secrets/chhoto-env.secret;
               format = "binary";
               owner = "root";
+              restartUnits = [ "chhoto-url.service" ];
             };
           };
         }
@@ -66,6 +67,11 @@ in
               port = mkIf cfg.nginx.enable cfg.nginx.port;
               site_url = mkIf cfg.nginx.enable "https://${cfg.nginx.domain}";
             };
+          };
+
+          systemd.services.chhoto-url = {
+            after = [ "sops-install-secrets.service" ];
+            requires = [ "sops-install-secrets.service" ];
           };
 
           services.nginx.virtualHosts."${cfg.nginx.domain}" = mkIf cfg.nginx.enable {
