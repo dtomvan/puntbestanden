@@ -42,10 +42,10 @@
           enable = mkEnableOption "rerouting nginx thru iocaine first" // {
             default = true;
           };
-          port = mkOption {
-            description = "The port that iocaine runs on";
-            default = 42069;
-            type = port;
+          udsPath = mkOption {
+            description = "Path that both iocaine and nginx will agree on to run the proxy on";
+            type = str;
+            default = "/run/iocaine-forgejo.sock";
           };
           metricsPort = mkOption {
             description = "The port that iocaine runs its metrics on";
@@ -111,18 +111,37 @@
             ''
           );
 
+        systemd.sockets.iocaine-forgejo = {
+          before = [
+            "nginx.service"
+            "iocaine.service"
+          ];
+          wantedBy = [ "sockets.target" ];
+          socketConfig = {
+            Accept = "yes";
+            ListenStream = cfg.iocaine.udsPath;
+            SocketUser = "iocaine";
+            SocketGroup = "iocaine";
+            SocketMode = "770";
+          };
+        };
+
         # this map may or may not reroute GET and HEAD requests to iocaine,
         # depending on whether or not it's enabled. This allows me to proxy to
         # "$upstream_location" unconditionally below.
         services.nginx.commonHttpConfig =
           let
             inherit (cfg) httpPort;
-            proxiedPort = if cfg.iocaine.enable then cfg.iocaine.port else cfg.httpPort;
+            location =
+              if cfg.iocaine.enable then
+                "http://unix://${cfg.iocaine.udsPath}"
+              else
+                "http://127.0.0.1:${toString httpPort}";
           in
-          lib.optionalString cfg.iocaine.enable ''
+          ''
             map $request_method $forgejo_upstream_location {
-              GET      http://127.0.0.1:${toString proxiedPort};
-              HEAD     http://127.0.0.1:${toString proxiedPort};
+              GET      ${location};
+              HEAD     ${location};
               default  http://127.0.0.1:${toString httpPort};
             }
           '';
@@ -163,12 +182,17 @@
 
         services.iocaine = lib.mkIf cfg.iocaine.enable {
           enable = true;
+          environment = {
+            RUST_LOG = "info";
+            RUST_BACKTRACE = "1";
+          };
           settings = {
             handler.main.config.checks.cookie-monster.forgejo-hosts = [ cfg.domain ];
 
             server = {
               default = {
-                bind = "127.0.0.1:${toString cfg.iocaine.port}";
+                bind = cfg.iocaine.udsPath;
+                unix-socket-access = "group";
                 mode = "http";
                 use = {
                   handler-from = "main";
