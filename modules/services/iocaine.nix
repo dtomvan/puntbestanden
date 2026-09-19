@@ -96,10 +96,10 @@
         sopsFile = ../../secrets/maxmind-credentials.secret;
         mode = "0400";
         format = "binary";
+        restartUnits = [ "iocaine-update-maxminddb.service" ];
       };
 
       systemd.services.iocaine-update-maxminddb = {
-        wantedBy = [ "iocaine.service" ];
         before = [ "iocaine.service" ];
         after = [ "sops-install-secrets.service" ];
         requires = [ "sops-install-secrets.service" ];
@@ -147,6 +147,8 @@
           mv "$unpackdir"/*/GeoLite2-ASN.mmdb .
         '';
         serviceConfig = {
+          Type = "oneshot";
+          Restart = "no";
           EnvironmentFile = config.sops.secrets.maxmind-credentials.path;
           StateDirectory = "iocaine";
           DynamicUser = true;
