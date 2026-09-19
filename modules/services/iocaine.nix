@@ -53,8 +53,8 @@
                   hash = "sha256-9R1PTa8yDtkfH+4rU5BF62ee73irhd3VYX1QB5KU+ZU=";
                 })
                 (pkgs.fetchurl {
-                  url = "https://archive.org/download/ost-english-brave_new_world_aldous_huxley/Brave_New_World_Aldous_Huxley_djvu.txt";
-                  hash = "sha256-6WkaO/3zQIezGzJDp4QjglikiTZTxgo0P4MEff2mdcY=";
+                  url = "https://archive.org/download/1932BraveNewWorld/1932%20-%20Brave%20New%20World%20-%20Aldous%20Huxley_djvu.txt";
+                  hash = "sha256-k/7cR8JQLF/el2lJZHt4kV4zDCTMHF6RJBmMhvqnYpc=";
                 })
               ];
             };
