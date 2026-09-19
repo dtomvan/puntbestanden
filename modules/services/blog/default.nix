@@ -1,5 +1,5 @@
 let
-  iocainePort = 23363;
+  udsPath = "/run/iocaine-blog.sock";
 in
 { self, lib, ... }:
 {
@@ -166,7 +166,8 @@ in
       services.iocaine = {
         enable = true;
         settings.server.blog = {
-          bind = "127.0.0.1:${toString iocainePort}";
+          bind = udsPath;
+          unix-socket-access = "group";
           mode = "http";
           use = {
             handler-from = "main";
@@ -175,10 +176,25 @@ in
         };
       };
 
+      systemd.sockets.iocaine-blog = {
+        before = [
+          "nginx.service"
+          "iocaine.service"
+        ];
+        wantedBy = [ "sockets.target" ];
+        socketConfig = {
+          Accept = "yes";
+          ListenStream = udsPath;
+          SocketUser = "iocaine";
+          SocketGroup = "iocaine";
+          SocketMode = "770";
+        };
+      };
+
       services.nginx.commonHttpConfig = ''
         map $request_method $blog_upstream_location {
-          GET      http://127.0.0.1:${toString iocainePort};
-          HEAD     http://127.0.0.1:${toString iocainePort};
+          GET      http://unix://${udsPath};
+          HEAD     http://unix://${udsPath};
           default  http://127.0.0.1:${toString port};
         }
       '';
