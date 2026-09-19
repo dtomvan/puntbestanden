@@ -1,3 +1,4 @@
+{ inputs, ... }:
 {
   flake-inputs.nixocaine = {
     url = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
@@ -12,6 +13,7 @@
       pkgs,
       lib,
       inputs',
+      modulesPath,
       ...
     }:
     let
@@ -22,6 +24,15 @@
       };
     in
     {
+      imports = [
+        inputs.nixocaine.nixosModules.default
+        ({ config, options, ... }: {
+          options.services.iocaine.settings = options.services.iocaine.config;
+          config.services.iocaine.config = lib.mkForce config.services.iocaine.settings;
+        })
+      ];
+      disabledModules = [ "${modulesPath}/services/networking/iocaine.nix" ];
+
       networking.nftables.enable = lib.mkDefault true;
 
       services.iocaine.settings = {
@@ -86,6 +97,12 @@
             };
           };
         };
+      };
+
+      users.groups.iocaine = { };
+      users.users.iocaine = {
+        isSystemUser = true;
+        group = "iocaine";
       };
 
       sops.secrets.maxmind-credentials = {
