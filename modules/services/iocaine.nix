@@ -1,9 +1,8 @@
+{ inputs, ... }:
 {
-  flake-inputs.nixocaine = {
-    url = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
-    inputs.nixpkgs.follows = "nixpkgs";
-    inputs.pre-commit-hooks.follows = "";
-    inputs.treefmt-nix.follows = "";
+  flake-inputs.nam-shub-of-enki = {
+    url = "git+https://git.madhouse-project.org/iocaine/nam-shub-of-enki/?ref=iocaine-3.x";
+    flake = false;
   };
 
   flake.modules.nixos.services-iocaine =
@@ -11,15 +10,16 @@
       config,
       pkgs,
       lib,
-      inputs',
       ...
     }:
     let
-      nsoePackage = inputs'.nixocaine.packages.nam-shub-of-enki.overrideAttrs {
-        patches = [
-          ./iocaine/0001-Add-contact-details.patch
-        ];
-      };
+      nsoePackage =
+        (pkgs.callPackage "${inputs.nam-shub-of-enki}/nix/nam-shub-of-enki.nix" {}).overrideAttrs
+          {
+            patches = [
+              ./iocaine/0001-Add-contact-details.patch
+            ];
+          };
     in
     {
       networking.nftables.enable = lib.mkDefault true;
@@ -86,6 +86,12 @@
             };
           };
         };
+      };
+
+      users.groups.iocaine = { };
+      users.users.iocaine = {
+        isSystemUser = true;
+        group = "iocaine";
       };
 
       sops.secrets.maxmind-credentials = {

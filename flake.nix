@@ -142,6 +142,10 @@
       };
       "url" = "git+https://git.toostveen.nl/tom/lazy-apps";
     };
+    "nam-shub-of-enki" = {
+      "flake" = false;
+      "url" = "git+https://git.madhouse-project.org/iocaine/nam-shub-of-enki/?ref=iocaine-3.x";
+    };
     "ncro" = {
       "inputs" = {
         "nixpkgs" = {
@@ -160,20 +164,6 @@
     };
     "nix-maid" = {
       "url" = "git+https://codeberg.org/dtomvan/nix-maid";
-    };
-    "nixocaine" = {
-      "inputs" = {
-        "nixpkgs" = {
-          "follows" = "nixpkgs";
-        };
-        "pre-commit-hooks" = {
-          "follows" = "";
-        };
-        "treefmt-nix" = {
-          "follows" = "";
-        };
-      };
-      "url" = "git+https://git.madhouse-project.org/iocaine/nixocaine/?ref=stable";
     };
     "nixos-small" = {
       "url" = "https://channels.nixos.org/nixos-unstable-small/nixexprs.tar.zst";
