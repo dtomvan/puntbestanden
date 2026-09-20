@@ -10,8 +10,14 @@ fleet:
       - "1"
       - --cores
       - "1"
+      - --log-format
+      - raw-with-logs
+      # PANIX IS FUCKING DUMB AND LOOKS AT THE LAST LINE OF THE LOG TO FIGURE OUT WHAT THE OUTPATH WAS
+      - --print-out-paths
     copy_flags:
       - --substitute-on-destination
+      - --log-format
+      - raw-with-logs
   flakes:
     puntbestanden:
       installables:
