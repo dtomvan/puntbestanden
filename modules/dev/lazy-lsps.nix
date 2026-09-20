@@ -9,10 +9,6 @@
         name = "lazy-language-servers";
         paths = map pkgs.lazy-app.override [
           { pkg = pkgs.bash-language-server; }
-          {
-            pkg = pkgs.clang-tools;
-            exe = "clangd";
-          }
           { pkg = pkgs.cmake-language-server; }
           { pkg = pkgs.dockerfile-language-server; }
           { pkg = pkgs.emmet-language-server; }

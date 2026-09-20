@@ -24,7 +24,6 @@
           ''
             for _, server in ipairs {
               "bashls",
-              "clangd",
               "cmake",
               "dockerls",
               "emmet_language_server",
@@ -43,6 +42,7 @@
         inlayHints.enable = true;
         servers = {
           lua_ls.enable = true;
+          clangd.enable = true;
           nixd.enable = true;
           nixd.config.formatting.command = [ (lib.getExe pkgs.nixfmt) ];
         };
