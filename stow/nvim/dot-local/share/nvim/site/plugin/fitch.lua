@@ -2,7 +2,6 @@ vim.filetype.add {
     extension = {
         fitch = function(_, bufnr)
             if vim.fn.executable "fitchv" then
-                vim.notify("This seems like a FitchVIZIER proof.")
                 vim.cmd.iabbrev("<buffer>", "and", "∧")
                 vim.cmd.iabbrev("<buffer>", "or", "∨")
                 vim.cmd.iabbrev("<buffer>", "not", "¬")
