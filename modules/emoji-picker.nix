@@ -23,7 +23,7 @@
           wl-clipboard
         ];
         text = ''
-          jq -c .emojis[] < "''${emojiList:?}" | sk --preview 'echo {} | jq .emoji' | jq -r .emoji | wl-copy
+          jq -c .emojis[] < "''${emojiList:?}" | sk --preview 'echo {} | jq .emoji' | jq -r .emoji | tr -d '\n' | wl-copy
         '';
       };
     };
