@@ -157,6 +157,24 @@
             jj bookmark track "$2"@"$1"
           '';
         })
+        (writeShellApplication {
+          name = "unblockme";
+          runtimeInputs = lib.singleton pkgs.openssh;
+          text = ''
+            declare -a cmd=()
+            ipv4="$(curl -s4 icanhazip.com || true)"
+            ipv6="$(curl -s6 icanhazip.com || true)"
+            if [ -n "$ipv4" ]; then
+              cmd+=("nft delete element inet iocaine blocks_v4 \"{ $ipv4 }\"")
+            fi
+            if [ -n "$ipv6" ]; then
+              cmd+=("nft delete element inet iocaine blocks_v6 \"{ $ipv6 }\"")
+            fi
+
+            # shellcheck disable=SC2029
+            IFS=';'; ssh root@commitit "''${cmd[*]}"
+          '';
+        })
         (evalExpr "nix-source" ''$(printf 'with import <nixpkgs> {}; lib.concatLines [(%s.src.url or "") (%s.meta.homepage or "")]' "$@" "$@")'')
         (evalExpr "nix-maintainers" ''$(printf 'with import <nixpkgs> {}; lib.concatLines (lib.map (m: "@''${m.github}") (%s.meta.maintainers or []))' "$@")'')
       ]
