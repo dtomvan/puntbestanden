@@ -52,7 +52,7 @@
         setFlakeRegistry = lib.mkDefault false;
       };
 
-      boot.kernelPackages = inputs'.nixos-small.legacyPackages.linuxPackages_latest;
+      # boot.kernelPackages = inputs'.nixos-small.legacyPackages.linuxPackages_latest;
 
       networking = {
         useNetworkd = lib.mkForce true;
