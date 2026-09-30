@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake-inputs.nam-shub-of-enki = {
-    url = "git+https://git.madhouse-project.org/iocaine/nam-shub-of-enki/?ref=iocaine-3.x";
+    url = "git+https://git.madhouse-project.org/iocaine/nam-shub-of-enki";
     flake = false;
   };
 
@@ -36,12 +36,12 @@
             inherits = "recommended";
             logging.classification.enable = true;
             sources = {
-              wordlists =
-                pkgs.fetchurl {
-                  url = "https://git.toostveen.nl/cgit/miscfiles/raw/commit/fc51530ea66019efba9e961578df986a950cbb65/web2";
-                  hash = "sha256-KSmJWrP+x4xpY+vly7NJP+T8nhHroJWlInh7ivxTqGM=";
-                }
-                |> lib.singleton;
+              # wordlists =
+              #   pkgs.fetchurl {
+              #     url = "https://git.toostveen.nl/cgit/miscfiles/raw/commit/fc51530ea66019efba9e961578df986a950cbb65/web2";
+              #     hash = "sha256-KSmJWrP+x4xpY+vly7NJP+T8nhHroJWlInh7ivxTqGM=";
+              #   }
+              #   |> lib.singleton;
 
               training-corpus = [
                 (pkgs.fetchurl {

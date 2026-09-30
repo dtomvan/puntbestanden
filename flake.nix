@@ -142,10 +142,6 @@
       };
       "url" = "git+https://git.toostveen.nl/tom/lazy-apps";
     };
-    "nam-shub-of-enki" = {
-      "flake" = false;
-      "url" = "git+https://git.madhouse-project.org/iocaine/nam-shub-of-enki/?ref=iocaine-3.x";
-    };
     "ncro" = {
       "inputs" = {
         "nixpkgs" = {

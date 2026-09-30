@@ -299,18 +299,17 @@
     "nam-shub-of-enki": {
       "flake": false,
       "locked": {
-        "lastModified": 1789629199,
-        "narHash": "sha256-uZGC9LNPMIN8dFi5gIOovmbf7GvPjI54obqN3n33M1U=",
-        "ref": "iocaine-3.x",
-        "rev": "3ade790646424a9be9aa1d339ab6d7a62eb1a1dc",
-        "revCount": 368,
+        "lastModified": 1786876225,
+        "narHash": "sha256-cJkmtIsSz/pxNkqgjUUjfbUcxZ9OV2EIRKpukEC8sFc=",
+        "ref": "refs/heads/main",
+        "rev": "951fd3d6f9700bc87639f82551d0c2c1e6b7e8b3",
+        "revCount": 344,
         "type": "git",
-        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki/"
+        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
       },
       "original": {
-        "ref": "iocaine-3.x",
         "type": "git",
-        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki/"
+        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
       }
     },
     "ncro": {
@@ -524,7 +523,6 @@
         "home-manager": "home-manager",
         "kconfig-declarative": "kconfig-declarative",
         "lazy-apps": "lazy-apps",
-        "nam-shub-of-enki": "nam-shub-of-enki",
         "ncro": "ncro",
         "nix-index-database": "nix-index-database",
         "nix-maid": "nix-maid",
