@@ -160,6 +160,7 @@
         (writeShellApplication {
           name = "unblockme";
           runtimeInputs = lib.singleton pkgs.openssh;
+          excludeShellChecks = [ "SC2029" ];
           text = ''
             declare -a cmd=()
             ipv4="$(curl -s4 icanhazip.com || true)"

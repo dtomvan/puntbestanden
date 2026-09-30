@@ -3,7 +3,12 @@ let
 in
 {
   flake.modules.nixos.services-xandikos =
-    { config, modulesPath, ... }:
+    {
+      config,
+      pkgs,
+      modulesPath,
+      ...
+    }:
     {
       imports = [
         {
@@ -29,6 +34,32 @@ in
               '';
             };
           };
+
+          services.nginx.virtualHosts.${domain}.locations."/rug/".proxyPass = "http://127.0.0.1:6565/";
+
+          systemd.services.rug-rooster =
+            let
+              python = pkgs.python3.withPackages (
+                p: with p; [
+                  requests
+                  ics
+                ]
+              );
+              src = pkgs.fetchFromGitHub {
+                owner = "friedelschoen";
+                repo = "rug-rooster-ical";
+                rev = "81d91bd781163ca166f83082e3fec3a19bff09b2";
+                hash = "sha256-D6tO4WG7fXWUo/jOiksG8wm/gz3wLKHFwDGe58lVn80=";
+              };
+            in
+            {
+              before = [ "nginx.service" ];
+              wantedBy = [ "multi-user.target" ];
+              path = [ python ];
+              script = ''
+                python3 ${src}/rug-rooster-ical.py
+              '';
+            };
         }
 
         (

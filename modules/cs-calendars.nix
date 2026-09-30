@@ -11,14 +11,44 @@
       };
     };
 
-    cs-y1 = {
+    # cs-y1 = {
+    #   thunderbird = {
+    #     enable = true;
+    #     color = "#33ff33";
+    #   };
+    #   remote = {
+    #     type = "caldav";
+    #     url = "https://rooster.rug.nl/maat/api/2026-2027/schedule/2fec0d5f-4cd4-4d8d-a1d0-ac140e4319d8";
+    #   };
+    # };
+    cs-logic = {
+      remote = {
+        type = "http";
+        url = "https://cal.toostveen.nl/rug/calendar.ics?courseOffering=WBCS030-05.2026-2027.1";
+      };
       thunderbird = {
         enable = true;
         color = "#33ff33";
       };
+    };
+    cs-pf = {
       remote = {
-        type = "caldav";
-        url = "https://rooster.rug.nl/maat/api/2026-2027/schedule/2fec0d5f-4cd4-4d8d-a1d0-ac140e4319d8";
+        type = "http";
+        url = "https://cal.toostveen.nl/rug/calendar.ics?courseOffering=WBCS046-10.2026-2027.1";
+      };
+      thunderbird = {
+        enable = true;
+        color = "#33ff33";
+      };
+    };
+    cs-ics = {
+      remote = {
+        type = "http";
+        url = "https://cal.toostveen.nl/rug/calendar.ics?courseOffering=WBCS005-05.2026-2027.1";
+      };
+      thunderbird = {
+        enable = true;
+        color = "#33ff33";
       };
     };
   };
