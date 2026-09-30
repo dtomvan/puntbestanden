@@ -359,6 +359,22 @@
       }
     },
     "nam-shub-of-enki": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1786876225,
+        "narHash": "sha256-cJkmtIsSz/pxNkqgjUUjfbUcxZ9OV2EIRKpukEC8sFc=",
+        "ref": "refs/heads/main",
+        "rev": "951fd3d6f9700bc87639f82551d0c2c1e6b7e8b3",
+        "revCount": 344,
+        "type": "git",
+        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
+      }
+    },
+    "nam-shub-of-enki_2": {
       "inputs": {
         "avalanche": "avalanche",
         "iocaine": [
@@ -380,16 +396,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1788184591,
-        "narHash": "sha256-SplMSutdS4hcxEu/aqeU727+W7Rn+iEEYc9vZQTRYIE=",
-        "ref": "iocaine-3.x",
-        "rev": "27c30f7ff8c95db0c37a6bf72d8b7e8d94c31e74",
-        "revCount": 366,
+        "lastModified": 1786876225,
+        "narHash": "sha256-cJkmtIsSz/pxNkqgjUUjfbUcxZ9OV2EIRKpukEC8sFc=",
+        "ref": "refs/heads/main",
+        "rev": "951fd3d6f9700bc87639f82551d0c2c1e6b7e8b3",
+        "revCount": 344,
         "type": "git",
         "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
       },
       "original": {
-        "ref": "iocaine-3.x",
         "type": "git",
         "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
       }
@@ -452,7 +467,7 @@
     "nixocaine": {
       "inputs": {
         "iocaine-stable": "iocaine-stable",
-        "nam-shub-of-enki": "nam-shub-of-enki",
+        "nam-shub-of-enki": "nam-shub-of-enki_2",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -680,6 +695,7 @@
         "home-manager": "home-manager",
         "kconfig-declarative": "kconfig-declarative",
         "lazy-apps": "lazy-apps",
+        "nam-shub-of-enki": "nam-shub-of-enki",
         "ncro": "ncro",
         "nix-index-database": "nix-index-database",
         "nix-maid": "nix-maid",
