@@ -19,6 +19,9 @@ vim.filetype.add {
                 end, { buf = bufnr })
                 vim.treesitter.start(bufnr, "fitch")
             end
+            if vim.fn.executable 'fitchlsp' then
+                vim.lsp.start { name = "fitchlsp", cmd = { 'fitchlsp' }, filetypes = { 'fitch', }, }
+            end
             return "fitch"
         end,
     },
