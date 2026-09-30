@@ -1,11 +1,11 @@
 {
   flake.modules.homeManager.jujutsu.programs = {
-    mergiraf = {
-      enable = true;
-      enableGitIntegration = true;
-      enableJujutsuIntegration = true;
-    };
-
+    # mergiraf = {
+    #   enable = true;
+    #   enableGitIntegration = true;
+    #   enableJujutsuIntegration = true;
+    # };
+    #
     jujutsu.settings = {
       fix.tools = {
         nixfmt = {
