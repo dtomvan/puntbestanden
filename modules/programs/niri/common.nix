@@ -39,8 +39,8 @@
             ;
           inherit (pkgs.nur.repos.dtomvan)
             cclip
-            fsel
             ;
+          fsel = pkgs.nur.repos.dtomvan.fsel.overrideAttrs { doCheck = false; };
           swaylock = pkgs.writeShellScriptBin "swaylock" ''
             B='#00000000' # blank
             C='#ffffff22' # clear ish

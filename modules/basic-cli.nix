@@ -186,7 +186,6 @@
           forgejo-cli
           neovim
           ;
-        inherit (pkgs.nur.repos.dtomvan) lappverk;
       };
   };
 }
