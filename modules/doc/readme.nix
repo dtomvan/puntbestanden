@@ -6,7 +6,6 @@
       "nixos_configs"
       "home_configs"
       "contents_rest"
-      "hub"
       "disko_install"
       "dendritic"
       "hostnames"

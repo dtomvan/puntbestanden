@@ -17,8 +17,6 @@
     {
       imports = [ inputs.nix-index-database.nixosModules.nix-index ];
 
-      programs.command-not-found.enable = false;
-
       environment.systemPackages =
         (import inputs.nix-index-database { inherit pkgs; }).comma-with-db.override {
           comma = pkgs.comma.override { nix = config.nix.package; };

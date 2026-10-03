@@ -67,8 +67,6 @@
           profiles-noctalia
           themes-catppuccin
 
-          guest
-
           hardware-nvidia
           hardware-ssd
 

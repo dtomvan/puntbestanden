@@ -45,8 +45,6 @@ in
               programs-comma
 
               networking-wifi-passwords
-
-              undollar
               ;
           })
           ++ [
