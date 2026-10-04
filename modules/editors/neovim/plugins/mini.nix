@@ -29,7 +29,9 @@
           git = { };
           input = { };
           jump = { };
-          jump2d = { };
+          jump2d = {
+            dim = true;
+          };
           notify = { };
           sessions = { };
           statusline = { };
