@@ -27,6 +27,9 @@
           icons = { };
           indentscope = { };
           git = { };
+          input = { };
+          jump = { };
+          jump2d = { };
           notify = { };
           sessions = { };
           statusline = { };
