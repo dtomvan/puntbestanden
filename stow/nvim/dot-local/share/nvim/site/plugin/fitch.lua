@@ -16,7 +16,7 @@ vim.filetype.add {
                     local level = vim.log.levels.ERROR
                     if obj.code == 0 and obj.signal == 0 then level = vim.log.levels.INFO end
                     vim.notify(obj.stdout, level)
-                end, { buf = bufnr })
+                end, { buf = bufnr, desc = "run fitchv on file" })
                 vim.treesitter.start(bufnr, "fitch")
             end
             if vim.fn.executable 'fitchlsp' then

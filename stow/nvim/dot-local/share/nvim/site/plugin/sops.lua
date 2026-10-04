@@ -1,7 +1,7 @@
 local function f(bufnr)
     if vim.fn.executable("sops") == 1 then
         -- HACK: open in a terminal, which nests nvims, which relies on $EDITOR, and also we could just make the tempfile ourselves, but I'm too lazy to do that.
-        vim.keymap.set('n', '<leader>e', '<cmd>term sops %<cr>', { buf = bufnr })
+        vim.keymap.set('n', '<leader>e', '<cmd>term sops %<cr>', { buf = bufnr, desc = "edit file with sops" })
         vim.notify("This seems like a sops secret. Press `<leader>e' to edit in-place")
     end
 end

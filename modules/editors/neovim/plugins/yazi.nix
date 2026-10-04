@@ -4,6 +4,9 @@
       {
         action = "<cmd>Yazi<cr>";
         key = "<leader>-";
+        options = {
+          desc = "open yazi";
+        };
       }
     ];
     plugins.yazi.enable = true;
