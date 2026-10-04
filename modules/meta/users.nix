@@ -8,19 +8,15 @@
 # Then, when used with NixOS, you should
 let
   inherit (lib)
-    literalExpression
     mapAttrs'
     mkDefault
-    mkEnableOption
     mkIf
     mkOption
     nameValuePair
     ;
   inherit (lib.types)
     attrsOf
-    functionTo
     nullOr
-    package
     str
     submodule
     ;

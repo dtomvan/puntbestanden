@@ -533,12 +533,12 @@ figure:has(img.headshot) {
 }
 
 img.headshot {
-    max-width: 200px;
+  max-width: 200px;
 }
 
 figure:has(img.headshot) > figcaption {
   color: var(--ctp-subtext0);
-  font-size-adjust: .4;
+  font-size-adjust: 0.4;
   max-width: 200px;
 }
 

@@ -2,7 +2,7 @@
 
 - STATE: OPEN
 - PRIORITY: 50
-- TAGS: 
+- TAGS:
 
 ```toml
 admin_signal_execute = [ "!admin media delete-past-remote-media 4w" ]

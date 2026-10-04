@@ -6,7 +6,7 @@
 }:
 {
   flake.modules.nixos.profiles-hetzner-bakkie =
-    { inputs', host, ... }:
+    { host, ... }:
     {
       imports = builtins.attrValues {
         inherit (inputs.srvos.nixosModules) server;
