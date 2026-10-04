@@ -199,6 +199,8 @@
           glab
           forgejo-cli
           neovim
+          prek
+          jj-pre-push
           ;
       };
   };

@@ -3,11 +3,6 @@
   flake.modules.homeManager.jujutsu = {
     programs.jujutsu.settings = {
       aliases = {
-        up = [
-          "bookmark"
-          "set"
-        ];
-
         # prepend b to show current branch only, non-elided
         bl = [
           "log"
@@ -36,26 +31,10 @@
           "builtin_op_log_comfortable"
         ];
 
-        branch = [
-          "bookmark"
-          "list"
-          "-t"
-          "--remote"
-          "origin"
-        ];
-
         wip = [
           "log"
           "-r"
           "trunk()..closest_bookmark(@-) & description(glob:\"wip:*\")"
-        ];
-
-        review = [
-          "log"
-          "-r"
-          "trunk()..@"
-          "-p"
-          "--reversed"
         ];
 
         sync = [
@@ -64,33 +43,22 @@
           "--all-remotes"
         ];
 
-        nixpkgs = [
-          "git"
-          "fetch"
-          "--remote"
-          "upstream"
-        ];
-
         push = [
-          "git"
+          "util"
+          "exec"
+          "--"
+          "jj-pre-push"
+          "--checker"
+          "prek"
           "push"
-          "-c"
-          "@-"
         ];
 
-        # lists all bookmarks that are tracked but not authored by you and
-        # aren't a bookmark for the upstream remote.
-        #
-        # for use with xargs to clean up spurious tracked bookmarks
-        # tad nuclear probably
-        not-my-bookmarks = [
-          "bookmark"
-          "list"
-          "-t"
-          "-r"
-          "~mine() & ~tracked_remote_bookmarks(remote=upstream)"
-          "-T"
-          "if(remote, concat(name, \"@\", remote, \"\n'\"))"
+        prek = [
+          "run"
+          "--"
+          "bash"
+          "-c"
+          ''git show --name-only --format= "$JJ_COMMIT_ID" | xargs prek run --files''
         ];
       };
     };
