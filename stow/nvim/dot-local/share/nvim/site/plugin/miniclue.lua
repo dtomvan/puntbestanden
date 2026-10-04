@@ -24,9 +24,12 @@ miniclue.setup({
         miniclue.gen_clues.windows(),
         miniclue.gen_clues.z(),
         { mode = 'n', keys = '<Leader>e', desc = '+Edit' },
+        { mode = 'n', keys = '<Leader>f', desc = '+Find' },
         { mode = 'n', keys = '<Leader>t', desc = '+Tasks' },
         { mode = 'n', keys = '<Leader>o', desc = '+Org' },
         { mode = 'n', keys = '<Leader>r', desc = '+Rename' },
         { mode = 'n', keys = '<Leader>a', desc = 'Code action' },
+        { mode = 'n', keys = '<Leader>l', desc = '+LSP' },
+        { mode = 'n', keys = '<Leader>g', desc = '+Git' },
     },
 })
