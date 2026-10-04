@@ -31,6 +31,7 @@
           sessions = { };
           statusline = { };
           # pairs = {};
+          pick = { };
           surround = {
             mappings = {
               app = "ys";
