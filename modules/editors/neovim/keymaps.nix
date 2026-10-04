@@ -7,5 +7,6 @@
     vim.keymap.set('n', '<localleader><cr>', '<cr>')
     vim.keymap.set('x', 'S', function() MiniSurround.add('visual') end, { silent = true })
     vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+    vim.keymap.set('n', '<f1>', Snacks.explorer.open)
   '';
 }

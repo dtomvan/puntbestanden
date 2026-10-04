@@ -3,6 +3,7 @@
     enable = true;
     settings = {
       bigfile.enabled = true;
+      explorer.enabled = true;
       quickfile.enabled = true;
       statuscolumn.enabled = true;
     };
