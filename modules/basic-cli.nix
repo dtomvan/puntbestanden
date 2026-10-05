@@ -178,6 +178,20 @@
         })
         (evalExpr "nix-source" ''$(printf 'with import <nixpkgs> {}; lib.concatLines [(%s.src.url or "") (%s.meta.homepage or "")]' "$@" "$@")'')
         (evalExpr "nix-maintainers" ''$(printf 'with import <nixpkgs> {}; lib.concatLines (lib.map (m: "@''${m.github}") (%s.meta.maintainers or []))' "$@")'')
+        (writeShellApplication {
+          name = "atuin-purge";
+          runtimeInputs = [
+            pkgs.atuin
+            pkgs.sqlite
+          ];
+          inheritPath = false;
+          text = ''
+            atuin search -b "1 month ago" --delete-it-all
+            atuin history dedup --before "1 week ago" --dupkeep 1
+            atuin store purge
+            sqlite3 ~/.local/share/atuin/history.db <<< "VACUUM;"
+          '';
+        })
       ]
       ++ builtins.attrValues {
         inherit (pkgs)
