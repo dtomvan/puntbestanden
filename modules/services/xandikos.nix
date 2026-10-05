@@ -35,7 +35,12 @@ in
             };
           };
 
-          services.nginx.virtualHosts.${domain}.locations."/rug/".proxyPass = "http://127.0.0.1:6565/";
+          services.nginx.virtualHosts.${domain}.locations."/rug/" = {
+            proxyPass = "http://127.0.0.1:6565/";
+            extraConfig = ''
+              auth_basic off;
+            '';
+          };
 
           systemd.services.rug-rooster =
             let
