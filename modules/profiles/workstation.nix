@@ -75,7 +75,7 @@
             mpv
             sxiv
             thunderbird
-            zathura
+            pcmanfm
             ;
           firefox = config.programs.firefox.finalPackage;
         };
