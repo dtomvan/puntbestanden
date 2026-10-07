@@ -20,6 +20,7 @@ in
           jq
           forgejo-cli
           gnupg
+          nur.repos.dtomvan.fitch-vizier # IDGAF!!!
         ];
         nixConf.extra-experimental-features = [
           "nix-command"
