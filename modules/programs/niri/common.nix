@@ -1,12 +1,7 @@
 {
   flake.modules = {
     nixos.programs-niri-common =
-      {
-        pkgs,
-        lib,
-        config,
-        ...
-      }:
+      { pkgs, ... }:
       {
         programs.niri.enable = true;
 
@@ -19,12 +14,6 @@
         };
 
         services.udisks2.enable = true;
-
-        qt = lib.mkIf (!config.services.desktopManager.plasma6.enable) {
-          enable = true;
-          style = "breeze";
-          platformTheme = "qt5ct";
-        };
       };
 
     maid.programs-niri-common =
