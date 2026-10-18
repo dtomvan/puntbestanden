@@ -131,7 +131,6 @@
         };
 
         programs.firefox.profiles.dev-edition-default.extensions.packages = builtins.attrValues {
-          inherit (pkgs.nur.repos.dtomvan) zotero-connector;
           inherit (pkgs.nur.repos.rycee.firefox-addons) violentmonkey;
         };
 
@@ -167,7 +166,6 @@
               # rarely used
               gimp
               localsend
-              zotero
               ;
           }
         );
