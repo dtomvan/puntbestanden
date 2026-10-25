@@ -29,6 +29,7 @@
         environment.systemPackages = builtins.attrValues {
           inherit (pkgs)
             # keep-sorted start
+            borgbackup
             forge-sparks
             gram
             keepassxc

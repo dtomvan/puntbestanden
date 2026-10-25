@@ -23,6 +23,14 @@ in
         ];
       };
     };
+    sshPubkey = {
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIsynhrBdKsxZvn15QtltUBduTkZ8PX3fq2U8aUT0fzh tomvd@commitit";
+      allowedHosts = [
+        "boomer"
+        "feather"
+      ];
+      allowedUsers = [ "tomvd" ];
+    };
   };
 
   flake.modules.nixos.hosts-commitit =
@@ -106,12 +114,30 @@ in
         alertmanager.enable = true;
       };
 
-      infra.readeck.enable = true;
+      # infra.readeck.enable = true;
       infra.vaultwarden.enable = true;
 
       services.postgresql = {
         enable = true;
         package = pkgs.postgresql_18;
+      };
+
+      services.borgbackup.jobs.var-lib-boomer = {
+        paths = "/var/lib";
+        encryption.mode = "none";
+        environment.BORG_RSH = "ssh -i /home/tomvd/.ssh/id_ed25519";
+        repo = "ssh://tomvd@boomer/home/tomvd/commitit-var-lib";
+        compression = "auto,zstd";
+        startAt = "daily";
+      };
+
+      services.borgbackup.jobs.var-lib-feather = {
+        paths = "/var/lib";
+        encryption.mode = "none";
+        environment.BORG_RSH = "ssh -i /home/tomvd/.ssh/id_ed25519";
+        repo = "ssh://tomvd@feather/home/tomvd/commitit-var-lib";
+        compression = "auto,zstd";
+        startAt = "daily";
       };
 
       system.stateVersion = "26.11";
