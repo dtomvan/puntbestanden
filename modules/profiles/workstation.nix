@@ -15,7 +15,6 @@
             services-sane
 
             networking-wireguard
-            services-keybase
             utilities
             virt-podman
             ;

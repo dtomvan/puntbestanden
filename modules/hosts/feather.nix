@@ -88,11 +88,6 @@
           config.hwaccel = true;
         };
 
-        programs.gaming-free = {
-          enable = true;
-          # enableGraphical = true;
-        };
-
         virtualisation.libvirtd.onBoot = "ignore";
         systemd.services.podman.wantedBy = lib.mkForce [ ];
 

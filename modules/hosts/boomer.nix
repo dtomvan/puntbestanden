@@ -70,7 +70,6 @@
           hardware-nvidia
           hardware-ssd
 
-          gaming-free
           steam
 
           services-syncthing
@@ -82,11 +81,6 @@
           nix-distributed-builds
           users-remote-build
           ;
-      };
-
-      programs.gaming-free = {
-        enable = true;
-        # enableGraphical = true;
       };
 
       # <boomer patches from the shared disko config>
@@ -172,13 +166,4 @@
 
     };
   };
-
-  perSystem =
-    { lib, ... }:
-    {
-      devshells.default.env = lib.singleton {
-        name = "NIX_CONFIG";
-        eval = ''$([ "$(hostname)" == boomer ] && echo "builders = ")'';
-      };
-    };
 }
