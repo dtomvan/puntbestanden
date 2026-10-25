@@ -51,6 +51,7 @@ in
           services-miniflux
           services-monitoring
           services-readeck
+          services-silverbullet
           services-syncthing
           services-url
           services-vaultwarden
@@ -116,6 +117,7 @@ in
 
       # infra.readeck.enable = true;
       infra.vaultwarden.enable = true;
+      infra.silverbullet.enable = true;
 
       services.postgresql = {
         enable = true;
