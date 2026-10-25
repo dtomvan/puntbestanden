@@ -61,13 +61,8 @@
             # hardware-fprint
 
             steam
-            gaming-free
             services-syncthing
             virt-kvm
-
-            nix-distributed-builds
-            users-remote-build
-            virt-nixos-containers
             virt-nat
             ;
         };
