@@ -119,6 +119,8 @@ in
       infra.vaultwarden.enable = true;
       infra.silverbullet.enable = true;
 
+      services.nginx.virtualHosts."sb.${domain}".serverAliases = [ "cs.${domain}" ];
+
       services.postgresql = {
         enable = true;
         package = pkgs.postgresql_18;

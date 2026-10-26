@@ -194,7 +194,6 @@ in
 
         serverAliases = [
           "testing.${domain}"
-          "cs.${domain}"
         ];
 
         locations."/" = {
