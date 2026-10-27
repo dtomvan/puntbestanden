@@ -7,7 +7,7 @@ tags:
   - dx
   - tricks
   - notetaking
-draft: true
+draft: false
 ---
 
 ![SilverBullet, in my public cs-notes space](/assets/img/silverbullet.png) Silverbullet, in my public cs-notes space [^1]
