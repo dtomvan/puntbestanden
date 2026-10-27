@@ -192,7 +192,7 @@ hr {
 
 /* tweaks for post content style */
 .layout-post img {
-  max-width: 75%;
+  max-width: 100%;
   max-height: 400px;
 }
 

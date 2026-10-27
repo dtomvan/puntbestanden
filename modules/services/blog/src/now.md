@@ -8,7 +8,7 @@ updated: 2026-10-04T17:32:39+02:00
 Last updated: {{page.updated | date: '%a %d %b %Y'}}
 
 - Too busy to write for the blog lately
-- Grinding [Kattis](https://open.kattis.com)
+- Exploring [SilverBullet](https://silverbullet.md)
 - Playing (occasionally):
   - The Void Rains Upon Her Heart
   - Gunlocked 2
