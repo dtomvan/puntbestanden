@@ -132,7 +132,10 @@ in
 
       # infra.readeck.enable = true;
       infra.vaultwarden.enable = true;
-      infra.silverbullet.enable = true;
+      infra.silverbullet = {
+        enable = true;
+        enableEdge = true;
+      };
 
       services.nginx.virtualHosts."sb.${domain}".serverAliases = [ "cs.${domain}" ];
 
