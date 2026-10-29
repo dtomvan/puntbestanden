@@ -95,6 +95,12 @@
           "text/calendar" = "thunderbird.desktop";
         };
       };
+
+      sops.secrets.sbt = {
+        sopsFile = ../../secrets/sbt.secret;
+        mode = "0440";
+        format = "binary";
+      };
     };
 
     maid.profiles-workstation =
