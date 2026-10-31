@@ -109,20 +109,20 @@
       };
 
       services.prometheus.exporters.nginx.enable = lib.mkDefault true;
-      services.prometheus.exporters.nginxlog = {
-        enable = lib.mkDefault true;
-        # why isn't this the default????
-        settings.namespaces =
-          lib.singleton {
-            name = "default";
-            format = ''$remote_addr - $remote_user [$time_iso8601] '$host "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" ($request_id)'';
-            source.files = [
-              "/var/log/nginx/access.log"
-              "/var/log/nginx/error.log"
-            ];
-          }
-          |> lib.mkDefault;
-      };
+      # services.prometheus.exporters.nginxlog = {
+      #   enable = lib.mkDefault true;
+      #   # why isn't this the default????
+      #   settings.namespaces =
+      #     lib.singleton {
+      #       name = "default";
+      #       format = ''$remote_addr - $remote_user [$time_iso8601] '$host "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" ($request_id)'';
+      #       source.files = [
+      #         "/var/log/nginx/access.log"
+      #         "/var/log/nginx/error.log"
+      #       ];
+      #     }
+      #     |> lib.mkDefault;
+      # };
 
       # make recent nginx logs available in the journal, but don't keep them.
       # The actual logs are written to /var/log/nginx anyways.
@@ -135,7 +135,7 @@
 
       systemd.services.nginx.serviceConfig.LogNamespace = "nginx";
 
-      systemd.services.prometheus-nginxlog-exporter.serviceConfig.SupplementaryGroups = [ "nginx" ];
+      # systemd.services.prometheus-nginxlog-exporter.serviceConfig.SupplementaryGroups = [ "nginx" ];
 
       services.logrotate.settings.nginx = {
         # 4 weeks ~= a month, I don't need half a year of logs (default = 26)

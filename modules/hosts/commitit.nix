@@ -34,7 +34,7 @@ in
   };
 
   flake.modules.nixos.hosts-commitit =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = builtins.attrValues {
         inherit (self.modules.nixos)
@@ -85,6 +85,11 @@ in
         nginx.enable = true;
         paste = {
           enable = true;
+          access = {
+            rdw = [ "paster" ];
+            A = [ config.infra.copy.admin.username ];
+            G = [ "*" ];
+          };
           extraFlags.vmaxb = "200m";
         };
         scrot = {
@@ -92,6 +97,16 @@ in
           extraFlags.vmaxb = "2g";
         };
       };
+
+      sops.secrets.copyparty-paste = {
+        sopsFile = ../../secrets/copyparty-paste.secret;
+        owner = config.infra.copy.user;
+        group = config.infra.copy.group;
+        mode = "0400";
+        format = "binary";
+      };
+
+      services.copyparty.accounts.paster.passwordFile = config.sops.secrets.copyparty-paste.path;
 
       infra.matrix = {
         enable = true;
@@ -117,7 +132,10 @@ in
 
       # infra.readeck.enable = true;
       infra.vaultwarden.enable = true;
-      infra.silverbullet.enable = true;
+      infra.silverbullet = {
+        enable = true;
+        enableEdge = true;
+      };
 
       services.nginx.virtualHosts."sb.${domain}".serverAliases = [ "cs.${domain}" ];
 
