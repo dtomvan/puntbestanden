@@ -31,7 +31,6 @@
             # keep-sorted start
             borgbackup
             forge-sparks
-            gram
             keepassxc
             libreoffice-qt-stable
             man-pages
