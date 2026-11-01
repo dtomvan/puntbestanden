@@ -12,7 +12,7 @@ require("silverbullet").setup({
             },
         },
         cs = {
-            url = "https://sb.toostveen.nl/cs",
+            url = "https://cs.toostveen.nl/",
             auth = {
                 command = {
                     "cat",
