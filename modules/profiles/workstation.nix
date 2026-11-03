@@ -42,6 +42,7 @@
             signal-desktop
             sxiv
             thunderbird
+            ungoogled-chromium
             zathura
             # keep-sorted end
             ;
