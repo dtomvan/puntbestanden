@@ -63,6 +63,7 @@ in
 
       infra.fj = {
         enable = true;
+        enableSsh = true;
         lfsSupport = true;
         domain = "git.${domain}";
         admin = {
