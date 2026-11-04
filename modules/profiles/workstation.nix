@@ -36,6 +36,7 @@
             man-pages
             mpv
             obsidian
+            pandoc
             pdfarranger
             pika-backup
             python3
