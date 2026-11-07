@@ -94,4 +94,6 @@ in
     enable = true;
     settings.flavour = catppuccin.flavor; # nice
   };
+
+  flake.modules.maid.programs-tuios.programs.tuios.settings.theme = "catppuccin_${catppuccin.flavor}";
 }

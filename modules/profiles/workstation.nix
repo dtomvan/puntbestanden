@@ -64,6 +64,7 @@
           profiles-graphical
           programs-keepassxc
           programs-thunderbird
+          programs-zellij
           ;
       };
 
@@ -109,6 +110,7 @@
         imports = builtins.attrValues {
           inherit (self.modules.maid)
             profiles-base
+            programs-tuios
             ;
         };
 

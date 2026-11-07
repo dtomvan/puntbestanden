@@ -88,4 +88,7 @@ in
       };
     };
   };
+
+  flake.modules.maid.programs-tuios.programs.tuios.settings.screenshot.font_family =
+    fixedWidth.family;
 }
