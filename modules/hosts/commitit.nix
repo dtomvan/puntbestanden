@@ -140,6 +140,22 @@ in
 
       services.nginx.virtualHosts."sb.${domain}".serverAliases = [ "cs.${domain}" ];
 
+      system.services.cs-mini = {
+        _class = "service";
+        imports = [ pkgs.nur.repos.dtomvan.bull.services.default ];
+        bull = {
+          listen = "127.0.0.1:3333";
+          content = "/var/lib/silverbullet/spaces/cs";
+          extraArgs = [ "--editor=" ];
+        };
+      };
+
+      services.nginx.virtualHosts."cs-mini.${domain}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/".proxyPass = "http://localhost:3333";
+      };
+
       services.postgresql = {
         enable = true;
         package = pkgs.postgresql_18;
