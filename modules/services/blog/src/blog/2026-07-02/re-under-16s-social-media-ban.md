@@ -9,6 +9,7 @@ date: 2026-07-02T11:03:22+02:00
 layout: post
 lang: en
 draft: false
+hidden: true
 aliases:
   - /2026-07-02-re-under-16s-social-media-ban
 ---

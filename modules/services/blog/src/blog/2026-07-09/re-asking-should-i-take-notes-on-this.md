@@ -8,6 +8,7 @@ summary: |
 date: 2026-07-09T16:41:26+02:00
 layout: post
 lang: en
+hidden: true
 tags:
   - notetaking
   - reading

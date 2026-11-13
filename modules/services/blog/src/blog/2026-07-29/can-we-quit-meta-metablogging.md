@@ -8,6 +8,7 @@ tags:
   - bubbles
   - bearblog
 draft: false
+hidden: true
 aliases:
   - /2026-07-29-can-we-quit-meta-metablogging
 ---

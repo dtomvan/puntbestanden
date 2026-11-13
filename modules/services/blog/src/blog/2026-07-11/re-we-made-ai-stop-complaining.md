@@ -11,6 +11,7 @@ tags:
 layout: post
 lang: en
 draft: false
+hidden: true
 aliases:
   - /2026-07-11-re-we-made-ai-stop-complaining
 ---
