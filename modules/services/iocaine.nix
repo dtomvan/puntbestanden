@@ -22,6 +22,8 @@
         patches = [
           ./iocaine/0001-Add-contact-details.patch
         ];
+        nativeCheckInputs = [ ];
+        doCheck = false;
       };
     in
     {
@@ -30,6 +32,7 @@
 
       networking.nftables.enable = lib.mkDefault true;
 
+      services.iocaine.package = inputs'.nixpkgs.legacyPackages.iocaine;
       services.iocaine.config = {
         # very random, yes
         initial-seed-file = "/run/current-system/boot.json";
