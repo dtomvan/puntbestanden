@@ -20,10 +20,7 @@
             diff-editor = ":builtin"; # shut up
           };
 
-          git = {
-            # see signing.behavior
-            sign-on-push = true;
-          };
+          revsets.git-sign-on-push = "~signed() & mine()";
 
           workspace = {
             multi-working-copy = true;
@@ -35,13 +32,6 @@
             backend = "gpg";
             # key = gpgPubKey; # not nessecary, should pick up from user.email
           };
-
-          "--scope" = [
-            {
-              "--when".repositories = [ "~/org" ];
-              git.sign-on-push = false;
-            }
-          ];
 
           remotes.origin.auto-track-bookmarks = "glob:*";
         };
