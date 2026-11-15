@@ -30,7 +30,6 @@
           inherit (pkgs)
             # keep-sorted start
             borgbackup
-            forge-sparks
             keepassxc
             libreoffice-qt-stable
             man-pages
