@@ -25,6 +25,7 @@
             brightnessctl
             pipewire
             playerctl
+            wl-mirror
             ;
           inherit (pkgs.nur.repos.dtomvan)
             cclip
