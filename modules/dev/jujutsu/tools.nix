@@ -38,16 +38,6 @@
           ];
         };
 
-        rustfmt = {
-          enabled = false;
-          command = [
-            "rustfmt"
-            "--emit"
-            "stdout"
-          ];
-          patterns = [ "glob:'**/*.rs'" ];
-        };
-
         taplo = {
           command = [
             "taplo"
@@ -66,7 +56,6 @@
         exe = "gofmt";
       }
       { pkg = pkgs.ruff; }
-      { pkg = pkgs.rustfmt; }
       { pkg = pkgs.shfmt; }
       { pkg = pkgs.taplo; }
     ];

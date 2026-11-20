@@ -19,7 +19,6 @@
           }
           { pkg = pkgs.ruff; }
           { pkg = pkgs.rust-analyzer; }
-          { pkg = pkgs.rustfmt; }
           { pkg = pkgs.svelte-language-server; }
           { pkg = pkgs.taplo; }
           { pkg = pkgs.terraform-ls; }
