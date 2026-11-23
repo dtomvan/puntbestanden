@@ -266,6 +266,7 @@ in
                   access = {
                     A = [ cfg.admin.username ];
                     r = [ "*" ];
+                    "." = [ "*" ];
                   };
                 };
                 "/priv" = {
