@@ -39,7 +39,7 @@ in
 
       services.kmscon.config = {
         font-name = fixedWidth.family;
-        font-size = fixedWidth.pointSize;
+        font-size = fixedWidth.pointSize + 10;
       };
 
       services = {
