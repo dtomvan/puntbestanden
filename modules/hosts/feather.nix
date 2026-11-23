@@ -58,7 +58,7 @@
             hardware-comet-lake
             hardware-elan-tp
             hardware-tpacpi
-            # hardware-fprint
+            hardware-fprint
 
             steam
             services-syncthing
