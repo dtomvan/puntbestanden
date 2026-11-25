@@ -52,7 +52,7 @@ in
                   };
 
                   flake.modules = {
-                    nixos.hosts-feather =
+                    nixos."hosts-''${hostname}" =
                       { lib, ... }:
                       {
                         imports = builtins.attrValues {

@@ -70,6 +70,8 @@ in
           tomvd.openssh.authorizedKeys.keys = [
             # Nothing Phone (3a) key
             "ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBO7XeCMqmJps9MSUI1g7UmMAKqsggo+XOjfO8P3zw16HON7eE/eMx8OZXhovfHXPEm+dxKjLyV3JepjH+JzPU3Q="
+            # TP T570
+            "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEWqsePFXUNXl0AD2XBaCNmuI5K0VAvTWtebZN8pV6uP tomvd@chonker"
           ];
         }
       ];
