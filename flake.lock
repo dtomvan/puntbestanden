@@ -236,6 +236,24 @@
         "type": "github"
       }
     },
+    "flake-parts_3": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_3"
+      },
+      "locked": {
+        "lastModified": 1772408722,
+        "narHash": "sha256-rHuJtdcOjK7rAHpHphUb1iCvgkU3GpfvicLMwwnfMT0=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f20dc5d9b8027381c474144ecabc9034d6a839a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1678901627,
@@ -359,22 +377,6 @@
       }
     },
     "nam-shub-of-enki": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1794607296,
-        "narHash": "sha256-BPBE1FukoVNE5fCvYS54qMSBvtRvpt3Kuq2L+yOiJPs=",
-        "ref": "refs/heads/main",
-        "rev": "860cce14be108a452715a819aea2b691318e48e9",
-        "revCount": 383,
-        "type": "git",
-        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.madhouse-project.org/iocaine/nam-shub-of-enki"
-      }
-    },
-    "nam-shub-of-enki_2": {
       "inputs": {
         "avalanche": "avalanche",
         "iocaine": [
@@ -468,7 +470,7 @@
     "nixocaine": {
       "inputs": {
         "iocaine-stable": "iocaine-stable",
-        "nam-shub-of-enki": "nam-shub-of-enki_2",
+        "nam-shub-of-enki": "nam-shub-of-enki",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -555,6 +557,21 @@
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
         "rev": "596e2e3940e09b2abbeb03f75fa1828c57fcd72c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib_3": {
+      "locked": {
+        "lastModified": 1772328832,
+        "narHash": "sha256-e+/T/pmEkLP6BHhYjx6GmwP5ivonQQn0bJdH9YrRB+Q=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "c185c7a5e5dd8f9add5b2f8ebeff00888b070742",
         "type": "github"
       },
       "original": {
@@ -696,7 +713,6 @@
         "home-manager": "home-manager",
         "kconfig-declarative": "kconfig-declarative",
         "lazy-apps": "lazy-apps",
-        "nam-shub-of-enki": "nam-shub-of-enki",
         "ncro": "ncro",
         "nix-index-database": "nix-index-database",
         "nix-maid": "nix-maid",
@@ -710,7 +726,8 @@
         "srvos": "srvos",
         "tasks": "tasks",
         "tree-sitter-fitch": "tree-sitter-fitch",
-        "treefmt-nix": "treefmt-nix_2"
+        "treefmt-nix": "treefmt-nix_2",
+        "vscode-server": "vscode-server"
       }
     },
     "run0-sudo-shim": {
@@ -967,6 +984,24 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vscode-server": {
+      "inputs": {
+        "flake-parts": "flake-parts_3"
+      },
+      "locked": {
+        "lastModified": 1794081290,
+        "narHash": "sha256-vJCjuYXp06XZ9rufttvv/W3mkzQzefYxEvmmsZfUmvw=",
+        "owner": "nix-community",
+        "repo": "nixos-vscode-server",
+        "rev": "e8aac40ed8d76486859741b1608badeca3475943",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixos-vscode-server",
         "type": "github"
       }
     }
