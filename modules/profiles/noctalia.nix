@@ -85,6 +85,8 @@ in
           panel = {
             borders = false;
             shadow = false;
+            control_center_placement = "floating";
+            open_near_click_control_center = true;
           };
           polkit_agent = true;
           settings_show_advanced = true;
